@@ -1,0 +1,40 @@
+baseURL = 'https://blog.caowo.de/'
+languageCode = 'zh-CN'
+title = '言零的博客'
+theme = 'stack'
+
+[params]
+  description = '专注于 Web 渗透测试、漏洞复现与安全防御技术分享'
+  mainSections = ['posts']
+  
+  [params.header]
+    title = '言零的博客'
+    
+  [params.footer]
+    since = 2026
+    
+[menu]
+  [[menu.main]]
+    identifier = "posts"
+    name = "文章"
+    url = "/posts/"
+    weight = 1
+    
+  [[menu.main]]
+    identifier = "categories"
+    name = "分类"
+    url = "/categories/"
+    weight = 2
+    
+  [[menu.main]]
+    identifier = "tags"
+    name = "标签"
+    url = "/tags/"
+    weight = 3
+
+[markup]
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = false
+    lineNos = false
+    noClasses = false

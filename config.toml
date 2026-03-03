@@ -17,21 +17,33 @@ contentDir = 'source'
 [menu]
   [[menu.main]]
     identifier = "posts"
-    name = "文章"
+    name = "文章 / Posts"
     url = "/posts/"
     weight = 1
     
   [[menu.main]]
     identifier = "categories"
-    name = "分类"
+    name = "分类 / Categories"
     url = "/categories/"
     weight = 2
     
   [[menu.main]]
     identifier = "tags"
-    name = "标签"
+    name = "标签 / Tags"
     url = "/tags/"
     weight = 3
+    
+  [[menu.main]]
+    identifier = "about"
+    name = "关于 / About"
+    url = "/about/"
+    weight = 4
+    
+  [[menu.main]]
+    identifier = "links"
+    name = "友链 / Links"
+    url = "/links/"
+    weight = 5
 
 [markup]
   [markup.highlight]

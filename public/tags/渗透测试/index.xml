@@ -1,4 +1,77 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>渗透测试 on 言零的博客</title><link>https://blog.caowo.de/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/</link><description>Recent content in 渗透测试 on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 01 Mar 2026 11:00:00 +0800</lastBuildDate><atom:link href="https://blog.caowo.de/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/index.xml" rel="self" type="application/rss+xml"/><item><title>AI 赋能渗透测试 - 实战指南</title><link>https://blog.caowo.de/posts/ai-powered-pentest-guide/</link><pubDate>Sun, 01 Mar 2026 11:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/ai-powered-pentest-guide/</guid><description>&lt;h1 id="ai-赋能渗透测试---实战指南"&gt;AI 赋能渗透测试 - 实战指南
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>渗透测试 on 言零的博客</title><link>https://blog.caowo.de/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/</link><description>Recent content in 渗透测试 on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 03 Mar 2026 08:00:00 +0800</lastBuildDate><atom:link href="https://blog.caowo.de/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/index.xml" rel="self" type="application/rss+xml"/><item><title>Hello World | 开启 Web 渗透测试之旅</title><link>https://blog.caowo.de/posts/hello-world/</link><pubDate>Tue, 03 Mar 2026 08:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/hello-world/</guid><description>&lt;h1 id="hello-world--开启-web-渗透测试之旅"&gt;Hello World | 开启 Web 渗透测试之旅
+&lt;/h1&gt;&lt;hr&gt;
+&lt;h2 id="-博客启用"&gt;🎉 博客启用
+&lt;/h2&gt;&lt;p&gt;欢迎来到我的网络安全技术博客！&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="-博客定位"&gt;📝 博客定位
+&lt;/h2&gt;&lt;p&gt;本站专注于：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Web 渗透测试&lt;/strong&gt; - 实战技巧与案例分析&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;漏洞复现&lt;/strong&gt; - 最新 CVE 漏洞深度解析&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;安全防御&lt;/strong&gt; - 加固方案与最佳实践&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;工具教程&lt;/strong&gt; - Nuclei、SQLMap、BurpSuite 等&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-内容方向"&gt;🎯 内容方向
+&lt;/h2&gt;&lt;h3 id="1-漏洞复现系列"&gt;1. 漏洞复现系列
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Log4Shell (CVE-2021-44228)&lt;/li&gt;
+&lt;li&gt;ProxyShell (CVE-2021-34473)&lt;/li&gt;
+&lt;li&gt;Fastjson RCE&lt;/li&gt;
+&lt;li&gt;Shiro 反序列化&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="2-工具教程系列"&gt;2. 工具教程系列
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Nuclei 模板编写&lt;/li&gt;
+&lt;li&gt;SQLMap 高级用法&lt;/li&gt;
+&lt;li&gt;BurpSuite 实战技巧&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="3-src-挖洞经验"&gt;3. SRC 挖洞经验
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;信息收集方法论&lt;/li&gt;
+&lt;li&gt;漏洞挖掘思路&lt;/li&gt;
+&lt;li&gt;报告撰写技巧&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-关于我"&gt;📚 关于我
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;方向&lt;/strong&gt;: Web 安全、渗透测试、漏洞研究&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;经验&lt;/strong&gt;: 多年安全从业经验&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;目标&lt;/strong&gt;: 分享实战经验，共同成长&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-交流方式"&gt;🤝 交流方式
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;GitHub&lt;/strong&gt;: &lt;a class="link" href="https://github.com/wizawn" target="_blank" rel="noopener"
+ &gt;https://github.com/wizawn&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;邮箱&lt;/strong&gt;: &lt;a class="link" href="mailto:hihacker@foxmail.com" &gt;hihacker@foxmail.com&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;QQ&lt;/strong&gt;: 46333839&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-免责声明"&gt;⚠️ 免责声明
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;所有技术内容仅用于&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;✅ 安全研究与学习&lt;/li&gt;
+&lt;li&gt;✅ 授权渗透测试&lt;/li&gt;
+&lt;li&gt;✅ 技术交流分享&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;禁止用于&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;❌ 未授权攻击&lt;/li&gt;
+&lt;li&gt;❌ 非法用途&lt;/li&gt;
+&lt;li&gt;❌ 商业牟利&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-后续更新"&gt;📖 后续更新
+&lt;/h2&gt;&lt;p&gt;博客将持续更新：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;每周 1-2 篇技术文章&lt;/li&gt;
+&lt;li&gt;最新漏洞快速复现&lt;/li&gt;
+&lt;li&gt;实用工具教程&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;敬请期待！&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;2026-02-26 | 博客正式启用&lt;/em&gt;&lt;/p&gt;</description></item><item><title>AI 赋能渗透测试 - 实战指南</title><link>https://blog.caowo.de/posts/ai-powered-pentest-guide/</link><pubDate>Sun, 01 Mar 2026 11:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/ai-powered-pentest-guide/</guid><description>&lt;h1 id="ai-赋能渗透测试---实战指南"&gt;AI 赋能渗透测试 - 实战指南
 &lt;/h1&gt;
  &lt;blockquote&gt;
  &lt;p&gt;用 AI 提升 10 倍效率的渗透测试工作流&lt;/p&gt;
@@ -277,77 +350,4 @@ e.g.:
  &gt;PortSwigger SSRF Labs&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;标签&lt;/strong&gt;: #SSRF #Web 安全 #漏洞复现 #SRC #云安全&lt;/p&gt;</description></item><item><title>Hello World | 开启 Web 渗透测试之旅</title><link>https://blog.caowo.de/posts/hello-world/</link><pubDate>Thu, 26 Feb 2026 21:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/hello-world/</guid><description>&lt;h1 id="hello-world--开启-web-渗透测试之旅"&gt;Hello World | 开启 Web 渗透测试之旅
-&lt;/h1&gt;&lt;hr&gt;
-&lt;h2 id="-博客启用"&gt;🎉 博客启用
-&lt;/h2&gt;&lt;p&gt;欢迎来到我的网络安全技术博客！&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id="-博客定位"&gt;📝 博客定位
-&lt;/h2&gt;&lt;p&gt;本站专注于：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Web 渗透测试&lt;/strong&gt; - 实战技巧与案例分析&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;漏洞复现&lt;/strong&gt; - 最新 CVE 漏洞深度解析&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;安全防御&lt;/strong&gt; - 加固方案与最佳实践&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;工具教程&lt;/strong&gt; - Nuclei、SQLMap、BurpSuite 等&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="-内容方向"&gt;🎯 内容方向
-&lt;/h2&gt;&lt;h3 id="1-漏洞复现系列"&gt;1. 漏洞复现系列
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;Log4Shell (CVE-2021-44228)&lt;/li&gt;
-&lt;li&gt;ProxyShell (CVE-2021-34473)&lt;/li&gt;
-&lt;li&gt;Fastjson RCE&lt;/li&gt;
-&lt;li&gt;Shiro 反序列化&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="2-工具教程系列"&gt;2. 工具教程系列
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;Nuclei 模板编写&lt;/li&gt;
-&lt;li&gt;SQLMap 高级用法&lt;/li&gt;
-&lt;li&gt;BurpSuite 实战技巧&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="3-src-挖洞经验"&gt;3. SRC 挖洞经验
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;信息收集方法论&lt;/li&gt;
-&lt;li&gt;漏洞挖掘思路&lt;/li&gt;
-&lt;li&gt;报告撰写技巧&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="-关于我"&gt;📚 关于我
-&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;方向&lt;/strong&gt;: Web 安全、渗透测试、漏洞研究&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;经验&lt;/strong&gt;: 多年安全从业经验&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;目标&lt;/strong&gt;: 分享实战经验，共同成长&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="-交流方式"&gt;🤝 交流方式
-&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;GitHub&lt;/strong&gt;: &lt;a class="link" href="https://github.com/wizawn" target="_blank" rel="noopener"
- &gt;https://github.com/wizawn&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;邮箱&lt;/strong&gt;: &lt;a class="link" href="mailto:hihacker@foxmail.com" &gt;hihacker@foxmail.com&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;QQ&lt;/strong&gt;: 46333839&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="-免责声明"&gt;⚠️ 免责声明
-&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;所有技术内容仅用于&lt;/strong&gt;：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;✅ 安全研究与学习&lt;/li&gt;
-&lt;li&gt;✅ 授权渗透测试&lt;/li&gt;
-&lt;li&gt;✅ 技术交流分享&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;禁止用于&lt;/strong&gt;：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;❌ 未授权攻击&lt;/li&gt;
-&lt;li&gt;❌ 非法用途&lt;/li&gt;
-&lt;li&gt;❌ 商业牟利&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="-后续更新"&gt;📖 后续更新
-&lt;/h2&gt;&lt;p&gt;博客将持续更新：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;每周 1-2 篇技术文章&lt;/li&gt;
-&lt;li&gt;最新漏洞快速复现&lt;/li&gt;
-&lt;li&gt;实用工具教程&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;敬请期待！&lt;/strong&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;em&gt;2026-02-26 | 博客正式启用&lt;/em&gt;&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;&lt;strong&gt;标签&lt;/strong&gt;: #SSRF #Web 安全 #漏洞复现 #SRC #云安全&lt;/p&gt;</description></item></channel></rss>

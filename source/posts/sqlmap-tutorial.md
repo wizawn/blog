@@ -1,3 +1,11 @@
+---
+title: "SQLMap 注入工具从入门到精通"
+date: 2026-03-01T17:00:00+08:00
+draft: false
+categories: ['教程系列']
+tags: ['SQLMap', 'SQL 注入', '教程']
+---
+
 # SQLMap 注入工具从入门到精通
 
 > **工具名称：** SQLMap  

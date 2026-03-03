@@ -2,10 +2,11 @@ baseURL = 'https://blog.caowo.de/'
 languageCode = 'zh-CN'
 title = '言零的博客'
 theme = 'stack'
+contentDir = 'source'
 
 [params]
   description = '专注于 Web 渗透测试、漏洞复现与安全防御技术分享'
-  mainSections = ['posts']
+  mainSections = ['_posts']
   
   [params.header]
     title = '言零的博客'

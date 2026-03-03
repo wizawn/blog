@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>言零的博客</title><link>https://blog.caowo.de/</link><description>Recent content on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 01 Mar 2026 13:53:00 +0800</lastBuildDate><atom:link href="https://blog.caowo.de/index.xml" rel="self" type="application/rss+xml"/><item><title>青龙面板鉴权绕过漏洞复现 - 从路径大小写到 RCE</title><link>https://blog.caowo.de/_posts/qinglong-auth-bypass-rce/</link><pubDate>Sat, 28 Feb 2026 16:45:00 +0800</pubDate><guid>https://blog.caowo.de/_posts/qinglong-auth-bypass-rce/</guid><description>&lt;img src="https://blog.caowo.de/" alt="Featured image of post 青龙面板鉴权绕过漏洞复现 - 从路径大小写到 RCE" /&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>言零的博客</title><link>https://blog.caowo.de/</link><description>Recent content on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 01 Mar 2026 13:53:00 +0800</lastBuildDate><atom:link href="https://blog.caowo.de/index.xml" rel="self" type="application/rss+xml"/><item><title>青龙面板鉴权绕过漏洞复现 - 从路径大小写到 RCE</title><link>https://blog.caowo.de/posts/qinglong-auth-bypass-rce/</link><pubDate>Sat, 28 Feb 2026 16:45:00 +0800</pubDate><guid>https://blog.caowo.de/posts/qinglong-auth-bypass-rce/</guid><description>&lt;img src="https://blog.caowo.de/" alt="Featured image of post 青龙面板鉴权绕过漏洞复现 - 从路径大小写到 RCE" /&gt;
  &lt;blockquote&gt;
  &lt;p&gt;⚠️ &lt;strong&gt;免责声明&lt;/strong&gt;：本文仅用于安全研究与教育目的，请勿将技术用于非法用途。&lt;/p&gt;
 
@@ -403,7 +403,7 @@
 &lt;h2 id="-tags"&gt;🏷️ Tags
 &lt;/h2&gt;&lt;p&gt;#鉴权绕过 #RCE #青龙面板 #Node.js 安全 #Express #漏洞复现 #渗透测试&lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;em&gt;本文基于公开披露的漏洞信息编写，旨在提高安全意识。请合法使用安全技术。&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Log4Shell (CVE-2021-44228) 漏洞深度解析与利用</title><link>https://blog.caowo.de/_posts/log4shell-article/</link><pubDate>Sun, 01 Mar 2026 13:53:00 +0800</pubDate><guid>https://blog.caowo.de/_posts/log4shell-article/</guid><description>&lt;h1 id="log4shell-cve-2021-44228-漏洞深度解析与利用"&gt;Log4Shell (CVE-2021-44228) 漏洞深度解析与利用
+&lt;p&gt;&lt;em&gt;本文基于公开披露的漏洞信息编写，旨在提高安全意识。请合法使用安全技术。&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Log4Shell (CVE-2021-44228) 漏洞深度解析与利用</title><link>https://blog.caowo.de/posts/log4shell-article/</link><pubDate>Sun, 01 Mar 2026 13:53:00 +0800</pubDate><guid>https://blog.caowo.de/posts/log4shell-article/</guid><description>&lt;h1 id="log4shell-cve-2021-44228-漏洞深度解析与利用"&gt;Log4Shell (CVE-2021-44228) 漏洞深度解析与利用
 &lt;/h1&gt;
  &lt;blockquote&gt;
  &lt;p&gt;&lt;strong&gt;漏洞等级：&lt;/strong&gt; CVSS 10.0 (严重)&lt;br&gt;
@@ -487,7 +487,7 @@
  &gt;Log4Shell POC&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;em&gt;本文仅用于安全研究与教育目的&lt;/em&gt;&lt;/p&gt;</description></item><item><title>404 Not Found - 当爱情遭遇渗透测试</title><link>https://blog.caowo.de/_posts/404-not-found/</link><pubDate>Sat, 28 Feb 2026 14:43:00 +0800</pubDate><guid>https://blog.caowo.de/_posts/404-not-found/</guid><description>&lt;h1 id="404-not-found---当爱情遭遇渗透测试"&gt;404 Not Found - 当爱情遭遇渗透测试
+&lt;p&gt;&lt;em&gt;本文仅用于安全研究与教育目的&lt;/em&gt;&lt;/p&gt;</description></item><item><title>404 Not Found - 当爱情遭遇渗透测试</title><link>https://blog.caowo.de/posts/404-not-found/</link><pubDate>Sat, 28 Feb 2026 14:43:00 +0800</pubDate><guid>https://blog.caowo.de/posts/404-not-found/</guid><description>&lt;h1 id="404-not-found---当爱情遭遇渗透测试"&gt;404 Not Found - 当爱情遭遇渗透测试
 &lt;/h1&gt;&lt;hr&gt;
 
  &lt;blockquote&gt;
@@ -628,7 +628,7 @@ Connection: close
 &lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
 &lt;p&gt;&lt;em&gt;2026-02-28 | 谨以此文献给所有在爱情中受挫的安全从业者&lt;/em&gt;&lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;标签&lt;/strong&gt;: #情感 #安全 #渗透测试 #404 #技术感悟&lt;/p&gt;</description></item><item><title>Hello World | 开启 Web 渗透测试之旅</title><link>https://blog.caowo.de/_posts/hello-world/</link><pubDate>Thu, 26 Feb 2026 21:00:00 +0800</pubDate><guid>https://blog.caowo.de/_posts/hello-world/</guid><description>&lt;h1 id="hello-world--开启-web-渗透测试之旅"&gt;Hello World | 开启 Web 渗透测试之旅
+&lt;p&gt;&lt;strong&gt;标签&lt;/strong&gt;: #情感 #安全 #渗透测试 #404 #技术感悟&lt;/p&gt;</description></item><item><title>Hello World | 开启 Web 渗透测试之旅</title><link>https://blog.caowo.de/posts/hello-world/</link><pubDate>Thu, 26 Feb 2026 21:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/hello-world/</guid><description>&lt;h1 id="hello-world--开启-web-渗透测试之旅"&gt;Hello World | 开启 Web 渗透测试之旅
 &lt;/h1&gt;&lt;hr&gt;
 &lt;h2 id="-博客启用"&gt;🎉 博客启用
 &lt;/h2&gt;&lt;p&gt;欢迎来到我的网络安全技术博客！&lt;/p&gt;
@@ -701,7 +701,7 @@ Connection: close
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;敬请期待！&lt;/strong&gt;&lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;em&gt;2026-02-26 | 博客正式启用&lt;/em&gt;&lt;/p&gt;</description></item><item><title/><link>https://blog.caowo.de/_posts/advanced-ssrf-techniques/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/_posts/advanced-ssrf-techniques/</guid><description>&lt;h1 id="高级-ssrf-技巧与防御---从内网探测到云环境接管"&gt;高级 SSRF 技巧与防御 - 从内网探测到云环境接管
+&lt;p&gt;&lt;em&gt;2026-02-26 | 博客正式启用&lt;/em&gt;&lt;/p&gt;</description></item><item><title/><link>https://blog.caowo.de/posts/advanced-ssrf-techniques/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/advanced-ssrf-techniques/</guid><description>&lt;h1 id="高级-ssrf-技巧与防御---从内网探测到云环境接管"&gt;高级 SSRF 技巧与防御 - 从内网探测到云环境接管
 &lt;/h1&gt;&lt;h2 id="-漏洞概述"&gt;📋 漏洞概述
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;漏洞名称&lt;/strong&gt;: Server-Side Request Forgery (SSRF)&lt;br&gt;
 &lt;strong&gt;漏洞类型&lt;/strong&gt;: 服务端请求伪造&lt;br&gt;
@@ -818,7 +818,7 @@ e.g.:
  &gt;PortSwigger SSRF Labs&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;标签&lt;/strong&gt;: #SSRF #Web 安全 #漏洞复现 #SRC #云安全&lt;/p&gt;</description></item><item><title/><link>https://blog.caowo.de/_posts/ai-powered-pentest-guide/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/_posts/ai-powered-pentest-guide/</guid><description>&lt;h1 id="ai-赋能渗透测试---实战指南"&gt;AI 赋能渗透测试 - 实战指南
+&lt;p&gt;&lt;strong&gt;标签&lt;/strong&gt;: #SSRF #Web 安全 #漏洞复现 #SRC #云安全&lt;/p&gt;</description></item><item><title/><link>https://blog.caowo.de/posts/ai-powered-pentest-guide/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/ai-powered-pentest-guide/</guid><description>&lt;h1 id="ai-赋能渗透测试---实战指南"&gt;AI 赋能渗透测试 - 实战指南
 &lt;/h1&gt;
  &lt;blockquote&gt;
  &lt;p&gt;用 AI 提升 10 倍效率的渗透测试工作流&lt;/p&gt;
@@ -980,7 +980,7 @@ e.g.:
 &lt;hr&gt;
 &lt;p&gt;&lt;strong&gt;标签&lt;/strong&gt;: #AI #渗透测试 #网络安全 #自动化 #漏洞挖掘&lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;em&gt;AI 是工具，不是替代品。真正的安全专家 = 经验 + 工具 + 判断力&lt;/em&gt;&lt;/p&gt;</description></item><item><title/><link>https://blog.caowo.de/_posts/ai-vuln-detection-nuclei/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/_posts/ai-vuln-detection-nuclei/</guid><description>&lt;h1 id="用-ai-自动编写-nuclei-漏洞检测模板"&gt;用 AI 自动编写 Nuclei 漏洞检测模板
+&lt;p&gt;&lt;em&gt;AI 是工具，不是替代品。真正的安全专家 = 经验 + 工具 + 判断力&lt;/em&gt;&lt;/p&gt;</description></item><item><title/><link>https://blog.caowo.de/posts/ai-vuln-detection-nuclei/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/ai-vuln-detection-nuclei/</guid><description>&lt;h1 id="用-ai-自动编写-nuclei-漏洞检测模板"&gt;用 AI 自动编写 Nuclei 漏洞检测模板
 &lt;/h1&gt;
  &lt;blockquote&gt;
  &lt;p&gt;让 AI 帮你 10 分钟写出专业漏洞扫描模板&lt;/p&gt;
@@ -1146,7 +1146,7 @@ CVE-2024-XXXX: 某 CMS 系统存在 SQL 注入漏洞
 &lt;hr&gt;
 &lt;p&gt;&lt;strong&gt;标签&lt;/strong&gt;: #AI #Nuclei #漏洞扫描 #自动化 #渗透测试&lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;em&gt;模板写得越多，扫描效率越高。让 AI 帮你积累模板库！&lt;/em&gt;&lt;/p&gt;</description></item><item><title/><link>https://blog.caowo.de/_posts/csrf-injection-vuln/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/_posts/csrf-injection-vuln/</guid><description>&lt;h1 id="csrf-漏洞复现---从原理到防御实战"&gt;CSRF 漏洞复现 - 从原理到防御实战
+&lt;p&gt;&lt;em&gt;模板写得越多，扫描效率越高。让 AI 帮你积累模板库！&lt;/em&gt;&lt;/p&gt;</description></item><item><title/><link>https://blog.caowo.de/posts/csrf-injection-vuln/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/csrf-injection-vuln/</guid><description>&lt;h1 id="csrf-漏洞复现---从原理到防御实战"&gt;CSRF 漏洞复现 - 从原理到防御实战
 &lt;/h1&gt;&lt;h2 id="-漏洞概述"&gt;📋 漏洞概述
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;漏洞名称&lt;/strong&gt;: Cross-Site Request Forgery (CSRF)&lt;br&gt;
 &lt;strong&gt;漏洞类型&lt;/strong&gt;: 跨站请求伪造&lt;br&gt;
@@ -1427,7 +1427,7 @@ CVE-2024-XXXX: 某 CMS 系统存在 SQL 注入漏洞
  &gt;PayloadsAllTheThings CSRF&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;标签&lt;/strong&gt;: #CSRF #Web 安全 #漏洞复现 #SRC #渗透测试&lt;/p&gt;</description></item><item><title/><link>https://blog.caowo.de/_posts/market-monitor-solution/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/_posts/market-monitor-solution/</guid><description>&lt;h1 id="基于-openclaw-的全市场实时监控方案"&gt;基于 OpenClaw 的全市场实时监控方案
+&lt;p&gt;&lt;strong&gt;标签&lt;/strong&gt;: #CSRF #Web 安全 #漏洞复现 #SRC #渗透测试&lt;/p&gt;</description></item><item><title/><link>https://blog.caowo.de/posts/market-monitor-solution/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/market-monitor-solution/</guid><description>&lt;h1 id="基于-openclaw-的全市场实时监控方案"&gt;基于 OpenClaw 的全市场实时监控方案
 &lt;/h1&gt;
  &lt;blockquote&gt;
  &lt;p&gt;&lt;strong&gt;适用场景：&lt;/strong&gt; 股市/贵金属/加密货币实时监控&lt;br&gt;
@@ -1811,7 +1811,7 @@ CVE-2024-XXXX: 某 CMS 系统存在 SQL 注入漏洞
  &gt;AllTick API&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;em&gt;本文仅用于技术研究与教育目的，投资有风险，入市需谨慎。&lt;/em&gt;&lt;/p&gt;</description></item><item><title/><link>https://blog.caowo.de/_posts/nuclei-tutorial/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/_posts/nuclei-tutorial/</guid><description>&lt;h1 id="nuclei-漏洞扫描器从入门到精通"&gt;Nuclei 漏洞扫描器从入门到精通
+&lt;p&gt;&lt;em&gt;本文仅用于技术研究与教育目的，投资有风险，入市需谨慎。&lt;/em&gt;&lt;/p&gt;</description></item><item><title/><link>https://blog.caowo.de/posts/nuclei-tutorial/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/nuclei-tutorial/</guid><description>&lt;h1 id="nuclei-漏洞扫描器从入门到精通"&gt;Nuclei 漏洞扫描器从入门到精通
 &lt;/h1&gt;
  &lt;blockquote&gt;
  &lt;p&gt;&lt;strong&gt;工具名称：&lt;/strong&gt; Nuclei&lt;br&gt;
@@ -2044,7 +2044,7 @@ CVE-2024-XXXX: 某 CMS 系统存在 SQL 注入漏洞
  &gt;https://github.com/projectdiscovery/nuclei-templates&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;em&gt;本文仅用于安全研究与教育目的，请勿用于非法用途。&lt;/em&gt;&lt;/p&gt;</description></item><item><title/><link>https://blog.caowo.de/_posts/proxyshell-article/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/_posts/proxyshell-article/</guid><description>&lt;h1 id="proxyshell-漏洞链-cve-2021-34473-深度解析"&gt;ProxyShell 漏洞链 (CVE-2021-34473) 深度解析
+&lt;p&gt;&lt;em&gt;本文仅用于安全研究与教育目的，请勿用于非法用途。&lt;/em&gt;&lt;/p&gt;</description></item><item><title/><link>https://blog.caowo.de/posts/proxyshell-article/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/proxyshell-article/</guid><description>&lt;h1 id="proxyshell-漏洞链-cve-2021-34473-深度解析"&gt;ProxyShell 漏洞链 (CVE-2021-34473) 深度解析
 &lt;/h1&gt;
  &lt;blockquote&gt;
  &lt;p&gt;&lt;strong&gt;漏洞组合：&lt;/strong&gt; CVE-2021-34473 + CVE-2021-34523 + CVE-2021-31207&lt;br&gt;
@@ -2249,7 +2249,7 @@ Security Update for Exchange Server 2013 CU23 (KB5004361)
  &gt;https://www.zerodayinitiative.com/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;em&gt;本文仅用于安全研究与教育目的，请勿用于非法用途。&lt;/em&gt;&lt;/p&gt;</description></item><item><title/><link>https://blog.caowo.de/_posts/sqlmap-tutorial/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/_posts/sqlmap-tutorial/</guid><description>&lt;h1 id="sqlmap-注入工具从入门到精通"&gt;SQLMap 注入工具从入门到精通
+&lt;p&gt;&lt;em&gt;本文仅用于安全研究与教育目的，请勿用于非法用途。&lt;/em&gt;&lt;/p&gt;</description></item><item><title/><link>https://blog.caowo.de/posts/sqlmap-tutorial/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/sqlmap-tutorial/</guid><description>&lt;h1 id="sqlmap-注入工具从入门到精通"&gt;SQLMap 注入工具从入门到精通
 &lt;/h1&gt;
  &lt;blockquote&gt;
  &lt;p&gt;&lt;strong&gt;工具名称：&lt;/strong&gt; SQLMap&lt;br&gt;
@@ -2484,7 +2484,7 @@ Security Update for Exchange Server 2013 CU23 (KB5004361)
  &gt;https://sqlmap.org/faq/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;em&gt;本文仅用于安全研究与教育目的，请勿用于非法用途。&lt;/em&gt;&lt;/p&gt;</description></item><item><title/><link>https://blog.caowo.de/_posts/ssrf-injection-vuln/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/_posts/ssrf-injection-vuln/</guid><description>&lt;h1 id="ssrf-漏洞复现---从内网探测到云环境接管"&gt;SSRF 漏洞复现 - 从内网探测到云环境接管
+&lt;p&gt;&lt;em&gt;本文仅用于安全研究与教育目的，请勿用于非法用途。&lt;/em&gt;&lt;/p&gt;</description></item><item><title/><link>https://blog.caowo.de/posts/ssrf-injection-vuln/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/ssrf-injection-vuln/</guid><description>&lt;h1 id="ssrf-漏洞复现---从内网探测到云环境接管"&gt;SSRF 漏洞复现 - 从内网探测到云环境接管
 &lt;/h1&gt;&lt;h2 id="-漏洞概述"&gt;📋 漏洞概述
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;漏洞名称&lt;/strong&gt;: Server-Side Request Forgery (SSRF)&lt;br&gt;
 &lt;strong&gt;漏洞类型&lt;/strong&gt;: 服务端请求伪造&lt;br&gt;
@@ -2703,7 +2703,7 @@ http://[0:0:0:0:0:ffff:7f00:1]:80
  &gt;PayloadsAllTheThings SSRF&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;标签&lt;/strong&gt;: #SSRF #注入漏洞 #Web 安全 #漏洞复现 #SRC #云安全&lt;/p&gt;</description></item><item><title/><link>https://blog.caowo.de/_posts/xxe-injection-vuln/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/_posts/xxe-injection-vuln/</guid><description>&lt;h1 id="xxe-注入漏洞复现---从原理到实战利用"&gt;XXE 注入漏洞复现 - 从原理到实战利用
+&lt;p&gt;&lt;strong&gt;标签&lt;/strong&gt;: #SSRF #注入漏洞 #Web 安全 #漏洞复现 #SRC #云安全&lt;/p&gt;</description></item><item><title/><link>https://blog.caowo.de/posts/xxe-injection-vuln/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/xxe-injection-vuln/</guid><description>&lt;h1 id="xxe-注入漏洞复现---从原理到实战利用"&gt;XXE 注入漏洞复现 - 从原理到实战利用
 &lt;/h1&gt;&lt;h2 id="-漏洞概述"&gt;📋 漏洞概述
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;漏洞名称&lt;/strong&gt;: XML External Entity (XXE) Injection&lt;br&gt;
 &lt;strong&gt;漏洞类型&lt;/strong&gt;: 注入攻击&lt;br&gt;

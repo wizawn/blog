@@ -3,10 +3,7 @@ title: "关于本站 / About"
 date: 2026-03-03T08:00:00+08:00
 draft: false
 type: "page"
-menu:
-  main:
-    identifier: "about"
-    weight: 4
+
 ---
 
 # 关于本站 / About

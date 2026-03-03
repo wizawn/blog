@@ -13,7 +13,14 @@ contentDir = 'source'
     
   [params.footer]
     since = 2026
-    
+
+[markup]
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = false
+    lineNos = false
+    noClasses = false
+
 [menu]
   [[menu.main]]
     identifier = "posts"
@@ -44,10 +51,3 @@ contentDir = 'source'
     name = "友链 / Links"
     url = "/links/"
     weight = 5
-
-[markup]
-  [markup.highlight]
-    codeFences = true
-    guessSyntax = false
-    lineNos = false
-    noClasses = false

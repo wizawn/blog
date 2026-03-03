@@ -3,10 +3,7 @@ title: "友情链接 / Links"
 date: 2026-03-03T08:00:00+08:00
 draft: false
 type: "page"
-menu:
-  main:
-    identifier: "links"
-    weight: 5
+
 ---
 
 # 友情链接 / Links

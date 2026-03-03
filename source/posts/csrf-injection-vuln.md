@@ -4,6 +4,7 @@ date: 2026-03-01T13:00:00+08:00
 draft: false
 categories: ['漏洞复现']
 tags: ['CSRF', 'Web 安全', '漏洞复现']
+image: "/blog-cover-default.jpg"
 ---
 
 # CSRF 漏洞复现 - 从原理到防御实战

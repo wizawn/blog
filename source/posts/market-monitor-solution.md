@@ -4,6 +4,7 @@ date: 2026-03-01T14:00:00+08:00
 draft: false
 categories: ['教程系列']
 tags: ['自动化', '监控', 'OpenClaw']
+image: "/blog-cover-default.jpg"
 ---
 
 # 基于 OpenClaw 的全市场实时监控方案

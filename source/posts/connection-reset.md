@@ -4,6 +4,7 @@ date: 2026-02-27T10:00:00+08:00
 draft: false
 categories: ["技术感悟"]
 tags: ["网络", "情感", "TCP"]
+image: "/blog-cover-default.jpg"
 ---
 
 # Connection Reset - 当信任遭遇背叛

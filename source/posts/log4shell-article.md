@@ -4,6 +4,7 @@ date: 2026-03-01T13:53:00+08:00
 draft: false
 categories: ["漏洞复现"]
 tags: ["Log4j", "RCE", "CVE-2021-44228"]
+image: "/blog-cover-default.jpg"
 description: "Log4Shell 漏洞深度解析与利用教程"
 ---
 

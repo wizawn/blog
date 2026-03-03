@@ -4,6 +4,7 @@ date: 2026-03-01T18:00:00+08:00
 draft: false
 categories: ['漏洞复现']
 tags: ['SSRF', '内网渗透', '漏洞复现']
+image: "/blog-cover-default.jpg"
 ---
 
 # SSRF 漏洞复现 - 从内网探测到云环境接管

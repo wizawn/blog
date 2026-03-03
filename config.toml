@@ -13,6 +13,11 @@ contentDir = 'source'
     
   [params.footer]
     since = 2026
+    
+  # Cloudflare Web Analytics
+  [params.cloudflareAnalytics]
+    enabled = true
+    token = "SDZvDCIq-3er2UKht5fIrl2UvvIrJxi6hZVxBfIa"
 
 [markup]
   [markup.highlight]

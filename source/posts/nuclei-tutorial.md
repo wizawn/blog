@@ -4,6 +4,7 @@ date: 2026-03-01T15:00:00+08:00
 draft: false
 categories: ['教程系列']
 tags: ['Nuclei', '漏洞扫描', '教程']
+image: "/blog-cover-default.jpg"
 ---
 
 # Nuclei 漏洞扫描器从入门到精通

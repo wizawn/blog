@@ -4,6 +4,7 @@ date: 2026-02-28T14:43:00+08:00
 draft: false
 categories: ["技术感悟"]
 tags: ["情感", "安全", "随笔"]
+image: "/blog-cover-default.jpg"
 description: "用网络安全术语诠释一段失败的感情，从 HTTPS 到 APT 攻击，从防火墙到 0day 漏洞，原来最痛的漏洞，永远在心防。"
 ---
 

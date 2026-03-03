@@ -4,6 +4,7 @@ date: 2026-03-01T19:00:00+08:00
 draft: false
 categories: ['漏洞复现']
 tags: ['XXE', 'XML', '漏洞复现']
+image: "/blog-cover-default.jpg"
 ---
 
 # XXE 注入漏洞复现 - 从原理到实战利用

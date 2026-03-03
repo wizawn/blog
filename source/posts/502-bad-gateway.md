@@ -4,6 +4,7 @@ date: 2026-02-27T09:00:00+08:00
 draft: false
 categories: ["技术感悟"]
 tags: ["运维", "情感", "502"]
+image: "/blog-cover-default.jpg"
 ---
 
 # 502 Bad Gateway - 当理想遭遇现实

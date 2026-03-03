@@ -4,6 +4,7 @@ date: 2026-03-01T16:00:00+08:00
 draft: false
 categories: ['漏洞复现']
 tags: ['ProxyShell', 'Exchange', 'RCE']
+image: "/blog-cover-default.jpg"
 ---
 
 # ProxyShell 漏洞链 (CVE-2021-34473) 深度解析

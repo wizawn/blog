@@ -4,6 +4,7 @@ date: 2026-03-03T16:00:00+08:00
 draft: false
 categories: ["技术感悟"]
 tags: ["博客启用", "网络安全", "渗透测试"]
+image: "/blog-cover-default.jpg"
 description: "本站正式启用，专注于 Web 渗透测试、漏洞复现与安全防御技术分享"
 ---
 

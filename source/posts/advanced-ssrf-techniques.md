@@ -4,6 +4,7 @@ date: 2026-03-01T10:00:00+08:00
 draft: false
 categories: ['漏洞复现']
 tags: ['渗透测试', 'SSRF', '内网渗透']
+image: "/blog-cover-default.jpg"
 ---
 
 # 高级 SSRF 技巧与防御 - 从内网探测到云环境接管

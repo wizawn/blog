@@ -4,6 +4,7 @@ date: 2026-03-01T12:00:00+08:00
 draft: false
 categories: ['AI 系列']
 tags: ['AI', 'Nuclei', '漏洞检测']
+image: "/blog-cover-default.jpg"
 ---
 
 # 用 AI 自动编写 Nuclei 漏洞检测模板

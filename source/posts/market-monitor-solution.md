@@ -1,3 +1,11 @@
+---
+title: "基于 OpenClaw 的全市场实时监控方案"
+date: 2026-03-01T14:00:00+08:00
+draft: false
+categories: ['教程系列']
+tags: ['自动化', '监控', 'OpenClaw']
+---
+
 # 基于 OpenClaw 的全市场实时监控方案
 
 > **适用场景：** 股市/贵金属/加密货币实时监控  

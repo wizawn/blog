@@ -1,3 +1,11 @@
+---
+title: "用 AI 自动编写 Nuclei 漏洞检测模板"
+date: 2026-03-01T12:00:00+08:00
+draft: false
+categories: ['AI 系列']
+tags: ['AI', 'Nuclei', '漏洞检测']
+---
+
 # 用 AI 自动编写 Nuclei 漏洞检测模板
 
 > 让 AI 帮你 10 分钟写出专业漏洞扫描模板

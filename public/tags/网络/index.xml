@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>网络 on 言零的博客</title><link>https://blog.caowo.de/tags/%E7%BD%91%E7%BB%9C/</link><description>Recent content in 网络 on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 27 Feb 2026 10:00:00 +0800</lastBuildDate><atom:link href="https://blog.caowo.de/tags/%E7%BD%91%E7%BB%9C/index.xml" rel="self" type="application/rss+xml"/><item><title>Connection Reset - 当信任遭遇背叛</title><link>https://blog.caowo.de/posts/connection-reset/</link><pubDate>Fri, 27 Feb 2026 10:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/connection-reset/</guid><description>&lt;h1 id="connection-reset---当信任遭遇背叛"&gt;Connection Reset - 当信任遭遇背叛
+&lt;/h1&gt;
+ &lt;blockquote&gt;
+ &lt;p&gt;用网络术语诠释信任与背叛的故事&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+&lt;h2 id="三次握手---信任建立"&gt;三次握手 - 信任建立
+&lt;/h2&gt;&lt;pre tabindex="0"&gt;&lt;code&gt;Client (我) Server (你)
+ | |
+ |---- SYN (我想信任你) --------&amp;gt;|
+ | |
+ |&amp;lt;--- SYN-ACK (我接受) ---------|
+ | |
+ |---- ACK (连接建立) ----------&amp;gt;|
+ | |
+ ====== ESTABLISHED ======
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;我以为这次连接会持久稳定。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;但 TCP 连接可以被关闭，信任也可以被重置。&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="心跳检测---信任维护"&gt;心跳检测 - 信任维护
+&lt;/h2&gt;&lt;p&gt;我持续发送心跳包：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;send_heartbeat&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;packet&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;type&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;HEARTBEAT&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;message&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;我还在这里&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;packet&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;但收到的响应越来越少。&lt;/p&gt;
+&lt;h2 id="rst-包---信任断裂"&gt;RST 包 - 信任断裂
+&lt;/h2&gt;&lt;pre tabindex="0"&gt;&lt;code&gt;Client (我) Server (你)
+ | |
+ |---- PSH (我还爱你) ----------&amp;gt;|
+ | |
+ |&amp;lt;--- RST (断开连接) -----------|
+ | |
+ ====== CONNECTION RESET ======
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;没有 FIN 握手，没有优雅关闭。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;只有冰冷的 RST。&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="抓包分析"&gt;抓包分析
+&lt;/h2&gt;&lt;pre tabindex="0"&gt;&lt;code&gt;10:00:00 SYN → 192.168.1.100:443
+10:00:01 SYN-ACK ← 192.168.1.100:443
+10:00:01 ACK → 192.168.1.100:443
+10:05:00 PSH → 192.168.1.100:443 &amp;#34;我还在这里&amp;#34;
+10:05:01 RST ← 192.168.1.100:443
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="教训"&gt;教训
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;不是所有连接都能持久&lt;/li&gt;
+&lt;li&gt;不是所有信任都值得&lt;/li&gt;
+&lt;li&gt;及时止损，重建连接&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;2026-02-27 | 谨以此文献给所有被背叛的信任&lt;/em&gt;&lt;/p&gt;</description></item></channel></rss>

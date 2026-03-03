@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>502 on 言零的博客</title><link>https://blog.caowo.de/tags/502/</link><description>Recent content in 502 on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 27 Feb 2026 09:00:00 +0800</lastBuildDate><atom:link href="https://blog.caowo.de/tags/502/index.xml" rel="self" type="application/rss+xml"/><item><title>502 Bad Gateway - 当理想遭遇现实</title><link>https://blog.caowo.de/posts/502-bad-gateway/</link><pubDate>Fri, 27 Feb 2026 09:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/502-bad-gateway/</guid><description>&lt;h1 id="502-bad-gateway---当理想遭遇现实"&gt;502 Bad Gateway - 当理想遭遇现实
+&lt;/h1&gt;
+ &lt;blockquote&gt;
+ &lt;p&gt;用运维术语诠释理想与现实的碰撞&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+&lt;h2 id="架构设计---理想的蓝图"&gt;架构设计 - 理想的蓝图
+&lt;/h2&gt;&lt;p&gt;刚毕业那年，我画了一张完美的架构图：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt; 负载均衡器 (Nginx)
+ │
+ ┌─────────┼─────────┐
+ │ │ │
+ 后端 1 后端 2 后端 3
+ (理想) (理想) (理想)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;我以为人生会像高可用集群一样有冗余、有备份、有故障转移。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;但现实给了我一个 502 Bad Gateway。&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="上游服务器---现实的崩溃"&gt;上游服务器 - 现实的崩溃
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-nginx" data-lang="nginx"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;upstream&lt;/span&gt; &lt;span class="s"&gt;ideal_backend&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kn"&gt;server&lt;/span&gt; &lt;span class="n"&gt;192.168.1.10&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;8080&lt;/span&gt; &lt;span class="s"&gt;weight=5&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;# 我的努力
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kn"&gt;server&lt;/span&gt; &lt;span class="n"&gt;192.168.1.11&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;8080&lt;/span&gt; &lt;span class="s"&gt;weight=3&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;# 我的坚持
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kn"&gt;server&lt;/span&gt; &lt;span class="n"&gt;192.168.1.12&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;8080&lt;/span&gt; &lt;span class="s"&gt;weight=2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;# 我的期待
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;我以为配置了重试机制就能万无一失，但现实是：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;所有上游服务器都挂了。&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="错误日志"&gt;错误日志
+&lt;/h2&gt;&lt;pre tabindex="0"&gt;&lt;code&gt;[error] upstream prematurely closed connection
+[error] connect() failed (111: Connection refused)
+[crit] no live upstreams while connecting to upstream
+[alert] all backend servers are down
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="修复方案"&gt;修复方案
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 1. 检查后端服务状态&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;systemctl status backend
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 2. 查看后端日志&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;journalctl -u backend -f
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 3. 重启服务&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;systemctl restart backend
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 4. 验证健康检查&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl -I http://localhost:8080/health
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="人生感悟"&gt;人生感悟
+&lt;/h2&gt;&lt;p&gt;502 不是终点，而是重新架构的起点。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;修复步骤&lt;/strong&gt;:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;接受现实（后端确实挂了）&lt;/li&gt;
+&lt;li&gt;分析原因（为什么挂了）&lt;/li&gt;
+&lt;li&gt;修复问题（重启或重构）&lt;/li&gt;
+&lt;li&gt;添加监控（防止再次发生）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;2026-02-27 | 谨以此文献给所有在理想路上受挫的人&lt;/em&gt;&lt;/p&gt;</description></item></channel></rss>

@@ -7,12 +7,26 @@ contentDir = 'source'
 [params]
   description = '专注于 Web 渗透测试、漏洞复现与安全防御技术分享'
   mainSections = ['posts']
+  defaultImage = '/blog-cover-default.jpg'
   
   [params.header]
     title = '言零的博客'
     
   [params.footer]
     since = 2026
+    
+  # SEO 配置
+  [params.seo]
+    title = '言零的博客 - Web 渗透测试与安全研究'
+    description = '专注于 Web 渗透测试、漏洞复现、SRC 挖洞与安全防御技术分享。提供 Nuclei 教程、SQLMap 指南、CVE 漏洞复现等实战内容。'
+    keywords = ['Web 渗透测试', '漏洞复现', 'SRC 挖洞', '网络安全', 'Nuclei', 'SQLMap', 'CVE', '安全研究']
+    author = '言零'
+    
+  # Open Graph / 社交媒体分享
+  [params.opengraph]
+    title = '言零的博客'
+    description = '专注于 Web 渗透测试、漏洞复现与安全防御技术分享'
+    image = '/blog-cover-default.jpg'
     
   # Cloudflare Web Analytics
   [params.cloudflareAnalytics]

@@ -3,7 +3,10 @@ languageCode = 'zh-CN'
 title = '言零的博客'
 theme = 'stack'
 contentDir = 'source'
-enableFuturePages = true
+
+[params]
+  # 允许发布未来日期的文章
+  enableFuturePages = true
 
 [params]
   description = '专注于 Web 渗透测试、漏洞复现与安全防御技术分享'

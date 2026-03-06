@@ -4,7 +4,7 @@ date: 2026-03-06T09:30:00+08:00
 draft: false
 categories: ["币安广场"]
 tags: ["币安", "加密货币", "内容创作", "变现"]
-image: "/static/binance-content-cover.png"
+image: "/static/tech-cover-1.jpg"
 description: "收录我在币安广场发布的所有高质量内容，包括新手教程、币种分析、产品实操、交易策略等"
 ---
 

@@ -4,7 +4,7 @@ date: 2026-03-03T16:05:00+08:00
 draft: false
 categories: ["OpenClaw"]
 tags: ["OpenClaw", "Windows", "部署", "教程"]
-image: "/tech-cover-1.jpg"
+image: "/static/tech-cover-1.jpg"
 description: "OpenClaw AI 助手框架 Windows 平台完整部署教程，包含 WSL2 配置和原生安装方案"
 ---
 

@@ -4,7 +4,7 @@ date: 2026-03-03T16:00:00+08:00
 draft: false
 categories: ["OpenClaw"]
 tags: ["OpenClaw", "Linux", "部署", "教程"]
-image: "/security-cover.jpg"
+image: "/static/security-cover.jpg"
 description: "OpenClaw AI 助手框架 Linux 平台完整部署教程，包含依赖安装、配置优化和常见问题解决"
 ---
 

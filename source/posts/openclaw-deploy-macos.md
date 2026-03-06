@@ -4,7 +4,7 @@ date: 2026-03-03T16:10:00+08:00
 draft: false
 categories: ["OpenClaw"]
 tags: ["OpenClaw", "macOS", "部署", "教程"]
-image: "/security-cover.jpg"
+image: "/static/security-cover.jpg"
 description: "OpenClaw AI 助手框架 macOS 平台完整部署教程，支持 Intel 和 Apple Silicon"
 ---
 

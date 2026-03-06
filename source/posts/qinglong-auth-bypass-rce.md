@@ -4,7 +4,7 @@ date: 2026-02-28T16:45:00+08:00
 tags: ["鉴权绕过", "RCE", "Node.js", "路径遍历"]
 categories: ["漏洞复现"]
 description: "深度剖析青龙面板最新版鉴权绕过漏洞，利用路径大小写特性绕过 JWT 校验，最终实现未授权远程命令执行。"
-image: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=1200&h=630&fit=crop"
+image: "/static/security-cover.jpg"
 keywords: ["青龙面板", "鉴权绕过", "RCE", "Node.js 安全", "Express 漏洞"]
 draft: false
 weight: 1

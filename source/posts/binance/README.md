@@ -1,3 +1,7 @@
+---
+image: "/static/tech-cover-1.jpg"
+---
+
 # 币安广场内容创作计划
 
 ## 📅 本周内容排期

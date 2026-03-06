@@ -4,7 +4,7 @@ date: 2026-03-03T16:15:00+08:00
 draft: false
 categories: ["OpenClaw"]
 tags: ["OpenClaw", "Android", "部署", "教程", "Termux"]
-image: "/tech-cover-1.jpg"
+image: "/static/tech-cover-1.jpg"
 description: "OpenClaw AI 助手框架 Android 平台部署教程，使用 Termux 在手机上运行 AI 助手"
 ---
 

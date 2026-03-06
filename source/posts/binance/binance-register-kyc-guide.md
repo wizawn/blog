@@ -4,7 +4,7 @@ date: 2026-03-06T12:30:00+08:00
 draft: false
 categories: ["币安广场", "新手教程"]
 tags: ["币安", "注册教程", "KYC 认证", "新手入门", "加密货币"]
-image: "/static/tech-cover-1.jpg"
+image: "/static/binance-content-cover.png"
 description: "带你完成币安注册和 KYC 认证的全流程，从 0 到 1 开启加密之旅。包含注册方式、安全设置、KYC 认证、首次交易等完整指南"
 ---
 

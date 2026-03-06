@@ -4,7 +4,7 @@ date: 2026-03-06T10:00:00+08:00
 draft: false
 categories: ["漏洞复现", "资产收集"]
 tags: ["ARL", "资产收集", "海外站点", "Nuclei", "SRC"]
-image: "/static/security-cover.jpg"
+image: "/static/arl-overseas-cover.png"
 description: "使用 ARL 灯塔系统对海外站点进行资产收集，12 小时收集 10,000+ 域名、11,000+ 站点，为 SRC 挖洞打下基础"
 ---
 

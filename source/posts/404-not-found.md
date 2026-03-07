@@ -5,7 +5,7 @@ draft: false
 categories: ["技术感悟"]
 tags: ["情感", "安全", "随笔"]
 image: "/blog-cover-default.jpg"
-description: "用网络安全术语诠释一段失败的感情，从 HTTPS 到 APT 攻击，从防火墙到 0day 漏洞，原来最痛的漏洞，永远在心防。"
+description: "用网络安全术语诠释一段失败的感情"
 ---
 
 # 404 Not Found - 当爱情遭遇渗透测试
@@ -21,7 +21,8 @@ description: "用网络安全术语诠释一段失败的感情，从 HTTPS 到 A
 
 ## 1. 初始连接 - HTTPS 握手
 
-第一次遇见你，像是在建立 HTTPS 连接。
+第一次遇见你，  
+像是在建立 HTTPS 连接。
 
 我小心翼翼地发送 **Client Hello**，  
 期待你的 **Server Hello** 响应。

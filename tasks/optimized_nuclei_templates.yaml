@@ -1,0 +1,95 @@
+id: openclaw-exposure-check
+
+info:
+  name: OpenClaw Exposure Detection
+  author: ClawSec
+  severity: high
+  description: Detect exposed OpenClaw instances with default configuration
+  tags: openclaw,exposure,default-config
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}"
+      - "{{BaseURL}}/api/status"
+      - "{{BaseURL}}:18789"
+    
+    headers:
+      User-Agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "OpenClaw Control"
+          - "openclaw-app"
+        condition: or
+        
+      - type: status
+        status:
+          - 200
+
+---
+
+id: openclaw-default-auth
+
+info:
+  name: OpenClaw Default Authentication
+  author: ClawSec
+  severity: critical
+  description: Test for OpenClaw default credentials
+  tags: openclaw,default-login
+
+http:
+  - method: POST
+    path:
+      - "{{BaseURL}}/api/auth/login"
+      - "{{BaseURL}}:18789/api/auth/login"
+    
+    headers:
+      Content-Type: "application/json"
+    
+    body: |
+      {"username":"admin","password":"admin"}
+    
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "token"
+          - "success"
+        
+      - type: status
+        status:
+          - 200
+
+---
+
+id: openclaw-unauth-api
+
+info:
+  name: OpenClaw Unauth API Access
+  author: ClawSec
+  severity: high
+  description: Test for unauthenticated API access
+  tags: openclaw,unauth,api
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/api/assistants"
+      - "{{BaseURL}}:18789/api/assistants"
+      - "{{BaseURL}}/api/sessions"
+      - "{{BaseURL}}:18789/api/sessions"
+    
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "assistants"
+          - "id"
+          - "name"
+        
+      - type: status
+        status:
+          - 200

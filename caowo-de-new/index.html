@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>言零 | 资深安全研究员</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+            --accent: #06b6d4;
+            --dark: #0f172a;
+            --light: #f8fafc;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%);
+            color: var(--light);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            position: relative;
+        }
+
+        .avatar {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 4px solid var(--primary);
+            box-shadow: 0 0 40px rgba(99, 102, 241, 0.4);
+            margin-bottom: 2rem;
+            object-fit: cover;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .hero .tagline {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            margin-bottom: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .social-links a {
+            color: var(--light);
+            font-size: 1.8rem;
+            transition: all 0.3s;
+            padding: 0.8rem;
+            border-radius: 50%;
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* Sections */
+        .section {
+            background: rgba(30, 27, 75, 0.5);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--accent);
+        }
+
+        .section h2 i {
+            font-size: 1.8rem;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background: rgba(99, 102, 241, 0.1);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .skill-card h3 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: rgba(6, 182, 212, 0.2);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--accent);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--primary), var(--accent));
+            border-radius: 3px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.6rem;
+            top: 0.5rem;
+            width: 1rem;
+            height: 1rem;
+            background: var(--primary);
+            border-radius: 50%;
+            border: 3px solid var(--dark);
+        }
+
+        .timeline-item h3 {
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item .period {
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-item p {
+            color: #94a3b8;
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: rgba(99, 102, 241, 0.05);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            transition: all 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);
+        }
+
+        .project-card h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .project-card p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            color: #64748b;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .avatar {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .container {
+                padding: 1rem;
+            }
+            .section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <img src="/images/avatar.jpg" alt="言零" class="avatar">
+            <h1>言零</h1>
+            <p class="tagline">资深安全研究员 | 渗透测试专家 | 技术布道者</p>
+            <div class="social-links">
+                <a href="https://blog.caowo.de" title="博客"><i class="fas fa-blog"></i></a>
+                <a href="https://github.com/wizawn" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="mailto:hihacker@foxmail.com" title="邮箱"><i class="fas fa-envelope"></i></a>
+                <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=46333839" title="QQ"><i class="fab fa-qq"></i></a>
+            </div>
+        </section>
+
+        <!-- About -->
+        <section class="section">
+            <h2><i class="fas fa-user"></i> 关于我</h2>
+            <p style="color: #94a3b8; font-size: 1.1rem; line-height: 1.8;">
+                混迹黑客娱乐圈八年的资深南梁（伪）。不碰代码，只玩人心；不搞架构，只布迷局。擅长将复杂的地下交易包装成光鲜亮丽的娱乐盛宴。
+                曾在多场轰动业界的"黑客（娱乐）秀"中担任总导演，拥有极强的控场能力，确保每一次"重大事件"都能完美落幕，成为头条新闻。
+            </p>
+        </section>
+
+        <!-- Skills -->
+        <section class="section">
+            <h2><i class="fas fa-code"></i> 技术专长</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3><i class="fas fa-laptop-code"></i> 编程语言</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">PHP</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <h3><i class="fas fa-layer-group"></i> 框架与技术</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Spring Boot</span>
+                        <span class="skill-tag">Django</span>
+                        <span class="skill-tag">Vue.js</span>
+                        <span class="skill-tag">微服务架构</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <h3><i class="fas fa-database"></i> 数据库</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">MySQL</span>
+                        <span class="skill-tag">MongoDB</span>
+                        <span class="skill-tag">数据库设计与调优</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <h3><i class="fas fa-server"></i> 其他技术</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">高并发处理</span>
+                        <span class="skill-tag">分布式系统</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Kubernetes</span>
+                        <span class="skill-tag">AWS</span>
+                        <span class="skill-tag">Redis</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience -->
+        <section class="section">
+            <h2><i class="fas fa-briefcase"></i> 职业经历</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>超级网络安全工程师</h3>
+                    <p class="period">2020 - 至今 | 核心系统安全架构师 | 微服务防御专家</p>
+                    <p>带领 5 人团队守护数据边界，追求如妆容般无瑕的安全基线。🛡️ 工作上：严谨、敏锐、零容忍漏洞。🎀 生活中：混迹黑客圈的南梁（伪），用柔软外表包裹硬核技术。</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>超级脚本开发工程师</h3>
+                    <p class="period">2017 - 2020</p>
+                    <p>专注于高精度攻击脚本的编写与自动化渗透工具开发，针对订单篡改与支付绕过等核心场景定制专属 Exploit。将关键接口的突破响应时间降低 60%。</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>超级软件开发工程师</h3>
+                    <p class="period">2015 - 2017</p>
+                    <p>拥有扎实的企业级系统开发背景，深谙 Spring 与 Hibernate 的生命周期。擅长编写结构优雅、隐蔽性极强的自动化攻击脚本。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <section class="section">
+            <h2><i class="fas fa-project-diagram"></i> 项目亮点</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>🔪 手术刀式漏洞利用框架</h3>
+                    <p>基于对 Spring Boot 及 Hibernate 内部数据流转的深刻理解，独立编写轻量级自动化利用脚本，摒弃通用扫描器的暴力试探。</p>
+                </div>
+                <div class="project-card">
+                    <h3>🔐 零信任身份认证绕过研究</h3>
+                    <p>主导针对企业级 SSO 与 OAuth2 流程的深度审计，精准捕捉并发竞争条件下的逻辑竞态漏洞。</p>
+                </div>
+                <div class="project-card">
+                    <h3>💉 智能 Payload 生成器</h3>
+                    <p>针对复杂 ORM 框架开发的智能 Payload 生成工具，能自动识别后端框架版本，动态调整注入策略。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>© 2026 言零 | Simple is beautiful.</p>
+            <p style="margin-top: 0.5rem;">
+                <a href="https://blog.caowo.de" style="color: var(--primary);">博客</a> · 
+                <a href="mailto:hihacker@foxmail.com" style="color: var(--primary);">联系</a>
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

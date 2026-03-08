@@ -1,0 +1,8 @@
+{
+  "qveris_api_key": "sk-X8nC0MLGmx_NckHIDt45oeNA4wFT2HXHa5vG4Zd0g98",
+  "dingtalk_webhook": "https://oapi.dingtalk.com/robot/send?access_token=YOUR_ACCESS_TOKEN",
+  "metals": ["XAU", "XAG"],
+  "crypto": ["BTC", "ETH", "SOL"],
+  "volatility_threshold": 2.0,
+  "check_interval": 60
+}

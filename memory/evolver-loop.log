@@ -1,0 +1,5 @@
+Starting capability evolver...
+Loop mode enabled (internal daemon).
+[Heartbeat] Registered with hub. Node: node_5d0b5500c5d4
+[Heartbeat] Connected to hub. Node: node_5d0b5500c5d4
+[Heartbeat] 3 consecutive failures. Network issue? Last error: The operation was aborted due to timeout

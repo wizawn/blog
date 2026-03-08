@@ -1,0 +1,89 @@
+id: openclaw-real-vuln-check
+
+info:
+  name: OpenClaw Real Vulnerability Detection
+  author: ClawSec
+  severity: critical
+  description: Detect real OpenClaw vulnerabilities with verified POC
+  tags: openclaw,vuln,verified
+
+variables:
+  default_creds:
+    - "admin:admin"
+    - "admin:password"
+    - "root:root"
+
+http:
+  # 测试 1: 默认凭证
+  - method: POST
+    path:
+      - "{{BaseURL}}/api/auth/login"
+      - "{{BaseURL}}:18789/api/auth/login"
+    
+    headers:
+      Content-Type: "application/json"
+    
+    body: |
+      {"username":"admin","password":"admin"}
+    
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "token"
+          - "success"
+          - "user"
+        condition: and
+        
+      - type: status
+        status:
+          - 200
+    
+    extractors:
+      - type: json
+        json:
+          - ".token"
+          - ".user.username"
+
+  # 测试 2: 未授权 API 访问
+  - method: GET
+    path:
+      - "{{BaseURL}}/api/assistants"
+      - "{{BaseURL}}:18789/api/assistants"
+      - "{{BaseURL}}/api/sessions"
+      - "{{BaseURL}}:18789/api/sessions"
+    
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "assistants"
+          - "id"
+          - "name"
+          - "created_at"
+        
+      - type: status
+        status:
+          - 200
+
+  # 测试 3: 敏感信息泄露
+  - method: GET
+    path:
+      - "{{BaseURL}}/.env"
+      - "{{BaseURL}}:18789/.env"
+      - "{{BaseURL}}/config.json"
+      - "{{BaseURL}}:18789/config.json"
+    
+    matchers-condition: or
+    matchers:
+      - type: word
+        words:
+          - "DATABASE_URL"
+          - "API_KEY"
+          - "SECRET"
+          - "PASSWORD"
+        
+      - type: regex
+        regex:
+          - "password\\s*[:=]"
+          - "api[_-]?key\\s*[:=]"

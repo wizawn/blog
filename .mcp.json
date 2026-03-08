@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "aivectormemory": {
+      "command": "python3",
+      "args": ["-m", "aivectormemory", "--project-dir", "/root/.openclaw/workspace"],
+      "env": {
+        "HF_ENDPOINT": "https://hf-mirror.com"
+      }
+    }
+  }
+}

@@ -1,0 +1,2740 @@
+http:
+- matchers:
+  - condition: and
+    part: body
+    type: word
+    words:
+    - AdmissionReview
+    - response
+    - test-{{string}}
+  raw:
+  - "POST /validate HTTP/1.1\nHost: {{Hostname}}\nContent-Type: application/json\n\
+    \n{\n  \"kind\": \"AdmissionReview\",\n  \"apiVersion\": \"admission.k8s.io/v1\"\
+    ,\n  \"request\": {\n    \"uid\": \"{{string}}\",\n    \"kind\": {\n      \"group\"\
+    : \"networking.k8s.io\",\n      \"version\": \"v1\",\n      \"kind\": \"Ingress\"\
+    \n    },\n    \"operation\": \"CREATE\",\n    \"object\": {\n      \"metadata\"\
+    : {\n        \"name\": \"test-{{string}}\",\n        \"namespace\": \"default\"\
+    \n      },\n      \"spec\": {\n        \"rules\": [\n          {\n           \
+    \ \"host\": \"example.com\",\n            \"http\": {\n              \"paths\"\
+    : []\n            }\n          }\n        ]\n      }\n    }\n  }\n}\n"
+id: ingress-nginx-valid-admission
+info:
+  author: burso
+  description: 'Sends a valid minimal AdmissionReview JSON to reliably detect Kubernetes
+    Ingress-Nginx Admission webhook endpoints.
+
+    '
+  metadata:
+    max-request: 1
+    shodan-query: ssl:"ingress-nginx" port:8443
+    verified: true
+  name: Kubernetes Ingress-Nginx Valid AdmissionReview - Detection
+  severity: unknown
+  tags: tech,kubernetes,ingress,nginx,k8s,vuln
+variables:
+  string: '{{to_lower(rand_base(5))}}'
+---
+http:
+- extractors:
+  - group: 1
+    name: server-info
+    regex:
+    - '>HttpFileServer\s+([\d\w\.\s]+)\s*(随波汉化版)?</a>'
+    type: regex
+  - kval:
+    - Server
+    name: server-header
+    part: header
+    type: kval
+  matchers:
+  - condition: and
+    part: body
+    type: word
+    words:
+    - HFS =
+    - 'Build-time:'
+  - part: header
+    type: word
+    words:
+    - text/html
+  - status:
+    - 200
+    type: status
+  matchers-condition: and
+  method: GET
+  path:
+  - '{{BaseURL}}'
+id: hfs-exposure
+info:
+  author: tess,darses
+  classification:
+    cpe: cpe:2.3:a:rejetto:http_file_server:*:*:*:*:*:*:*:*
+  metadata:
+    max-request: 1
+    product: http_file_server
+    shodan-query:
+    - title:"HFS /"
+    - 'Set-Cookie: HFS_SID_='
+    - http.favicon.hash:2124459909
+    vendor: rejetto
+    verified: true
+  name: HFS Panel - Exposure
+  severity: unknown
+  tags: misconfig,hfs,exposure,panel,vuln
+---
+http:
+- extractors:
+  - group: 1
+    internal: true
+    name: user-token
+    regex:
+    - var g_ck = '([0-9a-z]+)'
+    type: regex
+  - group: 1
+    part: body
+    regex:
+    - '"count":([0-9]+),'
+    type: regex
+  matchers:
+  - condition: and
+    part: body
+    type: word
+    words:
+    - '"isValid":true'
+    - '"count":'
+  - part: body
+    regex:
+    - '"display_value":"(.*)",'
+    type: regex
+  matchers-condition: and
+  payloads:
+    table_list:
+    - t=kb_knowledge&f=text
+    - t=cmdb_model&f=name
+    - t=cmn_department&f=app_name
+    - t=licensable_app&f=app_name
+    - t=alm_asset&f=display_name
+    - t=sys_attachment&f=file_name
+    - t=sys_attachment_doc&f=data
+    - t=oauth_entity&f=name
+    - t=cmn_cost_center&f=name
+    - t=cmdb_model&f=name
+    - t=sc_cat_item&f=name
+    - t=sn_admin_center_application&f-name
+    - t=cmn_company&f=name
+    - t=sys_email_attachment&f=email
+    - t=sys_email_attachment&f=attachment
+    - t=cmn_notif_device&f=email_address
+    - t=sys_portal_age&f=display_name
+    - t=incident&f=short_description
+  raw:
+  - '@once
+
+    GET / HTTP/1.1
+
+    Host: {{Hostname}}
+
+    '
+  - '@once
+
+    GET /login.do HTTP/1.1
+
+    Host: {{Hostname}}
+
+    '
+  - 'POST /api/now/sp/widget/widget-simple-list?{{table_list}} HTTP/1.1
+
+    Host: {{Hostname}}
+
+    Accept: application/json
+
+    X-UserToken: {{user-token}}
+
+    Content-Type: application/json
+
+
+    {}
+
+    '
+id: servicenow-widget-misconfig
+info:
+  author: DhiyaneshDk
+  classification:
+    cpe: cpe:2.3:a:servicenow:servicenow:*:*:*:*:*:*:*:*
+  metadata:
+    max-request: 54
+    product: servicenow
+    shodan-query: title:"servicenow"
+    vendor: servicenow
+    verified: true
+  name: ServiceNow Widget-Simple-List - Misconfiguration
+  reference:
+  - https://github.com/bsysop/servicenow
+  - https://twitter.com/ConspiracyProof/status/1713270026046685272
+  - https://www.enumerated.ie/servicenow-data-exposure
+  severity: unknown
+  tags: servicenow,widget,misconfig,vuln
+---
+http:
+- matchers:
+  - condition: and
+    part: body
+    type: word
+    words:
+    - Configure ntop
+    - directory is properly installed
+  - part: header
+    type: word
+    words:
+    - text/html
+  - status:
+    - 200
+    type: status
+  matchers-condition: and
+  method: GET
+  path:
+  - '{{BaseURL}}'
+id: ntop-panel-exposed
+info:
+  author: tess
+  classification:
+    cpe: cpe:2.3:a:ntop:ntopng:*:*:*:*:*:*:*:*
+  metadata:
+    max-request: 1
+    product: ntopng
+    shodan-query: title:"Configure ntop"
+    vendor: ntop
+    verified: true
+  name: ntop Network Traffix Exposed
+  severity: unknown
+  tags: misconfig,ntop,exposure,vuln
+---
+http:
+- matchers:
+  - part: body
+    type: word
+    words:
+    - Welcome to the OGNL console!
+  - status:
+    - 200
+    type: status
+  matchers-condition: and
+  method: GET
+  path:
+  - '{{BaseURL}}/struts/webconsole.html?debug=console'
+id: struts-ognl-console
+info:
+  author: DhiyaneshDK
+  classification:
+    cpe: cpe:2.3:a:apache:struts:*:*:*:*:*:*:*:*
+  description: 'This development console allows the evaluation of OGNL expressions
+    that could lead to Remote Command Execution
+
+    '
+  metadata:
+    max-request: 1
+    product: struts
+    shodan-query: html:"Struts Problem Report"
+    vendor: apache
+    verified: true
+  name: Apache Struts - OGNL Console
+  reference:
+  - https://github.com/PortSwigger/j2ee-scan/blob/master/src/main/java/burp/j2ee/issues/impl/ApacheStrutsWebConsole.java
+  remediation: Restrict access to the struts console on the production server
+  severity: unknown
+  tags: apache,struts,ognl,panel,misconfig,vuln
+---
+flow: http(1) && http(2)
+http:
+- matchers:
+  - dsl:
+    - '!contains_any(body,"<title>Index of","<title>Directory listing of")'
+    internal: true
+    type: dsl
+  raw:
+  - 'GET / HTTP/1.1
+
+    Host: {{Hostname}}
+
+    '
+- host-redirects: true
+  matchers:
+  - condition: and
+    dsl:
+    - contains_any(body,"<title>Index of","<title>Directory listing of")
+    - status_code == 200
+    type: dsl
+  max-redirects: 2
+  raw:
+  - '@Host: {{Hostname}}
+
+    GET / HTTP/1.0
+
+
+    '
+  unsafe: true
+id: directory-listing-no-host-header
+info:
+  author: kazet
+  description: 'The HTTP server is configured to list files in the root directory
+    when no Host header is provided.
+
+    '
+  metadata:
+    max-request: 1
+    verified: true
+  name: Directory Listing - No Host header
+  severity: unknown
+  tags: misconfig,listing,vuln
+---
+http:
+- matchers:
+  - part: body
+    regex:
+    - <title>Home \- CUPS ([0-9.]+)<\/title>
+    type: regex
+  - status:
+    - 200
+    type: status
+  matchers-condition: and
+  method: GET
+  path:
+  - '{{BaseURL}}'
+id: apple-cups-exposure
+info:
+  author: DhiyaneshDK
+  classification:
+    cpe: cpe:2.3:a:apple:cups:*:*:*:*:*:*:*:*
+  description: 'Apple CUPS Sources was exposed.
+
+    '
+  metadata:
+    max-request: 1
+    product: cups
+    shodan-query: html:"Home - CUPS"
+    vendor: apple
+    verified: true
+  name: Apple CUPS Sources - Exposure
+  reference:
+  - https://github.com/apple/cups
+  severity: unknown
+  tags: apple,cups,exposure,misconfig,vuln
+---
+http:
+- matchers:
+  - regex:
+    - postMessage\([a-zA-Z]+,["']\*["']\)
+    type: regex
+  method: GET
+  path:
+  - '{{BaseURL}}'
+id: wildcard-postmessage
+info:
+  author: pdteam
+  classification:
+    cvss-metrics: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:C/C:L/I:L/A:N
+    cvss-score: 7.2
+    cwe-id: CWE-79
+  description: postMessage contains a cross-site scripting vulnerability. An attacker
+    can execute arbitrary script and therefore steal cookie-based authentication credentials
+    and launch other attacks.
+  metadata:
+    max-request: 1
+  name: postMessage - Cross-Site Scripting
+  reference:
+  - https://jlajara.gitlab.io/web/2020/06/12/Dom_XSS_PostMessage.html
+  - https://payatu.com/blog/anubhav.singh/postmessage-vulnerabilities
+  - https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage
+  severity: unknown
+  tags: xss,postmessage,misconfig,vuln
+---
+http:
+- matchers:
+  - condition: and
+    type: word
+    words:
+    - 'pool:'
+    - 'process manager:'
+    - 'start time:'
+    - 'pid:'
+  - status:
+    - 200
+    type: status
+  matchers-condition: and
+  method: GET
+  path:
+  - '{{BaseURL}}/status?full'
+id: php-fpm-status
+info:
+  author: geeknik
+  metadata:
+    max-request: 1
+  name: PHP-FPM Status
+  severity: unknown
+  tags: config,misconfig,vuln
+---
+http:
+- extractors:
+  - group: 1
+    part: body
+    regex:
+    - <Name>([^<]+)</Name>
+    type: regex
+  matchers:
+  - condition: and
+    dsl:
+    - status_code == 200
+    - contains(content_type, "application/xml")
+    - contains(header, "AliyunOSS")
+    - contains_all(body, "<ListBucketResult", "<Name>", "<Contents>", "<Key>")
+    type: dsl
+  method: GET
+  path:
+  - '{{BaseURL}}'
+id: alibaba-bucket-listing
+info:
+  author: 0x_Akoko
+  description: 'Alibaba Cloud Object Storage Service (OSS) bucket is publicly accessible
+    and allows anonymous listing of objects. This misconfiguration can expose sensitive
+    data, lead to data breaches, and result in unexpected charges on the Alibaba Cloud
+    bill.
+
+    '
+  metadata:
+    google-query: site:aliyuncs.com "ListBucketResult" "<Contents>"
+    max-request: 1
+    verified: true
+  name: Alibaba Cloud OSS Bucket - Public Listing Enabled
+  reference:
+  - https://www.alibabacloud.com/help/en/oss/user-guide/block-public-access
+  - https://www.trendmicro.com/cloudoneconformity/knowledge-base/alibaba-cloud/AlibabaCloud-OSS/publicly-accessible-oss-bucket.html
+  severity: unknown
+  tags: alibaba,cloud,bucket,misconfig,exposure,devops,cicd
+---
+http:
+- matchers:
+  - condition: and
+    part: body
+    type: word
+    words:
+    - Label Studio
+    - Sign up
+    - Create Account
+  - status:
+    - 200
+    type: status
+  matchers-condition: and
+  raw:
+  - 'GET /user/signup HTTP/1.1
+
+    Host: {{Hostname}}
+
+    Accept: */*
+
+    '
+id: label-studio-signup
+info:
+  author: DhiyaneshDK
+  classification:
+    cpe: cpe:2.3:a:heartex:label_studio:*:*:*:*:*:*:*:*
+  description: 'Detects the presence of the Label Studio sign-up.
+
+    '
+  metadata:
+    max-request: 1
+    product: label_studio
+    shodan-query: http.favicon.hash:-1649949475
+    vendor: heartex
+    verified: true
+  name: Label Studio - Sign-up Detect
+  severity: unknown
+  tags: label-studio,sign-up,misconfig,vuln
+---
+http:
+- matchers:
+  - condition: and
+    part: body
+    type: word
+    words:
+    - Sentinel License Monitor
+    - Licenses-in-use
+  - status:
+    - 200
+    type: status
+  matchers-condition: and
+  method: GET
+  path:
+  - '{{BaseURL}}/keyinfo.html'
+id: sentinel-license-monitor
+info:
+  author: DhiyaneshDk
+  classification:
+    cpe: cpe:2.3:a:trioniclabs:sentinel:*:*:*:*:*:*:*:*
+  metadata:
+    max-request: 1
+    product: sentinel
+    shodan-query: html:"Sentinel License Monitor"
+    vendor: trioniclabs
+    verified: true
+  name: Sentinel License Monitor - Detect
+  severity: unknown
+  tags: misconfig,sentinel,license,monitor,vuln
+---
+http:
+- matchers:
+  - condition: and
+    type: word
+    words:
+    - <th>Project</th>
+    - <th>Plan</th>
+    - <th>Build</th>
+  - part: header
+    type: word
+    words:
+    - text/html
+  - status:
+    - 200
+    type: status
+  matchers-condition: and
+  method: GET
+  path:
+  - '{{BaseURL}}/allPlans.action'
+id: atlassian-bamboo-build
+info:
+  author: DhiyaneshDK
+  classification:
+    cpe: cpe:2.3:a:atlassian:bamboo:*:*:*:*:*:*:*:*
+  metadata:
+    max-request: 1
+    product: bamboo
+    shodan-query: title:"Build Dashboard - Atlassian Bamboo"
+    vendor: atlassian
+    verified: true
+  name: Atlassian Bamboo Build Dashboard
+  severity: unknown
+  tags: misconfig,atlassian,bamboo,vuln
+---
+http:
+- matchers:
+  - part: body
+    type: word
+    words:
+    - <title>GraphQL playground</title>
+  - part: header
+    type: word
+    words:
+    - text/html
+  - status:
+    - 200
+    type: status
+  matchers-condition: and
+  method: GET
+  path:
+  - '{{BaseURL}}'
+id: graphql-playground
+info:
+  author: DhiyaneshDk
+  classification:
+    cpe: cpe:2.3:a:graphql:playground:*:*:*:*:node.js:*:*:*
+  metadata:
+    max-request: 1
+    product: playground
+    shodan-query: title:"GraphQL Playground"
+    vendor: graphql
+    verified: true
+  name: GraphQL Playground
+  reference:
+  - https://github.com/graphql/graphql-playground
+  severity: unknown
+  tags: misconfig,graphql,vuln
+---
+http:
+- matchers:
+  - condition: and
+    dsl:
+    - contains(body_2, "{{randstr}}")
+    - status_code_2==400
+    type: dsl
+  raw:
+  - 'GET /?{{string}} HTTP/1.1
+
+    Host: {{Hostname}}
+
+    X-Amz-Server-Side-Encryption: {{randstr}}
+
+    '
+  - 'GET /?{{string}} HTTP/1.1
+
+    Host: {{Hostname}}
+
+    '
+id: cdn-cache-poisoning
+info:
+  author: 0xcharan
+  description: 'When the X-Amz-Server-Side-Encryption header is sent with user controlled
+    value, it can lead to a misconfigured CDN cache response with a 400 status code,
+    making the page inaccessible.
+
+    '
+  metadata:
+    max-request: 2
+    shodan-query: X-Amz-Server-Side-Encryption
+    verified: true
+  name: Misconfigured CDN Cache Poisoning via X-Amz-Server-Side-Encryption Header
+  reference:
+  - https://portswigger.net/web-security/web-cache-poisoning
+  severity: unknown
+  tags: cache,aws,poisoning,cdn,misconfig,vuln
+variables:
+  string: '{{to_lower(rand_base(8))}}={{to_lower(rand_base(8))}}'
+---
+http:
+- matchers:
+  - condition: and
+    dsl:
+    - status_code == 403
+    - contains(body, 'Symfony') || contains(body, '403 Forbidden')
+    - ("8b2f83102bc96e5068d36df80301a64d" == md5(body)) || ("4df206fbc337c398c3b669172934c8cb"
+      == md5(body))
+    type: dsl
+  matchers-condition: and
+  method: GET
+  path:
+  - '{{BaseURL}}/_fragment'
+id: symfony-fragment
+info:
+  author: Palanichamy_perumal,TechbrunchFR
+  classification:
+    cpe: cpe:2.3:a:sensiolabs:symfony:*:*:*:*:*:*:*:*
+  description: 'Symfony servers support a "/_fragment" command that allows clients
+    to provide custom PHP commands and return the HTML output.
+
+    '
+  metadata:
+    max-request: 1
+    product: symfony
+    shodan-query: http.html:"symfony Profiler"
+    vendor: sensiolabs
+    verified: true
+  name: Symfony _fragment - Detect
+  reference:
+  - https://portswigger.net/daily-swig/symfony-based-websites-open-to-rce-attack-research-finds
+  - https://medium.com/@m4cddr/how-i-got-rce-in-10-websites-26dd87441f22
+  - https://al1z4deh.medium.com/how-i-hacked-28-sites-at-once-rce-5458211048d5
+  - https://github.com/ambionics/symfony-exploits
+  severity: unknown
+  tags: config,exposure,symfony,misconfig,vuln
+---
+http:
+- matchers:
+  - condition: and
+    part: body
+    type: word
+    words:
+    - Setup GitHub Enterprise
+    - Install GitHub Enterprise
+  - status:
+    - 200
+    type: status
+  matchers-condition: and
+  method: GET
+  path:
+  - '{{BaseURL}}/setup/start'
+id: setup-github-enterprise
+info:
+  author: tess
+  classification:
+    cpe: cpe:2.3:a:github:enterprise_server:*:*:*:*:*:*:*:*
+  metadata:
+    max-request: 1
+    product: enterprise_server
+    shodan-query: http.favicon.hash:-1373456171
+    vendor: github
+    verified: true
+  name: Setup GitHub Enterprise - Detect
+  severity: unknown
+  tags: misconfig,installer,github,setup,vuln
+---
+http:
+- matchers:
+  - type: word
+    words:
+    - '<title>Content Explorer - UserID: anonymous | Workspace: crx.default</title>'
+  - part: header
+    type: word
+    words:
+    - text/html
+  - status:
+    - 200
+    type: status
+  matchers-condition: and
+  method: GET
+  path:
+  - '{{BaseURL}}/crx/explorer/browser/index.jsp'
+id: aem-crx-browser
+info:
+  author: dhiyaneshDk
+  metadata:
+    max-request: 1
+    shodan-query:
+    - http.title:"AEM Sign In"
+    - http.component:"Adobe Experience Manager"
+  name: Adobe AEM CRX Browser Exposure
+  reference:
+  - https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/aem2.txt
+  severity: unknown
+  tags: misconfig,aem,adobe,exposure,vuln
+---
+http:
+- matchers:
+  - condition: and
+    type: word
+    words:
+    - <title>Search</title>
+    - '"/crx/explorer/ui/";'
+  - part: header
+    type: word
+    words:
+    - text/html
+  - status:
+    - 200
+    type: status
+  matchers-condition: and
+  method: GET
+  path:
+  - '{{BaseURL}}/crx/explorer/ui/search.jsp'
+  - '{{BaseURL}}/crx/explorer/ui/search.jsp?Path=&amp;Query='
+  - '{{BaseURL}}/crx/explorer/ui/search.jsp?Path=&Query='
+  stop-at-first-match: true
+id: aem-crx-search
+info:
+  author: dhiyaneshDk
+  classification:
+    cpe: cpe:2.3:a:adobe:acs_aem_commons:*:*:*:*:*:*:*:*
+  metadata:
+    max-request: 3
+    product: acs_aem_commons
+    shodan-query:
+    - http.title:"AEM Sign In"
+    - http.component:"Adobe Experience Manager"
+    vendor: adobe
+  name: Adobe AEM CRX Search Exposed
+  reference:
+  - https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/aem2.txt
+  severity: unknown
+  tags: misconfig,aem,adobe,exposure,vuln
+---
+http:
+- matchers:
+  - part: body
+    type: word
+    words:
+    - <title>AEM BulkEditor</title>
+  - status:
+    - 200
+    type: status
+  matchers-condition: and
+  method: GET
+  path:
+  - '{{BaseURL}}/etc/importers/bulkeditor.html'
+id: aem-bulkeditor
+info:
+  author: DhiyaneshDK
+  classification:
+    cpe: cpe:2.3:a:adobe:experience_manager:*:*:*:*:*:*:*:*
+  metadata:
+    max-request: 1
+    product: experience_manager
+    shodan-query:
+    - http.title:"AEM Sign In"
+    - http.component:"Adobe Experience Manager"
+    vendor: adobe
+  name: AEM BulkEditor
+  reference:
+  - https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/aem2.txt
+  severity: unknown
+  tags: misconfig,aem,adobe,editor,vuln
+---
+http:
+- matchers:
+  - type: word
+    words:
+    - <title>External Link Checker</title>
+  - part: header
+    type: word
+    words:
+    - text/html
+  - status:
+    - 200
+    type: status
+  matchers-condition: and
+  method: GET
+  path:
+  - '{{BaseURL}}/etc/linkchecker.html'
+  - '{{BaseURL}}/var/linkchecker.html'
+  stop-at-first-match: true
+id: aem-external-link-checker
+info:
+  author: dhiyaneshDk
+  classification:
+    cpe: cpe:2.3:a:adobe:acs_aem_commons:*:*:*:*:*:*:*:*
+  metadata:
+    max-request: 2
+    product: acs_aem_commons
+    shodan-query:
+    - http.title:"AEM Sign In"
+    - http.component:"Adobe Experience Manager"
+    vendor: adobe
+  name: Adobe AEM External Link Checker Exposure
+  reference:
+  - https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/aem2.txt
+  severity: unknown
+  tags: misconfig,aem,adobe,exposure,vuln
+---
+http:
+- extractors:
+  - internal: true
+    json:
+    - .[]
+    name: path
+    part: body
+    type: json
+  iterate-all: true
+  matchers:
+  - condition: and
+    part: body
+    type: word
+    words:
+    - '"jcr:primaryType":'
+    - '"jcr:createdBy":'
+  - part: header
+    type: word
+    words:
+    - application/json
+  - status:
+    - 200
+    type: status
+  matchers-condition: and
+  method: GET
+  path:
+  - '{{BaseURL}}/apps.tidy.infinity.json'
+  - '{{BaseURL}}{{path}}'
+  stop-at-first-match: true
+id: aem-custom-script
+info:
+  author: DhiyaneshDK
+  classification:
+    cpe: cpe:2.3:a:adobe:experience_manager:*:*:*:*:*:*:*:*
+  metadata:
+    max-request: 2
+    product: experience_manager
+    shodan-query:
+    - http.title:"AEM Sign In"
+    - http.component:"Adobe Experience Manager"
+    vendor: adobe
+  name: Adobe AEM Custom Scripts Exposure
+  reference:
+  - https://www.slideshare.net/0ang3el/hacking-aem-sites
+  severity: unknown
+  tags: misconfig,aem,adobe,vuln
+---
+http:
+- matchers:
+  - condition: and
+    dsl:
+    - status_code == 200
+    - contains_all(body, "ListBucketResult", "<Contents>", "<Generation>")
+    type: dsl
+  method: GET
+  path:
+  - '{{BaseURL}}'
+id: gcs-bucket-listing
+info:
+  author: 0x_Akoko
+  description: 'Detected Google Cloud Storage bucket was publicly accessible and allows
+    listing of objects, potentially exposing sensitive files.
+
+    '
+  metadata:
+    max-request: 1
+    shodan-query: storage.googleapis.com
+    verified: true
+  name: Google Cloud Storage - Public Bucket Listing
+  reference:
+  - https://cloud.google.com/storage/docs/public-access-prevention
+  severity: unknown
+  tags: exposure,gcs,google,cloud,bucket,misconfig
+---
+http:
+- extractors:
+  - group: 1
+    name: bucket-name
+    part: body
+    regex:
+    - <Name>([^<]+)</Name>
+    type: regex
+  matchers:
+  - condition: and
+    dsl:
+    - status_code == 200
+    - contains_all(body, "<ListBucketResult", "<Name>")
+    - contains_any(tolower(header), "ibm-sse-kp-enabled", "ibm-sse-kp-customer-root-key-crn",
+      "ibm-")
+    - contains_any(tolower(content_type), "application/xml", "text/xml")
+    type: dsl
+  method: GET
+  path:
+  - '{{BaseURL}}'
+  - '{{BaseURL}}/?list-type=2'
+  stop-at-first-match: true
+id: ibm-cloud-bucket-exposure
+info:
+  author: 0x_Akoko
+  description: 'IBM Cloud Object Storage bucket is publicly accessible, potentially
+    exposing sensitive files and data. Public bucket listing allows enumeration of
+    stored objects.
+
+    '
+  metadata:
+    fofa-query: host="cloud-object-storage.appdomain.cloud"
+    max-request: 2
+    shodan-query: ssl.cert.subject.cn:"cloud-object-storage.appdomain.cloud"
+    verified: true
+  name: IBM Cloud Object Storage - Bucket Exposure
+  reference:
+  - https://cloud.ibm.com/docs/cloud-object-storage
+  - https://cloud.ibm.com/docs/cloud-object-storage?topic=cloud-object-storage-iam-bucket-permissions
+  severity: unknown
+  tags: ibm,cloud,bucket,exposure,misconfig,s3
+---
+http:
+- matchers:
+  - condition: and
+    part: body
+    type: word
+    words:
+    - Cloudflare
+    - <svg
+    - M16.5088 16.8447c.1475-.5068.0908-.9707-.1553-1.3154-.2246-.3164-.6045-.499-1.0615-.5205l-
+    - 1475.5068-.0918.9707.1543 1.3164.2256.3164.6055.498
+  - part: header
+    type: word
+    words:
+    - image/svg+xml
+  - status:
+    - 200
+    type: status
+  matchers-condition: and
+  method: GET
+  path:
+  - '{{BaseURL}}/cdn-cgi/image/width=1000,format=auto/https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/cloudflare.svg'
+id: cloudflare-transform-via-url-injection
+info:
+  author: j3ssie
+  description: 'Transform via URL feature in Cloudflare allow attackers to show arbitrary
+    images to the visitor of a crafted URL on the website. This can be used to perform
+    various attacks such as phishing, defacement, etc.
+
+    '
+  metadata:
+    max-request: 1
+    verified: true
+  name: Cloudflare Transform via URL - Image Injection
+  reference:
+  - https://developers.cloudflare.com/images/transform-images/transform-via-url/
+  remediation: Disable Images → Transformations → “Resize from any origin” setting
+    in Cloudflare console.
+  severity: unknown
+  tags: misconfig,cloudflare,htmli,miscellaneous,vuln
+---
+http:
+- extractors:
+  - part: body
+    regex:
+    - \b[A-Za-z0-9/+=]{40}\b
+    type: regex
+  matchers:
+  - condition: and
+    part: body
+    regex:
+    - \bAKIA[0-9A-Z]{16}\b
+    - \b[A-Za-z0-9/+=]{40}\b
+    type: regex
+  matchers-condition: and
+  method: GET
+  path:
+  - '{{BaseURL}}'
+id: aws-secret-key
+info:
+  author: tess,Chemo850
+  metadata:
+    max-request: 1
+    verified: true
+  name: AWS Secret Key
+  reference:
+  - https://docs.aws.amazon.com/cli/latest/reference/sts/get-access-key-info.html
+  severity: unknown
+  tags: aws,exposure,tokens,vuln
+---
+http:
+- extractors:
+  - part: body
+    regex:
+    - jdbc:[a-z:]+://[A-Za-z0-9\.\-_:;=/@?,&]+
+    type: regex
+  method: GET
+  path:
+  - '{{BaseURL}}'
+id: jdbc-connection-string
+info:
+  author: Ice3man
+  metadata:
+    max-request: 1
+  name: JDBC Connection String Disclosure
+  severity: unknown
+  tags: exposure,token,generic,vuln
+---
+http:
+- extractors:
+  - part: body
+    regex:
+    - eyJ[a-zA-Z0-9]{10,}\.eyJ[a-zA-Z0-9]{10,}\.[a-zA-Z0-9_\-]{10,}
+    type: regex
+  method: GET
+  path:
+  - '{{BaseURL}}'
+id: jwt-token
+info:
+  author: Ice3man
+  metadata:
+    max-request: 1
+  name: JWT Token Disclosure
+  severity: unknown
+  tags: exposure,token,generic,vuln
+---
+http:
+- extractors:
+  - part: body
+    regex:
+    - (T|t)(O|o)(K|k)(E|e)(N|n)[\-|_|A-Za-z0-9]*(\''|")?( )*(:|=)+()*(\''|")?[ 0-9A-Za-z\-_]+(\''|")?
+    - (A|a)(P|p)(Ii)[\-|_|A-Za-z0-9]*(\''|")?( )*(:|=)( )*(\''|")?[0-9A-Za-z\-_]+(\''|")?
+    - (K|k)(E|e)(Y|y)[\-|_|A-Za-z0-9]*(\''|")?( )*(:|=)( )*(\''|")?[0-9A-Za-z\-_]+(\''|")?
+    - (S|s)(E|e)(C|c)(R|r)(E|e)(T|t)[\-|_|A-Za-z0-9]*(\''|")?( )*(:|=)()*(\''|")?[
+      0-9A-Za-z\-_]+(\''|")?
+    - (A|a)(U|u)(T|t)(H|h)(O|o)(R|r)(I|i)(Z|z)(A|a)(T|t)(I|i)(O|o)(N|n)[\-|_|A-Za-z0-9]*(\''|")?()*(:|=)(
+      )*(\''|")?[ 0-9A-Za-z\-_]+(\''|")?
+    - (P|p)(A|a)(S|s)(S|s)(W|w)(O|o)(R|r)(D|d)[\-|_|A-Za-z0-9]*(\''|")?()*(:|=)( )*(\''|")?[
+      0-9A-Za-z\-_]+(\''|")?
+    type: regex
+  matchers:
+  - dsl:
+    - regex("TOKEN[\\-|_|A-Z0-9]*(\'|\")?(:|=)(\'|\")?[\\-|_|A-Z0-9]{10}",replace(toupper(body),"",""))
+    - regex("API[\\-|_|A-Z0-9]*(\'|\")?(:|=)(\'|\")?[\\-|_|A-Z0-9]{10}",replace(toupper(body),"",""))
+    - regex("KEY[\\-|_|A-Z0-9]*(\'|\")?(:|=)(\'|\")?[\\-|_|A-Z0-9]{10}",replace(toupper(body),"",""))
+    - regex("SECRET[\\-|_|A-Z0-9]*(\'|\")?(:|=)(\'|\")?[\\-|_|A-Z0-9]{10}",replace(toupper(body),"",""))
+    - regex("AUTHORIZATION[\\-|_|A-Z0-9]*(\'|\")?(:|=)(\'|\")?[\\-|_|A-Z0-9]{10}",replace(toupper(body),"",""))
+    - regex("PASSWORD[\\-|_|A-Z0-9]*(\'|\")?(:|=)(\'|\")?[\\-|_|A-Z0-9]{10}",replace(toupper(body),"",""))
+    type: dsl
+  - condition: or
+    negative: true
+    part: body
+    regex:
+    - (?i)key(sinternal|up|down|press|boardnavigation|words?|board|ebrow|board_fill|_retry_interval|_fetched|_expiresat|board_shortcuts|s_close|s_previous|s_next|s_zoom|s_play_pause)
+    - (?i)password(protection|lessauth|requirementsashtmllist|emailnotfoundmessage|label|errormessage|message|_checkemail_title|_newfield_retype|_text_new|login_submit|_has_expired_title|_has_expired_text|_error|_hint|_strength)
+    - (?i)_(on|fade|init|default|parse|mouse|webgl|calculate|animate|clear|touch)|emit|color|render|stop|start|tostring|mobile|browser|get(highentropy|data|browser|os)
+    - (?i)(!native)|(.*keybindings)
+    - (?i)(layout|a)key
+    - (?i)token_expires_in
+    type: regex
+  matchers-condition: and
+  method: GET
+  path:
+  - '{{BaseURL}}'
+id: generic-tokens
+info:
+  author: nadino,geeknik
+  metadata:
+    max-request: 1
+  name: Generic Tokens
+  severity: unknown
+  tags: exposure,token,generic,vuln
+---
+http:
+- matchers:
+  - part: body
+    type: word
+    words:
+    - data-shoppable-auth-token
+  method: GET
+  path:
+  - '{{BaseURL}}'
+id: shoppable-token
+info:
+  author: philippedelteil
+  metadata:
+    max-request: 1
+  name: Shoppable Service Auth Token
+  reference:
+  - https://ask.shoppable.com/knowledge/quick-start-api-guide
+  severity: unknown
+  tags: exposure,shoppable,token,auth,service,generic,vuln
+---
+http:
+- extractors:
+  - part: body
+    regex:
+    - "(?i)[\"']?zopim[_-]?account[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?zhuliang[_-]?gh[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?zensonatypepassword[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - (?i)zendesk(_api_token|_key|_token|-travis-github|_url|_username)(\s|=)
+    - "(?i)[\"']?yt[_-]?server[_-]?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?yt[_-]?partner[_-]?refresh[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n\
+      ]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?yt[_-]?partner[_-]?client[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\S\r\n\
+      ]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?yt[_-]?client[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?yt[_-]?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?yt[_-]?account[_-]?refresh[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n\
+      ]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?yt[_-]?account[_-]?client[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\S\r\n\
+      ]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?yangshun[_-]?gh[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?yangshun[_-]?gh[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?www[_-]?googleapis[_-]?com[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?wpt[_-]?ssh[_-]?private[_-]?key[_-]?base64[\"']?[^\\S\r\n]*[=:][^\\\
+      S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?wpt[_-]?ssh[_-]?connect[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?wpt[_-]?report[_-]?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?wpt[_-]?prepare[_-]?dir[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?wpt[_-]?db[_-]?user[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?wpt[_-]?db[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?wporg[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?wpjm[_-]?phpunit[_-]?google[_-]?geocode[_-]?api[_-]?key[\"']?[^\\\
+      S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?wordpress[_-]?db[_-]?user[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?wordpress[_-]?db[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?wincert[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?widget[_-]?test[_-]?server[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?widget[_-]?fb[_-]?password[_-]?3[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?widget[_-]?fb[_-]?password[_-]?2[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?widget[_-]?fb[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?widget[_-]?basic[_-]?password[_-]?5[\"']?[^\\S\r\n]*[=:][^\\S\r\n\
+      ]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?widget[_-]?basic[_-]?password[_-]?4[\"']?[^\\S\r\n]*[=:][^\\S\r\n\
+      ]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?widget[_-]?basic[_-]?password[_-]?3[\"']?[^\\S\r\n]*[=:][^\\S\r\n\
+      ]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?widget[_-]?basic[_-]?password[_-]?2[\"']?[^\\S\r\n]*[=:][^\\S\r\n\
+      ]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?widget[_-]?basic[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?watson[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?watson[_-]?device[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?watson[_-]?conversation[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n\
+      ]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?wakatime[_-]?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?vscetoken[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?visual[_-]?recognition[_-]?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\
+      \n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?virustotal[_-]?apikey[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?vip[_-]?github[_-]?deploy[_-]?key[_-]?pass[\"']?[^\\S\r\n]*[=:][^\\\
+      S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?vip[_-]?github[_-]?deploy[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?vip[_-]?github[_-]?build[_-]?repo[_-]?deploy[_-]?key[\"']?[^\\S\r\
+      \n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?v[_-]?sfdc[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?v[_-]?sfdc[_-]?client[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?usertravis[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?user[_-]?assets[_-]?secret[_-]?access[_-]?key[\"']?[^\\S\r\n]*[=:][^\\\
+      S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?user[_-]?assets[_-]?access[_-]?key[_-]?id[\"']?[^\\S\r\n]*[=:][^\\\
+      S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?use[_-]?ssh[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?us[_-]?east[_-]?1[_-]?elb[_-]?amazonaws[_-]?com[\"']?[^\\S\r\n]*[=:][^\\\
+      S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?urban[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?urban[_-]?master[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?urban[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?unity[_-]?serial[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?unity[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?twitteroauthaccesstoken[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?twitteroauthaccesssecret[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?twitter[_-]?consumer[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?twitter[_-]?consumer[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?twine[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?twilio[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?twilio[_-]?sid[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?twilio[_-]?configuration[_-]?sid[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?twilio[_-]?chat[_-]?account[_-]?api[_-]?service[\"']?[^\\S\r\n]*[=:][^\\\
+      S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?twilio[_-]?api[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?twilio[_-]?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?trex[_-]?okta[_-]?client[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n\
+      ]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?trex[_-]?client[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?travis[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?travis[_-]?secure[_-]?env[_-]?vars[\"']?[^\\S\r\n]*[=:][^\\S\r\n\
+      ]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?travis[_-]?pull[_-]?request[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?travis[_-]?gh[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?travis[_-]?e2e[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?travis[_-]?com[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?travis[_-]?branch[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?travis[_-]?api[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?travis[_-]?access[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?token[_-]?core[_-]?java[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?thera[_-]?oss[_-]?access[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?tester[_-]?keys[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?test[_-]?test[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?test[_-]?github[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?tesco[_-]?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?svn[_-]?pass[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?surge[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?surge[_-]?login[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?stripe[_-]?public[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?stripe[_-]?private[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?strip[_-]?secret[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?strip[_-]?publishable[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?stormpath[_-]?api[_-]?key[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\S\r\n\
+      ]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?stormpath[_-]?api[_-]?key[_-]?id[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?starship[_-]?auth[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?starship[_-]?account[_-]?sid[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?star[_-]?test[_-]?secret[_-]?access[_-]?key[\"']?[^\\S\r\n]*[=:][^\\\
+      S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?star[_-]?test[_-]?location[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?star[_-]?test[_-]?bucket[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?star[_-]?test[_-]?aws[_-]?access[_-]?key[_-]?id[\"']?[^\\S\r\n]*[=:][^\\\
+      S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?staging[_-]?base[_-]?url[_-]?runscope[\"']?[^\\S\r\n]*[=:][^\\S\r\
+      \n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?ssmtp[_-]?config[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?sshpass[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?srcclr[_-]?api[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?square[_-]?reader[_-]?sdk[_-]?repository[_-]?password[\"']?[^\\S\r\
+      \n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?sqssecretkey[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?sqsaccesskey[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?spring[_-]?mail[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?spotify[_-]?api[_-]?client[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\S\r\
+      \n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?spotify[_-]?api[_-]?access[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n\
+      ]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?spaces[_-]?secret[_-]?access[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n\
+      ]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?spaces[_-]?access[_-]?key[_-]?id[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?soundcloud[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?soundcloud[_-]?client[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?sonatypepassword[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?sonatype[_-]?token[_-]?user[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?sonatype[_-]?token[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?sonatype[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?sonatype[_-]?pass[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?sonatype[_-]?nexus[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?sonatype[_-]?gpg[_-]?passphrase[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?sonatype[_-]?gpg[_-]?key[_-]?name[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?sonar[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?sonar[_-]?project[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?sonar[_-]?organization[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?socrata[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?socrata[_-]?app[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?snyk[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?snyk[_-]?api[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?snoowrap[_-]?refresh[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?snoowrap[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?snoowrap[_-]?client[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?slate[_-]?user[_-]?email[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?slash[_-]?developer[_-]?space[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\
+      \n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?slash[_-]?developer[_-]?space[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?signing[_-]?key[_-]?sid[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?signing[_-]?key[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?signing[_-]?key[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?signing[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?setsecretkey[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?setdstsecretkey[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?setdstaccesskey[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?ses[_-]?secret[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?ses[_-]?access[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?service[_-]?account[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?sentry[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?sentry[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?sentry[_-]?endpoint[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?sentry[_-]?default[_-]?org[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?sentry[_-]?auth[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?sendwithus[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?sendgrid[_-]?username[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?sendgrid[_-]?user[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?sendgrid[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?sendgrid[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?sendgrid[_-]?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?sendgrid[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?selion[_-]?selenium[_-]?host[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?selion[_-]?log[_-]?level[_-]?dev[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?segment[_-]?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?secretkey[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?secretaccesskey[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?secret[_-]?key[_-]?base[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?secret[_-]?9[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?secret[_-]?8[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?secret[_-]?7[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?secret[_-]?6[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?secret[_-]?5[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?secret[_-]?4[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?secret[_-]?3[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?secret[_-]?2[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?secret[_-]?11[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?secret[_-]?10[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?secret[_-]?1[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?secret[_-]?0[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?sdr[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?scrutinizer[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?sauce[_-]?access[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?sandbox[_-]?aws[_-]?secret[_-]?access[_-]?key[\"']?[^\\S\r\n]*[=:][^\\\
+      S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?sandbox[_-]?aws[_-]?access[_-]?key[_-]?id[\"']?[^\\S\r\n]*[=:][^\\\
+      S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?sandbox[_-]?access[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?salesforce[_-]?bulk[_-]?test[_-]?security[_-]?token[\"']?[^\\S\r\n\
+      ]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?salesforce[_-]?bulk[_-]?test[_-]?password[\"']?[^\\S\r\n]*[=:][^\\\
+      S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?sacloud[_-]?api[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?sacloud[_-]?access[_-]?token[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\\
+      S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?sacloud[_-]?access[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?s3[_-]?user[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?s3[_-]?secret[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?s3[_-]?secret[_-]?assets[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?s3[_-]?secret[_-]?app[_-]?logs[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?s3[_-]?key[_-]?assets[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?s3[_-]?key[_-]?app[_-]?logs[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?s3[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?s3[_-]?external[_-]?3[_-]?amazonaws[_-]?com[\"']?[^\\S\r\n]*[=:][^\\\
+      S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?s3[_-]?bucket[_-]?name[_-]?assets[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?s3[_-]?bucket[_-]?name[_-]?app[_-]?logs[\"']?[^\\S\r\n]*[=:][^\\\
+      S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?s3[_-]?access[_-]?key[_-]?id[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?s3[_-]?access[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?rubygems[_-]?auth[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?rtd[_-]?store[_-]?pass[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?rtd[_-]?key[_-]?pass[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?route53[_-]?access[_-]?key[_-]?id[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?ropsten[_-]?private[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?rinkeby[_-]?private[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?rest[_-]?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?repotoken[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?reporting[_-]?webdav[_-]?url[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?reporting[_-]?webdav[_-]?pwd[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?release[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?release[_-]?gh[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?registry[_-]?secure[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?registry[_-]?pass[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?refresh[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?rediscloud[_-]?url[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?redis[_-]?stunnel[_-]?urls[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?randrmusicapiaccesstoken[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?rabbitmq[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?quip[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?qiita[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?pypi[_-]?passowrd[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?pushover[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?publish[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?publish[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?publish[_-]?access[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?project[_-]?config[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?prod[_-]?secret[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?prod[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?prod[_-]?access[_-]?key[_-]?id[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?private[_-]?signing[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?pring[_-]?mail[_-]?username[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?preferred[_-]?username[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?prebuild[_-]?auth[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?postgresql[_-]?pass[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?postgresql[_-]?db[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?postgres[_-]?env[_-]?postgres[_-]?password[\"']?[^\\S\r\n]*[=:][^\\\
+      S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?postgres[_-]?env[_-]?postgres[_-]?db[\"']?[^\\S\r\n]*[=:][^\\S\r\n\
+      ]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?plugin[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?plotly[_-]?apikey[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?places[_-]?apikey[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?places[_-]?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?pg[_-]?host[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?pg[_-]?database[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?personal[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?personal[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?percy[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?percy[_-]?project[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?paypal[_-]?client[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?passwordtravis[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?parse[_-]?js[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?pagerduty[_-]?apikey[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?packagecloud[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?ossrh[_-]?username[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?ossrh[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?ossrh[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?ossrh[_-]?pass[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?ossrh[_-]?jira[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?os[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?os[_-]?auth[_-]?url[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?org[_-]?project[_-]?gradle[_-]?sonatype[_-]?nexus[_-]?password[\"\
+      ']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?org[_-]?gradle[_-]?project[_-]?sonatype[_-]?nexus[_-]?password[\"\
+      ']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?openwhisk[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?open[_-]?whisk[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?onesignal[_-]?user[_-]?auth[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n\
+      ]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?onesignal[_-]?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?omise[_-]?skey[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?omise[_-]?pubkey[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?omise[_-]?pkey[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?omise[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?okta[_-]?oauth2[_-]?clientsecret[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?okta[_-]?oauth2[_-]?client[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\S\r\
+      \n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?okta[_-]?client[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?ofta[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?ofta[_-]?region[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?ofta[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?octest[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?octest[_-]?app[_-]?username[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?octest[_-]?app[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?oc[_-]?pass[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?object[_-]?store[_-]?creds[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?object[_-]?store[_-]?bucket[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?object[_-]?storage[_-]?region[_-]?name[\"']?[^\\S\r\n]*[=:][^\\S\r\
+      \n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?object[_-]?storage[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?oauth[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?numbers[_-]?service[_-]?pass[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?nuget[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?nuget[_-]?apikey[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?nuget[_-]?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?npm[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?npm[_-]?secret[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?npm[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?npm[_-]?email[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?npm[_-]?auth[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?npm[_-]?api[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?npm[_-]?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?now[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?non[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?node[_-]?pre[_-]?gyp[_-]?secretaccesskey[\"']?[^\\S\r\n]*[=:][^\\\
+      S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?node[_-]?pre[_-]?gyp[_-]?github[_-]?token[\"']?[^\\S\r\n]*[=:][^\\\
+      S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?node[_-]?pre[_-]?gyp[_-]?accesskeyid[\"']?[^\\S\r\n]*[=:][^\\S\r\n\
+      ]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?node[_-]?env[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?ngrok[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?ngrok[_-]?auth[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?nexuspassword[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?nexus[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?new[_-]?relic[_-]?beta[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?netlify[_-]?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?nativeevents[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?mysqlsecret[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?mysqlmasteruser[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?mysql[_-]?username[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?mysql[_-]?user[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?mysql[_-]?root[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?mysql[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?mysql[_-]?hostname[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?mysql[_-]?database[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?my[_-]?secret[_-]?env[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?multi[_-]?workspace[_-]?sid[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?multi[_-]?workflow[_-]?sid[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?multi[_-]?disconnect[_-]?sid[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?multi[_-]?connect[_-]?sid[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?multi[_-]?bob[_-]?sid[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?minio[_-]?secret[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?minio[_-]?access[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?mile[_-]?zero[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?mh[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?mh[_-]?apikey[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?mg[_-]?public[_-]?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?mg[_-]?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?mapboxaccesstoken[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?mapbox[_-]?aws[_-]?secret[_-]?access[_-]?key[\"']?[^\\S\r\n]*[=:][^\\\
+      S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?mapbox[_-]?aws[_-]?access[_-]?key[_-]?id[\"']?[^\\S\r\n]*[=:][^\\\
+      S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?mapbox[_-]?api[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?mapbox[_-]?access[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?manifest[_-]?app[_-]?url[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?manifest[_-]?app[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?mandrill[_-]?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?managementapiaccesstoken[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?management[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?manage[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?manage[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?mailgun[_-]?secret[_-]?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n\
+      ]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?mailgun[_-]?pub[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?mailgun[_-]?pub[_-]?apikey[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?mailgun[_-]?priv[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?mailgun[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?mailgun[_-]?apikey[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?mailgun[_-]?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?mailer[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?mailchimp[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?mailchimp[_-]?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?mail[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?magento[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?magento[_-]?auth[_-]?username [\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?magento[_-]?auth[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?lottie[_-]?upload[_-]?cert[_-]?key[_-]?store[_-]?password[\"']?[^\\\
+      S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?lottie[_-]?upload[_-]?cert[_-]?key[_-]?password[\"']?[^\\S\r\n]*[=:][^\\\
+      S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?lottie[_-]?s3[_-]?secret[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?lottie[_-]?happo[_-]?secret[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n\
+      ]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?lottie[_-]?happo[_-]?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?looker[_-]?test[_-]?runner[_-]?client[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\\
+      S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?ll[_-]?shared[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?ll[_-]?publish[_-]?url[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?linux[_-]?signing[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?linkedin[_-]?client[_-]?secretor lottie[_-]?s3[_-]?api[_-]?key[\"\
+      ']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?lighthouse[_-]?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?lektor[_-]?deploy[_-]?username[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?lektor[_-]?deploy[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?leanplum[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?kxoltsn3vogdop92m[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?kubeconfig[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?kubecfg[_-]?s3[_-]?path[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?kovan[_-]?private[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?keystore[_-]?pass[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?kafka[_-]?rest[_-]?url[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?kafka[_-]?instance[_-]?name[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?kafka[_-]?admin[_-]?url[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?jwt[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?jdbc:mysql[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?jdbc[_-]?host[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?jdbc[_-]?databaseurl[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?itest[_-]?gh[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?ios[_-]?docs[_-]?deploy[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?internal[_-]?secrets[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?integration[_-]?test[_-]?appid[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?integration[_-]?test[_-]?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n\
+      ]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?index[_-]?name[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?ij[_-]?repo[_-]?username[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?ij[_-]?repo[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?hub[_-]?dxia2[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?homebrew[_-]?github[_-]?api[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\
+      \n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?hockeyapp[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?heroku[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?heroku[_-]?email[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?heroku[_-]?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?hb[_-]?codesign[_-]?key[_-]?pass[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?hb[_-]?codesign[_-]?gpg[_-]?pass[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?hab[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?hab[_-]?auth[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?grgit[_-]?user[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?gren[_-]?github[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?gradle[_-]?signing[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?gradle[_-]?signing[_-]?key[_-]?id[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?gradle[_-]?publish[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?gradle[_-]?publish[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?gpg[_-]?secret[_-]?keys[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?gpg[_-]?private[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?gpg[_-]?passphrase[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?gpg[_-]?ownertrust[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?gpg[_-]?keyname[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?gpg[_-]?key[_-]?name[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?google[_-]?private[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?google[_-]?maps[_-]?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?google[_-]?client[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?google[_-]?client[_-]?id[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?google[_-]?client[_-]?email[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?google[_-]?account[_-]?type[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?gogs[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?gitlab[_-]?user[_-]?email[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?github[_-]?tokens[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?github[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?github[_-]?repo[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?github[_-]?release[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?github[_-]?pwd[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?github[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?github[_-]?oauth[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?github[_-]?oauth[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?github[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?github[_-]?hunter[_-]?username[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?github[_-]?hunter[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?github[_-]?deployment[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?github[_-]?deploy[_-]?hb[_-]?doc[_-]?pass[\"']?[^\\S\r\n]*[=:][^\\\
+      S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?github[_-]?client[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?github[_-]?auth[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?github[_-]?auth[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?github[_-]?api[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?github[_-]?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?github[_-]?access[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?git[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?git[_-]?name[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?git[_-]?email[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?git[_-]?committer[_-]?name[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?git[_-]?committer[_-]?email[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?git[_-]?author[_-]?name[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?git[_-]?author[_-]?email[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?ghost[_-]?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?ghb[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?gh[_-]?unstable[_-]?oauth[_-]?client[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\\
+      S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?gh[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?gh[_-]?repo[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?gh[_-]?oauth[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?gh[_-]?oauth[_-]?client[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\S\r\n\
+      ]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?gh[_-]?next[_-]?unstable[_-]?oauth[_-]?client[_-]?secret[\"']?[^\\\
+      S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?gh[_-]?next[_-]?unstable[_-]?oauth[_-]?client[_-]?id[\"']?[^\\S\r\
+      \n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?gh[_-]?next[_-]?oauth[_-]?client[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\\
+      S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?gh[_-]?email[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?gh[_-]?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?gcs[_-]?bucket[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?gcr[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?gcloud[_-]?service[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?gcloud[_-]?project[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?gcloud[_-]?bucket[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?ftp[_-]?username[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?ftp[_-]?user[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?ftp[_-]?pw[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?ftp[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?ftp[_-]?login[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?ftp[_-]?host[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?fossa[_-]?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?flickr[_-]?api[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?flickr[_-]?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?flask[_-]?secret[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?firefox[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?firebase[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?firebase[_-]?project[_-]?develop[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?firebase[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?firebase[_-]?api[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?firebase[_-]?api[_-]?json[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?file[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?exp[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?eureka[_-]?awssecretkey[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?env[_-]?sonatype[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?env[_-]?secret[_-]?access[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?env[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?env[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?env[_-]?heroku[_-]?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?env[_-]?github[_-]?oauth[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n\
+      ]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?end[_-]?user[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?encryption[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?elasticsearch[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?elastic[_-]?cloud[_-]?auth[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?dsonar[_-]?projectkey[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?dsonar[_-]?login[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?droplet[_-]?travis[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?dropbox[_-]?oauth[_-]?bearer[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?doordash[_-]?auth[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?dockerhubpassword[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?dockerhub[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?docker[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?docker[_-]?postgres[_-]?url[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?docker[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?docker[_-]?passwd[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?docker[_-]?pass[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?docker[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?docker[_-]?hub[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?digitalocean[_-]?ssh[_-]?key[_-]?ids[\"']?[^\\S\r\n]*[=:][^\\S\r\n\
+      ]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?digitalocean[_-]?ssh[_-]?key[_-]?body[\"']?[^\\S\r\n]*[=:][^\\S\r\
+      \n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?digitalocean[_-]?access[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?dgpg[_-]?passphrase[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?deploy[_-]?user[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?deploy[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?deploy[_-]?secure[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?deploy[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?ddgc[_-]?github[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?ddg[_-]?test[_-]?email[_-]?pw[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?ddg[_-]?test[_-]?email[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?db[_-]?username[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?db[_-]?user[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?db[_-]?pw[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?db[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?db[_-]?host[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?db[_-]?database[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?db[_-]?connection[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?datadog[_-]?app[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?datadog[_-]?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?database[_-]?username[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?database[_-]?user[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?database[_-]?port[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?database[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?database[_-]?name[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?database[_-]?host[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?danger[_-]?github[_-]?api[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n\
+      ]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?cypress[_-]?record[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?coverity[_-]?scan[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?coveralls[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?coveralls[_-]?repo[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?coveralls[_-]?api[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?cos[_-]?secrets[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?conversation[_-]?username[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?conversation[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?contentful[_-]?v2[_-]?access[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\
+      \n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?contentful[_-]?test[_-]?org[_-]?cma[_-]?token[\"']?[^\\S\r\n]*[=:][^\\\
+      S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?contentful[_-]?php[_-]?management[_-]?test[_-]?token[\"']?[^\\S\r\
+      \n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?contentful[_-]?management[_-]?api[_-]?access[_-]?token[_-]?new[\"\
+      ']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?contentful[_-]?management[_-]?api[_-]?access[_-]?token[\"']?[^\\\
+      S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?contentful[_-]?integration[_-]?management[_-]?token[\"']?[^\\S\r\n\
+      ]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?contentful[_-]?cma[_-]?test[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\
+      \n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?contentful[_-]?access[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?consumerkey[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?consumer[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?conekta[_-]?apikey[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?coding[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?codecov[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?codeclimate[_-]?repo[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?codacy[_-]?project[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?cocoapods[_-]?trunk[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?cocoapods[_-]?trunk[_-]?email[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?cn[_-]?secret[_-]?access[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?cn[_-]?access[_-]?key[_-]?id[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?clu[_-]?ssh[_-]?private[_-]?key[_-]?base64[\"']?[^\\S\r\n]*[=:][^\\\
+      S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?clu[_-]?repo[_-]?url[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?cloudinary[_-]?url[_-]?staging[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?cloudinary[_-]?url[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?cloudflare[_-]?email[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?cloudflare[_-]?auth[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?cloudflare[_-]?auth[_-]?email[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?cloudflare[_-]?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?cloudant[_-]?service[_-]?database[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?cloudant[_-]?processed[_-]?database[\"']?[^\\S\r\n]*[=:][^\\S\r\n\
+      ]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?cloudant[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?cloudant[_-]?parsed[_-]?database[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?cloudant[_-]?order[_-]?database[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?cloudant[_-]?instance[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?cloudant[_-]?database[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?cloudant[_-]?audited[_-]?database[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?cloudant[_-]?archived[_-]?database[\"']?[^\\S\r\n]*[=:][^\\S\r\n\
+      ]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?cloud[_-]?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?clojars[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?client[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?cli[_-]?e2e[_-]?cma[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?claimr[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?claimr[_-]?superuser[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?claimr[_-]?db[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?claimr[_-]?database[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?ci[_-]?user[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?ci[_-]?server[_-]?name[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?ci[_-]?registry[_-]?user[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?ci[_-]?project[_-]?url[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?ci[_-]?deploy[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?chrome[_-]?refresh[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?chrome[_-]?client[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?cheverny[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?cf[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?certificate[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?censys[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?cattle[_-]?secret[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?cattle[_-]?agent[_-]?instance[_-]?auth[\"']?[^\\S\r\n]*[=:][^\\S\r\
+      \n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?cattle[_-]?access[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?cargo[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?cache[_-]?s3[_-]?secret[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?bx[_-]?username[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?bx[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?bundlesize[_-]?github[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?built[_-]?branch[_-]?deploy[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n\
+      ]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?bucketeer[_-]?aws[_-]?secret[_-]?access[_-]?key[\"']?[^\\S\r\n]*[=:][^\\\
+      S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?bucketeer[_-]?aws[_-]?access[_-]?key[_-]?id[\"']?[^\\S\r\n]*[=:][^\\\
+      S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?browserstack[_-]?access[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?browser[_-]?stack[_-]?access[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n\
+      ]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?brackets[_-]?repo[_-]?oauth[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\
+      \n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?bluemix[_-]?username[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?bluemix[_-]?pwd[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?bluemix[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?bluemix[_-]?pass[_-]?prod[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?bluemix[_-]?pass[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?bluemix[_-]?auth[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?bluemix[_-]?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?bintraykey[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?bintray[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?bintray[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?bintray[_-]?gpg[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?bintray[_-]?apikey[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?bintray[_-]?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?b2[_-]?bucket[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?b2[_-]?app[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?awssecretkey[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?awscn[_-]?secret[_-]?access[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n\
+      ]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?awscn[_-]?access[_-]?key[_-]?id[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?awsaccesskeyid[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?aws[_-]?ses[_-]?secret[_-]?access[_-]?key[\"']?[^\\S\r\n]*[=:][^\\\
+      S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?aws[_-]?ses[_-]?access[_-]?key[_-]?id[\"']?[^\\S\r\n]*[=:][^\\S\r\
+      \n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?aws[_-]?secrets[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?aws[_-]?secret[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?aws[_-]?secret[_-]?access[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?aws[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?aws[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?aws[_-]?config[_-]?secretaccesskey[\"']?[^\\S\r\n]*[=:][^\\S\r\n\
+      ]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?aws[_-]?config[_-]?accesskeyid[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?aws[_-]?access[_-]?key[_-]?id[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?aws[_-]?access[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?aws[_-]?access[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?author[_-]?npm[_-]?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?author[_-]?email[_-]?addr[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?auth0[_-]?client[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?auth0[_-]?api[_-]?clientsecret[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?auth[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?assistant[_-]?iam[_-]?apikey[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?artifacts[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?artifacts[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?artifacts[_-]?bucket[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?artifacts[_-]?aws[_-]?secret[_-]?access[_-]?key[\"']?[^\\S\r\n]*[=:][^\\\
+      S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?artifacts[_-]?aws[_-]?access[_-]?key[_-]?id[\"']?[^\\S\r\n]*[=:][^\\\
+      S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?artifactory[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?argos[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?apple[_-]?id[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?appclientsecret[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?app[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?app[_-]?secrete[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?app[_-]?report[_-]?token[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?app[_-]?bucket[_-]?perm[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?apigw[_-]?access[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?apiary[_-]?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?api[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?api[_-]?key[_-]?sid[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?api[_-]?key[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?aos[_-]?sec[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?aos[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?ansible[_-]?vault[_-]?password[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?android[_-]?docs[_-]?deploy[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\
+      \n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?anaconda[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?amazon[_-]?secret[_-]?access[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n\
+      ]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?amazon[_-]?bucket[_-]?name[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?alicloud[_-]?secret[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?alicloud[_-]?access[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?alias[_-]?pass[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?algolia[_-]?search[_-]?key[_-]?1[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?algolia[_-]?search[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?algolia[_-]?search[_-]?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n\
+      ]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?algolia[_-]?api[_-]?key[_-]?search[\"']?[^\\S\r\n]*[=:][^\\S\r\n\
+      ]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?algolia[_-]?api[_-]?key[_-]?mcm[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?algolia[_-]?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?algolia[_-]?admin[_-]?key[_-]?mcm[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?algolia[_-]?admin[_-]?key[_-]?2[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - "(?i)[\"']?algolia[_-]?admin[_-]?key[_-]?1[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"\
+      ']?[\\w-]+[\"']?"
+    - (?i)["']?air[-_]?table[-_]?api[-_]?key["']?[=:]["']?.+["']
+    - "(?i)[\"']?adzerk[_-]?api[_-]?key[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?admin[_-]?email[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?account[_-]?sid[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"']?"
+    - "(?i)[\"']?access[_-]?token[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[^(null)][\"']?[\\\
+      w-]+[\"']?"
+    - "(?i)[\"']?access[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\w-]+[\"\
+      ']?"
+    - "(?i)[\"']?access[_-]?key[_-]?secret[\"']?[^\\S\r\n]*[=:][^\\S\r\n]*[\"']?[\\\
+      w-]+[\"']?"
+    type: regex
+  host-redirects: true
+  max-redirects: 2
+  method: GET
+  path:
+  - '{{BaseURL}}'
+id: credentials-disclosure
+info:
+  author: Sy3Omda,forgedhallpass,geeknik
+  description: Look for keys/tokens/passwords in HTTP responses, exposed keys/tokens/secrets
+    requires manual verification for impact evaluation.
+  metadata:
+    max-request: 1
+  name: Credentials Disclosure Check
+  severity: unknown
+  tags: exposure,token,key,api,secret,password,generic,vuln
+---
+http:
+- matchers:
+  - part: body
+    type: word
+    words:
+    - <title>yii\base\ErrorException</title>
+  - status:
+    - 500
+    type: status
+  matchers-condition: and
+  method: GET
+  path:
+  - '{{BaseURL}}'
+id: yii-error-page
+info:
+  author: DhiyaneshDk
+  classification:
+    cpe: cpe:2.3:a:yii_software:yii:*:*:*:*:*:*:*:*
+  description: Yii (An application framework to handle and manage errors) error page
+    detected.
+  metadata:
+    max-request: 1
+    product: yii
+    shodan-query: html:"yii\base\ErrorException"
+    vendor: yii_software
+    verified: true
+  name: Yii Error Page - Detct
+  severity: unknown
+  tags: exposure,yii,logs,vuln
+---
+http:
+- matchers:
+  - condition: and
+    type: word
+    words:
+    - images_dir
+    - css_dir
+  - status:
+    - 200
+    type: status
+  matchers-condition: and
+  method: GET
+  path:
+  - '{{BaseURL}}/config.rb'
+  - '{{BaseURL}}/.chef/config.rb'
+  - '{{BaseURL}}/assets/config.rb'
+  stop-at-first-match: true
+id: config-rb
+info:
+  author: DhiyaneshDK
+  description: Multiple Ruby configuration files were detected.
+  metadata:
+    max-request: 3
+    shodan-query: html:"config.rb"
+    verified: true
+  name: Ruby Configuration File - Detect
+  severity: unknown
+  tags: ruby,devops,exposure,config,vuln
+---
+http:
+- attack: pitchfork
+  body: "{\n  \"jsonrpc\": \"2.0\",\n  \"method\": \"{{method}}\",\n  \"params\":\
+    \ {},\n  \"id\": 1\n}\n"
+  extractors:
+  - part: body
+    regex:
+    - '"name"\s*:\s*"([^"]+)"'
+    type: regex
+  headers:
+    Accept: application/json, text/event-stream
+    Content-Type: application/json
+  matchers:
+  - condition: and
+    part: body
+    type: word
+    words:
+    - jsonrpc
+    - result
+  - part: body
+    regex:
+    - '"available_tools"\s*:\s*\['
+    - '"name"\s*:\s*"get_tools"'
+    - '"server_status"\s*:\s*\{'
+    - '"observatories_by_type"'
+    - '"parameters"\s*:\s*\{'
+    - '"tools"\s*:\s*\[.*?\]'
+    - '"resources"\s*:\s*\[.*?\]'
+    - '"prompts"\s*:\s*\[.*?\]'
+    type: regex
+  matchers-condition: and
+  method: POST
+  path:
+  - '{{BaseURL}}'
+  - '{{BaseURL}}/mcp/'
+  payloads:
+    method:
+    - rpc.discover
+    - rpc.describe
+    - rpc.listTools
+    - tools/list
+    - resources/list
+    - prompts/list
+    - tool.status
+    - tool.help
+    - tool.version
+    - tool.list
+id: exposed-mcp-server
+info:
+  author: ivan_wallarm
+  description: 'Detects exposed Machine Control Protocol (MCP) servers through JSON-RPC
+    2.0 API endpoints.
+
+    MCP servers often provide administrative access to AI tools, LLM systems, or other
+    automation infrastructure.
+
+    Exposed MCP interfaces can lead to unauthorized access, information disclosure,
+    and potential system compromise.
+
+    This template tests multiple detection methods including tools/list, rpc.discover,
+    resources/list, and prompts/list.
+
+    '
+  metadata:
+    max-request: 10
+    verified: true
+  name: Exposed MCP JSON-RPC 2.0 API Detection
+  reference:
+  - https://jsonrpc.org/specification
+  - https://github.com/anthropics/anthropic-tools/tree/main/mcp
+  - https://lab.wallarm.com/wallarm-research-nuclei-template-counter-threats-targeting-llm-apps/
+  severity: unknown
+  tags: mcp,jsonrpc,devtools,exposure,api,ai,llm,discovery
+---
+http:
+- extractors:
+  - name: message_endpoint
+    regex:
+    - 'data: ([/?_=a-zA-Z0-9-]+)'
+    type: regex
+  matchers:
+  - condition: or
+    dsl:
+    - status_code == 200 && contains(content_type, 'text/event-stream')
+    - status_code == 406 && contains(content_type, 'application/json')
+    type: dsl
+  - condition: or
+    dsl:
+    - 'contains(body, ''event: endpoint'')'
+    - 'contains(body, ''Not Acceptable: Client must accept text/event-stream'')'
+    type: dsl
+  max-size: 100
+  method: GET
+  path:
+  - '{{BaseURL}}'
+  - '{{BaseURL}}/sse'
+  stop-at-first-match: true
+id: exposed-mcp-sse-server
+info:
+  author: domwhewell-sage
+  description: 'Detects exposed Model Context Protocol (MCP) servers through the SSE
+    API. MCP servers often provide administrative access to AI tools, LLM systems,
+    or other automation infrastructure. Exposed MCP interfaces can lead to unauthorized
+    access, information disclosure, and potential system compromise. This template
+    detects a SSE server event stream and returns the messages endpoint which can
+    be used to POST JSON-RPC 2.0 requests.
+
+    '
+  metadata:
+    max-requests: 2
+    shodan-query: text/event-stream
+    verified: true
+  name: MCP SSE API Exposed - Detect
+  reference:
+  - https://modelcontextprotocol.io/specification/2024-11-05/basic/transports#http-with-sse
+  severity: unknown
+  tags: mcp,devtools,exposure,api,ai,llm,discovery
+---
+http:
+- matchers:
+  - part: body
+    type: word
+    words:
+    - REACT_APP_
+  - condition: or
+    part: header
+    type: word
+    words:
+    - application/octet-stream
+    - application/javascript
+    - text/plain
+  - status:
+    - 200
+    type: status
+  matchers-condition: and
+  method: GET
+  path:
+  - '{{BaseURL}}/env.js'
+  - '{{BaseURL}}/config.js'
+  - '{{BaseURL}}/config/env.js'
+  - '{{BaseURL}}/config/runtime-env.js'
+  stop-at-first-match: true
+id: reactapp-env-js
+info:
+  author: random-robbie,rinolock
+  metadata:
+    github-query: REACT_APP_
+    max-request: 4
+    verified: true
+  name: React App Environment Js
+  severity: unknown
+  tags: react,exposure,config,js,javascript,vuln
+---
+http:
+- matchers:
+  - condition: and
+    dsl:
+    - contains(header_1, "Set-Cookie") && (contains(header_1, "rememberMe=") || contains(header_1,
+      "=deleteMe"))
+    - '!contains(header_2, "rememberMe=") && !contains(header_2, "=deleteMe")'
+    type: dsl
+  - condition: and
+    dsl:
+    - '!contains(body_2, "<p>当前访问疑似黑客攻击，已被网站管理员设置拦截并记录</p>")'
+    - '!contains(body_2, "很抱歉，由于您访问的URL有可能对网站造成安全威胁，您的访问被阻断")'
+    type: dsl
+  matchers-condition: and
+  payloads:
+    key: helpers/wordlists/shiro_encrypted_keys.txt
+  raw:
+  - 'GET / HTTP/1.1
+
+    Host: {{Hostname}}
+
+    Cookie: JSESSIONID={{randstr}};rememberMe=123;
+
+    '
+  - 'GET / HTTP/1.1
+
+    Host: {{Hostname}}
+
+    Cookie: JSESSIONID={{randstr}};rememberMe={{key}};
+
+    '
+  stop-at-first-match: true
+id: shiro-deserialization-detection
+info:
+  author: hotpot,j4vaovo
+  description: 'This template is designed to detect the Shiro framework''s default
+    key vulnerabilities. It leverages 51 built-in Shiro keys to probe for potential
+    vulnerabilities.
+
+    '
+  metadata:
+    max-request: 102
+  name: Shiro <= 1.2.4 Deserialization Detection
+  reference:
+  - https://github.com/sv3nbeast/ShiroScan
+  severity: unknown
+  tags: shiro,deserialization,rce,apache,vuln
+---
+http:
+- matchers:
+  - part: body
+    type: word
+    words:
+    - <title>Agent Development Kit Dev UI</title>
+  method: GET
+  path:
+  - '{{BaseURL}}/dev-ui/'
+id: google-adk-webui-exposed
+info:
+  author: princechaddha
+  description: 'Detects the exposure of the Google Agent Development Kit (ADK) Development
+    UI, which may lead to sensitive information disclosure or unauthorized access.
+
+    '
+  metadata:
+    max-request: 1
+    shodan-query: http.html:"Agent Development Kit Dev UI"
+    verified: true
+  name: Google ADK Development UI Exposure
+  reference:
+  - https://google.github.io/adk-docs/
+  - https://github.com/google/adk-samples
+  severity: unknown
+  tags: adk,exposure,google,ai,agent,devops,discovery
+---
+http:
+- matchers:
+  - condition: or
+    part: body
+    type: word
+    words:
+    - <title>Tailon
+    - class="tailon-dark
+  - status:
+    - 200
+    type: status
+  matchers-condition: and
+  method: GET
+  path:
+  - '{{BaseURL}}'
+id: tailon-panel
+info:
+  author: ritikchaddha
+  metadata:
+    max-request: 1
+    shodan-query: title:"tailon"
+    verified: true
+  name: Tailon Panel - Detect
+  reference:
+  - https://github.com/gvalkov/tailon
+  severity: unknown
+  tags: panel,tailon,detect,discovery
+---
+http:
+- matchers:
+  - condition: and
+    part: body
+    type: word
+    words:
+    - '","userId":"{{randstr}}"'
+    - '{"id":"'
+  raw:
+  - 'POST /apps/my_sample_agent/users/{{randstr}}/sessions/s_123 HTTP/1.1
+
+    Host: {{Hostname}}
+
+    Content-Type: application/json
+
+
+    {"state": {"key1": "value1", "key2": 42}}
+
+    '
+id: google-adk-api-exposed
+info:
+  author: princechaddha
+  description: 'Detects the exposure of the Google Agent Development Kit (ADK) API,
+    which may lead to sensitive information disclosure or unauthorized access.
+
+    '
+  metadata:
+    max-request: 1
+    verified: true
+  name: Google ADK API Exposure
+  reference:
+  - https://google.github.io/adk-docs/
+  - https://github.com/google/adk-samples
+  severity: unknown
+  tags: adk,exposure,google,ai,agent,api,devops,discovery
+---
+http:
+- matchers:
+  - condition: and
+    part: body
+    type: word
+    words:
+    - Protocol mismatch
+    - OpenSSH
+  - status:
+    - 200
+    type: status
+  matchers-condition: and
+  payloads:
+    verb:
+    - GET
+    - HEAD
+    - POST
+    - PUT
+    - DELETE
+    - CONNECT
+    - OPTIONS
+    - TRACE
+    - PATCH
+  raw:
+  - '{{verb}} http://127.0.0.1:22 HTTP/1.1
+
+    Host: {{Hostname}}
+
+
+    '
+  stop-at-first-match: true
+  unsafe: true
+id: ssrf-via-proxy
+info:
+  author: geeknik,petergrifin
+  metadata:
+    max-request: 9
+  name: SSRF via Proxy Unsafe
+  reference:
+  - https://github.com/geeknik/the-nuclei-templates/blob/main/ssrf-by-proxy.yaml
+  - https://twitter.com/HusseiN98D/status/1649006265450782720
+  - https://twitter.com/ImoJOnDz/status/1649089777629827072
+  severity: unknown
+  tags: ssrf,proxy,oast,fuzz,fuzzing,vuln

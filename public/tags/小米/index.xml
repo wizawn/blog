@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>小米 on 言零的博客</title><link>https://blog.caowo.de/tags/%E5%B0%8F%E7%B1%B3/</link><description>Recent content in 小米 on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 08 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.caowo.de/tags/%E5%B0%8F%E7%B1%B3/index.xml" rel="self" type="application/rss+xml"/><item><title>小米/红米骁龙 8 Elite Gen5 设备解锁工具包</title><link>https://blog.caowo.de/posts/xiaomi-unlock-tool-2026/</link><pubDate>Sun, 08 Mar 2026 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/xiaomi-unlock-tool-2026/</guid><description>&lt;h2 id="-重要声明"&gt;⚠️ 重要声明
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;本工具仅供个人学习研究使用，请勿用于非法用途！&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;🔓 解锁 Bootloader 会导致设备失去保修&lt;/li&gt;
+&lt;li&gt;💾 解锁会自动清除所有用户数据，请提前备份&lt;/li&gt;
+&lt;li&gt;⚠️ 使用不当可能导致设备变砖，风险自负&lt;/li&gt;
+&lt;li&gt;🚫 请勿用于非法用途，否则后果自负&lt;/li&gt;
+&lt;li&gt;💰 工具完全免费，请勿倒卖！&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-适用设备"&gt;📱 适用设备
+&lt;/h2&gt;&lt;h3 id="理论上适用于所有搭载骁龙-8-elite-gen5-处理器的设备"&gt;理论上适用于所有搭载骁龙 8 Elite Gen5 处理器的设备
+&lt;/h3&gt;&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;品牌&lt;/th&gt;
+ &lt;th&gt;设备型号&lt;/th&gt;
+ &lt;th&gt;处理器&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;小米&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;小米 17&lt;/td&gt;
+ &lt;td&gt;骁龙 8 Elite Gen5&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;小米&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;小米 17 Pro&lt;/td&gt;
+ &lt;td&gt;骁龙 8 Elite Gen5&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;小米&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;小米 17 Pro Max&lt;/td&gt;
+ &lt;td&gt;骁龙 8 Elite Gen5&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;小米&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;小米 17 Ultra&lt;/td&gt;
+ &lt;td&gt;骁龙 8 Elite Gen5&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;红米&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;红米 K90 Pro Max&lt;/td&gt;
+ &lt;td&gt;骁龙 8 Elite Gen5&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;POCO&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;POCO F8 Ultra&lt;/td&gt;
+ &lt;td&gt;骁龙 8 Elite Gen5&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="国际版设备"&gt;国际版设备
+&lt;/h3&gt;&lt;p&gt;更多信息请参考：&lt;a class="link" href="https://www.mobile01.com/topicdetail.php?f=634&amp;amp;t=7232343" target="_blank" rel="noopener"
+ &gt;Mobile01 讨论帖&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;小米 17&lt;/li&gt;
+&lt;li&gt;小米 17 Ultra&lt;/li&gt;
+&lt;li&gt;POCO F8 Ultra&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-下载链接"&gt;📥 下载链接
+&lt;/h2&gt;&lt;h3 id="一线解锁工具包"&gt;一线解锁工具包
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;下载地址&lt;/strong&gt;: &lt;a class="link" href="https://www.wenshushu.cn/f/jd7dmpy1gnn" target="_blank" rel="noopener"
+ &gt;https://www.wenshushu.cn/f/jd7dmpy1gnn&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;来源&lt;/strong&gt;: &lt;a class="link" href="https://www.coolapk.com/feed/70571250?s=Y2U5NGExZmMxMGRhNTczZzY5YWQzNDMzega1603" target="_blank" rel="noopener"
+ &gt;酷安反馈&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="-解锁前准备"&gt;🔧 解锁前准备
+&lt;/h2&gt;&lt;h3 id="1-数据备份-"&gt;1. 数据备份 ⚠️
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;解锁会自动清除设备内所有用户数据！&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;请务必提前备份以下内容到电脑或云端：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;📞 联系人&lt;/li&gt;
+&lt;li&gt;📸 照片/视频&lt;/li&gt;
+&lt;li&gt;📱 应用程序数据&lt;/li&gt;
+&lt;li&gt;💬 聊天记录（微信/QQ 等）&lt;/li&gt;
+&lt;li&gt;📄 文档文件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="2-设备准备"&gt;2. 设备准备
+&lt;/h3&gt;&lt;p&gt;解锁前请完成以下操作：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled="" type="checkbox"&gt; 关闭 &lt;strong&gt;查找手机&lt;/strong&gt; 功能&lt;/li&gt;
+&lt;li&gt;&lt;input disabled="" type="checkbox"&gt; 退出 &lt;strong&gt;小米帐号&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;input disabled="" type="checkbox"&gt; 删除 &lt;strong&gt;指纹数据&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;input disabled="" type="checkbox"&gt; 删除 &lt;strong&gt;锁屏密码&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;input disabled="" type="checkbox"&gt; 确保电量 &amp;gt; 50%&lt;/li&gt;
+&lt;li&gt;&lt;input disabled="" type="checkbox"&gt; 启用 &lt;strong&gt;开发者选项&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;input disabled="" type="checkbox"&gt; 启用 &lt;strong&gt;USB 调试&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="3-电脑准备"&gt;3. 电脑准备
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Windows 10/11 系统&lt;/li&gt;
+&lt;li&gt;安装小米 USB 驱动程序&lt;/li&gt;
+&lt;li&gt;准备原装 USB 数据线&lt;/li&gt;
+&lt;li&gt;关闭杀毒软件（可能误报）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-解锁步骤"&gt;📖 解锁步骤
+&lt;/h2&gt;&lt;h3 id="步骤-1-下载工具包"&gt;步骤 1: 下载工具包
+&lt;/h3&gt;&lt;p&gt;从文叔叔下载解锁工具包并解压到电脑。&lt;/p&gt;
+&lt;h3 id="步骤-2-进入-fastboot-模式"&gt;步骤 2: 进入 Fastboot 模式
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;关机&lt;/li&gt;
+&lt;li&gt;同时按住 &lt;strong&gt;音量下&lt;/strong&gt; + &lt;strong&gt;电源键&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;出现 Fastboot 标志后松手&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="步骤-3-连接电脑"&gt;步骤 3: 连接电脑
+&lt;/h3&gt;&lt;p&gt;使用原装 USB 数据线连接手机和电脑。&lt;/p&gt;
+&lt;h3 id="步骤-4-运行解锁工具"&gt;步骤 4: 运行解锁工具
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;打开解压后的工具包&lt;/li&gt;
+&lt;li&gt;运行 &lt;code&gt;unlock.bat&lt;/code&gt;（Windows）或 &lt;code&gt;unlock.sh&lt;/code&gt;（Linux/Mac）&lt;/li&gt;
+&lt;li&gt;按照提示操作&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="步骤-5-等待解锁完成"&gt;步骤 5: 等待解锁完成
+&lt;/h3&gt;&lt;p&gt;解锁过程约需 5-10 分钟，请耐心等待。&lt;/p&gt;
+&lt;h3 id="步骤-6-重启设备"&gt;步骤 6: 重启设备
+&lt;/h3&gt;&lt;p&gt;解锁完成后，设备会自动重启。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="-解锁后建议"&gt;⚙️ 解锁后建议
+&lt;/h2&gt;&lt;h3 id="1-关闭自动更新"&gt;1. 关闭自动更新
+&lt;/h3&gt;&lt;p&gt;解锁后&lt;strong&gt;建议立即关闭自动更新&lt;/strong&gt;并冻结系统更新程序：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 使用 ADB 冻结系统更新&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;adb shell pm disable-user com.miui.updater
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;否则后果自负！&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id="2-安装自定义-recovery"&gt;2. 安装自定义 Recovery
+&lt;/h3&gt;&lt;p&gt;可选安装 TWRP 或其他自定义 Recovery：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;TWRP Recovery&lt;/li&gt;
+&lt;li&gt;OrangeFox Recovery&lt;/li&gt;
+&lt;li&gt;PitchBlack Recovery&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="3-获取-root-权限"&gt;3. 获取 Root 权限
+&lt;/h3&gt;&lt;p&gt;可选刷入 Magisk 获取 Root 权限。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="-常见问题"&gt;❓ 常见问题
+&lt;/h2&gt;&lt;h3 id="q1-解锁后无法开机怎么办"&gt;Q1: 解锁后无法开机怎么办？
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;A&lt;/strong&gt;: 尝试进入 Recovery 模式清除数据，或重新刷入官方固件。&lt;/p&gt;
+&lt;h3 id="q2-解锁后银行-app-无法使用"&gt;Q2: 解锁后银行 APP 无法使用？
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;A&lt;/strong&gt;: 使用 Magisk Hide 或 Shamiko 模块隐藏 Root。&lt;/p&gt;
+&lt;h3 id="q3-解锁会影响信号吗"&gt;Q3: 解锁会影响信号吗？
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;A&lt;/strong&gt;: 正常情况下不会影响信号，但如果刷入第三方 ROM 可能导致信号问题。&lt;/p&gt;
+&lt;h3 id="q4-解锁后可以重新上锁吗"&gt;Q4: 解锁后可以重新上锁吗？
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;A&lt;/strong&gt;: 可以，但需要刷回官方固件后才能重新上锁。&lt;/p&gt;
+&lt;h3 id="q5-其他设备可以用吗"&gt;Q5: 其他设备可以用吗？
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;A&lt;/strong&gt;: 本工具专为骁龙 8 Elite Gen5 设备设计，其他设备不保证可用，使用变砖后果自负。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="-风险提示"&gt;⚠️ 风险提示
+&lt;/h2&gt;&lt;h3 id="解锁风险"&gt;解锁风险
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;🔓 &lt;strong&gt;失去保修&lt;/strong&gt;: 解锁后设备将失去官方保修服务&lt;/li&gt;
+&lt;li&gt;💾 &lt;strong&gt;数据丢失&lt;/strong&gt;: 解锁会清除所有用户数据&lt;/li&gt;
+&lt;li&gt;📱 &lt;strong&gt;变砖风险&lt;/strong&gt;: 操作不当可能导致设备无法开机&lt;/li&gt;
+&lt;li&gt;🔒 &lt;strong&gt;安全风险&lt;/strong&gt;: 解锁后设备安全性降低&lt;/li&gt;
+&lt;li&gt;💳 &lt;strong&gt;支付风险&lt;/strong&gt;: 部分支付 APP 可能无法使用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="使用须知"&gt;使用须知
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;本工具完全免费，请勿购买&lt;/li&gt;
+&lt;li&gt;工具仅供学习研究，请勿用于商业用途&lt;/li&gt;
+&lt;li&gt;使用本工具产生的任何问题，作者概不负责&lt;/li&gt;
+&lt;li&gt;请在 24 小时内删除本工具，否则后果自负&lt;/li&gt;
+&lt;li&gt;请勿将本工具用于非法用途&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id="-相关资源"&gt;📚 相关资源
+&lt;/h2&gt;&lt;h3 id="官方资源"&gt;官方资源
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://www.miui.com/unlock/" target="_blank" rel="noopener"
+ &gt;小米解锁官网&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="link" href="https://www.xiaomi.cn/" target="_blank" rel="noopener"
+ &gt;小米社区&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="link" href="https://miuirom.xiaomi.com/" target="_blank" rel="noopener"
+ &gt;MIUI 下载&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="第三方资源"&gt;第三方资源
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://forum.xda-developers.com/" target="_blank" rel="noopener"
+ &gt;XDA 开发者论坛&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="link" href="https://www.coolapk.com/" target="_blank" rel="noopener"
+ &gt;酷安网&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="link" href="https://www.mobile01.com/" target="_blank" rel="noopener"
+ &gt;Mobile01&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-反馈与支持"&gt;💬 反馈与支持
+&lt;/h2&gt;&lt;p&gt;如遇到问题，请在以下平台反馈：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;📱 酷安：&lt;a class="link" href="https://www.coolapk.com/feed/70571250" target="_blank" rel="noopener"
+ &gt;工具反馈帖&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;💬 Mobile01: &lt;a class="link" href="https://www.mobile01.com/topicdetail.php?f=634&amp;amp;t=7232343" target="_blank" rel="noopener"
+ &gt;讨论帖&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;📧 邮箱：support@example.com（示例）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-免责声明"&gt;📜 免责声明
+&lt;/h2&gt;&lt;p&gt;本工具仅供个人学习研究使用，作者不对使用本工具产生的任何后果负责。&lt;/p&gt;
+&lt;p&gt;使用本工具即表示你已阅读并同意以下条款：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;本工具完全免费，禁止倒卖&lt;/li&gt;
+&lt;li&gt;请勿用于非法用途&lt;/li&gt;
+&lt;li&gt;使用风险自负&lt;/li&gt;
+&lt;li&gt;24 小时内删除本工具&lt;/li&gt;
+&lt;li&gt;作者保留最终解释权&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;最后更新&lt;/strong&gt;: 2026-03-08&lt;br&gt;
+&lt;strong&gt;工具版本&lt;/strong&gt;: v1.0&lt;br&gt;
+&lt;strong&gt;适用系统&lt;/strong&gt;: Windows 10/11, Linux, macOS&lt;/p&gt;
+&lt;hr&gt;
+
+ &lt;blockquote&gt;
+ &lt;p&gt;⚠️ &lt;strong&gt;再次提醒&lt;/strong&gt;: 解锁有风险，操作需谨慎！请确保你已了解所有风险后再进行操作。&lt;/p&gt;
+
+ &lt;/blockquote&gt;</description></item></channel></rss>

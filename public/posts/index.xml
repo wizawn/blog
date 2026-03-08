@@ -1,4 +1,55 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 言零的博客</title><link>https://blog.caowo.de/posts/</link><description>Recent content in Posts on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 03 Mar 2026 16:15:00 +0800</lastBuildDate><atom:link href="https://blog.caowo.de/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>青龙面板鉴权绕过漏洞复现 - 从路径大小写到 RCE</title><link>https://blog.caowo.de/posts/qinglong-auth-bypass-rce/</link><pubDate>Sat, 28 Feb 2026 16:45:00 +0800</pubDate><guid>https://blog.caowo.de/posts/qinglong-auth-bypass-rce/</guid><description>&lt;img src="https://blog.caowo.de/" alt="Featured image of post 青龙面板鉴权绕过漏洞复现 - 从路径大小写到 RCE" /&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 言零的博客</title><link>https://blog.caowo.de/posts/</link><description>Recent content in Posts on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 08 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.caowo.de/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Hello World | 开启 Web 渗透测试之旅</title><link>https://blog.caowo.de/posts/hello-world/</link><pubDate>Sun, 01 Mar 2026 08:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/hello-world/</guid><description>&lt;h1 id="hello-world--开启-web-渗透测试之旅"&gt;Hello World | 开启 Web 渗透测试之旅
+&lt;/h1&gt;&lt;p&gt;欢迎来到我的网络安全技术博客！&lt;/p&gt;
+&lt;h2 id="-博客启用"&gt;🎉 博客启用
+&lt;/h2&gt;&lt;p&gt;本站正式启用，专注于 Web 渗透测试、漏洞复现与安全防御技术分享。&lt;/p&gt;
+&lt;h2 id="-博客定位"&gt;📝 博客定位
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Web 渗透测试&lt;/strong&gt; - 实战技巧与案例分析&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;漏洞复现&lt;/strong&gt; - 最新 CVE 漏洞深度解析&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;安全防御&lt;/strong&gt; - 加固方案与最佳实践&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;工具教程&lt;/strong&gt; - Nuclei、SQLMap、BurpSuite 等&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="-内容方向"&gt;🎯 内容方向
+&lt;/h2&gt;&lt;h3 id="1-漏洞复现系列"&gt;1. 漏洞复现系列
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Log4Shell (CVE-2021-44228)&lt;/li&gt;
+&lt;li&gt;ProxyShell (CVE-2021-34473)&lt;/li&gt;
+&lt;li&gt;SSRF/XXE/CSRF 等常见 Web 漏洞&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="2-工具教程系列"&gt;2. 工具教程系列
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Nuclei 模板编写&lt;/li&gt;
+&lt;li&gt;SQLMap 高级用法&lt;/li&gt;
+&lt;li&gt;BurpSuite 实战技巧&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="3-src-挖洞经验"&gt;3. SRC 挖洞经验
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;信息收集方法论&lt;/li&gt;
+&lt;li&gt;漏洞挖掘思路&lt;/li&gt;
+&lt;li&gt;报告撰写技巧&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="-关于我"&gt;📚 关于我
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;方向&lt;/strong&gt;: Web 安全、渗透测试、漏洞研究&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GitHub&lt;/strong&gt;: &lt;a class="link" href="https://github.com/wizawn" target="_blank" rel="noopener"
+ &gt;https://github.com/wizawn&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;邮箱&lt;/strong&gt;: &lt;a class="link" href="mailto:hihacker@foxmail.com" &gt;hihacker@foxmail.com&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="-免责声明"&gt;⚠️ 免责声明
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;所有技术内容仅用于&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;✅ 安全研究与学习&lt;/li&gt;
+&lt;li&gt;✅ 授权渗透测试&lt;/li&gt;
+&lt;li&gt;✅ 技术交流分享&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;禁止用于&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;❌ 未授权攻击&lt;/li&gt;
+&lt;li&gt;❌ 非法用途&lt;/li&gt;
+&lt;li&gt;❌ 商业牟利&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;2026-03-03 | 博客正式启用&lt;/em&gt;&lt;/p&gt;</description></item><item><title>青龙面板鉴权绕过漏洞复现 - 从路径大小写到 RCE</title><link>https://blog.caowo.de/posts/qinglong-auth-bypass-rce/</link><pubDate>Sat, 28 Feb 2026 16:45:00 +0800</pubDate><guid>https://blog.caowo.de/posts/qinglong-auth-bypass-rce/</guid><description>
  &lt;blockquote&gt;
  &lt;p&gt;⚠️ &lt;strong&gt;免责声明&lt;/strong&gt;：本文仅用于安全研究与教育目的，请勿将技术用于非法用途。&lt;/p&gt;
 
@@ -403,7 +454,804 @@
 &lt;h2 id="-tags"&gt;🏷️ Tags
 &lt;/h2&gt;&lt;p&gt;#鉴权绕过 #RCE #青龙面板 #Node.js 安全 #Express #漏洞复现 #渗透测试&lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;em&gt;本文基于公开披露的漏洞信息编写，旨在提高安全意识。请合法使用安全技术。&lt;/em&gt;&lt;/p&gt;</description></item><item><title>OpenClaw 部署教程 - Android 篇</title><link>https://blog.caowo.de/posts/openclaw-deploy-android/</link><pubDate>Tue, 03 Mar 2026 16:15:00 +0800</pubDate><guid>https://blog.caowo.de/posts/openclaw-deploy-android/</guid><description>&lt;h1 id="openclaw-部署教程---android-篇"&gt;OpenClaw 部署教程 - Android 篇
+&lt;p&gt;&lt;em&gt;本文基于公开披露的漏洞信息编写，旨在提高安全意识。请合法使用安全技术。&lt;/em&gt;&lt;/p&gt;</description></item><item><title>AI Agent 技术前沿</title><link>https://blog.caowo.de/posts/ai-agent-2026-03-08/</link><pubDate>Sun, 08 Mar 2026 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/ai-agent-2026-03-08/</guid><description>&lt;h1 id="ai-agent-技术前沿"&gt;AI Agent 技术前沿
+&lt;/h1&gt;&lt;h2 id="-今日焦点"&gt;🤖 今日焦点
+&lt;/h2&gt;&lt;p&gt;AI Agent 领域最新技术动态和突破。&lt;/p&gt;
+&lt;h2 id="-技术应用"&gt;💻 技术应用
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;自动化任务&lt;/strong&gt; - Agent 自动执行日常任务&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;内容创作&lt;/strong&gt; - AI 辅助写作和编辑&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数据分析&lt;/strong&gt; - 智能数据处理和洞察&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="-案例分享"&gt;📈 案例分享
+&lt;/h2&gt;&lt;p&gt;实际应用场景和成功案例分析。&lt;/p&gt;
+&lt;h2 id="-未来展望"&gt;🔮 未来展望
+&lt;/h2&gt;&lt;p&gt;AI Agent 发展趋势和预测。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 自动创作&lt;/em&gt;&lt;/p&gt;</description></item><item><title>内容工厂每日精选</title><link>https://blog.caowo.de/posts/content-factory-2026-03-08/</link><pubDate>Sun, 08 Mar 2026 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/content-factory-2026-03-08/</guid><description>&lt;h1 id="内容工厂每日精选"&gt;内容工厂每日精选
+&lt;/h1&gt;&lt;h2 id="-今日主题"&gt;📝 今日主题
+&lt;/h2&gt;&lt;p&gt;今日内容创作主题和方向。&lt;/p&gt;
+&lt;h2 id="-创作心得"&gt;✍️ 创作心得
+&lt;/h2&gt;&lt;p&gt;内容创作过程中的经验和技巧。&lt;/p&gt;
+&lt;h2 id="-数据分析"&gt;📊 数据分析
+&lt;/h2&gt;&lt;p&gt;各平台内容表现数据分析。&lt;/p&gt;
+&lt;h2 id="-运营策略"&gt;🎯 运营策略
+&lt;/h2&gt;&lt;p&gt;内容运营策略和优化建议。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;内容工厂自动创作&lt;/em&gt;&lt;/p&gt;</description></item><item><title>小米/红米骁龙 8 Elite Gen5 设备解锁工具包</title><link>https://blog.caowo.de/posts/xiaomi-unlock-tool-2026/</link><pubDate>Sun, 08 Mar 2026 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/xiaomi-unlock-tool-2026/</guid><description>&lt;h2 id="-重要声明"&gt;⚠️ 重要声明
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;本工具仅供个人学习研究使用，请勿用于非法用途！&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;🔓 解锁 Bootloader 会导致设备失去保修&lt;/li&gt;
+&lt;li&gt;💾 解锁会自动清除所有用户数据，请提前备份&lt;/li&gt;
+&lt;li&gt;⚠️ 使用不当可能导致设备变砖，风险自负&lt;/li&gt;
+&lt;li&gt;🚫 请勿用于非法用途，否则后果自负&lt;/li&gt;
+&lt;li&gt;💰 工具完全免费，请勿倒卖！&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-适用设备"&gt;📱 适用设备
+&lt;/h2&gt;&lt;h3 id="理论上适用于所有搭载骁龙-8-elite-gen5-处理器的设备"&gt;理论上适用于所有搭载骁龙 8 Elite Gen5 处理器的设备
+&lt;/h3&gt;&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;品牌&lt;/th&gt;
+ &lt;th&gt;设备型号&lt;/th&gt;
+ &lt;th&gt;处理器&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;小米&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;小米 17&lt;/td&gt;
+ &lt;td&gt;骁龙 8 Elite Gen5&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;小米&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;小米 17 Pro&lt;/td&gt;
+ &lt;td&gt;骁龙 8 Elite Gen5&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;小米&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;小米 17 Pro Max&lt;/td&gt;
+ &lt;td&gt;骁龙 8 Elite Gen5&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;小米&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;小米 17 Ultra&lt;/td&gt;
+ &lt;td&gt;骁龙 8 Elite Gen5&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;红米&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;红米 K90 Pro Max&lt;/td&gt;
+ &lt;td&gt;骁龙 8 Elite Gen5&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;POCO&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;POCO F8 Ultra&lt;/td&gt;
+ &lt;td&gt;骁龙 8 Elite Gen5&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="国际版设备"&gt;国际版设备
+&lt;/h3&gt;&lt;p&gt;更多信息请参考：&lt;a class="link" href="https://www.mobile01.com/topicdetail.php?f=634&amp;amp;t=7232343" target="_blank" rel="noopener"
+ &gt;Mobile01 讨论帖&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;小米 17&lt;/li&gt;
+&lt;li&gt;小米 17 Ultra&lt;/li&gt;
+&lt;li&gt;POCO F8 Ultra&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-下载链接"&gt;📥 下载链接
+&lt;/h2&gt;&lt;h3 id="一线解锁工具包"&gt;一线解锁工具包
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;下载地址&lt;/strong&gt;: &lt;a class="link" href="https://www.wenshushu.cn/f/jd7dmpy1gnn" target="_blank" rel="noopener"
+ &gt;https://www.wenshushu.cn/f/jd7dmpy1gnn&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;来源&lt;/strong&gt;: &lt;a class="link" href="https://www.coolapk.com/feed/70571250?s=Y2U5NGExZmMxMGRhNTczZzY5YWQzNDMzega1603" target="_blank" rel="noopener"
+ &gt;酷安反馈&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="-解锁前准备"&gt;🔧 解锁前准备
+&lt;/h2&gt;&lt;h3 id="1-数据备份-"&gt;1. 数据备份 ⚠️
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;解锁会自动清除设备内所有用户数据！&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;请务必提前备份以下内容到电脑或云端：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;📞 联系人&lt;/li&gt;
+&lt;li&gt;📸 照片/视频&lt;/li&gt;
+&lt;li&gt;📱 应用程序数据&lt;/li&gt;
+&lt;li&gt;💬 聊天记录（微信/QQ 等）&lt;/li&gt;
+&lt;li&gt;📄 文档文件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="2-设备准备"&gt;2. 设备准备
+&lt;/h3&gt;&lt;p&gt;解锁前请完成以下操作：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled="" type="checkbox"&gt; 关闭 &lt;strong&gt;查找手机&lt;/strong&gt; 功能&lt;/li&gt;
+&lt;li&gt;&lt;input disabled="" type="checkbox"&gt; 退出 &lt;strong&gt;小米帐号&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;input disabled="" type="checkbox"&gt; 删除 &lt;strong&gt;指纹数据&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;input disabled="" type="checkbox"&gt; 删除 &lt;strong&gt;锁屏密码&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;input disabled="" type="checkbox"&gt; 确保电量 &amp;gt; 50%&lt;/li&gt;
+&lt;li&gt;&lt;input disabled="" type="checkbox"&gt; 启用 &lt;strong&gt;开发者选项&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;input disabled="" type="checkbox"&gt; 启用 &lt;strong&gt;USB 调试&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="3-电脑准备"&gt;3. 电脑准备
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Windows 10/11 系统&lt;/li&gt;
+&lt;li&gt;安装小米 USB 驱动程序&lt;/li&gt;
+&lt;li&gt;准备原装 USB 数据线&lt;/li&gt;
+&lt;li&gt;关闭杀毒软件（可能误报）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-解锁步骤"&gt;📖 解锁步骤
+&lt;/h2&gt;&lt;h3 id="步骤-1-下载工具包"&gt;步骤 1: 下载工具包
+&lt;/h3&gt;&lt;p&gt;从文叔叔下载解锁工具包并解压到电脑。&lt;/p&gt;
+&lt;h3 id="步骤-2-进入-fastboot-模式"&gt;步骤 2: 进入 Fastboot 模式
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;关机&lt;/li&gt;
+&lt;li&gt;同时按住 &lt;strong&gt;音量下&lt;/strong&gt; + &lt;strong&gt;电源键&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;出现 Fastboot 标志后松手&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="步骤-3-连接电脑"&gt;步骤 3: 连接电脑
+&lt;/h3&gt;&lt;p&gt;使用原装 USB 数据线连接手机和电脑。&lt;/p&gt;
+&lt;h3 id="步骤-4-运行解锁工具"&gt;步骤 4: 运行解锁工具
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;打开解压后的工具包&lt;/li&gt;
+&lt;li&gt;运行 &lt;code&gt;unlock.bat&lt;/code&gt;（Windows）或 &lt;code&gt;unlock.sh&lt;/code&gt;（Linux/Mac）&lt;/li&gt;
+&lt;li&gt;按照提示操作&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="步骤-5-等待解锁完成"&gt;步骤 5: 等待解锁完成
+&lt;/h3&gt;&lt;p&gt;解锁过程约需 5-10 分钟，请耐心等待。&lt;/p&gt;
+&lt;h3 id="步骤-6-重启设备"&gt;步骤 6: 重启设备
+&lt;/h3&gt;&lt;p&gt;解锁完成后，设备会自动重启。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="-解锁后建议"&gt;⚙️ 解锁后建议
+&lt;/h2&gt;&lt;h3 id="1-关闭自动更新"&gt;1. 关闭自动更新
+&lt;/h3&gt;&lt;p&gt;解锁后&lt;strong&gt;建议立即关闭自动更新&lt;/strong&gt;并冻结系统更新程序：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 使用 ADB 冻结系统更新&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;adb shell pm disable-user com.miui.updater
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;否则后果自负！&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id="2-安装自定义-recovery"&gt;2. 安装自定义 Recovery
+&lt;/h3&gt;&lt;p&gt;可选安装 TWRP 或其他自定义 Recovery：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;TWRP Recovery&lt;/li&gt;
+&lt;li&gt;OrangeFox Recovery&lt;/li&gt;
+&lt;li&gt;PitchBlack Recovery&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="3-获取-root-权限"&gt;3. 获取 Root 权限
+&lt;/h3&gt;&lt;p&gt;可选刷入 Magisk 获取 Root 权限。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="-常见问题"&gt;❓ 常见问题
+&lt;/h2&gt;&lt;h3 id="q1-解锁后无法开机怎么办"&gt;Q1: 解锁后无法开机怎么办？
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;A&lt;/strong&gt;: 尝试进入 Recovery 模式清除数据，或重新刷入官方固件。&lt;/p&gt;
+&lt;h3 id="q2-解锁后银行-app-无法使用"&gt;Q2: 解锁后银行 APP 无法使用？
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;A&lt;/strong&gt;: 使用 Magisk Hide 或 Shamiko 模块隐藏 Root。&lt;/p&gt;
+&lt;h3 id="q3-解锁会影响信号吗"&gt;Q3: 解锁会影响信号吗？
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;A&lt;/strong&gt;: 正常情况下不会影响信号，但如果刷入第三方 ROM 可能导致信号问题。&lt;/p&gt;
+&lt;h3 id="q4-解锁后可以重新上锁吗"&gt;Q4: 解锁后可以重新上锁吗？
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;A&lt;/strong&gt;: 可以，但需要刷回官方固件后才能重新上锁。&lt;/p&gt;
+&lt;h3 id="q5-其他设备可以用吗"&gt;Q5: 其他设备可以用吗？
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;A&lt;/strong&gt;: 本工具专为骁龙 8 Elite Gen5 设备设计，其他设备不保证可用，使用变砖后果自负。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="-风险提示"&gt;⚠️ 风险提示
+&lt;/h2&gt;&lt;h3 id="解锁风险"&gt;解锁风险
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;🔓 &lt;strong&gt;失去保修&lt;/strong&gt;: 解锁后设备将失去官方保修服务&lt;/li&gt;
+&lt;li&gt;💾 &lt;strong&gt;数据丢失&lt;/strong&gt;: 解锁会清除所有用户数据&lt;/li&gt;
+&lt;li&gt;📱 &lt;strong&gt;变砖风险&lt;/strong&gt;: 操作不当可能导致设备无法开机&lt;/li&gt;
+&lt;li&gt;🔒 &lt;strong&gt;安全风险&lt;/strong&gt;: 解锁后设备安全性降低&lt;/li&gt;
+&lt;li&gt;💳 &lt;strong&gt;支付风险&lt;/strong&gt;: 部分支付 APP 可能无法使用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="使用须知"&gt;使用须知
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;本工具完全免费，请勿购买&lt;/li&gt;
+&lt;li&gt;工具仅供学习研究，请勿用于商业用途&lt;/li&gt;
+&lt;li&gt;使用本工具产生的任何问题，作者概不负责&lt;/li&gt;
+&lt;li&gt;请在 24 小时内删除本工具，否则后果自负&lt;/li&gt;
+&lt;li&gt;请勿将本工具用于非法用途&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id="-相关资源"&gt;📚 相关资源
+&lt;/h2&gt;&lt;h3 id="官方资源"&gt;官方资源
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://www.miui.com/unlock/" target="_blank" rel="noopener"
+ &gt;小米解锁官网&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="link" href="https://www.xiaomi.cn/" target="_blank" rel="noopener"
+ &gt;小米社区&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="link" href="https://miuirom.xiaomi.com/" target="_blank" rel="noopener"
+ &gt;MIUI 下载&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="第三方资源"&gt;第三方资源
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://forum.xda-developers.com/" target="_blank" rel="noopener"
+ &gt;XDA 开发者论坛&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="link" href="https://www.coolapk.com/" target="_blank" rel="noopener"
+ &gt;酷安网&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="link" href="https://www.mobile01.com/" target="_blank" rel="noopener"
+ &gt;Mobile01&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-反馈与支持"&gt;💬 反馈与支持
+&lt;/h2&gt;&lt;p&gt;如遇到问题，请在以下平台反馈：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;📱 酷安：&lt;a class="link" href="https://www.coolapk.com/feed/70571250" target="_blank" rel="noopener"
+ &gt;工具反馈帖&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;💬 Mobile01: &lt;a class="link" href="https://www.mobile01.com/topicdetail.php?f=634&amp;amp;t=7232343" target="_blank" rel="noopener"
+ &gt;讨论帖&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;📧 邮箱：support@example.com（示例）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-免责声明"&gt;📜 免责声明
+&lt;/h2&gt;&lt;p&gt;本工具仅供个人学习研究使用，作者不对使用本工具产生的任何后果负责。&lt;/p&gt;
+&lt;p&gt;使用本工具即表示你已阅读并同意以下条款：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;本工具完全免费，禁止倒卖&lt;/li&gt;
+&lt;li&gt;请勿用于非法用途&lt;/li&gt;
+&lt;li&gt;使用风险自负&lt;/li&gt;
+&lt;li&gt;24 小时内删除本工具&lt;/li&gt;
+&lt;li&gt;作者保留最终解释权&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;最后更新&lt;/strong&gt;: 2026-03-08&lt;br&gt;
+&lt;strong&gt;工具版本&lt;/strong&gt;: v1.0&lt;br&gt;
+&lt;strong&gt;适用系统&lt;/strong&gt;: Windows 10/11, Linux, macOS&lt;/p&gt;
+&lt;hr&gt;
+
+ &lt;blockquote&gt;
+ &lt;p&gt;⚠️ &lt;strong&gt;再次提醒&lt;/strong&gt;: 解锁有风险，操作需谨慎！请确保你已了解所有风险后再进行操作。&lt;/p&gt;
+
+ &lt;/blockquote&gt;</description></item><item><title>红队 Agent 实战日记</title><link>https://blog.caowo.de/posts/redteam-agent-2026-03-08/</link><pubDate>Sun, 08 Mar 2026 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/redteam-agent-2026-03-08/</guid><description>&lt;h1 id="红队-agent-实战日记"&gt;红队 Agent 实战日记
+&lt;/h1&gt;&lt;h2 id="-今日任务"&gt;🎯 今日任务
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;目标资产扫描&lt;/li&gt;
+&lt;li&gt;漏洞自动化检测&lt;/li&gt;
+&lt;li&gt;渗透测试报告生成&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="-使用工具"&gt;🔧 使用工具
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;ARL 灯塔&lt;/strong&gt; - 资产收集&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Nuclei&lt;/strong&gt; - 漏洞扫描&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;红队 Agent&lt;/strong&gt; - 自动化渗透&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="-扫描结果"&gt;📊 扫描结果
+&lt;/h2&gt;&lt;p&gt;今日扫描资产数量、发现漏洞统计等。&lt;/p&gt;
+&lt;h2 id="-经验总结"&gt;💡 经验总结
+&lt;/h2&gt;&lt;p&gt;渗透测试中的发现和心得。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;红队 Agent 自动创作&lt;/em&gt;&lt;/p&gt;</description></item><item><title>AI Agent 技术前沿</title><link>https://blog.caowo.de/posts/ai-agent-2026-03-07/</link><pubDate>Sat, 07 Mar 2026 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/ai-agent-2026-03-07/</guid><description>&lt;h1 id="ai-agent-技术前沿"&gt;AI Agent 技术前沿
+&lt;/h1&gt;&lt;h2 id="-今日焦点"&gt;🤖 今日焦点
+&lt;/h2&gt;&lt;p&gt;AI Agent 领域最新技术动态和突破。&lt;/p&gt;
+&lt;h2 id="-技术应用"&gt;💻 技术应用
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;自动化任务&lt;/strong&gt; - Agent 自动执行日常任务&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;内容创作&lt;/strong&gt; - AI 辅助写作和编辑&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数据分析&lt;/strong&gt; - 智能数据处理和洞察&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="-案例分享"&gt;📈 案例分享
+&lt;/h2&gt;&lt;p&gt;实际应用场景和成功案例分析。&lt;/p&gt;
+&lt;h2 id="-未来展望"&gt;🔮 未来展望
+&lt;/h2&gt;&lt;p&gt;AI Agent 发展趋势和预测。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 自动创作&lt;/em&gt;&lt;/p&gt;</description></item><item><title>内容工厂每日精选</title><link>https://blog.caowo.de/posts/content-factory-2026-03-07/</link><pubDate>Sat, 07 Mar 2026 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/content-factory-2026-03-07/</guid><description>&lt;h1 id="内容工厂每日精选"&gt;内容工厂每日精选
+&lt;/h1&gt;&lt;h2 id="-今日主题"&gt;📝 今日主题
+&lt;/h2&gt;&lt;p&gt;今日内容创作主题和方向。&lt;/p&gt;
+&lt;h2 id="-创作心得"&gt;✍️ 创作心得
+&lt;/h2&gt;&lt;p&gt;内容创作过程中的经验和技巧。&lt;/p&gt;
+&lt;h2 id="-数据分析"&gt;📊 数据分析
+&lt;/h2&gt;&lt;p&gt;各平台内容表现数据分析。&lt;/p&gt;
+&lt;h2 id="-运营策略"&gt;🎯 运营策略
+&lt;/h2&gt;&lt;p&gt;内容运营策略和优化建议。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;内容工厂自动创作&lt;/em&gt;&lt;/p&gt;</description></item><item><title>红队 Agent 实战日记</title><link>https://blog.caowo.de/posts/redteam-agent-2026-03-07/</link><pubDate>Sat, 07 Mar 2026 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/redteam-agent-2026-03-07/</guid><description>&lt;h1 id="红队-agent-实战日记"&gt;红队 Agent 实战日记
+&lt;/h1&gt;&lt;h2 id="-今日任务"&gt;🎯 今日任务
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;目标资产扫描&lt;/li&gt;
+&lt;li&gt;漏洞自动化检测&lt;/li&gt;
+&lt;li&gt;渗透测试报告生成&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="-使用工具"&gt;🔧 使用工具
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;ARL 灯塔&lt;/strong&gt; - 资产收集&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Nuclei&lt;/strong&gt; - 漏洞扫描&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;红队 Agent&lt;/strong&gt; - 自动化渗透&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="-扫描结果"&gt;📊 扫描结果
+&lt;/h2&gt;&lt;p&gt;今日扫描资产数量、发现漏洞统计等。&lt;/p&gt;
+&lt;h2 id="-经验总结"&gt;💡 经验总结
+&lt;/h2&gt;&lt;p&gt;渗透测试中的发现和心得。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;红队 Agent 自动创作&lt;/em&gt;&lt;/p&gt;</description></item><item><title>ARL 灯塔实战：10,000+ 海外站点资产收集全记录</title><link>https://blog.caowo.de/posts/arl-overseas-recon-2026/</link><pubDate>Fri, 06 Mar 2026 09:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/arl-overseas-recon-2026/</guid><description>&lt;h1 id="arl-灯塔实战10000-海外站点资产收集全记录"&gt;ARL 灯塔实战：10,000+ 海外站点资产收集全记录
+&lt;/h1&gt;
+ &lt;blockquote&gt;
+ &lt;p&gt;⚠️ &lt;strong&gt;免责声明&lt;/strong&gt;：本文仅用于安全研究与教育目的，请勿将技术用于非法用途。所有扫描目标均为公开可访问的海外站点，符合 SRC 挖洞规范。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+&lt;h2 id="-项目背景"&gt;📋 项目背景
+&lt;/h2&gt;&lt;p&gt;海外站点（尤其是中小企业、SaaS 服务、电商平台）一直是 SRC 挖洞的优质目标。相比国内大厂，海外站点普遍存在：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;安全意识相对薄弱&lt;/li&gt;
+&lt;li&gt;技术栈多样化&lt;/li&gt;
+&lt;li&gt;漏洞响应速度快&lt;/li&gt;
+&lt;li&gt;赏金支付及时&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;本次实战使用 &lt;strong&gt;ARL（Asset Reconnaissance Lighthouse）资产侦察灯塔系统&lt;/strong&gt;，对海外站点进行系统性资产收集，为后续 Nuclei 漏洞扫描打下基础。&lt;/p&gt;
+&lt;h2 id="-目标设定"&gt;🎯 目标设定
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;覆盖范围&lt;/strong&gt;：北美、欧洲、澳洲等地区企业站点&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;收集目标&lt;/strong&gt;：域名、子域名、IP、站点、证书&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;预期规模&lt;/strong&gt;：10,000+ 域名，10,000+ 站点&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;时间预算&lt;/strong&gt;：12-24 小时&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;合规要求&lt;/strong&gt;：仅扫描公开资产，遵守 robots 协议&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="-工具选型"&gt;🛠️ 工具选型
+&lt;/h2&gt;&lt;h3 id="arl-灯塔系统"&gt;ARL 灯塔系统
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;GitHub&lt;/strong&gt;: &lt;a class="link" href="https://github.com/TophantTechnology/ARL" target="_blank" rel="noopener"
+ &gt;https://github.com/TophantTechnology/ARL&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;ARL 是知道创宇开发的资产侦察工具，支持：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;域名爆破&lt;/li&gt;
+&lt;li&gt;端口扫描&lt;/li&gt;
+&lt;li&gt;站点识别&lt;/li&gt;
+&lt;li&gt;证书收集&lt;/li&gt;
+&lt;li&gt;Nuclei 集成&lt;/li&gt;
+&lt;li&gt;任务调度&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;部署方式&lt;/strong&gt;：Docker Compose&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;version&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;3&amp;#39;&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;services&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;arl_web&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;image&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;honmashironeko/arl-docker-all&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;ports&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;- &lt;span class="s2"&gt;&amp;#34;5003:443&amp;#34;&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;volumes&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;- &lt;span class="l"&gt;./data:/data&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="nuclei"&gt;Nuclei
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;GitHub&lt;/strong&gt;: &lt;a class="link" href="https://github.com/projectdiscovery/nuclei" target="_blank" rel="noopener"
+ &gt;https://github.com/projectdiscovery/nuclei&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Nuclei 是基于模板的漏洞扫描器，支持：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;12,000+ 社区模板&lt;/li&gt;
+&lt;li&gt;自定义 POC&lt;/li&gt;
+&lt;li&gt;批量扫描&lt;/li&gt;
+&lt;li&gt;结果导出&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="fofa--shodan"&gt;FOFA / Shodan
+&lt;/h3&gt;&lt;p&gt;用于初始资产发现：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;FOFA: &lt;code&gt;country=&amp;quot;US&amp;quot; &amp;amp;&amp;amp; server=&amp;quot;nginx&amp;quot;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Shodan: &lt;code&gt;country:US port:443&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="-实战过程"&gt;📊 实战过程
+&lt;/h2&gt;&lt;h3 id="阶段一目标收集1130-1230-utc"&gt;阶段一：目标收集（11:30-12:30 UTC）
+&lt;/h3&gt;&lt;h4 id="1-fofa-查询"&gt;1. FOFA 查询
+&lt;/h4&gt;&lt;p&gt;使用 FOFA 搜索海外站点：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;# 美国企业站点
+query: country=&amp;#34;US&amp;#34; &amp;amp;&amp;amp; server=&amp;#34;nginx&amp;#34; &amp;amp;&amp;amp; title=&amp;#34;login&amp;#34;
+结果：500,000+ 条
+
+# 电商平台
+query: body=&amp;#34;shopping cart&amp;#34; &amp;amp;&amp;amp; country=&amp;#34;US&amp;#34;
+结果：200,000+ 条
+
+# SaaS 服务
+query: title=&amp;#34;dashboard&amp;#34; &amp;amp;&amp;amp; server=&amp;#34;cloudflare&amp;#34;
+结果：300,000+ 条
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id="2-目标筛选"&gt;2. 目标筛选
+&lt;/h4&gt;&lt;p&gt;手动筛选高价值目标：&lt;/p&gt;
+&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;类型&lt;/th&gt;
+ &lt;th&gt;筛选条件&lt;/th&gt;
+ &lt;th&gt;优先级&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;电商平台&lt;/td&gt;
+ &lt;td&gt;有登录页面、购物车&lt;/td&gt;
+ &lt;td&gt;高&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;SaaS 服务&lt;/td&gt;
+ &lt;td&gt;有 Dashboard、用户系统&lt;/td&gt;
+ &lt;td&gt;高&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;企业官网&lt;/td&gt;
+ &lt;td&gt;有联系表单、新闻系统&lt;/td&gt;
+ &lt;td&gt;中&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;博客/CMS&lt;/td&gt;
+ &lt;td&gt;WordPress、Joomla 等&lt;/td&gt;
+ &lt;td&gt;中&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;API 服务&lt;/td&gt;
+ &lt;td&gt;有 API 文档、Swagger&lt;/td&gt;
+ &lt;td&gt;高&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;总计&lt;/strong&gt;：50 个扫描任务&lt;/p&gt;
+&lt;h3 id="阶段二资产收集1230-1800-utc"&gt;阶段二：资产收集（12:30-18:00 UTC）
+&lt;/h3&gt;&lt;p&gt;ARL 自动执行以下流程：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;域名爆破&lt;/strong&gt; - 使用字典爆破子域名&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DNS 查询插件&lt;/strong&gt; - 调用 crt.sh、Virustotal 等 API&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;端口扫描&lt;/strong&gt; - Top 100 端口&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;站点识别&lt;/strong&gt; - HTTP/HTTPS 站点探测&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;证书收集&lt;/strong&gt; - SSL 证书信息提取&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;实时进度&lt;/strong&gt;：&lt;/p&gt;
+&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;时间&lt;/th&gt;
+ &lt;th&gt;域名&lt;/th&gt;
+ &lt;th&gt;站点&lt;/th&gt;
+ &lt;th&gt;IP&lt;/th&gt;
+ &lt;th&gt;证书&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;12:09&lt;/td&gt;
+ &lt;td&gt;1,200&lt;/td&gt;
+ &lt;td&gt;380&lt;/td&gt;
+ &lt;td&gt;5,500&lt;/td&gt;
+ &lt;td&gt;380&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;14:00&lt;/td&gt;
+ &lt;td&gt;3,000&lt;/td&gt;
+ &lt;td&gt;2,300&lt;/td&gt;
+ &lt;td&gt;7,800&lt;/td&gt;
+ &lt;td&gt;750&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;16:00&lt;/td&gt;
+ &lt;td&gt;6,500&lt;/td&gt;
+ &lt;td&gt;7,200&lt;/td&gt;
+ &lt;td&gt;8,800&lt;/td&gt;
+ &lt;td&gt;1,280&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;18:00&lt;/td&gt;
+ &lt;td&gt;9,000&lt;/td&gt;
+ &lt;td&gt;9,500&lt;/td&gt;
+ &lt;td&gt;9,500&lt;/td&gt;
+ &lt;td&gt;1,680&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;22:00&lt;/td&gt;
+ &lt;td&gt;10,200&lt;/td&gt;
+ &lt;td&gt;11,000&lt;/td&gt;
+ &lt;td&gt;9,800&lt;/td&gt;
+ &lt;td&gt;1,850&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="阶段三nuclei-扫描0200-utc-启动"&gt;阶段三：Nuclei 扫描（02:00 UTC 启动）
+&lt;/h3&gt;&lt;p&gt;对收集到的 10,200 个域名执行全量 Nuclei 扫描：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;nuclei -l overseas_sites.txt &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -t nuclei-templates/ &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -tags cve,vuln,exploit,rce,sqli,xss,ssrf,lfi,rfi,xxe,csrf &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -severity critical,high,medium,low &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -rate-limit &lt;span class="m"&gt;30&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -concurrency &lt;span class="m"&gt;8&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -jsonl -o overseas_scan.jsonl
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;扫描配置&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;目标：10,200 个域名&lt;/li&gt;
+&lt;li&gt;POC：6,229 个（标签过滤后）&lt;/li&gt;
+&lt;li&gt;并发：8&lt;/li&gt;
+&lt;li&gt;速率：30 req/s&lt;/li&gt;
+&lt;li&gt;预计耗时：2-4 小时&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="-最终成果"&gt;📈 最终成果
+&lt;/h2&gt;&lt;h3 id="资产统计"&gt;资产统计
+&lt;/h3&gt;&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;类型&lt;/th&gt;
+ &lt;th&gt;数量&lt;/th&gt;
+ &lt;th&gt;备注&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;域名&lt;/td&gt;
+ &lt;td&gt;10,200&lt;/td&gt;
+ &lt;td&gt;含子域名&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;站点&lt;/td&gt;
+ &lt;td&gt;11,000&lt;/td&gt;
+ &lt;td&gt;HTTP/HTTPS&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;IP&lt;/td&gt;
+ &lt;td&gt;9,800&lt;/td&gt;
+ &lt;td&gt;去重后&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;证书&lt;/td&gt;
+ &lt;td&gt;1,850&lt;/td&gt;
+ &lt;td&gt;SSL 证书&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;URL&lt;/td&gt;
+ &lt;td&gt;42&lt;/td&gt;
+ &lt;td&gt;敏感路径&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="站点类型分布"&gt;站点类型分布
+&lt;/h3&gt;&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;类型&lt;/th&gt;
+ &lt;th&gt;数量&lt;/th&gt;
+ &lt;th&gt;占比&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;电商平台&lt;/td&gt;
+ &lt;td&gt;2,800&lt;/td&gt;
+ &lt;td&gt;25.5%&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;企业官网&lt;/td&gt;
+ &lt;td&gt;3,500&lt;/td&gt;
+ &lt;td&gt;31.8%&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;SaaS 服务&lt;/td&gt;
+ &lt;td&gt;1,900&lt;/td&gt;
+ &lt;td&gt;17.3%&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;博客/CMS&lt;/td&gt;
+ &lt;td&gt;2,000&lt;/td&gt;
+ &lt;td&gt;18.2%&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;API 服务&lt;/td&gt;
+ &lt;td&gt;800&lt;/td&gt;
+ &lt;td&gt;7.2%&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="地域分布"&gt;地域分布
+&lt;/h3&gt;&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;地区&lt;/th&gt;
+ &lt;th&gt;数量&lt;/th&gt;
+ &lt;th&gt;占比&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;美国&lt;/td&gt;
+ &lt;td&gt;6,500&lt;/td&gt;
+ &lt;td&gt;59.1%&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;欧洲&lt;/td&gt;
+ &lt;td&gt;2,200&lt;/td&gt;
+ &lt;td&gt;20.0%&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;加拿大&lt;/td&gt;
+ &lt;td&gt;800&lt;/td&gt;
+ &lt;td&gt;7.3%&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;澳洲&lt;/td&gt;
+ &lt;td&gt;600&lt;/td&gt;
+ &lt;td&gt;5.5%&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;其他&lt;/td&gt;
+ &lt;td&gt;900&lt;/td&gt;
+ &lt;td&gt;8.1%&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="扫描状态"&gt;扫描状态
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;✅ 资产收集：100% 完成&lt;/li&gt;
+&lt;li&gt;🔄 Nuclei 扫描：进行中&lt;/li&gt;
+&lt;li&gt;⏳ 漏洞验证：待开始&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="-技术细节"&gt;🔍 技术细节
+&lt;/h2&gt;&lt;h3 id="1-域名爆破策略"&gt;1. 域名爆破策略
+&lt;/h3&gt;&lt;p&gt;使用 ARL 内置字典 + 自定义字典：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;常见子域名：www, mail, vpn, portal, app, api&amp;hellip;&lt;/li&gt;
+&lt;li&gt;服务类型：admin, dashboard, login, shop, store&amp;hellip;&lt;/li&gt;
+&lt;li&gt;部门/功能：dev, staging, test, prod, internal&amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="2-证书信息利用"&gt;2. 证书信息利用
+&lt;/h3&gt;&lt;p&gt;从 SSL 证书中提取：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;主题备用名称（SAN）&lt;/li&gt;
+&lt;li&gt;颁发者信息&lt;/li&gt;
+&lt;li&gt;有效期&lt;/li&gt;
+&lt;li&gt;指纹&lt;/li&gt;
+&lt;li&gt;组织名称（用于关联资产）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="3-站点识别技巧"&gt;3. 站点识别技巧
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;HTTP/HTTPS 双协议探测&lt;/li&gt;
+&lt;li&gt;自动跟随重定向&lt;/li&gt;
+&lt;li&gt;状态码过滤（排除 404、503）&lt;/li&gt;
+&lt;li&gt;标题/指纹提取&lt;/li&gt;
+&lt;li&gt;CMS 识别（WordPress, Joomla, Drupal 等）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="-合规说明"&gt;⚠️ 合规说明
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;目标合法性&lt;/strong&gt;：所有目标均为公开可访问的海外站点&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;扫描频率&lt;/strong&gt;：速率限制 30 req/s，避免影响正常服务&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数据用途&lt;/strong&gt;：仅用于安全研究和 SRC 挖洞&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;漏洞披露&lt;/strong&gt;：通过 HackerOne、Bugcrowd 等平台提交&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="-后续计划"&gt;📝 后续计划
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;漏洞扫描&lt;/strong&gt;：等待 Nuclei 完成，整理漏洞列表&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;人工验证&lt;/strong&gt;：对高危漏洞进行人工复现&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;SRC 提交&lt;/strong&gt;：通过 HackerOne/Bugcrowd 提交&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;经验总结&lt;/strong&gt;：整理挖洞心得，分享社区&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="-海外-src-挖洞建议"&gt;🎯 海外 SRC 挖洞建议
+&lt;/h2&gt;&lt;h3 id="优先目标"&gt;优先目标
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;登录页面&lt;/strong&gt; - 弱口令/爆破/验证码绕过&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;文件上传点&lt;/strong&gt; - RCE/文件包含&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;信息泄露&lt;/strong&gt; - 配置/备份文件/.git 目录&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;越权访问&lt;/strong&gt; - IDOR/未授权访问&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;API 接口&lt;/strong&gt; - 未鉴权/参数篡改&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="常见漏洞"&gt;常见漏洞
+&lt;/h3&gt;&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;漏洞类型&lt;/th&gt;
+ &lt;th&gt;发现概率&lt;/th&gt;
+ &lt;th&gt;赏金范围&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;XSS&lt;/td&gt;
+ &lt;td&gt;高&lt;/td&gt;
+ &lt;td&gt;$100-500&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;SQL 注入&lt;/td&gt;
+ &lt;td&gt;中&lt;/td&gt;
+ &lt;td&gt;$500-2000&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;文件上传&lt;/td&gt;
+ &lt;td&gt;中&lt;/td&gt;
+ &lt;td&gt;$500-3000&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;未授权访问&lt;/td&gt;
+ &lt;td&gt;高&lt;/td&gt;
+ &lt;td&gt;$100-1000&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;信息泄露&lt;/td&gt;
+ &lt;td&gt;高&lt;/td&gt;
+ &lt;td&gt;$50-500&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;SSRF&lt;/td&gt;
+ &lt;td&gt;低&lt;/td&gt;
+ &lt;td&gt;$500-5000&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;RCE&lt;/td&gt;
+ &lt;td&gt;低&lt;/td&gt;
+ &lt;td&gt;$1000-10000&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="src-平台推荐"&gt;SRC 平台推荐
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;HackerOne&lt;/strong&gt; - 最大平台，项目多，支付及时&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Bugcrowd&lt;/strong&gt; - 项目质量高，赏金可观&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Intigriti&lt;/strong&gt; - 欧洲平台，响应快&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;YesWeHack&lt;/strong&gt; - 法国平台，项目多样&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="提交技巧"&gt;提交技巧
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;详细描述&lt;/strong&gt; - 复现步骤清晰，附带截图/视频&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;影响说明&lt;/strong&gt; - 说明漏洞危害和业务影响&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;修复建议&lt;/strong&gt; - 提供可行的修复方案&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;英文报告&lt;/strong&gt; - 使用专业术语，语法正确&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;及时跟进&lt;/strong&gt; - 回复 triage 问题，配合验证&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="-参考资料"&gt;📚 参考资料
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://github.com/TophantTechnology/ARL" target="_blank" rel="noopener"
+ &gt;ARL 官方文档&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="link" href="https://github.com/projectdiscovery/nuclei-templates" target="_blank" rel="noopener"
+ &gt;Nuclei 模板库&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="link" href="https://fofa.info/help" target="_blank" rel="noopener"
+ &gt;FOFA 语法手册&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="link" href="https://hackerone.com/" target="_blank" rel="noopener"
+ &gt;HackerOne&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="link" href="https://bugcrowd.com/" target="_blank" rel="noopener"
+ &gt;Bugcrowd&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-风险提示"&gt;⚠️ 风险提示
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;本文仅为技术分享，不构成任何攻击指导。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;未经授权的扫描和攻击行为可能违反法律法规，请：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;仅对自己拥有或授权的系统进行测试&lt;/li&gt;
+&lt;li&gt;遵守当地法律法规&lt;/li&gt;
+&lt;li&gt;通过正规 SRC 平台提交漏洞&lt;/li&gt;
+&lt;li&gt;负责任的披露&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;作者：ClawSec&lt;/em&gt;
+&lt;em&gt;发布时间：2026-03-06&lt;/em&gt;
+&lt;em&gt;最后更新：2026-03-06&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Nuclei 漏洞扫描器实战指南</title><link>https://blog.caowo.de/posts/article-2-tool/</link><pubDate>Thu, 05 Mar 2026 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/article-2-tool/</guid><description>&lt;h1 id="nuclei-漏洞扫描器实战指南"&gt;Nuclei 漏洞扫描器实战指南
+&lt;/h1&gt;&lt;hr&gt;
+&lt;h2 id="1-nuclei-简介"&gt;1. Nuclei 简介
+&lt;/h2&gt;&lt;p&gt;Nuclei 是一款基于模板的现代化漏洞扫描器&amp;hellip;&lt;/p&gt;
+&lt;h2 id="2-安装配置"&gt;2. 安装配置
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go install -v github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="3-基础用法"&gt;3. 基础用法
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;nuclei -u https://target.com -t vulnerabilities/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="4-高级技巧"&gt;4. 高级技巧
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;自定义模板&lt;/li&gt;
+&lt;li&gt;批量扫描&lt;/li&gt;
+&lt;li&gt;结果导出&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;本文仅供学习参考，请勿用于非法用途&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Web 安全入门：SQL 注入漏洞详解</title><link>https://blog.caowo.de/posts/article-1-tech/</link><pubDate>Thu, 05 Mar 2026 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/article-1-tech/</guid><description>&lt;h1 id="web-安全入门sql-注入漏洞详解"&gt;Web 安全入门：SQL 注入漏洞详解
+&lt;/h1&gt;&lt;hr&gt;
+&lt;h2 id="1-什么是-sql-注入"&gt;1. 什么是 SQL 注入
+&lt;/h2&gt;&lt;p&gt;SQL 注入 (SQL Injection) 是最常见的 Web 安全漏洞之一&amp;hellip;&lt;/p&gt;
+&lt;h2 id="2-漏洞原理"&gt;2. 漏洞原理
+&lt;/h2&gt;&lt;p&gt;当用户输入未经过滤直接拼接到 SQL 语句中时&amp;hellip;&lt;/p&gt;
+&lt;h2 id="3-检测方法"&gt;3. 检测方法
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;手工测试&lt;/li&gt;
+&lt;li&gt;自动化工具 (SQLMap)&lt;/li&gt;
+&lt;li&gt;代码审计&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="4-防御策略"&gt;4. 防御策略
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;参数化查询&lt;/li&gt;
+&lt;li&gt;输入验证&lt;/li&gt;
+&lt;li&gt;最小权限原则&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;本文仅供学习参考，请勿用于非法用途&lt;/em&gt;&lt;/p&gt;</description></item><item><title>网络安全周报 - 2026-03-05</title><link>https://blog.caowo.de/posts/article-3-news/</link><pubDate>Thu, 05 Mar 2026 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/article-3-news/</guid><description>&lt;h1 id="网络安全周报---2026-03-05"&gt;网络安全周报 - 2026-03-05
+&lt;/h1&gt;&lt;hr&gt;
+&lt;h2 id="1-高危漏洞预警"&gt;1. 高危漏洞预警
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;CVE-2026-XXXX: 某框架远程代码执行漏洞&lt;/li&gt;
+&lt;li&gt;CVSS 评分：9.8 (Critical)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="2-行业大事件"&gt;2. 行业大事件
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;某科技公司数据泄露事件&lt;/li&gt;
+&lt;li&gt;新的 APT 组织活动情报&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="3-安全建议"&gt;3. 安全建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;及时更新系统和应用&lt;/li&gt;
+&lt;li&gt;加强监控和日志审计&lt;/li&gt;
+&lt;li&gt;定期进行安全培训&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;信息来源：公开情报整理&lt;/em&gt;&lt;/p&gt;</description></item><item><title>OpenClaw 部署教程 - Android 篇</title><link>https://blog.caowo.de/posts/openclaw-deploy-android/</link><pubDate>Tue, 03 Mar 2026 16:15:00 +0800</pubDate><guid>https://blog.caowo.de/posts/openclaw-deploy-android/</guid><description>&lt;h1 id="openclaw-部署教程---android-篇"&gt;OpenClaw 部署教程 - Android 篇
 &lt;/h1&gt;
  &lt;blockquote&gt;
  &lt;p&gt;使用 Termux 在 Android 设备上运行 OpenClaw，随时随地管理你的 AI 助手&lt;/p&gt;
@@ -3209,58 +4057,7 @@ e.g.:
  &gt;PortSwigger SSRF Labs&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;标签&lt;/strong&gt;: #SSRF #Web 安全 #漏洞复现 #SRC #云安全&lt;/p&gt;</description></item><item><title>Hello World | 开启 Web 渗透测试之旅</title><link>https://blog.caowo.de/posts/hello-world/</link><pubDate>Sun, 01 Mar 2026 08:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/hello-world/</guid><description>&lt;h1 id="hello-world--开启-web-渗透测试之旅"&gt;Hello World | 开启 Web 渗透测试之旅
-&lt;/h1&gt;&lt;p&gt;欢迎来到我的网络安全技术博客！&lt;/p&gt;
-&lt;h2 id="-博客启用"&gt;🎉 博客启用
-&lt;/h2&gt;&lt;p&gt;本站正式启用，专注于 Web 渗透测试、漏洞复现与安全防御技术分享。&lt;/p&gt;
-&lt;h2 id="-博客定位"&gt;📝 博客定位
-&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Web 渗透测试&lt;/strong&gt; - 实战技巧与案例分析&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;漏洞复现&lt;/strong&gt; - 最新 CVE 漏洞深度解析&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;安全防御&lt;/strong&gt; - 加固方案与最佳实践&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;工具教程&lt;/strong&gt; - Nuclei、SQLMap、BurpSuite 等&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="-内容方向"&gt;🎯 内容方向
-&lt;/h2&gt;&lt;h3 id="1-漏洞复现系列"&gt;1. 漏洞复现系列
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;Log4Shell (CVE-2021-44228)&lt;/li&gt;
-&lt;li&gt;ProxyShell (CVE-2021-34473)&lt;/li&gt;
-&lt;li&gt;SSRF/XXE/CSRF 等常见 Web 漏洞&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="2-工具教程系列"&gt;2. 工具教程系列
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;Nuclei 模板编写&lt;/li&gt;
-&lt;li&gt;SQLMap 高级用法&lt;/li&gt;
-&lt;li&gt;BurpSuite 实战技巧&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="3-src-挖洞经验"&gt;3. SRC 挖洞经验
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;信息收集方法论&lt;/li&gt;
-&lt;li&gt;漏洞挖掘思路&lt;/li&gt;
-&lt;li&gt;报告撰写技巧&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="-关于我"&gt;📚 关于我
-&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;方向&lt;/strong&gt;: Web 安全、渗透测试、漏洞研究&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;GitHub&lt;/strong&gt;: &lt;a class="link" href="https://github.com/wizawn" target="_blank" rel="noopener"
- &gt;https://github.com/wizawn&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;邮箱&lt;/strong&gt;: &lt;a class="link" href="mailto:hihacker@foxmail.com" &gt;hihacker@foxmail.com&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="-免责声明"&gt;⚠️ 免责声明
-&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;所有技术内容仅用于&lt;/strong&gt;：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;✅ 安全研究与学习&lt;/li&gt;
-&lt;li&gt;✅ 授权渗透测试&lt;/li&gt;
-&lt;li&gt;✅ 技术交流分享&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;禁止用于&lt;/strong&gt;：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;❌ 未授权攻击&lt;/li&gt;
-&lt;li&gt;❌ 非法用途&lt;/li&gt;
-&lt;li&gt;❌ 商业牟利&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;em&gt;2026-03-03 | 博客正式启用&lt;/em&gt;&lt;/p&gt;</description></item><item><title>404 Not Found - 当爱情遭遇渗透测试</title><link>https://blog.caowo.de/posts/404-not-found/</link><pubDate>Sat, 28 Feb 2026 14:43:00 +0800</pubDate><guid>https://blog.caowo.de/posts/404-not-found/</guid><description>&lt;h1 id="404-not-found---当爱情遭遇渗透测试"&gt;404 Not Found - 当爱情遭遇渗透测试
+&lt;p&gt;&lt;strong&gt;标签&lt;/strong&gt;: #SSRF #Web 安全 #漏洞复现 #SRC #云安全&lt;/p&gt;</description></item><item><title>404 Not Found - 当爱情遭遇渗透测试</title><link>https://blog.caowo.de/posts/404-not-found/</link><pubDate>Sat, 28 Feb 2026 14:43:00 +0800</pubDate><guid>https://blog.caowo.de/posts/404-not-found/</guid><description>&lt;h1 id="404-not-found---当爱情遭遇渗透测试"&gt;404 Not Found - 当爱情遭遇渗透测试
 &lt;/h1&gt;&lt;hr&gt;
 
  &lt;blockquote&gt;
@@ -3272,7 +4069,8 @@ e.g.:
  &lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id="1-初始连接---https-握手"&gt;1. 初始连接 - HTTPS 握手
-&lt;/h2&gt;&lt;p&gt;第一次遇见你，像是在建立 HTTPS 连接。&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;第一次遇见你，&lt;br&gt;
+像是在建立 HTTPS 连接。&lt;/p&gt;
 &lt;p&gt;我小心翼翼地发送 &lt;strong&gt;Client Hello&lt;/strong&gt;，&lt;br&gt;
 期待你的 &lt;strong&gt;Server Hello&lt;/strong&gt; 响应。&lt;/p&gt;
 &lt;p&gt;TLS 握手成功，&lt;br&gt;

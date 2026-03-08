@@ -8,6 +8,8 @@ contentDir = 'source'
   # 允许发布未来日期的文章
   enableFuturePages = true
   
+  description = '专注于 Web 渗透测试、漏洞复现与安全防御技术分享'
+  
   # 自动配图配置
   [params.cover]
     # 使用随机封面图（从 static/ 目录随机选择）
@@ -17,9 +19,6 @@ contentDir = 'source'
       "/static/tech-cover-1.jpg",
       "/static/blog-cover-default.jpg"
     ]
-
-[params]
-  description = '专注于 Web 渗透测试、漏洞复现与安全防御技术分享'
   mainSections = ['posts']
   defaultImage = '/blog-cover-default.jpg'
   

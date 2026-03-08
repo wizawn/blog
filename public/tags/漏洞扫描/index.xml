@@ -1,4 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>漏洞扫描 on 言零的博客</title><link>https://blog.caowo.de/tags/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F/</link><description>Recent content in 漏洞扫描 on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 01 Mar 2026 15:00:00 +0800</lastBuildDate><atom:link href="https://blog.caowo.de/tags/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F/index.xml" rel="self" type="application/rss+xml"/><item><title>Nuclei 漏洞扫描器从入门到精通</title><link>https://blog.caowo.de/posts/nuclei-tutorial/</link><pubDate>Sun, 01 Mar 2026 15:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/nuclei-tutorial/</guid><description>&lt;h1 id="nuclei-漏洞扫描器从入门到精通"&gt;Nuclei 漏洞扫描器从入门到精通
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>漏洞扫描 on 言零的博客</title><link>https://blog.caowo.de/tags/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F/</link><description>Recent content in 漏洞扫描 on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 05 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.caowo.de/tags/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F/index.xml" rel="self" type="application/rss+xml"/><item><title>Nuclei 漏洞扫描器实战指南</title><link>https://blog.caowo.de/posts/article-2-tool/</link><pubDate>Thu, 05 Mar 2026 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/article-2-tool/</guid><description>&lt;h1 id="nuclei-漏洞扫描器实战指南"&gt;Nuclei 漏洞扫描器实战指南
+&lt;/h1&gt;&lt;hr&gt;
+&lt;h2 id="1-nuclei-简介"&gt;1. Nuclei 简介
+&lt;/h2&gt;&lt;p&gt;Nuclei 是一款基于模板的现代化漏洞扫描器&amp;hellip;&lt;/p&gt;
+&lt;h2 id="2-安装配置"&gt;2. 安装配置
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go install -v github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="3-基础用法"&gt;3. 基础用法
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;nuclei -u https://target.com -t vulnerabilities/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="4-高级技巧"&gt;4. 高级技巧
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;自定义模板&lt;/li&gt;
+&lt;li&gt;批量扫描&lt;/li&gt;
+&lt;li&gt;结果导出&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;本文仅供学习参考，请勿用于非法用途&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Nuclei 漏洞扫描器从入门到精通</title><link>https://blog.caowo.de/posts/nuclei-tutorial/</link><pubDate>Sun, 01 Mar 2026 15:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/nuclei-tutorial/</guid><description>&lt;h1 id="nuclei-漏洞扫描器从入门到精通"&gt;Nuclei 漏洞扫描器从入门到精通
 &lt;/h1&gt;
  &lt;blockquote&gt;
  &lt;p&gt;&lt;strong&gt;工具名称：&lt;/strong&gt; Nuclei&lt;br&gt;

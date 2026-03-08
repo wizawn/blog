@@ -10,7 +10,8 @@
  &lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id="1-初始连接---https-握手"&gt;1. 初始连接 - HTTPS 握手
-&lt;/h2&gt;&lt;p&gt;第一次遇见你，像是在建立 HTTPS 连接。&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;第一次遇见你，&lt;br&gt;
+像是在建立 HTTPS 连接。&lt;/p&gt;
 &lt;p&gt;我小心翼翼地发送 &lt;strong&gt;Client Hello&lt;/strong&gt;，&lt;br&gt;
 期待你的 &lt;strong&gt;Server Hello&lt;/strong&gt; 响应。&lt;/p&gt;
 &lt;p&gt;TLS 握手成功，&lt;br&gt;

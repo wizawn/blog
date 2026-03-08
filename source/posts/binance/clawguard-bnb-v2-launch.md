@@ -1,14 +1,14 @@
 ---
-title: "ClawGuard-BNB 全新发布 - 币安安全交易 AI 助手"
-date: 2026-03-07T10:00:00+08:00
+title: "ClawGuard-BNB v2.1.0 全新发布 - 币安安全交易 AI 助手"
+date: 2026-03-07T11:00:00+08:00
 draft: false
-categories: ["币安广场", "项目发布"]
-tags: ["ClawGuard", "币安", "安全交易", "AI 助手", "量化交易"]
+categories: ["币安广场", "项目发布", "ClawGuard"]
+tags: ["ClawGuard", "币安", "安全交易", "AI 助手", "量化交易", "API 安全"]
 image: "/static/security-cover.jpg"
-description: "ClawGuard-BNB 全新发布 - 集成安全审计、实时监控、技术分析、自动策略的币安安全交易助手"
+description: "ClawGuard-BNB v2.1.0 全新发布 - 集成 12 项 API 安全审计、WebSocket 实时行情、技术分析、智能网格交易的币安安全交易助手"
 ---
 
-# ClawGuard-BNB 全新发布 - 币安安全交易 AI 助手
+# ClawGuard-BNB v2.1.0 全新发布 - 币安安全交易 AI 助手
 
 > ⚠️ **风险提示**：本文仅为个人经验分享，不构成任何投资建议。加密货币市场风险极高，请理性投资。
 
@@ -250,45 +250,6 @@ clawguard monitor --symbol BTCUSDT --alert-upper 70000 --alert-lower 60000
 ```
 
 当价格突破设定值时，会自动发送告警。
-
----
-
-## 📊 交易报告
-
-### 生成交易报告
-
-```bash
-clawguard report --days 30
-```
-
-报告包含：
-- 交易次数统计
-- 盈亏分析
-- 胜率计算
-- 最佳交易对
-- 风险提示
-
----
-
-## 🔧 技术架构
-
-```
-ClawGuard-BNB/
-├── clawguard.py          # 主程序入口
-├── interactive_menu.py   # 交互式菜单
-├── install.sh            # 安装脚本
-├── deploy.sh             # 部署脚本
-├── requirements.txt      # Python 依赖
-└── src/
-    ├── api/              # 币安 API 封装
-    ├── security/         # 安全审计模块
-    ├── risk/             # 风控引擎
-    ├── analysis/         # 技术分析
-    ├── strategies/       # 交易策略
-    ├── streaming/        # WebSocket 数据流
-    ├── utils/            # 工具函数
-    └── config/           # 配置管理
-```
 
 ---
 

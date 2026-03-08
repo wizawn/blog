@@ -36,7 +36,9 @@ def create_app():
     CORS(app, resources={r"/api/*": {"origins": "*"}})
 
     # 注册路由
-    from .routes import dashboard, trading, strategy, analysis, risk, settings
+    import sys
+    sys.path.insert(0, str(Path(__file__).parent))
+    from routes import dashboard, trading, strategy, analysis, risk, settings
 
     app.register_blueprint(dashboard.bp, url_prefix='/api/dashboard')
     app.register_blueprint(trading.bp, url_prefix='/api/trading')

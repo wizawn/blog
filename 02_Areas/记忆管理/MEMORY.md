@@ -93,7 +93,7 @@
 ### 8. Cloudflare Web Analytics
 - **状态**: ✅ 已配置 (2026-03-03 09:00 UTC)
 - **Token**: `SDZvDCIq-3er2UKht5fIrl2UvvIrJxi6hZVxBfIa`
-- **GitHub Token**: `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` (2026-03-04 更新)
+- **GitHub Token**: `[REDACTED]` (2026-03-04 更新)
 
 ### 12. ClawGuard BNB 项目 (2026-03-04 启动)
 - **状态**: 🔄 开发中

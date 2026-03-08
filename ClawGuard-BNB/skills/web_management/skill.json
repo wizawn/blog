@@ -1,0 +1,47 @@
+{
+  "name": "web_management",
+  "version": "1.0.0",
+  "description": "管理 Web 管理界面",
+  "author": "ClawGuard",
+  "actions": [
+    {
+      "name": "start",
+      "description": "启动 Web 管理界面",
+      "parameters": {},
+      "returns": {
+        "success": "boolean",
+        "message": "string",
+        "url": "string"
+      }
+    },
+    {
+      "name": "stop",
+      "description": "停止 Web 管理界面",
+      "parameters": {},
+      "returns": {
+        "success": "boolean",
+        "message": "string"
+      }
+    },
+    {
+      "name": "status",
+      "description": "检查 Web 界面状态",
+      "parameters": {},
+      "returns": {
+        "success": "boolean",
+        "status": "string",
+        "url": "string"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "description": "启动 Web 界面",
+      "code": "execute_skill('start', {})"
+    },
+    {
+      "description": "检查状态",
+      "code": "execute_skill('status', {})"
+    }
+  ]
+}

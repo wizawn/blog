@@ -1,0 +1,51 @@
+{
+  "name": "market_analysis",
+  "version": "1.0.0",
+  "description": "市场分析 Skill，提供技术指标分析、趋势判断等功能",
+  "author": "ClawGuard",
+  "actions": [
+    {
+      "name": "analyze_indicators",
+      "description": "分析技术指标",
+      "parameters": {
+        "symbol": {
+          "type": "string",
+          "required": true,
+          "description": "交易对符号"
+        },
+        "interval": {
+          "type": "string",
+          "required": false,
+          "description": "时间间隔，默认 1h"
+        }
+      }
+    },
+    {
+      "name": "analyze_trend",
+      "description": "分析趋势",
+      "parameters": {
+        "symbol": {
+          "type": "string",
+          "required": true,
+          "description": "交易对符号"
+        },
+        "interval": {
+          "type": "string",
+          "required": false,
+          "description": "时间间隔，默认 1h"
+        }
+      }
+    },
+    {
+      "name": "get_recommendation",
+      "description": "获取交易建议",
+      "parameters": {
+        "symbol": {
+          "type": "string",
+          "required": true,
+          "description": "交易对符号"
+        }
+      }
+    }
+  ]
+}

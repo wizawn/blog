@@ -1,0 +1,117 @@
+{
+  "name": "binance_spot",
+  "version": "1.0.0",
+  "description": "币安现货交易 Skill，提供价格查询、账户管理、订单操作等功能",
+  "author": "ClawGuard",
+  "actions": [
+    {
+      "name": "query_price",
+      "description": "查询交易对价格",
+      "parameters": {
+        "symbol": {
+          "type": "string",
+          "required": true,
+          "description": "交易对符号，如 BTCUSDT"
+        }
+      }
+    },
+    {
+      "name": "query_account",
+      "description": "查询账户信息",
+      "parameters": {}
+    },
+    {
+      "name": "query_balance",
+      "description": "查询账户余额",
+      "parameters": {
+        "asset": {
+          "type": "string",
+          "required": false,
+          "description": "资产符号，如 USDT"
+        }
+      }
+    },
+    {
+      "name": "place_order",
+      "description": "下单",
+      "parameters": {
+        "symbol": {
+          "type": "string",
+          "required": true,
+          "description": "交易对符号"
+        },
+        "side": {
+          "type": "string",
+          "required": true,
+          "description": "买卖方向：BUY 或 SELL"
+        },
+        "type": {
+          "type": "string",
+          "required": true,
+          "description": "订单类型：MARKET 或 LIMIT"
+        },
+        "quantity": {
+          "type": "number",
+          "required": true,
+          "description": "数量"
+        },
+        "price": {
+          "type": "number",
+          "required": false,
+          "description": "价格（LIMIT 订单必需）"
+        }
+      }
+    },
+    {
+      "name": "query_orders",
+      "description": "查询订单",
+      "parameters": {
+        "symbol": {
+          "type": "string",
+          "required": true,
+          "description": "交易对符号"
+        },
+        "limit": {
+          "type": "number",
+          "required": false,
+          "description": "数量限制"
+        }
+      }
+    },
+    {
+      "name": "cancel_order",
+      "description": "取消订单",
+      "parameters": {
+        "symbol": {
+          "type": "string",
+          "required": true,
+          "description": "交易对符号"
+        },
+        "order_id": {
+          "type": "number",
+          "required": true,
+          "description": "订单ID"
+        }
+      }
+    }
+  ],
+  "examples": [
+    {
+      "action": "query_price",
+      "params": {
+        "symbol": "BTCUSDT"
+      },
+      "description": "查询 BTC 价格"
+    },
+    {
+      "action": "place_order",
+      "params": {
+        "symbol": "BTCUSDT",
+        "side": "BUY",
+        "type": "MARKET",
+        "quantity": 0.001
+      },
+      "description": "市价买入 0.001 BTC"
+    }
+  ]
+}

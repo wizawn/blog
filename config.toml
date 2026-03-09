@@ -20,7 +20,7 @@ paginate = 10
       "/static/tech-cover-1.jpg",
       "/static/blog-cover-default.jpg"
     ]
-  mainSections = ['posts']
+  mainSections = ["post", "posts"]
   defaultImage = '/blog-cover-default.jpg'
   
   [params.header]

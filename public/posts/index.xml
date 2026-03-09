@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 言零的博客</title><link>https://blog.caowo.de/posts/</link><description>Recent content in Posts on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 08 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.caowo.de/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Hello World | 开启 Web 渗透测试之旅</title><link>https://blog.caowo.de/posts/hello-world/</link><pubDate>Sun, 01 Mar 2026 08:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/hello-world/</guid><description>&lt;h1 id="hello-world--开启-web-渗透测试之旅"&gt;Hello World | 开启 Web 渗透测试之旅
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 言零的博客</title><link>https://blog.caowo.de/posts/</link><description>Recent content in Posts on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 09 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.caowo.de/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Hello World | 开启 Web 渗透测试之旅</title><link>https://blog.caowo.de/posts/hello-world/</link><pubDate>Sun, 01 Mar 2026 08:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/hello-world/</guid><description>&lt;h1 id="hello-world--开启-web-渗透测试之旅"&gt;Hello World | 开启 Web 渗透测试之旅
 &lt;/h1&gt;&lt;p&gt;欢迎来到我的网络安全技术博客！&lt;/p&gt;
 &lt;h2 id="-博客启用"&gt;🎉 博客启用
 &lt;/h2&gt;&lt;p&gt;本站正式启用，专注于 Web 渗透测试、漏洞复现与安全防御技术分享。&lt;/p&gt;
@@ -454,7 +454,49 @@
 &lt;h2 id="-tags"&gt;🏷️ Tags
 &lt;/h2&gt;&lt;p&gt;#鉴权绕过 #RCE #青龙面板 #Node.js 安全 #Express #漏洞复现 #渗透测试&lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;em&gt;本文基于公开披露的漏洞信息编写，旨在提高安全意识。请合法使用安全技术。&lt;/em&gt;&lt;/p&gt;</description></item><item><title>AI Agent 技术前沿</title><link>https://blog.caowo.de/posts/ai-agent-2026-03-08/</link><pubDate>Sun, 08 Mar 2026 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/ai-agent-2026-03-08/</guid><description>&lt;h1 id="ai-agent-技术前沿"&gt;AI Agent 技术前沿
+&lt;p&gt;&lt;em&gt;本文基于公开披露的漏洞信息编写，旨在提高安全意识。请合法使用安全技术。&lt;/em&gt;&lt;/p&gt;</description></item><item><title>AI Agent 技术前沿</title><link>https://blog.caowo.de/posts/ai-agent-2026-03-09/</link><pubDate>Mon, 09 Mar 2026 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/ai-agent-2026-03-09/</guid><description>&lt;h1 id="ai-agent-技术前沿"&gt;AI Agent 技术前沿
+&lt;/h1&gt;&lt;h2 id="-今日焦点"&gt;🤖 今日焦点
+&lt;/h2&gt;&lt;p&gt;AI Agent 领域最新技术动态和突破。&lt;/p&gt;
+&lt;h2 id="-技术应用"&gt;💻 技术应用
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;自动化任务&lt;/strong&gt; - Agent 自动执行日常任务&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;内容创作&lt;/strong&gt; - AI 辅助写作和编辑&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数据分析&lt;/strong&gt; - 智能数据处理和洞察&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="-案例分享"&gt;📈 案例分享
+&lt;/h2&gt;&lt;p&gt;实际应用场景和成功案例分析。&lt;/p&gt;
+&lt;h2 id="-未来展望"&gt;🔮 未来展望
+&lt;/h2&gt;&lt;p&gt;AI Agent 发展趋势和预测。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 自动创作&lt;/em&gt;&lt;/p&gt;</description></item><item><title>内容工厂每日精选</title><link>https://blog.caowo.de/posts/content-factory-2026-03-09/</link><pubDate>Mon, 09 Mar 2026 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/content-factory-2026-03-09/</guid><description>&lt;h1 id="内容工厂每日精选"&gt;内容工厂每日精选
+&lt;/h1&gt;&lt;h2 id="-今日主题"&gt;📝 今日主题
+&lt;/h2&gt;&lt;p&gt;今日内容创作主题和方向。&lt;/p&gt;
+&lt;h2 id="-创作心得"&gt;✍️ 创作心得
+&lt;/h2&gt;&lt;p&gt;内容创作过程中的经验和技巧。&lt;/p&gt;
+&lt;h2 id="-数据分析"&gt;📊 数据分析
+&lt;/h2&gt;&lt;p&gt;各平台内容表现数据分析。&lt;/p&gt;
+&lt;h2 id="-运营策略"&gt;🎯 运营策略
+&lt;/h2&gt;&lt;p&gt;内容运营策略和优化建议。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;内容工厂自动创作&lt;/em&gt;&lt;/p&gt;</description></item><item><title>红队 Agent 实战日记</title><link>https://blog.caowo.de/posts/redteam-agent-2026-03-09/</link><pubDate>Mon, 09 Mar 2026 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/redteam-agent-2026-03-09/</guid><description>&lt;h1 id="红队-agent-实战日记"&gt;红队 Agent 实战日记
+&lt;/h1&gt;&lt;h2 id="-今日任务"&gt;🎯 今日任务
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;目标资产扫描&lt;/li&gt;
+&lt;li&gt;漏洞自动化检测&lt;/li&gt;
+&lt;li&gt;渗透测试报告生成&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="-使用工具"&gt;🔧 使用工具
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;ARL 灯塔&lt;/strong&gt; - 资产收集&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Nuclei&lt;/strong&gt; - 漏洞扫描&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;红队 Agent&lt;/strong&gt; - 自动化渗透&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="-扫描结果"&gt;📊 扫描结果
+&lt;/h2&gt;&lt;p&gt;今日扫描资产数量、发现漏洞统计等。&lt;/p&gt;
+&lt;h2 id="-经验总结"&gt;💡 经验总结
+&lt;/h2&gt;&lt;p&gt;渗透测试中的发现和心得。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;红队 Agent 自动创作&lt;/em&gt;&lt;/p&gt;</description></item><item><title>AI Agent 技术前沿</title><link>https://blog.caowo.de/posts/ai-agent-2026-03-08/</link><pubDate>Sun, 08 Mar 2026 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/ai-agent-2026-03-08/</guid><description>&lt;h1 id="ai-agent-技术前沿"&gt;AI Agent 技术前沿
 &lt;/h1&gt;&lt;h2 id="-今日焦点"&gt;🤖 今日焦点
 &lt;/h2&gt;&lt;p&gt;AI Agent 领域最新技术动态和突破。&lt;/p&gt;
 &lt;h2 id="-技术应用"&gt;💻 技术应用

@@ -1,0 +1,300 @@
+{
+  "name": "clawguard-bnb",
+  "version": "3.0.0",
+  "description": "专业量化交易平台，支持币安现货和合约交易，完全适配 OpenClaw AI 助手",
+  "type": "trading-platform",
+  "category": "finance",
+  "tags": ["trading", "binance", "quantitative", "cryptocurrency", "futures", "spot", "technical-analysis", "backtesting"],
+
+  "author": {
+    "name": "ClawGuard Team",
+    "email": "hihacker@foxmail.com",
+    "url": "https://www.caowo.de"
+  },
+
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wizawn/clawguard-bnb"
+  },
+
+  "license": "MIT",
+
+  "requirements": {
+    "python": ">=3.8",
+    "os": ["linux", "darwin", "win32"],
+    "dependencies": [
+      "requests>=2.31.0",
+      "pyyaml>=6.0",
+      "cryptography>=41.0.0",
+      "flask>=2.3.0",
+      "flask-cors>=4.0.0",
+      "websockets>=11.0"
+    ]
+  },
+
+  "installation": {
+    "auto_install": true,
+    "init_script": "openclaw_init.py",
+    "install_script": "openclaw_setup.sh",
+    "install_script_windows": "openclaw_setup.bat",
+    "post_install": "openclaw_configure.py",
+    "validation": "openclaw_validate.py",
+    "one_command_setup": "python3 openclaw_init.py"
+  },
+
+  "configuration": {
+    "auto_configure": true,
+    "config_script": "openclaw_configure.py",
+    "config_file": "~/.clawguard/config.yaml",
+    "env_file": ".env",
+    "env_template": ".env.example",
+    "required_env_vars": [],
+    "optional_env_vars": [
+      "BINANCE_API_KEY",
+      "BINANCE_API_SECRET",
+      "PROXY_URL",
+      "USE_TESTNET"
+    ]
+  },
+
+  "capabilities": {
+    "spot_trading": {
+      "enabled": true,
+      "description": "币安现货交易",
+      "features": ["market_order", "limit_order", "stop_loss", "take_profit"]
+    },
+    "futures_trading": {
+      "enabled": true,
+      "description": "币安合约交易",
+      "features": ["leverage", "margin_mode", "funding_rate", "liquidation_protection"]
+    },
+    "technical_analysis": {
+      "enabled": true,
+      "description": "技术分析",
+      "indicators": ["RSI", "MACD", "Bollinger Bands", "MA", "ATR", "KDJ", "OBV", "Ichimoku"]
+    },
+    "trading_strategies": {
+      "enabled": true,
+      "description": "交易策略",
+      "strategies": ["grid", "ma_crossover", "breakout", "futures_grid", "funding_arbitrage"]
+    },
+    "backtesting": {
+      "enabled": true,
+      "description": "策略回测",
+      "metrics": ["total_return", "win_rate", "max_drawdown", "sharpe_ratio"]
+    },
+    "natural_language": {
+      "enabled": true,
+      "description": "自然语言理解",
+      "languages": ["zh-CN"],
+      "intents": 17,
+      "entities": 8
+    },
+    "risk_management": {
+      "enabled": true,
+      "description": "风险管理",
+      "features": ["position_sizing", "stop_loss", "leverage_limit", "liquidation_check"]
+    }
+  },
+
+  "integration_methods": [
+    {
+      "name": "cli",
+      "type": "command_line",
+      "description": "CLI + JSON 输出模式",
+      "command_template": "python3 clawguard.py {action} {params} --json --yes",
+      "examples": [
+        "python3 clawguard.py price BTC --json",
+        "python3 clawguard.py account --json",
+        "python3 clawguard.py analyze ETH --interval 1h --json"
+      ]
+    },
+    {
+      "name": "http_api",
+      "type": "rest_api",
+      "description": "HTTP RESTful API",
+      "base_url": "http://localhost:5000/api/v1",
+      "start_command": "python3 openclaw_server.py",
+      "health_check": "http://localhost:5000/health",
+      "endpoints": {
+        "price": "GET /price/{symbol}",
+        "account": "GET /account",
+        "order": "POST /order",
+        "analysis": "GET /analysis/summary/{symbol}",
+        "web_start": "POST /web/start",
+        "web_status": "GET /web/status"
+      }
+    },
+    {
+      "name": "skills",
+      "type": "module",
+      "description": "Skills 模块接口",
+      "import": "from skills import execute_skill",
+      "available_skills": ["binance_spot", "market_analysis", "web_management"],
+      "example": "execute_skill('binance_spot', 'query_price', {'symbol': 'BTCUSDT'})"
+    },
+    {
+      "name": "nlp",
+      "type": "natural_language",
+      "description": "自然语言接口",
+      "import": "from src.nlp.command_parser import NLPCommandParser",
+      "supported_languages": ["zh-CN"],
+      "example": "parser.parse('用1000 USDT买入BTC')"
+    },
+    {
+      "name": "web_interface",
+      "type": "web_ui",
+      "description": "Web 管理界面（由 OpenClaw 控制）",
+      "start_method": "通过 HTTP API 或 Skills 启动",
+      "url": "http://localhost:8080",
+      "features": ["dashboard", "trading", "strategy", "analysis", "risk", "settings"],
+      "data_update": "轮询更新，无独立 WebSocket"
+    },
+    {
+      "name": "python_api",
+      "type": "library",
+      "description": "Python API 直接调用",
+      "import": "from src.api.binance_client import BinanceClient",
+      "example": "client.get_ticker_price('BTCUSDT')"
+    }
+  ],
+
+  "commands": {
+    "price": {
+      "description": "查询价格",
+      "usage": "clawguard.py price <SYMBOL> [--json]",
+      "examples": ["price BTC", "price ETH --json"]
+    },
+    "account": {
+      "description": "查询账户信息",
+      "usage": "clawguard.py account [--json]",
+      "examples": ["account", "account --json"]
+    },
+    "analyze": {
+      "description": "技术分析",
+      "usage": "clawguard.py analyze <SYMBOL> [--interval INTERVAL] [--json]",
+      "examples": ["analyze BTC --interval 1h", "analyze ETH --json"]
+    },
+    "futures": {
+      "description": "合约交易",
+      "subcommands": ["account", "position", "leverage", "order", "funding"],
+      "usage": "clawguard.py futures <SUBCOMMAND> [OPTIONS]",
+      "examples": ["futures account --json", "futures position --json"]
+    },
+    "grid": {
+      "description": "网格交易策略",
+      "subcommands": ["create", "status", "stop"],
+      "usage": "clawguard.py grid <SUBCOMMAND> [OPTIONS]",
+      "examples": ["grid create BTCUSDT --lower 65000 --upper 70000 --grids 10 --amount 1000 --json --yes"]
+    }
+  },
+
+  "nlp_intents": {
+    "query_price": {
+      "description": "查询价格",
+      "examples": ["BTC现在多少钱？", "查询ETH价格", "告诉我BNB的价格"],
+      "entities": ["symbol"]
+    },
+    "query_account": {
+      "description": "查询账户",
+      "examples": ["我的账户余额是多少？", "查询账户信息", "显示我的资产"],
+      "entities": []
+    },
+    "place_buy_order": {
+      "description": "买入订单",
+      "examples": ["用1000 USDT买入BTC", "买入0.1个ETH", "市价买入BNB"],
+      "entities": ["symbol", "amount", "order_type"]
+    },
+    "place_sell_order": {
+      "description": "卖出订单",
+      "examples": ["卖出0.1个BTC", "在70000价格卖出BTC", "市价卖出ETH"],
+      "entities": ["symbol", "amount", "price", "order_type"]
+    },
+    "analyze_trend": {
+      "description": "分析趋势",
+      "examples": ["帮我分析一下BTC的走势", "ETH技术分析", "分析BNB"],
+      "entities": ["symbol", "interval"]
+    },
+    "strategy_start": {
+      "description": "启动策略",
+      "examples": ["启动BTC的网格交易", "开始ETH策略", "运行网格策略"],
+      "entities": ["symbol", "strategy_type"]
+    },
+    "set_leverage": {
+      "description": "设置杠杆",
+      "examples": ["把BTC的杠杆调到5倍", "设置ETH杠杆为3倍", "调整杠杆"],
+      "entities": ["symbol", "leverage"]
+    }
+  },
+
+  "documentation": {
+    "readme": "README.md",
+    "quickstart": "OPENCLAW_QUICKSTART.md",
+    "integration": "OPENCLAW_INTEGRATION.md",
+    "api": "docs/API.md",
+    "strategies": "docs/STRATEGIES.md",
+    "examples": "openclaw_examples.py"
+  },
+
+  "testing": {
+    "test_script": "tests/run_tests.py",
+    "test_directory": "tests/",
+    "coverage_target": 80
+  },
+
+  "health_check": {
+    "script": "openclaw_validate.py",
+    "checks": [
+      "config_files",
+      "api_keys",
+      "proxy",
+      "dependencies",
+      "network",
+      "skills",
+      "nlp",
+      "http_api"
+    ]
+  },
+
+  "learning_resources": {
+    "getting_started": "OPENCLAW_QUICKSTART.md",
+    "integration_guide": "OPENCLAW_INTEGRATION.md",
+    "api_reference": "docs/API.md",
+    "strategy_guide": "docs/STRATEGIES.md",
+    "examples": "openclaw_examples.py",
+    "video_tutorials": [],
+    "faq": "docs/FAQ.md"
+  },
+
+  "openclaw_metadata": {
+    "auto_learnable": true,
+    "difficulty": "beginner",
+    "estimated_setup_time": "2-5 minutes",
+    "requires_api_keys": false,
+    "requires_user_action": false,
+    "one_command_init": "python3 openclaw_init.py",
+    "testnet_available": true,
+    "production_ready": true,
+    "maintenance_status": "active",
+    "last_updated": "2026-03-08",
+    "features": {
+      "zero_config": true,
+      "auto_install": true,
+      "openclaw_controlled": true,
+      "web_ui_managed_by_openclaw": true,
+      "no_independent_websocket": true,
+      "uses_openclaw_notifications": true
+    },
+    "compatibility": {
+      "openclaw_version": ">=1.0.0",
+      "python_version": ">=3.8"
+    }
+  },
+
+  "support": {
+    "documentation": "https://github.com/wizawn/clawguard-bnb/docs",
+    "issues": "https://github.com/wizawn/clawguard-bnb/issues",
+    "email": "hihacker@foxmail.com",
+    "community": "https://blog.caowo.de"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "symbol": "BTCUSDT",
+  "side": "SHORT",
+  "size": 0.013,
+  "entry_price": 68716.1,
+  "current_price": 68383.8,
+  "pnl": 4.3199,
+  "pnl_pct": 0.48358390537298085,
+  "liquidation_price": 75298.17372044,
+  "stop_loss": 72000,
+  "take_profit_1": 67000,
+  "take_profit_2": 66000,
+  "update_time": "2026-03-09T18:05:59.190542"
+}

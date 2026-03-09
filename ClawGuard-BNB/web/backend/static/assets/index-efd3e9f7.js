@@ -1,3 +1,20 @@
+
+# =============================================================================
+# Copyright (C) 2026 言零 (GOV-HACK)
+# All Rights Reserved.
+#
+# 官方网站：https://www.caowo.de | https://www.wizawn.com
+# 技术博客：https://blog.caowo.de | https://blog.wizawn.com
+# 软著材料代生成平台：https://ruanzhu.caowo.de | https://ruanzhu.wizawn.com
+#
+# 开发者：言零
+# 微信号：GOV-HACK
+# QQ：46333839
+#
+# 本软件受著作权法保护，未经授权禁止复制、修改、分发或用于商业用途。
+# 违反者将承担法律责任。
+# =============================================================================
+
 var fJ=(e,t)=>()=>(t||e((t={exports:{}}).exports,t),t.exports);var Xot=fJ((pi,gi)=>{(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const a of document.querySelectorAll('link[rel="modulepreload"]'))r(a);new MutationObserver(a=>{for(const i of a)if(i.type==="childList")for(const o of i.addedNodes)o.tagName==="LINK"&&o.rel==="modulepreload"&&r(o)}).observe(document,{childList:!0,subtree:!0});function n(a){const i={};return a.integrity&&(i.integrity=a.integrity),a.referrerPolicy&&(i.referrerPolicy=a.referrerPolicy),a.crossOrigin==="use-credentials"?i.credentials="include":a.crossOrigin==="anonymous"?i.credentials="omit":i.credentials="same-origin",i}function r(a){if(a.ep)return;a.ep=!0;const i=n(a);fetch(a.href,i)}})();/**
 * @vue/shared v3.5.29
 * (c) 2018-present Yuxi (Evan) You and Vue contributors

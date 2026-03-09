@@ -1,23 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Web 安全 on 言零的博客</title><link>https://blog.caowo.de/tags/web-%E5%AE%89%E5%85%A8/</link><description>Recent content in Web 安全 on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 05 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.caowo.de/tags/web-%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml"/><item><title>Web 安全入门：SQL 注入漏洞详解</title><link>https://blog.caowo.de/posts/article-1-tech/</link><pubDate>Thu, 05 Mar 2026 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/article-1-tech/</guid><description>&lt;h1 id="web-安全入门sql-注入漏洞详解"&gt;Web 安全入门：SQL 注入漏洞详解
-&lt;/h1&gt;&lt;hr&gt;
-&lt;h2 id="1-什么是-sql-注入"&gt;1. 什么是 SQL 注入
-&lt;/h2&gt;&lt;p&gt;SQL 注入 (SQL Injection) 是最常见的 Web 安全漏洞之一&amp;hellip;&lt;/p&gt;
-&lt;h2 id="2-漏洞原理"&gt;2. 漏洞原理
-&lt;/h2&gt;&lt;p&gt;当用户输入未经过滤直接拼接到 SQL 语句中时&amp;hellip;&lt;/p&gt;
-&lt;h2 id="3-检测方法"&gt;3. 检测方法
-&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;手工测试&lt;/li&gt;
-&lt;li&gt;自动化工具 (SQLMap)&lt;/li&gt;
-&lt;li&gt;代码审计&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="4-防御策略"&gt;4. 防御策略
-&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;参数化查询&lt;/li&gt;
-&lt;li&gt;输入验证&lt;/li&gt;
-&lt;li&gt;最小权限原则&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;em&gt;本文仅供学习参考，请勿用于非法用途&lt;/em&gt;&lt;/p&gt;</description></item><item><title>CSRF 漏洞复现 - 从原理到防御实战</title><link>https://blog.caowo.de/posts/csrf-injection-vuln/</link><pubDate>Sun, 01 Mar 2026 13:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/csrf-injection-vuln/</guid><description>&lt;h1 id="csrf-漏洞复现---从原理到防御实战"&gt;CSRF 漏洞复现 - 从原理到防御实战
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Web 安全 on 言零的博客</title><link>https://blog.caowo.de/tags/web-%E5%AE%89%E5%85%A8/</link><description>Recent content in Web 安全 on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 01 Mar 2026 13:00:00 +0800</lastBuildDate><atom:link href="https://blog.caowo.de/tags/web-%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml"/><item><title>CSRF 漏洞复现 - 从原理到防御实战</title><link>https://blog.caowo.de/posts/csrf-injection-vuln/</link><pubDate>Sun, 01 Mar 2026 13:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/csrf-injection-vuln/</guid><description>&lt;h1 id="csrf-漏洞复现---从原理到防御实战"&gt;CSRF 漏洞复现 - 从原理到防御实战
 &lt;/h1&gt;&lt;h2 id="-漏洞概述"&gt;📋 漏洞概述
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;漏洞名称&lt;/strong&gt;: Cross-Site Request Forgery (CSRF)&lt;br&gt;
 &lt;strong&gt;漏洞类型&lt;/strong&gt;: 跨站请求伪造&lt;br&gt;

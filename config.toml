@@ -83,3 +83,10 @@ contentDir = 'source'
     name = "友链 / Links"
     url = "/links/"
     weight = 5
+
+# 首页配置
+[pagination]
+pagerSize = 10
+
+[outputs]
+home = ["HTML", "RSS", "JSON"]

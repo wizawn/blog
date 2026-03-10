@@ -1,4 +1,18 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>AI on 言零的博客</title><link>https://blog.caowo.de/tags/ai/</link><description>Recent content in AI on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 01 Mar 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://blog.caowo.de/tags/ai/index.xml" rel="self" type="application/rss+xml"/><item><title>用 AI 自动编写 Nuclei 漏洞检测模板</title><link>https://blog.caowo.de/posts/ai-vuln-detection-nuclei/</link><pubDate>Sun, 01 Mar 2026 12:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/ai-vuln-detection-nuclei/</guid><description>&lt;h1 id="用-ai-自动编写-nuclei-漏洞检测模板"&gt;用 AI 自动编写 Nuclei 漏洞检测模板
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>AI on 言零的博客</title><link>https://blog.caowo.de/tags/ai/</link><description>Recent content in AI on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 10 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.caowo.de/tags/ai/index.xml" rel="self" type="application/rss+xml"/><item><title>AI Agent 技术前沿</title><link>https://blog.caowo.de/posts/ai-agent-2026-03-10/</link><pubDate>Tue, 10 Mar 2026 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/ai-agent-2026-03-10/</guid><description>&lt;h1 id="ai-agent-技术前沿"&gt;AI Agent 技术前沿
+&lt;/h1&gt;&lt;h2 id="-今日焦点"&gt;🤖 今日焦点
+&lt;/h2&gt;&lt;p&gt;AI Agent 领域最新技术动态和突破。&lt;/p&gt;
+&lt;h2 id="-技术应用"&gt;💻 技术应用
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;自动化任务&lt;/strong&gt; - Agent 自动执行日常任务&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;内容创作&lt;/strong&gt; - AI 辅助写作和编辑&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数据分析&lt;/strong&gt; - 智能数据处理和洞察&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="-案例分享"&gt;📈 案例分享
+&lt;/h2&gt;&lt;p&gt;实际应用场景和成功案例分析。&lt;/p&gt;
+&lt;h2 id="-未来展望"&gt;🔮 未来展望
+&lt;/h2&gt;&lt;p&gt;AI Agent 发展趋势和预测。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 自动创作&lt;/em&gt;&lt;/p&gt;</description></item><item><title>用 AI 自动编写 Nuclei 漏洞检测模板</title><link>https://blog.caowo.de/posts/ai-vuln-detection-nuclei/</link><pubDate>Sun, 01 Mar 2026 12:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/ai-vuln-detection-nuclei/</guid><description>&lt;h1 id="用-ai-自动编写-nuclei-漏洞检测模板"&gt;用 AI 自动编写 Nuclei 漏洞检测模板
 &lt;/h1&gt;
  &lt;blockquote&gt;
  &lt;p&gt;让 AI 帮你 10 分钟写出专业漏洞扫描模板&lt;/p&gt;

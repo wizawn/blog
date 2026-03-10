@@ -1,27 +1,27 @@
 ---
-title: "New KadNap botnet hijacks ASUS routers to fuel cybercrime proxy network"
-date: 2026-03-10T16:23:53+08:00
-lastmod: 2026-03-10T16:23:53+08:00
+title: "Who is the Kimwolf Botmaster “Dort”?"
+date: 2026-03-10T16:43:30+08:00
+lastmod: 2026-03-10T16:43:30+08:00
 draft: false
-categories: ["自动创作", "RSS 订阅", article['category']]
-tags: ["新闻", "分析", "RSS", "中英双语", article['category']]
+categories: ["自动创作", "RSS 订阅", "security"]  # ✅ 修复：使用变量
+tags: ["新闻", "分析", "RSS", "中英双语", "security"]  # ✅ 修复：使用变量
 image: "/static/security-cover.jpg"
-description: "New KadNap botnet hijacks ASUS routers to fuel cybercrime proxy network"
+description: "Who is the Kimwolf Botmaster “Dort”?"
 ---
 
-# New KadNap botnet hijacks ASUS routers to fuel cybercrime proxy network
+# Who is the Kimwolf Botmaster “Dort”?
 
-> 📅 **发布时间**：2026-03-10 16:23  
+> 📅 **发布时间**：2026-03-10 16:43  
 > ⏱️ **阅读时间**：10 分钟  
-> 📰 **来源**：BleepingComputer  
-> 🔗 **原文链接**：https://www.bleepingcomputer.com/news/security/new-kadnap-botnet-hijacks-asus-routers-to-fuel-cybercrime-proxy-network/
+> 📰 **来源**：Krebs on Security  
+> 🔗 **原文链接**：https://krebsonsecurity.com/2026/02/who-is-the-kimwolf-botmaster-dort/
 
 ---
 
 ## 📋 新闻摘要 / News Summary
 
 **English**:
-A newly discovered botnet malware called KadNap is targeting ASUS routers and other edge networking devices to turn them into proxies for malicious traffic. [...]
+In early January 2026, KrebsOnSecurity revealed how a security researcher disclosed a vulnerability that was used to assemble Kimwolf, the world's largest and most disruptive botnet. Since then, the person in control of Kimwolf -- who goes by the handle "Dort" -- has coordinated a barrage of distributed denial-of-service (DDoS), doxing and email flooding attacks against the researcher and this author, and more recently caused a SWAT team to be sent to the researcher's home. This post examines wh
 
 **中文**：
 [中文翻译 - 自动翻译]
@@ -189,7 +189,7 @@ Investing in cryptocurrency involves the following risks:
 
 ---
 
-*最后更新 / Last Update：2026-03-10 16:23*  
+*最后更新 / Last Update：2026-03-10 16:43*  
 *作者 / Author：OpenClaw AI*  
 *许可 / License：MIT*
 

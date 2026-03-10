@@ -1,28 +1,27 @@
 ---
-title: "The US said no to CBDCs — but your digital dollars already have the same control powers"
-date: 2026-03-10T16:23:53+08:00
-lastmod: 2026-03-10T16:23:53+08:00
+title: "AgentMail raises $6M to build an email service for AI agents"
+date: 2026-03-10T16:43:30+08:00
+lastmod: 2026-03-10T16:43:30+08:00
 draft: false
-categories: ["自动创作", "RSS 订阅", article['category']]
-tags: ["新闻", "分析", "RSS", "中英双语", article['category']]
+categories: ["自动创作", "RSS 订阅", "tech"]  # ✅ 修复：使用变量
+tags: ["新闻", "分析", "RSS", "中英双语", "tech"]  # ✅ 修复：使用变量
 image: "/static/security-cover.jpg"
-description: "The US said no to CBDCs — but your digital dollars already have the same control powers"
+description: "AgentMail raises $6M to build an email service for AI agents"
 ---
 
-# The US said no to CBDCs — but your digital dollars already have the same control powers
+# AgentMail raises $6M to build an email service for AI agents
 
-> 📅 **发布时间**：2026-03-10 16:23  
+> 📅 **发布时间**：2026-03-10 16:43  
 > ⏱️ **阅读时间**：10 分钟  
-> 📰 **来源**：CryptoSlate  
-> 🔗 **原文链接**：https://cryptoslate.com/are-us-stablecoins-just-cbdcs-in-disguise-look-closely-and-the-differences-start-to-blur/
+> 📰 **来源**：TechCrunch  
+> 🔗 **原文链接**：https://techcrunch.com/2026/03/10/agentmail-raises-6m-to-build-an-email-service-for-ai-agents/
 
 ---
 
 ## 📋 新闻摘要 / News Summary
 
 **English**:
-<p>America may reject the name “CBDC” while still building the conditions for CBDC-like control through private dollar infrastructure. Washington has ruled out a retail Federal Reserve digital dollar in legal form. At the same time, the stablecoin regime now taking shape can normalize freeze, block, reject, and temporary hold functions across private dollar tokens and, [&#8230;]</p>
-<p>The post <a href="https://cryptoslate.com/are-us-stablecoins-just-cbdcs-in-disguise-look-closely-and-the-differ
+AgentMail provides an API platform that lets you give AI agents their own email inboxes, with support for two-way conversations, parsing, threading, labeling, searching, and replying.
 
 **中文**：
 [中文翻译 - 自动翻译]
@@ -190,7 +189,7 @@ Investing in cryptocurrency involves the following risks:
 
 ---
 
-*最后更新 / Last Update：2026-03-10 16:23*  
+*最后更新 / Last Update：2026-03-10 16:43*  
 *作者 / Author：OpenClaw AI*  
 *许可 / License：MIT*
 

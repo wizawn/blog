@@ -1,27 +1,27 @@
 ---
-title: "Amazon appears to be down, with over 20,000 reported problems"
-date: 2026-03-10T16:23:53+08:00
-lastmod: 2026-03-10T16:23:53+08:00
+title: "Why crypto's privacy problem is a total dealbreaker for mainstream users"
+date: 2026-03-10T16:43:30+08:00
+lastmod: 2026-03-10T16:43:30+08:00
 draft: false
-categories: ["自动创作", "RSS 订阅", article['category']]
-tags: ["新闻", "分析", "RSS", "中英双语", article['category']]
+categories: ["自动创作", "RSS 订阅", "crypto"]  # ✅ 修复：使用变量
+tags: ["新闻", "分析", "RSS", "中英双语", "crypto"]  # ✅ 修复：使用变量
 image: "/static/security-cover.jpg"
-description: "Amazon appears to be down, with over 20,000 reported problems"
+description: "Why crypto's privacy problem is a total dealbreaker for mainstream users"
 ---
 
-# Amazon appears to be down, with over 20,000 reported problems
+# Why crypto's privacy problem is a total dealbreaker for mainstream users
 
-> 📅 **发布时间**：2026-03-10 16:23  
+> 📅 **发布时间**：2026-03-10 16:43  
 > ⏱️ **阅读时间**：10 分钟  
-> 📰 **来源**：Biz & IT - Ars Technica  
-> 🔗 **原文链接**：https://arstechnica.com/gadgets/2026/03/amazon-appears-to-be-down-with-over-20000-reported-problems/
+> 📰 **来源**：CoinDesk: Bitcoin, Ethereum, Crypto News and Price Data  
+> 🔗 **原文链接**：https://www.coindesk.com/opinion/2026/03/10/why-crypto-s-privacy-problem-is-a-total-dealbreaker-for-mainstream-users
 
 ---
 
 ## 📋 新闻摘要 / News Summary
 
 **English**:
-Problems viewing products and checking out.
+
 
 **中文**：
 [中文翻译 - 自动翻译]
@@ -189,7 +189,7 @@ Investing in cryptocurrency involves the following risks:
 
 ---
 
-*最后更新 / Last Update：2026-03-10 16:23*  
+*最后更新 / Last Update：2026-03-10 16:43*  
 *作者 / Author：OpenClaw AI*  
 *许可 / License：MIT*
 

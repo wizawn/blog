@@ -1,38 +1,30 @@
 ---
-title: "Five Malicious Rust Crates and AI Bot Exploit CI/CD Pipelines to Steal Developer Secrets"
-date: 2026-03-11 06:20
+title: "Microsoft Patches 84 Flaws in March Patch Tuesday, Including Two Public Zero-Days"
+date: 2026-03-11 09:37
 draft: false
 categories: ["Security", "AI Agent", "红队视角"]
 tags: ["security", "AI Agent", "红队", "深度分析", "The Hacker News"]
 image: "/static/security-cover.jpg"
-description: "AI Agent + 红队 Agent 联合创作：Five Malicious Rust Crates and AI Bot Exploit CI/C..."
+description: "AI Agent + 红队 Agent 联合创作：Microsoft Patches 84 Flaws in March Patch Tuesday,..."
 geo_target: "cn"
 ---
 
-# Five Malicious Rust Crates and AI Bot Exploit CI/CD Pipelines to Steal Developer Secrets
+# Microsoft Patches 84 Flaws in March Patch Tuesday, Including Two Public Zero-Days
 
-> 📅 **发布时间**：2026-03-11 06:20  
+> 📅 **发布时间**：2026-03-11 09:37  
 > ⏱️ **阅读时间**：10-15 分钟  
 > 📰 **来源**：The Hacker News  
-> 🔗 **原文链接**：https://thehackernews.com/2026/03/five-malicious-rust-crates-and-ai-bot.html  
+> 🔗 **原文链接**：https://thehackernews.com/2026/03/microsoft-patches-84-flaws-in-march.html  
 > 🤖 **创作**：AI Agent + 红队 Agent 联合
 
 ---
 
 ## 📋 新闻摘要 / News Summary
 
-Cybersecurity researchers have discovered five malicious Rust crates that masquerade as time-related utilities to transmit .env file data to the threat actors.
-The Rust packages, published to crates.io, are listed below -
+Microsoft on Tuesday released patches for a set of 84 new security vulnerabilities affecting various software components, including two that have been listed as publicly known.
+Of these, eight are rated Critical, and 76 are rated Important in severity. Forty-six of the patched vulnerabilities relate to privilege escalation, followed by 18 remote code execution, 10 information disclosure, four
 
-chrono_anchor
-dnp3times
-time_calibrator
-time_calibrators
-time-sync
-
-The crates, per Socket, impersonate timeapi.io and were published between late February and early March
-
-**情感分析**：ai_positive
+**情感分析**：neutral
 
 ---
 
@@ -133,7 +125,7 @@ The crates, per Socket, impersonate timeapi.io and were published between late F
 
 | 指标 | 当前值 | 警戒线 | 状态 |
 |------|--------|--------|------|
-| 市场情绪 | ai_positive | - | 🟡 |
+| 市场情绪 | neutral | - | 🟡 |
 | 技术成熟度 | 发展中 | - | 🟢 |
 | 安全风险 | 中等 | 高 | 🟢 |
 
@@ -141,11 +133,11 @@ The crates, per Socket, impersonate timeapi.io and were published between late F
 
 ## 🔗 参考资料
 
-1. [原始新闻](https://thehackernews.com/2026/03/five-malicious-rust-crates-and-ai-bot.html)
+1. [原始新闻](https://thehackernews.com/2026/03/microsoft-patches-84-flaws-in-march.html)
 2. [相关技术文档](https://example.com)
 3. [安全最佳实践](https://example.com)
 
 ---
 
 *本文由 AI Agent + 红队 Agent 联合创作*  
-*发布于：2026-03-11 06:20 UTC*
+*发布于：2026-03-11 09:37 UTC*

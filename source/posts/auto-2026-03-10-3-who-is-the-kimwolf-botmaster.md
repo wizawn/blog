@@ -4,10 +4,11 @@ date: 2026-03-10T16:43:30+08:00
 lastmod: 2026-03-10T16:43:30+08:00
 draft: false
 categories: ["自动创作", "RSS 订阅", "security"]  # ✅ 修复：使用变量
-tags: ["新闻", "分析", "RSS", "中英双语", "security"]  # ✅ 修复：使用变量
+tags: ["新闻", "分析", "RSS", "中英双语", "security"]  # ✅ 修复：使用变量, "加密货币", "区块链", "AI", "人工智能", "自动化"]
 image: "/static/security-cover.jpg"
-description: "Who is the Kimwolf Botmaster “Dort”?"
----
+description: "Who is the Kimwolf Botmaster “Dort”? - ## 📋 新闻摘要 / News Summary  **English**: In early January 2026, KrebsOnSecurity revealed how a security researcher discl..."
+geo_target: "cn"---
+
 
 # Who is the Kimwolf Botmaster “Dort”?
 
@@ -16,7 +17,8 @@ description: "Who is the Kimwolf Botmaster “Dort”?"
 > 📰 **来源**：Krebs on Security  
 > 🔗 **原文链接**：https://krebsonsecurity.com/2026/02/who-is-the-kimwolf-botmaster-dort/
 
----
+geo_target: "cn"---
+
 
 ## 📋 新闻摘要 / News Summary
 
@@ -197,3 +199,10 @@ Investing in cryptocurrency involves the following risks:
 **Find it useful? Welcome to share with more friends!** 🚀
 
 **字数统计 / Word Count**: 2000+ 字
+
+
+
+<!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Who is the Kimwolf Botmaster “Dort”?", "description": "Who is the Kimwolf Botmaster “Dort”? - # Who is the Kimwolf Botmaster “Dort”?  > 📅 **发布时间**：2026-03-10 16:43   > ⏱️ **阅读时间**：10 分钟   > 📰 **来源**：Krebs on Secu...", "inLanguage": "zh-CN", "datePublished": "2026-03-11T05:14:56.365339", "author": {"@type": "Person", "name": "言零"}} -->
+
+
+<!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Who is the Kimwolf Botmaster “Dort”?", "description": "Who is the Kimwolf Botmaster “Dort”? - ## 📋 新闻摘要 / News Summary  **English**: In early January 2026, KrebsOnSecurity revealed how a security researcher discl...", "inLanguage": "zh-CN", "datePublished": "2026-03-11T05:15:37.240586", "author": {"@type": "Person", "name": "言零"}} -->

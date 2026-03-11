@@ -4,10 +4,11 @@ date: 2026-03-10T16:43:30+08:00
 lastmod: 2026-03-10T16:43:30+08:00
 draft: false
 categories: ["自动创作", "RSS 订阅", "tech"]  # ✅ 修复：使用变量
-tags: ["新闻", "分析", "RSS", "中英双语", "tech"]  # ✅ 修复：使用变量
+tags: ["新闻", "分析", "RSS", "中英双语", "tech"]  # ✅ 修复：使用变量, "加密货币", "区块链", "AI", "人工智能", "Agent"]
 image: "/static/security-cover.jpg"
-description: "AgentMail raises $6M to build an email service for AI agents"
----
+description: "AgentMail raises $6M to build an email service for AI agents - ## 📋 新闻摘要 / News Summary  **English**: AgentMail provides an API platform that lets you give A..."
+geo_target: "cn"---
+
 
 # AgentMail raises $6M to build an email service for AI agents
 
@@ -16,7 +17,8 @@ description: "AgentMail raises $6M to build an email service for AI agents"
 > 📰 **来源**：TechCrunch  
 > 🔗 **原文链接**：https://techcrunch.com/2026/03/10/agentmail-raises-6m-to-build-an-email-service-for-ai-agents/
 
----
+geo_target: "cn"---
+
 
 ## 📋 新闻摘要 / News Summary
 
@@ -197,3 +199,10 @@ Investing in cryptocurrency involves the following risks:
 **Find it useful? Welcome to share with more friends!** 🚀
 
 **字数统计 / Word Count**: 2000+ 字
+
+
+
+<!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "AgentMail raises $6M to build an email service for AI agents", "description": "AgentMail raises $6M to build an email service for AI agents - # AgentMail raises $6M to build an email service for AI agents  > 📅 **发布时间**：2026-03-10 16:43 ...", "inLanguage": "zh-CN", "datePublished": "2026-03-11T05:14:56.369895", "author": {"@type": "Person", "name": "言零"}} -->
+
+
+<!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "AgentMail raises $6M to build an email service for AI agents", "description": "AgentMail raises $6M to build an email service for AI agents - ## 📋 新闻摘要 / News Summary  **English**: AgentMail provides an API platform that lets you give A...", "inLanguage": "zh-CN", "datePublished": "2026-03-11T05:15:37.243925", "author": {"@type": "Person", "name": "言零"}} -->

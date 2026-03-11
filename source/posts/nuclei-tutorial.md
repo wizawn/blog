@@ -1,11 +1,13 @@
 ---
 title: "Nuclei 漏洞扫描器从入门到精通"
+description: "Nuclei 漏洞扫描器从入门到精通 - ## 工具概述  Nuclei 是一款基于模板的漏洞扫描器，支持快速编写自定义检测规则，是目前最流行的开源漏洞扫描工具之一。  ### 核心优势  - ✅ **模板化** - YAML 格式，易读易写 - ✅ **速度快** - 支持并发扫描 - ✅ **社区活跃** -..."
 date: 2026-03-01T15:00:00+08:00
 draft: false
 categories: ['教程系列']
-tags: ['Nuclei', '漏洞扫描', '教程']
+tags: ['Nuclei', '漏洞扫描', '教程', "ETH", "AI", "渗透测试", "CVE"]
 image: "/blog-cover-default.jpg"
----
+geo_target: "cn"---
+
 
 # Nuclei 漏洞扫描器从入门到精通
 
@@ -13,7 +15,8 @@ image: "/blog-cover-default.jpg"
 > **GitHub:** https://github.com/projectdiscovery/nuclei  
 > **适用场景：** Web 漏洞扫描、批量检测、CI/CD 集成
 
----
+geo_target: "cn"---
+
 
 ## 工具概述
 
@@ -301,3 +304,10 @@ Nuclei 是渗透测试必备工具，建议：
 ---
 
 *本文仅用于安全研究与教育目的，请勿用于非法用途。*
+
+
+
+<!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Nuclei 漏洞扫描器从入门到精通", "description": "Nuclei 漏洞扫描器从入门到精通 - # Nuclei 漏洞扫描器从入门到精通  > **工具名称：** Nuclei   > **GitHub:** https://github.com/projectdiscovery/nuclei   > **适用场景：** Web 漏洞扫描、批量检测、CI/CD 集成...", "inLanguage": "zh-CN", "datePublished": "2026-03-11T05:14:56.394447", "author": {"@type": "Person", "name": "言零"}} -->
+
+
+<!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Nuclei 漏洞扫描器从入门到精通", "description": "Nuclei 漏洞扫描器从入门到精通 - ## 工具概述  Nuclei 是一款基于模板的漏洞扫描器，支持快速编写自定义检测规则，是目前最流行的开源漏洞扫描工具之一。  ### 核心优势  - ✅ **模板化** - YAML 格式，易读易写 - ✅ **速度快** - 支持并发扫描 - ✅ **社区活跃** -...", "inLanguage": "zh-CN", "datePublished": "2026-03-11T05:15:37.254425", "author": {"@type": "Person", "name": "言零"}} -->

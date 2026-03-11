@@ -1,14 +1,15 @@
 ---
 title: "青龙面板鉴权绕过漏洞复现 - 从路径大小写到 RCE"
 date: 2026-02-28T16:45:00+08:00
-tags: ["鉴权绕过", "RCE", "Node.js", "路径遍历"]
+tags: ["鉴权绕过", "RCE", "Node.js", "路径遍历", "AI", "自动化", "渗透测试", "漏洞", "CVE"]
 categories: ["漏洞复现"]
-description: "深度剖析青龙面板最新版鉴权绕过漏洞，利用路径大小写特性绕过 JWT 校验，最终实现未授权远程命令执行。"
+description: "青龙面板鉴权绕过漏洞复现 - 从路径大小写到 RCE - ## 🎯 漏洞概述  青龙面板 (Qinglong Panel) 是一款流行的定时任务管理面板，广泛应用于脚本管理、自动化任务等场景。  2026 年 2 月，安全研究人员发现青龙面板最新版本存在一处**鉴权绕过漏洞**。攻击者通过构造特殊的路径大小写，可..."
 image: "/static/security-cover.jpg"
 keywords: ["青龙面板", "鉴权绕过", "RCE", "Node.js 安全", "Express 漏洞"]
 draft: false
 weight: 1
----
+geo_target: "cn"---
+
 
 > ⚠️ **免责声明**：本文仅用于安全研究与教育目的，请勿将技术用于非法用途。
 
@@ -23,7 +24,8 @@ weight: 1
 | **危害等级** | 🔴 严重 (Critical) |
 | **利用复杂度** | 🟢 低 (无需认证) |
 
----
+geo_target: "cn"---
+
 
 ## 🎯 漏洞概述
 
@@ -400,3 +402,10 @@ tail -f /ql/log/system.log | grep -E "(API|command|auth)"
 ---
 
 *本文基于公开披露的漏洞信息编写，旨在提高安全意识。请合法使用安全技术。*
+
+
+
+<!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "青龙面板鉴权绕过漏洞复现 - 从路径大小写到 RCE", "description": "青龙面板鉴权绕过漏洞复现 - 从路径大小写到 RCE - > ⚠️ **免责声明**：本文仅用于安全研究与教育目的，请勿将技术用于非法用途。  ## 📋 漏洞摘要  | 项目 | 详情 | |------|------| | **漏洞名称** | 青龙面板鉴权绕过导致 RCE | | **影响版本** | Qin...", "inLanguage": "zh-CN", "datePublished": "2026-03-11T05:14:56.352239", "author": {"@type": "Person", "name": "言零"}} -->
+
+
+<!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "青龙面板鉴权绕过漏洞复现 - 从路径大小写到 RCE", "description": "青龙面板鉴权绕过漏洞复现 - 从路径大小写到 RCE - ## 🎯 漏洞概述  青龙面板 (Qinglong Panel) 是一款流行的定时任务管理面板，广泛应用于脚本管理、自动化任务等场景。  2026 年 2 月，安全研究人员发现青龙面板最新版本存在一处**鉴权绕过漏洞**。攻击者通过构造特殊的路径大小写，可...", "inLanguage": "zh-CN", "datePublished": "2026-03-11T05:15:37.230755", "author": {"@type": "Person", "name": "言零"}} -->

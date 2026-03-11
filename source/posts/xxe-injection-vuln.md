@@ -1,11 +1,13 @@
 ---
 title: "XXE 注入漏洞复现 - 从原理到实战利用"
+description: "XXE 注入漏洞复现 - 从原理到实战利用 - ## 🎯 漏洞原理  ### 什么是 XXE？  XXE（XML External Entity）注入是一种针对 XML 解析器的攻击方式。当应用程序解析 XML 输入时，如果未正确配置 XML 解析器，攻击者可以通过构造恶意的 XML 实体来：  - 读取服务器文..."
 date: 2026-03-01T19:00:00+08:00
 draft: false
 categories: ['漏洞复现']
-tags: ['XXE', 'XML', '漏洞复现']
+tags: ['XXE', 'XML', '漏洞复现', "ETH", "AI", "SRC", "CVE"]
 image: "/blog-cover-default.jpg"
----
+geo_target: "cn"---
+
 
 # XXE 注入漏洞复现 - 从原理到实战利用
 
@@ -16,7 +18,8 @@ image: "/blog-cover-default.jpg"
 **危害等级**: 🔴 高危  
 **CVE 编号**: CVE-2022-22965 (Spring4Shell 相关) 等
 
----
+geo_target: "cn"---
+
 
 ## 🎯 漏洞原理
 
@@ -293,3 +296,10 @@ SecRule REQUEST_BODY "@rx SYSTEM.*file://" "id:2,deny,msg:'XXE File Access'"
 ---
 
 **标签**: #XXE #注入漏洞 #Web 安全 #漏洞复现 #SRC
+
+
+
+<!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "XXE 注入漏洞复现 - 从原理到实战利用", "description": "XXE 注入漏洞复现 - 从原理到实战利用 - # XXE 注入漏洞复现 - 从原理到实战利用  ## 📋 漏洞概述  **漏洞名称**: XML External Entity (XXE) Injection   **漏洞类型**: 注入攻击   **危害等级**: 🔴 高危   **CVE 编号**: CVE...", "inLanguage": "zh-CN", "datePublished": "2026-03-11T05:14:56.363311", "author": {"@type": "Person", "name": "言零"}} -->
+
+
+<!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "XXE 注入漏洞复现 - 从原理到实战利用", "description": "XXE 注入漏洞复现 - 从原理到实战利用 - ## 🎯 漏洞原理  ### 什么是 XXE？  XXE（XML External Entity）注入是一种针对 XML 解析器的攻击方式。当应用程序解析 XML 输入时，如果未正确配置 XML 解析器，攻击者可以通过构造恶意的 XML 实体来：  - 读取服务器文...", "inLanguage": "zh-CN", "datePublished": "2026-03-11T05:15:37.238792", "author": {"@type": "Person", "name": "言零"}} -->

@@ -1,11 +1,13 @@
 ---
 title: "502 Bad Gateway - 当理想遭遇现实"
+description: "502 Bad Gateway - 当理想遭遇现实 - *2026-02-27 | 谨以此文献给所有在理想路上受挫的人*    <!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "502 Bad..."
 date: 2026-02-27T09:00:00+08:00
 draft: false
 categories: ["技术感悟"]
-tags: ["运维", "情感", "502"]
+tags: ["运维", "情感", "502", "AI", "比特币", "以太坊", "AI Agent"]
 image: "/blog-cover-default.jpg"
----
+geo_target: "cn"---
+
 
 # 502 Bad Gateway - 当理想遭遇现实
 
@@ -77,6 +79,14 @@ curl -I http://localhost:8080/health
 3. 修复问题（重启或重构）
 4. 添加监控（防止再次发生）
 
----
+geo_target: "cn"---
+
 
 *2026-02-27 | 谨以此文献给所有在理想路上受挫的人*
+
+
+
+<!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "502 Bad Gateway - 当理想遭遇现实", "description": "502 Bad Gateway - 当理想遭遇现实 - # 502 Bad Gateway - 当理想遭遇现实  > 用运维术语诠释理想与现实的碰撞  ## 架构设计 - 理想的蓝图  刚毕业那年，我画了一张完美的架构图：  ```          负载均衡器 (Nginx)               │  ...", "inLanguage": "zh-CN", "datePublished": "2026-03-11T05:14:56.354479", "author": {"@type": "Person", "name": "言零"}} -->
+
+
+<!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "502 Bad Gateway - 当理想遭遇现实", "description": "502 Bad Gateway - 当理想遭遇现实 - *2026-02-27 | 谨以此文献给所有在理想路上受挫的人*    <!-- JSON-LD: {\"@context\": \"https://schema.org\", \"@type\": \"BlogPosting\", \"headline\": \"502 Bad...", "inLanguage": "zh-CN", "datePublished": "2026-03-11T05:15:37.232424", "author": {"@type": "Person", "name": "言零"}} -->

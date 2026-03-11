@@ -1,11 +1,13 @@
 ---
 title: "CSRF 漏洞复现 - 从原理到防御实战"
+description: "CSRF 漏洞复现 - 从原理到防御实战 - ## 🎯 漏洞原理  ### 什么是 CSRF？  CSRF（跨站请求伪造）是一种攻击方式，攻击者诱导已认证用户在不知情的情况下执行非预期操作。  **核心前提**: - 用户已登录目标网站 - 网站使用 Cookie 自动认证 - 请求无其他验证机制  ### 攻击..."
 date: 2026-03-01T13:00:00+08:00
 draft: false
 categories: ['漏洞复现']
-tags: ['CSRF', 'Web 安全', '漏洞复现']
+tags: ['CSRF', 'Web 安全', '漏洞复现', "ETH", "AI", "渗透测试", "SRC"]
 image: "/blog-cover-default.jpg"
----
+geo_target: "cn"---
+
 
 # CSRF 漏洞复现 - 从原理到防御实战
 
@@ -16,7 +18,8 @@ image: "/blog-cover-default.jpg"
 **危害等级**: 🟠 中高危  
 **常见场景**: 状态修改操作（转账、改密、删数据）
 
----
+geo_target: "cn"---
+
 
 ## 🎯 漏洞原理
 
@@ -388,3 +391,10 @@ app.post('/transfer', (req, res) => {
 ---
 
 **标签**: #CSRF #Web 安全 #漏洞复现 #SRC #渗透测试
+
+
+
+<!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "CSRF 漏洞复现 - 从原理到防御实战", "description": "CSRF 漏洞复现 - 从原理到防御实战 - # CSRF 漏洞复现 - 从原理到防御实战  ## 📋 漏洞概述  **漏洞名称**: Cross-Site Request Forgery (CSRF)   **漏洞类型**: 跨站请求伪造   **危害等级**: 🟠 中高危   **常见场景**: 状态修改操作...", "inLanguage": "zh-CN", "datePublished": "2026-03-11T05:14:56.347937", "author": {"@type": "Person", "name": "言零"}} -->
+
+
+<!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "CSRF 漏洞复现 - 从原理到防御实战", "description": "CSRF 漏洞复现 - 从原理到防御实战 - ## 🎯 漏洞原理  ### 什么是 CSRF？  CSRF（跨站请求伪造）是一种攻击方式，攻击者诱导已认证用户在不知情的情况下执行非预期操作。  **核心前提**: - 用户已登录目标网站 - 网站使用 Cookie 自动认证 - 请求无其他验证机制  ### 攻击...", "inLanguage": "zh-CN", "datePublished": "2026-03-11T05:15:37.227587", "author": {"@type": "Person", "name": "言零"}} -->

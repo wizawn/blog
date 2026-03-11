@@ -1,11 +1,13 @@
 ---
 title: "ProxyShell 漏洞链 (CVE-2021-34473) 深度解析"
+description: "ProxyShell 漏洞链 (CVE-2021-34473) 深度解析 - ## 漏洞概述  ProxyShell 是由三个漏洞组成的漏洞链，允许攻击者在无需身份验证的情况下，在 Exchange 服务器上执行任意代码。该漏洞链在 Pwn2Own 2021 大赛中被首次公开。  ### 三个漏洞  | CVE ..."
 date: 2026-03-01T16:00:00+08:00
 draft: false
 categories: ['漏洞复现']
-tags: ['ProxyShell', 'Exchange', 'RCE']
+tags: ['ProxyShell', 'Exchange', 'RCE', "比特币", "DeFi", "AI", "漏洞", "SRC"]
 image: "/blog-cover-default.jpg"
----
+geo_target: "cn"---
+
 
 # ProxyShell 漏洞链 (CVE-2021-34473) 深度解析
 
@@ -13,7 +15,8 @@ image: "/blog-cover-default.jpg"
 > **影响产品：** Microsoft Exchange Server  
 > **披露时间：** 2021 年 4 月 (Pwn2Own 2021)
 
----
+geo_target: "cn"---
+
 
 ## 漏洞概述
 
@@ -256,3 +259,10 @@ ProxyShell 漏洞链展示了：
 ---
 
 *本文仅用于安全研究与教育目的，请勿用于非法用途。*
+
+
+
+<!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "ProxyShell 漏洞链 (CVE-2021-34473) 深度解析", "description": "ProxyShell 漏洞链 (CVE-2021-34473) 深度解析 - # ProxyShell 漏洞链 (CVE-2021-34473) 深度解析  > **漏洞组合：** CVE-2021-34473 + CVE-2021-34523 + CVE-2021-31207   > **影响产品：** Mic...", "inLanguage": "zh-CN", "datePublished": "2026-03-11T05:14:56.345577", "author": {"@type": "Person", "name": "言零"}} -->
+
+
+<!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "ProxyShell 漏洞链 (CVE-2021-34473) 深度解析", "description": "ProxyShell 漏洞链 (CVE-2021-34473) 深度解析 - ## 漏洞概述  ProxyShell 是由三个漏洞组成的漏洞链，允许攻击者在无需身份验证的情况下，在 Exchange 服务器上执行任意代码。该漏洞链在 Pwn2Own 2021 大赛中被首次公开。  ### 三个漏洞  | CVE ...", "inLanguage": "zh-CN", "datePublished": "2026-03-11T05:15:37.225206", "author": {"@type": "Person", "name": "言零"}} -->

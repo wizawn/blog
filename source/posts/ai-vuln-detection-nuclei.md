@@ -1,11 +1,13 @@
 ---
 title: "用 AI 自动编写 Nuclei 漏洞检测模板"
+description: "用 AI 自动编写 Nuclei 漏洞检测模板 - ## 📝 完整实战案例  ### 案例：Log4j 检测模板  **步骤 1: 收集信息** ``` 漏洞名称：Log4Shell (CVE-2021-44228) 检测 Payload: ${jndi:ldap://your-server.com} 成功特征：..."
 date: 2026-03-01T12:00:00+08:00
 draft: false
 categories: ['AI 系列']
-tags: ['AI', 'Nuclei', '漏洞检测']
+tags: ['AI', 'Nuclei', '漏洞检测', "ETH", "Agent", "自动化", "渗透测试"]
 image: "/blog-cover-default.jpg"
----
+geo_target: "cn"---
+
 
 # 用 AI 自动编写 Nuclei 漏洞检测模板
 
@@ -107,7 +109,8 @@ requests:
 - 不同标签（img/script/svg）
 ```
 
----
+geo_target: "cn"---
+
 
 ## 📝 完整实战案例
 
@@ -218,3 +221,10 @@ requests:
 ---
 
 *模板写得越多，扫描效率越高。让 AI 帮你积累模板库！*
+
+
+
+<!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "用 AI 自动编写 Nuclei 漏洞检测模板", "description": "用 AI 自动编写 Nuclei 漏洞检测模板 - # 用 AI 自动编写 Nuclei 漏洞检测模板  > 让 AI 帮你 10 分钟写出专业漏洞扫描模板  ## 🎯 什么是 Nuclei？  Nuclei 是一个基于模板的漏洞扫描器，支持： - 10000+ 社区贡献模板 - 自定义 YAML 检测规则 - ...", "inLanguage": "zh-CN", "datePublished": "2026-03-11T05:14:56.349447", "author": {"@type": "Person", "name": "言零"}} -->
+
+
+<!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "用 AI 自动编写 Nuclei 漏洞检测模板", "description": "用 AI 自动编写 Nuclei 漏洞检测模板 - ## 📝 完整实战案例  ### 案例：Log4j 检测模板  **步骤 1: 收集信息** ``` 漏洞名称：Log4Shell (CVE-2021-44228) 检测 Payload: ${jndi:ldap://your-server.com} 成功特征：...", "inLanguage": "zh-CN", "datePublished": "2026-03-11T05:15:37.228575", "author": {"@type": "Person", "name": "言零"}} -->

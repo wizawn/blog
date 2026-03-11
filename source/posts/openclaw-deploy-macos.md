@@ -3,10 +3,11 @@ title: "OpenClaw 部署教程 - macOS 篇（2026 最新版）"
 date: 2026-03-10T16:00:00+08:00
 draft: false
 categories: ["OpenClaw", "部署教程"]
-tags: ["OpenClaw", "macOS", "部署", "教程", "AI 助手"]
+tags: ["OpenClaw", "macOS", "部署", "教程", "AI 助手", "Agent", "比特币", "以太坊", "AI Agent"]
 image: "/static/security-cover.jpg"
-description: "OpenClaw AI 助手框架 macOS 平台完整部署教程，包含 Homebrew 安装、一键脚本和本地模型配置实战"
----
+description: "OpenClaw 部署教程 - macOS 篇（2026 最新版） - ## 📚 推荐学习路径  **官方文档（最权威）**： - [OpenClaw 官方指南](https://open-claw.online/zh/docs/getting-started) - [macOS 安装指南](https://do..."
+geo_target: "cn"---
+
 
 # OpenClaw 部署教程 - macOS 篇（2026 最新版）
 
@@ -16,7 +17,8 @@ description: "OpenClaw AI 助手框架 macOS 平台完整部署教程，包含 H
 
 OpenClaw 是一款强大的 AI 助手框架，支持 macOS 平台部署。本文整合官方文档和社区最佳实践，详细介绍 macOS 平台的安装配置流程。
 
----
+geo_target: "cn"---
+
 
 ## 📚 推荐学习路径
 
@@ -398,3 +400,10 @@ tail -f ~/.openclaw/workspace/memory/*.log
 *许可：MIT*
 
 **觉得有用？欢迎分享给更多朋友！** 🚀
+
+
+
+<!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "OpenClaw 部署教程 - macOS 篇（2026 最新版）", "description": "OpenClaw 部署教程 - macOS 篇（2026 最新版） - # OpenClaw 部署教程 - macOS 篇（2026 最新版）  > 📅 **更新时间**：2026-03-10   > ⏱️ **阅读时间**：8 分钟   > 💡 **难度等级**：⭐⭐☆☆☆  OpenClaw 是一款强大的 A...", "inLanguage": "zh-CN", "datePublished": "2026-03-11T05:14:56.334524", "author": {"@type": "Person", "name": "言零"}} -->
+
+
+<!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "OpenClaw 部署教程 - macOS 篇（2026 最新版）", "description": "OpenClaw 部署教程 - macOS 篇（2026 最新版） - ## 📚 推荐学习路径  **官方文档（最权威）**： - [OpenClaw 官方指南](https://open-claw.online/zh/docs/getting-started) - [macOS 安装指南](https://do...", "inLanguage": "zh-CN", "datePublished": "2026-03-11T05:15:37.217375", "author": {"@type": "Person", "name": "言零"}} -->

@@ -1,11 +1,13 @@
 ---
 title: "基于 OpenClaw 的全市场实时监控方案"
+description: "基于 OpenClaw 的全市场实时监控方案 - ## 方案概述  本方案基于 OpenClaw AI Agent，实现 7×24 小时全市场实时监控，覆盖股市、贵金属、加密货币三大市场，支持价格告警、异动检测、多渠道通知。  ### 核心能力  | 模块 | 功能 | 实现方式 | |------|------..."
 date: 2026-03-01T14:00:00+08:00
 draft: false
 categories: ['教程系列']
-tags: ['自动化', '监控', 'OpenClaw']
+tags: ['自动化', '监控', 'OpenClaw', "BTC", "ETH", "加密货币", "AI", "Agent"]
 image: "/blog-cover-default.jpg"
----
+geo_target: "cn"---
+
 
 # 基于 OpenClaw 的全市场实时监控方案
 
@@ -13,7 +15,8 @@ image: "/blog-cover-default.jpg"
 > **技术栈：** OpenClaw + Python + 多数据源 API  
 > **部署难度：** ⭐⭐ (中等)
 
----
+geo_target: "cn"---
+
 
 ## 方案概述
 
@@ -382,3 +385,10 @@ if __name__ == "__main__":
 ---
 
 *本文仅用于技术研究与教育目的，投资有风险，入市需谨慎。*
+
+
+
+<!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "基于 OpenClaw 的全市场实时监控方案", "description": "基于 OpenClaw 的全市场实时监控方案 - # 基于 OpenClaw 的全市场实时监控方案  > **适用场景：** 股市/贵金属/加密货币实时监控   > **技术栈：** OpenClaw + Python + 多数据源 API   > **部署难度：** ⭐⭐ (中等)  ---  ## 方案概述 ...", "inLanguage": "zh-CN", "datePublished": "2026-03-11T05:14:56.340259", "author": {"@type": "Person", "name": "言零"}} -->
+
+
+<!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "基于 OpenClaw 的全市场实时监控方案", "description": "基于 OpenClaw 的全市场实时监控方案 - ## 方案概述  本方案基于 OpenClaw AI Agent，实现 7×24 小时全市场实时监控，覆盖股市、贵金属、加密货币三大市场，支持价格告警、异动检测、多渠道通知。  ### 核心能力  | 模块 | 功能 | 实现方式 | |------|------...", "inLanguage": "zh-CN", "datePublished": "2026-03-11T05:15:37.221412", "author": {"@type": "Person", "name": "言零"}} -->

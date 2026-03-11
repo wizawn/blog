@@ -4,11 +4,12 @@ date: 2026-03-10T10:32:33+08:00
 lastmod: 2026-03-10T10:32:33+08:00
 draft: false
 categories: ["自动创作", "RSS 订阅", "币圈新闻"]
-tags: ["币圈", "新闻", "分析", "RSS", "中英双语"]
+tags: ["币圈", "新闻", "分析", "RSS", "中英双语", "加密货币", "区块链", "AI", "漏洞", "安全审计"]
 image: "/static/security-cover.jpg"
-description: "Americans Use AI Every Day—But Most Still Don't Like It, New Poll Shows"
+description: "Americans Use AI Every Day—But Most Still Don't Like It, New Poll Shows - ## 📋 新闻摘要 / News Summary  **English**: Americans are increasingly using AI tools ev..."
 aliases: ["/posts/auto-2026-03-10-2/"]
----
+geo_target: "cn"---
+
 
 # Americans Use AI Every Day—But Most Still Don't Like It, New Poll Shows
 
@@ -17,7 +18,8 @@ aliases: ["/posts/auto-2026-03-10-2/"]
 > 📰 **来源**：Decrypt  
 > 🔗 **原文链接**：https://decrypt.co/360493/americans-ai-every-day-most-still-dont-like-it
 
----
+geo_target: "cn"---
+
 
 ## 📋 新闻摘要 / News Summary
 
@@ -154,3 +156,10 @@ Investing in cryptocurrency involves the following risks:
 
 **觉得有用？欢迎分享给更多朋友！**  
 **Find it useful? Welcome to share with more friends!** 🚀
+
+
+
+<!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Americans Use AI Every Day—But Most Still Don't Like It, New Poll Shows", "description": "Americans Use AI Every Day—But Most Still Don't Like It, New Poll Shows - # Americans Use AI Every Day—But Most Still Don't Like It, New Poll Shows  > 📅 **发布...", "inLanguage": "zh-CN", "datePublished": "2026-03-11T05:14:56.390058", "author": {"@type": "Person", "name": "言零"}} -->
+
+
+<!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Americans Use AI Every Day—But Most Still Don't Like It, New Poll Shows", "description": "Americans Use AI Every Day—But Most Still Don't Like It, New Poll Shows - ## 📋 新闻摘要 / News Summary  **English**: Americans are increasingly using AI tools ev...", "inLanguage": "zh-CN", "datePublished": "2026-03-11T05:15:37.252079", "author": {"@type": "Person", "name": "言零"}} -->

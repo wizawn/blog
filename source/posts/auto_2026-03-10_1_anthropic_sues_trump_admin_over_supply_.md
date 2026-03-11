@@ -4,11 +4,12 @@ date: 2026-03-10T10:32:33+08:00
 lastmod: 2026-03-10T10:32:33+08:00
 draft: false
 categories: ["自动创作", "RSS 订阅", "币圈新闻"]
-tags: ["币圈", "新闻", "分析", "RSS", "中英双语"]
+tags: ["币圈", "新闻", "分析", "RSS", "中英双语", "加密货币", "区块链", "AI", "漏洞", "安全审计"]
 image: "/static/security-cover.jpg"
-description: "Anthropic Sues Trump Admin Over 'Supply Chain Risk' Designation"
+description: "Anthropic Sues Trump Admin Over 'Supply Chain Risk' Designation - ## 📋 新闻摘要 / News Summary  **English**: The AI company filed a lawsuit in federal court afte..."
 aliases: ["/posts/auto-2026-03-10-1/"]
----
+geo_target: "cn"---
+
 
 # Anthropic Sues Trump Admin Over 'Supply Chain Risk' Designation
 
@@ -17,7 +18,8 @@ aliases: ["/posts/auto-2026-03-10-1/"]
 > 📰 **来源**：Decrypt  
 > 🔗 **原文链接**：https://decrypt.co/360446/anthropic-challenges-white-house-supply-chain-risk
 
----
+geo_target: "cn"---
+
 
 ## 📋 新闻摘要 / News Summary
 
@@ -154,3 +156,10 @@ Investing in cryptocurrency involves the following risks:
 
 **觉得有用？欢迎分享给更多朋友！**  
 **Find it useful? Welcome to share with more friends!** 🚀
+
+
+
+<!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Anthropic Sues Trump Admin Over 'Supply Chain Risk' Designation", "description": "Anthropic Sues Trump Admin Over 'Supply Chain Risk' Designation - # Anthropic Sues Trump Admin Over 'Supply Chain Risk' Designation  > 📅 **发布时间**：2026-03-10 ...", "inLanguage": "zh-CN", "datePublished": "2026-03-11T05:14:56.341753", "author": {"@type": "Person", "name": "言零"}} -->
+
+
+<!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Anthropic Sues Trump Admin Over 'Supply Chain Risk' Designation", "description": "Anthropic Sues Trump Admin Over 'Supply Chain Risk' Designation - ## 📋 新闻摘要 / News Summary  **English**: The AI company filed a lawsuit in federal court afte...", "inLanguage": "zh-CN", "datePublished": "2026-03-11T05:15:37.222680", "author": {"@type": "Person", "name": "言零"}} -->

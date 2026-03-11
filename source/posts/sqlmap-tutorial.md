@@ -1,11 +1,13 @@
 ---
 title: "SQLMap 注入工具从入门到精通"
+description: "SQLMap 注入工具从入门到精通 - ## 工具概述  SQLMap 是一款自动化的 SQL 注入工具，支持检测和使用多种 SQL 注入技术，是渗透测试人员的必备工具。  ### 核心功能  - ✅ **自动检测** - 自动识别 SQL 注入点 - ✅ **多种注入** - 支持 6 种注入类型 - ✅ **..."
 date: 2026-03-01T17:00:00+08:00
 draft: false
 categories: ['教程系列']
-tags: ['SQLMap', 'SQL 注入', '教程']
+tags: ['SQLMap', 'SQL 注入', '教程', "Agent", "自动化", "渗透测试", "比特币", "以太坊"]
 image: "/blog-cover-default.jpg"
----
+geo_target: "cn"---
+
 
 # SQLMap 注入工具从入门到精通
 
@@ -13,7 +15,8 @@ image: "/blog-cover-default.jpg"
 > **GitHub:** https://github.com/sqlmapproject/sqlmap  
 > **适用场景：** SQL 注入检测、数据库渗透测试
 
----
+geo_target: "cn"---
+
 
 ## 工具概述
 
@@ -290,3 +293,10 @@ SQLMap 是强大的 SQL 注入工具，建议：
 ---
 
 *本文仅用于安全研究与教育目的，请勿用于非法用途。*
+
+
+
+<!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "SQLMap 注入工具从入门到精通", "description": "SQLMap 注入工具从入门到精通 - # SQLMap 注入工具从入门到精通  > **工具名称：** SQLMap   > **GitHub:** https://github.com/sqlmapproject/sqlmap   > **适用场景：** SQL 注入检测、数据库渗透测试  ---  ## 工...", "inLanguage": "zh-CN", "datePublished": "2026-03-11T05:14:56.337727", "author": {"@type": "Person", "name": "言零"}} -->
+
+
+<!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "SQLMap 注入工具从入门到精通", "description": "SQLMap 注入工具从入门到精通 - ## 工具概述  SQLMap 是一款自动化的 SQL 注入工具，支持检测和使用多种 SQL 注入技术，是渗透测试人员的必备工具。  ### 核心功能  - ✅ **自动检测** - 自动识别 SQL 注入点 - ✅ **多种注入** - 支持 6 种注入类型 - ✅ **...", "inLanguage": "zh-CN", "datePublished": "2026-03-11T05:15:37.219449", "author": {"@type": "Person", "name": "言零"}} -->

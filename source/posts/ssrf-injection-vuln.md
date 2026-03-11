@@ -1,11 +1,13 @@
 ---
 title: "SSRF 漏洞复现 - 从内网探测到云环境接管"
+description: "SSRF 漏洞复现 - 从内网探测到云环境接管 - ## 🎯 漏洞原理  ### 什么是 SSRF？  SSRF（服务端请求伪造）是一种允许攻击者诱导服务器发起非预期请求的漏洞。攻击者可以：  - 探测内网拓扑 - 访问内网服务 - 读取云环境元数据 - 绕过防火墙限制 - 执行远程代码（配合其他漏洞）  ###..."
 date: 2026-03-01T18:00:00+08:00
 draft: false
 categories: ['漏洞复现']
-tags: ['SSRF', '内网渗透', '漏洞复现']
+tags: ['SSRF', '内网渗透', '漏洞复现', "ETH", "AI", "SRC", "比特币"]
 image: "/blog-cover-default.jpg"
----
+geo_target: "cn"---
+
 
 # SSRF 漏洞复现 - 从内网探测到云环境接管
 
@@ -16,7 +18,8 @@ image: "/blog-cover-default.jpg"
 **危害等级**: 🔴 高危  
 **常见场景**: 图片加载、URL 预览、API 代理、Webhook 回调
 
----
+geo_target: "cn"---
+
 
 ## 🎯 漏洞原理
 
@@ -332,3 +335,10 @@ def validate_url(url):
 ---
 
 **标签**: #SSRF #注入漏洞 #Web 安全 #漏洞复现 #SRC #云安全
+
+
+
+<!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "SSRF 漏洞复现 - 从内网探测到云环境接管", "description": "SSRF 漏洞复现 - 从内网探测到云环境接管 - # SSRF 漏洞复现 - 从内网探测到云环境接管  ## 📋 漏洞概述  **漏洞名称**: Server-Side Request Forgery (SSRF)   **漏洞类型**: 服务端请求伪造   **危害等级**: 🔴 高危   **常见场景**:...", "inLanguage": "zh-CN", "datePublished": "2026-03-11T05:14:56.372856", "author": {"@type": "Person", "name": "言零"}} -->
+
+
+<!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "SSRF 漏洞复现 - 从内网探测到云环境接管", "description": "SSRF 漏洞复现 - 从内网探测到云环境接管 - ## 🎯 漏洞原理  ### 什么是 SSRF？  SSRF（服务端请求伪造）是一种允许攻击者诱导服务器发起非预期请求的漏洞。攻击者可以：  - 探测内网拓扑 - 访问内网服务 - 读取云环境元数据 - 绕过防火墙限制 - 执行远程代码（配合其他漏洞）  ###...", "inLanguage": "zh-CN", "datePublished": "2026-03-11T05:15:37.245802", "author": {"@type": "Person", "name": "言零"}} -->

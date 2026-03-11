@@ -3,16 +3,18 @@ title: "OpenClaw 部署教程 - Android 篇"
 date: 2026-03-03T16:15:00+08:00
 draft: false
 categories: ["OpenClaw"]
-tags: ["OpenClaw", "Android", "部署", "教程", "Termux"]
+tags: ["OpenClaw", "Android", "部署", "教程", "Termux", "AI", "比特币", "以太坊", "AI Agent"]
 image: "/static/tech-cover-1.jpg"
-description: "OpenClaw AI 助手框架 Android 平台部署教程，使用 Termux 在手机上运行 AI 助手"
----
+description: "OpenClaw 部署教程 - Android 篇 - ## 📋 系统要求  | 项目 | 要求 | |------|------| | Android 版本 | 10.0+ | | 内存 | 4GB+ (推荐 8GB) | | 存储 | 5GB+ 可用空间 | | 应用 | Termux (从 F-Droid ..."
+geo_target: "cn"---
+
 
 # OpenClaw 部署教程 - Android 篇
 
 > 使用 Termux 在 Android 设备上运行 OpenClaw，随时随地管理你的 AI 助手
 
----
+geo_target: "cn"---
+
 
 ## 📋 系统要求
 
@@ -197,3 +199,10 @@ openclaw message send "Hello from Android!"
 | 🪟 Windows | [查看教程](/posts/openclaw-deploy-windows) |
 | 🍎 macOS | [查看教程](/posts/openclaw-deploy-macos) |
 | 📱 Android | [查看教程](/posts/openclaw-deploy-android) |
+
+
+
+<!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "OpenClaw 部署教程 - Android 篇", "description": "OpenClaw 部署教程 - Android 篇 - # OpenClaw 部署教程 - Android 篇  > 使用 Termux 在 Android 设备上运行 OpenClaw，随时随地管理你的 AI 助手  ---  ## 📋 系统要求  | 项目 | 要求 | |------|------| | A...", "inLanguage": "zh-CN", "datePublished": "2026-03-11T05:14:56.353674", "author": {"@type": "Person", "name": "言零"}} -->
+
+
+<!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "OpenClaw 部署教程 - Android 篇", "description": "OpenClaw 部署教程 - Android 篇 - ## 📋 系统要求  | 项目 | 要求 | |------|------| | Android 版本 | 10.0+ | | 内存 | 4GB+ (推荐 8GB) | | 存储 | 5GB+ 可用空间 | | 应用 | Termux (从 F-Droid ...", "inLanguage": "zh-CN", "datePublished": "2026-03-11T05:15:37.231883", "author": {"@type": "Person", "name": "言零"}} -->

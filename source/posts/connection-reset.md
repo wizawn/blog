@@ -1,11 +1,13 @@
 ---
 title: "Connection Reset - 当信任遭遇背叛"
+description: "Connection Reset - 当信任遭遇背叛 - *2026-02-27 | 谨以此文献给所有被背叛的信任*    <!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Connectio..."
 date: 2026-02-27T10:00:00+08:00
 draft: false
 categories: ["技术感悟"]
-tags: ["网络", "情感", "TCP"]
+tags: ["网络", "情感", "TCP", "比特币", "以太坊", "AI Agent"]
 image: "/blog-cover-default.jpg"
----
+geo_target: "cn"---
+
 
 # Connection Reset - 当信任遭遇背叛
 
@@ -73,6 +75,14 @@ Client (我)                    Server (你)
 - 不是所有信任都值得
 - 及时止损，重建连接
 
----
+geo_target: "cn"---
+
 
 *2026-02-27 | 谨以此文献给所有被背叛的信任*
+
+
+
+<!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Connection Reset - 当信任遭遇背叛", "description": "Connection Reset - 当信任遭遇背叛 - # Connection Reset - 当信任遭遇背叛  > 用网络术语诠释信任与背叛的故事  ## 三次握手 - 信任建立  ``` Client (我)                    Server (你)     |             ...", "inLanguage": "zh-CN", "datePublished": "2026-03-11T05:14:56.342905", "author": {"@type": "Person", "name": "言零"}} -->
+
+
+<!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Connection Reset - 当信任遭遇背叛", "description": "Connection Reset - 当信任遭遇背叛 - *2026-02-27 | 谨以此文献给所有被背叛的信任*    <!-- JSON-LD: {\"@context\": \"https://schema.org\", \"@type\": \"BlogPosting\", \"headline\": \"Connectio...", "inLanguage": "zh-CN", "datePublished": "2026-03-11T05:15:37.223228", "author": {"@type": "Person", "name": "言零"}} -->

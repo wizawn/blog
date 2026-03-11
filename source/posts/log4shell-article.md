@@ -3,10 +3,11 @@ title: "Log4Shell (CVE-2021-44228) 漏洞深度解析与利用"
 date: 2026-03-01T13:53:00+08:00
 draft: false
 categories: ["漏洞复现"]
-tags: ["Log4j", "RCE", "CVE-2021-44228"]
+tags: ["Log4j", "RCE", "CVE-2021-44228", "AI", "Agent", "漏洞", "比特币"]
 image: "/blog-cover-default.jpg"
-description: "Log4Shell 漏洞深度解析与利用教程"
----
+description: "Log4Shell (CVE-2021-44228) 漏洞深度解析与利用 - ## 漏洞概述  Log4Shell 是 Apache Log4j 日志库中的一个远程代码执行漏洞，被称为"本世纪最严重的漏洞之一"。该漏洞允许攻击者通过构造特殊的日志消息，在目标服务器上执行任意代码。  ### 受影响版本  ``` ..."
+geo_target: "cn"---
+
 
 # Log4Shell (CVE-2021-44228) 漏洞深度解析与利用
 
@@ -14,7 +15,8 @@ description: "Log4Shell 漏洞深度解析与利用教程"
 > **影响范围：** Apache Log4j 2.0-2.14.1  
 > **披露时间：** 2021 年 12 月 10 日
 
----
+geo_target: "cn"---
+
 
 ## 漏洞概述
 
@@ -141,3 +143,10 @@ zip -q -d log4j-core-*.jar org/apache/logging/log4j/core/lookup/JndiLookup.class
 ---
 
 *本文仅用于安全研究与教育目的*
+
+
+
+<!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Log4Shell (CVE-2021-44228) 漏洞深度解析与利用", "description": "Log4Shell (CVE-2021-44228) 漏洞深度解析与利用 - # Log4Shell (CVE-2021-44228) 漏洞深度解析与利用  > **漏洞等级：** CVSS 10.0 (严重)   > **影响范围：** Apache Log4j 2.0-2.14.1   > **披露时间：**...", "inLanguage": "zh-CN", "datePublished": "2026-03-11T05:14:56.356086", "author": {"@type": "Person", "name": "言零"}} -->
+
+
+<!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Log4Shell (CVE-2021-44228) 漏洞深度解析与利用", "description": "Log4Shell (CVE-2021-44228) 漏洞深度解析与利用 - ## 漏洞概述  Log4Shell 是 Apache Log4j 日志库中的一个远程代码执行漏洞，被称为\"本世纪最严重的漏洞之一\"。该漏洞允许攻击者通过构造特殊的日志消息，在目标服务器上执行任意代码。  ### 受影响版本  ``` ...", "inLanguage": "zh-CN", "datePublished": "2026-03-11T05:15:37.233320", "author": {"@type": "Person", "name": "言零"}} -->

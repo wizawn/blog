@@ -3,10 +3,11 @@ title: "ARL 灯塔实战：10,000+ 海外站点资产收集全记录"
 date: 2026-03-06T09:00:00+08:00
 draft: false
 categories: ["漏洞复现", "资产收集"]
-tags: ["ARL", "资产收集", "海外站点", "Nuclei", "SRC"]
+tags: ["ARL", "资产收集", "海外站点", "Nuclei", "SRC", "AI", "漏洞", "CVE", "比特币", "以太坊", "AI Agent"]
 image: "/static/security-cover.jpg"
-description: "使用 ARL 灯塔系统对海外站点进行资产收集，12 小时收集 10,000+ 域名、11,000+ 站点，为 SRC 挖洞打下基础"
----
+description: "ARL 灯塔实战：10,000+ 海外站点资产收集全记录 - ## ⚠️ 风险提示  **本文仅为技术分享，不构成任何攻击指导。**  未经授权的扫描和攻击行为可能违反法律法规，请： - 仅对自己拥有或授权的系统进行测试 - 遵守当地法律法规 - 通过正规 SRC 平台提交漏洞 - 负责任的披露  ---  *作..."
+geo_target: "cn"---
+
 
 # ARL 灯塔实战：10,000+ 海外站点资产收集全记录
 
@@ -273,7 +274,8 @@ nuclei -l overseas_sites.txt \
 - [HackerOne](https://hackerone.com/)
 - [Bugcrowd](https://bugcrowd.com/)
 
----
+geo_target: "cn"---
+
 
 ## ⚠️ 风险提示
 
@@ -290,3 +292,10 @@ nuclei -l overseas_sites.txt \
 *作者：ClawSec*
 *发布时间：2026-03-06*
 *最后更新：2026-03-06*
+
+
+
+<!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "ARL 灯塔实战：10,000+ 海外站点资产收集全记录", "description": "ARL 灯塔实战：10,000+ 海外站点资产收集全记录 - # ARL 灯塔实战：10,000+ 海外站点资产收集全记录  > ⚠️ **免责声明**：本文仅用于安全研究与教育目的，请勿将技术用于非法用途。所有扫描目标均为公开可访问的海外站点，符合 SRC 挖洞规范。  ## 📋 项目背景  海外站点（尤其是中...", "inLanguage": "zh-CN", "datePublished": "2026-03-11T05:14:56.381316", "author": {"@type": "Person", "name": "言零"}} -->
+
+
+<!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "ARL 灯塔实战：10,000+ 海外站点资产收集全记录", "description": "ARL 灯塔实战：10,000+ 海外站点资产收集全记录 - ## ⚠️ 风险提示  **本文仅为技术分享，不构成任何攻击指导。**  未经授权的扫描和攻击行为可能违反法律法规，请： - 仅对自己拥有或授权的系统进行测试 - 遵守当地法律法规 - 通过正规 SRC 平台提交漏洞 - 负责任的披露  ---  *作...", "inLanguage": "zh-CN", "datePublished": "2026-03-11T05:15:37.249502", "author": {"@type": "Person", "name": "言零"}} -->

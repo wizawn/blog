@@ -3,15 +3,13 @@ title: "404 Not Found - 当爱情遭遇渗透测试"
 date: 2026-02-28T14:43:00+08:00
 draft: false
 categories: ["技术感悟"]
-tags: ["情感", "安全", "随笔", "网络安全", "渗透测试", "漏洞", "比特币", "以太坊"]
+tags: ["情感", "安全", "随笔", "网络安全", "渗透测试", "漏洞"]
 image: "/blog-cover-default.jpg"
-description: "404 Not Found - 当爱情遭遇渗透测试 - > 用网络安全术语诠释一段失败的感情   > 从 HTTPS 到 APT 攻击   > 从防火墙到 0day 漏洞   > 原来最痛的漏洞，永远在心防  ---  ## 1. 初始连接 - HTTPS 握手  第一次遇见你，   像是在建立 HTTPS 连接..."
-geo_target: "cn"---
-
+description: "用网络安全术语诠释一段失败的感情，从 HTTPS 到 APT 攻击，从防火墙到 0day 漏洞，原来最痛的漏洞，永远在心防。"
+geo_target: "cn"
+---
 
 # 404 Not Found - 当爱情遭遇渗透测试
-
-geo_target: "cn"---
 
 
 > 用网络安全术语诠释一段失败的感情  

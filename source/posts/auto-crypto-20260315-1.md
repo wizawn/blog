@@ -1,0 +1,24 @@
+---
+title: "Here’s what happened in crypto today"
+date: 2026-03-15 23:00
+categories: ["crypto"]
+tags: ["auto-generated", "rss"]
+draft: false
+---
+
+## 摘要
+
+Need to know what happened in crypto today? Here is the latest news on daily trends and events impacting Bitcoin price, blockchain, DeFi, NFTs, Web3 and crypto regulation.
+
+## 来源
+
+- [阅读原文](https://cointelegraph.com/news/what-happened-in-crypto-today?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound)
+- 发布时间：Sun, 15 Mar 2026 21:56:41 +0000
+
+## 市场背景
+
+- BTC 价格：$72,774.25
+- 24h 涨跌：+2.85%
+
+---
+*自动生成于 2026-03-15T23:00:30.078810*

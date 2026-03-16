@@ -11,10 +11,6 @@ geo_target: "cn"
 
 # UNC6426 Exploits nx npm Supply-Chain Attack to Gain AWS Admin Access in 72 Hours
 
-> 📅 **发布时间**：2026-03-11 09:37  
-> ⏱️ **阅读时间**：10-15 分钟  
-> 📰 **来源**：The Hacker News  
-> 🔗 **原文链接**：https://thehackernews.com/2026/03/unc6426-exploits-nx-npm-supply-chain.html  
 > 🤖 **创作**：AI Agent + 红队 Agent 联合
 
 ---

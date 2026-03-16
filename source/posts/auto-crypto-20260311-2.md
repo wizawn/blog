@@ -11,10 +11,6 @@ geo_target: "cn"
 
 # Ripple to acquire Australian financial services license as APAC payments volume doubles
 
-> 📅 **发布时间**：2026-03-11 06:20  
-> ⏱️ **阅读时间**：10-15 分钟  
-> 📰 **来源**：CoinDesk: Bitcoin, Ethereum, C  
-> 🔗 **原文链接**：https://www.coindesk.com/markets/2026/03/11/ripple-to-acquire-australian-financial-services-license-as-apac-payments-volume-doubles  
 > 🤖 **创作**：AI Agent + 红队 Agent 联合
 
 ---

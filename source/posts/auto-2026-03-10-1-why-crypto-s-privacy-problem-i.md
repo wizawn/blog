@@ -12,10 +12,6 @@ geo_target: "cn"---
 
 # Why crypto's privacy problem is a total dealbreaker for mainstream users
 
-> 📅 **发布时间**：2026-03-10 16:43  
-> ⏱️ **阅读时间**：10 分钟  
-> 📰 **来源**：CoinDesk: Bitcoin, Ethereum, Crypto News and Price Data  
-> 🔗 **原文链接**：https://www.coindesk.com/opinion/2026/03/10/why-crypto-s-privacy-problem-is-a-total-dealbreaker-for-mainstream-users
 
 geo_target: "cn"---
 

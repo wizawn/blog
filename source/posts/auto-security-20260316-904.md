@@ -2,8 +2,9 @@
 title: "Microsoft Patch Tuesday, March 2026 Edition"
 date: 2026-03-16 18:21
 categories: ["security"]
-tags: ["auto-generated", "rss"]
+tags: ["网络安全", "auto-generated", "rss"]
 draft: false
+description: "## 摘要  Microsoft Corp. today pushed security updates to fix at least 77 vulnerabilities in its Windo..."
 ---
 
 ## 摘要

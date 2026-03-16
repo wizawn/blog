@@ -2,8 +2,9 @@
 title: "Iran-Backed Hackers Claim Wiper Attack on Medtech Firm Stryker"
 date: 2026-03-16 18:21
 categories: ["security"]
-tags: ["auto-generated", "rss"]
+tags: ["技术感悟", "人工智能", "网络安全", "auto-generated", "rss"]
 draft: false
+description: "## 摘要  A hacktivist group with links to Iran&#8217;s intelligence agencies is claiming responsibilit..."
 ---
 
 ## 摘要

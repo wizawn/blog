@@ -1,10 +1,9 @@
 ---
 title: "How AI Assistants are Moving the Security Goalposts"
-date: 2026-03-16 18:21
+date: 2026-03-16T18:21:00+08:00
 categories: ["security"]
 tags: ["人工智能", "网络安全", "auto-generated", "rss"]
 draft: false
-description: "## 摘要  AI-based assistants or &#8220;agents&#8221; &#8212; autonomous programs that have access to t..."
 ---
 
 ## 摘要

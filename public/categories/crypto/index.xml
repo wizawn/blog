@@ -1,173 +1,631 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Crypto on 言零的博客</title><link>https://blog.caowo.de/categories/crypto/</link><description>Recent content in Crypto on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 10 Mar 2026 16:43:30 +0800</lastBuildDate><atom:link href="https://blog.caowo.de/categories/crypto/index.xml" rel="self" type="application/rss+xml"/><item><title>Why crypto's privacy problem is a total dealbreaker for mainstream users</title><link>https://blog.caowo.de/posts/auto-2026-03-10-1-why-crypto-s-privacy-problem-i/</link><pubDate>Tue, 10 Mar 2026 16:43:30 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-2026-03-10-1-why-crypto-s-privacy-problem-i/</guid><description>&lt;h1 id="why-cryptos-privacy-problem-is-a-total-dealbreaker-for-mainstream-users"&gt;Why crypto&amp;rsquo;s privacy problem is a total dealbreaker for mainstream users
-&lt;/h1&gt;
- &lt;blockquote&gt;
- &lt;p&gt;📅 &lt;strong&gt;发布时间&lt;/strong&gt;：2026-03-10 16:43&lt;br&gt;
-⏱️ &lt;strong&gt;阅读时间&lt;/strong&gt;：10 分钟&lt;br&gt;
-📰 &lt;strong&gt;来源&lt;/strong&gt;：CoinDesk: Bitcoin, Ethereum, Crypto News and Price Data&lt;br&gt;
-🔗 &lt;strong&gt;原文链接&lt;/strong&gt;：https://www.coindesk.com/opinion/2026/03/10/why-crypto-s-privacy-problem-is-a-total-dealbreaker-for-mainstream-users&lt;/p&gt;
-
- &lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;h2 id="-新闻摘要--news-summary"&gt;📋 新闻摘要 / News Summary
-&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;English&lt;/strong&gt;:&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;中文&lt;/strong&gt;：
-[中文翻译 - 自动翻译]&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id="-深度分析--in-depth-analysis"&gt;🔍 深度分析 / In-depth Analysis
-&lt;/h2&gt;&lt;h3 id="背景介绍--background"&gt;背景介绍 / Background
-&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;English&lt;/strong&gt;:
-This event did not happen by accident. It reflects several important trends in the current cryptocurrency and technology industry:&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;中文&lt;/strong&gt;：
-这一事件的发生并非偶然，它反映了当前加密货币和科技行业的几个重要趋势：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;监管环境变化&lt;/strong&gt; / Regulatory Environment Changes&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;全球各国对加密货币的监管政策正在逐步完善&lt;/li&gt;
-&lt;li&gt;Global regulatory policies for cryptocurrency are improving&lt;/li&gt;
-&lt;li&gt;各国政府正在寻求平衡创新和消费者保护&lt;/li&gt;
-&lt;li&gt;Governments are seeking to balance innovation and consumer protection&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;技术创新加速&lt;/strong&gt; / Technological Innovation Acceleration&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;区块链技术在金融领域的应用不断深化&lt;/li&gt;
-&lt;li&gt;Blockchain technology applications in finance are deepening&lt;/li&gt;
-&lt;li&gt;人工智能与区块链的融合成为新趋势&lt;/li&gt;
-&lt;li&gt;Integration of AI and blockchain becomes a new trend&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;市场成熟度提升&lt;/strong&gt; / Market Maturity Improvement&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;机构投资者参与度持续提高&lt;/li&gt;
-&lt;li&gt;Institutional investor participation continues to increase&lt;/li&gt;
-&lt;li&gt;市场基础设施不断完善&lt;/li&gt;
-&lt;li&gt;Market infrastructure continues to improve&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;行业整合加速&lt;/strong&gt; / Industry Consolidation Acceleration&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;大型科技公司加速进入加密货币领域&lt;/li&gt;
-&lt;li&gt;Big tech companies accelerate entry into cryptocurrency&lt;/li&gt;
-&lt;li&gt;传统金融机构加速数字化转型&lt;/li&gt;
-&lt;li&gt;Traditional financial institutions accelerate digital transformation&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id="影响分析--impact-analysis"&gt;影响分析 / Impact Analysis
-&lt;/h3&gt;&lt;h4 id="对市场的影响--market-impact"&gt;对市场的影响 / Market Impact
-&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;English&lt;/strong&gt;:
-This news may have the following impacts on the cryptocurrency and technology market:&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;中文&lt;/strong&gt;：
-这一消息对加密货币和科技市场可能产生以下影响：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;短期波动&lt;/strong&gt; / Short-term Volatility：市场可能出现短期价格波动&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;长期趋势&lt;/strong&gt; / Long-term Trend：有利于行业长期健康发展&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;投资者信心&lt;/strong&gt; / Investor Confidence：增强机构投资者信心&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;监管合规&lt;/strong&gt; / Regulatory Compliance：推动行业合规化发展&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;技术创新&lt;/strong&gt; / Technological Innovation：促进新技术研发和应用&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id="对项目方的影响--project-impact"&gt;对项目方的影响 / Project Impact
-&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;English&lt;/strong&gt;:
-Projects need to pay attention to the following points:&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;中文&lt;/strong&gt;：
-项目方需要关注以下几点：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;合规要求&lt;/strong&gt; / Compliance Requirements：确保项目符合当地监管要求&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;技术升级&lt;/strong&gt; / Technology Upgrade：持续提升技术实力&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;社区建设&lt;/strong&gt; / Community Building：加强社区沟通和透明度&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;合作伙伴&lt;/strong&gt; / Partnerships：寻找合适的合作伙伴&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;用户体验&lt;/strong&gt; / User Experience：持续优化用户体验&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id="技术解读--technical-interpretation"&gt;技术解读 / Technical Interpretation
-&lt;/h3&gt;&lt;h4 id="区块链技术--blockchain-technology"&gt;区块链技术 / Blockchain Technology
-&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;English&lt;/strong&gt;:
-The decentralized and immutable characteristics of blockchain technology provide the technical foundation for cryptocurrency. This event may promote:&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;中文&lt;/strong&gt;：
-区块链技术的去中心化、不可篡改特性为加密货币提供了技术基础。本次事件可能推动：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;智能合约升级&lt;/strong&gt; / Smart Contract Upgrade：更安全的智能合约标准&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;跨链技术发展&lt;/strong&gt; / Cross-chain Technology：提升不同区块链之间的互操作性&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Layer2 解决方案&lt;/strong&gt; / Layer2 Solutions：提高交易速度和降低费用&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;隐私保护技术&lt;/strong&gt; / Privacy Protection Technology：增强用户隐私保护&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;可扩展性解决方案&lt;/strong&gt; / Scalability Solutions：提高区块链处理能力&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id="人工智能技术--artificial-intelligence-technology"&gt;人工智能技术 / Artificial Intelligence Technology
-&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;English&lt;/strong&gt;:
-AI technology is increasingly integrated with blockchain technology:&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;中文&lt;/strong&gt;：
-人工智能技术与区块链技术的融合：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;智能合约优化&lt;/strong&gt; / Smart Contract Optimization：AI 优化智能合约代码&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;风险评估&lt;/strong&gt; / Risk Assessment：AI 评估项目风险&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;市场分析&lt;/strong&gt; / Market Analysis：AI 分析市场趋势&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;自动化交易&lt;/strong&gt; / Automated Trading：AI 驱动的交易策略&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="投资建议--investment-advice"&gt;投资建议 / Investment Advice
-&lt;/h3&gt;&lt;h4 id="短期策略--short-term-strategy"&gt;短期策略 / Short-term Strategy
-&lt;/h4&gt;&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;观望为主&lt;/strong&gt; / Wait and See：等待市场情绪稳定&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;设置止损&lt;/strong&gt; / Set Stop-loss：严格控制风险&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;关注新闻&lt;/strong&gt; / Follow News：密切关注后续发展&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;分散投资&lt;/strong&gt; / Diversified Investment：不要把所有资金投入单一项目&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;小额试水&lt;/strong&gt; / Small Position：先小额试水，确认趋势后再加仓&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h4 id="长期策略--long-term-strategy"&gt;长期策略 / Long-term Strategy
-&lt;/h4&gt;&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;价值投资&lt;/strong&gt; / Value Investment：关注项目基本面&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;分散投资&lt;/strong&gt; / Diversified Investment：不要把所有资金投入单一项目&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;持续学习&lt;/strong&gt; / Continuous Learning：不断提升自己的认知&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;长期持有&lt;/strong&gt; / Long-term Holding：优质项目长期持有&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;定期复盘&lt;/strong&gt; / Regular Review：定期复盘投资策略&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id="风险评估--risk-assessment"&gt;风险评估 / Risk Assessment
-&lt;/h3&gt;&lt;h4 id="市场风险--market-risk"&gt;市场风险 / Market Risk
-&lt;/h4&gt;&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;价格波动&lt;/strong&gt; / Price Volatility：加密货币价格波动剧烈&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;流动性风险&lt;/strong&gt; / Liquidity Risk：市场流动性可能不足&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;监管风险&lt;/strong&gt; / Regulatory Risk：各国监管政策可能变化&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;技术风险&lt;/strong&gt; / Technical Risk：智能合约可能存在漏洞&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;安全风险&lt;/strong&gt; / Security Risk：交易所可能被黑客攻击&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h4 id="应对策略--response-strategy"&gt;应对策略 / Response Strategy
-&lt;/h4&gt;&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;仓位管理&lt;/strong&gt; / Position Management：控制仓位大小&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;止损设置&lt;/strong&gt; / Stop-loss Setting：设置合理止损&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;分散投资&lt;/strong&gt; / Diversified Investment：投资多个项目&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;持续学习&lt;/strong&gt; / Continuous Learning：不断学习新知识&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;风险控制&lt;/strong&gt; / Risk Control：严格控制风险&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h2 id="-风险提示--risk-warning"&gt;⚠️ 风险提示 / Risk Warning
-&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;English&lt;/strong&gt;:
-Investing in cryptocurrency involves the following risks:&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;中文&lt;/strong&gt;：
-投资加密货币存在以下风险：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;价格波动风险&lt;/strong&gt; / Price Volatility Risk：加密货币价格波动剧烈&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;监管风险&lt;/strong&gt; / Regulatory Risk：各国监管政策可能变化&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;技术风险&lt;/strong&gt; / Technical Risk：智能合约可能存在漏洞&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;市场风险&lt;/strong&gt; / Market Risk：市场流动性可能不足&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;安全风险&lt;/strong&gt; / Security Risk：交易所可能被黑客攻击&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;strong&gt;本文仅供参考，不构成投资建议。投资有风险，入市需谨慎。&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;This article is for reference only and does not constitute investment advice. Investment involves risks, please be cautious.&lt;/strong&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id="-相关阅读--related-reading"&gt;📚 相关阅读 / Related Reading
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Crypto on 言零的博客</title><link>https://blog.caowo.de/categories/crypto/</link><description>Recent content in Crypto on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 16 Mar 2026 18:00:00 +0800</lastBuildDate><atom:link href="https://blog.caowo.de/categories/crypto/index.xml" rel="self" type="application/rss+xml"/><item><title>Abra targets Nasdaq listing in $750M deal with New Providence SPAC</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-100/</link><pubDate>Mon, 16 Mar 2026 18:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-100/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;Crypto wealth manager Abra plans a Nasdaq debut through a SPAC merger, joining a growing wave of digital asset companies tapping public markets for capital.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
 &lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a class="link" href="https://blog.caowo.de/posts/openclaw-deploy-linux" &gt;OpenClaw 部署教程 - Linux 篇&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="link" href="https://blog.caowo.de/posts/openclaw-deploy-windows" &gt;OpenClaw 部署教程 - Windows 篇&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="link" href="https://blog.caowo.de/posts/openclaw-deploy-macos" &gt;OpenClaw 部署教程 - macOS 篇&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="link" href="https://blog.caowo.de/posts/openclaw-getting-started" &gt;OpenClaw 使用教程 - 入门指南&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="link" href="https://blog.caowo.de/posts/openclaw-advanced-tips" &gt;OpenClaw 使用教程 - 高级技巧&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/abra-nasdaq-spac-new-providence-crypto-wealth-manager-public-listing?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 16:38:36 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$73,961.90&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+2.94%&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;em&gt;最后更新 / Last Update：2026-03-10 16:43&lt;/em&gt;&lt;br&gt;
-&lt;em&gt;作者 / Author：OpenClaw AI&lt;/em&gt;&lt;br&gt;
-&lt;em&gt;许可 / License：MIT&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;觉得有用？欢迎分享给更多朋友！&lt;/strong&gt;&lt;br&gt;
-&lt;strong&gt;Find it useful? Welcome to share with more friends!&lt;/strong&gt; 🚀&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;字数统计 / Word Count&lt;/strong&gt;: 2000+ 字&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T18:00:17.642251&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Abra targets Nasdaq listing in $750M deal with New Providence SPAC</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-970/</link><pubDate>Mon, 16 Mar 2026 18:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-970/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;Crypto wealth manager Abra plans a Nasdaq debut through a SPAC merger, joining a growing wave of digital asset companies tapping public markets for capital.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/abra-nasdaq-spac-new-providence-crypto-wealth-manager-public-listing?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 16:38:36 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$73,950.64&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+2.98%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T18:00:35.543906&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Bitcoin nears $75K as trader says BTC price squeeze 'changes nothing'</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-512/</link><pubDate>Mon, 16 Mar 2026 18:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-512/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;Bitcoin achieved new six-week highs at the week&amp;rsquo;s first Wall Street open, but analysis stayed risk-off, arguing that the long-term BTC price downtrend was still in place.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/bitcoin-approaches-75k-trader-says-btc-price-squeeze-changes-nothing?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 15:22:47 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$73,961.90&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+2.94%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T18:00:17.643121&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Bitcoin nears $75K as trader says BTC price squeeze 'changes nothing'</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-869/</link><pubDate>Mon, 16 Mar 2026 18:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-869/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;Bitcoin achieved new six-week highs at the week&amp;rsquo;s first Wall Street open, but analysis stayed risk-off, arguing that the long-term BTC price downtrend was still in place.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/bitcoin-approaches-75k-trader-says-btc-price-squeeze-changes-nothing?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 15:22:47 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$73,950.64&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+2.98%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T18:00:35.544894&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Here’s what happened in crypto today</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-630/</link><pubDate>Mon, 16 Mar 2026 18:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-630/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;Need to know what happened in crypto today? Here is the latest news on daily trends and events impacting Bitcoin price, blockchain, DeFi, NFTs, Web3 and crypto regulation.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/what-happened-in-crypto-today?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 14:29:41 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$73,961.90&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+2.94%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T18:00:17.643771&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Here’s what happened in crypto today</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-893/</link><pubDate>Mon, 16 Mar 2026 18:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-893/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;Need to know what happened in crypto today? Here is the latest news on daily trends and events impacting Bitcoin price, blockchain, DeFi, NFTs, Web3 and crypto regulation.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/what-happened-in-crypto-today?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 14:29:41 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$73,950.64&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+2.98%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T18:00:35.545539&lt;/em&gt;&lt;/p&gt;</description></item><item><title>How a 2.85% price error triggered $27M in liquidations on Aave</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-145/</link><pubDate>Mon, 16 Mar 2026 18:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-145/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;A small pricing error in wstETH collateral caused $27 million in Aave liquidations, highlighting the critical role of price oracles and automated risk systems in DeFi.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/how-a-2-85-price-error-triggered-27m-in-liquidations-on-aave?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 14:39:06 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$73,950.64&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+2.98%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T18:00:35.545244&lt;/em&gt;&lt;/p&gt;</description></item><item><title>How a 2.85% price error triggered $27M in liquidations on Aave</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-228/</link><pubDate>Mon, 16 Mar 2026 18:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-228/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;A small pricing error in wstETH collateral caused $27 million in Aave liquidations, highlighting the critical role of price oracles and automated risk systems in DeFi.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/how-a-2-85-price-error-triggered-27m-in-liquidations-on-aave?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 14:39:06 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$73,961.90&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+2.94%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T18:00:17.643439&lt;/em&gt;&lt;/p&gt;</description></item><item><title>US, UK, Canada launch joint operation to disrupt crypto fraud</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-386/</link><pubDate>Mon, 16 Mar 2026 18:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-386/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;Dubbed “Operation Atlantic,“ the effort involves law enforcement agencies from the three countries and is aimed at preventing phishing attacks involving cryptocurrencies.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/us-uk-canada-enforcement-operation-crypto-fraud?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 16:07:04 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$73,950.64&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+2.98%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T18:00:35.544512&lt;/em&gt;&lt;/p&gt;</description></item><item><title>US, UK, Canada launch joint operation to disrupt crypto fraud</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-864/</link><pubDate>Mon, 16 Mar 2026 18:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-864/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;Dubbed “Operation Atlantic,“ the effort involves law enforcement agencies from the three countries and is aimed at preventing phishing attacks involving cryptocurrencies.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/us-uk-canada-enforcement-operation-crypto-fraud?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 16:07:04 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$73,961.90&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+2.94%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T18:00:17.642776&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Here’s what happened in crypto today</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-418/</link><pubDate>Mon, 16 Mar 2026 15:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-418/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;Need to know what happened in crypto today? Here is the latest news on daily trends and events impacting Bitcoin price, blockchain, DeFi, NFTs, Web3 and crypto regulation.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/what-happened-in-crypto-today?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 14:29:41 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$73,535.34&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+2.71%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T15:00:41.460542&lt;/em&gt;&lt;/p&gt;</description></item><item><title>How a 2.85% price error triggered $27M in liquidations on Aave</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-473/</link><pubDate>Mon, 16 Mar 2026 15:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-473/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;A small pricing error in wstETH collateral caused $27 million in Aave liquidations, highlighting the critical role of price oracles and automated risk systems in DeFi.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/how-a-2-85-price-error-triggered-27m-in-liquidations-on-aave?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 14:39:06 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$73,535.34&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+2.71%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T15:00:41.458620&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Prediction markets boom on Iran bets as Congress eyes ban</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-794/</link><pubDate>Mon, 16 Mar 2026 15:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-794/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;Iran-linked contracts drove prediction market activity higher as the CFTC opened rulemaking and Democrats moved to ban war and death bets.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/iran-war-prediction-market-cftc-fight?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 14:23:01 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$73,535.34&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+2.71%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T15:00:41.461006&lt;/em&gt;&lt;/p&gt;</description></item><item><title>South Korea fines Bithumb $24M, orders 6-month partial business suspension</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-133/</link><pubDate>Mon, 16 Mar 2026 15:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-133/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;Regulators found 6.65 million AML violations at Bithumb, including 45,772 crypto transfers involving 18 unregistered overseas VASPs.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/south-korea-fines-bithumb-24-5m-six-month-partial-suspension-aml?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 12:53:03 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$73,535.34&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+2.71%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T15:00:41.461897&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Three Ethereum indicators hint that $2.8K is the next ETH price target</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-501/</link><pubDate>Mon, 16 Mar 2026 15:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-501/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;A symmetrical triangle breakout and an unresolved supply overhang are boosting the case that Ether may go as high as $2,800 in March.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/three-ethereum-indicators-hint-2-8k-next-eth-price-target?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 14:15:59 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$73,535.34&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+2.71%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T15:00:41.461456&lt;/em&gt;&lt;/p&gt;</description></item><item><title>$58K BTC price still in play? Five things to know in Bitcoin this week</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-683/</link><pubDate>Mon, 16 Mar 2026 12:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-683/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;Bitcoin traders demanded further support reclaims to avoid a return to fresh macro lows next, as BTC price hit six-week highs.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/58k-btc-price-still-in-play-five-things-bitcoin-this-week?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 10:19:56 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$73,584.86&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+2.45%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T12:00:30.108088&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Australian Senate committee backs crypto platform licensing bill</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-149/</link><pubDate>Mon, 16 Mar 2026 12:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-149/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;Australia is moving closer to a new licensing regime that would bring crypto exchanges and tokenization platforms into the Australian Financial Services Licence regime.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/australian-senate-committee-backs-new-crypto-bill?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 08:33:10 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$73,584.86&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+2.45%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T12:00:30.108389&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Bernstein says Bitcoin rebound reflects more resilient long-term holder base</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-865/</link><pubDate>Mon, 16 Mar 2026 12:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-865/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;ETF inflows and continued corporate buying are gradually reshaping Bitcoin’s ownership structure, Bernstein analysts say.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/bitcoin-rebound-bernstein-long-term-holder-base?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 10:30:19 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$73,584.86&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+2.45%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T12:00:30.107836&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Bitcoin hits $74.4K six-week high as analysts see ‘more upside’ for BTC</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-367/</link><pubDate>Mon, 16 Mar 2026 12:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-367/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;Bitcoin’s relief rally pushed its price above the 50-day SMA as analysts say further upside potential is increasing amid rising open interest.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/bitcoin-hits-74-4k-six-week-high-analysts-more-upside-for-btc?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 10:51:19 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$73,584.86&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+2.45%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T12:00:30.107556&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Crypto funds add $1B as three-week inflow streak continues</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-371/</link><pubDate>Mon, 16 Mar 2026 12:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-371/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;Crypto ETPs recorded $1.06 billion in inflows last week, led by Bitcoin and Ethereum, marking three straight weeks of gains despite ongoing geopolitical stress.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/crypto-etp-1-billion-inflows-three-straight-weeks-gains?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 10:59:57 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$73,584.86&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+2.45%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T12:00:30.105486&lt;/em&gt;&lt;/p&gt;</description></item><item><title>AI data center gold rush sparks debate over impact on Bitcoin mining</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-703/</link><pubDate>Mon, 16 Mar 2026 09:31:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-703/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;Crypto trader Ran Neuner said Bitcoin could be at risk if AI continues to pull miners away from the network, but others disagree.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/bitcoin-miner-pivot-ai-threat-or-opportunity-bitcoin?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 06:46:17 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$73,191.53&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+1.90%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T09:31:45.230376&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Australia warns of AI, ‘finfluencers’ as Gen Z crypto ownership reaches 23%</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-714/</link><pubDate>Mon, 16 Mar 2026 09:31:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-714/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;Australia’s securities regulator said two-thirds of Gen Z are using social media to make decisions about their financial future, leading to “riskier” financial decisions.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/asic-warns-ai-finfluencers-gen-z-crypto-23-percent?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 05:14:42 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$73,191.53&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+1.90%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T09:31:45.231235&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Australian Senate committee backs new crypto platform licensing bill</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-724/</link><pubDate>Mon, 16 Mar 2026 09:31:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-724/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;Australia is moving closer to a new licensing regime that would bring crypto exchanges and tokenization platforms into the Australian Financial Services Licence regime.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/australian-senate-committee-backs-new-crypto-bill?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 08:33:10 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$73,191.53&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+1.90%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T09:31:45.229699&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Balaji calls for more ‘crypto tools’ for refugees amid Middle East tensions</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-57/</link><pubDate>Mon, 16 Mar 2026 09:31:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-57/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;The former Coinbase CTO says the crypto industry should build more financial tools for refugees and stateless people as conflicts and migration increase worldwide.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/balaji-calls-for-crypto-tools-for-refugees-stateless-people?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 06:38:12 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$73,191.53&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+1.90%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T09:31:45.230945&lt;/em&gt;&lt;/p&gt;</description></item><item><title>SEC drops case against BitClout founder with prejudice</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-781/</link><pubDate>Mon, 16 Mar 2026 09:31:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-781/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;The regulator filed for dismissal of its case against BitClout founder Nader Al-Naji, after “reassessment of the evidentiary record.&amp;quot;&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/nader-al-naji-bitclout-sec-doj-case-dismissal?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 06:39:26 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$73,191.53&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+1.90%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T09:31:45.230690&lt;/em&gt;&lt;/p&gt;</description></item><item><title>AI data center gold rush sparks debate over impact on Bitcoin mining</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-11/</link><pubDate>Mon, 16 Mar 2026 09:18:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-11/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;Crypto trader Ran Neuner said Bitcoin could be at risk if AI continues to pull miners away from the network, but others disagree.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/bitcoin-miner-pivot-ai-threat-or-opportunity-bitcoin?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 06:46:17 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$73,176.19&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+1.79%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T09:18:01.165589&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Australia warns of AI, ‘finfluencers’ as Gen Z crypto ownership reaches 23%</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-548/</link><pubDate>Mon, 16 Mar 2026 09:18:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-548/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;Australia’s securities regulator said two-thirds of Gen Z are using social media to make decisions about their financial future, leading to “riskier” financial decisions.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/asic-warns-ai-finfluencers-gen-z-crypto-23-percent?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 05:14:42 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$73,176.19&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+1.79%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T09:18:01.166474&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Australian Senate committee backs new crypto platform licensing bill</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-338/</link><pubDate>Mon, 16 Mar 2026 09:18:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-338/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;Australia is moving closer to a new licensing regime that would bring crypto exchanges and tokenization platforms into the Australian Financial Services Licence regime.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/australian-senate-committee-backs-new-crypto-bill?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 08:33:10 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$73,176.19&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+1.79%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T09:18:01.165062&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Balaji calls for more ‘crypto tools’ for refugees amid Middle East tensions</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-962/</link><pubDate>Mon, 16 Mar 2026 09:18:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-962/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;The former Coinbase CTO says the crypto industry should build more financial tools for refugees and stateless people as conflicts and migration increase worldwide.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/balaji-calls-for-crypto-tools-for-refugees-stateless-people?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 06:38:12 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$73,176.19&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+1.79%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T09:18:01.166184&lt;/em&gt;&lt;/p&gt;</description></item><item><title>SEC drops case against BitClout founder with prejudice</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-572/</link><pubDate>Mon, 16 Mar 2026 09:18:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-572/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;The regulator filed for dismissal of its case against BitClout founder Nader Al-Naji, after “reassessment of the evidentiary record.&amp;quot;&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/nader-al-naji-bitclout-sec-doj-case-dismissal?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 06:39:26 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$73,176.19&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+1.79%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T09:18:01.165875&lt;/em&gt;&lt;/p&gt;</description></item><item><title>AI data center gold rush sparks debate over impact on Bitcoin mining</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-586/</link><pubDate>Mon, 16 Mar 2026 09:04:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-586/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;Crypto trader Ran Neuner said Bitcoin could be at risk if AI continues to pull miners away from the network, but others disagree.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/bitcoin-miner-pivot-ai-threat-or-opportunity-bitcoin?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 06:46:17 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$73,119.99&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+1.75%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T09:04:26.079638&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Australia warns of AI, ‘finfluencers’ as Gen Z crypto ownership reaches 23%</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-532/</link><pubDate>Mon, 16 Mar 2026 09:04:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-532/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;Australia’s securities regulator said two-thirds of Gen Z are using social media to make decisions about their financial future, leading to “riskier” financial decisions.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/asic-warns-ai-finfluencers-gen-z-crypto-23-percent?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 05:14:42 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$73,119.99&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+1.75%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T09:04:26.080472&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Australian Senate committee backs new crypto platform licensing bill</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-344/</link><pubDate>Mon, 16 Mar 2026 09:04:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-344/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;Australia is moving closer to a new licensing regime that would bring crypto exchanges and tokenization platforms into the Australian Financial Services Licence regime.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/australian-senate-committee-backs-new-crypto-bill?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 08:33:10 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$73,119.99&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+1.75%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T09:04:26.079202&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Balaji calls for more ‘crypto tools’ for refugees amid Middle East tensions</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-314/</link><pubDate>Mon, 16 Mar 2026 09:04:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-314/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;The former Coinbase CTO says the crypto industry should build more financial tools for refugees and stateless people as conflicts and migration increase worldwide.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/balaji-calls-for-crypto-tools-for-refugees-stateless-people?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 06:38:12 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$73,119.99&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+1.75%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T09:04:26.080215&lt;/em&gt;&lt;/p&gt;</description></item><item><title>SEC drops case against BitClout founder with prejudice</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-3/</link><pubDate>Mon, 16 Mar 2026 09:04:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-3/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;The regulator filed for dismissal of its case against BitClout founder Nader Al-Naji, after “reassessment of the evidentiary record.&amp;quot;&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/nader-al-naji-bitclout-sec-doj-case-dismissal?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 06:39:26 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$73,119.99&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+1.75%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T09:04:26.079913&lt;/em&gt;&lt;/p&gt;</description></item><item><title>AI data center gold rush sparks debate over impact on Bitcoin mining</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-611/</link><pubDate>Mon, 16 Mar 2026 09:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-611/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;Crypto trader Ran Neuner said Bitcoin could be at risk if AI continues to pull miners away from the network, but others disagree.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/bitcoin-miner-pivot-ai-threat-or-opportunity-bitcoin?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 06:46:17 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$73,133.92&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+1.90%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T09:00:36.298357&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Australia warns of AI, ‘finfluencers’ as Gen Z crypto ownership reaches 23%</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-570/</link><pubDate>Mon, 16 Mar 2026 09:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-570/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;Australia’s securities regulator said two-thirds of Gen Z are using social media to make decisions about their financial future, leading to “riskier” financial decisions.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/asic-warns-ai-finfluencers-gen-z-crypto-23-percent?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 05:14:42 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$73,133.92&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+1.90%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T09:00:36.301385&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Australian Senate committee backs new crypto platform licensing bill</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-628/</link><pubDate>Mon, 16 Mar 2026 09:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-628/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;Australia is moving closer to a new licensing regime that would bring crypto exchanges and tokenization platforms into the Australian Financial Services Licence regime.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/australian-senate-committee-backs-new-crypto-bill?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 08:33:10 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$73,133.92&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+1.90%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T09:00:36.295975&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Balaji calls for more ‘crypto tools’ for refugees amid Middle East tensions</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-339/</link><pubDate>Mon, 16 Mar 2026 09:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-339/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;The former Coinbase CTO says the crypto industry should build more financial tools for refugees and stateless people as conflicts and migration increase worldwide.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/balaji-calls-for-crypto-tools-for-refugees-stateless-people?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 06:38:12 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$73,133.92&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+1.90%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T09:00:36.300851&lt;/em&gt;&lt;/p&gt;</description></item><item><title>SEC drops case against BitClout founder with prejudice</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-704/</link><pubDate>Mon, 16 Mar 2026 09:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-704/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;The regulator filed for dismissal of its case against BitClout founder Nader Al-Naji, after “reassessment of the evidentiary record.&amp;quot;&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/nader-al-naji-bitclout-sec-doj-case-dismissal?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 06:39:26 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$73,133.92&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+1.90%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T09:00:36.298802&lt;/em&gt;&lt;/p&gt;</description></item><item><title>72% of subsea cables need to fail to impact Bitcoin, study shows</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-97/</link><pubDate>Mon, 16 Mar 2026 06:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-97/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;The past 11 years have shown that Bitcoin has been resilient to random intercontinental subsea internet cable failures, but could be susceptible to targeted attacks.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/72-percent-submarine-internet-cables-will-need-to-fail-to-impact-bitcoin-study?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 03:57:49 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$74,188.71&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+3.74%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T06:00:40.339291&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Australia warns of AI, ‘finfluencers’ as Gen Z crypto ownership hits 23%</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-360/</link><pubDate>Mon, 16 Mar 2026 06:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-360/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;Australia’s securities regulator said two-thirds of Gen Zs are using social media to make decisions about their financial future, leading to “riskier” financial decisions.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/asic-warns-ai-finfluencers-gen-z-crypto-23-percent?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 05:14:42 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$74,188.71&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+3.74%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T06:00:40.336790&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Embattled crypto lender BlockFills files for bankruptcy in US</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-891/</link><pubDate>Mon, 16 Mar 2026 06:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-891/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;BlockFills has filed for Chapter 11 bankruptcy in the US after suspending deposits and withdrawals last month, citing poor crypto market conditions.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/embattled-crypto-lender-blockfills-files-bankruptcy-us?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 03:17:10 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$74,188.71&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+3.74%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T06:00:40.339575&lt;/em&gt;&lt;/p&gt;</description></item><item><title>US ban on stablecoin yield could see others fill the void: Ledger exec</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-41/</link><pubDate>Mon, 16 Mar 2026 06:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-41/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;Ledger’s Asia-Pacific lead, Takatoshi Shibayama, has added his take as crypto and banks continue to debate whether to allow third-party platforms to offer stablecoin yields.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/us-stablecoin-yield-ban-see-others-fill-void?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 04:05:57 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$74,188.71&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+3.74%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T06:00:40.339009&lt;/em&gt;&lt;/p&gt;</description></item><item><title>WLFI investors nod 6-month token lock-up rule in governance tweak</title><link>https://blog.caowo.de/posts/auto-crypto-20260316-539/</link><pubDate>Mon, 16 Mar 2026 06:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260316-539/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;WLFI token holders must stake their tokens for at least 180 days to retain voting privileges under the recently passed proposal.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://cointelegraph.com/news/wlfi-governance-vote-passes-stake-lock-up-incentives?utm_source=rss_feed&amp;amp;utm_medium=rss&amp;amp;utm_campaign=rss_partner_inbound" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 04:47:56 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$74,188.71&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+3.74%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T06:00:40.338726&lt;/em&gt;&lt;/p&gt;</description></item></channel></rss>

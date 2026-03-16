@@ -1,6 +1,6 @@
 ---
 title: "SEC drops case against BitClout founder with prejudice"
-date: 2026-03-16 09:04
+date: 2026-03-16T09:04:00+08:00
 categories: ["crypto"]
 tags: ["auto-generated", "rss"]
 draft: false

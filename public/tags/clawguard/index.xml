@@ -1,266 +1,39 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ClawGuard on 言零的博客</title><link>https://blog.caowo.de/tags/clawguard/</link><description>Recent content in ClawGuard on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 17 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.caowo.de/tags/clawguard/index.xml" rel="self" type="application/rss+xml"/><item><title>ClawGuard-BNB 每日安全报告</title><link>https://blog.caowo.de/posts/binance/binance-daily-2026-03-17/</link><pubDate>Tue, 17 Mar 2026 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/binance/binance-daily-2026-03-17/</guid><description>&lt;h1 id="clawguard-bnb-每日安全报告"&gt;ClawGuard-BNB 每日安全报告
-&lt;/h1&gt;
- &lt;blockquote&gt;
- &lt;p&gt;⚠️ &lt;strong&gt;风险提示&lt;/strong&gt;：本文仅为个人经验分享，不构成任何投资建议。&lt;/p&gt;
-
- &lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;h2 id="-api-安全审计"&gt;🛡️ API 安全审计
-&lt;/h2&gt;&lt;h3 id="今日检查结果"&gt;今日检查结果
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;✅ 提现权限：已禁用&lt;/li&gt;
-&lt;li&gt;✅ IP 白名单：已配置&lt;/li&gt;
-&lt;li&gt;✅ 密钥加密：AES-256&lt;/li&gt;
-&lt;li&gt;✅ 访问日志：正常&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="12-项安全检查"&gt;12 项安全检查
-&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;提现权限检查 ✅&lt;/li&gt;
-&lt;li&gt;IP 白名单配置 ✅&lt;/li&gt;
-&lt;li&gt;API 密钥泄露检测 ✅&lt;/li&gt;
-&lt;li&gt;权限最小化原则 ✅&lt;/li&gt;
-&lt;li&gt;密钥轮换提醒 ✅&lt;/li&gt;
-&lt;li&gt;异常登录检测 ✅&lt;/li&gt;
-&lt;li&gt;API 调用频率监控 ✅&lt;/li&gt;
-&lt;li&gt;密钥存储加密 ✅&lt;/li&gt;
-&lt;li&gt;访问日志审计 ✅&lt;/li&gt;
-&lt;li&gt;风险操作告警 ✅&lt;/li&gt;
-&lt;li&gt;设备指纹识别 ✅&lt;/li&gt;
-&lt;li&gt;二次验证检查 ✅&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h2 id="-交易分析"&gt;📊 交易分析
-&lt;/h2&gt;&lt;h3 id="今日交易统计"&gt;今日交易统计
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;交易次数：待统计&lt;/li&gt;
-&lt;li&gt;胜率：待统计&lt;/li&gt;
-&lt;li&gt;盈亏：待统计&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="技术指标"&gt;技术指标
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;RSI：待分析&lt;/li&gt;
-&lt;li&gt;MACD：待分析&lt;/li&gt;
-&lt;li&gt;布林带：待分析&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="-风险提示"&gt;⚠️ 风险提示
-&lt;/h2&gt;
- &lt;blockquote&gt;
- &lt;p&gt;投资有风险，入市需谨慎。&lt;/p&gt;
-
- &lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;em&gt;ClawGuard-BNB 自动创作&lt;/em&gt;
-&lt;em&gt;项目：https://github.com/wizawn/lobsterguard&lt;/em&gt;&lt;/p&gt;</description></item><item><title>ClawGuard-BNB 每日安全报告</title><link>https://blog.caowo.de/posts/binance/binance-daily-2026-03-16/</link><pubDate>Mon, 16 Mar 2026 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/binance/binance-daily-2026-03-16/</guid><description>&lt;h1 id="clawguard-bnb-每日安全报告"&gt;ClawGuard-BNB 每日安全报告
-&lt;/h1&gt;
- &lt;blockquote&gt;
- &lt;p&gt;⚠️ &lt;strong&gt;风险提示&lt;/strong&gt;：本文仅为个人经验分享，不构成任何投资建议。&lt;/p&gt;
-
- &lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;h2 id="-api-安全审计"&gt;🛡️ API 安全审计
-&lt;/h2&gt;&lt;h3 id="今日检查结果"&gt;今日检查结果
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;✅ 提现权限：已禁用&lt;/li&gt;
-&lt;li&gt;✅ IP 白名单：已配置&lt;/li&gt;
-&lt;li&gt;✅ 密钥加密：AES-256&lt;/li&gt;
-&lt;li&gt;✅ 访问日志：正常&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="12-项安全检查"&gt;12 项安全检查
-&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;提现权限检查 ✅&lt;/li&gt;
-&lt;li&gt;IP 白名单配置 ✅&lt;/li&gt;
-&lt;li&gt;API 密钥泄露检测 ✅&lt;/li&gt;
-&lt;li&gt;权限最小化原则 ✅&lt;/li&gt;
-&lt;li&gt;密钥轮换提醒 ✅&lt;/li&gt;
-&lt;li&gt;异常登录检测 ✅&lt;/li&gt;
-&lt;li&gt;API 调用频率监控 ✅&lt;/li&gt;
-&lt;li&gt;密钥存储加密 ✅&lt;/li&gt;
-&lt;li&gt;访问日志审计 ✅&lt;/li&gt;
-&lt;li&gt;风险操作告警 ✅&lt;/li&gt;
-&lt;li&gt;设备指纹识别 ✅&lt;/li&gt;
-&lt;li&gt;二次验证检查 ✅&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h2 id="-交易分析"&gt;📊 交易分析
-&lt;/h2&gt;&lt;h3 id="今日交易统计"&gt;今日交易统计
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;交易次数：待统计&lt;/li&gt;
-&lt;li&gt;胜率：待统计&lt;/li&gt;
-&lt;li&gt;盈亏：待统计&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="技术指标"&gt;技术指标
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;RSI：待分析&lt;/li&gt;
-&lt;li&gt;MACD：待分析&lt;/li&gt;
-&lt;li&gt;布林带：待分析&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="-风险提示"&gt;⚠️ 风险提示
-&lt;/h2&gt;
- &lt;blockquote&gt;
- &lt;p&gt;投资有风险，入市需谨慎。&lt;/p&gt;
-
- &lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;em&gt;ClawGuard-BNB 自动创作&lt;/em&gt;
-&lt;em&gt;项目：https://github.com/wizawn/lobsterguard&lt;/em&gt;&lt;/p&gt;</description></item><item><title>ClawGuard-BNB 每日安全报告</title><link>https://blog.caowo.de/posts/binance/binance-daily-2026-03-15/</link><pubDate>Sun, 15 Mar 2026 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/binance/binance-daily-2026-03-15/</guid><description>&lt;h1 id="clawguard-bnb-每日安全报告"&gt;ClawGuard-BNB 每日安全报告
-&lt;/h1&gt;
- &lt;blockquote&gt;
- &lt;p&gt;⚠️ &lt;strong&gt;风险提示&lt;/strong&gt;：本文仅为个人经验分享，不构成任何投资建议。&lt;/p&gt;
-
- &lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;h2 id="-api-安全审计"&gt;🛡️ API 安全审计
-&lt;/h2&gt;&lt;h3 id="今日检查结果"&gt;今日检查结果
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;✅ 提现权限：已禁用&lt;/li&gt;
-&lt;li&gt;✅ IP 白名单：已配置&lt;/li&gt;
-&lt;li&gt;✅ 密钥加密：AES-256&lt;/li&gt;
-&lt;li&gt;✅ 访问日志：正常&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="12-项安全检查"&gt;12 项安全检查
-&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;提现权限检查 ✅&lt;/li&gt;
-&lt;li&gt;IP 白名单配置 ✅&lt;/li&gt;
-&lt;li&gt;API 密钥泄露检测 ✅&lt;/li&gt;
-&lt;li&gt;权限最小化原则 ✅&lt;/li&gt;
-&lt;li&gt;密钥轮换提醒 ✅&lt;/li&gt;
-&lt;li&gt;异常登录检测 ✅&lt;/li&gt;
-&lt;li&gt;API 调用频率监控 ✅&lt;/li&gt;
-&lt;li&gt;密钥存储加密 ✅&lt;/li&gt;
-&lt;li&gt;访问日志审计 ✅&lt;/li&gt;
-&lt;li&gt;风险操作告警 ✅&lt;/li&gt;
-&lt;li&gt;设备指纹识别 ✅&lt;/li&gt;
-&lt;li&gt;二次验证检查 ✅&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h2 id="-交易分析"&gt;📊 交易分析
-&lt;/h2&gt;&lt;h3 id="今日交易统计"&gt;今日交易统计
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;交易次数：待统计&lt;/li&gt;
-&lt;li&gt;胜率：待统计&lt;/li&gt;
-&lt;li&gt;盈亏：待统计&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="技术指标"&gt;技术指标
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;RSI：待分析&lt;/li&gt;
-&lt;li&gt;MACD：待分析&lt;/li&gt;
-&lt;li&gt;布林带：待分析&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="-风险提示"&gt;⚠️ 风险提示
-&lt;/h2&gt;
- &lt;blockquote&gt;
- &lt;p&gt;投资有风险，入市需谨慎。&lt;/p&gt;
-
- &lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;em&gt;ClawGuard-BNB 自动创作&lt;/em&gt;
-&lt;em&gt;项目：https://github.com/wizawn/lobsterguard&lt;/em&gt;&lt;/p&gt;</description></item><item><title>ClawGuard-BNB 每日安全报告</title><link>https://blog.caowo.de/posts/binance/binance-daily-2026-03-14/</link><pubDate>Sat, 14 Mar 2026 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/binance/binance-daily-2026-03-14/</guid><description>&lt;h1 id="clawguard-bnb-每日安全报告"&gt;ClawGuard-BNB 每日安全报告
-&lt;/h1&gt;
- &lt;blockquote&gt;
- &lt;p&gt;⚠️ &lt;strong&gt;风险提示&lt;/strong&gt;：本文仅为个人经验分享，不构成任何投资建议。&lt;/p&gt;
-
- &lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;h2 id="-api-安全审计"&gt;🛡️ API 安全审计
-&lt;/h2&gt;&lt;h3 id="今日检查结果"&gt;今日检查结果
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;✅ 提现权限：已禁用&lt;/li&gt;
-&lt;li&gt;✅ IP 白名单：已配置&lt;/li&gt;
-&lt;li&gt;✅ 密钥加密：AES-256&lt;/li&gt;
-&lt;li&gt;✅ 访问日志：正常&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="12-项安全检查"&gt;12 项安全检查
-&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;提现权限检查 ✅&lt;/li&gt;
-&lt;li&gt;IP 白名单配置 ✅&lt;/li&gt;
-&lt;li&gt;API 密钥泄露检测 ✅&lt;/li&gt;
-&lt;li&gt;权限最小化原则 ✅&lt;/li&gt;
-&lt;li&gt;密钥轮换提醒 ✅&lt;/li&gt;
-&lt;li&gt;异常登录检测 ✅&lt;/li&gt;
-&lt;li&gt;API 调用频率监控 ✅&lt;/li&gt;
-&lt;li&gt;密钥存储加密 ✅&lt;/li&gt;
-&lt;li&gt;访问日志审计 ✅&lt;/li&gt;
-&lt;li&gt;风险操作告警 ✅&lt;/li&gt;
-&lt;li&gt;设备指纹识别 ✅&lt;/li&gt;
-&lt;li&gt;二次验证检查 ✅&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h2 id="-交易分析"&gt;📊 交易分析
-&lt;/h2&gt;&lt;h3 id="今日交易统计"&gt;今日交易统计
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;交易次数：待统计&lt;/li&gt;
-&lt;li&gt;胜率：待统计&lt;/li&gt;
-&lt;li&gt;盈亏：待统计&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="技术指标"&gt;技术指标
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;RSI：待分析&lt;/li&gt;
-&lt;li&gt;MACD：待分析&lt;/li&gt;
-&lt;li&gt;布林带：待分析&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="-风险提示"&gt;⚠️ 风险提示
-&lt;/h2&gt;
- &lt;blockquote&gt;
- &lt;p&gt;投资有风险，入市需谨慎。&lt;/p&gt;
-
- &lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;em&gt;ClawGuard-BNB 自动创作&lt;/em&gt;
-&lt;em&gt;项目：https://github.com/wizawn/lobsterguard&lt;/em&gt;&lt;/p&gt;</description></item><item><title>ClawGuard-BNB 每日安全报告</title><link>https://blog.caowo.de/posts/binance/binance-daily-2026-03-12/</link><pubDate>Thu, 12 Mar 2026 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/binance/binance-daily-2026-03-12/</guid><description>&lt;h1 id="clawguard-bnb-每日安全报告"&gt;ClawGuard-BNB 每日安全报告
-&lt;/h1&gt;
- &lt;blockquote&gt;
- &lt;p&gt;⚠️ &lt;strong&gt;风险提示&lt;/strong&gt;：本文仅为个人经验分享，不构成任何投资建议。&lt;/p&gt;
-
- &lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;h2 id="-api-安全审计"&gt;🛡️ API 安全审计
-&lt;/h2&gt;&lt;h3 id="今日检查结果"&gt;今日检查结果
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;✅ 提现权限：已禁用&lt;/li&gt;
-&lt;li&gt;✅ IP 白名单：已配置&lt;/li&gt;
-&lt;li&gt;✅ 密钥加密：AES-256&lt;/li&gt;
-&lt;li&gt;✅ 访问日志：正常&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="12-项安全检查"&gt;12 项安全检查
-&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;提现权限检查 ✅&lt;/li&gt;
-&lt;li&gt;IP 白名单配置 ✅&lt;/li&gt;
-&lt;li&gt;API 密钥泄露检测 ✅&lt;/li&gt;
-&lt;li&gt;权限最小化原则 ✅&lt;/li&gt;
-&lt;li&gt;密钥轮换提醒 ✅&lt;/li&gt;
-&lt;li&gt;异常登录检测 ✅&lt;/li&gt;
-&lt;li&gt;API 调用频率监控 ✅&lt;/li&gt;
-&lt;li&gt;密钥存储加密 ✅&lt;/li&gt;
-&lt;li&gt;访问日志审计 ✅&lt;/li&gt;
-&lt;li&gt;风险操作告警 ✅&lt;/li&gt;
-&lt;li&gt;设备指纹识别 ✅&lt;/li&gt;
-&lt;li&gt;二次验证检查 ✅&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h2 id="-交易分析"&gt;📊 交易分析
-&lt;/h2&gt;&lt;h3 id="今日交易统计"&gt;今日交易统计
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;交易次数：待统计&lt;/li&gt;
-&lt;li&gt;胜率：待统计&lt;/li&gt;
-&lt;li&gt;盈亏：待统计&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="技术指标"&gt;技术指标
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;RSI：待分析&lt;/li&gt;
-&lt;li&gt;MACD：待分析&lt;/li&gt;
-&lt;li&gt;布林带：待分析&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="-风险提示"&gt;⚠️ 风险提示
-&lt;/h2&gt;
- &lt;blockquote&gt;
- &lt;p&gt;投资有风险，入市需谨慎。&lt;/p&gt;
-
- &lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;em&gt;ClawGuard-BNB 自动创作&lt;/em&gt;
-&lt;em&gt;项目：https://github.com/wizawn/lobsterguard&lt;/em&gt;&lt;/p&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>ClawGuard on 言零的博客</title>
+        <link>https://blog.caowo.de/tags/clawguard/</link>
+        <description>Recent content in ClawGuard on 言零的博客</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-CN</language>
+        <lastBuildDate>Tue, 17 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.caowo.de/tags/clawguard/index.xml" rel="self" type="application/rss+xml" /><item>
+            <title>ClawGuard-BNB 每日安全报告</title>
+            <link>https://blog.caowo.de/posts/binance/binance-daily-2026-03-17/</link>
+            <pubDate>Tue, 17 Mar 2026 00:00:00 +0000</pubDate>
+            <guid>https://blog.caowo.de/posts/binance/binance-daily-2026-03-17/</guid>
+            <description>&lt;h1 id=&#34;clawguard-bnb-每日安全报告&#34;&gt;ClawGuard-BNB 每日安全报告&#xA;&lt;/h1&gt;&#xA;    &lt;blockquote&gt;&#xA;        &lt;p&gt;⚠️ &lt;strong&gt;风险提示&lt;/strong&gt;：本文仅为个人经验分享，不构成任何投资建议。&lt;/p&gt;&#xA;&#xA;    &lt;/blockquote&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-api-安全审计&#34;&gt;🛡️ API 安全审计&#xA;&lt;/h2&gt;&lt;h3 id=&#34;今日检查结果&#34;&gt;今日检查结果&#xA;&lt;/h3&gt;&lt;ul&gt;&#xA;&lt;li&gt;✅ 提现权限：已禁用&lt;/li&gt;&#xA;&lt;li&gt;✅ IP 白名单：已配置&lt;/li&gt;&#xA;&lt;li&gt;✅ 密钥加密：AES-256&lt;/li&gt;&#xA;&lt;li&gt;✅ 访问日志：正常&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;12-项安全检查&#34;&gt;12 项安全检查&#xA;&lt;/h3&gt;&lt;ol&gt;&#xA;&lt;li&gt;提现权限检查 ✅&lt;/li&gt;&#xA;&lt;li&gt;IP 白名单配置 ✅&lt;/li&gt;&#xA;&lt;li&gt;API 密钥泄露检测 ✅&lt;/li&gt;&#xA;&lt;li&gt;权限最小化原则 ✅&lt;/li&gt;&#xA;&lt;li&gt;密钥轮换提醒 ✅&lt;/li&gt;&#xA;&lt;li&gt;异常登录检测 ✅&lt;/li&gt;&#xA;&lt;li&gt;API 调用频率监控 ✅&lt;/li&gt;&#xA;&lt;li&gt;密钥存储加密 ✅&lt;/li&gt;&#xA;&lt;li&gt;访问日志审计 ✅&lt;/li&gt;&#xA;&lt;li&gt;风险操作告警 ✅&lt;/li&gt;&#xA;&lt;li&gt;设备指纹识别 ✅&lt;/li&gt;&#xA;&lt;li&gt;二次验证检查 ✅&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-交易分析&#34;&gt;📊 交易分析&#xA;&lt;/h2&gt;&lt;h3 id=&#34;今日交易统计&#34;&gt;今日交易统计&#xA;&lt;/h3&gt;&lt;ul&gt;&#xA;&lt;li&gt;交易次数：待统计&lt;/li&gt;&#xA;&lt;li&gt;胜率：待统计&lt;/li&gt;&#xA;&lt;li&gt;盈亏：待统计&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;技术指标&#34;&gt;技术指标&#xA;&lt;/h3&gt;&lt;ul&gt;&#xA;&lt;li&gt;RSI：待分析&lt;/li&gt;&#xA;&lt;li&gt;MACD：待分析&lt;/li&gt;&#xA;&lt;li&gt;布林带：待分析&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-风险提示&#34;&gt;⚠️ 风险提示&#xA;&lt;/h2&gt;&#xA;    &lt;blockquote&gt;&#xA;        &lt;p&gt;投资有风险，入市需谨慎。&lt;/p&gt;&#xA;&#xA;    &lt;/blockquote&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;&lt;em&gt;ClawGuard-BNB 自动创作&lt;/em&gt;&#xA;&lt;em&gt;项目：https://github.com/wizawn/lobsterguard&lt;/em&gt;&lt;/p&gt;&#xA;</description>
+        </item><item>
+            <title>ClawGuard-BNB 每日安全报告</title>
+            <link>https://blog.caowo.de/posts/binance/binance-daily-2026-03-16/</link>
+            <pubDate>Mon, 16 Mar 2026 00:00:00 +0000</pubDate>
+            <guid>https://blog.caowo.de/posts/binance/binance-daily-2026-03-16/</guid>
+            <description>&lt;h1 id=&#34;clawguard-bnb-每日安全报告&#34;&gt;ClawGuard-BNB 每日安全报告&#xA;&lt;/h1&gt;&#xA;    &lt;blockquote&gt;&#xA;        &lt;p&gt;⚠️ &lt;strong&gt;风险提示&lt;/strong&gt;：本文仅为个人经验分享，不构成任何投资建议。&lt;/p&gt;&#xA;&#xA;    &lt;/blockquote&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-api-安全审计&#34;&gt;🛡️ API 安全审计&#xA;&lt;/h2&gt;&lt;h3 id=&#34;今日检查结果&#34;&gt;今日检查结果&#xA;&lt;/h3&gt;&lt;ul&gt;&#xA;&lt;li&gt;✅ 提现权限：已禁用&lt;/li&gt;&#xA;&lt;li&gt;✅ IP 白名单：已配置&lt;/li&gt;&#xA;&lt;li&gt;✅ 密钥加密：AES-256&lt;/li&gt;&#xA;&lt;li&gt;✅ 访问日志：正常&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;12-项安全检查&#34;&gt;12 项安全检查&#xA;&lt;/h3&gt;&lt;ol&gt;&#xA;&lt;li&gt;提现权限检查 ✅&lt;/li&gt;&#xA;&lt;li&gt;IP 白名单配置 ✅&lt;/li&gt;&#xA;&lt;li&gt;API 密钥泄露检测 ✅&lt;/li&gt;&#xA;&lt;li&gt;权限最小化原则 ✅&lt;/li&gt;&#xA;&lt;li&gt;密钥轮换提醒 ✅&lt;/li&gt;&#xA;&lt;li&gt;异常登录检测 ✅&lt;/li&gt;&#xA;&lt;li&gt;API 调用频率监控 ✅&lt;/li&gt;&#xA;&lt;li&gt;密钥存储加密 ✅&lt;/li&gt;&#xA;&lt;li&gt;访问日志审计 ✅&lt;/li&gt;&#xA;&lt;li&gt;风险操作告警 ✅&lt;/li&gt;&#xA;&lt;li&gt;设备指纹识别 ✅&lt;/li&gt;&#xA;&lt;li&gt;二次验证检查 ✅&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-交易分析&#34;&gt;📊 交易分析&#xA;&lt;/h2&gt;&lt;h3 id=&#34;今日交易统计&#34;&gt;今日交易统计&#xA;&lt;/h3&gt;&lt;ul&gt;&#xA;&lt;li&gt;交易次数：待统计&lt;/li&gt;&#xA;&lt;li&gt;胜率：待统计&lt;/li&gt;&#xA;&lt;li&gt;盈亏：待统计&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;技术指标&#34;&gt;技术指标&#xA;&lt;/h3&gt;&lt;ul&gt;&#xA;&lt;li&gt;RSI：待分析&lt;/li&gt;&#xA;&lt;li&gt;MACD：待分析&lt;/li&gt;&#xA;&lt;li&gt;布林带：待分析&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-风险提示&#34;&gt;⚠️ 风险提示&#xA;&lt;/h2&gt;&#xA;    &lt;blockquote&gt;&#xA;        &lt;p&gt;投资有风险，入市需谨慎。&lt;/p&gt;&#xA;&#xA;    &lt;/blockquote&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;&lt;em&gt;ClawGuard-BNB 自动创作&lt;/em&gt;&#xA;&lt;em&gt;项目：https://github.com/wizawn/lobsterguard&lt;/em&gt;&lt;/p&gt;&#xA;</description>
+        </item><item>
+            <title>ClawGuard-BNB 每日安全报告</title>
+            <link>https://blog.caowo.de/posts/binance/binance-daily-2026-03-15/</link>
+            <pubDate>Sun, 15 Mar 2026 00:00:00 +0000</pubDate>
+            <guid>https://blog.caowo.de/posts/binance/binance-daily-2026-03-15/</guid>
+            <description>&lt;h1 id=&#34;clawguard-bnb-每日安全报告&#34;&gt;ClawGuard-BNB 每日安全报告&#xA;&lt;/h1&gt;&#xA;    &lt;blockquote&gt;&#xA;        &lt;p&gt;⚠️ &lt;strong&gt;风险提示&lt;/strong&gt;：本文仅为个人经验分享，不构成任何投资建议。&lt;/p&gt;&#xA;&#xA;    &lt;/blockquote&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-api-安全审计&#34;&gt;🛡️ API 安全审计&#xA;&lt;/h2&gt;&lt;h3 id=&#34;今日检查结果&#34;&gt;今日检查结果&#xA;&lt;/h3&gt;&lt;ul&gt;&#xA;&lt;li&gt;✅ 提现权限：已禁用&lt;/li&gt;&#xA;&lt;li&gt;✅ IP 白名单：已配置&lt;/li&gt;&#xA;&lt;li&gt;✅ 密钥加密：AES-256&lt;/li&gt;&#xA;&lt;li&gt;✅ 访问日志：正常&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;12-项安全检查&#34;&gt;12 项安全检查&#xA;&lt;/h3&gt;&lt;ol&gt;&#xA;&lt;li&gt;提现权限检查 ✅&lt;/li&gt;&#xA;&lt;li&gt;IP 白名单配置 ✅&lt;/li&gt;&#xA;&lt;li&gt;API 密钥泄露检测 ✅&lt;/li&gt;&#xA;&lt;li&gt;权限最小化原则 ✅&lt;/li&gt;&#xA;&lt;li&gt;密钥轮换提醒 ✅&lt;/li&gt;&#xA;&lt;li&gt;异常登录检测 ✅&lt;/li&gt;&#xA;&lt;li&gt;API 调用频率监控 ✅&lt;/li&gt;&#xA;&lt;li&gt;密钥存储加密 ✅&lt;/li&gt;&#xA;&lt;li&gt;访问日志审计 ✅&lt;/li&gt;&#xA;&lt;li&gt;风险操作告警 ✅&lt;/li&gt;&#xA;&lt;li&gt;设备指纹识别 ✅&lt;/li&gt;&#xA;&lt;li&gt;二次验证检查 ✅&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-交易分析&#34;&gt;📊 交易分析&#xA;&lt;/h2&gt;&lt;h3 id=&#34;今日交易统计&#34;&gt;今日交易统计&#xA;&lt;/h3&gt;&lt;ul&gt;&#xA;&lt;li&gt;交易次数：待统计&lt;/li&gt;&#xA;&lt;li&gt;胜率：待统计&lt;/li&gt;&#xA;&lt;li&gt;盈亏：待统计&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;技术指标&#34;&gt;技术指标&#xA;&lt;/h3&gt;&lt;ul&gt;&#xA;&lt;li&gt;RSI：待分析&lt;/li&gt;&#xA;&lt;li&gt;MACD：待分析&lt;/li&gt;&#xA;&lt;li&gt;布林带：待分析&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-风险提示&#34;&gt;⚠️ 风险提示&#xA;&lt;/h2&gt;&#xA;    &lt;blockquote&gt;&#xA;        &lt;p&gt;投资有风险，入市需谨慎。&lt;/p&gt;&#xA;&#xA;    &lt;/blockquote&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;&lt;em&gt;ClawGuard-BNB 自动创作&lt;/em&gt;&#xA;&lt;em&gt;项目：https://github.com/wizawn/lobsterguard&lt;/em&gt;&lt;/p&gt;&#xA;</description>
+        </item><item>
+            <title>ClawGuard-BNB 每日安全报告</title>
+            <link>https://blog.caowo.de/posts/binance/binance-daily-2026-03-14/</link>
+            <pubDate>Sat, 14 Mar 2026 00:00:00 +0000</pubDate>
+            <guid>https://blog.caowo.de/posts/binance/binance-daily-2026-03-14/</guid>
+            <description>&lt;h1 id=&#34;clawguard-bnb-每日安全报告&#34;&gt;ClawGuard-BNB 每日安全报告&#xA;&lt;/h1&gt;&#xA;    &lt;blockquote&gt;&#xA;        &lt;p&gt;⚠️ &lt;strong&gt;风险提示&lt;/strong&gt;：本文仅为个人经验分享，不构成任何投资建议。&lt;/p&gt;&#xA;&#xA;    &lt;/blockquote&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-api-安全审计&#34;&gt;🛡️ API 安全审计&#xA;&lt;/h2&gt;&lt;h3 id=&#34;今日检查结果&#34;&gt;今日检查结果&#xA;&lt;/h3&gt;&lt;ul&gt;&#xA;&lt;li&gt;✅ 提现权限：已禁用&lt;/li&gt;&#xA;&lt;li&gt;✅ IP 白名单：已配置&lt;/li&gt;&#xA;&lt;li&gt;✅ 密钥加密：AES-256&lt;/li&gt;&#xA;&lt;li&gt;✅ 访问日志：正常&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;12-项安全检查&#34;&gt;12 项安全检查&#xA;&lt;/h3&gt;&lt;ol&gt;&#xA;&lt;li&gt;提现权限检查 ✅&lt;/li&gt;&#xA;&lt;li&gt;IP 白名单配置 ✅&lt;/li&gt;&#xA;&lt;li&gt;API 密钥泄露检测 ✅&lt;/li&gt;&#xA;&lt;li&gt;权限最小化原则 ✅&lt;/li&gt;&#xA;&lt;li&gt;密钥轮换提醒 ✅&lt;/li&gt;&#xA;&lt;li&gt;异常登录检测 ✅&lt;/li&gt;&#xA;&lt;li&gt;API 调用频率监控 ✅&lt;/li&gt;&#xA;&lt;li&gt;密钥存储加密 ✅&lt;/li&gt;&#xA;&lt;li&gt;访问日志审计 ✅&lt;/li&gt;&#xA;&lt;li&gt;风险操作告警 ✅&lt;/li&gt;&#xA;&lt;li&gt;设备指纹识别 ✅&lt;/li&gt;&#xA;&lt;li&gt;二次验证检查 ✅&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-交易分析&#34;&gt;📊 交易分析&#xA;&lt;/h2&gt;&lt;h3 id=&#34;今日交易统计&#34;&gt;今日交易统计&#xA;&lt;/h3&gt;&lt;ul&gt;&#xA;&lt;li&gt;交易次数：待统计&lt;/li&gt;&#xA;&lt;li&gt;胜率：待统计&lt;/li&gt;&#xA;&lt;li&gt;盈亏：待统计&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;技术指标&#34;&gt;技术指标&#xA;&lt;/h3&gt;&lt;ul&gt;&#xA;&lt;li&gt;RSI：待分析&lt;/li&gt;&#xA;&lt;li&gt;MACD：待分析&lt;/li&gt;&#xA;&lt;li&gt;布林带：待分析&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-风险提示&#34;&gt;⚠️ 风险提示&#xA;&lt;/h2&gt;&#xA;    &lt;blockquote&gt;&#xA;        &lt;p&gt;投资有风险，入市需谨慎。&lt;/p&gt;&#xA;&#xA;    &lt;/blockquote&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;&lt;em&gt;ClawGuard-BNB 自动创作&lt;/em&gt;&#xA;&lt;em&gt;项目：https://github.com/wizawn/lobsterguard&lt;/em&gt;&lt;/p&gt;&#xA;</description>
+        </item><item>
+            <title>ClawGuard-BNB 每日安全报告</title>
+            <link>https://blog.caowo.de/posts/binance/binance-daily-2026-03-12/</link>
+            <pubDate>Thu, 12 Mar 2026 00:00:00 +0000</pubDate>
+            <guid>https://blog.caowo.de/posts/binance/binance-daily-2026-03-12/</guid>
+            <description>&lt;h1 id=&#34;clawguard-bnb-每日安全报告&#34;&gt;ClawGuard-BNB 每日安全报告&#xA;&lt;/h1&gt;&#xA;    &lt;blockquote&gt;&#xA;        &lt;p&gt;⚠️ &lt;strong&gt;风险提示&lt;/strong&gt;：本文仅为个人经验分享，不构成任何投资建议。&lt;/p&gt;&#xA;&#xA;    &lt;/blockquote&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-api-安全审计&#34;&gt;🛡️ API 安全审计&#xA;&lt;/h2&gt;&lt;h3 id=&#34;今日检查结果&#34;&gt;今日检查结果&#xA;&lt;/h3&gt;&lt;ul&gt;&#xA;&lt;li&gt;✅ 提现权限：已禁用&lt;/li&gt;&#xA;&lt;li&gt;✅ IP 白名单：已配置&lt;/li&gt;&#xA;&lt;li&gt;✅ 密钥加密：AES-256&lt;/li&gt;&#xA;&lt;li&gt;✅ 访问日志：正常&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;12-项安全检查&#34;&gt;12 项安全检查&#xA;&lt;/h3&gt;&lt;ol&gt;&#xA;&lt;li&gt;提现权限检查 ✅&lt;/li&gt;&#xA;&lt;li&gt;IP 白名单配置 ✅&lt;/li&gt;&#xA;&lt;li&gt;API 密钥泄露检测 ✅&lt;/li&gt;&#xA;&lt;li&gt;权限最小化原则 ✅&lt;/li&gt;&#xA;&lt;li&gt;密钥轮换提醒 ✅&lt;/li&gt;&#xA;&lt;li&gt;异常登录检测 ✅&lt;/li&gt;&#xA;&lt;li&gt;API 调用频率监控 ✅&lt;/li&gt;&#xA;&lt;li&gt;密钥存储加密 ✅&lt;/li&gt;&#xA;&lt;li&gt;访问日志审计 ✅&lt;/li&gt;&#xA;&lt;li&gt;风险操作告警 ✅&lt;/li&gt;&#xA;&lt;li&gt;设备指纹识别 ✅&lt;/li&gt;&#xA;&lt;li&gt;二次验证检查 ✅&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-交易分析&#34;&gt;📊 交易分析&#xA;&lt;/h2&gt;&lt;h3 id=&#34;今日交易统计&#34;&gt;今日交易统计&#xA;&lt;/h3&gt;&lt;ul&gt;&#xA;&lt;li&gt;交易次数：待统计&lt;/li&gt;&#xA;&lt;li&gt;胜率：待统计&lt;/li&gt;&#xA;&lt;li&gt;盈亏：待统计&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;技术指标&#34;&gt;技术指标&#xA;&lt;/h3&gt;&lt;ul&gt;&#xA;&lt;li&gt;RSI：待分析&lt;/li&gt;&#xA;&lt;li&gt;MACD：待分析&lt;/li&gt;&#xA;&lt;li&gt;布林带：待分析&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-风险提示&#34;&gt;⚠️ 风险提示&#xA;&lt;/h2&gt;&#xA;    &lt;blockquote&gt;&#xA;        &lt;p&gt;投资有风险，入市需谨慎。&lt;/p&gt;&#xA;&#xA;    &lt;/blockquote&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;&lt;em&gt;ClawGuard-BNB 自动创作&lt;/em&gt;&#xA;&lt;em&gt;项目：https://github.com/wizawn/lobsterguard&lt;/em&gt;&lt;/p&gt;&#xA;</description>
+        </item></channel>
+</rss>

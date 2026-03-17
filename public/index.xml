@@ -1,4 +1,99 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>言零的博客</title><link>https://blog.caowo.de/</link><description>Recent content on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 16 Mar 2026 18:21:00 +0800</lastBuildDate><atom:link href="https://blog.caowo.de/index.xml" rel="self" type="application/rss+xml"/><item><title>Driving the $375,000 Porsche race car that debuted as a $12 DLC in iRacing</title><link>https://blog.caowo.de/posts/auto-tech-20260316-370/</link><pubDate>Mon, 16 Mar 2026 18:21:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-tech-20260316-370/</guid><description>&lt;h2 id="摘要"&gt;摘要
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>言零的博客</title><link>https://blog.caowo.de/</link><description>Recent content on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 17 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.caowo.de/index.xml" rel="self" type="application/rss+xml"/><item><title>AI Agent 技术前沿</title><link>https://blog.caowo.de/posts/ai-agent-2026-03-17/</link><pubDate>Tue, 17 Mar 2026 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/ai-agent-2026-03-17/</guid><description>&lt;h1 id="ai-agent-技术前沿"&gt;AI Agent 技术前沿
+&lt;/h1&gt;&lt;h2 id="-今日焦点"&gt;🤖 今日焦点
+&lt;/h2&gt;&lt;p&gt;AI Agent 领域最新技术动态和突破。&lt;/p&gt;
+&lt;h2 id="-技术应用"&gt;💻 技术应用
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;自动化任务&lt;/strong&gt; - Agent 自动执行日常任务&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;内容创作&lt;/strong&gt; - AI 辅助写作和编辑&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数据分析&lt;/strong&gt; - 智能数据处理和洞察&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="-案例分享"&gt;📈 案例分享
+&lt;/h2&gt;&lt;p&gt;实际应用场景和成功案例分析。&lt;/p&gt;
+&lt;h2 id="-未来展望"&gt;🔮 未来展望
+&lt;/h2&gt;&lt;p&gt;AI Agent 发展趋势和预测。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 自动创作&lt;/em&gt;&lt;/p&gt;</description></item><item><title>ClawGuard-BNB 每日安全报告</title><link>https://blog.caowo.de/posts/binance/binance-daily-2026-03-17/</link><pubDate>Tue, 17 Mar 2026 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/binance/binance-daily-2026-03-17/</guid><description>&lt;h1 id="clawguard-bnb-每日安全报告"&gt;ClawGuard-BNB 每日安全报告
+&lt;/h1&gt;
+ &lt;blockquote&gt;
+ &lt;p&gt;⚠️ &lt;strong&gt;风险提示&lt;/strong&gt;：本文仅为个人经验分享，不构成任何投资建议。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id="-api-安全审计"&gt;🛡️ API 安全审计
+&lt;/h2&gt;&lt;h3 id="今日检查结果"&gt;今日检查结果
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;✅ 提现权限：已禁用&lt;/li&gt;
+&lt;li&gt;✅ IP 白名单：已配置&lt;/li&gt;
+&lt;li&gt;✅ 密钥加密：AES-256&lt;/li&gt;
+&lt;li&gt;✅ 访问日志：正常&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="12-项安全检查"&gt;12 项安全检查
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;提现权限检查 ✅&lt;/li&gt;
+&lt;li&gt;IP 白名单配置 ✅&lt;/li&gt;
+&lt;li&gt;API 密钥泄露检测 ✅&lt;/li&gt;
+&lt;li&gt;权限最小化原则 ✅&lt;/li&gt;
+&lt;li&gt;密钥轮换提醒 ✅&lt;/li&gt;
+&lt;li&gt;异常登录检测 ✅&lt;/li&gt;
+&lt;li&gt;API 调用频率监控 ✅&lt;/li&gt;
+&lt;li&gt;密钥存储加密 ✅&lt;/li&gt;
+&lt;li&gt;访问日志审计 ✅&lt;/li&gt;
+&lt;li&gt;风险操作告警 ✅&lt;/li&gt;
+&lt;li&gt;设备指纹识别 ✅&lt;/li&gt;
+&lt;li&gt;二次验证检查 ✅&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id="-交易分析"&gt;📊 交易分析
+&lt;/h2&gt;&lt;h3 id="今日交易统计"&gt;今日交易统计
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;交易次数：待统计&lt;/li&gt;
+&lt;li&gt;胜率：待统计&lt;/li&gt;
+&lt;li&gt;盈亏：待统计&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="技术指标"&gt;技术指标
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;RSI：待分析&lt;/li&gt;
+&lt;li&gt;MACD：待分析&lt;/li&gt;
+&lt;li&gt;布林带：待分析&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-风险提示"&gt;⚠️ 风险提示
+&lt;/h2&gt;
+ &lt;blockquote&gt;
+ &lt;p&gt;投资有风险，入市需谨慎。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;ClawGuard-BNB 自动创作&lt;/em&gt;
+&lt;em&gt;项目：https://github.com/wizawn/lobsterguard&lt;/em&gt;&lt;/p&gt;</description></item><item><title>内容工厂每日精选</title><link>https://blog.caowo.de/posts/content-factory-2026-03-17/</link><pubDate>Tue, 17 Mar 2026 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/content-factory-2026-03-17/</guid><description>&lt;h1 id="内容工厂每日精选"&gt;内容工厂每日精选
+&lt;/h1&gt;&lt;h2 id="-今日主题"&gt;📝 今日主题
+&lt;/h2&gt;&lt;p&gt;今日内容创作主题和方向。&lt;/p&gt;
+&lt;h2 id="-创作心得"&gt;✍️ 创作心得
+&lt;/h2&gt;&lt;p&gt;内容创作过程中的经验和技巧。&lt;/p&gt;
+&lt;h2 id="-数据分析"&gt;📊 数据分析
+&lt;/h2&gt;&lt;p&gt;各平台内容表现数据分析。&lt;/p&gt;
+&lt;h2 id="-运营策略"&gt;🎯 运营策略
+&lt;/h2&gt;&lt;p&gt;内容运营策略和优化建议。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;内容工厂自动创作&lt;/em&gt;&lt;/p&gt;</description></item><item><title>红队 Agent 实战日记</title><link>https://blog.caowo.de/posts/redteam-agent-2026-03-17/</link><pubDate>Tue, 17 Mar 2026 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/redteam-agent-2026-03-17/</guid><description>&lt;h1 id="红队-agent-实战日记"&gt;红队 Agent 实战日记
+&lt;/h1&gt;&lt;h2 id="-今日任务"&gt;🎯 今日任务
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;目标资产扫描&lt;/li&gt;
+&lt;li&gt;漏洞自动化检测&lt;/li&gt;
+&lt;li&gt;渗透测试报告生成&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="-使用工具"&gt;🔧 使用工具
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;ARL 灯塔&lt;/strong&gt; - 资产收集&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Nuclei&lt;/strong&gt; - 漏洞扫描&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;红队 Agent&lt;/strong&gt; - 自动化渗透&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="-扫描结果"&gt;📊 扫描结果
+&lt;/h2&gt;&lt;p&gt;今日扫描资产数量、发现漏洞统计等。&lt;/p&gt;
+&lt;h2 id="-经验总结"&gt;💡 经验总结
+&lt;/h2&gt;&lt;p&gt;渗透测试中的发现和心得。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;红队 Agent 自动创作&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Driving the $375,000 Porsche race car that debuted as a $12 DLC in iRacing</title><link>https://blog.caowo.de/posts/auto-tech-20260316-370/</link><pubDate>Mon, 16 Mar 2026 18:21:00 +0800</pubDate><guid>https://blog.caowo.de/posts/auto-tech-20260316-370/</guid><description>&lt;h2 id="摘要"&gt;摘要
 &lt;/h2&gt;&lt;p&gt;Porsche provided flights from Albany, New York, to Los Angeles and accommodation so Ars could drive the 911 Cup. Ars does not accept paid editorial content.
 Video game launches for new cars are increasingly common these days—Gran Turismo alone has hosted dozens of &amp;ldquo;Vision&amp;rdquo; concepts—but Porsche decided to go a little more serious for the digital debut of its latest model. iRacing, the online driving sim that has been punishing people&amp;rsquo;s digital driving indiscretions since 2008, was not only the first place anyone could drive the new 911 Cup, but also serves as a sort of digital feeder series to Porsche&amp;rsquo;s one-make Porsche Carrera Cup.
 That sim makes a great venue because the 911 Cup is as hardcore a racer as iRacing is a hardcore racing game. When I was invited to drive that new car for real, I knew exactly where to start.
@@ -4229,7 +4324,24 @@ ETH &amp;lt; $3,200（强支撑）
 &lt;li&gt;24h 涨跌：-1.47%&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;em&gt;自动生成于 2026-03-12T15:00:21.622365&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Ethereum Foundation publishes new mandate defining its role, core principles</title><link>https://blog.caowo.de/posts/auto-crypto-20260313-649/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260313-649/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-12T15:00:21.622365&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Elon Musk's xAI sued for turning three girls' real photos into AI CSAM</title><link>https://blog.caowo.de/posts/auto-tech-20260316-886/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-tech-20260316-886/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;A tip from an anonymous Discord user led cops to find what may be the first confirmed Grok-generated child sexual abuse materials (CSAM) that Elon Musk&amp;rsquo;s xAI can&amp;rsquo;t easily dismiss as nonexistent.
+As recently as January, Musk denied that Grok generated any CSAM during a scandal in which xAI refused to update filters to block the chatbot from nudifying images of real people.
+At the height of the controversy, researchers from the Center for Countering Digital Hate estimated that Grok generated approximately three million sexualized images, of which about 23,000 images depicted apparent children. Rather than fix Grok, xAI limited access to the system to paying subscribers. That kept the most shocking outputs from circulating on X, but the worst of it was not posted there, Wired reported.Read full article
+Comments&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://arstechnica.com/tech-policy/2026/03/elon-musks-xai-sued-for-turning-three-girls-real-photos-into-ai-csam/" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 21:51:16 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$74,661.34&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+2.56%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T23:00:35.572023&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Ethereum Foundation publishes new mandate defining its role, core principles</title><link>https://blog.caowo.de/posts/auto-crypto-20260313-649/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260313-649/</guid><description>&lt;h2 id="摘要"&gt;摘要
 &lt;/h2&gt;&lt;h2 id="来源"&gt;来源
 &lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a class="link" href="https://www.coindesk.com/tech/2026/03/13/ethereum-foundation-publishes-new-mandate-defining-its-role-core-principles" target="_blank" rel="noopener"
@@ -4535,7 +4647,127 @@ time-sync&lt;/p&gt;
 &lt;li&gt;24h 涨跌：-0.83%&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;em&gt;自动生成于 2026-03-14T21:00:20.369313&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Meet LITRO: The tokenized crude project to start pilot testing soon for 2027 debut</title><link>https://blog.caowo.de/posts/auto-crypto-20260312-294/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260312-294/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-14T21:00:20.369313&lt;/em&gt;&lt;/p&gt;</description></item><item><title>How AI Assistants are Moving the Security Goalposts</title><link>https://blog.caowo.de/posts/auto-security-20260316-153/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-security-20260316-153/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;AI-based assistants or “agents” — autonomous programs that have access to the user’s computer, files, online services and can automate virtually any task — are growing in popularity with developers and IT workers. But as so many eyebrow-raising headlines over the past few weeks have shown, these powerful and assertive new tools are rapidly shifting the security priorities for organizations, while blurring the lines between data and code, trusted co-worker and insider threat, ninja hacker and novice code jockey.
+The new hotness in AI-based assistants — OpenClaw (formerly known as ClawdBot and Moltbot) — has seen rapid adoption since its release in November 2025. OpenClaw is an open-source autonomous AI agent designed to run locally on your computer and proactively take actions on your behalf without needing to be prompted.
+The OpenClaw logo.
+If that sounds like a risky proposition or a dare, consider that OpenClaw is most useful when it has complete access to your digital life, where it can then manage your inbox and calendar, execute programs and tools, browse the Internet for information, and integrate with chat apps like Discord, Signal, Teams or WhatsApp.
+Other more established AI assistants like Anthropic’s Claude and Microsoft’s Copilot also can do these things, but OpenClaw isn’t just a passive digital butler waiting for commands. Rather, it’s designed to take the initiative on your behalf based on what it knows about your life and its understanding of what you want done.
+“The testimonials are remarkable,” the AI security firm Snyk observed. “Developers building websites from their phones while putting babies to sleep; users running entire companies through a lobster-themed AI; engineers who’ve set up autonomous code loops that fix tests, capture errors through webhooks, and open pull requests, all while they’re away from their desks.”
+You can probably already see how this experimental technology could go sideways in a hurry. In late February, Summer Yue, the director of safety and alignment at Meta’s “superintelligence” lab, recounted on Twitter/X how she was fiddling with OpenClaw when the AI assistant suddenly began mass-deleting messages in her email inbox. The thread included screenshots of Yue frantically pleading with the preoccupied bot via instant message and ordering it to stop.
+“Nothing humbles you like telling your OpenClaw ‘confirm before acting’ and watching it speedrun deleting your inbox,” Yue said. “I couldn’t stop it from my phone. I had to RUN to my Mac mini like I was defusing a bomb.”
+Meta’s director of AI safety, recounting on Twitter/X how her OpenClaw installation suddenly began mass-deleting her inbox.
+There’s nothing wrong with feeling a little schadenfreude at Yue’s encounter with OpenClaw, which fits Meta’s “move fast and br&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://krebsonsecurity.com/2026/03/how-ai-assistants-are-moving-the-security-goalposts/" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Sun, 08 Mar 2026 23:35:42 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$74,200.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+3.48%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T21:00:47.245132&lt;/em&gt;&lt;/p&gt;</description></item><item><title>How AI Assistants are Moving the Security Goalposts</title><link>https://blog.caowo.de/posts/auto-security-20260316-38/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-security-20260316-38/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;AI-based assistants or “agents” — autonomous programs that have access to the user’s computer, files, online services and can automate virtually any task — are growing in popularity with developers and IT workers. But as so many eyebrow-raising headlines over the past few weeks have shown, these powerful and assertive new tools are rapidly shifting the security priorities for organizations, while blurring the lines between data and code, trusted co-worker and insider threat, ninja hacker and novice code jockey.
+The new hotness in AI-based assistants — OpenClaw (formerly known as ClawdBot and Moltbot) — has seen rapid adoption since its release in November 2025. OpenClaw is an open-source autonomous AI agent designed to run locally on your computer and proactively take actions on your behalf without needing to be prompted.
+The OpenClaw logo.
+If that sounds like a risky proposition or a dare, consider that OpenClaw is most useful when it has complete access to your digital life, where it can then manage your inbox and calendar, execute programs and tools, browse the Internet for information, and integrate with chat apps like Discord, Signal, Teams or WhatsApp.
+Other more established AI assistants like Anthropic’s Claude and Microsoft’s Copilot also can do these things, but OpenClaw isn’t just a passive digital butler waiting for commands. Rather, it’s designed to take the initiative on your behalf based on what it knows about your life and its understanding of what you want done.
+“The testimonials are remarkable,” the AI security firm Snyk observed. “Developers building websites from their phones while putting babies to sleep; users running entire companies through a lobster-themed AI; engineers who’ve set up autonomous code loops that fix tests, capture errors through webhooks, and open pull requests, all while they’re away from their desks.”
+You can probably already see how this experimental technology could go sideways in a hurry. In late February, Summer Yue, the director of safety and alignment at Meta’s “superintelligence” lab, recounted on Twitter/X how she was fiddling with OpenClaw when the AI assistant suddenly began mass-deleting messages in her email inbox. The thread included screenshots of Yue frantically pleading with the preoccupied bot via instant message and ordering it to stop.
+“Nothing humbles you like telling your OpenClaw ‘confirm before acting’ and watching it speedrun deleting your inbox,” Yue said. “I couldn’t stop it from my phone. I had to RUN to my Mac mini like I was defusing a bomb.”
+Meta’s director of AI safety, recounting on Twitter/X how her OpenClaw installation suddenly began mass-deleting her inbox.
+There’s nothing wrong with feeling a little schadenfreude at Yue’s encounter with OpenClaw, which fits Meta’s “move fast and br&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://krebsonsecurity.com/2026/03/how-ai-assistants-are-moving-the-security-goalposts/" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Sun, 08 Mar 2026 23:35:42 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$74,661.34&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+2.56%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T23:00:35.570661&lt;/em&gt;&lt;/p&gt;</description></item><item><title>How to watch Jensen Huang’s Nvidia GTC 2026 keynote — and what to expect</title><link>https://blog.caowo.de/posts/auto-tech-20260316-733/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-tech-20260316-733/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;GTC is Nvidia&amp;rsquo;s flagship annual event, where the chipmaker typically announces new products, partnerships, and its vision for the future of computing. Huang&amp;rsquo;s keynote will focus on Nvidia&amp;rsquo;s role in the future of computing and AI.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://techcrunch.com/2026/03/16/nvidia-gtc-how-to-watch-jensen-huang-2026-keynote/" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 17:51:46 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$74,661.34&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+2.56%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T23:00:35.571097&lt;/em&gt;&lt;/p&gt;</description></item><item><title>How to watch Jensen Huang’s Nvidia GTC 2026 keynote — and what to expect</title><link>https://blog.caowo.de/posts/auto-tech-20260316-861/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-tech-20260316-861/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;GTC is Nvidia&amp;rsquo;s flagship annual event, where the chipmaker typically announces new products, partnerships, and its vision for the future of computing. Huang&amp;rsquo;s keynote will focus on Nvidia&amp;rsquo;s role in the future of computing and AI.&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://techcrunch.com/2026/03/16/nvidia-gtc-how-to-watch-jensen-huang-2026-keynote/" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 17:51:46 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$74,200.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+3.48%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T21:00:47.245422&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Iran-Backed Hackers Claim Wiper Attack on Medtech Firm Stryker</title><link>https://blog.caowo.de/posts/auto-security-20260316-177/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-security-20260316-177/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;A hacktivist group with links to Iran’s intelligence agencies is claiming responsibility for a data-wiping attack against Stryker, a global medical technology company based in Michigan. News reports out of Ireland, Stryker’s largest hub outside of the United States, said the company sent home more than 5,000 workers there today. Meanwhile, a voicemail message at Stryker’s main U.S. headquarters says the company is currently experiencing a building emergency.
+Based in Kalamazoo, Michigan, Stryker [NYSE:SYK] is a medical and surgical equipment maker that reported $25 billion in global sales last year. In a lengthy statement posted to Telegram, a hacktivist group known as Handala (a.k.a. Handala Hack Team) claimed that Stryker’s offices in 79 countries have been forced to shut down after the group erased data from more than 200,000 systems, servers and mobile devices.
+A manifesto posted by the Iran-backed hacktivist group Handala, claiming a mass data-wiping attack against medical technology maker Stryker.
+“All the acquired data is now in the hands of the free people of the world, ready to be used for the true advancement of humanity and the exposure of injustice and corruption,” a portion of the Handala statement reads.
+The group said the wiper attack was in retaliation for a Feb. 28 missile strike that hit an Iranian school and killed at least 175 people, most of them children. The New York Times reports today that an ongoing military investigation has determined the United States is responsible for the deadly Tomahawk missile strike.
+Handala was one of several hacker groups recently profiled by Palo Alto Networks, which links it to Iran’s Ministry of Intelligence and Security (MOIS). Palo Alto says Handala surfaced in late 2023 and is assessed as one of several online personas maintained by Void Manticore, a MOIS-affiliated actor.
+Stryker’s website says the company has 56,000 employees in 61 countries. A phone call placed Wednesday morning to the media line at Stryker’s Michigan headquarters sent this author to a voicemail message that stated, “We are currently experiencing a building emergency. Please try your call again later.”
+A report Wednesday morning from the Irish Examiner said Stryker staff are now communicating via WhatsApp for any updates on when they can return to work. The story quoted an unnamed employee saying anything connected to the network is down, and that “anyone with Microsoft Outlook on their personal phones had their devices wiped.”
+“Multiple sources have said that systems in the Cork headquarters have been ‘shut down’ and that Stryker devices held by employees have been wiped out,” the Examiner reported. “The login pages coming up on these devices have been defaced with the Handala logo.”
+Wiper attacks usually involve malicious software designed to overwrite any existing data on infected devices. But a trusted&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://krebsonsecurity.com/2026/03/iran-backed-hackers-claim-wiper-attack-on-medtech-firm-stryker/" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Wed, 11 Mar 2026 16:20:13 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$74,200.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+3.48%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T21:00:47.243021&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Iran-Backed Hackers Claim Wiper Attack on Medtech Firm Stryker</title><link>https://blog.caowo.de/posts/auto-security-20260316-201/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-security-20260316-201/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;A hacktivist group with links to Iran’s intelligence agencies is claiming responsibility for a data-wiping attack against Stryker, a global medical technology company based in Michigan. News reports out of Ireland, Stryker’s largest hub outside of the United States, said the company sent home more than 5,000 workers there today. Meanwhile, a voicemail message at Stryker’s main U.S. headquarters says the company is currently experiencing a building emergency.
+Based in Kalamazoo, Michigan, Stryker [NYSE:SYK] is a medical and surgical equipment maker that reported $25 billion in global sales last year. In a lengthy statement posted to Telegram, a hacktivist group known as Handala (a.k.a. Handala Hack Team) claimed that Stryker’s offices in 79 countries have been forced to shut down after the group erased data from more than 200,000 systems, servers and mobile devices.
+A manifesto posted by the Iran-backed hacktivist group Handala, claiming a mass data-wiping attack against medical technology maker Stryker.
+“All the acquired data is now in the hands of the free people of the world, ready to be used for the true advancement of humanity and the exposure of injustice and corruption,” a portion of the Handala statement reads.
+The group said the wiper attack was in retaliation for a Feb. 28 missile strike that hit an Iranian school and killed at least 175 people, most of them children. The New York Times reports today that an ongoing military investigation has determined the United States is responsible for the deadly Tomahawk missile strike.
+Handala was one of several hacker groups recently profiled by Palo Alto Networks, which links it to Iran’s Ministry of Intelligence and Security (MOIS). Palo Alto says Handala surfaced in late 2023 and is assessed as one of several online personas maintained by Void Manticore, a MOIS-affiliated actor.
+Stryker’s website says the company has 56,000 employees in 61 countries. A phone call placed Wednesday morning to the media line at Stryker’s Michigan headquarters sent this author to a voicemail message that stated, “We are currently experiencing a building emergency. Please try your call again later.”
+A report Wednesday morning from the Irish Examiner said Stryker staff are now communicating via WhatsApp for any updates on when they can return to work. The story quoted an unnamed employee saying anything connected to the network is down, and that “anyone with Microsoft Outlook on their personal phones had their devices wiped.”
+“Multiple sources have said that systems in the Cork headquarters have been ‘shut down’ and that Stryker devices held by employees have been wiped out,” the Examiner reported. “The login pages coming up on these devices have been defaced with the Handala logo.”
+Wiper attacks usually involve malicious software designed to overwrite any existing data on infected devices. But a trusted&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://krebsonsecurity.com/2026/03/iran-backed-hackers-claim-wiper-attack-on-medtech-firm-stryker/" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Wed, 11 Mar 2026 16:20:13 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$74,661.34&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+2.56%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T23:00:35.569590&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Meet LITRO: The tokenized crude project to start pilot testing soon for 2027 debut</title><link>https://blog.caowo.de/posts/auto-crypto-20260312-294/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260312-294/</guid><description>&lt;h2 id="摘要"&gt;摘要
 &lt;/h2&gt;&lt;h2 id="来源"&gt;来源
 &lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a class="link" href="https://www.coindesk.com/markets/2026/03/12/meet-litro-the-tokenized-crude-project-to-start-pilot-testing-soon-for-2027-debut" target="_blank" rel="noopener"
@@ -4548,7 +4780,59 @@ time-sync&lt;/p&gt;
 &lt;li&gt;24h 涨跌：+0.34%&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;em&gt;自动生成于 2026-03-12T09:00:23.683088&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Microsoft Patches 84 Flaws in March Patch Tuesday, Including Two Public Zero-Days</title><link>https://blog.caowo.de/posts/auto-security-20260311-1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-security-20260311-1/</guid><description>&lt;h1 id="microsoft-patches-84-flaws-in-march-patch-tuesday-including-two-public-zero-days"&gt;Microsoft Patches 84 Flaws in March Patch Tuesday, Including Two Public Zero-Days
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-12T09:00:23.683088&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Microsoft Patch Tuesday, March 2026 Edition</title><link>https://blog.caowo.de/posts/auto-security-20260316-386/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-security-20260316-386/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;Microsoft Corp. today pushed security updates to fix at least 77 vulnerabilities in its Windows operating systems and other software. There are no pressing “zero-day” flaws this month (compared to February’s five zero-day treat), but as usual some patches may deserve more rapid attention from organizations using Windows. Here are a few highlights from this month’s Patch Tuesday.
+Image: Shutterstock, @nwz.
+Two of the bugs Microsoft patched today were publicly disclosed previously. CVE-2026-21262 is a weakness that allows an attacker to elevate their privileges on SQL Server 2016 and later editions.
+“This isn’t just any elevation of privilege vulnerability, either; the advisory notes that an authorized attacker can elevate privileges to sysadmin over a network,” Rapid7’s Adam Barnett said. “The CVSS v3 base score of 8.8 is just below the threshold for critical severity, since low-level privileges are required. It would be a courageous defender who shrugged and deferred the patches for this one.”
+The other publicly disclosed flaw is CVE-2026-26127, a vulnerability in applications running on .NET. Barnett said the immediate impact of exploitation is likely limited to denial of service by triggering a crash, with the potential for other types of attacks during a service reboot.
+It would hardly be a proper Patch Tuesday without at least one critical Microsoft Office exploit, and this month doesn’t disappoint. CVE-2026-26113 and CVE-2026-26110 are both remote code execution flaws that can be triggered just by viewing a booby-trapped message in the Preview Pane.
+Satnam Narang at Tenable notes that just over half (55%) of all Patch Tuesday CVEs this month are privilege escalation bugs, and of those, a half dozen were rated “exploitation more likely” — across Windows Graphics Component, Windows Accessibility Infrastructure, Windows Kernel, Windows SMB Server and Winlogon. These include:
+–CVE-2026-24291: Incorrect permission assignments within the Windows Accessibility Infrastructure to reach SYSTEM (CVSS 7.8)
+–CVE-2026-24294: Improper authentication in the core SMB component (CVSS 7.8)
+–CVE-2026-24289: High-severity memory corruption and race condition flaw (CVSS 7.8)
+–CVE-2026-25187: Winlogon process weakness discovered by Google Project Zero (CVSS 7.8).
+Ben McCarthy, lead cyber security engineer at Immersive, called attention to CVE-2026-21536, a critical remote code execution bug in a component called the Microsoft Devices Pricing Program. Microsoft has already resolved the issue on their end, and fixing it requires no action on the part of Windows users. But McCarthy says it’s notable as one of the first vulnerabilities identified by an AI agent and officially recognized with a CVE attributed to the Windows operating system. It was discovered by XBOW, a fully autonomous AI penetration testing agent.
+XBOW has consistently ranked at or near the top&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://krebsonsecurity.com/2026/03/microsoft-patch-tuesday-march-2026-edition/" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Wed, 11 Mar 2026 00:32:51 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$74,661.34&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+2.56%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T23:00:35.570250&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Microsoft Patch Tuesday, March 2026 Edition</title><link>https://blog.caowo.de/posts/auto-security-20260316-63/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-security-20260316-63/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;Microsoft Corp. today pushed security updates to fix at least 77 vulnerabilities in its Windows operating systems and other software. There are no pressing “zero-day” flaws this month (compared to February’s five zero-day treat), but as usual some patches may deserve more rapid attention from organizations using Windows. Here are a few highlights from this month’s Patch Tuesday.
+Image: Shutterstock, @nwz.
+Two of the bugs Microsoft patched today were publicly disclosed previously. CVE-2026-21262 is a weakness that allows an attacker to elevate their privileges on SQL Server 2016 and later editions.
+“This isn’t just any elevation of privilege vulnerability, either; the advisory notes that an authorized attacker can elevate privileges to sysadmin over a network,” Rapid7’s Adam Barnett said. “The CVSS v3 base score of 8.8 is just below the threshold for critical severity, since low-level privileges are required. It would be a courageous defender who shrugged and deferred the patches for this one.”
+The other publicly disclosed flaw is CVE-2026-26127, a vulnerability in applications running on .NET. Barnett said the immediate impact of exploitation is likely limited to denial of service by triggering a crash, with the potential for other types of attacks during a service reboot.
+It would hardly be a proper Patch Tuesday without at least one critical Microsoft Office exploit, and this month doesn’t disappoint. CVE-2026-26113 and CVE-2026-26110 are both remote code execution flaws that can be triggered just by viewing a booby-trapped message in the Preview Pane.
+Satnam Narang at Tenable notes that just over half (55%) of all Patch Tuesday CVEs this month are privilege escalation bugs, and of those, a half dozen were rated “exploitation more likely” — across Windows Graphics Component, Windows Accessibility Infrastructure, Windows Kernel, Windows SMB Server and Winlogon. These include:
+–CVE-2026-24291: Incorrect permission assignments within the Windows Accessibility Infrastructure to reach SYSTEM (CVSS 7.8)
+–CVE-2026-24294: Improper authentication in the core SMB component (CVSS 7.8)
+–CVE-2026-24289: High-severity memory corruption and race condition flaw (CVSS 7.8)
+–CVE-2026-25187: Winlogon process weakness discovered by Google Project Zero (CVSS 7.8).
+Ben McCarthy, lead cyber security engineer at Immersive, called attention to CVE-2026-21536, a critical remote code execution bug in a component called the Microsoft Devices Pricing Program. Microsoft has already resolved the issue on their end, and fixing it requires no action on the part of Windows users. But McCarthy says it’s notable as one of the first vulnerabilities identified by an AI agent and officially recognized with a CVE attributed to the Windows operating system. It was discovered by XBOW, a fully autonomous AI penetration testing agent.
+XBOW has consistently ranked at or near the top&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://krebsonsecurity.com/2026/03/microsoft-patch-tuesday-march-2026-edition/" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Wed, 11 Mar 2026 00:32:51 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$74,200.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+3.48%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T21:00:47.244837&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Microsoft Patches 84 Flaws in March Patch Tuesday, Including Two Public Zero-Days</title><link>https://blog.caowo.de/posts/auto-security-20260311-1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-security-20260311-1/</guid><description>&lt;h1 id="microsoft-patches-84-flaws-in-march-patch-tuesday-including-two-public-zero-days"&gt;Microsoft Patches 84 Flaws in March Patch Tuesday, Including Two Public Zero-Days
 &lt;/h1&gt;
  &lt;blockquote&gt;
  &lt;p&gt;📅 &lt;strong&gt;发布时间&lt;/strong&gt;：2026-03-11 09:37&lt;br&gt;
@@ -4744,7 +5028,24 @@ Of these, eight are rated Critical, and 76 are rated Important in severity. Fort
 &lt;li&gt;24h 涨跌：+1.17%&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;em&gt;自动生成于 2026-03-13T18:00:23.259794&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Next week could spice things up for bitcoin as seven central banks face an inflation test</title><link>https://blog.caowo.de/posts/auto-crypto-20260311-132/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260311-132/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-13T18:00:23.259794&lt;/em&gt;&lt;/p&gt;</description></item><item><title>National Academies of Sciences says no to demands it remove climate info</title><link>https://blog.caowo.de/posts/auto-tech-20260316-975/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-tech-20260316-975/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;Judges are frequently confronted with cases that hinge upon scientific information that their educational backgrounds may leave them ill-equipped to manage. Because of this challenge, the Federal Judicial Center, a group within the judicial branch of the government, has collaborated with the National Academies of Sciences (NAS) to produce a reference manual that provides background on a range of scientific and medical issues that frequently confront the court system. The Reference Manual on Scientific Evidence is currently on its fourth edition, and it has turned out to be an unexpectedly controversial one.
+For the first time, this edition of the Reference Manual has included a chapter on climate change, meant to prepare judges to manage and potentially decide cases focused on everything from federal environmental rules to charges that fossil fuel producers engaged in fraud by ignoring the many warnings of harms caused by their products. That didn&amp;rsquo;t sit well with Republican politicians; a collection of red-state attorneys general sent a letter demanding that the Federal Judicial Center pull the chapter. Back in February, it complied, posting a modified version of the Reference Manual with the climate chapter deleted.
+But, as noted above, the NAS arranges for the production of the Reference Manual, and it hosts a copy in its extensive library of publications. So, fresh off their success with the government, the same collection of attorneys general turned their sights on the Academies. In a letter dated February 19, they &amp;ldquo;urge&amp;rdquo; the NAS to follow the judiciary&amp;rsquo;s example and delete the chapter. Citing sources such as a Wall Street Journal editorial and their own threatening letter, the attorneys general accuse the NAS of engaging in “one-sided advocacy” and “judicial indoctrination,” and say it &amp;ldquo;is building a reputation as a partisan actor.&amp;ldquo;Read full article
+Comments&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://arstechnica.com/science/2026/03/national-academies-of-sciences-resisting-pressure-to-pull-climate-info/" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 20:33:41 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$74,200.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+3.48%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T21:00:47.245955&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Next week could spice things up for bitcoin as seven central banks face an inflation test</title><link>https://blog.caowo.de/posts/auto-crypto-20260311-132/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260311-132/</guid><description>&lt;h2 id="摘要"&gt;摘要
 &lt;/h2&gt;&lt;h2 id="来源"&gt;来源
 &lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a class="link" href="https://www.coindesk.com/markets/2026/03/11/next-week-could-spice-things-up-for-bitcoin-as-seven-central-banks-face-an-inflation-test" target="_blank" rel="noopener"
@@ -5130,7 +5431,47 @@ Of these, eight are rated Critical, and 76 are rated Important in severity. Fort
 &lt;/ol&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;em&gt;本文由 AI Agent + 红队 Agent 联合创作&lt;/em&gt;&lt;br&gt;
-&lt;em&gt;发布于：2026-03-11 09:38 UTC&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Ripple to acquire Australian financial services license as APAC payments volume doubles</title><link>https://blog.caowo.de/posts/auto-crypto-20260311-2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260311-2/</guid><description>&lt;h1 id="ripple-to-acquire-australian-financial-services-license-as-apac-payments-volume-doubles"&gt;Ripple to acquire Australian financial services license as APAC payments volume doubles
+&lt;em&gt;发布于：2026-03-11 09:38 UTC&lt;/em&gt;&lt;/p&gt;</description></item><item><title>RFK Jr.’s anti-vaccine changes to CDC vaccine guidance blocked by judge</title><link>https://blog.caowo.de/posts/auto-tech-20260316-194/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-tech-20260316-194/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;A federal judge on Monday temporarily blocked most of the damage that anti-vaccine Health Secretary Robert F. Kennedy Jr. has done to federal vaccine guidance in his time in office.
+In a 45-page ruling that opens with a quote from science communicator Carl Sagan, US District Judge Brian Murphy issued a temporary injunction that blocks:&lt;/p&gt;
+&lt;p&gt;The federal vaccine advisors Kennedy appointed to the Centers for Disease Control and Prevention&amp;rsquo;s Advisory Committee on Immunization Practices (ACIP) after firing all 17 expert members. Almost all of Kennedy&amp;rsquo;s new advisors hold anti-vaccine views, have questionable qualifications for being on the committee, and did not appear to go through standard vetting.
+Every vote those ACIP members have made to change federal vaccine guidance.
+Kennedy&amp;rsquo;s dramatic overhaul of the CDC&amp;rsquo;s childhood vaccine schedule in January, which dropped the number of recommended immunizations from 17 to 11, in line with Denmark, and was done without consulting ACIP.&lt;/p&gt;
+&lt;p&gt;The ruling stems from a lawsuit brought by the American Academy of Pediatrics, along with several other medical groups, against Kennedy. The groups challenged the legality of the unprecedented moves, which disregarded standard procedures and lacked the backing of scientific evidence.Read full article
+Comments&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://arstechnica.com/health/2026/03/judge-temporarily-blocks-rfk-jr-s-changes-to-cdc-vaccine-recommendations/" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 22:20:39 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$74,661.34&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+2.56%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T23:00:35.571579&lt;/em&gt;&lt;/p&gt;</description></item><item><title>RFK Jr's changes to CDC vaccine guidance, advisory board blocked by judge</title><link>https://blog.caowo.de/posts/auto-tech-20260316-123/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-tech-20260316-123/</guid><description>&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;US District Judge Brian Murphy on Monday temporarily blocked most of the damage that anti-vaccine Health Secretary Robert F. Kennedy Jr. has done to federal vaccine guidance.
+In a 45-page ruling that opens with a quote from Carl Sagan, US District Judge Brian Murphy issued a temporary injunction that blocks:&lt;/p&gt;
+&lt;p&gt;The federal vaccine advisors Kennedy appointed to the Centers for Disease Control and Prevention&amp;rsquo;s Advisory Committee on Immunization Practices after firing all 17 expert members. Almost all of Kennedy&amp;rsquo;s new advisors hold anti-vaccine views, have questionable qualifications for being on the committee, and did not appear to go through standard vetting.
+Every vote those ACIP members have made to change federal vaccine guidance.
+Kennedy&amp;rsquo;s dramatic overhaul of the Centers for Disease Control and Prevention&amp;rsquo;s childhood vaccine schedule in January, which dropped the number of recommended immunizations from 17 to 11, in line with Denmark.&lt;/p&gt;
+&lt;p&gt;The ruling stems from a lawsuit brought by the American Academy of Pediatrics, along with several other medical groups, against Kennedy. The groups challenged the legality of the unprecedented moves, which disregarded standard procedures and lacked the backing of scientific evidence.Read full article
+Comments&lt;/p&gt;
+&lt;h2 id="来源"&gt;来源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://arstechnica.com/health/2026/03/judge-temporarily-blocks-rfk-jr-s-changes-to-cdc-vaccine-recommendations/" target="_blank" rel="noopener"
+ &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;发布时间：Mon, 16 Mar 2026 20:46:39 +0000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$74,200.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+3.48%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;自动生成于 2026-03-16T21:00:47.245695&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Ripple to acquire Australian financial services license as APAC payments volume doubles</title><link>https://blog.caowo.de/posts/auto-crypto-20260311-2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-crypto-20260311-2/</guid><description>&lt;h1 id="ripple-to-acquire-australian-financial-services-license-as-apac-payments-volume-doubles"&gt;Ripple to acquire Australian financial services license as APAC payments volume doubles
 &lt;/h1&gt;
  &lt;blockquote&gt;
  &lt;p&gt;🤖 &lt;strong&gt;创作&lt;/strong&gt;：AI Agent + 红队 Agent 联合&lt;/p&gt;

@@ -6,6 +6,12 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-CN</language>
         <lastBuildDate>Tue, 17 Mar 2026 09:00:00 +0800</lastBuildDate><atom:link href="https://blog.caowo.de/categories/security/index.xml" rel="self" type="application/rss+xml" /><item>
+            <title>CVE-2026-30860：腾讯开源 AI 框架 WeKnora SQL 注入绕过导致远程代码执行</title>
+            <link>https://blog.caowo.de/posts/auto-security-20260317-97/</link>
+            <pubDate>Tue, 17 Mar 2026 09:00:00 +0800</pubDate>
+            <guid>https://blog.caowo.de/posts/auto-security-20260317-97/</guid>
+            <description>&lt;h2 id=&#34;摘要&#34;&gt;摘要&#xA;&lt;/h2&gt;&lt;p&gt;漏洞来源一个评分十分的漏洞漏洞描述WeKnora 是一个基于 LLM 的框架，旨在实现深度文档理解和语义检索。在 0.2.12 版本之前，该应用程序的数据库查询功能存在远程代码执行 (RCE) 漏洞。验证系统未能递归检查 PostgreSQL 数组表达式和行表达式中的子节点，这使得攻击者能够绕过 SQL 注入保护。攻击者可以通过在这些表达式中嵌入危险的 PostgreSQL 函数，并将其与大型对象&lt;/p&gt;&#xA;&lt;h2 id=&#34;来源&#34;&gt;来源&#xA;&lt;/h2&gt;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://xz.aliyun.com/news/91706&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;&#xA;    &gt;阅读原文&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;发布时间：2026-03-09 07:59:16&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;市场背景&#34;&gt;市场背景&#xA;&lt;/h2&gt;&lt;ul&gt;&#xA;&lt;li&gt;BTC 价格：$74,188.65&lt;/li&gt;&#xA;&lt;li&gt;24h 涨跌：+1.46%&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;&lt;em&gt;自动生成于 2026-03-17T09:00:54.846968&lt;/em&gt;&lt;/p&gt;&#xA;</description>
+        </item><item>
             <title>How AI Assistants are Moving the Security Goalposts</title>
             <link>https://blog.caowo.de/posts/auto-security-20260317-482/</link>
             <pubDate>Tue, 17 Mar 2026 09:00:00 +0800</pubDate>

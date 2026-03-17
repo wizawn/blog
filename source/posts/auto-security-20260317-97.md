@@ -1,6 +1,6 @@
 ---
 title: "CVE-2026-30860：腾讯开源 AI 框架 WeKnora SQL 注入绕过导致远程代码执行"
-date: 2026-03-17 09:00
+date: 2026-03-17T09:00:00+08:00
 categories: ["security"]
 tags: ["auto-generated", "rss"]
 draft: false

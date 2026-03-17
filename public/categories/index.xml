@@ -6,6 +6,18 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-CN</language>
         <lastBuildDate>Tue, 17 Mar 2026 14:00:00 +0800</lastBuildDate><atom:link href="https://blog.caowo.de/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+            <title>OpenClaw</title>
+            <link>https://blog.caowo.de/categories/openclaw/</link>
+            <pubDate>Tue, 17 Mar 2026 14:00:00 +0800</pubDate>
+            <guid>https://blog.caowo.de/categories/openclaw/</guid>
+            <description></description>
+        </item><item>
+            <title>部署教程</title>
+            <link>https://blog.caowo.de/categories/%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B/</link>
+            <pubDate>Tue, 17 Mar 2026 14:00:00 +0800</pubDate>
+            <guid>https://blog.caowo.de/categories/%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B/</guid>
+            <description></description>
+        </item><item>
             <title>项目介绍</title>
             <link>https://blog.caowo.de/categories/%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D/</link>
             <pubDate>Tue, 17 Mar 2026 14:00:00 +0800</pubDate>
@@ -64,12 +76,6 @@
             <link>https://blog.caowo.de/categories/%E7%BA%A2%E9%98%9F%E8%A7%86%E8%A7%92/</link>
             <pubDate>Wed, 11 Mar 2026 09:00:00 +0800</pubDate>
             <guid>https://blog.caowo.de/categories/%E7%BA%A2%E9%98%9F%E8%A7%86%E8%A7%92/</guid>
-            <description></description>
-        </item><item>
-            <title>OpenClaw</title>
-            <link>https://blog.caowo.de/categories/openclaw/</link>
-            <pubDate>Tue, 10 Mar 2026 16:00:00 +0800</pubDate>
-            <guid>https://blog.caowo.de/categories/openclaw/</guid>
             <description></description>
         </item><item>
             <title>技术感悟</title>

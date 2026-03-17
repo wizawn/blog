@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="摘要 这里记录每周值得分享的科技内容，周五发布。\n本杂志开源，欢迎投稿。另有《谁在招人》服务，发布程序员招聘信息。合作请邮件联系（yifeng.ruan@gmail.com）。 封面图\n重庆涪陵某景区架设了世界首座&quot;巨石索桥&quot;，桥面就是一块块巨石，一不小心就会踏空。（via）\n测试是新的护城河\nNext.js 是目前排名第一的 JS 框架。平时遇到的 JS 全栈应用，我估计，一半用它开发。\n两周前，这个框架被一则新闻颠覆了。\n一个 Cloudflare 工程师宣布，他只用一个星期就用 AI 重新实现了 Next.js，起名为 vinext。\n事实上，一天就生成产品原型了，后面几天只是在完善。\n&ldquo;真正动手是2月13日，当天晚上，基本功能已经实现。第二天下午，11个路由器做好了10个。第三天，已经部署到我们的服务器，实现了完整的客户端水合。\n接下来的几天，主要进行安全加固：修复极端情况，扩展测试套件，提升 API 覆盖率至 94%。&rdquo;\n这个新的实现，比原版 Next.js 性能更好。\n&ldquo;早期基准测试中，构建速度提升了4倍，客户端软件包的体积缩小了57%，生产环境的 Next.js 应用已经直接跑在上面了。&rdquo;\n这个 vinext 的代码已经放出来了。\n我觉得，这件事对 Next.js 的打击非常大。\nNext.js 是 Vercel 公司的产品，背后有一个大型开发团队，每年都是巨额投入，已经整整做了10年。虽然是开源软件，但是企业版、云服务、插件、皮肤都要收费，去年的年收入达到2亿美元。\n这种看似难以逾越的护城河，在 AI 面前不堪一击。一个工程师用了一个星期，就复刻了大团队十年的工作成果，现有的网页应用不改一行代码，放上去就能跑，原版的每个功能都支持。\n你知道花了多少钱？Token 费用仅仅为 1100 美元！\n这叫 Vercel 怎么再向 Next.js 的开发投钱，客户又怎么愿意再为某个功能付出高昂的使用费。\n推而广之，所有的商业软件都受到了重创。代码的护城河不存在了，只要投入一小笔金钱，AI 就能复刻出大型软件。\n那么，为了保护自己，软件公司下一步肯定要防止 AI 复刻。\n怎么防呢？关键就是测试用例。\nCloudflare 工程师这一次能够复刻成功，主要原因是 Next.js 有完备的文档、庞大的社区文章、以及完整的测试用例。AI 模拟的每一个 API，只要能够通过原有的接口测试，就能确认百分百兼容。\n如果拿不到测试用例，谁知道代码行为是否一致，谁敢放到生产环境运行。\n可以想象，为了防止复刻，大型软件项目一定会保护自己的测试用例。测试才是新的护城河。\n">
+<title>科技爱好者周刊（第 388 期）：测试是新的护城河</title>
+
+
+<link rel="canonical" href="https://blog.caowo.de/posts/auto-tech-20260317-796/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.390cc81d180d80110703ea467e355a4f3a0f44f25d4e957842790824fb5f2ef2.css"><meta property='og:title' content="科技爱好者周刊（第 388 期）：测试是新的护城河">
+<meta property='og:description' content="摘要 这里记录每周值得分享的科技内容，周五发布。\n本杂志开源，欢迎投稿。另有《谁在招人》服务，发布程序员招聘信息。合作请邮件联系（yifeng.ruan@gmail.com）。 封面图\n重庆涪陵某景区架设了世界首座&quot;巨石索桥&quot;，桥面就是一块块巨石，一不小心就会踏空。（via）\n测试是新的护城河\nNext.js 是目前排名第一的 JS 框架。平时遇到的 JS 全栈应用，我估计，一半用它开发。\n两周前，这个框架被一则新闻颠覆了。\n一个 Cloudflare 工程师宣布，他只用一个星期就用 AI 重新实现了 Next.js，起名为 vinext。\n事实上，一天就生成产品原型了，后面几天只是在完善。\n&ldquo;真正动手是2月13日，当天晚上，基本功能已经实现。第二天下午，11个路由器做好了10个。第三天，已经部署到我们的服务器，实现了完整的客户端水合。\n接下来的几天，主要进行安全加固：修复极端情况，扩展测试套件，提升 API 覆盖率至 94%。&rdquo;\n这个新的实现，比原版 Next.js 性能更好。\n&ldquo;早期基准测试中，构建速度提升了4倍，客户端软件包的体积缩小了57%，生产环境的 Next.js 应用已经直接跑在上面了。&rdquo;\n这个 vinext 的代码已经放出来了。\n我觉得，这件事对 Next.js 的打击非常大。\nNext.js 是 Vercel 公司的产品，背后有一个大型开发团队，每年都是巨额投入，已经整整做了10年。虽然是开源软件，但是企业版、云服务、插件、皮肤都要收费，去年的年收入达到2亿美元。\n这种看似难以逾越的护城河，在 AI 面前不堪一击。一个工程师用了一个星期，就复刻了大团队十年的工作成果，现有的网页应用不改一行代码，放上去就能跑，原版的每个功能都支持。\n你知道花了多少钱？Token 费用仅仅为 1100 美元！\n这叫 Vercel 怎么再向 Next.js 的开发投钱，客户又怎么愿意再为某个功能付出高昂的使用费。\n推而广之，所有的商业软件都受到了重创。代码的护城河不存在了，只要投入一小笔金钱，AI 就能复刻出大型软件。\n那么，为了保护自己，软件公司下一步肯定要防止 AI 复刻。\n怎么防呢？关键就是测试用例。\nCloudflare 工程师这一次能够复刻成功，主要原因是 Next.js 有完备的文档、庞大的社区文章、以及完整的测试用例。AI 模拟的每一个 API，只要能够通过原有的接口测试，就能确认百分百兼容。\n如果拿不到测试用例，谁知道代码行为是否一致，谁敢放到生产环境运行。\n可以想象，为了防止复刻，大型软件项目一定会保护自己的测试用例。测试才是新的护城河。\n">
+<meta property='og:url' content='https://blog.caowo.de/posts/auto-tech-20260317-796/'>
+<meta property='og:site_name' content='言零的博客'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='auto-generated' /><meta property='article:tag' content='rss' /><meta property='article:published_time' content='2026-03-17T09:00:00&#43;08:00'/><meta property='article:modified_time' content='2026-03-17T09:00:00&#43;08:00'/>
+<meta name="twitter:title" content="科技爱好者周刊（第 388 期）：测试是新的护城河">
+<meta name="twitter:description" content="摘要 这里记录每周值得分享的科技内容，周五发布。\n本杂志开源，欢迎投稿。另有《谁在招人》服务，发布程序员招聘信息。合作请邮件联系（yifeng.ruan@gmail.com）。 封面图\n重庆涪陵某景区架设了世界首座&quot;巨石索桥&quot;，桥面就是一块块巨石，一不小心就会踏空。（via）\n测试是新的护城河\nNext.js 是目前排名第一的 JS 框架。平时遇到的 JS 全栈应用，我估计，一半用它开发。\n两周前，这个框架被一则新闻颠覆了。\n一个 Cloudflare 工程师宣布，他只用一个星期就用 AI 重新实现了 Next.js，起名为 vinext。\n事实上，一天就生成产品原型了，后面几天只是在完善。\n&ldquo;真正动手是2月13日，当天晚上，基本功能已经实现。第二天下午，11个路由器做好了10个。第三天，已经部署到我们的服务器，实现了完整的客户端水合。\n接下来的几天，主要进行安全加固：修复极端情况，扩展测试套件，提升 API 覆盖率至 94%。&rdquo;\n这个新的实现，比原版 Next.js 性能更好。\n&ldquo;早期基准测试中，构建速度提升了4倍，客户端软件包的体积缩小了57%，生产环境的 Next.js 应用已经直接跑在上面了。&rdquo;\n这个 vinext 的代码已经放出来了。\n我觉得，这件事对 Next.js 的打击非常大。\nNext.js 是 Vercel 公司的产品，背后有一个大型开发团队，每年都是巨额投入，已经整整做了10年。虽然是开源软件，但是企业版、云服务、插件、皮肤都要收费，去年的年收入达到2亿美元。\n这种看似难以逾越的护城河，在 AI 面前不堪一击。一个工程师用了一个星期，就复刻了大团队十年的工作成果，现有的网页应用不改一行代码，放上去就能跑，原版的每个功能都支持。\n你知道花了多少钱？Token 费用仅仅为 1100 美元！\n这叫 Vercel 怎么再向 Next.js 的开发投钱，客户又怎么愿意再为某个功能付出高昂的使用费。\n推而广之，所有的商业软件都受到了重创。代码的护城河不存在了，只要投入一小笔金钱，AI 就能复刻出大型软件。\n那么，为了保护自己，软件公司下一步肯定要防止 AI 复刻。\n怎么防呢？关键就是测试用例。\nCloudflare 工程师这一次能够复刻成功，主要原因是 Next.js 有完备的文档、庞大的社区文章、以及完整的测试用例。AI 模拟的每一个 API，只要能够通过原有的接口测试，就能确认百分百兼容。\n如果拿不到测试用例，谁知道代码行为是否一致，谁敢放到生产环境运行。\n可以想象，为了防止复刻，大型软件项目一定会保护自己的测试用例。测试才是新的护城河。\n">
+
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' 
+        data-cf-beacon='{"token": "SDZvDCIq-3er2UKht5fIrl2UvvIrJxi6hZVxBfIa"}'></script>
+
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">言零的博客</a></h1>
+            <h2 class="site-description"></h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/posts/' >
+                
+                <span>文章 / Posts</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/' >
+                
+                <span>分类 / Categories</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/tags/' >
+                
+                <span>标签 / Tags</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                <span>关于 / About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                <span>友链 / Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            
+            
+            
+            <a href="/categories/tech/" style="background-color: hsl(145, 60%, 84%); color: hsl(145, 60%, 15%);">
+                Tech
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/auto-tech-20260317-796/">科技爱好者周刊（第 388 期）：测试是新的护城河</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published" datetime='2026-03-17T09:00:00&#43;08:00'>Tuesday, March 17, 2026</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+
+    
+</div>
+
+</header>
+
+    
+
+    <section class="article-content">
+    
+    
+    <h2 id="摘要">摘要
+</h2><p>这里记录每周值得分享的科技内容，周五发布。</p>
+<pre><code>    本杂志开源，欢迎投稿。另有《谁在招人》服务，发布程序员招聘信息。合作请邮件联系（yifeng.ruan@gmail.com）。
+</code></pre>
+<p>封面图</p>
+<p>重庆涪陵某景区架设了世界首座&quot;巨石索桥&quot;，桥面就是一块块巨石，一不小心就会踏空。（via）</p>
+<p>测试是新的护城河</p>
+<p>Next.js 是目前排名第一的 JS 框架。平时遇到的 JS 全栈应用，我估计，一半用它开发。</p>
+<p>两周前，这个框架被一则新闻颠覆了。</p>
+<p>一个 Cloudflare 工程师宣布，他只用一个星期就用 AI 重新实现了 Next.js，起名为 vinext。</p>
+<p>事实上，一天就生成产品原型了，后面几天只是在完善。</p>
+<p>&ldquo;真正动手是2月13日，当天晚上，基本功能已经实现。第二天下午，11个路由器做好了10个。第三天，已经部署到我们的服务器，实现了完整的客户端水合。</p>
+<p>接下来的几天，主要进行安全加固：修复极端情况，扩展测试套件，提升 API 覆盖率至 94%。&rdquo;</p>
+<p>这个新的实现，比原版 Next.js 性能更好。</p>
+<p>&ldquo;早期基准测试中，构建速度提升了4倍，客户端软件包的体积缩小了57%，生产环境的 Next.js 应用已经直接跑在上面了。&rdquo;</p>
+<p>这个 vinext 的代码已经放出来了。</p>
+<p>我觉得，这件事对 Next.js 的打击非常大。</p>
+<p>Next.js 是 Vercel 公司的产品，背后有一个大型开发团队，每年都是巨额投入，已经整整做了10年。虽然是开源软件，但是企业版、云服务、插件、皮肤都要收费，去年的年收入达到2亿美元。</p>
+<p>这种看似难以逾越的护城河，在 AI 面前不堪一击。一个工程师用了一个星期，就复刻了大团队十年的工作成果，现有的网页应用不改一行代码，放上去就能跑，原版的每个功能都支持。</p>
+<p>你知道花了多少钱？Token 费用仅仅为 1100 美元！</p>
+<p>这叫 Vercel 怎么再向 Next.js 的开发投钱，客户又怎么愿意再为某个功能付出高昂的使用费。</p>
+<p>推而广之，所有的商业软件都受到了重创。代码的护城河不存在了，只要投入一小笔金钱，AI 就能复刻出大型软件。</p>
+<p>那么，为了保护自己，软件公司下一步肯定要防止 AI 复刻。</p>
+<p>怎么防呢？关键就是测试用例。</p>
+<p>Cloudflare 工程师这一次能够复刻成功，主要原因是 Next.js 有完备的文档、庞大的社区文章、以及完整的测试用例。AI 模拟的每一个 API，只要能够通过原有的接口测试，就能确认百分百兼容。</p>
+<p>如果拿不到测试用例，谁知道代码行为是否一致，谁敢放到生产环境运行。</p>
+<p>可以想象，为了防止复刻，大型软件项目一定会保护自己的测试用例。测试才是新的护城河。</p>
+<p>世界最流行的数据库 SQLite，本身代码15.6万行，但是测试用例9205万行，足足大了590倍！</p>
+<p>其中，最核心的测试套件 TH3 是闭源的，不公开，主要测试航空、医疗等关键行业的极端情况和边缘案例，属于核心技术资产。正是这些保密用例，才让 SQLite 难以复刻。</p>
+<p>无独有偶，就在前两天，另一个开源项目 tldraw 也准备将测试用例闭源。</p>
+<p>说实话，保密的测试用例肯定不利于开源项目的发展，但是开发者需要保护自己的利益。在日益强大的 AI 面前，越来越多的软件可能会选择这样做。</p>
+<p>AI 复刻的版权问题</p>
+<p>AI 复刻软件还有一个版权问题，也引起了很大争议。</p>
+<p>Next.js 是最宽松的 MIT 许可证，所以复刻没有版权问题。但是，有人复刻了一个叫做 chardet 的项目，就争议巨大。</p>
+<p>chardet 本来采用的许可证，是限制较多的 LGPL，复刻以后改成了 MIT 许可证，引发了原始作者的抗议。</p>
+<p>网上的意见也分成了两派。</p>
+<p>支持者说，AI 只复刻了功能和接口，代码完全不一样，当然可以更改许可证。</p>
+<p>反对者说，GPL 规定了，所有衍生作品都不能更改许可证，AI 复刻就属于衍生。</p>
+<p>更麻烦的是，美国法律规定，AI 生成产物无版权，属于公共领域。这意味着，AI 复刻的软件不能设置许可证，设置了无效。</p>
+<p>按照这条法律，软件许可证就意义不大了。管你是什么许可证，任何人 AI 复刻一下就能规避，AI 实现的版本一律没有版权。</p>
+<p>科技动态</p>
+<p>1、AI 改写脏话</p>
+<p>游戏平台 Roblox 宣布，将用 AI 实时修改玩家的对话，让其变得更文明。</p>
+<p>以前，如果玩家在游戏里面骂脏话，系统只会将其过滤，显示为 ####，你还是知道他在骂人。</p>
+<p>现在，AI 将重新修改整个句子，让表达变得更礼貌、更文明，你就察觉不到对方在骂人。</p>
+<p>虽然这样未免有点虚假，但确实有必要。网络论坛也应该跟进，不要让人身攻击毁掉交流氛围。</p>
+<p>2、飞机的激光上网</p>
+<p>欧洲航天局成功进行了飞机的&quot;激光上网&quot;实验，通过激光将一架飞机与一颗卫星连接，实现了高速通信。</p>
+<p>飞机上网现在都通过无线电波，比如星链就通过无线电，让飞机连接卫星。本次实验则是通过激光连接卫星。</p>
+<p>上图就是安装在飞机舷窗上的激光终端。</p>
+<p>激光通信的优点是带宽大，不受无线频谱的限制，这次实验的上网速度达到了 2.6Gbps，是星链的8到10倍。</p>
+<p>缺点是激光与卫星之间必须保持直线，不能有云层和大气的障碍物。所以采用这种方式，大概只有飞到高空时才能上网。</p>
+<p>3、Grammarly 的专家意见</p>
+<p>Grammarly 是一个写作服务，提供一个收费功能&quot;专家意见&quot;，让专家点评你的文章。</p>
+<p>一个国外用户使用该功能时，震惊地发现，点评专家里面有他的前老板（下图），但是他知道老板已经去世了。</p>
+<p>原来这不是真人点评，而是 AI 为每个专家建了一个分身，用他们各自的文章进行训练，然后让分身点评你的文章。</p>
+<p>这引起了争议，我们是否有权搭建别人的&quot;数字分身&quot;，然后冠以原始人物的名义（比如&quot;孔子分身&quot;或者&quot;爱因斯坦分身&quot;）？</p>
+<p>4、太阳能邮筒</p>
+<p>网络通信普及以后，传统的邮筒怎么办？</p>
+<p>英国皇家邮政想出一个办法，将英国各地3500个邮筒，变为&quot;太阳能邮筒&quot;。</p>
+<p>邮筒顶部加装了太阳能光伏片，功能也从寄信，变成了收寄小包裹。</p>
+<p>这样既保存了传统的红色邮筒，成为街道的景观，又为人们邮寄包裹提供了方便。</p>
+<p>文章</p>
+<p>1、GitHub Issue 标题的注入攻击（英文）</p>
+<p>这可能是第一起 AI 模型注入的真实攻击。Cline 项目使用 AI 对 GitHub Issue 进行分类，有人就在标题插入恶意提示词，从而成功拿到 npm 令牌，发布了一个恶意版本。本文告诉你这是怎么做到的。</p>
+<p>2、重新评估 AGENTS.md（英文）</p>
+<p>最近的一项研究提出，跟推荐做法相反，AGENTS.md 文件对 AI 编码不是促进，而是阻碍。</p>
+<p>它只是让模型&quot;思考&quot;得更多（成本上升），生成结果却没有更好（性能下降）。</p>
+<p>3、Temporal API 的九年历程（英文）</p>
+<p>本周，Temporal API 正式通过了第四阶段。这意味着，它进入了 ES2026 标准，成为了 JavaScript 语法的一部分。本文是这个标准的起草者对九年推进历程的回顾。</p>
+<p>4、AI 的胡说测试（英文）</p>
+<p>国外有一个 BuillshitBench，专门</p>
+<h2 id="来源">来源
+</h2><ul>
+<li><a class="link" href="http://www.ruanyifeng.com/blog/2026/03/weekly-issue-388.html"  target="_blank" rel="noopener"
+    >阅读原文</a></li>
+<li>发布时间：2026-03-12T23:59:16Z</li>
+</ul>
+<h2 id="市场背景">市场背景
+</h2><ul>
+<li>BTC 价格：$74,188.65</li>
+<li>24h 涨跌：+1.46%</li>
+</ul>
+<hr>
+<p><em>自动生成于 2026-03-17T09:00:54.847648</em></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/auto-generated/">Auto-Generated</a>
+        
+            <a href="/tags/rss/">Rss</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/posts/auto-security-20260317-97/">
+        
+
+        <div class="article-details">
+            <h2 class="article-title">CVE-2026-30860：腾讯开源 AI 框架 WeKnora SQL 注入绕过导致远程代码执行</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="">
+    <a href="/posts/auto-tech-20260317-536/">
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Elon Musk&#39;s xAI sued for turning three girls&#39; real photos into AI CSAM</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="">
+    <a href="/posts/auto-tech-20260317-369/">
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Fragments: March 16</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="">
+    <a href="/posts/auto-security-20260317-482/">
+        
+
+        <div class="article-details">
+            <h2 class="article-title">How AI Assistants are Moving the Security Goalposts</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="">
+    <a href="/posts/auto-security-20260317-594/">
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Iran-Backed Hackers Claim Wiper Attack on Medtech Firm Stryker</h2>
+        </div>
+    </a>
+</article>
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+        <div class="disqus-container">
+    
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2026 言零的博客
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="4.0.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+
+
+
+<script type="module">
+    import gallery from '\/ts\/gallery.js';
+
+    const articleContent = document.querySelector('.article-content');
+    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
+    
+    if (shouldLoad) {
+        gallery(articleContent);
+
+        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
+        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
+
+        const styleTag = document.createElement('link');
+        styleTag.rel = 'stylesheet';
+        styleTag.href = styleHref;
+        document.head.appendChild(styleTag);
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallerySelector: '.article-content',
+            childSelector: 'figure a.image-link',
+            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
+        });
+        lightbox.init();
+    }
+</script>
+    
+
+            </main>
+        </div>
+        
+<script type="text/javascript" src="/ts/main.acaf849f2b273f6a8368a58b001f336738d0c948d92e79b116467d0c7515f932.js" defer></script>
+
+
+    </body>
+</html>

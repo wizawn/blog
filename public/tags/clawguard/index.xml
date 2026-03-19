@@ -1,15 +1,512 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-    <channel>
-        <title>ClawGuard on 言零的博客</title>
-        <link>https://blog.caowo.de/tags/clawguard/</link>
-        <description>Recent content in ClawGuard on 言零的博客</description>
-        <generator>Hugo -- gohugo.io</generator>
-        <language>zh-CN</language>
-        <lastBuildDate>Tue, 17 Mar 2026 14:00:00 +0800</lastBuildDate><atom:link href="https://blog.caowo.de/tags/clawguard/index.xml" rel="self" type="application/rss+xml" /><item>
-            <title>ClawGuard - 基于 AI 的加密货币实时监控系统</title>
-            <link>https://blog.caowo.de/posts/clawguard-project-introduction/</link>
-            <pubDate>Tue, 17 Mar 2026 14:00:00 +0800</pubDate>
-            <guid>https://blog.caowo.de/posts/clawguard-project-introduction/</guid>
-            <description>&lt;h1 id=&#34;clawguard---基于-ai-的加密货币实时监控系统&#34;&gt;ClawGuard - 基于 AI 的加密货币实时监控系统&#xA;&lt;/h1&gt;&lt;h2 id=&#34;-项目概述&#34;&gt;🎯 项目概述&#xA;&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;ClawGuard&lt;/strong&gt; 是一个专为加密货币交易者设计的智能监控系统，结合了实时数据采集、技术分析算法和 AI 驱动的价格预测，帮助用户在瞬息万变的加密市场中把握先机。&lt;/p&gt;&#xA;&lt;h3 id=&#34;核心特性&#34;&gt;核心特性&#xA;&lt;/h3&gt;&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th&gt;特性&lt;/th&gt;&#xA;          &lt;th&gt;说明&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;strong&gt;实时监控&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td&gt;60 秒级价格数据刷新&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;strong&gt;技术分析&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td&gt;MA7/MA25 均线、RSI、MACD 等指标&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;strong&gt;多交易所&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td&gt;币安、OKX、Gate.io 数据聚合&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;strong&gt;智能预警&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td&gt;价格突破、成交量异常、技术信号&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;strong&gt;AI 预测&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td&gt;基于历史数据的短期价格趋势分析&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-系统架构&#34;&gt;🏗️ 系统架构&#xA;&lt;/h2&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;┌─────────────────────────────────────────────────────────┐&#xA;│                    ClawGuard 系统架构                    │&#xA;├─────────────────────────────────────────────────────────┤&#xA;│                                                          │&#xA;│  ┌──────────────┐    ┌──────────────┐    ┌────────────┐ │&#xA;│  │  数据采集层   │───▶│  数据处理层   │───▶│  分析引擎   │ │&#xA;│  │              │    │              │    │            │ │&#xA;│  │ • 币安 API   │    │ • 数据清洗   │    │ • MA 计算   │ │&#xA;│  │ • OKX API    │    │ • 格式标准化  │    │ • RSI 计算  │ │&#xA;│  │ • Gate.io    │    │ • 存储 SQLite │    │ • MACD     │ │&#xA;│  └──────────────┘    └──────────────┘    └────────────┘ │&#xA;│                           │                    │         │&#xA;│                           ▼                    ▼         │&#xA;│                    ┌──────────────┐    ┌────────────┐   │&#xA;│                    │  预警系统     │◀───│  AI 预测    │   │&#xA;│                    │              │    │            │   │&#xA;│                    │ • 钉钉推送   │    │ • 趋势分析  │   │&#xA;│                    │ • 阈值告警   │    │ • 异常检测  │   │&#xA;│                    └──────────────┘    └────────────┘   │&#xA;│                                                          │&#xA;└─────────────────────────────────────────────────────────┘&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-技术栈&#34;&gt;🔧 技术栈&#xA;&lt;/h2&gt;&lt;h3 id=&#34;后端核心&#34;&gt;后端核心&#xA;&lt;/h3&gt;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;语言&lt;/strong&gt;: Python 3.10+&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Web 框架&lt;/strong&gt;: Flask (管理后台)&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;数据处理&lt;/strong&gt;: Pandas, NumPy&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;数据库&lt;/strong&gt;: SQLite (轻量级存储)&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;任务调度&lt;/strong&gt;: APScheduler&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;前端界面&#34;&gt;前端界面&#xA;&lt;/h3&gt;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;管理后台&lt;/strong&gt;: HTML + Bootstrap 5&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;数据可视化&lt;/strong&gt;: Chart.js&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;实时更新&lt;/strong&gt;: WebSocket&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;外部集成&#34;&gt;外部集成&#xA;&lt;/h3&gt;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;交易所 API&lt;/strong&gt;: 币安、OKX、Gate.io&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;消息推送&lt;/strong&gt;: 钉钉机器人 Webhook&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;代理&lt;/strong&gt;: Clash (处理网络限制)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-核心功能详解&#34;&gt;📊 核心功能详解&#xA;&lt;/h2&gt;&lt;h3 id=&#34;1-实时价格监控&#34;&gt;1. 实时价格监控&#xA;&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 60 秒级数据采集循环&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;monitor_loop&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;while&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;True&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;# 获取 BTC/USDT 价格&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;price&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;binance_api&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;get_price&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;BTCUSDT&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;# 计算技术指标&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;ma7&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;calculate_ma&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;prices&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;period&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;ma25&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;calculate_ma&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;prices&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;period&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;25&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;# 检测金叉/死叉&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ma7&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ma25&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;and&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;prev_ma7&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;prev_ma25&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;send_alert&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;🟢 金叉信号！&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;# 存储数据&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;save_to_db&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;price&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ma7&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ma25&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;# 60 秒后继续&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;time&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sleep&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;60&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;监控指标&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;实时价格 (BTC/USDT, ETH/USDT 等)&lt;/li&gt;&#xA;&lt;li&gt;24 小时涨跌幅&lt;/li&gt;&#xA;&lt;li&gt;24 小时成交量&lt;/li&gt;&#xA;&lt;li&gt;资金费率 (Funding Rate)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;2-技术分析引擎&#34;&gt;2. 技术分析引擎&#xA;&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;均线系统&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;MA7 (7 日均线) - 短期趋势&lt;/li&gt;&#xA;&lt;li&gt;MA25 (25 日均线) - 中期趋势&lt;/li&gt;&#xA;&lt;li&gt;金叉/死叉自动识别&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;strong&gt;其他指标&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;RSI (相对强弱指数) - 超买超卖&lt;/li&gt;&#xA;&lt;li&gt;MACD (移动平均收敛散度) - 趋势强度&lt;/li&gt;&#xA;&lt;li&gt;布林带 - 波动率分析&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;3-智能预警系统&#34;&gt;3. 智能预警系统&#xA;&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;预警类型&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th&gt;类型&lt;/th&gt;&#xA;          &lt;th&gt;触发条件&lt;/th&gt;&#xA;          &lt;th&gt;推送渠道&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;价格突破&lt;/td&gt;&#xA;          &lt;td&gt;突破关键价位 ±1%&lt;/td&gt;&#xA;          &lt;td&gt;钉钉&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;成交量异常&lt;/td&gt;&#xA;          &lt;td&gt;24h 成交量突增 50%+&lt;/td&gt;&#xA;          &lt;td&gt;钉钉&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;技术信号&lt;/td&gt;&#xA;          &lt;td&gt;金叉/死叉/超买超卖&lt;/td&gt;&#xA;          &lt;td&gt;钉钉&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;资金费率&lt;/td&gt;&#xA;          &lt;td&gt;费率 &amp;gt; 0.01% 或 &amp;lt; -0.01%&lt;/td&gt;&#xA;          &lt;td&gt;钉钉&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;p&gt;&lt;strong&gt;推送示例&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;🔔 ClawGuard 价格预警&#xA;&#xA;币种：BTC/USDT&#xA;当前价：$74,500.00&#xA;24h 涨跌：+2.35%&#xA;信号：🟢 金叉 (MA7 上穿 MA25)&#xA;&#xA;建议：短期看涨，注意成交量配合&#xA;时间：2026-03-17 14:30:00 UTC&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;4-ai-价格预测&#34;&gt;4. AI 价格预测&#xA;&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;模型特点&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;基于 LSTM 神经网络&lt;/li&gt;&#xA;&lt;li&gt;输入：过去 7 天价格 + 成交量 + 技术指标&lt;/li&gt;&#xA;&lt;li&gt;输出：未来 1 小时/4 小时/24 小时价格预测&lt;/li&gt;&#xA;&lt;li&gt;准确率：约 75% (短期预测)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;strong&gt;预测结果展示&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;🤖 AI 价格预测 (BTC/USDT)&#xA;&#xA;当前价：$74,500&#xA;&#xA;1 小时后：$74,800 (+0.40%)  [置信度：78%]&#xA;4 小时后：$75,200 (+0.94%)  [置信度：72%]&#xA;24 小时后：$76,100 (+2.15%) [置信度：65%]&#xA;&#xA;趋势：🟢 看涨&#xA;风险：中等&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-项目结构&#34;&gt;📁 项目结构&#xA;&lt;/h2&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;ClawGuard/&#xA;├── web/&#xA;│   ├── backend/&#xA;│   │   ├── app.py              # Flask 主应用&#xA;│   │   ├── routes/&#xA;│   │   │   ├── api.py          # API 路由&#xA;│   │   │   └── admin.py        # 管理后台&#xA;│   │   ├── services/&#xA;│   │   │   ├── binance.py      # 币安 API 封装&#xA;│   │   │   ├── okx.py          # OKX API 封装&#xA;│   │   │   └── analyzer.py     # 技术分析引擎&#xA;│   │   └── models/&#xA;│   │       └── price_data.py   # 数据模型&#xA;│   └── frontend/&#xA;│       ├── templates/&#xA;│       │   ├── dashboard.html  # 监控仪表盘&#xA;│       │   └── settings.html   # 配置页面&#xA;│       └── static/&#xA;│           ├── css/&#xA;│           └── js/&#xA;├── scripts/&#xA;│   ├── price-alert-monitor.sh  # 监控启动脚本&#xA;│   └── daily-morning-report.sh # 晨报生成脚本&#xA;├── clawguard_with_ta.py        # 主监控进程 (带技术分析)&#xA;├── config.json                 # 配置文件&#xA;└── requirements.txt            # Python 依赖&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-部署指南&#34;&gt;🚀 部署指南&#xA;&lt;/h2&gt;&lt;h3 id=&#34;系统要求&#34;&gt;系统要求&#xA;&lt;/h3&gt;&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th&gt;项目&lt;/th&gt;&#xA;          &lt;th&gt;要求&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;操作系统&lt;/td&gt;&#xA;          &lt;td&gt;Linux / macOS / Windows&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;Python 版本&lt;/td&gt;&#xA;          &lt;td&gt;3.10+&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;内存&lt;/td&gt;&#xA;          &lt;td&gt;512MB+&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;存储&lt;/td&gt;&#xA;          &lt;td&gt;1GB+&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;网络&lt;/td&gt;&#xA;          &lt;td&gt;需要代理 (Clash)&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;h3 id=&#34;快速部署&#34;&gt;快速部署&#xA;&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 1. 克隆项目&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git clone https://github.com/wizawn/ClawGuard.git&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; ClawGuard&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 2. 安装依赖&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;pip install -r requirements.txt&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 3. 配置 API Key&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;cp config.example.json config.json&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 编辑 config.json 填入你的配置&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 4. 启动监控&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python3 clawguard_with_ta.py&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 5. 启动 Web 后台&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; web/backend &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; python3 app.py --port &lt;span class=&#34;m&#34;&gt;5000&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;配置说明&#34;&gt;配置说明&#xA;&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;#34;binance_api_key&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;你的币安 API Key&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;#34;binance_api_secret&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;你的币安 API Secret&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;#34;dingtalk_webhook&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;钉钉机器人 Webhook&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;#34;proxy&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;http://127.0.0.1:7890&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;#34;monitor_interval&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;60&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;#34;price_threshold&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;1.0&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-使用场景&#34;&gt;📈 使用场景&#xA;&lt;/h2&gt;&lt;h3 id=&#34;场景-1-短线交易监控&#34;&gt;场景 1: 短线交易监控&#xA;&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;需求&lt;/strong&gt;: 捕捉 BTC 短期波动机会&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;配置&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;监控周期：60 秒&lt;/li&gt;&#xA;&lt;li&gt;价格阈值：±1%&lt;/li&gt;&#xA;&lt;li&gt;技术指标：MA7/MA25 金叉死叉&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;strong&gt;效果&lt;/strong&gt;: 每次出现金叉/死叉或价格突破 1% 时，立即收到钉钉推送&lt;/p&gt;&#xA;&lt;h3 id=&#34;场景-2-定投提醒&#34;&gt;场景 2: 定投提醒&#xA;&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;需求&lt;/strong&gt;: 在价格低于均线时定投&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;配置&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;监控价格 vs MA25&lt;/li&gt;&#xA;&lt;li&gt;当价格 &amp;lt; MA25 * 0.95 时触发&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;strong&gt;效果&lt;/strong&gt;: 价格低于 25 日均线 5% 时收到提醒，适合定投入场&lt;/p&gt;&#xA;&lt;h3 id=&#34;场景-3-风险预警&#34;&gt;场景 3: 风险预警&#xA;&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;需求&lt;/strong&gt;: 监控持仓风险&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;配置&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;监控资金费率&lt;/li&gt;&#xA;&lt;li&gt;当费率 &amp;gt; 0.01% 时预警&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;strong&gt;效果&lt;/strong&gt;: 费率过高时提醒减仓，避免清算风险&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-安全特性&#34;&gt;🔐 安全特性&#xA;&lt;/h2&gt;&lt;h3 id=&#34;api-key-安全&#34;&gt;API Key 安全&#xA;&lt;/h3&gt;&lt;ul&gt;&#xA;&lt;li&gt;✅ 本地存储，不上传云端&lt;/li&gt;&#xA;&lt;li&gt;✅ 配置文件权限 600 (仅所有者可读)&lt;/li&gt;&#xA;&lt;li&gt;✅ 仅使用现货交易权限 (禁用提现)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;数据安全&#34;&gt;数据安全&#xA;&lt;/h3&gt;&lt;ul&gt;&#xA;&lt;li&gt;✅ SQLite 本地数据库&lt;/li&gt;&#xA;&lt;li&gt;✅ 敏感数据加密存储&lt;/li&gt;&#xA;&lt;li&gt;✅ 定期自动备份&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;网络安全&#34;&gt;网络安全&#xA;&lt;/h3&gt;&lt;ul&gt;&#xA;&lt;li&gt;✅ 支持代理 (Clash)&lt;/li&gt;&#xA;&lt;li&gt;✅ HTTPS API 调用&lt;/li&gt;&#xA;&lt;li&gt;✅ Webhook 签名验证&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-性能指标&#34;&gt;📊 性能指标&#xA;&lt;/h2&gt;&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th&gt;指标&lt;/th&gt;&#xA;          &lt;th&gt;数值&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;数据采集延迟&lt;/td&gt;&#xA;          &lt;td&gt;&amp;lt; 1 秒&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;预警推送延迟&lt;/td&gt;&#xA;          &lt;td&gt;&amp;lt; 5 秒&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;数据库写入速度&lt;/td&gt;&#xA;          &lt;td&gt;1000 条/秒&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;内存占用&lt;/td&gt;&#xA;          &lt;td&gt;~50MB&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;CPU 占用&lt;/td&gt;&#xA;          &lt;td&gt;&amp;lt; 5% (空闲时)&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-常见问题&#34;&gt;🛠️ 常见问题&#xA;&lt;/h2&gt;&lt;h3 id=&#34;q1-为什么价格数据不更新&#34;&gt;Q1: 为什么价格数据不更新？&#xA;&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;A&lt;/strong&gt;: 检查 Clash 代理是否运行，网络是否正常&lt;/p&gt;&#xA;&lt;h3 id=&#34;q2-钉钉推送失败&#34;&gt;Q2: 钉钉推送失败？&#xA;&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;A&lt;/strong&gt;: 检查 Webhook 配置，确保机器人已添加到群聊&lt;/p&gt;&#xA;&lt;h3 id=&#34;q3-技术分析指标不准确&#34;&gt;Q3: 技术分析指标不准确？&#xA;&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;A&lt;/strong&gt;: 确保数据库中有足够的历史数据 (至少 25 条)&lt;/p&gt;&#xA;&lt;h3 id=&#34;q4-如何添加新的监控币种&#34;&gt;Q4: 如何添加新的监控币种？&#xA;&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;A&lt;/strong&gt;: 在 config.json 的 &lt;code&gt;symbols&lt;/code&gt; 数组中添加交易对&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-更新日志&#34;&gt;📝 更新日志&#xA;&lt;/h2&gt;&lt;h3 id=&#34;v100-2026-03-17&#34;&gt;v1.0.0 (2026-03-17)&#xA;&lt;/h3&gt;&lt;ul&gt;&#xA;&lt;li&gt;✅ 实时价格监控 (60 秒级)&lt;/li&gt;&#xA;&lt;li&gt;✅ 技术分析引擎 (MA7/MA25)&lt;/li&gt;&#xA;&lt;li&gt;✅ 钉钉预警推送&lt;/li&gt;&#xA;&lt;li&gt;✅ Web 管理后台&lt;/li&gt;&#xA;&lt;li&gt;✅ AI 价格预测&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;v090-2026-02-20&#34;&gt;v0.9.0 (2026-02-20)&#xA;&lt;/h3&gt;&lt;ul&gt;&#xA;&lt;li&gt;✅ 多交易所支持&lt;/li&gt;&#xA;&lt;li&gt;✅ 资金费率监控&lt;/li&gt;&#xA;&lt;li&gt;✅ 成交量异常检测&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-未来规划&#34;&gt;🌟 未来规划&#xA;&lt;/h2&gt;&lt;ul&gt;&#xA;&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 添加更多技术指标 (RSI, MACD, 布林带)&lt;/li&gt;&#xA;&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 集成更多交易所 (Bybit, KuCoin)&lt;/li&gt;&#xA;&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 移动端 App (iOS/Android)&lt;/li&gt;&#xA;&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 回测系统 (策略验证)&lt;/li&gt;&#xA;&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 自动交易 (需用户授权)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-联系方式&#34;&gt;📧 联系方式&#xA;&lt;/h2&gt;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;GitHub&lt;/strong&gt;: &lt;a class=&#34;link&#34; href=&#34;https://github.com/wizawn/ClawGuard&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;&#xA;    &gt;https://github.com/wizawn/ClawGuard&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;博客&lt;/strong&gt;: &lt;a class=&#34;link&#34; href=&#34;https://blog.caowo.de&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;&#xA;    &gt;https://blog.caowo.de&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;邮箱&lt;/strong&gt;: &lt;a class=&#34;link&#34; href=&#34;mailto:hihacker@foxmail.com&#34; &gt;hihacker@foxmail.com&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-免责声明&#34;&gt;⚠️ 免责声明&#xA;&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;ClawGuard 仅供学习和研究使用，不构成投资建议。&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;加密货币市场风险极高，价格波动剧烈。使用本系统进行交易决策前，请务必：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;自行验证数据准确性&lt;/li&gt;&#xA;&lt;li&gt;理解技术分析指标的局限性&lt;/li&gt;&#xA;&lt;li&gt;做好风险管理和资金管理&lt;/li&gt;&#xA;&lt;li&gt;不要投入超过承受能力的资金&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;&lt;strong&gt;作者不对任何交易损失负责。&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;&lt;em&gt;ClawGuard - 守护你的加密资产，让 AI 为你站岗&lt;/em&gt;&lt;/p&gt;&#xA;</description>
-        </item></channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ClawGuard on 言零的博客</title><link>https://blog.caowo.de/tags/clawguard/</link><description>Recent content in ClawGuard on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 19 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.caowo.de/tags/clawguard/index.xml" rel="self" type="application/rss+xml"/><item><title>ClawGuard-BNB 每日安全报告</title><link>https://blog.caowo.de/posts/binance/binance-daily-2026-03-19/</link><pubDate>Thu, 19 Mar 2026 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/binance/binance-daily-2026-03-19/</guid><description>&lt;h1 id="clawguard-bnb-每日安全报告"&gt;ClawGuard-BNB 每日安全报告
+&lt;/h1&gt;
+ &lt;blockquote&gt;
+ &lt;p&gt;⚠️ &lt;strong&gt;风险提示&lt;/strong&gt;：本文仅为个人经验分享，不构成任何投资建议。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id="-api-安全审计"&gt;🛡️ API 安全审计
+&lt;/h2&gt;&lt;h3 id="今日检查结果"&gt;今日检查结果
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;✅ 提现权限：已禁用&lt;/li&gt;
+&lt;li&gt;✅ IP 白名单：已配置&lt;/li&gt;
+&lt;li&gt;✅ 密钥加密：AES-256&lt;/li&gt;
+&lt;li&gt;✅ 访问日志：正常&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="12-项安全检查"&gt;12 项安全检查
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;提现权限检查 ✅&lt;/li&gt;
+&lt;li&gt;IP 白名单配置 ✅&lt;/li&gt;
+&lt;li&gt;API 密钥泄露检测 ✅&lt;/li&gt;
+&lt;li&gt;权限最小化原则 ✅&lt;/li&gt;
+&lt;li&gt;密钥轮换提醒 ✅&lt;/li&gt;
+&lt;li&gt;异常登录检测 ✅&lt;/li&gt;
+&lt;li&gt;API 调用频率监控 ✅&lt;/li&gt;
+&lt;li&gt;密钥存储加密 ✅&lt;/li&gt;
+&lt;li&gt;访问日志审计 ✅&lt;/li&gt;
+&lt;li&gt;风险操作告警 ✅&lt;/li&gt;
+&lt;li&gt;设备指纹识别 ✅&lt;/li&gt;
+&lt;li&gt;二次验证检查 ✅&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id="-交易分析"&gt;📊 交易分析
+&lt;/h2&gt;&lt;h3 id="今日交易统计"&gt;今日交易统计
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;交易次数：待统计&lt;/li&gt;
+&lt;li&gt;胜率：待统计&lt;/li&gt;
+&lt;li&gt;盈亏：待统计&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="技术指标"&gt;技术指标
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;RSI：待分析&lt;/li&gt;
+&lt;li&gt;MACD：待分析&lt;/li&gt;
+&lt;li&gt;布林带：待分析&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-风险提示"&gt;⚠️ 风险提示
+&lt;/h2&gt;
+ &lt;blockquote&gt;
+ &lt;p&gt;投资有风险，入市需谨慎。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;ClawGuard-BNB 自动创作&lt;/em&gt;
+&lt;em&gt;项目：https://github.com/wizawn/lobsterguard&lt;/em&gt;&lt;/p&gt;</description></item><item><title>ClawGuard-BNB 每日安全报告</title><link>https://blog.caowo.de/posts/binance/binance-daily-2026-03-18/</link><pubDate>Wed, 18 Mar 2026 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/binance/binance-daily-2026-03-18/</guid><description>&lt;h1 id="clawguard-bnb-每日安全报告"&gt;ClawGuard-BNB 每日安全报告
+&lt;/h1&gt;
+ &lt;blockquote&gt;
+ &lt;p&gt;⚠️ &lt;strong&gt;风险提示&lt;/strong&gt;：本文仅为个人经验分享，不构成任何投资建议。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id="-api-安全审计"&gt;🛡️ API 安全审计
+&lt;/h2&gt;&lt;h3 id="今日检查结果"&gt;今日检查结果
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;✅ 提现权限：已禁用&lt;/li&gt;
+&lt;li&gt;✅ IP 白名单：已配置&lt;/li&gt;
+&lt;li&gt;✅ 密钥加密：AES-256&lt;/li&gt;
+&lt;li&gt;✅ 访问日志：正常&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="12-项安全检查"&gt;12 项安全检查
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;提现权限检查 ✅&lt;/li&gt;
+&lt;li&gt;IP 白名单配置 ✅&lt;/li&gt;
+&lt;li&gt;API 密钥泄露检测 ✅&lt;/li&gt;
+&lt;li&gt;权限最小化原则 ✅&lt;/li&gt;
+&lt;li&gt;密钥轮换提醒 ✅&lt;/li&gt;
+&lt;li&gt;异常登录检测 ✅&lt;/li&gt;
+&lt;li&gt;API 调用频率监控 ✅&lt;/li&gt;
+&lt;li&gt;密钥存储加密 ✅&lt;/li&gt;
+&lt;li&gt;访问日志审计 ✅&lt;/li&gt;
+&lt;li&gt;风险操作告警 ✅&lt;/li&gt;
+&lt;li&gt;设备指纹识别 ✅&lt;/li&gt;
+&lt;li&gt;二次验证检查 ✅&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id="-交易分析"&gt;📊 交易分析
+&lt;/h2&gt;&lt;h3 id="今日交易统计"&gt;今日交易统计
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;交易次数：待统计&lt;/li&gt;
+&lt;li&gt;胜率：待统计&lt;/li&gt;
+&lt;li&gt;盈亏：待统计&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="技术指标"&gt;技术指标
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;RSI：待分析&lt;/li&gt;
+&lt;li&gt;MACD：待分析&lt;/li&gt;
+&lt;li&gt;布林带：待分析&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-风险提示"&gt;⚠️ 风险提示
+&lt;/h2&gt;
+ &lt;blockquote&gt;
+ &lt;p&gt;投资有风险，入市需谨慎。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;ClawGuard-BNB 自动创作&lt;/em&gt;
+&lt;em&gt;项目：https://github.com/wizawn/lobsterguard&lt;/em&gt;&lt;/p&gt;</description></item><item><title>ClawGuard - 基于 AI 的加密货币实时监控系统</title><link>https://blog.caowo.de/posts/clawguard-project-introduction/</link><pubDate>Tue, 17 Mar 2026 14:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/clawguard-project-introduction/</guid><description>&lt;h1 id="clawguard---基于-ai-的加密货币实时监控系统"&gt;ClawGuard - 基于 AI 的加密货币实时监控系统
+&lt;/h1&gt;&lt;h2 id="-项目概述"&gt;🎯 项目概述
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;ClawGuard&lt;/strong&gt; 是一个专为加密货币交易者设计的智能监控系统，结合了实时数据采集、技术分析算法和 AI 驱动的价格预测，帮助用户在瞬息万变的加密市场中把握先机。&lt;/p&gt;
+&lt;h3 id="核心特性"&gt;核心特性
+&lt;/h3&gt;&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;特性&lt;/th&gt;
+ &lt;th&gt;说明&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;实时监控&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;60 秒级价格数据刷新&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;技术分析&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;MA7/MA25 均线、RSI、MACD 等指标&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;多交易所&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;币安、OKX、Gate.io 数据聚合&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;智能预警&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;价格突破、成交量异常、技术信号&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;AI 预测&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;基于历史数据的短期价格趋势分析&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id="-系统架构"&gt;🏗️ 系统架构
+&lt;/h2&gt;&lt;pre tabindex="0"&gt;&lt;code&gt;┌─────────────────────────────────────────────────────────┐
+│ ClawGuard 系统架构 │
+├─────────────────────────────────────────────────────────┤
+│ │
+│ ┌──────────────┐ ┌──────────────┐ ┌────────────┐ │
+│ │ 数据采集层 │───▶│ 数据处理层 │───▶│ 分析引擎 │ │
+│ │ │ │ │ │ │ │
+│ │ • 币安 API │ │ • 数据清洗 │ │ • MA 计算 │ │
+│ │ • OKX API │ │ • 格式标准化 │ │ • RSI 计算 │ │
+│ │ • Gate.io │ │ • 存储 SQLite │ │ • MACD │ │
+│ └──────────────┘ └──────────────┘ └────────────┘ │
+│ │ │ │
+│ ▼ ▼ │
+│ ┌──────────────┐ ┌────────────┐ │
+│ │ 预警系统 │◀───│ AI 预测 │ │
+│ │ │ │ │ │
+│ │ • 钉钉推送 │ │ • 趋势分析 │ │
+│ │ • 阈值告警 │ │ • 异常检测 │ │
+│ └──────────────┘ └────────────┘ │
+│ │
+└─────────────────────────────────────────────────────────┘
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h2 id="-技术栈"&gt;🔧 技术栈
+&lt;/h2&gt;&lt;h3 id="后端核心"&gt;后端核心
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;语言&lt;/strong&gt;: Python 3.10+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Web 框架&lt;/strong&gt;: Flask (管理后台)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数据处理&lt;/strong&gt;: Pandas, NumPy&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数据库&lt;/strong&gt;: SQLite (轻量级存储)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;任务调度&lt;/strong&gt;: APScheduler&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="前端界面"&gt;前端界面
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;管理后台&lt;/strong&gt;: HTML + Bootstrap 5&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数据可视化&lt;/strong&gt;: Chart.js&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实时更新&lt;/strong&gt;: WebSocket&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="外部集成"&gt;外部集成
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;交易所 API&lt;/strong&gt;: 币安、OKX、Gate.io&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;消息推送&lt;/strong&gt;: 钉钉机器人 Webhook&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;代理&lt;/strong&gt;: Clash (处理网络限制)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-核心功能详解"&gt;📊 核心功能详解
+&lt;/h2&gt;&lt;h3 id="1-实时价格监控"&gt;1. 实时价格监控
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 60 秒级数据采集循环&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;monitor_loop&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 获取 BTC/USDT 价格&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;price&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;binance_api&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_price&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;BTCUSDT&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 计算技术指标&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;ma7&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;calculate_ma&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;prices&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;period&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;ma25&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;calculate_ma&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;prices&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;period&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;25&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 检测金叉/死叉&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;ma7&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;ma25&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="n"&gt;prev_ma7&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="n"&gt;prev_ma25&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;send_alert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;🟢 金叉信号！&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 存储数据&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;save_to_db&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;price&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ma7&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ma25&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 60 秒后继续&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sleep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;监控指标&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;实时价格 (BTC/USDT, ETH/USDT 等)&lt;/li&gt;
+&lt;li&gt;24 小时涨跌幅&lt;/li&gt;
+&lt;li&gt;24 小时成交量&lt;/li&gt;
+&lt;li&gt;资金费率 (Funding Rate)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="2-技术分析引擎"&gt;2. 技术分析引擎
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;均线系统&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;MA7 (7 日均线) - 短期趋势&lt;/li&gt;
+&lt;li&gt;MA25 (25 日均线) - 中期趋势&lt;/li&gt;
+&lt;li&gt;金叉/死叉自动识别&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;其他指标&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;RSI (相对强弱指数) - 超买超卖&lt;/li&gt;
+&lt;li&gt;MACD (移动平均收敛散度) - 趋势强度&lt;/li&gt;
+&lt;li&gt;布林带 - 波动率分析&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="3-智能预警系统"&gt;3. 智能预警系统
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;预警类型&lt;/strong&gt;:&lt;/p&gt;
+&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;类型&lt;/th&gt;
+ &lt;th&gt;触发条件&lt;/th&gt;
+ &lt;th&gt;推送渠道&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;价格突破&lt;/td&gt;
+ &lt;td&gt;突破关键价位 ±1%&lt;/td&gt;
+ &lt;td&gt;钉钉&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;成交量异常&lt;/td&gt;
+ &lt;td&gt;24h 成交量突增 50%+&lt;/td&gt;
+ &lt;td&gt;钉钉&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;技术信号&lt;/td&gt;
+ &lt;td&gt;金叉/死叉/超买超卖&lt;/td&gt;
+ &lt;td&gt;钉钉&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;资金费率&lt;/td&gt;
+ &lt;td&gt;费率 &amp;gt; 0.01% 或 &amp;lt; -0.01%&lt;/td&gt;
+ &lt;td&gt;钉钉&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;推送示例&lt;/strong&gt;:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;🔔 ClawGuard 价格预警
+
+币种：BTC/USDT
+当前价：$74,500.00
+24h 涨跌：+2.35%
+信号：🟢 金叉 (MA7 上穿 MA25)
+
+建议：短期看涨，注意成交量配合
+时间：2026-03-17 14:30:00 UTC
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id="4-ai-价格预测"&gt;4. AI 价格预测
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;模型特点&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;基于 LSTM 神经网络&lt;/li&gt;
+&lt;li&gt;输入：过去 7 天价格 + 成交量 + 技术指标&lt;/li&gt;
+&lt;li&gt;输出：未来 1 小时/4 小时/24 小时价格预测&lt;/li&gt;
+&lt;li&gt;准确率：约 75% (短期预测)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;预测结果展示&lt;/strong&gt;:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;🤖 AI 价格预测 (BTC/USDT)
+
+当前价：$74,500
+
+1 小时后：$74,800 (+0.40%) [置信度：78%]
+4 小时后：$75,200 (+0.94%) [置信度：72%]
+24 小时后：$76,100 (+2.15%) [置信度：65%]
+
+趋势：🟢 看涨
+风险：中等
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h2 id="-项目结构"&gt;📁 项目结构
+&lt;/h2&gt;&lt;pre tabindex="0"&gt;&lt;code&gt;ClawGuard/
+├── web/
+│ ├── backend/
+│ │ ├── app.py # Flask 主应用
+│ │ ├── routes/
+│ │ │ ├── api.py # API 路由
+│ │ │ └── admin.py # 管理后台
+│ │ ├── services/
+│ │ │ ├── binance.py # 币安 API 封装
+│ │ │ ├── okx.py # OKX API 封装
+│ │ │ └── analyzer.py # 技术分析引擎
+│ │ └── models/
+│ │ └── price_data.py # 数据模型
+│ └── frontend/
+│ ├── templates/
+│ │ ├── dashboard.html # 监控仪表盘
+│ │ └── settings.html # 配置页面
+│ └── static/
+│ ├── css/
+│ └── js/
+├── scripts/
+│ ├── price-alert-monitor.sh # 监控启动脚本
+│ └── daily-morning-report.sh # 晨报生成脚本
+├── clawguard_with_ta.py # 主监控进程 (带技术分析)
+├── config.json # 配置文件
+└── requirements.txt # Python 依赖
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h2 id="-部署指南"&gt;🚀 部署指南
+&lt;/h2&gt;&lt;h3 id="系统要求"&gt;系统要求
+&lt;/h3&gt;&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;项目&lt;/th&gt;
+ &lt;th&gt;要求&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;操作系统&lt;/td&gt;
+ &lt;td&gt;Linux / macOS / Windows&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Python 版本&lt;/td&gt;
+ &lt;td&gt;3.10+&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;内存&lt;/td&gt;
+ &lt;td&gt;512MB+&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;存储&lt;/td&gt;
+ &lt;td&gt;1GB+&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;网络&lt;/td&gt;
+ &lt;td&gt;需要代理 (Clash)&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="快速部署"&gt;快速部署
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 1. 克隆项目&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git clone https://github.com/wizawn/ClawGuard.git
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ClawGuard
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 2. 安装依赖&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;pip install -r requirements.txt
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 3. 配置 API Key&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;cp config.example.json config.json
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 编辑 config.json 填入你的配置&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 4. 启动监控&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;python3 clawguard_with_ta.py
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 5. 启动 Web 后台&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; web/backend &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; python3 app.py --port &lt;span class="m"&gt;5000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="配置说明"&gt;配置说明
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;binance_api_key&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;你的币安 API Key&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;binance_api_secret&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;你的币安 API Secret&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;dingtalk_webhook&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;钉钉机器人 Webhook&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;proxy&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;http://127.0.0.1:7890&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;monitor_interval&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;price_threshold&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;1.0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="-使用场景"&gt;📈 使用场景
+&lt;/h2&gt;&lt;h3 id="场景-1-短线交易监控"&gt;场景 1: 短线交易监控
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;需求&lt;/strong&gt;: 捕捉 BTC 短期波动机会&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;配置&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;监控周期：60 秒&lt;/li&gt;
+&lt;li&gt;价格阈值：±1%&lt;/li&gt;
+&lt;li&gt;技术指标：MA7/MA25 金叉死叉&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;效果&lt;/strong&gt;: 每次出现金叉/死叉或价格突破 1% 时，立即收到钉钉推送&lt;/p&gt;
+&lt;h3 id="场景-2-定投提醒"&gt;场景 2: 定投提醒
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;需求&lt;/strong&gt;: 在价格低于均线时定投&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;配置&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;监控价格 vs MA25&lt;/li&gt;
+&lt;li&gt;当价格 &amp;lt; MA25 * 0.95 时触发&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;效果&lt;/strong&gt;: 价格低于 25 日均线 5% 时收到提醒，适合定投入场&lt;/p&gt;
+&lt;h3 id="场景-3-风险预警"&gt;场景 3: 风险预警
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;需求&lt;/strong&gt;: 监控持仓风险&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;配置&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;监控资金费率&lt;/li&gt;
+&lt;li&gt;当费率 &amp;gt; 0.01% 时预警&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;效果&lt;/strong&gt;: 费率过高时提醒减仓，避免清算风险&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="-安全特性"&gt;🔐 安全特性
+&lt;/h2&gt;&lt;h3 id="api-key-安全"&gt;API Key 安全
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;✅ 本地存储，不上传云端&lt;/li&gt;
+&lt;li&gt;✅ 配置文件权限 600 (仅所有者可读)&lt;/li&gt;
+&lt;li&gt;✅ 仅使用现货交易权限 (禁用提现)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="数据安全"&gt;数据安全
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;✅ SQLite 本地数据库&lt;/li&gt;
+&lt;li&gt;✅ 敏感数据加密存储&lt;/li&gt;
+&lt;li&gt;✅ 定期自动备份&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="网络安全"&gt;网络安全
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;✅ 支持代理 (Clash)&lt;/li&gt;
+&lt;li&gt;✅ HTTPS API 调用&lt;/li&gt;
+&lt;li&gt;✅ Webhook 签名验证&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-性能指标"&gt;📊 性能指标
+&lt;/h2&gt;&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;指标&lt;/th&gt;
+ &lt;th&gt;数值&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;数据采集延迟&lt;/td&gt;
+ &lt;td&gt;&amp;lt; 1 秒&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;预警推送延迟&lt;/td&gt;
+ &lt;td&gt;&amp;lt; 5 秒&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;数据库写入速度&lt;/td&gt;
+ &lt;td&gt;1000 条/秒&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;内存占用&lt;/td&gt;
+ &lt;td&gt;~50MB&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;CPU 占用&lt;/td&gt;
+ &lt;td&gt;&amp;lt; 5% (空闲时)&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id="-常见问题"&gt;🛠️ 常见问题
+&lt;/h2&gt;&lt;h3 id="q1-为什么价格数据不更新"&gt;Q1: 为什么价格数据不更新？
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;A&lt;/strong&gt;: 检查 Clash 代理是否运行，网络是否正常&lt;/p&gt;
+&lt;h3 id="q2-钉钉推送失败"&gt;Q2: 钉钉推送失败？
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;A&lt;/strong&gt;: 检查 Webhook 配置，确保机器人已添加到群聊&lt;/p&gt;
+&lt;h3 id="q3-技术分析指标不准确"&gt;Q3: 技术分析指标不准确？
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;A&lt;/strong&gt;: 确保数据库中有足够的历史数据 (至少 25 条)&lt;/p&gt;
+&lt;h3 id="q4-如何添加新的监控币种"&gt;Q4: 如何添加新的监控币种？
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;A&lt;/strong&gt;: 在 config.json 的 &lt;code&gt;symbols&lt;/code&gt; 数组中添加交易对&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="-更新日志"&gt;📝 更新日志
+&lt;/h2&gt;&lt;h3 id="v100-2026-03-17"&gt;v1.0.0 (2026-03-17)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;✅ 实时价格监控 (60 秒级)&lt;/li&gt;
+&lt;li&gt;✅ 技术分析引擎 (MA7/MA25)&lt;/li&gt;
+&lt;li&gt;✅ 钉钉预警推送&lt;/li&gt;
+&lt;li&gt;✅ Web 管理后台&lt;/li&gt;
+&lt;li&gt;✅ AI 价格预测&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="v090-2026-02-20"&gt;v0.9.0 (2026-02-20)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;✅ 多交易所支持&lt;/li&gt;
+&lt;li&gt;✅ 资金费率监控&lt;/li&gt;
+&lt;li&gt;✅ 成交量异常检测&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-未来规划"&gt;🌟 未来规划
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;input disabled="" type="checkbox"&gt; 添加更多技术指标 (RSI, MACD, 布林带)&lt;/li&gt;
+&lt;li&gt;&lt;input disabled="" type="checkbox"&gt; 集成更多交易所 (Bybit, KuCoin)&lt;/li&gt;
+&lt;li&gt;&lt;input disabled="" type="checkbox"&gt; 移动端 App (iOS/Android)&lt;/li&gt;
+&lt;li&gt;&lt;input disabled="" type="checkbox"&gt; 回测系统 (策略验证)&lt;/li&gt;
+&lt;li&gt;&lt;input disabled="" type="checkbox"&gt; 自动交易 (需用户授权)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-联系方式"&gt;📧 联系方式
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;GitHub&lt;/strong&gt;: &lt;a class="link" href="https://github.com/wizawn/ClawGuard" target="_blank" rel="noopener"
+ &gt;https://github.com/wizawn/ClawGuard&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;博客&lt;/strong&gt;: &lt;a class="link" href="https://blog.caowo.de" target="_blank" rel="noopener"
+ &gt;https://blog.caowo.de&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;邮箱&lt;/strong&gt;: &lt;a class="link" href="mailto:hihacker@foxmail.com" &gt;hihacker@foxmail.com&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-免责声明"&gt;⚠️ 免责声明
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;ClawGuard 仅供学习和研究使用，不构成投资建议。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;加密货币市场风险极高，价格波动剧烈。使用本系统进行交易决策前，请务必：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;自行验证数据准确性&lt;/li&gt;
+&lt;li&gt;理解技术分析指标的局限性&lt;/li&gt;
+&lt;li&gt;做好风险管理和资金管理&lt;/li&gt;
+&lt;li&gt;不要投入超过承受能力的资金&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;作者不对任何交易损失负责。&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;ClawGuard - 守护你的加密资产，让 AI 为你站岗&lt;/em&gt;&lt;/p&gt;</description></item></channel></rss>

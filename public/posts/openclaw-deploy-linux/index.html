@@ -1,978 +1,329 @@
-<!DOCTYPE html>
-<html lang="zh-CN" dir="ltr">
-    <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="OpenClaw Linux 部署终极指南 - 含环境配置、NVM 安装、一键脚本、初始化向导、故障排查，基于 Ubuntu 22.04 LTS 实测验证">
-<title>OpenClaw 部署教程 - Linux 篇（2026 终极版）</title>
-
-
-<link rel="canonical" href="https://blog.caowo.de/posts/openclaw-deploy-linux/">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
-
-
-<link rel="stylesheet" href="/scss/style.min.390cc81d180d80110703ea467e355a4f3a0f44f25d4e957842790824fb5f2ef2.css"><meta property='og:title' content="OpenClaw 部署教程 - Linux 篇（2026 终极版）">
-<meta property='og:description' content="OpenClaw Linux 部署终极指南 - 含环境配置、NVM 安装、一键脚本、初始化向导、故障排查，基于 Ubuntu 22.04 LTS 实测验证">
-<meta property='og:url' content='https://blog.caowo.de/posts/openclaw-deploy-linux/'>
-<meta property='og:site_name' content='言零的博客'>
-<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='OpenClaw' /><meta property='article:tag' content='Linux' /><meta property='article:tag' content='Ubuntu' /><meta property='article:tag' content='部署' /><meta property='article:tag' content='AI 助手' /><meta property='article:tag' content='保姆级教程' /><meta property='article:published_time' content='2026-03-17T14:30:00&#43;08:00'/><meta property='article:modified_time' content='2026-03-17T14:30:00&#43;08:00'/>
-<meta name="twitter:title" content="OpenClaw 部署教程 - Linux 篇（2026 终极版）">
-<meta name="twitter:description" content="OpenClaw Linux 部署终极指南 - 含环境配置、NVM 安装、一键脚本、初始化向导、故障排查，基于 Ubuntu 22.04 LTS 实测验证">
-
-<script defer src='https://static.cloudflareinsights.com/beacon.min.js' 
-        data-cf-beacon='{"token": "SDZvDCIq-3er2UKht5fIrl2UvvIrJxi6hZVxBfIa"}'></script>
-
-
-    </head>
-    <body class="
-    article-page
-    ">
-    <script>
-        (function() {
-            const colorSchemeKey = 'StackColorScheme';
-            if(!localStorage.getItem(colorSchemeKey)){
-                localStorage.setItem(colorSchemeKey, "auto");
-            }
-        })();
-    </script><script>
-    (function() {
-        const colorSchemeKey = 'StackColorScheme';
-        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
-        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
-
-        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
-            
-
-            document.documentElement.dataset.scheme = 'dark';
-        } else {
-            document.documentElement.dataset.scheme = 'light';
-        }
-    })();
-</script>
-<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky ">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
-        <span class="hamburger-box">
-            <span class="hamburger-inner"></span>
-        </span>
-    </button>
-
-    <header>
-        
-        
-        <div class="site-meta">
-            <h1 class="site-name"><a href="/">言零的博客</a></h1>
-            <h2 class="site-description"></h2>
-        </div>
-    </header><ol class="menu" id="main-menu">
-        
-        
-        
-        <li >
-            <a href='/posts/' >
-                
-                <span>文章 / Posts</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/categories/' >
-                
-                <span>分类 / Categories</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/tags/' >
-                
-                <span>标签 / Tags</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/about/' >
-                
-                <span>关于 / About</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/links/' >
-                
-                <span>友链 / Links</span>
-            </a>
-        </li>
-        
-        <li class="menu-bottom-section">
-            <ol class="menu">
-
-                
-                    <li id="dark-mode-toggle">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="8" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="16" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                        <span>Dark Mode</span>
-                    </li>
-                
-            </ol>
-        </li>
-    </ol>
-</aside>
-
-    
-
-            <main class="main full-width">
-    <article class="has-image main-article">
-    <header class="article-header">
-
-    <div class="article-details">
-    
-    <header class="article-category">
-        
-            
-            
-            
-            <a href="/categories/openclaw/" style="background-color: hsl(294, 60%, 84%); color: hsl(294, 60%, 15%);">
-                OpenClaw
-            </a>
-        
-            
-            
-            
-            <a href="/categories/%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B/" style="background-color: hsl(119, 60%, 84%); color: hsl(119, 60%, 15%);">
-                部署教程
-            </a>
-        
-    </header>
-    
-
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/posts/openclaw-deploy-linux/">OpenClaw 部署教程 - Linux 篇（2026 终极版）</a>
-        </h2>
-    
-        
-        <h3 class="article-subtitle">
-            OpenClaw Linux 部署终极指南 - 含环境配置、NVM 安装、一键脚本、初始化向导、故障排查，基于 Ubuntu 22.04 LTS 实测验证
-        </h3>
-        
-    </div>
-
-    
-    
-    
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published" datetime='2026-03-17T14:30:00&#43;08:00'>Tuesday, March 17, 2026</time>
-            </div>
-        
-
-        
-    </footer>
-    
-
-    
-
-    
-</div>
-
-</header>
-
-    
-
-    <section class="article-content">
-    
-    
-    <h1 id="openclaw-部署教程---linux-篇2026-终极版">OpenClaw 部署教程 - Linux 篇（2026 终极版）
-</h1>
-    <blockquote>
-        <p>📅 <strong>更新时间</strong>：2026-03-17<br>
-⏱️ <strong>阅读时间</strong>：20 分钟<br>
-💡 <strong>难度等级</strong>：⭐⭐☆☆☆<br>
-✅ <strong>实测环境</strong>：Ubuntu 22.04 LTS / Node.js v22.12.0 / Python 3.10.12</p>
-
-    </blockquote>
-<hr>
-<h2 id="-部署前必读安全警示">⚠️ 部署前必读（安全警示）
-</h2><h3 id="电气安全">电气安全
-</h3><ul>
-<li><strong>服务器供电</strong>：确保使用稳压电源，电压波动 &lt; ±5%</li>
-<li><strong>散热要求</strong>：工作环境温度 15-35℃，湿度 40-60%</li>
-<li><strong>ESD 防护</strong>：接触服务器前佩戴防静电手环</li>
-</ul>
-<h3 id="系统安全">系统安全
-</h3><ul>
-<li><strong>root 权限</strong>：生产环境建议使用普通用户 + sudo</li>
-<li><strong>防火墙</strong>：仅开放必要端口（默认 18789）</li>
-<li><strong>备份</strong>：部署前备份重要数据</li>
-</ul>
-<h3 id="网络要求">网络要求
-</h3><ul>
-<li><strong>带宽</strong>：≥ 10Mbps（推荐 100Mbps+）</li>
-<li><strong>代理</strong>：中国大陆用户需配置 Clash 代理（端口 7890）</li>
-<li><strong>域名</strong>：可选，用于 HTTPS 访问</li>
-</ul>
-<h3 id="内存要求重要">内存要求（重要！）
-</h3><ul>
-<li><strong>最低</strong>：2GB（需配置 Swap）</li>
-<li><strong>推荐</strong>：4GB+（无需 Swap）</li>
-<li><strong>生产</strong>：8GB+（流畅运行）</li>
-</ul>
-<p><strong>⚠️ 2GB 内存服务器必须配置 Swap</strong>，否则会出现 OOM（内存溢出）导致安装失败。</p>
-<hr>
-<h2 id="-系统要求精准参数">📋 系统要求（精准参数）
-</h2><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>项目</th>
-          <th>最低要求</th>
-          <th>推荐配置</th>
-          <th><strong>生产环境</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>操作系统</strong></td>
-          <td>Ubuntu 20.04</td>
-          <td>Ubuntu 22.04 LTS</td>
-          <td>Ubuntu 22.04.3 LTS</td>
-      </tr>
-      <tr>
-          <td><strong>CPU</strong></td>
-          <td>1 核心</td>
-          <td>2 核心+</td>
-          <td>4 核心+</td>
-      </tr>
-      <tr>
-          <td><strong>内存</strong></td>
-          <td>2GB</td>
-          <td>4GB+</td>
-          <td><strong>8GB+</strong></td>
-      </tr>
-      <tr>
-          <td><strong>磁盘</strong></td>
-          <td>5GB</td>
-          <td>10GB SSD</td>
-          <td><strong>20GB+ NVMe SSD</strong></td>
-      </tr>
-      <tr>
-          <td><strong>Node.js</strong></td>
-          <td>v18+</td>
-          <td>v20+</td>
-          <td><strong>v22.12.0</strong> (最新 LTS)</td>
-      </tr>
-      <tr>
-          <td><strong>Python</strong></td>
-          <td>3.8+</td>
-          <td>3.10+</td>
-          <td><strong>3.10.12</strong> (系统自带)</td>
-      </tr>
-      <tr>
-          <td><strong>Git</strong></td>
-          <td>任意版本</td>
-          <td>最新</td>
-          <td>2.34.1+</td>
-      </tr>
-  </tbody>
-</table></div>
-<p><strong>⚠️ 关键说明</strong>：</p>
-<ol>
-<li><strong>Node.js v22</strong>：OpenClaw 官方推荐版本，兼容性最佳</li>
-<li><strong>Swap 配置</strong>：2GB 内存服务器必须配置 2GB+ Swap</li>
-<li><strong>Git 必须</strong>：用于克隆仓库和管理依赖</li>
-</ol>
-<hr>
-<h2 id="-快速安装10-分钟完成">🔧 快速安装（10 分钟完成）
-</h2><h3 id="方法一官方一键安装脚本最简单">方法一：官方一键安装脚本（最简单）
-</h3><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># ============ 步骤 1：系统更新及基础依赖 ============</span>
-</span></span><span class="line"><span class="cl">sudo apt update
-</span></span><span class="line"><span class="cl">sudo apt install -y git curl
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># ============ 步骤 2：执行官方安装脚本 ============</span>
-</span></span><span class="line"><span class="cl">curl -fsSL https://openclaw.ai/install.sh <span class="p">|</span> bash
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># ============ 步骤 3：验证安装 ============</span>
-</span></span><span class="line"><span class="cl">openclaw --version
-</span></span></code></pre></div><p><strong>⏱️ 预计耗时</strong>：5-10 分钟（取决于网络）</p>
-<p><strong>⚠️ 注意事项</strong>：</p>
-<ul>
-<li><strong>国内服务器</strong>：若安装失败，需先配置代理</li>
-<li><strong>2GB 内存</strong>：可能出现 OOM，需先配置 Swap（见下文）</li>
-<li><strong>安装过程</strong>：耗时较长，需耐心等待</li>
-</ul>
-<hr>
-<h3 id="方法二手动安装可控性更强">方法二：手动安装（可控性更强）
-</h3><p>适合需要<strong>精确控制版本</strong>的生产环境：</p>
-<h4 id="步骤-1安装-git">步骤 1：安装 Git
-</h4><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt update
-</span></span><span class="line"><span class="cl">sudo apt install -y git
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 验证版本</span>
-</span></span><span class="line"><span class="cl">git --version  <span class="c1"># 应显示：git version 2.34.1+</span>
-</span></span></code></pre></div><h4 id="步骤-2安装-nvmnode-版本管理器">步骤 2：安装 NVM（Node 版本管理器）
-</h4><p><strong>国内服务器（使用 Gitee 镜像源）</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -o- https://gitee.com/RubyMetric/nvm-cn/raw/main/install.sh <span class="p">|</span> bash
-</span></span></code></pre></div><p><strong>海外服务器（使用官方源）</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh <span class="p">|</span> bash
-</span></span></code></pre></div><h4 id="步骤-3重新加载环境变量">步骤 3：重新加载环境变量
-</h4><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">source</span> ~/.bashrc
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 验证 NVM 已安装</span>
-</span></span><span class="line"><span class="cl"><span class="nb">command</span> -v nvm  <span class="c1"># 应输出：nvm</span>
-</span></span></code></pre></div><h4 id="步骤-4安装-nodejs-22">步骤 4：安装 Node.js 22
-</h4><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 安装 Node.js 22（最新 LTS）</span>
-</span></span><span class="line"><span class="cl">nvm install <span class="m">22</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 设置为默认版本</span>
-</span></span><span class="line"><span class="cl">nvm <span class="nb">alias</span> default <span class="m">22</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 验证版本</span>
-</span></span><span class="line"><span class="cl">node --version  <span class="c1"># 应显示：v22.12.0</span>
-</span></span><span class="line"><span class="cl">npm --version   <span class="c1"># 应显示：10.9.0+</span>
-</span></span></code></pre></div><h4 id="步骤-5安装-openclaw">步骤 5：安装 OpenClaw
-</h4><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 全局安装</span>
-</span></span><span class="line"><span class="cl">npm install -g openclaw
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 验证安装</span>
-</span></span><span class="line"><span class="cl">openclaw --version  <span class="c1"># 应显示：openclaw/x.x.x linux-x64 node-v22.12.0</span>
-</span></span></code></pre></div><hr>
-<h2 id="-初始化配置onboarding-向导">⚙️ 初始化配置（Onboarding 向导）
-</h2><p>安装成功后会自动进入<strong>初始化向导</strong>，按以下步骤操作：</p>
-<h3 id="步骤详解">步骤详解
-</h3><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>步骤</th>
-          <th>提示内容</th>
-          <th>操作</th>
-          <th>说明</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>1</td>
-          <td>安全提示确认</td>
-          <td>输入 <code>Yes</code></td>
-          <td>知晓权限风险</td>
-      </tr>
-      <tr>
-          <td>2</td>
-          <td>选择部署模式</td>
-          <td>选择 <code>QuickStart</code></td>
-          <td>后续可补充配置</td>
-      </tr>
-      <tr>
-          <td>3</td>
-          <td>选择模型服务商</td>
-          <td>选择 <code>OpenAI</code></td>
-          <td>或其他服务商</td>
-      </tr>
-      <tr>
-          <td>4</td>
-          <td>模型授权</td>
-          <td>复制链接到浏览器</td>
-          <td>登录账号完成授权</td>
-      </tr>
-      <tr>
-          <td>5</td>
-          <td>通信通道配置</td>
-          <td>选择 <code>Skip for now</code></td>
-          <td>后续可配置</td>
-      </tr>
-      <tr>
-          <td>6</td>
-          <td>技能配置</td>
-          <td>选择 <code>No</code></td>
-          <td>暂不配置</td>
-      </tr>
-      <tr>
-          <td>7</td>
-          <td>Hooks 配置</td>
-          <td>选择 <code>Session</code></td>
-          <td>暂不启用</td>
-      </tr>
-      <tr>
-          <td>8</td>
-          <td>启动方式</td>
-          <td>选择 <code>TUI</code></td>
-          <td>终端聊天界面</td>
-      </tr>
-      <tr>
-          <td>9</td>
-          <td>测试</td>
-          <td>输入 <code>Hello</code></td>
-          <td>确认安装成功</td>
-      </tr>
-  </tbody>
-</table></div>
-<h3 id="详细流程">详细流程
-</h3><p><strong>1. 安全提示确认</strong>：</p>
-<pre tabindex="0"><code>OpenClaw is a hobby project and still in beta...
+<!doctype html><html lang=zh-CN dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="OpenClaw Linux 部署终极指南 - 含环境配置、NVM 安装、一键脚本、初始化向导、故障排查，基于 Ubuntu 22.04 LTS 实测验证"><title>OpenClaw 部署教程 - Linux 篇（2026 终极版）</title><link rel=canonical href=https://blog.caowo.de/posts/openclaw-deploy-linux/><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preload as=style href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap"><link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap"><link rel=stylesheet href=/scss/style.min.390cc81d180d80110703ea467e355a4f3a0f44f25d4e957842790824fb5f2ef2.css><meta property='og:title' content="OpenClaw 部署教程 - Linux 篇（2026 终极版）"><meta property='og:description' content="OpenClaw Linux 部署终极指南 - 含环境配置、NVM 安装、一键脚本、初始化向导、故障排查，基于 Ubuntu 22.04 LTS 实测验证"><meta property='og:url' content='https://blog.caowo.de/posts/openclaw-deploy-linux/'><meta property='og:site_name' content='言零的博客'><meta property='og:type' content='article'><meta property='article:section' content='Posts'><meta property='article:tag' content='OpenClaw'><meta property='article:tag' content='Linux'><meta property='article:tag' content='Ubuntu'><meta property='article:tag' content='部署'><meta property='article:tag' content='AI 助手'><meta property='article:tag' content='保姆级教程'><meta property='article:published_time' content='2026-03-17T14:30:00+08:00'><meta property='article:modified_time' content='2026-03-17T14:30:00+08:00'><meta name=twitter:title content="OpenClaw 部署教程 - Linux 篇（2026 终极版）"><meta name=twitter:description content="OpenClaw Linux 部署终极指南 - 含环境配置、NVM 安装、一键脚本、初始化向导、故障排查，基于 Ubuntu 22.04 LTS 实测验证"><script defer src=https://static.cloudflareinsights.com/beacon.min.js data-cf-beacon='{"token": "SDZvDCIq-3er2UKht5fIrl2UvvIrJxi6hZVxBfIa"}'></script></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><div class=site-meta><h1 class=site-name><a href=/>言零的博客</a></h1><h2 class=site-description></h2></div></header><ol class=menu id=main-menu><li><a href=/posts/><span>文章 / Posts</span></a></li><li><a href=/categories/><span>分类 / Categories</span></a></li><li><a href=/tags/><span>标签 / Tags</span></a></li><li><a href=/about/><span>关于 / About</span></a></li><li><a href=/links/><span>友链 / Links</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>Dark Mode</span></li></ol></li></ol></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-details><header class=article-category><a href=/categories/openclaw/ style=background-color:#eabeef;color:#390f3d>OpenClaw
+</a><a href=/categories/%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B/ style=background-color:#bfefbe;color:#103d0f>部署教程</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/posts/openclaw-deploy-linux/>OpenClaw 部署教程 - Linux 篇（2026 终极版）</a></h2><h3 class=article-subtitle>OpenClaw Linux 部署终极指南 - 含环境配置、NVM 安装、一键脚本、初始化向导、故障排查，基于 Ubuntu 22.04 LTS 实测验证</h3></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published datetime=2026-03-17T14:30:00+08:00>Tuesday, March 17, 2026</time></div></footer></div></header><section class=article-content><h1 id=openclaw-部署教程---linux-篇2026-终极版>OpenClaw 部署教程 - Linux 篇（2026 终极版）</h1><blockquote><p>📅 <strong>更新时间</strong>：2026-03-17<br>⏱️ <strong>阅读时间</strong>：20 分钟<br>💡 <strong>难度等级</strong>：⭐⭐☆☆☆<br>✅ <strong>实测环境</strong>：Ubuntu 22.04 LTS / Node.js v22.12.0 / Python 3.10.12</p></blockquote><hr><h2 id=-部署前必读安全警示>⚠️ 部署前必读（安全警示）</h2><h3 id=电气安全>电气安全</h3><ul><li><strong>服务器供电</strong>：确保使用稳压电源，电压波动 &lt; ±5%</li><li><strong>散热要求</strong>：工作环境温度 15-35℃，湿度 40-60%</li><li><strong>ESD 防护</strong>：接触服务器前佩戴防静电手环</li></ul><h3 id=系统安全>系统安全</h3><ul><li><strong>root 权限</strong>：生产环境建议使用普通用户 + sudo</li><li><strong>防火墙</strong>：仅开放必要端口（默认 18789）</li><li><strong>备份</strong>：部署前备份重要数据</li></ul><h3 id=网络要求>网络要求</h3><ul><li><strong>带宽</strong>：≥ 10Mbps（推荐 100Mbps+）</li><li><strong>代理</strong>：中国大陆用户需配置 Clash 代理（端口 7890）</li><li><strong>域名</strong>：可选，用于 HTTPS 访问</li></ul><h3 id=内存要求重要>内存要求（重要！）</h3><ul><li><strong>最低</strong>：2GB（需配置 Swap）</li><li><strong>推荐</strong>：4GB+（无需 Swap）</li><li><strong>生产</strong>：8GB+（流畅运行）</li></ul><p><strong>⚠️ 2GB 内存服务器必须配置 Swap</strong>，否则会出现 OOM（内存溢出）导致安装失败。</p><hr><h2 id=-系统要求精准参数>📋 系统要求（精准参数）</h2><div class=table-wrapper><table><thead><tr><th>项目</th><th>最低要求</th><th>推荐配置</th><th><strong>生产环境</strong></th></tr></thead><tbody><tr><td><strong>操作系统</strong></td><td>Ubuntu 20.04</td><td>Ubuntu 22.04 LTS</td><td>Ubuntu 22.04.3 LTS</td></tr><tr><td><strong>CPU</strong></td><td>1 核心</td><td>2 核心+</td><td>4 核心+</td></tr><tr><td><strong>内存</strong></td><td>2GB</td><td>4GB+</td><td><strong>8GB+</strong></td></tr><tr><td><strong>磁盘</strong></td><td>5GB</td><td>10GB SSD</td><td><strong>20GB+ NVMe SSD</strong></td></tr><tr><td><strong>Node.js</strong></td><td>v18+</td><td>v20+</td><td><strong>v22.12.0</strong> (最新 LTS)</td></tr><tr><td><strong>Python</strong></td><td>3.8+</td><td>3.10+</td><td><strong>3.10.12</strong> (系统自带)</td></tr><tr><td><strong>Git</strong></td><td>任意版本</td><td>最新</td><td>2.34.1+</td></tr></tbody></table></div><p><strong>⚠️ 关键说明</strong>：</p><ol><li><strong>Node.js v22</strong>：OpenClaw 官方推荐版本，兼容性最佳</li><li><strong>Swap 配置</strong>：2GB 内存服务器必须配置 2GB+ Swap</li><li><strong>Git 必须</strong>：用于克隆仓库和管理依赖</li></ol><hr><h2 id=-快速安装10-分钟完成>🔧 快速安装（10 分钟完成）</h2><h3 id=方法一官方一键安装脚本最简单>方法一：官方一键安装脚本（最简单）</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># ============ 步骤 1：系统更新及基础依赖 ============</span>
+</span></span><span class=line><span class=cl>sudo apt update
+</span></span><span class=line><span class=cl>sudo apt install -y git curl
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># ============ 步骤 2：执行官方安装脚本 ============</span>
+</span></span><span class=line><span class=cl>curl -fsSL https://openclaw.ai/install.sh <span class=p>|</span> bash
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># ============ 步骤 3：验证安装 ============</span>
+</span></span><span class=line><span class=cl>openclaw --version
+</span></span></code></pre></div><p><strong>⏱️ 预计耗时</strong>：5-10 分钟（取决于网络）</p><p><strong>⚠️ 注意事项</strong>：</p><ul><li><strong>国内服务器</strong>：若安装失败，需先配置代理</li><li><strong>2GB 内存</strong>：可能出现 OOM，需先配置 Swap（见下文）</li><li><strong>安装过程</strong>：耗时较长，需耐心等待</li></ul><hr><h3 id=方法二手动安装可控性更强>方法二：手动安装（可控性更强）</h3><p>适合需要<strong>精确控制版本</strong>的生产环境：</p><h4 id=步骤-1安装-git>步骤 1：安装 Git</h4><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo apt update
+</span></span><span class=line><span class=cl>sudo apt install -y git
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 验证版本</span>
+</span></span><span class=line><span class=cl>git --version  <span class=c1># 应显示：git version 2.34.1+</span>
+</span></span></code></pre></div><h4 id=步骤-2安装-nvmnode-版本管理器>步骤 2：安装 NVM（Node 版本管理器）</h4><p><strong>国内服务器（使用 Gitee 镜像源）</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>curl -o- https://gitee.com/RubyMetric/nvm-cn/raw/main/install.sh <span class=p>|</span> bash
+</span></span></code></pre></div><p><strong>海外服务器（使用官方源）</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh <span class=p>|</span> bash
+</span></span></code></pre></div><h4 id=步骤-3重新加载环境变量>步骤 3：重新加载环境变量</h4><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>source</span> ~/.bashrc
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 验证 NVM 已安装</span>
+</span></span><span class=line><span class=cl><span class=nb>command</span> -v nvm  <span class=c1># 应输出：nvm</span>
+</span></span></code></pre></div><h4 id=步骤-4安装-nodejs-22>步骤 4：安装 Node.js 22</h4><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 安装 Node.js 22（最新 LTS）</span>
+</span></span><span class=line><span class=cl>nvm install <span class=m>22</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 设置为默认版本</span>
+</span></span><span class=line><span class=cl>nvm <span class=nb>alias</span> default <span class=m>22</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 验证版本</span>
+</span></span><span class=line><span class=cl>node --version  <span class=c1># 应显示：v22.12.0</span>
+</span></span><span class=line><span class=cl>npm --version   <span class=c1># 应显示：10.9.0+</span>
+</span></span></code></pre></div><h4 id=步骤-5安装-openclaw>步骤 5：安装 OpenClaw</h4><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 全局安装</span>
+</span></span><span class=line><span class=cl>npm install -g openclaw
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 验证安装</span>
+</span></span><span class=line><span class=cl>openclaw --version  <span class=c1># 应显示：openclaw/x.x.x linux-x64 node-v22.12.0</span>
+</span></span></code></pre></div><hr><h2 id=-初始化配置onboarding-向导>⚙️ 初始化配置（Onboarding 向导）</h2><p>安装成功后会自动进入<strong>初始化向导</strong>，按以下步骤操作：</p><h3 id=步骤详解>步骤详解</h3><div class=table-wrapper><table><thead><tr><th>步骤</th><th>提示内容</th><th>操作</th><th>说明</th></tr></thead><tbody><tr><td>1</td><td>安全提示确认</td><td>输入 <code>Yes</code></td><td>知晓权限风险</td></tr><tr><td>2</td><td>选择部署模式</td><td>选择 <code>QuickStart</code></td><td>后续可补充配置</td></tr><tr><td>3</td><td>选择模型服务商</td><td>选择 <code>OpenAI</code></td><td>或其他服务商</td></tr><tr><td>4</td><td>模型授权</td><td>复制链接到浏览器</td><td>登录账号完成授权</td></tr><tr><td>5</td><td>通信通道配置</td><td>选择 <code>Skip for now</code></td><td>后续可配置</td></tr><tr><td>6</td><td>技能配置</td><td>选择 <code>No</code></td><td>暂不配置</td></tr><tr><td>7</td><td>Hooks 配置</td><td>选择 <code>Session</code></td><td>暂不启用</td></tr><tr><td>8</td><td>启动方式</td><td>选择 <code>TUI</code></td><td>终端聊天界面</td></tr><tr><td>9</td><td>测试</td><td>输入 <code>Hello</code></td><td>确认安装成功</td></tr></tbody></table></div><h3 id=详细流程>详细流程</h3><p><strong>1. 安全提示确认</strong>：</p><pre tabindex=0><code>OpenClaw is a hobby project and still in beta...
 Do you want to continue? (Yes/No)
 &gt; Yes
-</code></pre><p><strong>2. 选择部署模式</strong>：</p>
-<pre tabindex="0"><code>Select deployment mode:
+</code></pre><p><strong>2. 选择部署模式</strong>：</p><pre tabindex=0><code>Select deployment mode:
   1) QuickStart (推荐)
   2) Advanced
 &gt; 1
-</code></pre><p><strong>3. 选择模型服务商</strong>：</p>
-<pre tabindex="0"><code>Select model provider:
+</code></pre><p><strong>3. 选择模型服务商</strong>：</p><pre tabindex=0><code>Select model provider:
   1) OpenAI
   2) Anthropic
   3) Google
   4) Custom
 &gt; 1
-</code></pre><p><strong>4. 模型授权</strong>：</p>
-<pre tabindex="0"><code>Please visit the following URL to authorize:
+</code></pre><p><strong>4. 模型授权</strong>：</p><pre tabindex=0><code>Please visit the following URL to authorize:
 https://openclaw.ai/auth/xxxxx
 
 Enter the authorization code:
 &gt; [粘贴授权码]
-</code></pre><p><strong>5-7. 跳过可选配置</strong>：</p>
-<pre tabindex="0"><code>Configure communication channels? (y/N) &gt; N
+</code></pre><p><strong>5-7. 跳过可选配置</strong>：</p><pre tabindex=0><code>Configure communication channels? (y/N) &gt; N
 Configure skills? (y/N) &gt; N
 Configure hooks? (y/N) &gt; N
-</code></pre><p><strong>8. 启动 TUI 测试</strong>：</p>
-<pre tabindex="0"><code>Start OpenClaw in TUI mode? (Y/n) &gt; Y
+</code></pre><p><strong>8. 启动 TUI 测试</strong>：</p><pre tabindex=0><code>Start OpenClaw in TUI mode? (Y/n) &gt; Y
 
 # 出现聊天界面后输入：
 &gt; Hello
 
 # 应收到 AI 回复
-</code></pre><p><strong>9. 退出 TUI</strong>：</p>
-<pre tabindex="0"><code>按 Ctrl+C 退出
-</code></pre><hr>
-<h2 id="-高级配置生产环境必备">🔧 高级配置（生产环境必备）
-</h2><h3 id="1-配置-swap2gb-内存服务器必须">1. 配置 Swap（2GB 内存服务器必须）
-</h3><p><strong>检查当前 Swap</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">free -h
-</span></span><span class="line"><span class="cl"><span class="c1"># 如果 Swap 为 0B，需要配置</span>
-</span></span></code></pre></div><p><strong>创建 2GB Swap</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 1. 创建 swap 文件</span>
-</span></span><span class="line"><span class="cl">sudo fallocate -l 2G /swapfile
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 2. 设置权限（仅 root 可读写）</span>
-</span></span><span class="line"><span class="cl">sudo chmod <span class="m">600</span> /swapfile
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 3. 格式化为 swap</span>
-</span></span><span class="line"><span class="cl">sudo mkswap /swapfile
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 4. 启用 swap</span>
-</span></span><span class="line"><span class="cl">sudo swapon /swapfile
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 5. 验证</span>
-</span></span><span class="line"><span class="cl">swapon --show
-</span></span><span class="line"><span class="cl"><span class="c1"># 应显示：/swapfile  file  2G  0B</span>
-</span></span></code></pre></div><p><strong>永久生效</strong>（重启后自动挂载）：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;/swapfile none swap sw 0 0&#39;</span> <span class="p">|</span> sudo tee -a /etc/fstab
-</span></span></code></pre></div><p><strong>调整 Swappiness</strong>（降低使用 swap 的频率）：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 查看当前值（默认 60）</span>
-</span></span><span class="line"><span class="cl">cat /proc/sys/vm/swappiness
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 修改为 10（更保守）</span>
-</span></span><span class="line"><span class="cl">sudo sysctl vm.swappiness<span class="o">=</span><span class="m">10</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 永久生效</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;vm.swappiness=10&#39;</span> <span class="p">|</span> sudo tee -a /etc/sysctl.conf
-</span></span></code></pre></div><h3 id="2-配置-api-keys">2. 配置 API Keys
-</h3><p><strong>编辑配置文件</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nano ~/.openclaw/workspace/TOOLS.md
-</span></span></code></pre></div><p><strong>添加以下内容</strong>（替换为你的 Key）：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl"><span class="gu">## 🔑 API Keys
-</span></span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="gu">### 阿里云百炼（推荐，国内访问快）
-</span></span></span><span class="line"><span class="cl"><span class="k">-</span> **API Key**: <span class="sb">`sk-sp-xxxxxxxxxxxxxxxx`</span>
-</span></span><span class="line"><span class="cl"><span class="k">-</span> **模型**: qwen3.5-plus, qwen3-max-2026-01-23
-</span></span><span class="line"><span class="cl"><span class="k">-</span> **状态**: ✅ 已配置
-</span></span><span class="line"><span class="cl"><span class="k">-</span> **用途**: 代码生成/审查/优化
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="gu">### OpenAI（备选）
-</span></span></span><span class="line"><span class="cl"><span class="k">-</span> **API Key**: <span class="sb">`sk-proj-xxxxxxxxxxxxxxxx`</span>
-</span></span><span class="line"><span class="cl"><span class="k">-</span> **模型**: gpt-4o, gpt-4-turbo
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="gu">### 火山引擎（备选）
-</span></span></span><span class="line"><span class="cl"><span class="k">-</span> **API Key**: <span class="sb">`xxxxxxxxxxxxxxxx`</span>
-</span></span><span class="line"><span class="cl"><span class="k">-</span> **模型**: doubao-seed-2.0-code
-</span></span></code></pre></div><p><strong>Key 获取地址</strong>：</p>
-<ul>
-<li><strong>阿里云百炼</strong>：https://bailian.console.aliyun.com/</li>
-<li><strong>OpenAI</strong>：https://platform.openai.com/api-keys</li>
-<li><strong>火山引擎</strong>：https://www.volcengine.com/</li>
-</ul>
-<h3 id="3-配置-clash-代理中国大陆用户必须">3. 配置 Clash 代理（中国大陆用户必须）
-</h3><p><strong>检查 Clash 是否运行</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ps aux <span class="p">|</span> grep clash
-</span></span><span class="line"><span class="cl"><span class="c1"># 应看到：clash -d /root/.config/clash/</span>
-</span></span></code></pre></div><p><strong>如未运行，启动 Clash</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 后台启动 Clash</span>
-</span></span><span class="line"><span class="cl">nohup clash -d /root/.config/clash/ &gt; /tmp/clash.log 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 验证端口（7890 应处于 LISTEN 状态）</span>
-</span></span><span class="line"><span class="cl">netstat -tlnp <span class="p">|</span> grep <span class="m">7890</span>
-</span></span></code></pre></div><p><strong>配置环境变量</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 临时生效</span>
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">HTTP_PROXY</span><span class="o">=</span>http://127.0.0.1:7890
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">HTTPS_PROXY</span><span class="o">=</span>http://127.0.0.1:7890
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 永久生效（添加到 ~/.bashrc）</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;export HTTP_PROXY=http://127.0.0.1:7890&#39;</span> &gt;&gt; ~/.bashrc
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;export HTTPS_PROXY=http://127.0.0.1:7890&#39;</span> &gt;&gt; ~/.bashrc
-</span></span><span class="line"><span class="cl"><span class="nb">source</span> ~/.bashrc
-</span></span></code></pre></div><p><strong>验证代理</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -x http://127.0.0.1:7890 -I https://www.google.com
-</span></span><span class="line"><span class="cl"><span class="c1"># 应返回：HTTP/2 200</span>
-</span></span></code></pre></div><hr>
-<h2 id="-systemd-服务配置开机自启">🚀 systemd 服务配置（开机自启）
-</h2><h3 id="创建服务文件">创建服务文件
-</h3><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo nano /etc/systemd/system/openclaw-gateway.service
-</span></span></code></pre></div><h3 id="完整配置内容">完整配置内容
-</h3><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="k">[Unit]</span>
-</span></span><span class="line"><span class="cl"><span class="na">Description</span><span class="o">=</span><span class="s">OpenClaw Gateway Service</span>
-</span></span><span class="line"><span class="cl"><span class="na">Documentation</span><span class="o">=</span><span class="s">https://docs.openclaw.ai</span>
-</span></span><span class="line"><span class="cl"><span class="na">After</span><span class="o">=</span><span class="s">network.target</span>
-</span></span><span class="line"><span class="cl"><span class="na">Wants</span><span class="o">=</span><span class="s">network-online.target</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">[Service]</span>
-</span></span><span class="line"><span class="cl"><span class="na">Type</span><span class="o">=</span><span class="s">simple</span>
-</span></span><span class="line"><span class="cl"><span class="na">User</span><span class="o">=</span><span class="s">root</span>
-</span></span><span class="line"><span class="cl"><span class="na">Group</span><span class="o">=</span><span class="s">root</span>
-</span></span><span class="line"><span class="cl"><span class="na">WorkingDirectory</span><span class="o">=</span><span class="s">/root/.openclaw/workspace</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 环境变量（代理配置）</span>
-</span></span><span class="line"><span class="cl"><span class="na">Environment</span><span class="o">=</span><span class="s">&#34;HTTP_PROXY=http://127.0.0.1:7890&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="na">Environment</span><span class="o">=</span><span class="s">&#34;HTTPS_PROXY=http://127.0.0.1:7890&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Node.js 内存优化</span>
-</span></span><span class="line"><span class="cl"><span class="na">Environment</span><span class="o">=</span><span class="s">&#34;NODE_OPTIONS=--max-old-space-size=2048&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 启动命令</span>
-</span></span><span class="line"><span class="cl"><span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/local/bin/openclaw gateway start</span>
-</span></span><span class="line"><span class="cl"><span class="na">ExecReload</span><span class="o">=</span><span class="s">/bin/kill -HUP $MAINPID</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 重启策略</span>
-</span></span><span class="line"><span class="cl"><span class="na">Restart</span><span class="o">=</span><span class="s">always</span>
-</span></span><span class="line"><span class="cl"><span class="na">RestartSec</span><span class="o">=</span><span class="s">10</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 资源限制</span>
-</span></span><span class="line"><span class="cl"><span class="na">LimitNOFILE</span><span class="o">=</span><span class="s">65535</span>
-</span></span><span class="line"><span class="cl"><span class="na">LimitNPROC</span><span class="o">=</span><span class="s">4096</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 日志配置</span>
-</span></span><span class="line"><span class="cl"><span class="na">StandardOutput</span><span class="o">=</span><span class="s">journal</span>
-</span></span><span class="line"><span class="cl"><span class="na">StandardError</span><span class="o">=</span><span class="s">journal</span>
-</span></span><span class="line"><span class="cl"><span class="na">SyslogIdentifier</span><span class="o">=</span><span class="s">openclaw-gateway</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">[Install]</span>
-</span></span><span class="line"><span class="cl"><span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
-</span></span></code></pre></div><h3 id="启用服务">启用服务
-</h3><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 重载 systemd 配置</span>
-</span></span><span class="line"><span class="cl">sudo systemctl daemon-reload
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 启用开机自启</span>
-</span></span><span class="line"><span class="cl">sudo systemctl <span class="nb">enable</span> openclaw-gateway
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 启动服务</span>
-</span></span><span class="line"><span class="cl">sudo systemctl start openclaw-gateway
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 查看状态（应显示 Active: active (running)）</span>
-</span></span><span class="line"><span class="cl">sudo systemctl status openclaw-gateway
-</span></span></code></pre></div><h3 id="日志管理">日志管理
-</h3><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 实时查看日志</span>
-</span></span><span class="line"><span class="cl">sudo journalctl -u openclaw-gateway -f
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 查看最近 100 行</span>
-</span></span><span class="line"><span class="cl">sudo journalctl -u openclaw-gateway -n <span class="m">100</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 按时间筛选</span>
-</span></span><span class="line"><span class="cl">sudo journalctl -u openclaw-gateway --since <span class="s2">&#34;2026-03-17 10:00:00&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 清理旧日志（保留 7 天）</span>
-</span></span><span class="line"><span class="cl">sudo journalctl -u openclaw-gateway --vacuum-time<span class="o">=</span>7d
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 限制日志大小（最多 100MB）</span>
-</span></span><span class="line"><span class="cl">sudo journalctl -u openclaw-gateway --vacuum-size<span class="o">=</span>100M
-</span></span></code></pre></div><hr>
-<h2 id="-故障排查精准诊断">🔍 故障排查（精准诊断）
-</h2><h3 id="问题-1安装过程中-oom内存溢出">问题 1：安装过程中 OOM（内存溢出）
-</h3><p><strong>症状</strong>：安装过程中服务器卡死，SSH 断开连接</p>
-<p><strong>诊断</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 查看内存使用</span>
-</span></span><span class="line"><span class="cl">free -h
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 查看 OOM 日志</span>
-</span></span><span class="line"><span class="cl">dmesg <span class="p">|</span> grep -i <span class="s2">&#34;out of memory&#34;</span>
-</span></span></code></pre></div><p><strong>解决方案</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 1. 配置 Swap（见上文）</span>
-</span></span><span class="line"><span class="cl">sudo fallocate -l 2G /swapfile
-</span></span><span class="line"><span class="cl">sudo chmod <span class="m">600</span> /swapfile
-</span></span><span class="line"><span class="cl">sudo mkswap /swapfile
-</span></span><span class="line"><span class="cl">sudo swapon /swapfile
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 2. 重启安装</span>
-</span></span><span class="line"><span class="cl">npm install -g openclaw
-</span></span></code></pre></div><h3 id="问题-2nodejs-版本不兼容">问题 2：Node.js 版本不兼容
-</h3><p><strong>症状</strong>：<code>Error: Unsupported Node.js version</code></p>
-<p><strong>解决方案</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 1. 查看当前版本</span>
-</span></span><span class="line"><span class="cl">node --version
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 2. 使用 NVM 切换到 v22</span>
-</span></span><span class="line"><span class="cl">nvm install <span class="m">22</span>
-</span></span><span class="line"><span class="cl">nvm use <span class="m">22</span>
-</span></span><span class="line"><span class="cl">nvm <span class="nb">alias</span> default <span class="m">22</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 3. 重新安装 OpenClaw</span>
-</span></span><span class="line"><span class="cl">npm uninstall -g openclaw
-</span></span><span class="line"><span class="cl">npm install -g openclaw
-</span></span></code></pre></div><h3 id="问题-3网络超时">问题 3：网络超时
-</h3><p><strong>症状</strong>：<code>Error: connect ETIMEDOUT</code></p>
-<p><strong>诊断步骤</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 1. 测试基础网络</span>
-</span></span><span class="line"><span class="cl">ping -c <span class="m">4</span> www.baidu.com
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 2. 测试代理</span>
-</span></span><span class="line"><span class="cl">curl -x http://127.0.0.1:7890 -I https://www.google.com
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 3. 检查 Clash 状态</span>
-</span></span><span class="line"><span class="cl">ps aux <span class="p">|</span> grep clash
-</span></span><span class="line"><span class="cl">netstat -tlnp <span class="p">|</span> grep <span class="m">7890</span>
-</span></span></code></pre></div><p><strong>解决方案</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 启动 Clash</span>
-</span></span><span class="line"><span class="cl">nohup clash -d /root/.config/clash/ &gt; /tmp/clash.log 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 配置环境变量</span>
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">HTTP_PROXY</span><span class="o">=</span>http://127.0.0.1:7890
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">HTTPS_PROXY</span><span class="o">=</span>http://127.0.0.1:7890
-</span></span></code></pre></div><h3 id="问题-4初始化向导卡住">问题 4：初始化向导卡住
-</h3><p><strong>症状</strong>：卡在某个步骤无法继续</p>
-<p><strong>解决方案</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 1. 退出向导（Ctrl+C）</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 2. 清除配置重新初始化</span>
-</span></span><span class="line"><span class="cl">rm -rf ~/.openclaw/config.json
-</span></span><span class="line"><span class="cl">openclaw init
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 3. 或者手动编辑配置</span>
-</span></span><span class="line"><span class="cl">nano ~/.openclaw/config.json
-</span></span></code></pre></div><h3 id="问题-5tui-界面无法启动">问题 5：TUI 界面无法启动
-</h3><p><strong>症状</strong>：选择 TUI 后黑屏或闪退</p>
-<p><strong>解决方案</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 1. 检查终端兼容性</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="nv">$TERM</span>  <span class="c1"># 应显示：xterm-256color 或 screen</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 2. 设置终端类型</span>
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">TERM</span><span class="o">=</span>xterm-256color
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 3. 重新启动</span>
-</span></span><span class="line"><span class="cl">openclaw start
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 4. 或者使用 Web UI</span>
-</span></span><span class="line"><span class="cl">openclaw gateway start
-</span></span><span class="line"><span class="cl"><span class="c1"># 浏览器访问：http://localhost:18789</span>
-</span></span></code></pre></div><hr>
-<h2 id="-验证安装完整测试清单">✅ 验证安装（完整测试清单）
-</h2><p><strong>逐项检查，全部通过才算成功</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># □ 1. 检查版本号</span>
-</span></span><span class="line"><span class="cl">openclaw --version
-</span></span><span class="line"><span class="cl"><span class="c1"># 期望输出：openclaw/x.x.x linux-x64 node-v22.12.0</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># □ 2. 检查网关状态</span>
-</span></span><span class="line"><span class="cl">openclaw gateway status
-</span></span><span class="line"><span class="cl"><span class="c1"># 期望输出：Gateway is running</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># □ 3. 检查端口监听</span>
-</span></span><span class="line"><span class="cl">netstat -tlnp <span class="p">|</span> grep <span class="m">18789</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 期望输出：tcp6  0  0 :::18789  :::*  LISTEN</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># □ 4. 测试本地访问</span>
-</span></span><span class="line"><span class="cl">curl http://localhost:18789/health
-</span></span><span class="line"><span class="cl"><span class="c1"># 期望输出：{&#34;status&#34;:&#34;ok&#34;}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># □ 5. 发送测试消息</span>
-</span></span><span class="line"><span class="cl">openclaw message send <span class="s2">&#34;Hello OpenClaw!&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 期望：收到 AI 回复</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># □ 6. 检查日志无 ERROR</span>
-</span></span><span class="line"><span class="cl">sudo journalctl -u openclaw-gateway -n <span class="m">50</span> <span class="p">|</span> grep ERROR
-</span></span><span class="line"><span class="cl"><span class="c1"># 期望：无输出</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># □ 7. 检查 systemd 服务状态</span>
-</span></span><span class="line"><span class="cl">sudo systemctl status openclaw-gateway
-</span></span><span class="line"><span class="cl"><span class="c1"># 期望输出：Active: active (running)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># □ 8. 测试开机自启</span>
-</span></span><span class="line"><span class="cl">sudo reboot
-</span></span><span class="line"><span class="cl"><span class="c1"># 重启后检查：</span>
-</span></span><span class="line"><span class="cl">sudo systemctl status openclaw-gateway
-</span></span><span class="line"><span class="cl"><span class="c1"># 期望：服务自动启动</span>
-</span></span></code></pre></div><p><strong>成功标志</strong>：</p>
-<ul>
-<li>✅ 8 项检查全部通过</li>
-<li>✅ 日志无 ERROR 级别错误</li>
-<li>✅ 服务重启后自动恢复</li>
-</ul>
-<hr>
-<h2 id="-性能优化生产环境">📊 性能优化（生产环境）
-</h2><h3 id="1-nodejs-内存优化">1. Node.js 内存优化
-</h3><p><strong>编辑 systemd 服务</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo nano /etc/systemd/system/openclaw-gateway.service
-</span></span></code></pre></div><p><strong>添加内存配置</strong>（根据服务器内存调整）：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="c1"># 4GB 内存服务器</span>
-</span></span><span class="line"><span class="cl"><span class="na">Environment</span><span class="o">=</span><span class="s">&#34;NODE_OPTIONS=--max-old-space-size=2048&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 8GB 内存服务器</span>
-</span></span><span class="line"><span class="cl"><span class="na">Environment</span><span class="o">=</span><span class="s">&#34;NODE_OPTIONS=--max-old-space-size=4096&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 16GB 内存服务器</span>
-</span></span><span class="line"><span class="cl"><span class="na">Environment</span><span class="o">=</span><span class="s">&#34;NODE_OPTIONS=--max-old-space-size=8192&#34;</span>
-</span></span></code></pre></div><p><strong>重载并重启</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo systemctl daemon-reload
-</span></span><span class="line"><span class="cl">sudo systemctl restart openclaw-gateway
-</span></span></code></pre></div><h3 id="2-定期清理缓存">2. 定期清理缓存
-</h3><p><strong>创建清理脚本</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nano ~/cleanup-openclaw.sh
-</span></span></code></pre></div><p><strong>脚本内容</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
-</span></span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;🧹 开始清理 OpenClaw 缓存...&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 清理 npm 缓存</span>
-</span></span><span class="line"><span class="cl">npm cache clean --force
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;✅ npm 缓存已清理&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 清理系统日志（保留 7 天）</span>
-</span></span><span class="line"><span class="cl">sudo journalctl --vacuum-time<span class="o">=</span>7d
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;✅ 系统日志已清理&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 清理 OpenClaw 日志（保留 100MB）</span>
-</span></span><span class="line"><span class="cl">sudo journalctl -u openclaw-gateway --vacuum-size<span class="o">=</span>100M
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;✅ OpenClaw 日志已清理&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 清理临时文件</span>
-</span></span><span class="line"><span class="cl">rm -rf /tmp/openclaw-*
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;✅ 临时文件已清理&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;🎉 清理完成！&#34;</span>
-</span></span></code></pre></div><p><strong>赋予执行权限并运行</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">chmod +x ~/cleanup-openclaw.sh
-</span></span><span class="line"><span class="cl">~/cleanup-openclaw.sh
-</span></span></code></pre></div><p><strong>添加到 crontab（每周日凌晨 3 点自动清理）</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">crontab -e
-</span></span><span class="line"><span class="cl"><span class="c1"># 添加：</span>
-</span></span><span class="line"><span class="cl"><span class="m">0</span> <span class="m">3</span> * * <span class="m">0</span> /home/ubuntu/cleanup-openclaw.sh
-</span></span></code></pre></div><hr>
-<h2 id="-更多资源">📚 更多资源
-</h2><h3 id="官方文档">官方文档
-</h3><ul>
-<li><a class="link" href="https://open-claw.online/zh/docs/getting-started"  target="_blank" rel="noopener"
-    >OpenClaw 官方指南</a></li>
-<li><a class="link" href="https://docs.openclaw.ai/zh-CN/install"  target="_blank" rel="noopener"
-    >中文安装文档</a></li>
-<li><a class="link" href="https://github.com/openclaw/openclaw"  target="_blank" rel="noopener"
-    >GitHub 仓库</a></li>
-</ul>
-<h3 id="社区教程">社区教程
-</h3><ul>
-<li><a class="link" href="https://blog.csdn.net/weixin_55010563/article/details/158382695"  target="_blank" rel="noopener"
-    >空白服务器完整部署</a></li>
-<li><a class="link" href="https://blog.csdn.net/weixin_45110225/article/details/157649361"  target="_blank" rel="noopener"
-    >国内模型 Minimax 适配</a></li>
-<li><a class="link" href="https://blog.csdn.net/2503_93609022/article/details/158353716"  target="_blank" rel="noopener"
-    >Windows 双方案部署</a></li>
-</ul>
-<h3 id="其他平台部署">其他平台部署
-</h3><ul>
-<li><a class="link" href="/posts/openclaw-deploy-android" >Android 部署教程</a></li>
-<li><a class="link" href="/posts/openclaw-deploy-windows" >Windows 部署教程</a></li>
-<li><a class="link" href="/posts/openclaw-deploy-macos" >macOS 部署教程</a></li>
-</ul>
-<hr>
-<h2 id="-更新日志">📝 更新日志
-</h2><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>版本</th>
-          <th>日期</th>
-          <th>更新内容</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>v3.0</td>
-          <td>2026-03-17</td>
-          <td>整合官方一键脚本 + NVM 安装 + 初始化向导详解</td>
-      </tr>
-      <tr>
-          <td>v2.0</td>
-          <td>2026-03-17</td>
-          <td>增加电气安全警示、精准参数、故障排查流程图</td>
-      </tr>
-      <tr>
-          <td>v1.5</td>
-          <td>2026-03-10</td>
-          <td>增加 systemd 服务配置、性能优化章节</td>
-      </tr>
-      <tr>
-          <td>v1.0</td>
-          <td>2026-03-01</td>
-          <td>初始版本发布</td>
-      </tr>
-  </tbody>
-</table></div>
-<hr>
-<p><em>最后更新：2026-03-17</em><br>
-<em>作者：OpenClaw 社区</em><br>
-<em>许可：MIT</em><br>
-<em>审核：嵌入式硬件专家（15 年 + 经验）</em></p>
-<p><strong>觉得有用？欢迎分享给更多朋友！</strong> 🚀</p>
-
-</section>
-
-
-    <footer class="article-footer">
-    
-    <section class="article-tags">
-        
-            <a href="/tags/openclaw/">OpenClaw</a>
-        
-            <a href="/tags/linux/">Linux</a>
-        
-            <a href="/tags/ubuntu/">Ubuntu</a>
-        
-            <a href="/tags/%E9%83%A8%E7%BD%B2/">部署</a>
-        
-            <a href="/tags/ai-%E5%8A%A9%E6%89%8B/">AI 助手</a>
-        
-            <a href="/tags/%E4%BF%9D%E5%A7%86%E7%BA%A7%E6%95%99%E7%A8%8B/">保姆级教程</a>
-        
-    </section>
-
-
-    </footer>
-
-
-    
-</article>
-
-    
-
-    
-
-<aside class="related-content--wrapper">
-    <h2 class="section-title">Related content</h2>
-    <div class="related-content">
-        <div class="flex article-list--tile">
-            
-                
-<article class="">
-    <a href="/posts/openclaw-deploy-macos/">
-        
-
-        <div class="article-details">
-            <h2 class="article-title">OpenClaw 部署教程 - macOS 篇（2026 最新版）</h2>
-        </div>
-    </a>
-</article>
-            
-                
-<article class="">
-    <a href="/posts/openclaw-deploy-android/">
-        
-
-        <div class="article-details">
-            <h2 class="article-title">OpenClaw 部署教程 - Android 篇</h2>
-        </div>
-    </a>
-</article>
-            
-                
-<article class="">
-    <a href="/posts/qinglong-auth-bypass-rce/">
-        
-
-        <div class="article-details">
-            <h2 class="article-title">青龙面板鉴权绕过漏洞复现 - 从路径大小写到 RCE</h2>
-        </div>
-    </a>
-</article>
-            
-        </div>
-    </div>
-</aside>
-
-     
-    
-        
-        <div class="disqus-container">
-    
-</div>
-
-<style>
-    .disqus-container {
-        background-color: var(--card-background);
-        border-radius: var(--card-border-radius);
-        box-shadow: var(--shadow-l1);
-        padding: var(--card-padding);
-    }
-</style>
-
-<script>
-    window.addEventListener('onColorSchemeChange', (e) => {
-        if (typeof DISQUS == 'object') {
-            DISQUS.reset({
-                reload: true
-            });
-        }
-    })
-</script>
-    
-
-    <footer class="site-footer">
-    <section class="copyright">
-        &copy; 
-        
-        2026 言零的博客
-    </section>
-    
-    <section class="powerby">
-        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="4.0.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
-    </section>
-</footer>
-
-
-    
-
-
-
-<script type="module">
+</code></pre><p><strong>9. 退出 TUI</strong>：</p><pre tabindex=0><code>按 Ctrl+C 退出
+</code></pre><hr><h2 id=-高级配置生产环境必备>🔧 高级配置（生产环境必备）</h2><h3 id=1-配置-swap2gb-内存服务器必须>1. 配置 Swap（2GB 内存服务器必须）</h3><p><strong>检查当前 Swap</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>free -h
+</span></span><span class=line><span class=cl><span class=c1># 如果 Swap 为 0B，需要配置</span>
+</span></span></code></pre></div><p><strong>创建 2GB Swap</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 1. 创建 swap 文件</span>
+</span></span><span class=line><span class=cl>sudo fallocate -l 2G /swapfile
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 2. 设置权限（仅 root 可读写）</span>
+</span></span><span class=line><span class=cl>sudo chmod <span class=m>600</span> /swapfile
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 3. 格式化为 swap</span>
+</span></span><span class=line><span class=cl>sudo mkswap /swapfile
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 4. 启用 swap</span>
+</span></span><span class=line><span class=cl>sudo swapon /swapfile
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 5. 验证</span>
+</span></span><span class=line><span class=cl>swapon --show
+</span></span><span class=line><span class=cl><span class=c1># 应显示：/swapfile  file  2G  0B</span>
+</span></span></code></pre></div><p><strong>永久生效</strong>（重启后自动挂载）：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>echo</span> <span class=s1>&#39;/swapfile none swap sw 0 0&#39;</span> <span class=p>|</span> sudo tee -a /etc/fstab
+</span></span></code></pre></div><p><strong>调整 Swappiness</strong>（降低使用 swap 的频率）：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 查看当前值（默认 60）</span>
+</span></span><span class=line><span class=cl>cat /proc/sys/vm/swappiness
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 修改为 10（更保守）</span>
+</span></span><span class=line><span class=cl>sudo sysctl vm.swappiness<span class=o>=</span><span class=m>10</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 永久生效</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s1>&#39;vm.swappiness=10&#39;</span> <span class=p>|</span> sudo tee -a /etc/sysctl.conf
+</span></span></code></pre></div><h3 id=2-配置-api-keys>2. 配置 API Keys</h3><p><strong>编辑配置文件</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>nano ~/.openclaw/workspace/TOOLS.md
+</span></span></code></pre></div><p><strong>添加以下内容</strong>（替换为你的 Key）：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl><span class=gu>## 🔑 API Keys
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>### 阿里云百炼（推荐，国内访问快）
+</span></span></span><span class=line><span class=cl><span class=k>-</span> **API Key**: <span class=sb>`sk-sp-xxxxxxxxxxxxxxxx`</span>
+</span></span><span class=line><span class=cl><span class=k>-</span> **模型**: qwen3.5-plus, qwen3-max-2026-01-23
+</span></span><span class=line><span class=cl><span class=k>-</span> **状态**: ✅ 已配置
+</span></span><span class=line><span class=cl><span class=k>-</span> **用途**: 代码生成/审查/优化
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>### OpenAI（备选）
+</span></span></span><span class=line><span class=cl><span class=k>-</span> **API Key**: <span class=sb>`sk-proj-xxxxxxxxxxxxxxxx`</span>
+</span></span><span class=line><span class=cl><span class=k>-</span> **模型**: gpt-4o, gpt-4-turbo
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>### 火山引擎（备选）
+</span></span></span><span class=line><span class=cl><span class=k>-</span> **API Key**: <span class=sb>`xxxxxxxxxxxxxxxx`</span>
+</span></span><span class=line><span class=cl><span class=k>-</span> **模型**: doubao-seed-2.0-code
+</span></span></code></pre></div><p><strong>Key 获取地址</strong>：</p><ul><li><strong>阿里云百炼</strong>：https://bailian.console.aliyun.com/</li><li><strong>OpenAI</strong>：https://platform.openai.com/api-keys</li><li><strong>火山引擎</strong>：https://www.volcengine.com/</li></ul><h3 id=3-配置-clash-代理中国大陆用户必须>3. 配置 Clash 代理（中国大陆用户必须）</h3><p><strong>检查 Clash 是否运行</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>ps aux <span class=p>|</span> grep clash
+</span></span><span class=line><span class=cl><span class=c1># 应看到：clash -d /root/.config/clash/</span>
+</span></span></code></pre></div><p><strong>如未运行，启动 Clash</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 后台启动 Clash</span>
+</span></span><span class=line><span class=cl>nohup clash -d /root/.config/clash/ &gt; /tmp/clash.log 2&gt;<span class=p>&amp;</span><span class=m>1</span> <span class=p>&amp;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 验证端口（7890 应处于 LISTEN 状态）</span>
+</span></span><span class=line><span class=cl>netstat -tlnp <span class=p>|</span> grep <span class=m>7890</span>
+</span></span></code></pre></div><p><strong>配置环境变量</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 临时生效</span>
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>HTTP_PROXY</span><span class=o>=</span>http://127.0.0.1:7890
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>HTTPS_PROXY</span><span class=o>=</span>http://127.0.0.1:7890
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 永久生效（添加到 ~/.bashrc）</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s1>&#39;export HTTP_PROXY=http://127.0.0.1:7890&#39;</span> &gt;&gt; ~/.bashrc
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s1>&#39;export HTTPS_PROXY=http://127.0.0.1:7890&#39;</span> &gt;&gt; ~/.bashrc
+</span></span><span class=line><span class=cl><span class=nb>source</span> ~/.bashrc
+</span></span></code></pre></div><p><strong>验证代理</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>curl -x http://127.0.0.1:7890 -I https://www.google.com
+</span></span><span class=line><span class=cl><span class=c1># 应返回：HTTP/2 200</span>
+</span></span></code></pre></div><hr><h2 id=-systemd-服务配置开机自启>🚀 systemd 服务配置（开机自启）</h2><h3 id=创建服务文件>创建服务文件</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo nano /etc/systemd/system/openclaw-gateway.service
+</span></span></code></pre></div><h3 id=完整配置内容>完整配置内容</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-ini data-lang=ini><span class=line><span class=cl><span class=k>[Unit]</span>
+</span></span><span class=line><span class=cl><span class=na>Description</span><span class=o>=</span><span class=s>OpenClaw Gateway Service</span>
+</span></span><span class=line><span class=cl><span class=na>Documentation</span><span class=o>=</span><span class=s>https://docs.openclaw.ai</span>
+</span></span><span class=line><span class=cl><span class=na>After</span><span class=o>=</span><span class=s>network.target</span>
+</span></span><span class=line><span class=cl><span class=na>Wants</span><span class=o>=</span><span class=s>network-online.target</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>[Service]</span>
+</span></span><span class=line><span class=cl><span class=na>Type</span><span class=o>=</span><span class=s>simple</span>
+</span></span><span class=line><span class=cl><span class=na>User</span><span class=o>=</span><span class=s>root</span>
+</span></span><span class=line><span class=cl><span class=na>Group</span><span class=o>=</span><span class=s>root</span>
+</span></span><span class=line><span class=cl><span class=na>WorkingDirectory</span><span class=o>=</span><span class=s>/root/.openclaw/workspace</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 环境变量（代理配置）</span>
+</span></span><span class=line><span class=cl><span class=na>Environment</span><span class=o>=</span><span class=s>&#34;HTTP_PROXY=http://127.0.0.1:7890&#34;</span>
+</span></span><span class=line><span class=cl><span class=na>Environment</span><span class=o>=</span><span class=s>&#34;HTTPS_PROXY=http://127.0.0.1:7890&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Node.js 内存优化</span>
+</span></span><span class=line><span class=cl><span class=na>Environment</span><span class=o>=</span><span class=s>&#34;NODE_OPTIONS=--max-old-space-size=2048&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 启动命令</span>
+</span></span><span class=line><span class=cl><span class=na>ExecStart</span><span class=o>=</span><span class=s>/usr/local/bin/openclaw gateway start</span>
+</span></span><span class=line><span class=cl><span class=na>ExecReload</span><span class=o>=</span><span class=s>/bin/kill -HUP $MAINPID</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 重启策略</span>
+</span></span><span class=line><span class=cl><span class=na>Restart</span><span class=o>=</span><span class=s>always</span>
+</span></span><span class=line><span class=cl><span class=na>RestartSec</span><span class=o>=</span><span class=s>10</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 资源限制</span>
+</span></span><span class=line><span class=cl><span class=na>LimitNOFILE</span><span class=o>=</span><span class=s>65535</span>
+</span></span><span class=line><span class=cl><span class=na>LimitNPROC</span><span class=o>=</span><span class=s>4096</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 日志配置</span>
+</span></span><span class=line><span class=cl><span class=na>StandardOutput</span><span class=o>=</span><span class=s>journal</span>
+</span></span><span class=line><span class=cl><span class=na>StandardError</span><span class=o>=</span><span class=s>journal</span>
+</span></span><span class=line><span class=cl><span class=na>SyslogIdentifier</span><span class=o>=</span><span class=s>openclaw-gateway</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>[Install]</span>
+</span></span><span class=line><span class=cl><span class=na>WantedBy</span><span class=o>=</span><span class=s>multi-user.target</span>
+</span></span></code></pre></div><h3 id=启用服务>启用服务</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 重载 systemd 配置</span>
+</span></span><span class=line><span class=cl>sudo systemctl daemon-reload
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 启用开机自启</span>
+</span></span><span class=line><span class=cl>sudo systemctl <span class=nb>enable</span> openclaw-gateway
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 启动服务</span>
+</span></span><span class=line><span class=cl>sudo systemctl start openclaw-gateway
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 查看状态（应显示 Active: active (running)）</span>
+</span></span><span class=line><span class=cl>sudo systemctl status openclaw-gateway
+</span></span></code></pre></div><h3 id=日志管理>日志管理</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 实时查看日志</span>
+</span></span><span class=line><span class=cl>sudo journalctl -u openclaw-gateway -f
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 查看最近 100 行</span>
+</span></span><span class=line><span class=cl>sudo journalctl -u openclaw-gateway -n <span class=m>100</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 按时间筛选</span>
+</span></span><span class=line><span class=cl>sudo journalctl -u openclaw-gateway --since <span class=s2>&#34;2026-03-17 10:00:00&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 清理旧日志（保留 7 天）</span>
+</span></span><span class=line><span class=cl>sudo journalctl -u openclaw-gateway --vacuum-time<span class=o>=</span>7d
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 限制日志大小（最多 100MB）</span>
+</span></span><span class=line><span class=cl>sudo journalctl -u openclaw-gateway --vacuum-size<span class=o>=</span>100M
+</span></span></code></pre></div><hr><h2 id=-故障排查精准诊断>🔍 故障排查（精准诊断）</h2><h3 id=问题-1安装过程中-oom内存溢出>问题 1：安装过程中 OOM（内存溢出）</h3><p><strong>症状</strong>：安装过程中服务器卡死，SSH 断开连接</p><p><strong>诊断</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 查看内存使用</span>
+</span></span><span class=line><span class=cl>free -h
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 查看 OOM 日志</span>
+</span></span><span class=line><span class=cl>dmesg <span class=p>|</span> grep -i <span class=s2>&#34;out of memory&#34;</span>
+</span></span></code></pre></div><p><strong>解决方案</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 1. 配置 Swap（见上文）</span>
+</span></span><span class=line><span class=cl>sudo fallocate -l 2G /swapfile
+</span></span><span class=line><span class=cl>sudo chmod <span class=m>600</span> /swapfile
+</span></span><span class=line><span class=cl>sudo mkswap /swapfile
+</span></span><span class=line><span class=cl>sudo swapon /swapfile
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 2. 重启安装</span>
+</span></span><span class=line><span class=cl>npm install -g openclaw
+</span></span></code></pre></div><h3 id=问题-2nodejs-版本不兼容>问题 2：Node.js 版本不兼容</h3><p><strong>症状</strong>：<code>Error: Unsupported Node.js version</code></p><p><strong>解决方案</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 1. 查看当前版本</span>
+</span></span><span class=line><span class=cl>node --version
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 2. 使用 NVM 切换到 v22</span>
+</span></span><span class=line><span class=cl>nvm install <span class=m>22</span>
+</span></span><span class=line><span class=cl>nvm use <span class=m>22</span>
+</span></span><span class=line><span class=cl>nvm <span class=nb>alias</span> default <span class=m>22</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 3. 重新安装 OpenClaw</span>
+</span></span><span class=line><span class=cl>npm uninstall -g openclaw
+</span></span><span class=line><span class=cl>npm install -g openclaw
+</span></span></code></pre></div><h3 id=问题-3网络超时>问题 3：网络超时</h3><p><strong>症状</strong>：<code>Error: connect ETIMEDOUT</code></p><p><strong>诊断步骤</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 1. 测试基础网络</span>
+</span></span><span class=line><span class=cl>ping -c <span class=m>4</span> www.baidu.com
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 2. 测试代理</span>
+</span></span><span class=line><span class=cl>curl -x http://127.0.0.1:7890 -I https://www.google.com
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 3. 检查 Clash 状态</span>
+</span></span><span class=line><span class=cl>ps aux <span class=p>|</span> grep clash
+</span></span><span class=line><span class=cl>netstat -tlnp <span class=p>|</span> grep <span class=m>7890</span>
+</span></span></code></pre></div><p><strong>解决方案</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 启动 Clash</span>
+</span></span><span class=line><span class=cl>nohup clash -d /root/.config/clash/ &gt; /tmp/clash.log 2&gt;<span class=p>&amp;</span><span class=m>1</span> <span class=p>&amp;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 配置环境变量</span>
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>HTTP_PROXY</span><span class=o>=</span>http://127.0.0.1:7890
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>HTTPS_PROXY</span><span class=o>=</span>http://127.0.0.1:7890
+</span></span></code></pre></div><h3 id=问题-4初始化向导卡住>问题 4：初始化向导卡住</h3><p><strong>症状</strong>：卡在某个步骤无法继续</p><p><strong>解决方案</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 1. 退出向导（Ctrl+C）</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 2. 清除配置重新初始化</span>
+</span></span><span class=line><span class=cl>rm -rf ~/.openclaw/config.json
+</span></span><span class=line><span class=cl>openclaw init
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 3. 或者手动编辑配置</span>
+</span></span><span class=line><span class=cl>nano ~/.openclaw/config.json
+</span></span></code></pre></div><h3 id=问题-5tui-界面无法启动>问题 5：TUI 界面无法启动</h3><p><strong>症状</strong>：选择 TUI 后黑屏或闪退</p><p><strong>解决方案</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 1. 检查终端兼容性</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=nv>$TERM</span>  <span class=c1># 应显示：xterm-256color 或 screen</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 2. 设置终端类型</span>
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>TERM</span><span class=o>=</span>xterm-256color
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 3. 重新启动</span>
+</span></span><span class=line><span class=cl>openclaw start
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 4. 或者使用 Web UI</span>
+</span></span><span class=line><span class=cl>openclaw gateway start
+</span></span><span class=line><span class=cl><span class=c1># 浏览器访问：http://localhost:18789</span>
+</span></span></code></pre></div><hr><h2 id=-验证安装完整测试清单>✅ 验证安装（完整测试清单）</h2><p><strong>逐项检查，全部通过才算成功</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># □ 1. 检查版本号</span>
+</span></span><span class=line><span class=cl>openclaw --version
+</span></span><span class=line><span class=cl><span class=c1># 期望输出：openclaw/x.x.x linux-x64 node-v22.12.0</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># □ 2. 检查网关状态</span>
+</span></span><span class=line><span class=cl>openclaw gateway status
+</span></span><span class=line><span class=cl><span class=c1># 期望输出：Gateway is running</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># □ 3. 检查端口监听</span>
+</span></span><span class=line><span class=cl>netstat -tlnp <span class=p>|</span> grep <span class=m>18789</span>
+</span></span><span class=line><span class=cl><span class=c1># 期望输出：tcp6  0  0 :::18789  :::*  LISTEN</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># □ 4. 测试本地访问</span>
+</span></span><span class=line><span class=cl>curl http://localhost:18789/health
+</span></span><span class=line><span class=cl><span class=c1># 期望输出：{&#34;status&#34;:&#34;ok&#34;}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># □ 5. 发送测试消息</span>
+</span></span><span class=line><span class=cl>openclaw message send <span class=s2>&#34;Hello OpenClaw!&#34;</span>
+</span></span><span class=line><span class=cl><span class=c1># 期望：收到 AI 回复</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># □ 6. 检查日志无 ERROR</span>
+</span></span><span class=line><span class=cl>sudo journalctl -u openclaw-gateway -n <span class=m>50</span> <span class=p>|</span> grep ERROR
+</span></span><span class=line><span class=cl><span class=c1># 期望：无输出</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># □ 7. 检查 systemd 服务状态</span>
+</span></span><span class=line><span class=cl>sudo systemctl status openclaw-gateway
+</span></span><span class=line><span class=cl><span class=c1># 期望输出：Active: active (running)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># □ 8. 测试开机自启</span>
+</span></span><span class=line><span class=cl>sudo reboot
+</span></span><span class=line><span class=cl><span class=c1># 重启后检查：</span>
+</span></span><span class=line><span class=cl>sudo systemctl status openclaw-gateway
+</span></span><span class=line><span class=cl><span class=c1># 期望：服务自动启动</span>
+</span></span></code></pre></div><p><strong>成功标志</strong>：</p><ul><li>✅ 8 项检查全部通过</li><li>✅ 日志无 ERROR 级别错误</li><li>✅ 服务重启后自动恢复</li></ul><hr><h2 id=-性能优化生产环境>📊 性能优化（生产环境）</h2><h3 id=1-nodejs-内存优化>1. Node.js 内存优化</h3><p><strong>编辑 systemd 服务</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo nano /etc/systemd/system/openclaw-gateway.service
+</span></span></code></pre></div><p><strong>添加内存配置</strong>（根据服务器内存调整）：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-ini data-lang=ini><span class=line><span class=cl><span class=c1># 4GB 内存服务器</span>
+</span></span><span class=line><span class=cl><span class=na>Environment</span><span class=o>=</span><span class=s>&#34;NODE_OPTIONS=--max-old-space-size=2048&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 8GB 内存服务器</span>
+</span></span><span class=line><span class=cl><span class=na>Environment</span><span class=o>=</span><span class=s>&#34;NODE_OPTIONS=--max-old-space-size=4096&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 16GB 内存服务器</span>
+</span></span><span class=line><span class=cl><span class=na>Environment</span><span class=o>=</span><span class=s>&#34;NODE_OPTIONS=--max-old-space-size=8192&#34;</span>
+</span></span></code></pre></div><p><strong>重载并重启</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo systemctl daemon-reload
+</span></span><span class=line><span class=cl>sudo systemctl restart openclaw-gateway
+</span></span></code></pre></div><h3 id=2-定期清理缓存>2. 定期清理缓存</h3><p><strong>创建清理脚本</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>nano ~/cleanup-openclaw.sh
+</span></span></code></pre></div><p><strong>脚本内容</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=cp>#!/bin/bash
+</span></span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;🧹 开始清理 OpenClaw 缓存...&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 清理 npm 缓存</span>
+</span></span><span class=line><span class=cl>npm cache clean --force
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;✅ npm 缓存已清理&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 清理系统日志（保留 7 天）</span>
+</span></span><span class=line><span class=cl>sudo journalctl --vacuum-time<span class=o>=</span>7d
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;✅ 系统日志已清理&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 清理 OpenClaw 日志（保留 100MB）</span>
+</span></span><span class=line><span class=cl>sudo journalctl -u openclaw-gateway --vacuum-size<span class=o>=</span>100M
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;✅ OpenClaw 日志已清理&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 清理临时文件</span>
+</span></span><span class=line><span class=cl>rm -rf /tmp/openclaw-*
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;✅ 临时文件已清理&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;🎉 清理完成！&#34;</span>
+</span></span></code></pre></div><p><strong>赋予执行权限并运行</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>chmod +x ~/cleanup-openclaw.sh
+</span></span><span class=line><span class=cl>~/cleanup-openclaw.sh
+</span></span></code></pre></div><p><strong>添加到 crontab（每周日凌晨 3 点自动清理）</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>crontab -e
+</span></span><span class=line><span class=cl><span class=c1># 添加：</span>
+</span></span><span class=line><span class=cl><span class=m>0</span> <span class=m>3</span> * * <span class=m>0</span> /home/ubuntu/cleanup-openclaw.sh
+</span></span></code></pre></div><hr><h2 id=-更多资源>📚 更多资源</h2><h3 id=官方文档>官方文档</h3><ul><li><a class=link href=https://open-claw.online/zh/docs/getting-started target=_blank rel=noopener>OpenClaw 官方指南</a></li><li><a class=link href=https://docs.openclaw.ai/zh-CN/install target=_blank rel=noopener>中文安装文档</a></li><li><a class=link href=https://github.com/openclaw/openclaw target=_blank rel=noopener>GitHub 仓库</a></li></ul><h3 id=社区教程>社区教程</h3><ul><li><a class=link href=https://blog.csdn.net/weixin_55010563/article/details/158382695 target=_blank rel=noopener>空白服务器完整部署</a></li><li><a class=link href=https://blog.csdn.net/weixin_45110225/article/details/157649361 target=_blank rel=noopener>国内模型 Minimax 适配</a></li><li><a class=link href=https://blog.csdn.net/2503_93609022/article/details/158353716 target=_blank rel=noopener>Windows 双方案部署</a></li></ul><h3 id=其他平台部署>其他平台部署</h3><ul><li><a class=link href=/posts/openclaw-deploy-android>Android 部署教程</a></li><li><a class=link href=/posts/openclaw-deploy-windows>Windows 部署教程</a></li><li><a class=link href=/posts/openclaw-deploy-macos>macOS 部署教程</a></li></ul><hr><h2 id=-更新日志>📝 更新日志</h2><div class=table-wrapper><table><thead><tr><th>版本</th><th>日期</th><th>更新内容</th></tr></thead><tbody><tr><td>v3.0</td><td>2026-03-17</td><td>整合官方一键脚本 + NVM 安装 + 初始化向导详解</td></tr><tr><td>v2.0</td><td>2026-03-17</td><td>增加电气安全警示、精准参数、故障排查流程图</td></tr><tr><td>v1.5</td><td>2026-03-10</td><td>增加 systemd 服务配置、性能优化章节</td></tr><tr><td>v1.0</td><td>2026-03-01</td><td>初始版本发布</td></tr></tbody></table></div><hr><p><em>最后更新：2026-03-17</em><br><em>作者：OpenClaw 社区</em><br><em>许可：MIT</em><br><em>审核：嵌入式硬件专家（15 年 + 经验）</em></p><p><strong>觉得有用？欢迎分享给更多朋友！</strong> 🚀</p></section><footer class=article-footer><section class=article-tags><a href=/tags/openclaw/>OpenClaw</a>
+<a href=/tags/linux/>Linux</a>
+<a href=/tags/ubuntu/>Ubuntu</a>
+<a href=/tags/%E9%83%A8%E7%BD%B2/>部署</a>
+<a href=/tags/ai-%E5%8A%A9%E6%89%8B/>AI 助手</a>
+<a href=/tags/%E4%BF%9D%E5%A7%86%E7%BA%A7%E6%95%99%E7%A8%8B/>保姆级教程</a></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>Related content</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/posts/openclaw-deploy-macos/><div class=article-details><h2 class=article-title>OpenClaw 部署教程 - macOS 篇（2026 最新版）</h2></div></a></article><article><a href=/posts/openclaw-deploy-android/><div class=article-details><h2 class=article-title>OpenClaw 部署教程 - Android 篇</h2></div></a></article><article><a href=/posts/qinglong-auth-bypass-rce/><div class=article-details><h2 class=article-title>青龙面板鉴权绕过漏洞复现 - 从路径大小写到 RCE</h2></div></a></article></div></div></aside><div class=disqus-container></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{typeof DISQUS=="object"&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
+2026 言零的博客</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=4.0.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><script type=module>
     import gallery from '\/ts\/gallery.js';
 
     const articleContent = document.querySelector('.article-content');
@@ -996,14 +347,4 @@ Configure hooks? (y/N) &gt; N
         });
         lightbox.init();
     }
-</script>
-    
-
-            </main>
-        </div>
-        
-<script type="text/javascript" src="/ts/main.acaf849f2b273f6a8368a58b001f336738d0c948d92e79b116467d0c7515f932.js" defer></script>
-
-
-    </body>
-</html>
+</script></main></div><script type=text/javascript src=/ts/main.acaf849f2b273f6a8368a58b001f336738d0c948d92e79b116467d0c7515f932.js defer></script></body></html>

@@ -1,986 +1,311 @@
-<!DOCTYPE html>
-<html lang="zh-CN" dir="ltr">
-    <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="OpenClaw Windows 部署终极指南 - 含 PowerShell 一键安装、Node.js 22 配置、Git 环境、初始化向导、故障排查，基于 Windows 11 实测验证">
-<title>OpenClaw 部署教程 - Windows 篇（2026 终极版）</title>
-
-
-<link rel="canonical" href="https://blog.caowo.de/posts/openclaw-deploy-windows/">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
-
-
-<link rel="stylesheet" href="/scss/style.min.390cc81d180d80110703ea467e355a4f3a0f44f25d4e957842790824fb5f2ef2.css"><meta property='og:title' content="OpenClaw 部署教程 - Windows 篇（2026 终极版）">
-<meta property='og:description' content="OpenClaw Windows 部署终极指南 - 含 PowerShell 一键安装、Node.js 22 配置、Git 环境、初始化向导、故障排查，基于 Windows 11 实测验证">
-<meta property='og:url' content='https://blog.caowo.de/posts/openclaw-deploy-windows/'>
-<meta property='og:site_name' content='言零的博客'>
-<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='OpenClaw' /><meta property='article:tag' content='Windows' /><meta property='article:tag' content='PowerShell' /><meta property='article:tag' content='部署' /><meta property='article:tag' content='AI 助手' /><meta property='article:tag' content='保姆级教程' /><meta property='article:published_time' content='2026-03-17T15:00:00&#43;08:00'/><meta property='article:modified_time' content='2026-03-17T15:00:00&#43;08:00'/>
-<meta name="twitter:title" content="OpenClaw 部署教程 - Windows 篇（2026 终极版）">
-<meta name="twitter:description" content="OpenClaw Windows 部署终极指南 - 含 PowerShell 一键安装、Node.js 22 配置、Git 环境、初始化向导、故障排查，基于 Windows 11 实测验证">
-
-<script defer src='https://static.cloudflareinsights.com/beacon.min.js' 
-        data-cf-beacon='{"token": "SDZvDCIq-3er2UKht5fIrl2UvvIrJxi6hZVxBfIa"}'></script>
-
-
-    </head>
-    <body class="
-    article-page
-    ">
-    <script>
-        (function() {
-            const colorSchemeKey = 'StackColorScheme';
-            if(!localStorage.getItem(colorSchemeKey)){
-                localStorage.setItem(colorSchemeKey, "auto");
-            }
-        })();
-    </script><script>
-    (function() {
-        const colorSchemeKey = 'StackColorScheme';
-        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
-        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
-
-        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
-            
-
-            document.documentElement.dataset.scheme = 'dark';
-        } else {
-            document.documentElement.dataset.scheme = 'light';
-        }
-    })();
-</script>
-<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky ">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
-        <span class="hamburger-box">
-            <span class="hamburger-inner"></span>
-        </span>
-    </button>
-
-    <header>
-        
-        
-        <div class="site-meta">
-            <h1 class="site-name"><a href="/">言零的博客</a></h1>
-            <h2 class="site-description"></h2>
-        </div>
-    </header><ol class="menu" id="main-menu">
-        
-        
-        
-        <li >
-            <a href='/posts/' >
-                
-                <span>文章 / Posts</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/categories/' >
-                
-                <span>分类 / Categories</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/tags/' >
-                
-                <span>标签 / Tags</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/about/' >
-                
-                <span>关于 / About</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/links/' >
-                
-                <span>友链 / Links</span>
-            </a>
-        </li>
-        
-        <li class="menu-bottom-section">
-            <ol class="menu">
-
-                
-                    <li id="dark-mode-toggle">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="8" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="16" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                        <span>Dark Mode</span>
-                    </li>
-                
-            </ol>
-        </li>
-    </ol>
-</aside>
-
-    
-
-            <main class="main full-width">
-    <article class="has-image main-article">
-    <header class="article-header">
-
-    <div class="article-details">
-    
-    <header class="article-category">
-        
-            
-            
-            
-            <a href="/categories/openclaw/" style="background-color: hsl(294, 60%, 84%); color: hsl(294, 60%, 15%);">
-                OpenClaw
-            </a>
-        
-            
-            
-            
-            <a href="/categories/%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B/" style="background-color: hsl(119, 60%, 84%); color: hsl(119, 60%, 15%);">
-                部署教程
-            </a>
-        
-    </header>
-    
-
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/posts/openclaw-deploy-windows/">OpenClaw 部署教程 - Windows 篇（2026 终极版）</a>
-        </h2>
-    
-        
-        <h3 class="article-subtitle">
-            OpenClaw Windows 部署终极指南 - 含 PowerShell 一键安装、Node.js 22 配置、Git 环境、初始化向导、故障排查，基于 Windows 11 实测验证
-        </h3>
-        
-    </div>
-
-    
-    
-    
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published" datetime='2026-03-17T15:00:00&#43;08:00'>Tuesday, March 17, 2026</time>
-            </div>
-        
-
-        
-    </footer>
-    
-
-    
-
-    
-</div>
-
-</header>
-
-    
-
-    <section class="article-content">
-    
-    
-    <h1 id="openclaw-部署教程---windows-篇2026-终极版">OpenClaw 部署教程 - Windows 篇（2026 终极版）
-</h1>
-    <blockquote>
-        <p>📅 <strong>更新时间</strong>：2026-03-17<br>
-⏱️ <strong>阅读时间</strong>：20 分钟<br>
-💡 <strong>难度等级</strong>：⭐⭐☆☆☆<br>
-✅ <strong>实测环境</strong>：Windows 11 专业版 / Node.js v22.1.0 / Git 2.46.0 / PowerShell 7.4</p>
-
-    </blockquote>
-<hr>
-<h2 id="-部署前必读安全警示">⚠️ 部署前必读（安全警示）
-</h2><h3 id="系统安全">系统安全
-</h3><ul>
-<li><strong>管理员权限</strong>：安装过程需要管理员权限，但运行时建议使用普通用户</li>
-<li><strong>防火墙</strong>：首次运行会提示允许网络访问，需点击&quot;允许&quot;</li>
-<li><strong>杀毒软件</strong>：Windows Defender 可能误报，需添加排除项</li>
-<li><strong>备份</strong>：部署前备份重要数据</li>
-</ul>
-<h3 id="硬件要求">硬件要求
-</h3><ul>
-<li><strong>内存</strong>：最低 4GB，推荐 8GB+（2GB 需配置虚拟内存）</li>
-<li><strong>磁盘</strong>：至少 10GB 可用空间（推荐 SSD）</li>
-<li><strong>网络</strong>：需访问外网（中国大陆用户需配置代理）</li>
-</ul>
-<h3 id="环境准备">环境准备
-</h3><ul>
-<li><strong>PowerShell</strong>：需以管理员身份运行</li>
-<li><strong>执行策略</strong>：需设置为 <code>RemoteSigned</code>（允许运行签名脚本）</li>
-<li><strong>TLS 1.2</strong>：必须启用（解决 SSL 连接问题）</li>
-</ul>
-<hr>
-<h2 id="-系统要求精准参数">📋 系统要求（精准参数）
-</h2><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>项目</th>
-          <th>最低要求</th>
-          <th>推荐配置</th>
-          <th><strong>生产环境</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>操作系统</strong></td>
-          <td>Windows 10</td>
-          <td>Windows 11</td>
-          <td>Windows 11 专业版 23H2</td>
-      </tr>
-      <tr>
-          <td><strong>CPU</strong></td>
-          <td>2 核心</td>
-          <td>4 核心+</td>
-          <td>8 核心+ (Intel i7/Ryzen 7)</td>
-      </tr>
-      <tr>
-          <td><strong>内存</strong></td>
-          <td>4GB</td>
-          <td>8GB+</td>
-          <td><strong>16GB+</strong> (AI 模型缓存)</td>
-      </tr>
-      <tr>
-          <td><strong>磁盘</strong></td>
-          <td>10GB</td>
-          <td>20GB SSD</td>
-          <td><strong>50GB NVMe SSD</strong></td>
-      </tr>
-      <tr>
-          <td><strong>Node.js</strong></td>
-          <td>v18+</td>
-          <td>v20+</td>
-          <td><strong>v22.1.0</strong> (最新稳定)</td>
-      </tr>
-      <tr>
-          <td><strong>Git</strong></td>
-          <td>任意版本</td>
-          <td>最新</td>
-          <td><strong>2.46.0</strong></td>
-      </tr>
-      <tr>
-          <td><strong>PowerShell</strong></td>
-          <td>5.1+</td>
-          <td>7.4+</td>
-          <td><strong>7.4.1</strong></td>
-      </tr>
-  </tbody>
-</table></div>
-<p><strong>⚠️ 关键说明</strong>：</p>
-<ol>
-<li><strong>Node.js v22</strong>：OpenClaw 官方推荐版本，兼容性最佳</li>
-<li><strong>PowerShell 7</strong>：比 5.1 更稳定，支持更多命令</li>
-<li><strong>Git 必须</strong>：用于克隆仓库和管理依赖</li>
-</ol>
-<hr>
-<h2 id="-快速安装10-分钟完成">🔧 快速安装（10 分钟完成）
-</h2><h3 id="方法一powershell-一键安装推荐新手">方法一：PowerShell 一键安装（推荐新手）
-</h3><p><strong>完整流程</strong>（复制粘贴到 PowerShell）：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># ============ 步骤 1：以管理员身份运行 PowerShell ============</span>
-</span></span><span class="line"><span class="cl"><span class="c"># 开始菜单 → 搜索 PowerShell → 右键 → 以管理员身份运行</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># ============ 步骤 2：设置执行策略（允许运行脚本） ============</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Set-ExecutionPolicy</span> <span class="n">RemoteSigned</span> <span class="n">-Scope</span> <span class="n">CurrentUser</span> <span class="n">-Force</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># ============ 步骤 3：启用 TLS 1.2（解决 SSL 连接问题） ============</span>
-</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="no">Net.ServicePointManager</span><span class="p">]::</span><span class="n">SecurityProtocol</span> <span class="p">=</span> <span class="p">[</span><span class="no">Net.SecurityProtocolType</span><span class="p">]::</span><span class="n">Tls12</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># ============ 步骤 4：执行安装脚本 ============</span>
-</span></span><span class="line"><span class="cl"><span class="nb">irm </span><span class="n">https</span><span class="err">:</span><span class="p">//</span><span class="n">docs</span><span class="p">.</span><span class="py">openclaw</span><span class="p">.</span><span class="n">ai</span><span class="p">/</span><span class="nb">zh-CN</span><span class="p">/</span><span class="n">install</span> <span class="p">|</span> <span class="nb">iex
-</span></span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># ============ 步骤 5：验证安装 ============</span>
-</span></span><span class="line"><span class="cl"><span class="n">openclaw</span> <span class="p">-</span><span class="n">-version</span>
-</span></span></code></pre></div><p><strong>⏱️ 预计耗时</strong>：5-10 分钟（取决于网络）</p>
-<p><strong>⚠️ 注意事项</strong>：</p>
-<ul>
-<li><strong>必须管理员权限</strong>：否则安装失败</li>
-<li><strong>国内网络</strong>：可能需要代理</li>
-<li><strong>安装过程</strong>：自动安装 Node.js、Git、OpenClaw</li>
-</ul>
-<hr>
-<h3 id="方法二分步安装可控性更强推荐">方法二：分步安装（可控性更强，推荐）
-</h3><p>适合需要<strong>精确控制版本</strong>或<strong>排查问题</strong>的场景：</p>
-<h4 id="步骤-1准备工作目录">步骤 1：准备工作目录
-</h4><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># 创建临时目录（存放安装包）</span>
-</span></span><span class="line"><span class="cl"><span class="nb">New-Item</span> <span class="n">-Path</span> <span class="s2">&#34;C:\temp&#34;</span> <span class="n">-ItemType</span> <span class="n">Directory</span> <span class="n">-Force</span>
-</span></span></code></pre></div><h4 id="步骤-2启用-tls-12">步骤 2：启用 TLS 1.2
-</h4><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># 必须执行，否则下载会失败</span>
-</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="no">Net.ServicePointManager</span><span class="p">]::</span><span class="n">SecurityProtocol</span> <span class="p">=</span> <span class="p">[</span><span class="no">Net.SecurityProtocolType</span><span class="p">]::</span><span class="n">Tls12</span>
-</span></span></code></pre></div><h4 id="步骤-3安装-nodejs-22">步骤 3：安装 Node.js 22
-</h4><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># 1. 下载 Node.js 22.1.0 64 位安装包</span>
-</span></span><span class="line"><span class="cl"><span class="nb">iwr </span><span class="n">-Uri</span> <span class="s2">&#34;https://nodejs.org/dist/v22.1.0/node-v22.1.0-x64.msi&#34;</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl"> <span class="n">-OutFile</span> <span class="s2">&#34;C:\temp\node-v22.1.0-x64.msi&#34;</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl"> <span class="n">-UseBasicParsing</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 2. 验证文件是否存在</span>
-</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nb">Test-Path</span> <span class="s2">&#34;C:\temp\node-v22.1.0-x64.msi&#34;</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;✅ 文件存在，开始安装...&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="c"># 静默安装，/qn 表示无界面，/norestart 表示不自动重启</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">Start-Process</span> <span class="n">-FilePath</span> <span class="s2">&#34;C:\temp\node-v22.1.0-x64.msi&#34;</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">     <span class="n">-ArgumentList</span> <span class="s2">&#34;/qn /norestart&#34;</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">     <span class="n">-Wait</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;✅ Node.js 安装完成！&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;❌ 错误：安装包未找到，请检查下载命令！&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 3. 验证版本（需重新打开 PowerShell）</span>
-</span></span><span class="line"><span class="cl"><span class="n">node</span> <span class="n">-v</span>   <span class="c"># 应显示：v22.1.0</span>
-</span></span><span class="line"><span class="cl"><span class="n">npm</span> <span class="n">-v</span>    <span class="c"># 应显示：10.5.0+</span>
-</span></span></code></pre></div><p><strong>⏱️ 预计耗时</strong>：3-5 分钟</p>
-<h4 id="步骤-4安装-git">步骤 4：安装 Git
-</h4><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># 1. 下载 Git for Windows 最新稳定版</span>
-</span></span><span class="line"><span class="cl"><span class="nb">iwr </span><span class="n">-Uri</span> <span class="s2">&#34;https://github.com/git-for-windows/git/releases/download/v2.46.0.windows.1/Git-2.46.0-64-bit.exe&#34;</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl"> <span class="n">-OutFile</span> <span class="s2">&#34;C:\temp\Git-Setup.exe&#34;</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl"> <span class="n">-UseBasicParsing</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 2. 静默安装（自动添加到 PATH）</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Start-Process</span> <span class="n">-FilePath</span> <span class="s2">&#34;C:\temp\Git-Setup.exe&#34;</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl"> <span class="n">-ArgumentList</span> <span class="s2">&#34;/VERYSILENT /NORESTART /NOCANCEL /SP- /SUPPRESSMSGBOXES /ADDLOCAL=ALL&#34;</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl"> <span class="n">-Wait</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">Write-Host</span> <span class="s2">&#34;✅ Git 安装完成，请重启 PowerShell 后验证！&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 3. 验证（需重启 PowerShell）</span>
-</span></span><span class="line"><span class="cl"><span class="n">git</span> <span class="p">-</span><span class="n">-version</span>  <span class="c"># 应显示：git version 2.46.0.windows.1</span>
-</span></span></code></pre></div><p><strong>⏱️ 预计耗时</strong>：2-3 分钟</p>
-<h4 id="步骤-5安装-openclaw">步骤 5：安装 OpenClaw
-</h4><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># 方法 A：下载脚本到本地（推荐，可排查错误）</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$scriptPath</span> <span class="p">=</span> <span class="s2">&#34;C:\temp\openclaw-install.ps1&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">New-Item</span> <span class="n">-Path</span> <span class="s2">&#34;C:\temp&#34;</span> <span class="n">-ItemType</span> <span class="n">Directory</span> <span class="n">-Force</span> <span class="p">|</span> <span class="nb">Out-Null</span>
-</span></span><span class="line"><span class="cl"><span class="nb">iwr </span><span class="n">-Uri</span> <span class="s2">&#34;https://openclaw.ai/install.ps1&#34;</span> <span class="n">-OutFile</span> <span class="nv">$scriptPath</span> <span class="n">-UseBasicParsing</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 执行脚本（会显示具体错误，而非闪退）</span>
-</span></span><span class="line"><span class="cl"><span class="p">&amp;</span> <span class="nv">$scriptPath</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 方法 B：一键安装（简单快速）</span>
-</span></span><span class="line"><span class="cl"><span class="nb">iwr </span><span class="n">-useb</span> <span class="n">https</span><span class="err">:</span><span class="p">//</span><span class="n">openclaw</span><span class="p">.</span><span class="n">bot</span><span class="p">/</span><span class="n">install</span><span class="p">.</span><span class="py">ps1</span> <span class="p">|</span> <span class="nb">iex
-</span></span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 验证安装</span>
-</span></span><span class="line"><span class="cl"><span class="n">openclaw</span> <span class="p">-</span><span class="n">-version</span>
-</span></span><span class="line"><span class="cl"><span class="nb">where </span><span class="n">openclaw</span>
-</span></span></code></pre></div><p><strong>⏱️ 预计耗时</strong>：2-3 分钟</p>
-<hr>
-<h2 id="-初始化配置onboarding-向导">⚙️ 初始化配置（Onboarding 向导）
-</h2><p>安装成功后会自动进入<strong>初始化向导</strong>，按以下步骤操作：</p>
-<h3 id="完整流程">完整流程
-</h3><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># 步骤 1：执行初始化向导</span>
-</span></span><span class="line"><span class="cl"><span class="n">openclaw</span> <span class="n">onboard</span> <span class="p">-</span><span class="n">-flow</span> <span class="n">quickstart</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 步骤 2：启动 OpenClaw</span>
-</span></span><span class="line"><span class="cl"><span class="n">openclaw</span> <span class="nb">start
-</span></span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 步骤 3：测试运行</span>
-</span></span><span class="line"><span class="cl"><span class="c"># 在聊天界面输入 &#34;Hello&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="c"># 应收到 AI 回复</span>
-</span></span></code></pre></div><h3 id="详细步骤说明">详细步骤说明
-</h3><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>步骤</th>
-          <th>提示内容</th>
-          <th>操作</th>
-          <th>说明</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>1</td>
-          <td>安全提示确认</td>
-          <td>输入 <code>Yes</code></td>
-          <td>知晓权限风险</td>
-      </tr>
-      <tr>
-          <td>2</td>
-          <td>选择部署模式</td>
-          <td>选择 <code>QuickStart</code></td>
-          <td>后续可补充配置</td>
-      </tr>
-      <tr>
-          <td>3</td>
-          <td>选择模型服务商</td>
-          <td>选择 <code>OpenAI</code></td>
-          <td>或其他服务商</td>
-      </tr>
-      <tr>
-          <td>4</td>
-          <td>模型授权</td>
-          <td>复制链接到浏览器</td>
-          <td>登录账号完成授权</td>
-      </tr>
-      <tr>
-          <td>5</td>
-          <td>通信通道配置</td>
-          <td>选择 <code>Skip for now</code></td>
-          <td>后续可配置</td>
-      </tr>
-      <tr>
-          <td>6</td>
-          <td>技能配置</td>
-          <td>选择 <code>No</code></td>
-          <td>暂不配置</td>
-      </tr>
-      <tr>
-          <td>7</td>
-          <td>Hooks 配置</td>
-          <td>选择 <code>Session</code></td>
-          <td>暂不启用</td>
-      </tr>
-      <tr>
-          <td>8</td>
-          <td>启动方式</td>
-          <td>选择 <code>TUI</code></td>
-          <td>终端聊天界面</td>
-      </tr>
-      <tr>
-          <td>9</td>
-          <td>测试</td>
-          <td>输入 <code>Hello</code></td>
-          <td>确认安装成功</td>
-      </tr>
-  </tbody>
-</table></div>
-<h3 id="配置-api-keys">配置 API Keys
-</h3><p><strong>编辑配置文件</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">notepad</span> <span class="nv">$env:USERPROFILE</span><span class="p">\.</span><span class="n">openclaw</span><span class="p">\</span><span class="n">workspace</span><span class="p">\</span><span class="n">TOOLS</span><span class="p">.</span><span class="nb">md
-</span></span></span></code></pre></div><p><strong>添加以下内容</strong>（替换为你的 Key）：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl"><span class="gu">## 🔑 API Keys
-</span></span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="gu">### 阿里云百炼（推荐，国内访问快）
-</span></span></span><span class="line"><span class="cl"><span class="k">-</span> **API Key**: <span class="sb">`sk-sp-xxxxxxxxxxxxxxxx`</span>
-</span></span><span class="line"><span class="cl"><span class="k">-</span> **模型**: qwen3.5-plus, qwen3-max-2026-01-23
-</span></span><span class="line"><span class="cl"><span class="k">-</span> **状态**: ✅ 已配置
-</span></span><span class="line"><span class="cl"><span class="k">-</span> **用途**: 代码生成/审查/优化
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="gu">### OpenAI（备选）
-</span></span></span><span class="line"><span class="cl"><span class="k">-</span> **API Key**: <span class="sb">`sk-proj-xxxxxxxxxxxxxxxx`</span>
-</span></span><span class="line"><span class="cl"><span class="k">-</span> **模型**: gpt-4o, gpt-4-turbo
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="gu">### 火山引擎（备选）
-</span></span></span><span class="line"><span class="cl"><span class="k">-</span> **API Key**: <span class="sb">`xxxxxxxxxxxxxxxx`</span>
-</span></span><span class="line"><span class="cl"><span class="k">-</span> **模型**: doubao-seed-2.0-code
-</span></span></code></pre></div><p><strong>Key 获取地址</strong>：</p>
-<ul>
-<li><strong>阿里云百炼</strong>：https://bailian.console.aliyun.com/</li>
-<li><strong>OpenAI</strong>：https://platform.openai.com/api-keys</li>
-<li><strong>火山引擎</strong>：https://www.volcengine.com/</li>
-</ul>
-<h3 id="配置代理中国大陆用户必须">配置代理（中国大陆用户必须）
-</h3><p><strong>编辑配置文件</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">notepad</span> <span class="nv">$env:USERPROFILE</span><span class="p">\.</span><span class="n">openclaw</span><span class="p">\</span><span class="n">config</span><span class="p">.</span><span class="py">json</span>
-</span></span></code></pre></div><p><strong>添加代理配置</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;proxy&#34;</span><span class="p">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;http&#34;</span><span class="p">:</span> <span class="s2">&#34;http://127.0.0.1:7890&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;https&#34;</span><span class="p">:</span> <span class="s2">&#34;http://127.0.0.1:7890&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">},</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;gateway&#34;</span><span class="p">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;port&#34;</span><span class="p">:</span> <span class="mi">18789</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;host&#34;</span><span class="p">:</span> <span class="s2">&#34;0.0.0.0&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p><strong>验证代理</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nv">$env:HTTP_PROXY</span><span class="p">=</span><span class="s2">&#34;http://127.0.0.1:7890&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$env:HTTPS_PROXY</span><span class="p">=</span><span class="s2">&#34;http://127.0.0.1:7890&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Test-NetConnection</span> <span class="n">api</span><span class="p">.</span><span class="py">binance</span><span class="p">.</span><span class="py">com</span> <span class="n">-Port</span> <span class="mf">443</span>
-</span></span><span class="line"><span class="cl"><span class="c"># 应显示：TcpTestSucceeded : True</span>
-</span></span></code></pre></div><hr>
-<h2 id="-高级配置生产环境必备">🚀 高级配置（生产环境必备）
-</h2><h3 id="1-配置虚拟内存4gb-内存推荐">1. 配置虚拟内存（4GB 内存推荐）
-</h3><p><strong>检查当前虚拟内存</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># 查看系统信息</span>
-</span></span><span class="line"><span class="cl"><span class="n">systeminfo</span> <span class="p">|</span> <span class="n">findstr</span> <span class="s2">&#34;虚拟内存&#34;</span>
-</span></span></code></pre></div><p><strong>手动配置（8GB 虚拟内存）</strong>：</p>
-<ol>
-<li>右键&quot;此电脑&quot; → 属性</li>
-<li>高级系统设置 → 高级 → 性能设置</li>
-<li>高级 → 虚拟内存 → 更改</li>
-<li>取消&quot;自动管理&quot;</li>
-<li>选择 C 盘 → 自定义大小</li>
-<li>初始大小：8192 MB，最大值：8192 MB</li>
-<li>点击&quot;设置&quot; → 确定 → 重启</li>
-</ol>
-<h3 id="2-配置-windows-防火墙">2. 配置 Windows 防火墙
-</h3><p><strong>允许 OpenClaw 通过网络</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># 添加入站规则</span>
-</span></span><span class="line"><span class="cl"><span class="nb">New-NetFirewallRule</span> <span class="n">-DisplayName</span> <span class="s2">&#34;OpenClaw Gateway&#34;</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl"> <span class="n">-Direction</span> <span class="n">Inbound</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl"> <span class="n">-LocalPort</span> <span class="mf">18789</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl"> <span class="n">-Protocol</span> <span class="n">TCP</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl"> <span class="n">-Action</span> <span class="n">Allow</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 查看规则</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Get-NetFirewallRule</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="n">DisplayName</span> <span class="o">-like</span> <span class="s2">&#34;*OpenClaw*&#34;</span>
-</span></span></code></pre></div><h3 id="3-配置-windows-defender-排除项">3. 配置 Windows Defender 排除项
-</h3><p><strong>避免误报</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># 添加排除目录</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Add-MpPreference</span> <span class="n">-ExclusionPath</span> <span class="s2">&#34;C:\Users\</span><span class="nv">$env:USERNAME</span><span class="s2">\.openclaw&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 添加排除进程</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Add-MpPreference</span> <span class="n">-ExclusionProcess</span> <span class="s2">&#34;node.exe&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 验证排除项</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Get-MpPreference</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">ExclusionPath</span><span class="p">,</span> <span class="n">ExclusionProcess</span>
-</span></span></code></pre></div><h3 id="4-开机自启任务计划程序">4. 开机自启（任务计划程序）
-</h3><p><strong>创建启动脚本</strong> <code>C:\openclaw-start.bat</code>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-batch" data-lang="batch"><span class="line"><span class="cl"><span class="p">@</span><span class="k">echo</span> off
-</span></span><span class="line"><span class="cl">timeout /t 30 /nobreak
-</span></span><span class="line"><span class="cl"><span class="k">cd</span> /d <span class="nv">%USERPROFILE%</span>\.openclaw\workspace
-</span></span><span class="line"><span class="cl">openclaw gateway start
-</span></span><span class="line"><span class="cl"><span class="k">exit</span>
-</span></span></code></pre></div><p><strong>添加到任务计划程序</strong>：</p>
-<ol>
-<li>开始菜单 → 搜索&quot;任务计划程序&quot;</li>
-<li>右侧&quot;创建基本任务&quot;</li>
-<li>名称：<code>OpenClaw Gateway</code></li>
-<li>触发器：<strong>登录时</strong></li>
-<li>操作：<strong>启动程序</strong></li>
-<li>程序/脚本：<code>C:\openclaw-start.bat</code></li>
-<li>完成 → 输入管理员密码</li>
-</ol>
-<p><strong>验证</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># 查看任务</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Get-ScheduledTask</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="n">TaskName</span> <span class="o">-like</span> <span class="s2">&#34;*OpenClaw*&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 手动运行测试</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Start-ScheduledTask</span> <span class="n">-TaskName</span> <span class="s2">&#34;OpenClaw Gateway&#34;</span>
-</span></span></code></pre></div><hr>
-<h2 id="-故障排查精准诊断">🔍 故障排查（精准诊断）
-</h2><h3 id="问题-1executionpolicy-报错">问题 1：ExecutionPolicy 报错
-</h3><p><strong>症状</strong>：<code>cannot be loaded because running scripts is disabled on this system</code></p>
-<p><strong>解决方案</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># 1. 检查当前策略</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Get-ExecutionPolicy</span> <span class="n">-Scope</span> <span class="n">CurrentUser</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 2. 临时设置（仅当前会话）</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Set-ExecutionPolicy</span> <span class="n">RemoteSigned</span> <span class="n">-Scope</span> <span class="n">CurrentUser</span> <span class="n">-Force</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 3. 验证</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Get-ExecutionPolicy</span> <span class="n">-Scope</span> <span class="n">CurrentUser</span>
-</span></span><span class="line"><span class="cl"><span class="c"># 应显示：RemoteSigned</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 4. 重新运行安装脚本</span>
-</span></span><span class="line"><span class="cl"><span class="p">&amp;</span> <span class="nv">$scriptPath</span>
-</span></span></code></pre></div><h3 id="问题-2path-或命令找不到">问题 2：PATH 或命令找不到
-</h3><p><strong>症状</strong>：<code>openclaw : 无法将&quot;openclaw&quot;项识别为 cmdlet、函数、脚本文件</code></p>
-<p><strong>解决方案</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># 1. 检查 openclaw 路径</span>
-</span></span><span class="line"><span class="cl"><span class="nb">where </span><span class="n">openclaw</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 2. 如果无输出，说明未添加到 PATH</span>
-</span></span><span class="line"><span class="cl"><span class="c"># 手动添加环境变量</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$userPath</span> <span class="p">=</span> <span class="p">[</span><span class="no">Environment</span><span class="p">]::</span><span class="n">GetEnvironmentVariable</span><span class="p">(</span><span class="s2">&#34;Path&#34;</span><span class="p">,</span> <span class="s2">&#34;User&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$npmPath</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="nv">$env:APPDATA</span><span class="s2">\npm&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="no">Environment</span><span class="p">]::</span><span class="n">SetEnvironmentVariable</span><span class="p">(</span><span class="s2">&#34;Path&#34;</span><span class="p">,</span> <span class="s2">&#34;</span><span class="nv">$userPath</span><span class="s2">;</span><span class="nv">$npmPath</span><span class="s2">&#34;</span><span class="p">,</span> <span class="s2">&#34;User&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 3. 重新打开 PowerShell（必须）</span>
-</span></span><span class="line"><span class="cl"><span class="c"># 关闭所有 PowerShell 窗口，重新打开</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 4. 验证</span>
-</span></span><span class="line"><span class="cl"><span class="n">openclaw</span> <span class="p">-</span><span class="n">-version</span>
-</span></span></code></pre></div><h3 id="问题-3安装脚本闪退">问题 3：安装脚本闪退
-</h3><p><strong>症状</strong>：执行脚本后 PowerShell 直接关闭，看不到错误信息</p>
-<p><strong>解决方案</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># 1. 下载脚本到本地（不要直接管道执行）</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$scriptPath</span> <span class="p">=</span> <span class="s2">&#34;C:\temp\openclaw-install.ps1&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">New-Item</span> <span class="n">-Path</span> <span class="s2">&#34;C:\temp&#34;</span> <span class="n">-ItemType</span> <span class="n">Directory</span> <span class="n">-Force</span> <span class="p">|</span> <span class="nb">Out-Null</span>
-</span></span><span class="line"><span class="cl"><span class="nb">iwr </span><span class="n">-Uri</span> <span class="s2">&#34;https://openclaw.ai/install.ps1&#34;</span> <span class="n">-OutFile</span> <span class="nv">$scriptPath</span> <span class="n">-UseBasicParsing</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 2. 手动执行（会显示具体错误）</span>
-</span></span><span class="line"><span class="cl"><span class="p">&amp;</span> <span class="nv">$scriptPath</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 3. 如果还是失败，查看错误日志</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Get-Content</span> <span class="n">C:</span><span class="p">\</span><span class="n">temp</span><span class="p">\</span><span class="nb">openclaw-install</span><span class="p">.</span><span class="py">log</span> <span class="n">-Tail</span> <span class="mf">50</span>
-</span></span></code></pre></div><h3 id="问题-4nodejs-版本不兼容">问题 4：Node.js 版本不兼容
-</h3><p><strong>症状</strong>：<code>Error: Unsupported Node.js version</code></p>
-<p><strong>解决方案</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># 1. 查看当前版本</span>
-</span></span><span class="line"><span class="cl"><span class="n">node</span> <span class="n">-v</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 2. 卸载旧版本（控制面板 → 程序和功能）</span>
-</span></span><span class="line"><span class="cl"><span class="c"># 或者使用 PowerShell</span>
-</span></span><span class="line"><span class="cl"><span class="n">winget</span> <span class="n">uninstall</span> <span class="s2">&#34;Node.js&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 3. 重新安装 Node.js 22</span>
-</span></span><span class="line"><span class="cl"><span class="nb">iwr </span><span class="n">-Uri</span> <span class="s2">&#34;https://nodejs.org/dist/v22.1.0/node-v22.1.0-x64.msi&#34;</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl"> <span class="n">-OutFile</span> <span class="s2">&#34;C:\temp\node-v22.1.0-x64.msi&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Start-Process</span> <span class="n">-FilePath</span> <span class="s2">&#34;C:\temp\node-v22.1.0-x64.msi&#34;</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl"> <span class="n">-ArgumentList</span> <span class="s2">&#34;/qn /norestart&#34;</span> <span class="n">-Wait</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 4. 重新打开 PowerShell 验证</span>
-</span></span><span class="line"><span class="cl"><span class="n">node</span> <span class="n">-v</span>  <span class="c"># 应显示：v22.1.0</span>
-</span></span></code></pre></div><h3 id="问题-5防火墙或-defender-拦截">问题 5：防火墙或 Defender 拦截
-</h3><p><strong>症状</strong>：网络连接超时，或被 Defender 隔离</p>
-<p><strong>解决方案</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># 1. 检查防火墙规则</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Get-NetFirewallRule</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="n">DisplayName</span> <span class="o">-like</span> <span class="s2">&#34;*OpenClaw*&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 2. 添加入站规则（如果不存在）</span>
-</span></span><span class="line"><span class="cl"><span class="nb">New-NetFirewallRule</span> <span class="n">-DisplayName</span> <span class="s2">&#34;OpenClaw Gateway&#34;</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl"> <span class="n">-Direction</span> <span class="n">Inbound</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl"> <span class="n">-LocalPort</span> <span class="mf">18789</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl"> <span class="n">-Protocol</span> <span class="n">TCP</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl"> <span class="n">-Action</span> <span class="n">Allow</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 3. 检查 Defender 隔离区</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Get-MpThreatDetection</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">ThreatName</span><span class="p">,</span> <span class="n">DetectionTime</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 4. 恢复被隔离文件（如果有）</span>
-</span></span><span class="line"><span class="cl"><span class="c"># Windows 安全中心 → 病毒和威胁防护 → 保护历史记录 → 还原</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 5. 添加排除项</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Add-MpPreference</span> <span class="n">-ExclusionPath</span> <span class="s2">&#34;</span><span class="nv">$env:USERPROFILE</span><span class="s2">\.openclaw&#34;</span>
-</span></span></code></pre></div><h3 id="问题-6端口被占用">问题 6：端口被占用
-</h3><p><strong>症状</strong>：<code>Error: listen EADDRINUSE: address already in use :::18789</code></p>
-<p><strong>解决方案</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># 1. 检查端口占用</span>
-</span></span><span class="line"><span class="cl"><span class="n">netstat</span> <span class="n">-ano</span> <span class="p">|</span> <span class="n">findstr</span> <span class="err">:</span><span class="mf">18789</span>
-</span></span><span class="line"><span class="cl"><span class="c"># 输出示例：TCP  0.0.0.0:18789  0.0.0.0:0  LISTEN  1234</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 2. 杀死占用进程</span>
-</span></span><span class="line"><span class="cl"><span class="n">taskkill</span> <span class="p">/</span><span class="n">F</span> <span class="p">/</span><span class="n">PID</span> <span class="mf">1234</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 3. 或者修改 OpenClaw 端口</span>
-</span></span><span class="line"><span class="cl"><span class="n">notepad</span> <span class="nv">$env:USERPROFILE</span><span class="p">\.</span><span class="n">openclaw</span><span class="p">\</span><span class="n">config</span><span class="p">.</span><span class="py">json</span>
-</span></span><span class="line"><span class="cl"><span class="c"># 修改：&#34;port&#34;: 18790</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 4. 重启服务</span>
-</span></span><span class="line"><span class="cl"><span class="n">openclaw</span> <span class="n">gateway</span> <span class="n">restart</span>
-</span></span></code></pre></div><h3 id="问题-7npm-安装失败">问题 7：npm 安装失败
-</h3><p><strong>症状</strong>：<code>npm ERR! code EACCES</code> 或 <code>npm ERR! permissions</code></p>
-<p><strong>解决方案</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># 1. 清理 npm 缓存</span>
-</span></span><span class="line"><span class="cl"><span class="n">npm</span> <span class="n">cache</span> <span class="n">clean</span> <span class="p">-</span><span class="n">-force</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 2. 使用淘宝镜像</span>
-</span></span><span class="line"><span class="cl"><span class="n">npm</span> <span class="n">config</span> <span class="nb">set </span><span class="n">registry</span> <span class="n">https</span><span class="err">:</span><span class="p">//</span><span class="n">registry</span><span class="p">.</span><span class="py">npmmirror</span><span class="p">.</span><span class="py">com</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 3. 修改 npm 全局目录</span>
-</span></span><span class="line"><span class="cl"><span class="n">npm</span> <span class="n">config</span> <span class="nb">set </span><span class="n">prefix</span> <span class="s2">&#34;C:\npm-global&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 4. 添加环境变量</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$userPath</span> <span class="p">=</span> <span class="p">[</span><span class="no">Environment</span><span class="p">]::</span><span class="n">GetEnvironmentVariable</span><span class="p">(</span><span class="s2">&#34;Path&#34;</span><span class="p">,</span> <span class="s2">&#34;User&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="no">Environment</span><span class="p">]::</span><span class="n">SetEnvironmentVariable</span><span class="p">(</span><span class="s2">&#34;Path&#34;</span><span class="p">,</span> <span class="s2">&#34;</span><span class="nv">$userPath</span><span class="s2">;C:\npm-global&#34;</span><span class="p">,</span> <span class="s2">&#34;User&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 5. 重新打开 PowerShell，重新安装</span>
-</span></span><span class="line"><span class="cl"><span class="n">npm</span> <span class="n">install</span> <span class="n">-g</span> <span class="n">openclaw</span>
-</span></span></code></pre></div><hr>
-<h2 id="-验证安装完整测试清单">✅ 验证安装（完整测试清单）
-</h2><p><strong>逐项检查，全部通过才算成功</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># □ 1. 检查版本号</span>
-</span></span><span class="line"><span class="cl"><span class="n">openclaw</span> <span class="p">-</span><span class="n">-version</span>
-</span></span><span class="line"><span class="cl"><span class="c"># 期望输出：openclaw/x.x.x win32-x64 node-v22.1.0</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># □ 2. 检查网关状态</span>
-</span></span><span class="line"><span class="cl"><span class="n">openclaw</span> <span class="n">gateway</span> <span class="n">status</span>
-</span></span><span class="line"><span class="cl"><span class="c"># 期望输出：Gateway is running</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># □ 3. 检查端口监听</span>
-</span></span><span class="line"><span class="cl"><span class="n">netstat</span> <span class="n">-ano</span> <span class="p">|</span> <span class="n">findstr</span> <span class="err">:</span><span class="mf">18789</span>
-</span></span><span class="line"><span class="cl"><span class="c"># 期望输出：TCP  0.0.0.0:18789  0.0.0.0:0  LISTEN</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># □ 4. 测试本地访问</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Test-NetConnection</span> <span class="n">localhost</span> <span class="n">-Port</span> <span class="mf">18789</span>
-</span></span><span class="line"><span class="cl"><span class="c"># 期望输出：TcpTestSucceeded : True</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># □ 5. 发送测试消息</span>
-</span></span><span class="line"><span class="cl"><span class="n">openclaw</span> <span class="n">message</span> <span class="n">send</span> <span class="s2">&#34;Hello OpenClaw!&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="c"># 期望：收到 AI 回复</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># □ 6. 检查日志无 ERROR</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Get-Content</span> <span class="nv">$env:USERPROFILE</span><span class="p">\.</span><span class="n">openclaw</span><span class="p">\</span><span class="n">workspace</span><span class="p">\</span><span class="n">memory</span><span class="p">\*.</span><span class="n">log</span> <span class="n">-Tail</span> <span class="mf">50</span> <span class="p">|</span> <span class="nb">Select-String</span> <span class="s2">&#34;ERROR&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="c"># 期望：无输出</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># □ 7. 检查服务状态</span>
-</span></span><span class="line"><span class="cl"><span class="n">openclaw</span> <span class="n">gateway</span> <span class="n">status</span>
-</span></span><span class="line"><span class="cl"><span class="c"># 期望输出：Active: active (running)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># □ 8. 测试开机自启</span>
-</span></span><span class="line"><span class="cl"><span class="c"># 重启电脑后检查：</span>
-</span></span><span class="line"><span class="cl"><span class="n">openclaw</span> <span class="n">gateway</span> <span class="n">status</span>
-</span></span><span class="line"><span class="cl"><span class="c"># 期望：服务自动启动</span>
-</span></span></code></pre></div><p><strong>成功标志</strong>：</p>
-<ul>
-<li>✅ 8 项检查全部通过</li>
-<li>✅ 日志无 ERROR 级别错误</li>
-<li>✅ 服务重启后自动恢复</li>
-</ul>
-<hr>
-<h2 id="-性能优化生产环境">📊 性能优化（生产环境）
-</h2><h3 id="1-使用-ssd-存储">1. 使用 SSD 存储
-</h3><p><strong>检查工作区位置</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># 查看工作区路径</span>
-</span></span><span class="line"><span class="cl"><span class="n">openclaw</span> <span class="n">status</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 如果不在 SSD，迁移工作区</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Move-Item</span> <span class="s2">&#34;</span><span class="nv">$env:USERPROFILE</span><span class="s2">\.openclaw&#34;</span> <span class="s2">&#34;D:\openclaw&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">New-Item</span> <span class="n">-ItemType</span> <span class="n">SymbolicLink</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl"> <span class="n">-Path</span> <span class="s2">&#34;</span><span class="nv">$env:USERPROFILE</span><span class="s2">\.openclaw&#34;</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl"> <span class="n">-Target</span> <span class="s2">&#34;D:\openclaw&#34;</span>
-</span></span></code></pre></div><h3 id="2-增加-nodejs-内存">2. 增加 Node.js 内存
-</h3><p><strong>编辑启动配置</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># 临时生效（当前会话）</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$env:NODE_OPTIONS</span><span class="p">=</span><span class="s2">&#34;--max-old-space-size=4096&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 永久生效（添加到环境变量）</span>
-</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="no">Environment</span><span class="p">]::</span><span class="n">SetEnvironmentVariable</span><span class="p">(</span><span class="s2">&#34;NODE_OPTIONS&#34;</span><span class="p">,</span> <span class="s2">&#34;--max-old-space-size=4096&#34;</span><span class="p">,</span> <span class="s2">&#34;User&#34;</span><span class="p">)</span>
-</span></span></code></pre></div><h3 id="3-定期清理缓存">3. 定期清理缓存
-</h3><p><strong>创建清理脚本</strong> <code>C:\cleanup-openclaw.ps1</code>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Write-Host</span> <span class="s2">&#34;🧹 开始清理 OpenClaw 缓存...&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 清理 npm 缓存</span>
-</span></span><span class="line"><span class="cl"><span class="n">npm</span> <span class="n">cache</span> <span class="n">clean</span> <span class="p">-</span><span class="n">-force</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Write-Host</span> <span class="s2">&#34;✅ npm 缓存已清理&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 清理临时文件</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Remove-Item</span> <span class="s2">&#34;C:\temp\openclaw-*&#34;</span> <span class="n">-Recurse</span> <span class="n">-Force</span> <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Write-Host</span> <span class="s2">&#34;✅ 临时文件已清理&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 清理日志（保留最近 7 天）</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$daysToKeep</span> <span class="p">=</span> <span class="mf">7</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$cutoffDate</span> <span class="p">=</span> <span class="p">(</span><span class="nb">Get-Date</span><span class="p">).</span><span class="py">AddDays</span><span class="p">(-</span><span class="nv">$daysToKeep</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Get-ChildItem</span> <span class="s2">&#34;</span><span class="nv">$env:USERPROFILE</span><span class="s2">\.openclaw\workspace\memory\*.log&#34;</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">LastWriteTime</span> <span class="o">-lt</span> <span class="nv">$cutoffDate</span> <span class="p">}</span> <span class="p">|</span> <span class="nb">Remove-Item</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Write-Host</span> <span class="s2">&#34;✅ 旧日志已清理&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">Write-Host</span> <span class="s2">&#34;🎉 清理完成！&#34;</span>
-</span></span></code></pre></div><p><strong>运行清理脚本</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># 以管理员身份运行</span>
-</span></span><span class="line"><span class="cl"><span class="n">powershell</span> <span class="n">-ExecutionPolicy</span> <span class="n">Bypass</span> <span class="o">-File</span> <span class="n">C:</span><span class="p">\</span><span class="nb">cleanup-openclaw</span><span class="p">.</span><span class="py">ps1</span>
-</span></span></code></pre></div><p><strong>添加到任务计划程序（每周日凌晨 3 点）</strong>：</p>
-<ol>
-<li>任务计划程序 → 创建基本任务</li>
-<li>名称：<code>OpenClaw Cleanup</code></li>
-<li>触发器：<strong>每周</strong>，周日，凌晨 3:00</li>
-<li>操作：<strong>启动程序</strong></li>
-<li>程序：<code>powershell.exe</code></li>
-<li>参数：<code>-ExecutionPolicy Bypass -File C:\cleanup-openclaw.ps1</code></li>
-</ol>
-<hr>
-<h2 id="-更多资源">📚 更多资源
-</h2><h3 id="官方文档">官方文档
-</h3><ul>
-<li><a class="link" href="https://open-claw.online/zh/docs/getting-started"  target="_blank" rel="noopener"
-    >OpenClaw 官方指南</a></li>
-<li><a class="link" href="https://docs.openclaw.ai/zh-CN/install"  target="_blank" rel="noopener"
-    >中文安装文档</a></li>
-<li><a class="link" href="https://github.com/openclaw/openclaw"  target="_blank" rel="noopener"
-    >GitHub 仓库</a></li>
-</ul>
-<h3 id="社区教程">社区教程
-</h3><ul>
-<li><a class="link" href="https://blog.csdn.net/2503_93609022/article/details/158353716"  target="_blank" rel="noopener"
-    >原生+Docker 双方案</a></li>
-<li><a class="link" href="https://open-claw.online/zh/docs/windows-install"  target="_blank" rel="noopener"
-    >Windows 保姆级教程</a></li>
-</ul>
-<h3 id="其他平台部署">其他平台部署
-</h3><ul>
-<li><a class="link" href="/posts/openclaw-deploy-linux" >Linux 部署教程</a></li>
-<li><a class="link" href="/posts/openclaw-deploy-android" >Android 部署教程</a></li>
-<li><a class="link" href="/posts/openclaw-deploy-macos" >macOS 部署教程</a></li>
-</ul>
-<hr>
-<h2 id="-更新日志">📝 更新日志
-</h2><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>版本</th>
-          <th>日期</th>
-          <th>更新内容</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>v3.0</td>
-          <td>2026-03-17</td>
-          <td>整合 PowerShell 一键脚本 + Node.js 22 + Git 环境 + 初始化向导详解</td>
-      </tr>
-      <tr>
-          <td>v2.0</td>
-          <td>2026-03-10</td>
-          <td>增加安全警示、精准参数、故障排查流程</td>
-      </tr>
-      <tr>
-          <td>v1.5</td>
-          <td>2026-03-05</td>
-          <td>增加 Docker 方案、性能优化章节</td>
-      </tr>
-      <tr>
-          <td>v1.0</td>
-          <td>2026-03-01</td>
-          <td>初始版本发布</td>
-      </tr>
-  </tbody>
-</table></div>
-<hr>
-<p><em>最后更新：2026-03-17</em><br>
-<em>作者：OpenClaw 社区</em><br>
-<em>许可：MIT</em><br>
-<em>审核：嵌入式硬件专家（15 年 + 经验）</em></p>
-<p><strong>觉得有用？欢迎分享给更多朋友！</strong> 🚀</p>
-
-</section>
-
-
-    <footer class="article-footer">
-    
-    <section class="article-tags">
-        
-            <a href="/tags/openclaw/">OpenClaw</a>
-        
-            <a href="/tags/windows/">Windows</a>
-        
-            <a href="/tags/powershell/">PowerShell</a>
-        
-            <a href="/tags/%E9%83%A8%E7%BD%B2/">部署</a>
-        
-            <a href="/tags/ai-%E5%8A%A9%E6%89%8B/">AI 助手</a>
-        
-            <a href="/tags/%E4%BF%9D%E5%A7%86%E7%BA%A7%E6%95%99%E7%A8%8B/">保姆级教程</a>
-        
-    </section>
-
-
-    </footer>
-
-
-    
-</article>
-
-    
-
-    
-
-<aside class="related-content--wrapper">
-    <h2 class="section-title">Related content</h2>
-    <div class="related-content">
-        <div class="flex article-list--tile">
-            
-                
-<article class="">
-    <a href="/posts/openclaw-deploy-linux/">
-        
-
-        <div class="article-details">
-            <h2 class="article-title">OpenClaw 部署教程 - Linux 篇（2026 终极版）</h2>
-        </div>
-    </a>
-</article>
-            
-                
-<article class="">
-    <a href="/posts/openclaw-deploy-macos/">
-        
-
-        <div class="article-details">
-            <h2 class="article-title">OpenClaw 部署教程 - macOS 篇（2026 最新版）</h2>
-        </div>
-    </a>
-</article>
-            
-                
-<article class="">
-    <a href="/posts/openclaw-deploy-android/">
-        
-
-        <div class="article-details">
-            <h2 class="article-title">OpenClaw 部署教程 - Android 篇</h2>
-        </div>
-    </a>
-</article>
-            
-                
-<article class="">
-    <a href="/posts/qinglong-auth-bypass-rce/">
-        
-
-        <div class="article-details">
-            <h2 class="article-title">青龙面板鉴权绕过漏洞复现 - 从路径大小写到 RCE</h2>
-        </div>
-    </a>
-</article>
-            
-        </div>
-    </div>
-</aside>
-
-     
-    
-        
-        <div class="disqus-container">
-    
-</div>
-
-<style>
-    .disqus-container {
-        background-color: var(--card-background);
-        border-radius: var(--card-border-radius);
-        box-shadow: var(--shadow-l1);
-        padding: var(--card-padding);
-    }
-</style>
-
-<script>
-    window.addEventListener('onColorSchemeChange', (e) => {
-        if (typeof DISQUS == 'object') {
-            DISQUS.reset({
-                reload: true
-            });
-        }
-    })
-</script>
-    
-
-    <footer class="site-footer">
-    <section class="copyright">
-        &copy; 
-        
-        2026 言零的博客
-    </section>
-    
-    <section class="powerby">
-        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="4.0.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
-    </section>
-</footer>
-
-
-    
-
-
-
-<script type="module">
+<!doctype html><html lang=zh-CN dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="OpenClaw Windows 部署终极指南 - 含 PowerShell 一键安装、Node.js 22 配置、Git 环境、初始化向导、故障排查，基于 Windows 11 实测验证"><title>OpenClaw 部署教程 - Windows 篇（2026 终极版）</title><link rel=canonical href=https://blog.caowo.de/posts/openclaw-deploy-windows/><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preload as=style href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap"><link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap"><link rel=stylesheet href=/scss/style.min.390cc81d180d80110703ea467e355a4f3a0f44f25d4e957842790824fb5f2ef2.css><meta property='og:title' content="OpenClaw 部署教程 - Windows 篇（2026 终极版）"><meta property='og:description' content="OpenClaw Windows 部署终极指南 - 含 PowerShell 一键安装、Node.js 22 配置、Git 环境、初始化向导、故障排查，基于 Windows 11 实测验证"><meta property='og:url' content='https://blog.caowo.de/posts/openclaw-deploy-windows/'><meta property='og:site_name' content='言零的博客'><meta property='og:type' content='article'><meta property='article:section' content='Posts'><meta property='article:tag' content='OpenClaw'><meta property='article:tag' content='Windows'><meta property='article:tag' content='PowerShell'><meta property='article:tag' content='部署'><meta property='article:tag' content='AI 助手'><meta property='article:tag' content='保姆级教程'><meta property='article:published_time' content='2026-03-17T15:00:00+08:00'><meta property='article:modified_time' content='2026-03-17T15:00:00+08:00'><meta name=twitter:title content="OpenClaw 部署教程 - Windows 篇（2026 终极版）"><meta name=twitter:description content="OpenClaw Windows 部署终极指南 - 含 PowerShell 一键安装、Node.js 22 配置、Git 环境、初始化向导、故障排查，基于 Windows 11 实测验证"><script defer src=https://static.cloudflareinsights.com/beacon.min.js data-cf-beacon='{"token": "SDZvDCIq-3er2UKht5fIrl2UvvIrJxi6hZVxBfIa"}'></script></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><div class=site-meta><h1 class=site-name><a href=/>言零的博客</a></h1><h2 class=site-description></h2></div></header><ol class=menu id=main-menu><li><a href=/posts/><span>文章 / Posts</span></a></li><li><a href=/categories/><span>分类 / Categories</span></a></li><li><a href=/tags/><span>标签 / Tags</span></a></li><li><a href=/about/><span>关于 / About</span></a></li><li><a href=/links/><span>友链 / Links</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>Dark Mode</span></li></ol></li></ol></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-details><header class=article-category><a href=/categories/openclaw/ style=background-color:#eabeef;color:#390f3d>OpenClaw
+</a><a href=/categories/%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B/ style=background-color:#bfefbe;color:#103d0f>部署教程</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/posts/openclaw-deploy-windows/>OpenClaw 部署教程 - Windows 篇（2026 终极版）</a></h2><h3 class=article-subtitle>OpenClaw Windows 部署终极指南 - 含 PowerShell 一键安装、Node.js 22 配置、Git 环境、初始化向导、故障排查，基于 Windows 11 实测验证</h3></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published datetime=2026-03-17T15:00:00+08:00>Tuesday, March 17, 2026</time></div></footer></div></header><section class=article-content><h1 id=openclaw-部署教程---windows-篇2026-终极版>OpenClaw 部署教程 - Windows 篇（2026 终极版）</h1><blockquote><p>📅 <strong>更新时间</strong>：2026-03-17<br>⏱️ <strong>阅读时间</strong>：20 分钟<br>💡 <strong>难度等级</strong>：⭐⭐☆☆☆<br>✅ <strong>实测环境</strong>：Windows 11 专业版 / Node.js v22.1.0 / Git 2.46.0 / PowerShell 7.4</p></blockquote><hr><h2 id=-部署前必读安全警示>⚠️ 部署前必读（安全警示）</h2><h3 id=系统安全>系统安全</h3><ul><li><strong>管理员权限</strong>：安装过程需要管理员权限，但运行时建议使用普通用户</li><li><strong>防火墙</strong>：首次运行会提示允许网络访问，需点击"允许"</li><li><strong>杀毒软件</strong>：Windows Defender 可能误报，需添加排除项</li><li><strong>备份</strong>：部署前备份重要数据</li></ul><h3 id=硬件要求>硬件要求</h3><ul><li><strong>内存</strong>：最低 4GB，推荐 8GB+（2GB 需配置虚拟内存）</li><li><strong>磁盘</strong>：至少 10GB 可用空间（推荐 SSD）</li><li><strong>网络</strong>：需访问外网（中国大陆用户需配置代理）</li></ul><h3 id=环境准备>环境准备</h3><ul><li><strong>PowerShell</strong>：需以管理员身份运行</li><li><strong>执行策略</strong>：需设置为 <code>RemoteSigned</code>（允许运行签名脚本）</li><li><strong>TLS 1.2</strong>：必须启用（解决 SSL 连接问题）</li></ul><hr><h2 id=-系统要求精准参数>📋 系统要求（精准参数）</h2><div class=table-wrapper><table><thead><tr><th>项目</th><th>最低要求</th><th>推荐配置</th><th><strong>生产环境</strong></th></tr></thead><tbody><tr><td><strong>操作系统</strong></td><td>Windows 10</td><td>Windows 11</td><td>Windows 11 专业版 23H2</td></tr><tr><td><strong>CPU</strong></td><td>2 核心</td><td>4 核心+</td><td>8 核心+ (Intel i7/Ryzen 7)</td></tr><tr><td><strong>内存</strong></td><td>4GB</td><td>8GB+</td><td><strong>16GB+</strong> (AI 模型缓存)</td></tr><tr><td><strong>磁盘</strong></td><td>10GB</td><td>20GB SSD</td><td><strong>50GB NVMe SSD</strong></td></tr><tr><td><strong>Node.js</strong></td><td>v18+</td><td>v20+</td><td><strong>v22.1.0</strong> (最新稳定)</td></tr><tr><td><strong>Git</strong></td><td>任意版本</td><td>最新</td><td><strong>2.46.0</strong></td></tr><tr><td><strong>PowerShell</strong></td><td>5.1+</td><td>7.4+</td><td><strong>7.4.1</strong></td></tr></tbody></table></div><p><strong>⚠️ 关键说明</strong>：</p><ol><li><strong>Node.js v22</strong>：OpenClaw 官方推荐版本，兼容性最佳</li><li><strong>PowerShell 7</strong>：比 5.1 更稳定，支持更多命令</li><li><strong>Git 必须</strong>：用于克隆仓库和管理依赖</li></ol><hr><h2 id=-快速安装10-分钟完成>🔧 快速安装（10 分钟完成）</h2><h3 id=方法一powershell-一键安装推荐新手>方法一：PowerShell 一键安装（推荐新手）</h3><p><strong>完整流程</strong>（复制粘贴到 PowerShell）：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=c># ============ 步骤 1：以管理员身份运行 PowerShell ============</span>
+</span></span><span class=line><span class=cl><span class=c># 开始菜单 → 搜索 PowerShell → 右键 → 以管理员身份运行</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># ============ 步骤 2：设置执行策略（允许运行脚本） ============</span>
+</span></span><span class=line><span class=cl><span class=nb>Set-ExecutionPolicy</span> <span class=n>RemoteSigned</span> <span class=n>-Scope</span> <span class=n>CurrentUser</span> <span class=n>-Force</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># ============ 步骤 3：启用 TLS 1.2（解决 SSL 连接问题） ============</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=no>Net.ServicePointManager</span><span class=p>]::</span><span class=n>SecurityProtocol</span> <span class=p>=</span> <span class=p>[</span><span class=no>Net.SecurityProtocolType</span><span class=p>]::</span><span class=n>Tls12</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># ============ 步骤 4：执行安装脚本 ============</span>
+</span></span><span class=line><span class=cl><span class=nb>irm </span><span class=n>https</span><span class=err>:</span><span class=p>//</span><span class=n>docs</span><span class=p>.</span><span class=py>openclaw</span><span class=p>.</span><span class=n>ai</span><span class=p>/</span><span class=nb>zh-CN</span><span class=p>/</span><span class=n>install</span> <span class=p>|</span> <span class=nb>iex
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># ============ 步骤 5：验证安装 ============</span>
+</span></span><span class=line><span class=cl><span class=n>openclaw</span> <span class=p>-</span><span class=n>-version</span>
+</span></span></code></pre></div><p><strong>⏱️ 预计耗时</strong>：5-10 分钟（取决于网络）</p><p><strong>⚠️ 注意事项</strong>：</p><ul><li><strong>必须管理员权限</strong>：否则安装失败</li><li><strong>国内网络</strong>：可能需要代理</li><li><strong>安装过程</strong>：自动安装 Node.js、Git、OpenClaw</li></ul><hr><h3 id=方法二分步安装可控性更强推荐>方法二：分步安装（可控性更强，推荐）</h3><p>适合需要<strong>精确控制版本</strong>或<strong>排查问题</strong>的场景：</p><h4 id=步骤-1准备工作目录>步骤 1：准备工作目录</h4><div class=highlight><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=c># 创建临时目录（存放安装包）</span>
+</span></span><span class=line><span class=cl><span class=nb>New-Item</span> <span class=n>-Path</span> <span class=s2>&#34;C:\temp&#34;</span> <span class=n>-ItemType</span> <span class=n>Directory</span> <span class=n>-Force</span>
+</span></span></code></pre></div><h4 id=步骤-2启用-tls-12>步骤 2：启用 TLS 1.2</h4><div class=highlight><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=c># 必须执行，否则下载会失败</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=no>Net.ServicePointManager</span><span class=p>]::</span><span class=n>SecurityProtocol</span> <span class=p>=</span> <span class=p>[</span><span class=no>Net.SecurityProtocolType</span><span class=p>]::</span><span class=n>Tls12</span>
+</span></span></code></pre></div><h4 id=步骤-3安装-nodejs-22>步骤 3：安装 Node.js 22</h4><div class=highlight><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=c># 1. 下载 Node.js 22.1.0 64 位安装包</span>
+</span></span><span class=line><span class=cl><span class=nb>iwr </span><span class=n>-Uri</span> <span class=s2>&#34;https://nodejs.org/dist/v22.1.0/node-v22.1.0-x64.msi&#34;</span> <span class=p>`</span>
+</span></span><span class=line><span class=cl> <span class=n>-OutFile</span> <span class=s2>&#34;C:\temp\node-v22.1.0-x64.msi&#34;</span> <span class=p>`</span>
+</span></span><span class=line><span class=cl> <span class=n>-UseBasicParsing</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 2. 验证文件是否存在</span>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=p>(</span><span class=nb>Test-Path</span> <span class=s2>&#34;C:\temp\node-v22.1.0-x64.msi&#34;</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nb>Write-Host</span> <span class=s2>&#34;✅ 文件存在，开始安装...&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=c># 静默安装，/qn 表示无界面，/norestart 表示不自动重启</span>
+</span></span><span class=line><span class=cl>    <span class=nb>Start-Process</span> <span class=n>-FilePath</span> <span class=s2>&#34;C:\temp\node-v22.1.0-x64.msi&#34;</span> <span class=p>`</span>
+</span></span><span class=line><span class=cl>     <span class=n>-ArgumentList</span> <span class=s2>&#34;/qn /norestart&#34;</span> <span class=p>`</span>
+</span></span><span class=line><span class=cl>     <span class=n>-Wait</span>
+</span></span><span class=line><span class=cl>    <span class=nb>Write-Host</span> <span class=s2>&#34;✅ Node.js 安装完成！&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nb>Write-Host</span> <span class=s2>&#34;❌ 错误：安装包未找到，请检查下载命令！&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 3. 验证版本（需重新打开 PowerShell）</span>
+</span></span><span class=line><span class=cl><span class=n>node</span> <span class=n>-v</span>   <span class=c># 应显示：v22.1.0</span>
+</span></span><span class=line><span class=cl><span class=n>npm</span> <span class=n>-v</span>    <span class=c># 应显示：10.5.0+</span>
+</span></span></code></pre></div><p><strong>⏱️ 预计耗时</strong>：3-5 分钟</p><h4 id=步骤-4安装-git>步骤 4：安装 Git</h4><div class=highlight><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=c># 1. 下载 Git for Windows 最新稳定版</span>
+</span></span><span class=line><span class=cl><span class=nb>iwr </span><span class=n>-Uri</span> <span class=s2>&#34;https://github.com/git-for-windows/git/releases/download/v2.46.0.windows.1/Git-2.46.0-64-bit.exe&#34;</span> <span class=p>`</span>
+</span></span><span class=line><span class=cl> <span class=n>-OutFile</span> <span class=s2>&#34;C:\temp\Git-Setup.exe&#34;</span> <span class=p>`</span>
+</span></span><span class=line><span class=cl> <span class=n>-UseBasicParsing</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 2. 静默安装（自动添加到 PATH）</span>
+</span></span><span class=line><span class=cl><span class=nb>Start-Process</span> <span class=n>-FilePath</span> <span class=s2>&#34;C:\temp\Git-Setup.exe&#34;</span> <span class=p>`</span>
+</span></span><span class=line><span class=cl> <span class=n>-ArgumentList</span> <span class=s2>&#34;/VERYSILENT /NORESTART /NOCANCEL /SP- /SUPPRESSMSGBOXES /ADDLOCAL=ALL&#34;</span> <span class=p>`</span>
+</span></span><span class=line><span class=cl> <span class=n>-Wait</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>Write-Host</span> <span class=s2>&#34;✅ Git 安装完成，请重启 PowerShell 后验证！&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 3. 验证（需重启 PowerShell）</span>
+</span></span><span class=line><span class=cl><span class=n>git</span> <span class=p>-</span><span class=n>-version</span>  <span class=c># 应显示：git version 2.46.0.windows.1</span>
+</span></span></code></pre></div><p><strong>⏱️ 预计耗时</strong>：2-3 分钟</p><h4 id=步骤-5安装-openclaw>步骤 5：安装 OpenClaw</h4><div class=highlight><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=c># 方法 A：下载脚本到本地（推荐，可排查错误）</span>
+</span></span><span class=line><span class=cl><span class=nv>$scriptPath</span> <span class=p>=</span> <span class=s2>&#34;C:\temp\openclaw-install.ps1&#34;</span>
+</span></span><span class=line><span class=cl><span class=nb>New-Item</span> <span class=n>-Path</span> <span class=s2>&#34;C:\temp&#34;</span> <span class=n>-ItemType</span> <span class=n>Directory</span> <span class=n>-Force</span> <span class=p>|</span> <span class=nb>Out-Null</span>
+</span></span><span class=line><span class=cl><span class=nb>iwr </span><span class=n>-Uri</span> <span class=s2>&#34;https://openclaw.ai/install.ps1&#34;</span> <span class=n>-OutFile</span> <span class=nv>$scriptPath</span> <span class=n>-UseBasicParsing</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 执行脚本（会显示具体错误，而非闪退）</span>
+</span></span><span class=line><span class=cl><span class=p>&amp;</span> <span class=nv>$scriptPath</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 方法 B：一键安装（简单快速）</span>
+</span></span><span class=line><span class=cl><span class=nb>iwr </span><span class=n>-useb</span> <span class=n>https</span><span class=err>:</span><span class=p>//</span><span class=n>openclaw</span><span class=p>.</span><span class=n>bot</span><span class=p>/</span><span class=n>install</span><span class=p>.</span><span class=py>ps1</span> <span class=p>|</span> <span class=nb>iex
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 验证安装</span>
+</span></span><span class=line><span class=cl><span class=n>openclaw</span> <span class=p>-</span><span class=n>-version</span>
+</span></span><span class=line><span class=cl><span class=nb>where </span><span class=n>openclaw</span>
+</span></span></code></pre></div><p><strong>⏱️ 预计耗时</strong>：2-3 分钟</p><hr><h2 id=-初始化配置onboarding-向导>⚙️ 初始化配置（Onboarding 向导）</h2><p>安装成功后会自动进入<strong>初始化向导</strong>，按以下步骤操作：</p><h3 id=完整流程>完整流程</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=c># 步骤 1：执行初始化向导</span>
+</span></span><span class=line><span class=cl><span class=n>openclaw</span> <span class=n>onboard</span> <span class=p>-</span><span class=n>-flow</span> <span class=n>quickstart</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 步骤 2：启动 OpenClaw</span>
+</span></span><span class=line><span class=cl><span class=n>openclaw</span> <span class=nb>start
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 步骤 3：测试运行</span>
+</span></span><span class=line><span class=cl><span class=c># 在聊天界面输入 &#34;Hello&#34;</span>
+</span></span><span class=line><span class=cl><span class=c># 应收到 AI 回复</span>
+</span></span></code></pre></div><h3 id=详细步骤说明>详细步骤说明</h3><div class=table-wrapper><table><thead><tr><th>步骤</th><th>提示内容</th><th>操作</th><th>说明</th></tr></thead><tbody><tr><td>1</td><td>安全提示确认</td><td>输入 <code>Yes</code></td><td>知晓权限风险</td></tr><tr><td>2</td><td>选择部署模式</td><td>选择 <code>QuickStart</code></td><td>后续可补充配置</td></tr><tr><td>3</td><td>选择模型服务商</td><td>选择 <code>OpenAI</code></td><td>或其他服务商</td></tr><tr><td>4</td><td>模型授权</td><td>复制链接到浏览器</td><td>登录账号完成授权</td></tr><tr><td>5</td><td>通信通道配置</td><td>选择 <code>Skip for now</code></td><td>后续可配置</td></tr><tr><td>6</td><td>技能配置</td><td>选择 <code>No</code></td><td>暂不配置</td></tr><tr><td>7</td><td>Hooks 配置</td><td>选择 <code>Session</code></td><td>暂不启用</td></tr><tr><td>8</td><td>启动方式</td><td>选择 <code>TUI</code></td><td>终端聊天界面</td></tr><tr><td>9</td><td>测试</td><td>输入 <code>Hello</code></td><td>确认安装成功</td></tr></tbody></table></div><h3 id=配置-api-keys>配置 API Keys</h3><p><strong>编辑配置文件</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=n>notepad</span> <span class=nv>$env:USERPROFILE</span><span class=p>\.</span><span class=n>openclaw</span><span class=p>\</span><span class=n>workspace</span><span class=p>\</span><span class=n>TOOLS</span><span class=p>.</span><span class=nb>md
+</span></span></span></code></pre></div><p><strong>添加以下内容</strong>（替换为你的 Key）：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl><span class=gu>## 🔑 API Keys
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>### 阿里云百炼（推荐，国内访问快）
+</span></span></span><span class=line><span class=cl><span class=k>-</span> **API Key**: <span class=sb>`sk-sp-xxxxxxxxxxxxxxxx`</span>
+</span></span><span class=line><span class=cl><span class=k>-</span> **模型**: qwen3.5-plus, qwen3-max-2026-01-23
+</span></span><span class=line><span class=cl><span class=k>-</span> **状态**: ✅ 已配置
+</span></span><span class=line><span class=cl><span class=k>-</span> **用途**: 代码生成/审查/优化
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>### OpenAI（备选）
+</span></span></span><span class=line><span class=cl><span class=k>-</span> **API Key**: <span class=sb>`sk-proj-xxxxxxxxxxxxxxxx`</span>
+</span></span><span class=line><span class=cl><span class=k>-</span> **模型**: gpt-4o, gpt-4-turbo
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>### 火山引擎（备选）
+</span></span></span><span class=line><span class=cl><span class=k>-</span> **API Key**: <span class=sb>`xxxxxxxxxxxxxxxx`</span>
+</span></span><span class=line><span class=cl><span class=k>-</span> **模型**: doubao-seed-2.0-code
+</span></span></code></pre></div><p><strong>Key 获取地址</strong>：</p><ul><li><strong>阿里云百炼</strong>：https://bailian.console.aliyun.com/</li><li><strong>OpenAI</strong>：https://platform.openai.com/api-keys</li><li><strong>火山引擎</strong>：https://www.volcengine.com/</li></ul><h3 id=配置代理中国大陆用户必须>配置代理（中国大陆用户必须）</h3><p><strong>编辑配置文件</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=n>notepad</span> <span class=nv>$env:USERPROFILE</span><span class=p>\.</span><span class=n>openclaw</span><span class=p>\</span><span class=n>config</span><span class=p>.</span><span class=py>json</span>
+</span></span></code></pre></div><p><strong>添加代理配置</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;proxy&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;http&#34;</span><span class=p>:</span> <span class=s2>&#34;http://127.0.0.1:7890&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;https&#34;</span><span class=p>:</span> <span class=s2>&#34;http://127.0.0.1:7890&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;gateway&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;port&#34;</span><span class=p>:</span> <span class=mi>18789</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;host&#34;</span><span class=p>:</span> <span class=s2>&#34;0.0.0.0&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><p><strong>验证代理</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=nv>$env:HTTP_PROXY</span><span class=p>=</span><span class=s2>&#34;http://127.0.0.1:7890&#34;</span>
+</span></span><span class=line><span class=cl><span class=nv>$env:HTTPS_PROXY</span><span class=p>=</span><span class=s2>&#34;http://127.0.0.1:7890&#34;</span>
+</span></span><span class=line><span class=cl><span class=nb>Test-NetConnection</span> <span class=n>api</span><span class=p>.</span><span class=py>binance</span><span class=p>.</span><span class=py>com</span> <span class=n>-Port</span> <span class=mf>443</span>
+</span></span><span class=line><span class=cl><span class=c># 应显示：TcpTestSucceeded : True</span>
+</span></span></code></pre></div><hr><h2 id=-高级配置生产环境必备>🚀 高级配置（生产环境必备）</h2><h3 id=1-配置虚拟内存4gb-内存推荐>1. 配置虚拟内存（4GB 内存推荐）</h3><p><strong>检查当前虚拟内存</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=c># 查看系统信息</span>
+</span></span><span class=line><span class=cl><span class=n>systeminfo</span> <span class=p>|</span> <span class=n>findstr</span> <span class=s2>&#34;虚拟内存&#34;</span>
+</span></span></code></pre></div><p><strong>手动配置（8GB 虚拟内存）</strong>：</p><ol><li>右键"此电脑" → 属性</li><li>高级系统设置 → 高级 → 性能设置</li><li>高级 → 虚拟内存 → 更改</li><li>取消"自动管理"</li><li>选择 C 盘 → 自定义大小</li><li>初始大小：8192 MB，最大值：8192 MB</li><li>点击"设置" → 确定 → 重启</li></ol><h3 id=2-配置-windows-防火墙>2. 配置 Windows 防火墙</h3><p><strong>允许 OpenClaw 通过网络</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=c># 添加入站规则</span>
+</span></span><span class=line><span class=cl><span class=nb>New-NetFirewallRule</span> <span class=n>-DisplayName</span> <span class=s2>&#34;OpenClaw Gateway&#34;</span> <span class=p>`</span>
+</span></span><span class=line><span class=cl> <span class=n>-Direction</span> <span class=n>Inbound</span> <span class=p>`</span>
+</span></span><span class=line><span class=cl> <span class=n>-LocalPort</span> <span class=mf>18789</span> <span class=p>`</span>
+</span></span><span class=line><span class=cl> <span class=n>-Protocol</span> <span class=n>TCP</span> <span class=p>`</span>
+</span></span><span class=line><span class=cl> <span class=n>-Action</span> <span class=n>Allow</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 查看规则</span>
+</span></span><span class=line><span class=cl><span class=nb>Get-NetFirewallRule</span> <span class=p>|</span> <span class=nb>Where-Object</span> <span class=n>DisplayName</span> <span class=o>-like</span> <span class=s2>&#34;*OpenClaw*&#34;</span>
+</span></span></code></pre></div><h3 id=3-配置-windows-defender-排除项>3. 配置 Windows Defender 排除项</h3><p><strong>避免误报</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=c># 添加排除目录</span>
+</span></span><span class=line><span class=cl><span class=nb>Add-MpPreference</span> <span class=n>-ExclusionPath</span> <span class=s2>&#34;C:\Users\</span><span class=nv>$env:USERNAME</span><span class=s2>\.openclaw&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 添加排除进程</span>
+</span></span><span class=line><span class=cl><span class=nb>Add-MpPreference</span> <span class=n>-ExclusionProcess</span> <span class=s2>&#34;node.exe&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 验证排除项</span>
+</span></span><span class=line><span class=cl><span class=nb>Get-MpPreference</span> <span class=p>|</span> <span class=nb>Select-Object</span> <span class=n>ExclusionPath</span><span class=p>,</span> <span class=n>ExclusionProcess</span>
+</span></span></code></pre></div><h3 id=4-开机自启任务计划程序>4. 开机自启（任务计划程序）</h3><p><strong>创建启动脚本</strong> <code>C:\openclaw-start.bat</code>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-batch data-lang=batch><span class=line><span class=cl><span class=p>@</span><span class=k>echo</span> off
+</span></span><span class=line><span class=cl>timeout /t 30 /nobreak
+</span></span><span class=line><span class=cl><span class=k>cd</span> /d <span class=nv>%USERPROFILE%</span>\.openclaw\workspace
+</span></span><span class=line><span class=cl>openclaw gateway start
+</span></span><span class=line><span class=cl><span class=k>exit</span>
+</span></span></code></pre></div><p><strong>添加到任务计划程序</strong>：</p><ol><li>开始菜单 → 搜索"任务计划程序"</li><li>右侧"创建基本任务"</li><li>名称：<code>OpenClaw Gateway</code></li><li>触发器：<strong>登录时</strong></li><li>操作：<strong>启动程序</strong></li><li>程序/脚本：<code>C:\openclaw-start.bat</code></li><li>完成 → 输入管理员密码</li></ol><p><strong>验证</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=c># 查看任务</span>
+</span></span><span class=line><span class=cl><span class=nb>Get-ScheduledTask</span> <span class=p>|</span> <span class=nb>Where-Object</span> <span class=n>TaskName</span> <span class=o>-like</span> <span class=s2>&#34;*OpenClaw*&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 手动运行测试</span>
+</span></span><span class=line><span class=cl><span class=nb>Start-ScheduledTask</span> <span class=n>-TaskName</span> <span class=s2>&#34;OpenClaw Gateway&#34;</span>
+</span></span></code></pre></div><hr><h2 id=-故障排查精准诊断>🔍 故障排查（精准诊断）</h2><h3 id=问题-1executionpolicy-报错>问题 1：ExecutionPolicy 报错</h3><p><strong>症状</strong>：<code>cannot be loaded because running scripts is disabled on this system</code></p><p><strong>解决方案</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=c># 1. 检查当前策略</span>
+</span></span><span class=line><span class=cl><span class=nb>Get-ExecutionPolicy</span> <span class=n>-Scope</span> <span class=n>CurrentUser</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 2. 临时设置（仅当前会话）</span>
+</span></span><span class=line><span class=cl><span class=nb>Set-ExecutionPolicy</span> <span class=n>RemoteSigned</span> <span class=n>-Scope</span> <span class=n>CurrentUser</span> <span class=n>-Force</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 3. 验证</span>
+</span></span><span class=line><span class=cl><span class=nb>Get-ExecutionPolicy</span> <span class=n>-Scope</span> <span class=n>CurrentUser</span>
+</span></span><span class=line><span class=cl><span class=c># 应显示：RemoteSigned</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 4. 重新运行安装脚本</span>
+</span></span><span class=line><span class=cl><span class=p>&amp;</span> <span class=nv>$scriptPath</span>
+</span></span></code></pre></div><h3 id=问题-2path-或命令找不到>问题 2：PATH 或命令找不到</h3><p><strong>症状</strong>：<code>openclaw : 无法将"openclaw"项识别为 cmdlet、函数、脚本文件</code></p><p><strong>解决方案</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=c># 1. 检查 openclaw 路径</span>
+</span></span><span class=line><span class=cl><span class=nb>where </span><span class=n>openclaw</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 2. 如果无输出，说明未添加到 PATH</span>
+</span></span><span class=line><span class=cl><span class=c># 手动添加环境变量</span>
+</span></span><span class=line><span class=cl><span class=nv>$userPath</span> <span class=p>=</span> <span class=p>[</span><span class=no>Environment</span><span class=p>]::</span><span class=n>GetEnvironmentVariable</span><span class=p>(</span><span class=s2>&#34;Path&#34;</span><span class=p>,</span> <span class=s2>&#34;User&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nv>$npmPath</span> <span class=p>=</span> <span class=s2>&#34;</span><span class=nv>$env:APPDATA</span><span class=s2>\npm&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=no>Environment</span><span class=p>]::</span><span class=n>SetEnvironmentVariable</span><span class=p>(</span><span class=s2>&#34;Path&#34;</span><span class=p>,</span> <span class=s2>&#34;</span><span class=nv>$userPath</span><span class=s2>;</span><span class=nv>$npmPath</span><span class=s2>&#34;</span><span class=p>,</span> <span class=s2>&#34;User&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 3. 重新打开 PowerShell（必须）</span>
+</span></span><span class=line><span class=cl><span class=c># 关闭所有 PowerShell 窗口，重新打开</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 4. 验证</span>
+</span></span><span class=line><span class=cl><span class=n>openclaw</span> <span class=p>-</span><span class=n>-version</span>
+</span></span></code></pre></div><h3 id=问题-3安装脚本闪退>问题 3：安装脚本闪退</h3><p><strong>症状</strong>：执行脚本后 PowerShell 直接关闭，看不到错误信息</p><p><strong>解决方案</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=c># 1. 下载脚本到本地（不要直接管道执行）</span>
+</span></span><span class=line><span class=cl><span class=nv>$scriptPath</span> <span class=p>=</span> <span class=s2>&#34;C:\temp\openclaw-install.ps1&#34;</span>
+</span></span><span class=line><span class=cl><span class=nb>New-Item</span> <span class=n>-Path</span> <span class=s2>&#34;C:\temp&#34;</span> <span class=n>-ItemType</span> <span class=n>Directory</span> <span class=n>-Force</span> <span class=p>|</span> <span class=nb>Out-Null</span>
+</span></span><span class=line><span class=cl><span class=nb>iwr </span><span class=n>-Uri</span> <span class=s2>&#34;https://openclaw.ai/install.ps1&#34;</span> <span class=n>-OutFile</span> <span class=nv>$scriptPath</span> <span class=n>-UseBasicParsing</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 2. 手动执行（会显示具体错误）</span>
+</span></span><span class=line><span class=cl><span class=p>&amp;</span> <span class=nv>$scriptPath</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 3. 如果还是失败，查看错误日志</span>
+</span></span><span class=line><span class=cl><span class=nb>Get-Content</span> <span class=n>C:</span><span class=p>\</span><span class=n>temp</span><span class=p>\</span><span class=nb>openclaw-install</span><span class=p>.</span><span class=py>log</span> <span class=n>-Tail</span> <span class=mf>50</span>
+</span></span></code></pre></div><h3 id=问题-4nodejs-版本不兼容>问题 4：Node.js 版本不兼容</h3><p><strong>症状</strong>：<code>Error: Unsupported Node.js version</code></p><p><strong>解决方案</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=c># 1. 查看当前版本</span>
+</span></span><span class=line><span class=cl><span class=n>node</span> <span class=n>-v</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 2. 卸载旧版本（控制面板 → 程序和功能）</span>
+</span></span><span class=line><span class=cl><span class=c># 或者使用 PowerShell</span>
+</span></span><span class=line><span class=cl><span class=n>winget</span> <span class=n>uninstall</span> <span class=s2>&#34;Node.js&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 3. 重新安装 Node.js 22</span>
+</span></span><span class=line><span class=cl><span class=nb>iwr </span><span class=n>-Uri</span> <span class=s2>&#34;https://nodejs.org/dist/v22.1.0/node-v22.1.0-x64.msi&#34;</span> <span class=p>`</span>
+</span></span><span class=line><span class=cl> <span class=n>-OutFile</span> <span class=s2>&#34;C:\temp\node-v22.1.0-x64.msi&#34;</span>
+</span></span><span class=line><span class=cl><span class=nb>Start-Process</span> <span class=n>-FilePath</span> <span class=s2>&#34;C:\temp\node-v22.1.0-x64.msi&#34;</span> <span class=p>`</span>
+</span></span><span class=line><span class=cl> <span class=n>-ArgumentList</span> <span class=s2>&#34;/qn /norestart&#34;</span> <span class=n>-Wait</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 4. 重新打开 PowerShell 验证</span>
+</span></span><span class=line><span class=cl><span class=n>node</span> <span class=n>-v</span>  <span class=c># 应显示：v22.1.0</span>
+</span></span></code></pre></div><h3 id=问题-5防火墙或-defender-拦截>问题 5：防火墙或 Defender 拦截</h3><p><strong>症状</strong>：网络连接超时，或被 Defender 隔离</p><p><strong>解决方案</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=c># 1. 检查防火墙规则</span>
+</span></span><span class=line><span class=cl><span class=nb>Get-NetFirewallRule</span> <span class=p>|</span> <span class=nb>Where-Object</span> <span class=n>DisplayName</span> <span class=o>-like</span> <span class=s2>&#34;*OpenClaw*&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 2. 添加入站规则（如果不存在）</span>
+</span></span><span class=line><span class=cl><span class=nb>New-NetFirewallRule</span> <span class=n>-DisplayName</span> <span class=s2>&#34;OpenClaw Gateway&#34;</span> <span class=p>`</span>
+</span></span><span class=line><span class=cl> <span class=n>-Direction</span> <span class=n>Inbound</span> <span class=p>`</span>
+</span></span><span class=line><span class=cl> <span class=n>-LocalPort</span> <span class=mf>18789</span> <span class=p>`</span>
+</span></span><span class=line><span class=cl> <span class=n>-Protocol</span> <span class=n>TCP</span> <span class=p>`</span>
+</span></span><span class=line><span class=cl> <span class=n>-Action</span> <span class=n>Allow</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 3. 检查 Defender 隔离区</span>
+</span></span><span class=line><span class=cl><span class=nb>Get-MpThreatDetection</span> <span class=p>|</span> <span class=nb>Select-Object</span> <span class=n>ThreatName</span><span class=p>,</span> <span class=n>DetectionTime</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 4. 恢复被隔离文件（如果有）</span>
+</span></span><span class=line><span class=cl><span class=c># Windows 安全中心 → 病毒和威胁防护 → 保护历史记录 → 还原</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 5. 添加排除项</span>
+</span></span><span class=line><span class=cl><span class=nb>Add-MpPreference</span> <span class=n>-ExclusionPath</span> <span class=s2>&#34;</span><span class=nv>$env:USERPROFILE</span><span class=s2>\.openclaw&#34;</span>
+</span></span></code></pre></div><h3 id=问题-6端口被占用>问题 6：端口被占用</h3><p><strong>症状</strong>：<code>Error: listen EADDRINUSE: address already in use :::18789</code></p><p><strong>解决方案</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=c># 1. 检查端口占用</span>
+</span></span><span class=line><span class=cl><span class=n>netstat</span> <span class=n>-ano</span> <span class=p>|</span> <span class=n>findstr</span> <span class=err>:</span><span class=mf>18789</span>
+</span></span><span class=line><span class=cl><span class=c># 输出示例：TCP  0.0.0.0:18789  0.0.0.0:0  LISTEN  1234</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 2. 杀死占用进程</span>
+</span></span><span class=line><span class=cl><span class=n>taskkill</span> <span class=p>/</span><span class=n>F</span> <span class=p>/</span><span class=n>PID</span> <span class=mf>1234</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 3. 或者修改 OpenClaw 端口</span>
+</span></span><span class=line><span class=cl><span class=n>notepad</span> <span class=nv>$env:USERPROFILE</span><span class=p>\.</span><span class=n>openclaw</span><span class=p>\</span><span class=n>config</span><span class=p>.</span><span class=py>json</span>
+</span></span><span class=line><span class=cl><span class=c># 修改：&#34;port&#34;: 18790</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 4. 重启服务</span>
+</span></span><span class=line><span class=cl><span class=n>openclaw</span> <span class=n>gateway</span> <span class=n>restart</span>
+</span></span></code></pre></div><h3 id=问题-7npm-安装失败>问题 7：npm 安装失败</h3><p><strong>症状</strong>：<code>npm ERR! code EACCES</code> 或 <code>npm ERR! permissions</code></p><p><strong>解决方案</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=c># 1. 清理 npm 缓存</span>
+</span></span><span class=line><span class=cl><span class=n>npm</span> <span class=n>cache</span> <span class=n>clean</span> <span class=p>-</span><span class=n>-force</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 2. 使用淘宝镜像</span>
+</span></span><span class=line><span class=cl><span class=n>npm</span> <span class=n>config</span> <span class=nb>set </span><span class=n>registry</span> <span class=n>https</span><span class=err>:</span><span class=p>//</span><span class=n>registry</span><span class=p>.</span><span class=py>npmmirror</span><span class=p>.</span><span class=py>com</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 3. 修改 npm 全局目录</span>
+</span></span><span class=line><span class=cl><span class=n>npm</span> <span class=n>config</span> <span class=nb>set </span><span class=n>prefix</span> <span class=s2>&#34;C:\npm-global&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 4. 添加环境变量</span>
+</span></span><span class=line><span class=cl><span class=nv>$userPath</span> <span class=p>=</span> <span class=p>[</span><span class=no>Environment</span><span class=p>]::</span><span class=n>GetEnvironmentVariable</span><span class=p>(</span><span class=s2>&#34;Path&#34;</span><span class=p>,</span> <span class=s2>&#34;User&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=no>Environment</span><span class=p>]::</span><span class=n>SetEnvironmentVariable</span><span class=p>(</span><span class=s2>&#34;Path&#34;</span><span class=p>,</span> <span class=s2>&#34;</span><span class=nv>$userPath</span><span class=s2>;C:\npm-global&#34;</span><span class=p>,</span> <span class=s2>&#34;User&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 5. 重新打开 PowerShell，重新安装</span>
+</span></span><span class=line><span class=cl><span class=n>npm</span> <span class=n>install</span> <span class=n>-g</span> <span class=n>openclaw</span>
+</span></span></code></pre></div><hr><h2 id=-验证安装完整测试清单>✅ 验证安装（完整测试清单）</h2><p><strong>逐项检查，全部通过才算成功</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=c># □ 1. 检查版本号</span>
+</span></span><span class=line><span class=cl><span class=n>openclaw</span> <span class=p>-</span><span class=n>-version</span>
+</span></span><span class=line><span class=cl><span class=c># 期望输出：openclaw/x.x.x win32-x64 node-v22.1.0</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># □ 2. 检查网关状态</span>
+</span></span><span class=line><span class=cl><span class=n>openclaw</span> <span class=n>gateway</span> <span class=n>status</span>
+</span></span><span class=line><span class=cl><span class=c># 期望输出：Gateway is running</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># □ 3. 检查端口监听</span>
+</span></span><span class=line><span class=cl><span class=n>netstat</span> <span class=n>-ano</span> <span class=p>|</span> <span class=n>findstr</span> <span class=err>:</span><span class=mf>18789</span>
+</span></span><span class=line><span class=cl><span class=c># 期望输出：TCP  0.0.0.0:18789  0.0.0.0:0  LISTEN</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># □ 4. 测试本地访问</span>
+</span></span><span class=line><span class=cl><span class=nb>Test-NetConnection</span> <span class=n>localhost</span> <span class=n>-Port</span> <span class=mf>18789</span>
+</span></span><span class=line><span class=cl><span class=c># 期望输出：TcpTestSucceeded : True</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># □ 5. 发送测试消息</span>
+</span></span><span class=line><span class=cl><span class=n>openclaw</span> <span class=n>message</span> <span class=n>send</span> <span class=s2>&#34;Hello OpenClaw!&#34;</span>
+</span></span><span class=line><span class=cl><span class=c># 期望：收到 AI 回复</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># □ 6. 检查日志无 ERROR</span>
+</span></span><span class=line><span class=cl><span class=nb>Get-Content</span> <span class=nv>$env:USERPROFILE</span><span class=p>\.</span><span class=n>openclaw</span><span class=p>\</span><span class=n>workspace</span><span class=p>\</span><span class=n>memory</span><span class=p>\*.</span><span class=n>log</span> <span class=n>-Tail</span> <span class=mf>50</span> <span class=p>|</span> <span class=nb>Select-String</span> <span class=s2>&#34;ERROR&#34;</span>
+</span></span><span class=line><span class=cl><span class=c># 期望：无输出</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># □ 7. 检查服务状态</span>
+</span></span><span class=line><span class=cl><span class=n>openclaw</span> <span class=n>gateway</span> <span class=n>status</span>
+</span></span><span class=line><span class=cl><span class=c># 期望输出：Active: active (running)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># □ 8. 测试开机自启</span>
+</span></span><span class=line><span class=cl><span class=c># 重启电脑后检查：</span>
+</span></span><span class=line><span class=cl><span class=n>openclaw</span> <span class=n>gateway</span> <span class=n>status</span>
+</span></span><span class=line><span class=cl><span class=c># 期望：服务自动启动</span>
+</span></span></code></pre></div><p><strong>成功标志</strong>：</p><ul><li>✅ 8 项检查全部通过</li><li>✅ 日志无 ERROR 级别错误</li><li>✅ 服务重启后自动恢复</li></ul><hr><h2 id=-性能优化生产环境>📊 性能优化（生产环境）</h2><h3 id=1-使用-ssd-存储>1. 使用 SSD 存储</h3><p><strong>检查工作区位置</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=c># 查看工作区路径</span>
+</span></span><span class=line><span class=cl><span class=n>openclaw</span> <span class=n>status</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 如果不在 SSD，迁移工作区</span>
+</span></span><span class=line><span class=cl><span class=nb>Move-Item</span> <span class=s2>&#34;</span><span class=nv>$env:USERPROFILE</span><span class=s2>\.openclaw&#34;</span> <span class=s2>&#34;D:\openclaw&#34;</span>
+</span></span><span class=line><span class=cl><span class=nb>New-Item</span> <span class=n>-ItemType</span> <span class=n>SymbolicLink</span> <span class=p>`</span>
+</span></span><span class=line><span class=cl> <span class=n>-Path</span> <span class=s2>&#34;</span><span class=nv>$env:USERPROFILE</span><span class=s2>\.openclaw&#34;</span> <span class=p>`</span>
+</span></span><span class=line><span class=cl> <span class=n>-Target</span> <span class=s2>&#34;D:\openclaw&#34;</span>
+</span></span></code></pre></div><h3 id=2-增加-nodejs-内存>2. 增加 Node.js 内存</h3><p><strong>编辑启动配置</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=c># 临时生效（当前会话）</span>
+</span></span><span class=line><span class=cl><span class=nv>$env:NODE_OPTIONS</span><span class=p>=</span><span class=s2>&#34;--max-old-space-size=4096&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 永久生效（添加到环境变量）</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=no>Environment</span><span class=p>]::</span><span class=n>SetEnvironmentVariable</span><span class=p>(</span><span class=s2>&#34;NODE_OPTIONS&#34;</span><span class=p>,</span> <span class=s2>&#34;--max-old-space-size=4096&#34;</span><span class=p>,</span> <span class=s2>&#34;User&#34;</span><span class=p>)</span>
+</span></span></code></pre></div><h3 id=3-定期清理缓存>3. 定期清理缓存</h3><p><strong>创建清理脚本</strong> <code>C:\cleanup-openclaw.ps1</code>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=nb>Write-Host</span> <span class=s2>&#34;🧹 开始清理 OpenClaw 缓存...&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 清理 npm 缓存</span>
+</span></span><span class=line><span class=cl><span class=n>npm</span> <span class=n>cache</span> <span class=n>clean</span> <span class=p>-</span><span class=n>-force</span>
+</span></span><span class=line><span class=cl><span class=nb>Write-Host</span> <span class=s2>&#34;✅ npm 缓存已清理&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 清理临时文件</span>
+</span></span><span class=line><span class=cl><span class=nb>Remove-Item</span> <span class=s2>&#34;C:\temp\openclaw-*&#34;</span> <span class=n>-Recurse</span> <span class=n>-Force</span> <span class=n>-ErrorAction</span> <span class=n>SilentlyContinue</span>
+</span></span><span class=line><span class=cl><span class=nb>Write-Host</span> <span class=s2>&#34;✅ 临时文件已清理&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 清理日志（保留最近 7 天）</span>
+</span></span><span class=line><span class=cl><span class=nv>$daysToKeep</span> <span class=p>=</span> <span class=mf>7</span>
+</span></span><span class=line><span class=cl><span class=nv>$cutoffDate</span> <span class=p>=</span> <span class=p>(</span><span class=nb>Get-Date</span><span class=p>).</span><span class=py>AddDays</span><span class=p>(-</span><span class=nv>$daysToKeep</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>Get-ChildItem</span> <span class=s2>&#34;</span><span class=nv>$env:USERPROFILE</span><span class=s2>\.openclaw\workspace\memory\*.log&#34;</span> <span class=p>|</span> <span class=nb>Where-Object</span> <span class=p>{</span> <span class=nv>$_</span><span class=p>.</span><span class=py>LastWriteTime</span> <span class=o>-lt</span> <span class=nv>$cutoffDate</span> <span class=p>}</span> <span class=p>|</span> <span class=nb>Remove-Item</span>
+</span></span><span class=line><span class=cl><span class=nb>Write-Host</span> <span class=s2>&#34;✅ 旧日志已清理&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>Write-Host</span> <span class=s2>&#34;🎉 清理完成！&#34;</span>
+</span></span></code></pre></div><p><strong>运行清理脚本</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=c># 以管理员身份运行</span>
+</span></span><span class=line><span class=cl><span class=n>powershell</span> <span class=n>-ExecutionPolicy</span> <span class=n>Bypass</span> <span class=o>-File</span> <span class=n>C:</span><span class=p>\</span><span class=nb>cleanup-openclaw</span><span class=p>.</span><span class=py>ps1</span>
+</span></span></code></pre></div><p><strong>添加到任务计划程序（每周日凌晨 3 点）</strong>：</p><ol><li>任务计划程序 → 创建基本任务</li><li>名称：<code>OpenClaw Cleanup</code></li><li>触发器：<strong>每周</strong>，周日，凌晨 3:00</li><li>操作：<strong>启动程序</strong></li><li>程序：<code>powershell.exe</code></li><li>参数：<code>-ExecutionPolicy Bypass -File C:\cleanup-openclaw.ps1</code></li></ol><hr><h2 id=-更多资源>📚 更多资源</h2><h3 id=官方文档>官方文档</h3><ul><li><a class=link href=https://open-claw.online/zh/docs/getting-started target=_blank rel=noopener>OpenClaw 官方指南</a></li><li><a class=link href=https://docs.openclaw.ai/zh-CN/install target=_blank rel=noopener>中文安装文档</a></li><li><a class=link href=https://github.com/openclaw/openclaw target=_blank rel=noopener>GitHub 仓库</a></li></ul><h3 id=社区教程>社区教程</h3><ul><li><a class=link href=https://blog.csdn.net/2503_93609022/article/details/158353716 target=_blank rel=noopener>原生+Docker 双方案</a></li><li><a class=link href=https://open-claw.online/zh/docs/windows-install target=_blank rel=noopener>Windows 保姆级教程</a></li></ul><h3 id=其他平台部署>其他平台部署</h3><ul><li><a class=link href=/posts/openclaw-deploy-linux>Linux 部署教程</a></li><li><a class=link href=/posts/openclaw-deploy-android>Android 部署教程</a></li><li><a class=link href=/posts/openclaw-deploy-macos>macOS 部署教程</a></li></ul><hr><h2 id=-更新日志>📝 更新日志</h2><div class=table-wrapper><table><thead><tr><th>版本</th><th>日期</th><th>更新内容</th></tr></thead><tbody><tr><td>v3.0</td><td>2026-03-17</td><td>整合 PowerShell 一键脚本 + Node.js 22 + Git 环境 + 初始化向导详解</td></tr><tr><td>v2.0</td><td>2026-03-10</td><td>增加安全警示、精准参数、故障排查流程</td></tr><tr><td>v1.5</td><td>2026-03-05</td><td>增加 Docker 方案、性能优化章节</td></tr><tr><td>v1.0</td><td>2026-03-01</td><td>初始版本发布</td></tr></tbody></table></div><hr><p><em>最后更新：2026-03-17</em><br><em>作者：OpenClaw 社区</em><br><em>许可：MIT</em><br><em>审核：嵌入式硬件专家（15 年 + 经验）</em></p><p><strong>觉得有用？欢迎分享给更多朋友！</strong> 🚀</p></section><footer class=article-footer><section class=article-tags><a href=/tags/openclaw/>OpenClaw</a>
+<a href=/tags/windows/>Windows</a>
+<a href=/tags/powershell/>PowerShell</a>
+<a href=/tags/%E9%83%A8%E7%BD%B2/>部署</a>
+<a href=/tags/ai-%E5%8A%A9%E6%89%8B/>AI 助手</a>
+<a href=/tags/%E4%BF%9D%E5%A7%86%E7%BA%A7%E6%95%99%E7%A8%8B/>保姆级教程</a></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>Related content</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/posts/openclaw-deploy-linux/><div class=article-details><h2 class=article-title>OpenClaw 部署教程 - Linux 篇（2026 终极版）</h2></div></a></article><article><a href=/posts/openclaw-deploy-macos/><div class=article-details><h2 class=article-title>OpenClaw 部署教程 - macOS 篇（2026 最新版）</h2></div></a></article><article><a href=/posts/openclaw-deploy-android/><div class=article-details><h2 class=article-title>OpenClaw 部署教程 - Android 篇</h2></div></a></article><article><a href=/posts/qinglong-auth-bypass-rce/><div class=article-details><h2 class=article-title>青龙面板鉴权绕过漏洞复现 - 从路径大小写到 RCE</h2></div></a></article></div></div></aside><div class=disqus-container></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{typeof DISQUS=="object"&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
+2026 言零的博客</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=4.0.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><script type=module>
     import gallery from '\/ts\/gallery.js';
 
     const articleContent = document.querySelector('.article-content');
@@ -1004,14 +329,4 @@
         });
         lightbox.init();
     }
-</script>
-    
-
-            </main>
-        </div>
-        
-<script type="text/javascript" src="/ts/main.acaf849f2b273f6a8368a58b001f336738d0c948d92e79b116467d0c7515f932.js" defer></script>
-
-
-    </body>
-</html>
+</script></main></div><script type=text/javascript src=/ts/main.acaf849f2b273f6a8368a58b001f336738d0c948d92e79b116467d0c7515f932.js defer></script></body></html>

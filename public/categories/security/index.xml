@@ -1,33 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Security on 言零的博客</title><link>https://blog.caowo.de/categories/security/</link><description>Recent content in Security on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 19 Mar 2026 09:00:00 +0000</lastBuildDate><atom:link href="https://blog.caowo.de/categories/security/index.xml" rel="self" type="application/rss+xml"/><item><title>2026软件系统安全赛 writeup</title><link>https://blog.caowo.de/posts/auto-security-20260319-894/</link><pubDate>Thu, 19 Mar 2026 09:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-security-20260319-894/</guid><description>&lt;h2 id="摘要"&gt;摘要
-&lt;/h2&gt;&lt;p&gt;为积极响应国家关于加强软件工程学科建设与系统安全人才培养的战略部署，特举办软件系统安全赛。本赛事面向大学生，聚焦大型工业软件、关键基础软件等核心领域软件漏洞的挖掘、攻击与修复，通过模拟真实场景的攻防对抗，全面提升大学生在软件系统安全领域的实战能力。
-通过此项科技创新活动，有效提高学生的软件系统安全攻防水平、创新意识与团队协作精神，加强高校间的学术交流，推动软件工程与网络安全人才培养体系的深化改革和&lt;/p&gt;
-&lt;h2 id="来源"&gt;来源
-&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a class="link" href="https://xz.aliyun.com/news/91744" target="_blank" rel="noopener"
- &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;发布时间：2026-03-15 01:24:36&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="市场背景"&gt;市场背景
-&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;BTC 价格：$70,065.01&lt;/li&gt;
-&lt;li&gt;24h 涨跌：-5.40%&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;em&gt;自动生成于 2026-03-19T09:00:54.960743&lt;/em&gt;&lt;/p&gt;</description></item><item><title>提示词注入视角下的 AI Webshell 检测绕过技术研究</title><link>https://blog.caowo.de/posts/auto-security-20260319-378/</link><pubDate>Thu, 19 Mar 2026 09:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-security-20260319-378/</guid><description>&lt;h2 id="摘要"&gt;摘要
-&lt;/h2&gt;&lt;p&gt;引言随着大型语言模型（LLM）和深度学习技术在安全领域的广泛应用，传统的基于特征码、抽象语法树（AST）或沙箱行为分析的 Webshell 检测手段正逐渐向基于 AI 的语义分析演进。AI 模型能够理解代码的逻辑意图，从而识别出经过复杂混淆的恶意脚本。然而，AI 模型本身存在一个本质性的弱点：它们在处理代码时，往往将代码逻辑与注释、元数据等“非执行内容”置于同一语义空间进行推理。这就为提示词注入（&lt;/p&gt;
-&lt;h2 id="来源"&gt;来源
-&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a class="link" href="https://xz.aliyun.com/news/91756" target="_blank" rel="noopener"
- &gt;阅读原文&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;发布时间：2026-03-16 03:33:00&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="市场背景"&gt;市场背景
-&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;BTC 价格：$70,065.01&lt;/li&gt;
-&lt;li&gt;24h 涨跌：-5.40%&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;em&gt;自动生成于 2026-03-19T09:00:54.959290&lt;/em&gt;&lt;/p&gt;</description></item><item><title>2026软件系统安全赛 writeup</title><link>https://blog.caowo.de/posts/auto-security-20260319-632/</link><pubDate>Thu, 19 Mar 2026 06:01:00 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-security-20260319-632/</guid><description>&lt;h2 id="摘要"&gt;摘要
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Security on 言零的博客</title><link>https://blog.caowo.de/categories/security/</link><description>Recent content in Security on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 19 Mar 2026 06:01:00 +0000</lastBuildDate><atom:link href="https://blog.caowo.de/categories/security/index.xml" rel="self" type="application/rss+xml"/><item><title>2026软件系统安全赛 writeup</title><link>https://blog.caowo.de/posts/auto-security-20260319-632/</link><pubDate>Thu, 19 Mar 2026 06:01:00 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-security-20260319-632/</guid><description>&lt;h2 id="摘要"&gt;摘要
 &lt;/h2&gt;&lt;p&gt;为积极响应国家关于加强软件工程学科建设与系统安全人才培养的战略部署，特举办软件系统安全赛。本赛事面向大学生，聚焦大型工业软件、关键基础软件等核心领域软件漏洞的挖掘、攻击与修复，通过模拟真实场景的攻防对抗，全面提升大学生在软件系统安全领域的实战能力。
 通过此项科技创新活动，有效提高学生的软件系统安全攻防水平、创新意识与团队协作精神，加强高校间的学术交流，推动软件工程与网络安全人才培养体系的深化改革和&lt;/p&gt;
 &lt;h2 id="来源"&gt;来源

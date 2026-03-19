@@ -1,32 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>AI on 言零的博客</title><link>https://blog.caowo.de/tags/ai/</link><description>Recent content in AI on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 19 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.caowo.de/tags/ai/index.xml" rel="self" type="application/rss+xml"/><item><title>AI Agent 技术前沿</title><link>https://blog.caowo.de/posts/ai-agent-2026-03-19/</link><pubDate>Thu, 19 Mar 2026 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/ai-agent-2026-03-19/</guid><description>&lt;h1 id="ai-agent-技术前沿"&gt;AI Agent 技术前沿
-&lt;/h1&gt;&lt;h2 id="-今日焦点"&gt;🤖 今日焦点
-&lt;/h2&gt;&lt;p&gt;AI Agent 领域最新技术动态和突破。&lt;/p&gt;
-&lt;h2 id="-技术应用"&gt;💻 技术应用
-&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;自动化任务&lt;/strong&gt; - Agent 自动执行日常任务&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;内容创作&lt;/strong&gt; - AI 辅助写作和编辑&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;数据分析&lt;/strong&gt; - 智能数据处理和洞察&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id="-案例分享"&gt;📈 案例分享
-&lt;/h2&gt;&lt;p&gt;实际应用场景和成功案例分析。&lt;/p&gt;
-&lt;h2 id="-未来展望"&gt;🔮 未来展望
-&lt;/h2&gt;&lt;p&gt;AI Agent 发展趋势和预测。&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;em&gt;AI Agent 自动创作&lt;/em&gt;&lt;/p&gt;</description></item><item><title>AI Agent 技术前沿</title><link>https://blog.caowo.de/posts/ai-agent-2026-03-18/</link><pubDate>Wed, 18 Mar 2026 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/ai-agent-2026-03-18/</guid><description>&lt;h1 id="ai-agent-技术前沿"&gt;AI Agent 技术前沿
-&lt;/h1&gt;&lt;h2 id="-今日焦点"&gt;🤖 今日焦点
-&lt;/h2&gt;&lt;p&gt;AI Agent 领域最新技术动态和突破。&lt;/p&gt;
-&lt;h2 id="-技术应用"&gt;💻 技术应用
-&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;自动化任务&lt;/strong&gt; - Agent 自动执行日常任务&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;内容创作&lt;/strong&gt; - AI 辅助写作和编辑&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;数据分析&lt;/strong&gt; - 智能数据处理和洞察&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id="-案例分享"&gt;📈 案例分享
-&lt;/h2&gt;&lt;p&gt;实际应用场景和成功案例分析。&lt;/p&gt;
-&lt;h2 id="-未来展望"&gt;🔮 未来展望
-&lt;/h2&gt;&lt;p&gt;AI Agent 发展趋势和预测。&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;em&gt;AI Agent 自动创作&lt;/em&gt;&lt;/p&gt;</description></item><item><title>ClawGuard - 基于 AI 的加密货币实时监控系统</title><link>https://blog.caowo.de/posts/clawguard-project-introduction/</link><pubDate>Tue, 17 Mar 2026 14:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/clawguard-project-introduction/</guid><description>&lt;h1 id="clawguard---基于-ai-的加密货币实时监控系统"&gt;ClawGuard - 基于 AI 的加密货币实时监控系统
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>AI on 言零的博客</title><link>https://blog.caowo.de/tags/ai/</link><description>Recent content in AI on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 17 Mar 2026 14:00:00 +0800</lastBuildDate><atom:link href="https://blog.caowo.de/tags/ai/index.xml" rel="self" type="application/rss+xml"/><item><title>ClawGuard - 基于 AI 的加密货币实时监控系统</title><link>https://blog.caowo.de/posts/clawguard-project-introduction/</link><pubDate>Tue, 17 Mar 2026 14:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/clawguard-project-introduction/</guid><description>&lt;h1 id="clawguard---基于-ai-的加密货币实时监控系统"&gt;ClawGuard - 基于 AI 的加密货币实时监控系统
 &lt;/h1&gt;&lt;h2 id="-项目概述"&gt;🎯 项目概述
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;ClawGuard&lt;/strong&gt; 是一个专为加密货币交易者设计的智能监控系统，结合了实时数据采集、技术分析算法和 AI 驱动的价格预测，帮助用户在瞬息万变的加密市场中把握先机。&lt;/p&gt;
 &lt;h3 id="核心特性"&gt;核心特性

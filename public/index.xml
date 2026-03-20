@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>言零的博客</title><link>https://blog.caowo.de/</link><description>Recent content on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 20 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.caowo.de/index.xml" rel="self" type="application/rss+xml"/><item><title>Hello World | 开启 Web 渗透测试之旅</title><link>https://blog.caowo.de/posts/hello-world/</link><pubDate>Sun, 01 Mar 2026 08:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/hello-world/</guid><description>&lt;h1 id="hello-world--开启-web-渗透测试之旅"&gt;Hello World | 开启 Web 渗透测试之旅
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>言零的博客</title><link>https://blog.caowo.de/</link><description>Recent content on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 19 Mar 2026 23:00:59 +0000</lastBuildDate><atom:link href="https://blog.caowo.de/index.xml" rel="self" type="application/rss+xml"/><item><title>Hello World | 开启 Web 渗透测试之旅</title><link>https://blog.caowo.de/posts/hello-world/</link><pubDate>Sun, 01 Mar 2026 08:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/hello-world/</guid><description>&lt;h1 id="hello-world--开启-web-渗透测试之旅"&gt;Hello World | 开启 Web 渗透测试之旅
 &lt;/h1&gt;&lt;p&gt;欢迎来到我的网络安全技术博客！&lt;/p&gt;
 &lt;h2 id="-博客启用"&gt;🎉 博客启用
 &lt;/h2&gt;&lt;p&gt;本站正式启用，专注于 Web 渗透测试、漏洞复现与安全防御技术分享。&lt;/p&gt;
@@ -49,60 +49,7 @@
 &lt;li&gt;❌ 商业牟利&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;em&gt;2026-03-03 | 博客正式启用&lt;/em&gt;&lt;/p&gt;</description></item><item><title>ClawGuard-BNB 每日安全报告</title><link>https://blog.caowo.de/posts/binance/binance-daily-2026-03-20/</link><pubDate>Fri, 20 Mar 2026 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/binance/binance-daily-2026-03-20/</guid><description>&lt;h1 id="clawguard-bnb-每日安全报告"&gt;ClawGuard-BNB 每日安全报告
-&lt;/h1&gt;
- &lt;blockquote&gt;
- &lt;p&gt;⚠️ &lt;strong&gt;风险提示&lt;/strong&gt;：本文仅为个人经验分享，不构成任何投资建议。&lt;/p&gt;
-
- &lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;h2 id="-api-安全审计"&gt;🛡️ API 安全审计
-&lt;/h2&gt;&lt;h3 id="今日检查结果"&gt;今日检查结果
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;✅ 提现权限：已禁用&lt;/li&gt;
-&lt;li&gt;✅ IP 白名单：已配置&lt;/li&gt;
-&lt;li&gt;✅ 密钥加密：AES-256&lt;/li&gt;
-&lt;li&gt;✅ 访问日志：正常&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="12-项安全检查"&gt;12 项安全检查
-&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;提现权限检查 ✅&lt;/li&gt;
-&lt;li&gt;IP 白名单配置 ✅&lt;/li&gt;
-&lt;li&gt;API 密钥泄露检测 ✅&lt;/li&gt;
-&lt;li&gt;权限最小化原则 ✅&lt;/li&gt;
-&lt;li&gt;密钥轮换提醒 ✅&lt;/li&gt;
-&lt;li&gt;异常登录检测 ✅&lt;/li&gt;
-&lt;li&gt;API 调用频率监控 ✅&lt;/li&gt;
-&lt;li&gt;密钥存储加密 ✅&lt;/li&gt;
-&lt;li&gt;访问日志审计 ✅&lt;/li&gt;
-&lt;li&gt;风险操作告警 ✅&lt;/li&gt;
-&lt;li&gt;设备指纹识别 ✅&lt;/li&gt;
-&lt;li&gt;二次验证检查 ✅&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h2 id="-交易分析"&gt;📊 交易分析
-&lt;/h2&gt;&lt;h3 id="今日交易统计"&gt;今日交易统计
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;交易次数：待统计&lt;/li&gt;
-&lt;li&gt;胜率：待统计&lt;/li&gt;
-&lt;li&gt;盈亏：待统计&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="技术指标"&gt;技术指标
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;RSI：待分析&lt;/li&gt;
-&lt;li&gt;MACD：待分析&lt;/li&gt;
-&lt;li&gt;布林带：待分析&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="-风险提示"&gt;⚠️ 风险提示
-&lt;/h2&gt;
- &lt;blockquote&gt;
- &lt;p&gt;投资有风险，入市需谨慎。&lt;/p&gt;
-
- &lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;em&gt;ClawGuard-BNB 自动创作&lt;/em&gt;
-&lt;em&gt;项目：https://github.com/wizawn/lobsterguard&lt;/em&gt;&lt;/p&gt;</description></item><item><title>2026软件系统安全赛 writeup</title><link>https://blog.caowo.de/posts/auto-security-20260319-610/</link><pubDate>Thu, 19 Mar 2026 23:00:59 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-security-20260319-610/</guid><description>&lt;h2 id="原文摘要"&gt;原文摘要
+&lt;p&gt;&lt;em&gt;2026-03-03 | 博客正式启用&lt;/em&gt;&lt;/p&gt;</description></item><item><title>2026软件系统安全赛 writeup</title><link>https://blog.caowo.de/posts/auto-security-20260319-610/</link><pubDate>Thu, 19 Mar 2026 23:00:59 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-security-20260319-610/</guid><description>&lt;h2 id="原文摘要"&gt;原文摘要
 &lt;/h2&gt;&lt;p&gt;为积极响应国家关于加强软件工程学科建设与系统安全人才培养的战略部署，特举办软件系统安全赛。本赛事面向大学生，聚焦大型工业软件、关键基础软件等核心领域软件漏洞的挖掘、攻击与修复，通过模拟真实场景的攻防对抗，全面提升大学生在软件系统安全领域的实战能力。
 通过此项科技创新活动，有效提高学生的软件系统安全攻防水平、创新意识与团队协作精神，加强高校间的学术交流，推动软件工程与网络安全人才培养体系的深化改革和&lt;/p&gt;
 &lt;h2 id="ai-agent-分析"&gt;AI Agent 分析
@@ -1602,113 +1549,7 @@
 &lt;/ul&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;em&gt;AI Agent 加工：内容工厂（润色 + 结构化）&lt;/em&gt;
-&lt;em&gt;生成时间：2026-03-19T15:00:51.916125&lt;/em&gt;&lt;/p&gt;</description></item><item><title>ClawGuard-BNB 每日安全报告</title><link>https://blog.caowo.de/posts/binance/binance-daily-2026-03-19/</link><pubDate>Thu, 19 Mar 2026 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/binance/binance-daily-2026-03-19/</guid><description>&lt;h1 id="clawguard-bnb-每日安全报告"&gt;ClawGuard-BNB 每日安全报告
-&lt;/h1&gt;
- &lt;blockquote&gt;
- &lt;p&gt;⚠️ &lt;strong&gt;风险提示&lt;/strong&gt;：本文仅为个人经验分享，不构成任何投资建议。&lt;/p&gt;
-
- &lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;h2 id="-api-安全审计"&gt;🛡️ API 安全审计
-&lt;/h2&gt;&lt;h3 id="今日检查结果"&gt;今日检查结果
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;✅ 提现权限：已禁用&lt;/li&gt;
-&lt;li&gt;✅ IP 白名单：已配置&lt;/li&gt;
-&lt;li&gt;✅ 密钥加密：AES-256&lt;/li&gt;
-&lt;li&gt;✅ 访问日志：正常&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="12-项安全检查"&gt;12 项安全检查
-&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;提现权限检查 ✅&lt;/li&gt;
-&lt;li&gt;IP 白名单配置 ✅&lt;/li&gt;
-&lt;li&gt;API 密钥泄露检测 ✅&lt;/li&gt;
-&lt;li&gt;权限最小化原则 ✅&lt;/li&gt;
-&lt;li&gt;密钥轮换提醒 ✅&lt;/li&gt;
-&lt;li&gt;异常登录检测 ✅&lt;/li&gt;
-&lt;li&gt;API 调用频率监控 ✅&lt;/li&gt;
-&lt;li&gt;密钥存储加密 ✅&lt;/li&gt;
-&lt;li&gt;访问日志审计 ✅&lt;/li&gt;
-&lt;li&gt;风险操作告警 ✅&lt;/li&gt;
-&lt;li&gt;设备指纹识别 ✅&lt;/li&gt;
-&lt;li&gt;二次验证检查 ✅&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h2 id="-交易分析"&gt;📊 交易分析
-&lt;/h2&gt;&lt;h3 id="今日交易统计"&gt;今日交易统计
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;交易次数：待统计&lt;/li&gt;
-&lt;li&gt;胜率：待统计&lt;/li&gt;
-&lt;li&gt;盈亏：待统计&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="技术指标"&gt;技术指标
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;RSI：待分析&lt;/li&gt;
-&lt;li&gt;MACD：待分析&lt;/li&gt;
-&lt;li&gt;布林带：待分析&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="-风险提示"&gt;⚠️ 风险提示
-&lt;/h2&gt;
- &lt;blockquote&gt;
- &lt;p&gt;投资有风险，入市需谨慎。&lt;/p&gt;
-
- &lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;em&gt;ClawGuard-BNB 自动创作&lt;/em&gt;
-&lt;em&gt;项目：https://github.com/wizawn/lobsterguard&lt;/em&gt;&lt;/p&gt;</description></item><item><title>ClawGuard-BNB 每日安全报告</title><link>https://blog.caowo.de/posts/binance/binance-daily-2026-03-18/</link><pubDate>Wed, 18 Mar 2026 00:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/binance/binance-daily-2026-03-18/</guid><description>&lt;h1 id="clawguard-bnb-每日安全报告"&gt;ClawGuard-BNB 每日安全报告
-&lt;/h1&gt;
- &lt;blockquote&gt;
- &lt;p&gt;⚠️ &lt;strong&gt;风险提示&lt;/strong&gt;：本文仅为个人经验分享，不构成任何投资建议。&lt;/p&gt;
-
- &lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;h2 id="-api-安全审计"&gt;🛡️ API 安全审计
-&lt;/h2&gt;&lt;h3 id="今日检查结果"&gt;今日检查结果
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;✅ 提现权限：已禁用&lt;/li&gt;
-&lt;li&gt;✅ IP 白名单：已配置&lt;/li&gt;
-&lt;li&gt;✅ 密钥加密：AES-256&lt;/li&gt;
-&lt;li&gt;✅ 访问日志：正常&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="12-项安全检查"&gt;12 项安全检查
-&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;提现权限检查 ✅&lt;/li&gt;
-&lt;li&gt;IP 白名单配置 ✅&lt;/li&gt;
-&lt;li&gt;API 密钥泄露检测 ✅&lt;/li&gt;
-&lt;li&gt;权限最小化原则 ✅&lt;/li&gt;
-&lt;li&gt;密钥轮换提醒 ✅&lt;/li&gt;
-&lt;li&gt;异常登录检测 ✅&lt;/li&gt;
-&lt;li&gt;API 调用频率监控 ✅&lt;/li&gt;
-&lt;li&gt;密钥存储加密 ✅&lt;/li&gt;
-&lt;li&gt;访问日志审计 ✅&lt;/li&gt;
-&lt;li&gt;风险操作告警 ✅&lt;/li&gt;
-&lt;li&gt;设备指纹识别 ✅&lt;/li&gt;
-&lt;li&gt;二次验证检查 ✅&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h2 id="-交易分析"&gt;📊 交易分析
-&lt;/h2&gt;&lt;h3 id="今日交易统计"&gt;今日交易统计
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;交易次数：待统计&lt;/li&gt;
-&lt;li&gt;胜率：待统计&lt;/li&gt;
-&lt;li&gt;盈亏：待统计&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="技术指标"&gt;技术指标
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;RSI：待分析&lt;/li&gt;
-&lt;li&gt;MACD：待分析&lt;/li&gt;
-&lt;li&gt;布林带：待分析&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="-风险提示"&gt;⚠️ 风险提示
-&lt;/h2&gt;
- &lt;blockquote&gt;
- &lt;p&gt;投资有风险，入市需谨慎。&lt;/p&gt;
-
- &lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;em&gt;ClawGuard-BNB 自动创作&lt;/em&gt;
-&lt;em&gt;项目：https://github.com/wizawn/lobsterguard&lt;/em&gt;&lt;/p&gt;</description></item><item><title>OpenClaw 部署教程 - Windows 篇（2026 终极版）</title><link>https://blog.caowo.de/posts/openclaw-deploy-windows/</link><pubDate>Tue, 17 Mar 2026 15:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/openclaw-deploy-windows/</guid><description>&lt;h1 id="openclaw-部署教程---windows-篇2026-终极版"&gt;OpenClaw 部署教程 - Windows 篇（2026 终极版）
+&lt;em&gt;生成时间：2026-03-19T15:00:51.916125&lt;/em&gt;&lt;/p&gt;</description></item><item><title>OpenClaw 部署教程 - Windows 篇（2026 终极版）</title><link>https://blog.caowo.de/posts/openclaw-deploy-windows/</link><pubDate>Tue, 17 Mar 2026 15:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/openclaw-deploy-windows/</guid><description>&lt;h1 id="openclaw-部署教程---windows-篇2026-终极版"&gt;OpenClaw 部署教程 - Windows 篇（2026 终极版）
 &lt;/h1&gt;
  &lt;blockquote&gt;
  &lt;p&gt;📅 &lt;strong&gt;更新时间&lt;/strong&gt;：2026-03-17&lt;br&gt;

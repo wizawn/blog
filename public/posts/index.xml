@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 言零的博客</title><link>https://blog.caowo.de/posts/</link><description>Recent content in Posts on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 23 Mar 2026 16:10:50 +0000</lastBuildDate><atom:link href="https://blog.caowo.de/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Hello World | 开启 Web 渗透测试之旅</title><link>https://blog.caowo.de/posts/hello-world/</link><pubDate>Sun, 01 Mar 2026 08:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/hello-world/</guid><description>&lt;h1 id="hello-world--开启-web-渗透测试之旅"&gt;Hello World | 开启 Web 渗透测试之旅
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 言零的博客</title><link>https://blog.caowo.de/posts/</link><description>Recent content in Posts on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 23 Mar 2026 18:01:11 +0000</lastBuildDate><atom:link href="https://blog.caowo.de/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Hello World | 开启 Web 渗透测试之旅</title><link>https://blog.caowo.de/posts/hello-world/</link><pubDate>Sun, 01 Mar 2026 08:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/hello-world/</guid><description>&lt;h1 id="hello-world--开启-web-渗透测试之旅"&gt;Hello World | 开启 Web 渗透测试之旅
 &lt;/h1&gt;&lt;p&gt;欢迎来到我的网络安全技术博客！&lt;/p&gt;
 &lt;h2 id="-博客启用"&gt;🎉 博客启用
 &lt;/h2&gt;&lt;p&gt;本站正式启用，专注于 Web 渗透测试、漏洞复现与安全防御技术分享。&lt;/p&gt;
@@ -49,7 +49,321 @@
 &lt;li&gt;❌ 商业牟利&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;em&gt;2026-03-03 | 博客正式启用&lt;/em&gt;&lt;/p&gt;</description></item><item><title>科技爱好者周刊（第 388 期）：测试是新的护城河</title><link>https://blog.caowo.de/posts/auto-tech-20260323-281/</link><pubDate>Mon, 23 Mar 2026 16:10:50 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-tech-20260323-281/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;p&gt;&lt;em&gt;2026-03-03 | 博客正式启用&lt;/em&gt;&lt;/p&gt;</description></item><item><title>科技爱好者周刊（第 388 期）：测试是新的护城河</title><link>https://blog.caowo.de/posts/auto-tech-20260323-985/</link><pubDate>Mon, 23 Mar 2026 18:01:11 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-tech-20260323-985/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;这里记录每周值得分享的科技内容，周五发布。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; 本杂志开源，欢迎投稿。另有《谁在招人》服务，发布程序员招聘信息。合作请邮件联系（yifeng.ruan@gmail.com）。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;封面图&lt;/p&gt;
+&lt;p&gt;重庆涪陵某景区架设了世界首座&amp;quot;巨石索桥&amp;quot;，桥面就是一块块巨石，一不小心就会踏空。（via）&lt;/p&gt;
+&lt;p&gt;测试是新的护城河&lt;/p&gt;
+&lt;p&gt;Next.js 是目前排名第一的 JS 框架。平时遇到的 JS 全栈应用，我估计，一半用它开发。&lt;/p&gt;
+&lt;p&gt;两周前，这个框架被一则新闻颠覆了。&lt;/p&gt;
+&lt;p&gt;一个 Cloudflare 工程师宣布，他只用一个星期就用 AI 重新实现了 Next.js，起名为 vinext。&lt;/p&gt;
+&lt;p&gt;事实上，一天就生成产品原型了，后面几天只是在完善。&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;真正动手是2月13日，当天晚上，基本功能已经实现。第二天下午，11个路由器做好了10个。第三天，已经部署到我们的服务器，实现了完整的客户端水合。&lt;/p&gt;
+&lt;p&gt;接下来的几天，主要进行安全加固：修复极端情况，扩展测试套件，提升 API 覆盖率至 94%。&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;这个新的实现，比原版 Next.js 性能更好。&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;早期基准测试中，构建速度提升了4倍，客户端软&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，这里记录每周值得分享的科技内容，周五发布。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; 本杂志开源，欢迎投稿。另有《谁在招人》服务，发布程序员招聘信息。合作请邮件联系（yifeng.ruan@gmail.com）。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;封面图&lt;/p&gt;
+&lt;p&gt;重庆涪陵某景区架设了世界首座&amp;quot;巨石索桥&amp;rdquo;，桥面就是一块块巨石，一不小心就会踏空。（via）&lt;/p&gt;
+&lt;p&gt;测试是新的护城河&lt;/p&gt;
+&lt;p&gt;Next.js 是目前排名第一的 JS 框架。平时遇到的 JS 全栈应用，我估计，一半用它开发。&lt;/p&gt;
+&lt;p&gt;两周前，这个框架被一则新闻颠覆了。&lt;/p&gt;
+&lt;p&gt;一个 Cloudflare 工程师宣布，他只用一个星期就用 AI 重新实现了 Next.js，起名为 vinext。&lt;/p&gt;
+&lt;p&gt;事实上，一天就 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="http://www.ruanyifeng.com/blog/2026/03/weekly-issue-388.html" target="_blank" rel="noopener"
+ &gt;http://www.ruanyifeng.com/blog/2026/03/weekly-issue-388.html&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：内容工厂（润色 + 结构化）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：内容工厂（润色 + 结构化）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-23T18:01:11.231891&lt;/em&gt;&lt;/p&gt;</description></item><item><title>科技爱好者周刊（第 389 期）：未来如何招聘程序员</title><link>https://blog.caowo.de/posts/auto-tech-20260323-244/</link><pubDate>Mon, 23 Mar 2026 18:01:04 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-tech-20260323-244/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;这里记录每周值得分享的科技内容，周五发布。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; 本杂志开源，欢迎投稿。另有《谁在招人》服务，发布程序员招聘信息。合作请邮件联系（yifeng.ruan@gmail.com）。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;封面图&lt;/p&gt;
+&lt;p&gt;唐山河头老街景区的轨道车&amp;quot;大唐云车&amp;quot;。（via）&lt;/p&gt;
+&lt;p&gt;未来如何招聘程序员&lt;/p&gt;
+&lt;p&gt;前些天，讨论区有一个帖子，提出一个问题。&lt;/p&gt;
+&lt;p&gt;如果未来的代码都是 AI 写的，那么我们怎么招聘程序员呢？&lt;/p&gt;
+&lt;p&gt;程序员负责代码，但代码是 AI 写的，不是程序员写的，那么应该怎么面试他呢？&lt;/p&gt;
+&lt;p&gt;你仔细想想，这个问题比预想的难多了。&lt;/p&gt;
+&lt;p&gt;首先，考察他的代码能力不重要（代码不是他写的），更重要的是考察他会不会 AI。只要善于使用 AI，能够产出合格的代码，对公司来说就是合格的人选。&lt;/p&gt;
+&lt;p&gt;但是，什么样的面试问题，能够考察出一个人是否掌握 AI？下面是我想出的一些问题：&lt;/p&gt;
+&lt;p&gt;请将一个复杂的项目需求，转化成提示词，要求是清晰、逻辑性强、切中要害。
+描述一个你认为需要使用 Skill 和 MCP 的场景，并阐述它们的工作原理和构建方法。
+如何将一个大项目分解，设计出一个多 Agent 协同工作的机制。
+&amp;hellip;&amp;hellip;&lt;/p&gt;
+&lt;p&gt;这些问题能&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，这里记录每周值得分享的科技内容，周五发布。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; 本杂志开源，欢迎投稿。另有《谁在招人》服务，发布程序员招聘信息。合作请邮件联系（yifeng.ruan@gmail.com）。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;封面图&lt;/p&gt;
+&lt;p&gt;唐山河头老街景区的轨道车&amp;quot;大唐云车&amp;quot;。（via）&lt;/p&gt;
+&lt;p&gt;未来如何招聘程序员&lt;/p&gt;
+&lt;p&gt;前些天，讨论区有一个帖子，提出一个问题。&lt;/p&gt;
+&lt;p&gt;如果未来的代码都是 AI 写的，那么我们怎么招聘程序员呢？&lt;/p&gt;
+&lt;p&gt;程序员负责代码，但代码是 AI 写的，不是程序员写的，那么应该怎么面试他呢？&lt;/p&gt;
+&lt;p&gt;你仔细想想，这个问题比预想的难多了。&lt;/p&gt;
+&lt;p&gt;首先，考察他的代码能力不重要（代码不是他写的），更重要的是考察他会不会 AI。只要善于使用 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="http://www.ruanyifeng.com/blog/2026/03/weekly-issue-389.html" target="_blank" rel="noopener"
+ &gt;http://www.ruanyifeng.com/blog/2026/03/weekly-issue-389.html&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：内容工厂（润色 + 结构化）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：内容工厂（润色 + 结构化）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-23T18:01:04.316648&lt;/em&gt;&lt;/p&gt;</description></item><item><title>套壳中国大模型撑起500亿美元估值？扒一扒 Cursor 的套壳疑云</title><link>https://blog.caowo.de/posts/auto-tech-20260323-731/</link><pubDate>Mon, 23 Mar 2026 18:00:57 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-tech-20260323-731/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;1、&lt;/p&gt;
+&lt;p&gt;本周末，有一条最热闹的 AI 新闻，震动了太平洋两岸，连马斯克都关注了。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; 昨天，AI 编程工具 Cursor 推出了&amp;quot;自己的&amp;quot;模型 Composer 2。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;上图是官网截图，现在点进去还写着&amp;quot;自有模型&amp;quot;。&lt;/p&gt;
+&lt;p&gt;自从2024年10月，Composer 1 发布以来，外界就一直怀疑，它是套壳的中国模型，因为行为很类似，但苦于找不到证据。&lt;/p&gt;
+&lt;p&gt;现在 Composer 2 来了，很多人就开始研究，它的背后到底是什么模型，真的是 Cursor 自家的吗？&lt;/p&gt;
+&lt;p&gt;Cursor 为了防止破解，做了很多限制，但是百密一疏。国外推友 @fynnso 发现，有一个地方在上一个版本是禁止的，但是这个版本却可以执行。&lt;/p&gt;
+&lt;p&gt;首先，你自己架设一台服务器，充当 AI 模型的调用接口，有没有模型无所谓，只要能收到客户端请求就行。&lt;/p&gt;
+&lt;p&gt;然后，你在本地的 Cursor 里面，设置使用的模型为 Composer 2，模型网址就是你刚架设的服务器。这样一来，Cursor 就会向你的服务器发出请求，从而可以看到它到底在请求什么模型。&lt;/p&gt;
+&lt;p&gt;真相就暴露了，它请求的模型 ID 居然是 kimi-k2p5-rl-031&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，1、&lt;/p&gt;
+&lt;p&gt;本周末，有一条最热闹的 AI 新闻，震动了太平洋两岸，连马斯克都关注了。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; 昨天，AI 编程工具 Cursor 推出了&amp;quot;自己的&amp;quot;模型 Composer 2。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;上图是官网截图，现在点进去还写着&amp;quot;自有模型&amp;quot;。&lt;/p&gt;
+&lt;p&gt;自从2024年10月，Composer 1 发布以来，外界就一直怀疑，它是套壳的中国模型，因为行为很类似，但苦于找不到证据。&lt;/p&gt;
+&lt;p&gt;现在 Composer 2 来了，很多人就开始研究，它的背后到底是什么模型，真的是 Cursor 自家的吗？&lt;/p&gt;
+&lt;p&gt;Cursor 为了防止破解，做了很多限制，但是百密一疏。国外推友 @fynnso 发现，有一个地方在上一个版本是禁止的，但 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="http://www.ruanyifeng.com/blog/2026/03/kimi-cursor.html" target="_blank" rel="noopener"
+ &gt;http://www.ruanyifeng.com/blog/2026/03/kimi-cursor.html&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：内容工厂（润色 + 结构化）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：内容工厂（润色 + 结构化）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-23T18:00:57.306190&lt;/em&gt;&lt;/p&gt;</description></item><item><title>CVE-2026-3672 Jeecgboot3.9.1/3.9.0 WAF绕过：正则缺陷导致SQL注入</title><link>https://blog.caowo.de/posts/auto-security-20260323-410/</link><pubDate>Mon, 23 Mar 2026 18:00:50 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-security-20260323-410/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;漏洞描述该漏洞本质上是由于JeecgBoot内置的WAF存在逻辑缺陷，导致针对特定接口的SQL注入防护被绕过。影响版本: JeecgBoot 版本 3.9.1/3.9.0需要任意用户权限漏洞分析来到SysDictController.java入口路由为 GET /sys/dict/getDictItems/{dictCode}控制器直接将 dictCode 传入sysDictService.get&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，漏洞描述该漏洞本质上是由于JeecgBoot内置的WAF存在逻辑缺陷，导致针对特定接口的SQL注入防护被绕过。影响版本: JeecgBoot 版本 3.9.1/3.9.0需要任意用户权限漏洞分析来到SysDictController.java入口路由为 GET /sys/dict/getDictItems/{dictCode}控制器直接将 dictCode 传入sysDictService.get 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="https://xz.aliyun.com/news/91794" target="_blank" rel="noopener"
+ &gt;https://xz.aliyun.com/news/91794&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：红队 Agent（安全视角解读）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：红队 Agent（安全视角解读）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-23T18:00:50.402295&lt;/em&gt;&lt;/p&gt;</description></item><item><title>硬氪首发 | 前华为自动驾驶核心成员创业，要做“会走路”的情绪陪伴机器人</title><link>https://blog.caowo.de/posts/auto-ai-20260323-837/</link><pubDate>Mon, 23 Mar 2026 18:00:43 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-ai-20260323-837/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;作者 | 林晴晴
+编辑 | 袁斯来
+硬氪获悉，情绪陪伴场景小型具身机器人公司「青心意创」已于近期完成Pre-A轮融资，本轮融资由厚雪资本和天际资本领投，老股东乐朴资本持续跟投，新辉资本担任长期财务顾问。本轮融资将主要用于超小型双足陪伴机器人的产品研发及技术平台搭建、核心算法迭代与团队扩充。此前，公司已完成由初心资本、乐朴资本及多位科技领域个人投资者参与的天使轮融资。
+「青心意创」核心团队于2024年初组建，将前沿的具身智能以及自动驾驶大小脑协同软硬件等全栈技术能力应用于陪伴机器人的研发与探索，在全球率先实现了直膝行走，并首创强化学习“情绪步态大模型”，完成了情绪步态生成、全身运动控制及多模态交互等核心算法的验证与集成。目前，公司正推进首个具身角色智能机器人的开发，其初代版本已完成全栈自研及模型搭建。
+伴随城市独居人口增加与情感消费趋势显现，具备交互能力的陪伴型机器人市场关注度逐步提升。目前市面上相关产品主要分为两类：一类是基于大型语言模型的桌面智能硬件，交互以语音为主，形态固定；另一类是采用轮式底盘的移动机器人，运动能力与拟人化表&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，作者 | 林晴晴
+编辑 | 袁斯来
+硬氪获悉，情绪陪伴场景小型具身机器人公司「青心意创」已于近期完成Pre-A轮融资，本轮融资由厚雪资本和天际资本领投，老股东乐朴资本持续跟投，新辉资本担任长期财务顾问。本轮融资将主要用于超小型双足陪伴机器人的产品研发及技术平台搭建、核心算法迭代与团队扩充。此前，公司已完成由初心资本、乐朴资本及多位科技领域个人投资者参与的天使轮融资。
+「青心意创」核心团队于2024年初组建，将前沿的具身智能以及自动驾驶大小脑协同软硬件等全栈技术能力应用于陪伴机器人的研发与探索，在全球率先实现了直膝行走，并首创强化学习“情绪步态 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="https://36kr.com/p/3735384009048325?f=rss" target="_blank" rel="noopener"
+ &gt;https://36kr.com/p/3735384009048325?f=rss&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-23T18:00:43.463850&lt;/em&gt;&lt;/p&gt;</description></item><item><title>36氪AI测评小程序重磅上线！帮你pick最适合自己的AI神器！</title><link>https://blog.caowo.de/posts/auto-ai-20260323-319/</link><pubDate>Mon, 23 Mar 2026 18:00:36 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-ai-20260323-319/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;这个春天，一打开手机，全网似乎都开始“养龙虾”了。
+只是从“养龙虾”再到“卸龙虾”，AI应用圈的的变化速度超乎想象。
+AI应用大批涌现的当下，跟风实在易踩坑。
+AI遍地走，到底谁靠谱？
+别急，36氪AI测评来帮你！&lt;/p&gt;
+&lt;p&gt;01
+36氪AI测评小程序，正式上线啦！&lt;/p&gt;
+&lt;p&gt;⬆️扫码体验36氪AI测评小程序⬆️
+其实，36氪早就上线了AI测评网（网页版），被大家戏称为“AI应用领域的大众点评”。
+现在，小程序版也正式来了！ 微信里搜一搜，就能打开这个“AI应用百宝箱”，通勤摸鱼都能刷，随时随地帮你找到顺手的AI工具。&lt;/p&gt;
+&lt;p&gt;36氪AI测评小程序-首页
+正如36氪AI测评slogan：选靠谱AI，看真实评测。我们玩儿的就是真实！
+市面上的“水评”多如牛毛——要么短到只有一句“好用”，要么软得看不出真假。
+在这里，没有敷衍的打卡，没有虚伪的客套，只有无数大神在社区“肝”出来的神仙分享，以及毫无情面的疯狂吐槽，帮你快速扒开滤镜，看清这些AI的真实面孔！
+目前，36氪AI测评已经收录了400+款AI应用（还在疯狂更新中），覆盖办公、编程、设计、&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，这个春天，一打开手机，全网似乎都开始“养龙虾”了。
+只是从“养龙虾”再到“卸龙虾”，AI应用圈的的变化速度超乎想象。
+AI应用大批涌现的当下，跟风实在易踩坑。
+AI遍地走，到底谁靠谱？
+别急，36氪AI测评来帮你！&lt;/p&gt;
+&lt;p&gt;01
+36氪AI测评小程序，正式上线啦！&lt;/p&gt;
+&lt;p&gt;⬆️扫码体验36氪AI测评小程序⬆️
+其实，36氪早就上线了AI测评网（网页版），被大家戏称为“AI应用领域的大众点评”。
+现在，小程序版也正式来了！ 微信里搜一搜，就能打开这个“AI应用百宝箱”，通勤摸鱼都能刷，随时随地帮你找到顺手的AI工具。&lt;/p&gt;
+&lt;p&gt;36氪AI测评小程序-首页
+正如 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="https://36kr.com/p/3735404612370441?f=rss" target="_blank" rel="noopener"
+ &gt;https://36kr.com/p/3735404612370441?f=rss&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-23T18:00:36.519369&lt;/em&gt;&lt;/p&gt;</description></item><item><title>氪星晚报 ｜阿里明日或将发布重要芯片产品；全球首个脑机接口创新产品获得医保编码；LG电子称今年将全力推进机器人业务</title><link>https://blog.caowo.de/posts/auto-ai-20260323-662/</link><pubDate>Mon, 23 Mar 2026 18:00:29 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-ai-20260323-662/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;大公司：
+双林股份港股上市获中国证监会备案
+36氪获悉，中国证监会国际合作司发布关于双林股份有限公司境外发行上市备案通知书，公司拟发行不超过89,697,300股境外上市普通股并在香港联合交易所上市。
+宝盖新材料港股IPO获中国证监会备案
+36氪获悉，中国证监会国际合作司发布关于山东宝盖新材料科技股份有限公司境外发行上市备案通知书，公司拟发行不超过16,640,500股境外上市普通股并在香港联合交易所上市。
+云天化：2025年净利润51.56亿元，拟每10股派12元
+36氪获悉，云天化发布2025年业绩报告。报告显示，公司2025年实现营业收入484.15亿元，同比下降21.47%；归属于上市公司股东的净利润为51.56亿元，同比下降3.40%。公司拟向全体股东每10股派发现金红利12元(含税)，2025年度合计分红25.52亿元，占当年净利润的49.50%。
+首个国产企业级满血版OpenClaw来了！百度DuMate全量上线
+3月22日，百度智能云DuMate正式上线，面向用户全量开放。这是国内首个国产企业级龙虾产品，支持本地部署，企业级用户也能安全合&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，大公司：
+双林股份港股上市获中国证监会备案
+36氪获悉，中国证监会国际合作司发布关于双林股份有限公司境外发行上市备案通知书，公司拟发行不超过89,697,300股境外上市普通股并在香港联合交易所上市。
+宝盖新材料港股IPO获中国证监会备案
+36氪获悉，中国证监会国际合作司发布关于山东宝盖新材料科技股份有限公司境外发行上市备案通知书，公司拟发行不超过16,640,500股境外上市普通股并在香港联合交易所上市。
+云天化：2025年净利润51.56亿元，拟每10股派12元
+36氪获悉，云天化发布2025年业绩报告。报告显示，公司2025年实现营业收入484.15亿元，同比下降 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="https://36kr.com/p/3735459789242375?f=rss" target="_blank" rel="noopener"
+ &gt;https://36kr.com/p/3735459789242375?f=rss&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-23T18:00:29.411610&lt;/em&gt;&lt;/p&gt;</description></item><item><title>科技爱好者周刊（第 388 期）：测试是新的护城河</title><link>https://blog.caowo.de/posts/auto-tech-20260323-281/</link><pubDate>Mon, 23 Mar 2026 16:10:50 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-tech-20260323-281/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
 &lt;/h2&gt;&lt;p&gt;这里记录每周值得分享的科技内容，周五发布。&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt; 本杂志开源，欢迎投稿。另有《谁在招人》服务，发布程序员招聘信息。合作请邮件联系（yifeng.ruan@gmail.com）。
 &lt;/code&gt;&lt;/pre&gt;

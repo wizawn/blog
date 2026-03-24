@@ -1,4 +1,137 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ai on 言零的博客</title><link>https://blog.caowo.de/categories/ai/</link><description>Recent content in Ai on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 23 Mar 2026 16:10:20 +0000</lastBuildDate><atom:link href="https://blog.caowo.de/categories/ai/index.xml" rel="self" type="application/rss+xml"/><item><title>硬氪首发 | 前华为自动驾驶核心成员创业，要做“会走路”的情绪陪伴机器人</title><link>https://blog.caowo.de/posts/auto-ai-20260323-381/</link><pubDate>Mon, 23 Mar 2026 16:10:20 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-ai-20260323-381/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ai on 言零的博客</title><link>https://blog.caowo.de/categories/ai/</link><description>Recent content in Ai on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 23 Mar 2026 18:00:43 +0000</lastBuildDate><atom:link href="https://blog.caowo.de/categories/ai/index.xml" rel="self" type="application/rss+xml"/><item><title>硬氪首发 | 前华为自动驾驶核心成员创业，要做“会走路”的情绪陪伴机器人</title><link>https://blog.caowo.de/posts/auto-ai-20260323-837/</link><pubDate>Mon, 23 Mar 2026 18:00:43 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-ai-20260323-837/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;作者 | 林晴晴
+编辑 | 袁斯来
+硬氪获悉，情绪陪伴场景小型具身机器人公司「青心意创」已于近期完成Pre-A轮融资，本轮融资由厚雪资本和天际资本领投，老股东乐朴资本持续跟投，新辉资本担任长期财务顾问。本轮融资将主要用于超小型双足陪伴机器人的产品研发及技术平台搭建、核心算法迭代与团队扩充。此前，公司已完成由初心资本、乐朴资本及多位科技领域个人投资者参与的天使轮融资。
+「青心意创」核心团队于2024年初组建，将前沿的具身智能以及自动驾驶大小脑协同软硬件等全栈技术能力应用于陪伴机器人的研发与探索，在全球率先实现了直膝行走，并首创强化学习“情绪步态大模型”，完成了情绪步态生成、全身运动控制及多模态交互等核心算法的验证与集成。目前，公司正推进首个具身角色智能机器人的开发，其初代版本已完成全栈自研及模型搭建。
+伴随城市独居人口增加与情感消费趋势显现，具备交互能力的陪伴型机器人市场关注度逐步提升。目前市面上相关产品主要分为两类：一类是基于大型语言模型的桌面智能硬件，交互以语音为主，形态固定；另一类是采用轮式底盘的移动机器人，运动能力与拟人化表&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，作者 | 林晴晴
+编辑 | 袁斯来
+硬氪获悉，情绪陪伴场景小型具身机器人公司「青心意创」已于近期完成Pre-A轮融资，本轮融资由厚雪资本和天际资本领投，老股东乐朴资本持续跟投，新辉资本担任长期财务顾问。本轮融资将主要用于超小型双足陪伴机器人的产品研发及技术平台搭建、核心算法迭代与团队扩充。此前，公司已完成由初心资本、乐朴资本及多位科技领域个人投资者参与的天使轮融资。
+「青心意创」核心团队于2024年初组建，将前沿的具身智能以及自动驾驶大小脑协同软硬件等全栈技术能力应用于陪伴机器人的研发与探索，在全球率先实现了直膝行走，并首创强化学习“情绪步态 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="https://36kr.com/p/3735384009048325?f=rss" target="_blank" rel="noopener"
+ &gt;https://36kr.com/p/3735384009048325?f=rss&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-23T18:00:43.463850&lt;/em&gt;&lt;/p&gt;</description></item><item><title>36氪AI测评小程序重磅上线！帮你pick最适合自己的AI神器！</title><link>https://blog.caowo.de/posts/auto-ai-20260323-319/</link><pubDate>Mon, 23 Mar 2026 18:00:36 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-ai-20260323-319/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;这个春天，一打开手机，全网似乎都开始“养龙虾”了。
+只是从“养龙虾”再到“卸龙虾”，AI应用圈的的变化速度超乎想象。
+AI应用大批涌现的当下，跟风实在易踩坑。
+AI遍地走，到底谁靠谱？
+别急，36氪AI测评来帮你！&lt;/p&gt;
+&lt;p&gt;01
+36氪AI测评小程序，正式上线啦！&lt;/p&gt;
+&lt;p&gt;⬆️扫码体验36氪AI测评小程序⬆️
+其实，36氪早就上线了AI测评网（网页版），被大家戏称为“AI应用领域的大众点评”。
+现在，小程序版也正式来了！ 微信里搜一搜，就能打开这个“AI应用百宝箱”，通勤摸鱼都能刷，随时随地帮你找到顺手的AI工具。&lt;/p&gt;
+&lt;p&gt;36氪AI测评小程序-首页
+正如36氪AI测评slogan：选靠谱AI，看真实评测。我们玩儿的就是真实！
+市面上的“水评”多如牛毛——要么短到只有一句“好用”，要么软得看不出真假。
+在这里，没有敷衍的打卡，没有虚伪的客套，只有无数大神在社区“肝”出来的神仙分享，以及毫无情面的疯狂吐槽，帮你快速扒开滤镜，看清这些AI的真实面孔！
+目前，36氪AI测评已经收录了400+款AI应用（还在疯狂更新中），覆盖办公、编程、设计、&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，这个春天，一打开手机，全网似乎都开始“养龙虾”了。
+只是从“养龙虾”再到“卸龙虾”，AI应用圈的的变化速度超乎想象。
+AI应用大批涌现的当下，跟风实在易踩坑。
+AI遍地走，到底谁靠谱？
+别急，36氪AI测评来帮你！&lt;/p&gt;
+&lt;p&gt;01
+36氪AI测评小程序，正式上线啦！&lt;/p&gt;
+&lt;p&gt;⬆️扫码体验36氪AI测评小程序⬆️
+其实，36氪早就上线了AI测评网（网页版），被大家戏称为“AI应用领域的大众点评”。
+现在，小程序版也正式来了！ 微信里搜一搜，就能打开这个“AI应用百宝箱”，通勤摸鱼都能刷，随时随地帮你找到顺手的AI工具。&lt;/p&gt;
+&lt;p&gt;36氪AI测评小程序-首页
+正如 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="https://36kr.com/p/3735404612370441?f=rss" target="_blank" rel="noopener"
+ &gt;https://36kr.com/p/3735404612370441?f=rss&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-23T18:00:36.519369&lt;/em&gt;&lt;/p&gt;</description></item><item><title>氪星晚报 ｜阿里明日或将发布重要芯片产品；全球首个脑机接口创新产品获得医保编码；LG电子称今年将全力推进机器人业务</title><link>https://blog.caowo.de/posts/auto-ai-20260323-662/</link><pubDate>Mon, 23 Mar 2026 18:00:29 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-ai-20260323-662/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;大公司：
+双林股份港股上市获中国证监会备案
+36氪获悉，中国证监会国际合作司发布关于双林股份有限公司境外发行上市备案通知书，公司拟发行不超过89,697,300股境外上市普通股并在香港联合交易所上市。
+宝盖新材料港股IPO获中国证监会备案
+36氪获悉，中国证监会国际合作司发布关于山东宝盖新材料科技股份有限公司境外发行上市备案通知书，公司拟发行不超过16,640,500股境外上市普通股并在香港联合交易所上市。
+云天化：2025年净利润51.56亿元，拟每10股派12元
+36氪获悉，云天化发布2025年业绩报告。报告显示，公司2025年实现营业收入484.15亿元，同比下降21.47%；归属于上市公司股东的净利润为51.56亿元，同比下降3.40%。公司拟向全体股东每10股派发现金红利12元(含税)，2025年度合计分红25.52亿元，占当年净利润的49.50%。
+首个国产企业级满血版OpenClaw来了！百度DuMate全量上线
+3月22日，百度智能云DuMate正式上线，面向用户全量开放。这是国内首个国产企业级龙虾产品，支持本地部署，企业级用户也能安全合&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，大公司：
+双林股份港股上市获中国证监会备案
+36氪获悉，中国证监会国际合作司发布关于双林股份有限公司境外发行上市备案通知书，公司拟发行不超过89,697,300股境外上市普通股并在香港联合交易所上市。
+宝盖新材料港股IPO获中国证监会备案
+36氪获悉，中国证监会国际合作司发布关于山东宝盖新材料科技股份有限公司境外发行上市备案通知书，公司拟发行不超过16,640,500股境外上市普通股并在香港联合交易所上市。
+云天化：2025年净利润51.56亿元，拟每10股派12元
+36氪获悉，云天化发布2025年业绩报告。报告显示，公司2025年实现营业收入484.15亿元，同比下降 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="https://36kr.com/p/3735459789242375?f=rss" target="_blank" rel="noopener"
+ &gt;https://36kr.com/p/3735459789242375?f=rss&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-23T18:00:29.411610&lt;/em&gt;&lt;/p&gt;</description></item><item><title>硬氪首发 | 前华为自动驾驶核心成员创业，要做“会走路”的情绪陪伴机器人</title><link>https://blog.caowo.de/posts/auto-ai-20260323-381/</link><pubDate>Mon, 23 Mar 2026 16:10:20 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-ai-20260323-381/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
 &lt;/h2&gt;&lt;p&gt;作者 | 林晴晴
 编辑 | 袁斯来
 硬氪获悉，情绪陪伴场景小型具身机器人公司「青心意创」已于近期完成Pre-A轮融资，本轮融资由厚雪资本和天际资本领投，老股东乐朴资本持续跟投，新辉资本担任长期财务顾问。本轮融资将主要用于超小型双足陪伴机器人的产品研发及技术平台搭建、核心算法迭代与团队扩充。此前，公司已完成由初心资本、乐朴资本及多位科技领域个人投资者参与的天使轮融资。

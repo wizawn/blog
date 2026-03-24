@@ -1,4 +1,575 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Auto-Generated on 言零的博客</title><link>https://blog.caowo.de/tags/auto-generated/</link><description>Recent content in Auto-Generated on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 23 Mar 2026 18:01:11 +0000</lastBuildDate><atom:link href="https://blog.caowo.de/tags/auto-generated/index.xml" rel="self" type="application/rss+xml"/><item><title>科技爱好者周刊（第 388 期）：测试是新的护城河</title><link>https://blog.caowo.de/posts/auto-tech-20260323-985/</link><pubDate>Mon, 23 Mar 2026 18:01:11 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-tech-20260323-985/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Auto-Generated on 言零的博客</title><link>https://blog.caowo.de/tags/auto-generated/</link><description>Recent content in Auto-Generated on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 24 Mar 2026 09:01:17 +0000</lastBuildDate><atom:link href="https://blog.caowo.de/tags/auto-generated/index.xml" rel="self" type="application/rss+xml"/><item><title>科技爱好者周刊（第 388 期）：测试是新的护城河</title><link>https://blog.caowo.de/posts/auto-tech-20260324-498/</link><pubDate>Tue, 24 Mar 2026 09:01:17 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-tech-20260324-498/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;这里记录每周值得分享的科技内容，周五发布。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; 本杂志开源，欢迎投稿。另有《谁在招人》服务，发布程序员招聘信息。合作请邮件联系（yifeng.ruan@gmail.com）。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;封面图&lt;/p&gt;
+&lt;p&gt;重庆涪陵某景区架设了世界首座&amp;quot;巨石索桥&amp;quot;，桥面就是一块块巨石，一不小心就会踏空。（via）&lt;/p&gt;
+&lt;p&gt;测试是新的护城河&lt;/p&gt;
+&lt;p&gt;Next.js 是目前排名第一的 JS 框架。平时遇到的 JS 全栈应用，我估计，一半用它开发。&lt;/p&gt;
+&lt;p&gt;两周前，这个框架被一则新闻颠覆了。&lt;/p&gt;
+&lt;p&gt;一个 Cloudflare 工程师宣布，他只用一个星期就用 AI 重新实现了 Next.js，起名为 vinext。&lt;/p&gt;
+&lt;p&gt;事实上，一天就生成产品原型了，后面几天只是在完善。&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;真正动手是2月13日，当天晚上，基本功能已经实现。第二天下午，11个路由器做好了10个。第三天，已经部署到我们的服务器，实现了完整的客户端水合。&lt;/p&gt;
+&lt;p&gt;接下来的几天，主要进行安全加固：修复极端情况，扩展测试套件，提升 API 覆盖率至 94%。&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;这个新的实现，比原版 Next.js 性能更好。&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;早期基准测试中，构建速度提升了4倍，客户端软&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，这里记录每周值得分享的科技内容，周五发布。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; 本杂志开源，欢迎投稿。另有《谁在招人》服务，发布程序员招聘信息。合作请邮件联系（yifeng.ruan@gmail.com）。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;封面图&lt;/p&gt;
+&lt;p&gt;重庆涪陵某景区架设了世界首座&amp;quot;巨石索桥&amp;rdquo;，桥面就是一块块巨石，一不小心就会踏空。（via）&lt;/p&gt;
+&lt;p&gt;测试是新的护城河&lt;/p&gt;
+&lt;p&gt;Next.js 是目前排名第一的 JS 框架。平时遇到的 JS 全栈应用，我估计，一半用它开发。&lt;/p&gt;
+&lt;p&gt;两周前，这个框架被一则新闻颠覆了。&lt;/p&gt;
+&lt;p&gt;一个 Cloudflare 工程师宣布，他只用一个星期就用 AI 重新实现了 Next.js，起名为 vinext。&lt;/p&gt;
+&lt;p&gt;事实上，一天就 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="http://www.ruanyifeng.com/blog/2026/03/weekly-issue-388.html" target="_blank" rel="noopener"
+ &gt;http://www.ruanyifeng.com/blog/2026/03/weekly-issue-388.html&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：内容工厂（润色 + 结构化）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：内容工厂（润色 + 结构化）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-24T09:01:17.309180&lt;/em&gt;&lt;/p&gt;</description></item><item><title>科技爱好者周刊（第 389 期）：未来如何招聘程序员</title><link>https://blog.caowo.de/posts/auto-tech-20260324-853/</link><pubDate>Tue, 24 Mar 2026 09:01:09 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-tech-20260324-853/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;这里记录每周值得分享的科技内容，周五发布。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; 本杂志开源，欢迎投稿。另有《谁在招人》服务，发布程序员招聘信息。合作请邮件联系（yifeng.ruan@gmail.com）。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;封面图&lt;/p&gt;
+&lt;p&gt;唐山河头老街景区的轨道车&amp;quot;大唐云车&amp;quot;。（via）&lt;/p&gt;
+&lt;p&gt;未来如何招聘程序员&lt;/p&gt;
+&lt;p&gt;前些天，讨论区有一个帖子，提出一个问题。&lt;/p&gt;
+&lt;p&gt;如果未来的代码都是 AI 写的，那么我们怎么招聘程序员呢？&lt;/p&gt;
+&lt;p&gt;程序员负责代码，但代码是 AI 写的，不是程序员写的，那么应该怎么面试他呢？&lt;/p&gt;
+&lt;p&gt;你仔细想想，这个问题比预想的难多了。&lt;/p&gt;
+&lt;p&gt;首先，考察他的代码能力不重要（代码不是他写的），更重要的是考察他会不会 AI。只要善于使用 AI，能够产出合格的代码，对公司来说就是合格的人选。&lt;/p&gt;
+&lt;p&gt;但是，什么样的面试问题，能够考察出一个人是否掌握 AI？下面是我想出的一些问题：&lt;/p&gt;
+&lt;p&gt;请将一个复杂的项目需求，转化成提示词，要求是清晰、逻辑性强、切中要害。
+描述一个你认为需要使用 Skill 和 MCP 的场景，并阐述它们的工作原理和构建方法。
+如何将一个大项目分解，设计出一个多 Agent 协同工作的机制。
+&amp;hellip;&amp;hellip;&lt;/p&gt;
+&lt;p&gt;这些问题能&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，这里记录每周值得分享的科技内容，周五发布。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; 本杂志开源，欢迎投稿。另有《谁在招人》服务，发布程序员招聘信息。合作请邮件联系（yifeng.ruan@gmail.com）。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;封面图&lt;/p&gt;
+&lt;p&gt;唐山河头老街景区的轨道车&amp;quot;大唐云车&amp;quot;。（via）&lt;/p&gt;
+&lt;p&gt;未来如何招聘程序员&lt;/p&gt;
+&lt;p&gt;前些天，讨论区有一个帖子，提出一个问题。&lt;/p&gt;
+&lt;p&gt;如果未来的代码都是 AI 写的，那么我们怎么招聘程序员呢？&lt;/p&gt;
+&lt;p&gt;程序员负责代码，但代码是 AI 写的，不是程序员写的，那么应该怎么面试他呢？&lt;/p&gt;
+&lt;p&gt;你仔细想想，这个问题比预想的难多了。&lt;/p&gt;
+&lt;p&gt;首先，考察他的代码能力不重要（代码不是他写的），更重要的是考察他会不会 AI。只要善于使用 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="http://www.ruanyifeng.com/blog/2026/03/weekly-issue-389.html" target="_blank" rel="noopener"
+ &gt;http://www.ruanyifeng.com/blog/2026/03/weekly-issue-389.html&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：内容工厂（润色 + 结构化）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：内容工厂（润色 + 结构化）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-24T09:01:09.411130&lt;/em&gt;&lt;/p&gt;</description></item><item><title>套壳中国大模型撑起500亿美元估值？扒一扒 Cursor 的套壳疑云</title><link>https://blog.caowo.de/posts/auto-tech-20260324-99/</link><pubDate>Tue, 24 Mar 2026 09:01:01 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-tech-20260324-99/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;1、&lt;/p&gt;
+&lt;p&gt;本周末，有一条最热闹的 AI 新闻，震动了太平洋两岸，连马斯克都关注了。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; 昨天，AI 编程工具 Cursor 推出了&amp;quot;自己的&amp;quot;模型 Composer 2。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;上图是官网截图，现在点进去还写着&amp;quot;自有模型&amp;quot;。&lt;/p&gt;
+&lt;p&gt;自从2024年10月，Composer 1 发布以来，外界就一直怀疑，它是套壳的中国模型，因为行为很类似，但苦于找不到证据。&lt;/p&gt;
+&lt;p&gt;现在 Composer 2 来了，很多人就开始研究，它的背后到底是什么模型，真的是 Cursor 自家的吗？&lt;/p&gt;
+&lt;p&gt;Cursor 为了防止破解，做了很多限制，但是百密一疏。国外推友 @fynnso 发现，有一个地方在上一个版本是禁止的，但是这个版本却可以执行。&lt;/p&gt;
+&lt;p&gt;首先，你自己架设一台服务器，充当 AI 模型的调用接口，有没有模型无所谓，只要能收到客户端请求就行。&lt;/p&gt;
+&lt;p&gt;然后，你在本地的 Cursor 里面，设置使用的模型为 Composer 2，模型网址就是你刚架设的服务器。这样一来，Cursor 就会向你的服务器发出请求，从而可以看到它到底在请求什么模型。&lt;/p&gt;
+&lt;p&gt;真相就暴露了，它请求的模型 ID 居然是 kimi-k2p5-rl-031&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，1、&lt;/p&gt;
+&lt;p&gt;本周末，有一条最热闹的 AI 新闻，震动了太平洋两岸，连马斯克都关注了。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; 昨天，AI 编程工具 Cursor 推出了&amp;quot;自己的&amp;quot;模型 Composer 2。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;上图是官网截图，现在点进去还写着&amp;quot;自有模型&amp;quot;。&lt;/p&gt;
+&lt;p&gt;自从2024年10月，Composer 1 发布以来，外界就一直怀疑，它是套壳的中国模型，因为行为很类似，但苦于找不到证据。&lt;/p&gt;
+&lt;p&gt;现在 Composer 2 来了，很多人就开始研究，它的背后到底是什么模型，真的是 Cursor 自家的吗？&lt;/p&gt;
+&lt;p&gt;Cursor 为了防止破解，做了很多限制，但是百密一疏。国外推友 @fynnso 发现，有一个地方在上一个版本是禁止的，但 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="http://www.ruanyifeng.com/blog/2026/03/kimi-cursor.html" target="_blank" rel="noopener"
+ &gt;http://www.ruanyifeng.com/blog/2026/03/kimi-cursor.html&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：内容工厂（润色 + 结构化）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：内容工厂（润色 + 结构化）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-24T09:01:01.133690&lt;/em&gt;&lt;/p&gt;</description></item><item><title>黑石加仓，热钱蓄势：2026 年中国商办投资迎来布局窗口期？</title><link>https://blog.caowo.de/posts/auto-ai-20260324-0/</link><pubDate>Tue, 24 Mar 2026 09:00:53 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-ai-20260324-0/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;01.遇事不决不动产
+投资圈近期最热的话题，莫过于OpenAI、Anthropic即将IPO的消息。
+一直以来，位于行业塔尖的企业总有着最高的确定性与最惊人的估值，更何况是风头正盛的人工智能。在最新一轮的融资后，OpenAI的估值已超过50000亿人民币，与门内顿足捶胸的英伟达相比，更苦闷的是门外守着的诸多顶级财团——
+即便不谈全球范围的量化宽松，优质标的也远比寻找机会的热钱稀缺。
+近日，全球最大的另类资产管理公司‌黑石集团也发布了2025年业绩。在2025年，黑石在管资产规模同比增长13%，在期末升至史无前例的1.27万亿美元。
+作为全球最大的另类资产管理商，黑石集团持着全球最庞大的房地产资产，还布局基建、能源等等不同领域。它曾在收购希尔顿酒店集团后，实现市值翻倍，也在国内重金布局写字楼、仓储物流等不动产资产，其中最著名的案例，是向soho中国写字楼抛出收购的橄榄枝。
+虽然不是最早一批投资AI的玩家，但黑石通过近5年来完成的AI数据中心布局，也赚到了AI的红利。根据最新的评估，这些作为AI产业链的基建资产，价值已接近千亿美元。
+收益与风险匹配是亘古不变的道&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，01.遇事不决不动产
+投资圈近期最热的话题，莫过于OpenAI、Anthropic即将IPO的消息。
+一直以来，位于行业塔尖的企业总有着最高的确定性与最惊人的估值，更何况是风头正盛的人工智能。在最新一轮的融资后，OpenAI的估值已超过50000亿人民币，与门内顿足捶胸的英伟达相比，更苦闷的是门外守着的诸多顶级财团——
+即便不谈全球范围的量化宽松，优质标的也远比寻找机会的热钱稀缺。
+近日，全球最大的另类资产管理公司‌黑石集团也发布了2025年业绩。在2025年，黑石在管资产规模同比增长13%，在期末升至史无前例的1.27万亿美元。
+作为全球最大的另类资产管理商，黑石集团持着 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="https://36kr.com/p/3736572995813636?f=rss" target="_blank" rel="noopener"
+ &gt;https://36kr.com/p/3736572995813636?f=rss&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-24T09:00:53.363497&lt;/em&gt;&lt;/p&gt;</description></item><item><title>高瓴领投，产投、家办出手，「宇石空间」完成2亿元Pre-A+轮融资｜36氪首发</title><link>https://blog.caowo.de/posts/auto-ai-20260324-103/</link><pubDate>Tue, 24 Mar 2026 09:00:46 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-ai-20260324-103/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;文 | 阿至
+宇石空间成立不到两年，始终在用一种极致的速度来推进团队的扩张和技术的工程化落地。
+在3个月前的一次沟通中，宇石空间的团队规模在120人左右，到今天这个数字已经超过了170，其中有七成以上是研发人员。
+团队规模扩张背后，是技术、资金与竞争态势变化所带来的多重驱动。
+36氪了解到，宇石空间已完成新一轮2亿元Pre-A+轮融资，本轮融资由高瓴创投、兴湘资本联合领投，明荟致远（汇川技术家办）跟投，老股东千乘资本、拓丰资本、知盛睿盈、云启资本多家机构超额跟投。资金将主要用于火箭总装测试、筷子回收技术验证、火箭产能建设和团队建设。
+对于火箭研制这样一个技术高度复杂、工程化链路长、且需要大量跨学科人才协同的领域，资金和团队规模只是起点，人才密度、资本效率与组织效率的乘积，还需要在工程进度上得到更直接的体现。
+作为36氪长期关注的企业，宇石空间专注于大运力、低成本、快速复用液体火箭的研制，9个月内累计融资近3亿元，加上近期完成的新一轮融资，其累计融资额已接近5亿元。与融资速度相对应的是，今年1月，宇石空间在其湖南火箭研制基地正式交付了首发70m&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，文 | 阿至
+宇石空间成立不到两年，始终在用一种极致的速度来推进团队的扩张和技术的工程化落地。
+在3个月前的一次沟通中，宇石空间的团队规模在120人左右，到今天这个数字已经超过了170，其中有七成以上是研发人员。
+团队规模扩张背后，是技术、资金与竞争态势变化所带来的多重驱动。
+36氪了解到，宇石空间已完成新一轮2亿元Pre-A+轮融资，本轮融资由高瓴创投、兴湘资本联合领投，明荟致远（汇川技术家办）跟投，老股东千乘资本、拓丰资本、知盛睿盈、云启资本多家机构超额跟投。资金将主要用于火箭总装测试、筷子回收技术验证、火箭产能建设和团队建设。
+对于火箭研制这样一个 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="https://36kr.com/p/3736614731694082?f=rss" target="_blank" rel="noopener"
+ &gt;https://36kr.com/p/3736614731694082?f=rss&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-24T09:00:46.333607&lt;/em&gt;&lt;/p&gt;</description></item><item><title>拒多家车企邀约，前理想端到端负责人夏中谱加入无界动力｜36氪独家</title><link>https://blog.caowo.de/posts/auto-ai-20260324-487/</link><pubDate>Tue, 24 Mar 2026 09:00:28 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-ai-20260324-487/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;图为理想汽车
+文 | 肖漫 
+编辑 | 李勤、杨轩
+又一位理想高管加入具身智能行业。
+36氪汽车独家获悉，前理想智驾端到端负责人夏中谱将加入具身智能公司「无界动力」。
+无界动力成立于2025年，由前地平线副总裁张玉峰创办，目前，该公司已完成三轮融资，投资方包括红杉、高瓴等知名机构。无界动力聚焦于构建机器人“通用大脑”与“操作智能”，提供软硬一体的具身智能解决方案。
+夏中谱是在2025年年中离开理想汽车，此后一直在中科院从事世界模型和强化学习方向的研究工作。有多位知情人士告诉36氪汽车，夏中谱从理想离职后，有多家头部车企曾投去橄榄枝，但夏中谱在接触之后均未加入。
+伴随着夏中谱去向尘埃落定，离职的理想智驾战队核心成员已悉数完成向具身智能行业的跨越。
+在当前具身智能创业浪潮中，理想汽车智驾体系出身的高管正受到资本市场的高度关注——前理想汽车智能驾驶总裁郎咸朋投身具身智能行业后已获得多轮融资；由贾鹏、王凯创办的至简动力半年内获得5轮融资，累计融资20亿人民币。
+有投资人认为，汽车行业出身的团队具备极强的AI工&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，图为理想汽车
+文 | 肖漫 
+编辑 | 李勤、杨轩
+又一位理想高管加入具身智能行业。
+36氪汽车独家获悉，前理想智驾端到端负责人夏中谱将加入具身智能公司「无界动力」。
+无界动力成立于2025年，由前地平线副总裁张玉峰创办，目前，该公司已完成三轮融资，投资方包括红杉、高瓴等知名机构。无界动力聚焦于构建机器人“通用大脑”与“操作智能”，提供软硬一体的具身智能解决方案。
+夏中谱是在2025年年中离开理想汽车，此后一直在中科院从事世界模型和强化学习方向的研究工作。有多位知情人士告诉36氪汽车，夏中谱从理想离职后，有多家头部车企曾 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="https://36kr.com/p/3736702595301638?f=rss" target="_blank" rel="noopener"
+ &gt;https://36kr.com/p/3736702595301638?f=rss&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-24T09:00:28.142555&lt;/em&gt;&lt;/p&gt;</description></item><item><title>科技爱好者周刊（第 388 期）：测试是新的护城河</title><link>https://blog.caowo.de/posts/auto-tech-20260324-248/</link><pubDate>Tue, 24 Mar 2026 06:01:14 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-tech-20260324-248/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;这里记录每周值得分享的科技内容，周五发布。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; 本杂志开源，欢迎投稿。另有《谁在招人》服务，发布程序员招聘信息。合作请邮件联系（yifeng.ruan@gmail.com）。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;封面图&lt;/p&gt;
+&lt;p&gt;重庆涪陵某景区架设了世界首座&amp;quot;巨石索桥&amp;quot;，桥面就是一块块巨石，一不小心就会踏空。（via）&lt;/p&gt;
+&lt;p&gt;测试是新的护城河&lt;/p&gt;
+&lt;p&gt;Next.js 是目前排名第一的 JS 框架。平时遇到的 JS 全栈应用，我估计，一半用它开发。&lt;/p&gt;
+&lt;p&gt;两周前，这个框架被一则新闻颠覆了。&lt;/p&gt;
+&lt;p&gt;一个 Cloudflare 工程师宣布，他只用一个星期就用 AI 重新实现了 Next.js，起名为 vinext。&lt;/p&gt;
+&lt;p&gt;事实上，一天就生成产品原型了，后面几天只是在完善。&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;真正动手是2月13日，当天晚上，基本功能已经实现。第二天下午，11个路由器做好了10个。第三天，已经部署到我们的服务器，实现了完整的客户端水合。&lt;/p&gt;
+&lt;p&gt;接下来的几天，主要进行安全加固：修复极端情况，扩展测试套件，提升 API 覆盖率至 94%。&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;这个新的实现，比原版 Next.js 性能更好。&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;早期基准测试中，构建速度提升了4倍，客户端软&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，这里记录每周值得分享的科技内容，周五发布。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; 本杂志开源，欢迎投稿。另有《谁在招人》服务，发布程序员招聘信息。合作请邮件联系（yifeng.ruan@gmail.com）。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;封面图&lt;/p&gt;
+&lt;p&gt;重庆涪陵某景区架设了世界首座&amp;quot;巨石索桥&amp;rdquo;，桥面就是一块块巨石，一不小心就会踏空。（via）&lt;/p&gt;
+&lt;p&gt;测试是新的护城河&lt;/p&gt;
+&lt;p&gt;Next.js 是目前排名第一的 JS 框架。平时遇到的 JS 全栈应用，我估计，一半用它开发。&lt;/p&gt;
+&lt;p&gt;两周前，这个框架被一则新闻颠覆了。&lt;/p&gt;
+&lt;p&gt;一个 Cloudflare 工程师宣布，他只用一个星期就用 AI 重新实现了 Next.js，起名为 vinext。&lt;/p&gt;
+&lt;p&gt;事实上，一天就 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="http://www.ruanyifeng.com/blog/2026/03/weekly-issue-388.html" target="_blank" rel="noopener"
+ &gt;http://www.ruanyifeng.com/blog/2026/03/weekly-issue-388.html&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：内容工厂（润色 + 结构化）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：内容工厂（润色 + 结构化）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-24T06:01:14.762044&lt;/em&gt;&lt;/p&gt;</description></item><item><title>科技爱好者周刊（第 389 期）：未来如何招聘程序员</title><link>https://blog.caowo.de/posts/auto-tech-20260324-568/</link><pubDate>Tue, 24 Mar 2026 06:01:07 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-tech-20260324-568/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;这里记录每周值得分享的科技内容，周五发布。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; 本杂志开源，欢迎投稿。另有《谁在招人》服务，发布程序员招聘信息。合作请邮件联系（yifeng.ruan@gmail.com）。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;封面图&lt;/p&gt;
+&lt;p&gt;唐山河头老街景区的轨道车&amp;quot;大唐云车&amp;quot;。（via）&lt;/p&gt;
+&lt;p&gt;未来如何招聘程序员&lt;/p&gt;
+&lt;p&gt;前些天，讨论区有一个帖子，提出一个问题。&lt;/p&gt;
+&lt;p&gt;如果未来的代码都是 AI 写的，那么我们怎么招聘程序员呢？&lt;/p&gt;
+&lt;p&gt;程序员负责代码，但代码是 AI 写的，不是程序员写的，那么应该怎么面试他呢？&lt;/p&gt;
+&lt;p&gt;你仔细想想，这个问题比预想的难多了。&lt;/p&gt;
+&lt;p&gt;首先，考察他的代码能力不重要（代码不是他写的），更重要的是考察他会不会 AI。只要善于使用 AI，能够产出合格的代码，对公司来说就是合格的人选。&lt;/p&gt;
+&lt;p&gt;但是，什么样的面试问题，能够考察出一个人是否掌握 AI？下面是我想出的一些问题：&lt;/p&gt;
+&lt;p&gt;请将一个复杂的项目需求，转化成提示词，要求是清晰、逻辑性强、切中要害。
+描述一个你认为需要使用 Skill 和 MCP 的场景，并阐述它们的工作原理和构建方法。
+如何将一个大项目分解，设计出一个多 Agent 协同工作的机制。
+&amp;hellip;&amp;hellip;&lt;/p&gt;
+&lt;p&gt;这些问题能&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，这里记录每周值得分享的科技内容，周五发布。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; 本杂志开源，欢迎投稿。另有《谁在招人》服务，发布程序员招聘信息。合作请邮件联系（yifeng.ruan@gmail.com）。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;封面图&lt;/p&gt;
+&lt;p&gt;唐山河头老街景区的轨道车&amp;quot;大唐云车&amp;quot;。（via）&lt;/p&gt;
+&lt;p&gt;未来如何招聘程序员&lt;/p&gt;
+&lt;p&gt;前些天，讨论区有一个帖子，提出一个问题。&lt;/p&gt;
+&lt;p&gt;如果未来的代码都是 AI 写的，那么我们怎么招聘程序员呢？&lt;/p&gt;
+&lt;p&gt;程序员负责代码，但代码是 AI 写的，不是程序员写的，那么应该怎么面试他呢？&lt;/p&gt;
+&lt;p&gt;你仔细想想，这个问题比预想的难多了。&lt;/p&gt;
+&lt;p&gt;首先，考察他的代码能力不重要（代码不是他写的），更重要的是考察他会不会 AI。只要善于使用 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="http://www.ruanyifeng.com/blog/2026/03/weekly-issue-389.html" target="_blank" rel="noopener"
+ &gt;http://www.ruanyifeng.com/blog/2026/03/weekly-issue-389.html&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：内容工厂（润色 + 结构化）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：内容工厂（润色 + 结构化）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-24T06:01:07.785760&lt;/em&gt;&lt;/p&gt;</description></item><item><title>套壳中国大模型撑起500亿美元估值？扒一扒 Cursor 的套壳疑云</title><link>https://blog.caowo.de/posts/auto-tech-20260324-708/</link><pubDate>Tue, 24 Mar 2026 06:00:59 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-tech-20260324-708/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;1、&lt;/p&gt;
+&lt;p&gt;本周末，有一条最热闹的 AI 新闻，震动了太平洋两岸，连马斯克都关注了。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; 昨天，AI 编程工具 Cursor 推出了&amp;quot;自己的&amp;quot;模型 Composer 2。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;上图是官网截图，现在点进去还写着&amp;quot;自有模型&amp;quot;。&lt;/p&gt;
+&lt;p&gt;自从2024年10月，Composer 1 发布以来，外界就一直怀疑，它是套壳的中国模型，因为行为很类似，但苦于找不到证据。&lt;/p&gt;
+&lt;p&gt;现在 Composer 2 来了，很多人就开始研究，它的背后到底是什么模型，真的是 Cursor 自家的吗？&lt;/p&gt;
+&lt;p&gt;Cursor 为了防止破解，做了很多限制，但是百密一疏。国外推友 @fynnso 发现，有一个地方在上一个版本是禁止的，但是这个版本却可以执行。&lt;/p&gt;
+&lt;p&gt;首先，你自己架设一台服务器，充当 AI 模型的调用接口，有没有模型无所谓，只要能收到客户端请求就行。&lt;/p&gt;
+&lt;p&gt;然后，你在本地的 Cursor 里面，设置使用的模型为 Composer 2，模型网址就是你刚架设的服务器。这样一来，Cursor 就会向你的服务器发出请求，从而可以看到它到底在请求什么模型。&lt;/p&gt;
+&lt;p&gt;真相就暴露了，它请求的模型 ID 居然是 kimi-k2p5-rl-031&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，1、&lt;/p&gt;
+&lt;p&gt;本周末，有一条最热闹的 AI 新闻，震动了太平洋两岸，连马斯克都关注了。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; 昨天，AI 编程工具 Cursor 推出了&amp;quot;自己的&amp;quot;模型 Composer 2。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;上图是官网截图，现在点进去还写着&amp;quot;自有模型&amp;quot;。&lt;/p&gt;
+&lt;p&gt;自从2024年10月，Composer 1 发布以来，外界就一直怀疑，它是套壳的中国模型，因为行为很类似，但苦于找不到证据。&lt;/p&gt;
+&lt;p&gt;现在 Composer 2 来了，很多人就开始研究，它的背后到底是什么模型，真的是 Cursor 自家的吗？&lt;/p&gt;
+&lt;p&gt;Cursor 为了防止破解，做了很多限制，但是百密一疏。国外推友 @fynnso 发现，有一个地方在上一个版本是禁止的，但 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="http://www.ruanyifeng.com/blog/2026/03/kimi-cursor.html" target="_blank" rel="noopener"
+ &gt;http://www.ruanyifeng.com/blog/2026/03/kimi-cursor.html&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：内容工厂（润色 + 结构化）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：内容工厂（润色 + 结构化）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-24T06:00:59.648495&lt;/em&gt;&lt;/p&gt;</description></item><item><title>CVE-2026-3672 Jeecgboot3.9.1/3.9.0 WAF绕过：正则缺陷导致SQL注入</title><link>https://blog.caowo.de/posts/auto-security-20260324-128/</link><pubDate>Tue, 24 Mar 2026 06:00:52 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-security-20260324-128/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;漏洞描述该漏洞本质上是由于JeecgBoot内置的WAF存在逻辑缺陷，导致针对特定接口的SQL注入防护被绕过。影响版本: JeecgBoot 版本 3.9.1/3.9.0需要任意用户权限漏洞分析来到SysDictController.java入口路由为 GET /sys/dict/getDictItems/{dictCode}控制器直接将 dictCode 传入sysDictService.get&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，漏洞描述该漏洞本质上是由于JeecgBoot内置的WAF存在逻辑缺陷，导致针对特定接口的SQL注入防护被绕过。影响版本: JeecgBoot 版本 3.9.1/3.9.0需要任意用户权限漏洞分析来到SysDictController.java入口路由为 GET /sys/dict/getDictItems/{dictCode}控制器直接将 dictCode 传入sysDictService.get 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="https://xz.aliyun.com/news/91794" target="_blank" rel="noopener"
+ &gt;https://xz.aliyun.com/news/91794&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：红队 Agent（安全视角解读）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：红队 Agent（安全视角解读）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-24T06:00:52.240745&lt;/em&gt;&lt;/p&gt;</description></item><item><title>36氪首发 | 红杉、明势给远距影像硬件公司投资千万美金，创始人为前海康萤石产品负责人</title><link>https://blog.caowo.de/posts/auto-ai-20260324-217/</link><pubDate>Tue, 24 Mar 2026 06:00:44 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-ai-20260324-217/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;作者 | 张子怡
+编辑 | 袁斯来
+硬氪获悉，聚焦远距影像场景的科技创新团队「大览科技」，在一个月内连续完成天使轮及Pre-A轮融资，融资金额达千万美元。
+融资由红杉中国、明势创投领投，老股东嘉程资本持续跟投。融资资金将主要用于核心产品研发、供应链和组织建设。当前，「大览」核心产品已进入面向量产的关键推进阶段，并持续引入影像算法、软硬件开发及市场营销等关键人才。
+资本押注的背后，是远距影像正在展现出的巨大消费潜力。vivo前不久在2026 年世界移动通信大会(MWC 2026)上亮相的vivo X300 Ultra，其外接的超远摄增距镜曾引起不少讨论。其他手机厂商也都不约而同地在远距摄影上发力。
+事实上，远距影像绝非一个单一的小众兴趣圈。它一端连接着每年数千万台的户外光学、长焦镜头等成熟器材消费，另一端则覆盖了“距离远、节奏快、不可重来”的庞大真实场景。有数据显示，全球野生动物爱好者达3亿人，运动和体育赛事爱好者10亿人，而演唱会、狩猎、星空爱好者也均在亿级规模。无论是去非洲看野生动物还是坐在演唱会“山顶”体验贴脸追星的冲击感&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，作者 | 张子怡
+编辑 | 袁斯来
+硬氪获悉，聚焦远距影像场景的科技创新团队「大览科技」，在一个月内连续完成天使轮及Pre-A轮融资，融资金额达千万美元。
+融资由红杉中国、明势创投领投，老股东嘉程资本持续跟投。融资资金将主要用于核心产品研发、供应链和组织建设。当前，「大览」核心产品已进入面向量产的关键推进阶段，并持续引入影像算法、软硬件开发及市场营销等关键人才。
+资本押注的背后，是远距影像正在展现出的巨大消费潜力。vivo前不久在2026 年世界移动通信大会(MWC 2026)上亮相的vivo X300 Ultra，其外接的超远摄增距镜曾 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="https://36kr.com/p/3735669905670408?f=rss" target="_blank" rel="noopener"
+ &gt;https://36kr.com/p/3735669905670408?f=rss&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-24T06:00:44.632204&lt;/em&gt;&lt;/p&gt;</description></item><item><title>36氪首发 | 斯坦福博士做分子检测平台，产品已进入北大、清华</title><link>https://blog.caowo.de/posts/auto-ai-20260324-976/</link><pubDate>Tue, 24 Mar 2026 06:00:37 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-ai-20260324-976/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;作者 | 张子怡
+编辑 | 袁斯来
+硬氪获悉，广州洞察科技有限公司（以下简称“洞察科技”）于近日完成数千万元Pre-A轮融资。本轮融资由联想创投领投，力合金融、哇牛资本跟投，老股东天图资本和雅亿资本持续加注，芯湃资本担任本轮财务顾问。融资资金将用于晶圆级超高密度打孔机、超薄膜材料以及基因测序仪商业机的研发。
+固态纳米孔是一种以半导体工艺为基础的单分子传感平台。相比传统方案，该技术结构简洁，无需复杂的扩增与标记步骤，能够直接测量生物大分子的本征物理属性。在基因测序、癌症早筛和单分子分析中潜力巨大。
+洞察科技专注于固态纳米孔单分子检测技术的研发与产业化，洞察科技介绍称，公司已突破了固态纳米孔制备的瓶颈，实现了1-100nm孔径固态纳米孔的精准、低成本和高稳定性可控制备。同时，公司通过多通道并行打孔，实现了晶圆上纳米孔阵列的制备，使该技术从实验室走向工程化量产成为可能。
+值得注意的是，固态纳米孔技术的工程化落地，有望重塑现有的分子诊断与基因测序市场格局。在精准医疗、感染性疾病监控及肿瘤早筛等高频刚需场景中，其“无需扩增、单分子直读”&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，作者 | 张子怡
+编辑 | 袁斯来
+硬氪获悉，广州洞察科技有限公司（以下简称“洞察科技”）于近日完成数千万元Pre-A轮融资。本轮融资由联想创投领投，力合金融、哇牛资本跟投，老股东天图资本和雅亿资本持续加注，芯湃资本担任本轮财务顾问。融资资金将用于晶圆级超高密度打孔机、超薄膜材料以及基因测序仪商业机的研发。
+固态纳米孔是一种以半导体工艺为基础的单分子传感平台。相比传统方案，该技术结构简洁，无需复杂的扩增与标记步骤，能够直接测量生物大分子的本征物理属性。在基因测序、癌症早筛和单分子分析中潜力巨大。
+洞察科技专注于固态纳米孔单分子检测技术的研 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="https://36kr.com/p/3735674146865160?f=rss" target="_blank" rel="noopener"
+ &gt;https://36kr.com/p/3735674146865160?f=rss&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-24T06:00:37.235471&lt;/em&gt;&lt;/p&gt;</description></item><item><title>珀乐互动完成天使轮融资，以AI+IP重塑数字内容生态 | 36氪首发</title><link>https://blog.caowo.de/posts/auto-ai-20260324-652/</link><pubDate>Tue, 24 Mar 2026 06:00:29 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-ai-20260324-652/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;36氪获悉，以AI为核心的数字内容公司珀乐互动科技（下称“珀乐互动”）已完成天使轮融资，金额为数千万元人民币。本轮投资由星连资本领投、春华创投跟投，资金将重点用于技术研发、团队扩充与IP商业化开发，全面加速公司多模态泛娱乐生态的战略布局。
+珀乐互动成立于2025年，是一家聚焦于“AI+IP”融合模式的科技公司。其核心业务是通过自研技术中台，将AI大模型能力深度应用于IP的开发、运营与衍生环节，提升全链条效率。
+公司核心团队汇集了AI、影视创作、数字内容制作等多领域的人才。创始人杨晟曾参与制作多部影视作品，也曾监制Steam爆款互动影游，具备跨界打造成功产品的经验与商业落地能力。
+值得一提的是，智谱AI已与珀乐互动开展大模型、AI工具、内容生产等多领域的深度合作，而珀乐互动也有望成为人工智能科技企业在泛娱乐生态链上的重要成员。
+技术方面，珀乐互动打破常规的技术调用层面，通过将底层算力无缝转化为交互生产力，基于“技术底层+娱乐场景”的融合模式，深度整合智谱、生数等头部模型底座。
+杨晟表示，珀乐互动正在打造一条从低成本算力投入到高溢价合规数字资产累积的高效能转化链路，重新&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，36氪获悉，以AI为核心的数字内容公司珀乐互动科技（下称“珀乐互动”）已完成天使轮融资，金额为数千万元人民币。本轮投资由星连资本领投、春华创投跟投，资金将重点用于技术研发、团队扩充与IP商业化开发，全面加速公司多模态泛娱乐生态的战略布局。
+珀乐互动成立于2025年，是一家聚焦于“AI+IP”融合模式的科技公司。其核心业务是通过自研技术中台，将AI大模型能力深度应用于IP的开发、运营与衍生环节，提升全链条效率。
+公司核心团队汇集了AI、影视创作、数字内容制作等多领域的人才。创始人杨晟曾参与制作多部影视作品，也曾监制Steam爆款互动影游，具备跨界打造成功产品的经验与商业落地能力。
+值 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="https://36kr.com/p/3735324365094918?f=rss" target="_blank" rel="noopener"
+ &gt;https://36kr.com/p/3735324365094918?f=rss&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-24T06:00:29.516719&lt;/em&gt;&lt;/p&gt;</description></item><item><title>科技爱好者周刊（第 388 期）：测试是新的护城河</title><link>https://blog.caowo.de/posts/auto-tech-20260323-985/</link><pubDate>Mon, 23 Mar 2026 18:01:11 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-tech-20260323-985/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
 &lt;/h2&gt;&lt;p&gt;这里记录每周值得分享的科技内容，周五发布。&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt; 本杂志开源，欢迎投稿。另有《谁在招人》服务，发布程序员招聘信息。合作请邮件联系（yifeng.ruan@gmail.com）。
 &lt;/code&gt;&lt;/pre&gt;

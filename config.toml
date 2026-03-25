@@ -48,6 +48,8 @@ paginate = 10
     token = "SDZvDCIq-3er2UKht5fIrl2UvvIrJxi6hZVxBfIa"
 
 [markup]
+  [markup.goldmark.renderer]
+    unsafe = true
   [markup.highlight]
     codeFences = true
     guessSyntax = false

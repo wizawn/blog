@@ -1,20 +1,3 @@
-
-# =============================================================================
-# Copyright (C) 2026 言零 (GOV-HACK)
-# All Rights Reserved.
-#
-# 官方网站：https://www.caowo.de | https://www.wizawn.com
-# 技术博客：https://blog.caowo.de | https://blog.wizawn.com
-# 软著材料代生成平台：https://ruanzhu.caowo.de | https://ruanzhu.wizawn.com
-#
-# 开发者：言零
-# 微信号：GOV-HACK
-# QQ：46333839
-#
-# 本软件受著作权法保护，未经授权禁止复制、修改、分发或用于商业用途。
-# 违反者将承担法律责任。
-# =============================================================================
-
 <template>
   <el-container class="app-container">
     <el-aside width="200px" class="sidebar">
@@ -54,7 +37,6 @@
         </el-menu-item>
       </el-menu>
     </el-aside>
-
     <el-container>
       <el-header class="header">
         <div class="header-left">
@@ -67,23 +49,19 @@
           </el-tag>
         </div>
       </el-header>
-
       <el-main class="main-content">
         <router-view />
       </el-main>
     </el-container>
   </el-container>
 </template>
-
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { apiClient } from '@/api/client'
-
 const route = useRoute()
 const tradingMode = ref('paper')
 const apiStatus = ref('连接中...')
-
 const pageTitle = computed(() => {
   const titles = {
     '/dashboard': '仪表盘',
@@ -95,7 +73,6 @@ const pageTitle = computed(() => {
   }
   return titles[route.path] || 'ClawGuard-BNB'
 })
-
 const modeType = computed(() => {
   const types = {
     'paper': 'info',
@@ -104,11 +81,9 @@ const modeType = computed(() => {
   }
   return types[tradingMode.value] || 'info'
 })
-
 const statusType = computed(() => {
   return apiStatus.value === '已连接' ? 'success' : 'danger'
 })
-
 const loadSystemStatus = async () => {
   try {
     const res = await apiClient.get('/api/dashboard/system-status')
@@ -122,23 +97,28 @@ const loadSystemStatus = async () => {
   }
 }
 
+let statusInterval = null
+
 onMounted(() => {
   loadSystemStatus()
   // 每30秒刷新一次状态
-  setInterval(loadSystemStatus, 30000)
+  statusInterval = setInterval(loadSystemStatus, 30000)
+})
+
+onUnmounted(() => {
+  if (statusInterval) {
+    clearInterval(statusInterval)
+  }
 })
 </script>
-
 <style scoped>
 .app-container {
   height: 100vh;
 }
-
 .sidebar {
   background-color: #304156;
   overflow-x: hidden;
 }
-
 .logo {
   height: 60px;
   display: flex;
@@ -147,12 +127,10 @@ onMounted(() => {
   color: #fff;
   background-color: #2b3a4a;
 }
-
 .logo h2 {
   margin: 0;
   font-size: 20px;
 }
-
 .header {
   background-color: #fff;
   border-bottom: 1px solid #e6e6e6;
@@ -161,31 +139,26 @@ onMounted(() => {
   justify-content: space-between;
   padding: 0 20px;
 }
-
 .header-left h3 {
   margin: 0;
   font-size: 18px;
   color: #303133;
 }
-
 .header-right {
   display: flex;
   align-items: center;
 }
-
 .main-content {
   background-color: #f0f2f5;
   padding: 20px;
 }
 </style>
-
 <style>
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }

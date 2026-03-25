@@ -28,10 +28,15 @@ from src.trading.unified_client import UnifiedTradingClient
 from src.api.binance_futures_client import BinanceFuturesClient
 from src.risk.risk_control import RiskControlEngine
 from src.config.config_manager import ConfigManager
+from src.database.repository import OrderRepository, TradeRepository
 import logging
 
 bp = Blueprint('trading', __name__)
 logger = logging.getLogger(__name__)
+
+# Initialize repositories
+order_repo = OrderRepository()
+trade_repo = TradeRepository()
 
 
 @bp.route('/spot/order', methods=['POST'])
@@ -153,6 +158,22 @@ def place_spot_order():
             order_params['timeInForce'] = 'GTC'
 
         result = client.create_order(**order_params)
+
+        # Save order to database
+        try:
+            order_repo.create(
+                strategy_id=None,  # Manual order, no strategy
+                order_id=str(result.get('orderId', '')),
+                symbol=symbol,
+                side=side,
+                type=order_type,
+                price=float(result.get('price', price or current_price)),
+                quantity=float(result.get('executedQty', quantity)),
+                status=result.get('status', 'NEW')
+            )
+            logger.info(f"Spot order saved to database: {result.get('orderId')}")
+        except Exception as e:
+            logger.error(f"Failed to save order to database: {e}")
 
         return jsonify({
             'success': True,
@@ -319,6 +340,22 @@ def place_futures_order():
             order_params['timeInForce'] = 'GTC'
 
         result = client.create_order(**order_params)
+
+        # Save order to database
+        try:
+            order_repo.create(
+                strategy_id=None,  # Manual order, no strategy
+                order_id=str(result.get('orderId', '')),
+                symbol=symbol,
+                side=side,
+                type=order_type,
+                price=float(result.get('avgPrice', price or 0)),
+                quantity=float(result.get('executedQty', quantity)),
+                status=result.get('status', 'NEW')
+            )
+            logger.info(f"Futures order saved to database: {result.get('orderId')}")
+        except Exception as e:
+            logger.error(f"Failed to save futures order to database: {e}")
 
         return jsonify({
             'success': True,
@@ -500,6 +537,279 @@ def get_account():
 
     except Exception as e:
         logger.error(f"获取账户信息失败: {e}")
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        }), 500
+
+# ==================== 新增的统一API端点 ====================
+
+@bp.route('/balance', methods=['GET'])
+def get_balance():
+    """获取账户余额（现货+合约）"""
+    try:
+        from src.api.binance_client import BinanceClient
+        from src.api.binance_futures_client import BinanceFuturesClient
+
+        spot_client = BinanceClient()
+        futures_client = BinanceFuturesClient()
+
+        # 获取现货余额
+        spot_balance = []
+        try:
+            spot_account = spot_client.get_account()
+            for balance in spot_account.get('balances', []):
+                free = float(balance['free'])
+                locked = float(balance['locked'])
+                if free > 0 or locked > 0:
+                    spot_balance.append({
+                        'asset': balance['asset'],
+                        'free': free,
+                        'locked': locked,
+                        'total': free + locked
+                    })
+        except Exception as e:
+            logger.warning(f"获取现货余额失败: {e}")
+
+        # 获取合约余额
+        futures_balance = []
+        try:
+            futures_account = futures_client.get_balance()
+            for balance in futures_account:
+                available = float(balance.get('availableBalance', 0))
+                if available > 0:
+                    futures_balance.append({
+                        'asset': balance['asset'],
+                        'available': available,
+                        'balance': float(balance.get('balance', 0)),
+                        'crossUnPnl': float(balance.get('crossUnPnl', 0))
+                    })
+        except Exception as e:
+            logger.warning(f"获取合约余额失败: {e}")
+
+        return jsonify({
+            'success': True,
+            'data': {
+                'spot': spot_balance,
+                'futures': futures_balance
+            }
+        })
+
+    except Exception as e:
+        logger.error(f"获取余额失败: {e}")
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        }), 500
+
+
+@bp.route('/positions', methods=['GET'])
+def get_positions():
+    """获取当前持仓（现货+合约）"""
+    try:
+        from src.api.binance_futures_client import BinanceFuturesClient
+
+        futures_client = BinanceFuturesClient()
+
+        # 获取合约持仓
+        positions = []
+        try:
+            position_risk = futures_client.get_position_risk()
+            for pos in position_risk:
+                position_amt = float(pos.get('positionAmt', 0))
+                if position_amt != 0:  # 只返回有持仓的
+                    positions.append({
+                        'symbol': pos['symbol'],
+                        'positionAmt': position_amt,
+                        'entryPrice': float(pos.get('entryPrice', 0)),
+                        'markPrice': float(pos.get('markPrice', 0)),
+                        'unRealizedProfit': float(pos.get('unRealizedProfit', 0)),
+                        'leverage': int(pos.get('leverage', 1)),
+                        'positionSide': pos.get('positionSide', 'BOTH'),
+                        'liquidationPrice': float(pos.get('liquidationPrice', 0))
+                    })
+        except Exception as e:
+            logger.warning(f"获取合约持仓失败: {e}")
+
+        return jsonify({
+            'success': True,
+            'data': {
+                'positions': positions,
+                'count': len(positions)
+            }
+        })
+
+    except Exception as e:
+        logger.error(f"获取持仓失败: {e}")
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        }), 500
+
+
+@bp.route('/place-order', methods=['POST'])
+def place_unified_order():
+    """统一下单接口（现货/合约）"""
+    try:
+        data = request.get_json()
+
+        market_type = data.get('market_type', 'spot')
+        symbol = data.get('symbol')
+        side = data.get('side')
+        order_type = data.get('type', 'MARKET')
+        quantity = data.get('quantity')
+        price = data.get('price')
+
+        # 参数验证
+        if not all([symbol, side, quantity]):
+            return jsonify({
+                'success': False,
+                'error': '缺少必需参数: symbol, side, quantity'
+            }), 400
+
+        if side not in ['BUY', 'SELL']:
+            return jsonify({
+                'success': False,
+                'error': 'side 必须是 BUY 或 SELL'
+            }), 400
+
+        quantity = float(quantity)
+        if quantity <= 0:
+            return jsonify({
+                'success': False,
+                'error': 'quantity 必须大于 0'
+            }), 400
+
+        if order_type == 'LIMIT' and not price:
+            return jsonify({
+                'success': False,
+                'error': '限价单必须提供 price'
+            }), 400
+
+        # 风控检查
+        risk_control = RiskControlEngine()
+        if not risk_control.check_order_allowed(symbol, side, quantity):
+            return jsonify({
+                'success': False,
+                'error': '订单未通过风控检查'
+            }), 403
+
+        # 下单
+        if market_type == 'spot':
+            from src.api.binance_client import BinanceClient
+            client = BinanceClient()
+
+            if order_type == 'MARKET':
+                result = client.create_order(
+                    symbol=symbol,
+                    side=side,
+                    type='MARKET',
+                    quantity=quantity
+                )
+            else:
+                result = client.create_order(
+                    symbol=symbol,
+                    side=side,
+                    type='LIMIT',
+                    quantity=quantity,
+                    price=float(price),
+                    timeInForce='GTC'
+                )
+        else:
+            from src.api.binance_futures_client import BinanceFuturesClient
+            client = BinanceFuturesClient()
+            result = client.place_order(
+                symbol=symbol,
+                side=side,
+                order_type=order_type,
+                quantity=quantity,
+                price=float(price) if price else None
+            )
+
+        return jsonify({
+            'success': True,
+            'data': result
+        })
+
+    except Exception as e:
+        logger.error(f"下单失败: {e}")
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        }), 500
+
+
+@bp.route('/cancel-order', methods=['DELETE'])
+def cancel_unified_order():
+    """取消订单"""
+    try:
+        data = request.get_json()
+
+        market_type = data.get('market_type', 'spot')
+        symbol = data.get('symbol')
+        order_id = data.get('order_id')
+
+        if not all([symbol, order_id]):
+            return jsonify({
+                'success': False,
+                'error': '缺少必需参数: symbol, order_id'
+            }), 400
+
+        if market_type == 'spot':
+            from src.api.binance_client import BinanceClient
+            client = BinanceClient()
+            result = client.cancel_order(symbol, int(order_id))
+        else:
+            from src.api.binance_futures_client import BinanceFuturesClient
+            client = BinanceFuturesClient()
+            result = client.cancel_order(symbol, int(order_id))
+
+        return jsonify({
+            'success': True,
+            'data': result
+        })
+
+    except Exception as e:
+        logger.error(f"取消订单失败: {e}")
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        }), 500
+
+
+@bp.route('/order-history', methods=['GET'])
+def get_order_history():
+    """获取订单历史"""
+    try:
+        market_type = request.args.get('market_type', 'spot')
+        symbol = request.args.get('symbol')
+        limit = request.args.get('limit', 100, type=int)
+
+        if not symbol:
+            return jsonify({
+                'success': False,
+                'error': '缺少必需参数: symbol'
+            }), 400
+
+        if market_type == 'spot':
+            from src.api.binance_client import BinanceClient
+            client = BinanceClient()
+            orders = client.get_all_orders(symbol, limit=limit)
+        else:
+            from src.api.binance_futures_client import BinanceFuturesClient
+            client = BinanceFuturesClient()
+            orders = client.get_all_orders(symbol, limit=limit)
+
+        return jsonify({
+            'success': True,
+            'data': {
+                'orders': orders,
+                'count': len(orders)
+            }
+        })
+
+    except Exception as e:
+        logger.error(f"获取订单历史失败: {e}")
         return jsonify({
             'success': False,
             'error': str(e)

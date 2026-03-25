@@ -1,5 +1,0 @@
-Traceback (most recent call last):
-  File "/root/.openclaw/workspace/ClawGuard-BNB/btc-price-alert.py", line 33, in <module>
-    current_trailing_stop = ENTRY_PRICE  # 当前移动止损位
-                            ^^^^^^^^^^^
-NameError: name 'ENTRY_PRICE' is not defined

@@ -38,3 +38,658 @@
 [2026-03-09 03:30:13] 💰 BTC: $67,239.47 | 盈亏：$-2.60 (-0.49%)
 [2026-03-09 03:40:17] 💰 BTC: $67,101.61 | 盈亏：$-1.50 (-0.28%)
 [2026-03-09 05:34:58] ⚠️ 突破止损预警 $67180 | 当前：$67,587.08
+2026-03-11 14:01:40,361 - INFO - ============================================================
+2026-03-11 14:01:40,362 - INFO - 🚀 BTC 利空/利好消息实时监控启动
+2026-03-11 14:01:40,362 - INFO - 检查间隔：60秒
+2026-03-11 14:01:40,362 - INFO - 订阅源：12 个
+2026-03-11 14:01:40,362 - INFO - ============================================================
+2026-03-11 14:01:59,695 - INFO - 发现 6 条重大消息！
+2026-03-11 14:01:59,696 - WARNING - ============================================================
+2026-03-11 14:01:59,696 - WARNING - 🚨 重大消息告警！
+2026-03-11 14:01:59,696 - WARNING - NEUTRAL: Is crypto needed to protect the security of AI agents paying each other online?
+2026-03-11 14:01:59,696 - WARNING - BULLISH: Prosecutors push to retry Tornado Cash founder even after Washington said crypto mixers have legal uses
+2026-03-11 14:01:59,696 - WARNING - NEUTRAL: How AI Assistants are Moving the Security Goalposts
+2026-03-11 14:01:59,697 - WARNING - BEARISH: Meta Disables 150K Accounts Linked to Southeast Asia Scam Centers in Global Crackdown
+2026-03-11 14:01:59,697 - WARNING - NEUTRAL: Dozens of Vendors Patch Security Flaws Across Enterprise Software and Network Devices
+2026-03-11 14:01:59,697 - WARNING - BEARISH: What Boards Must Demand in the Age of AI-Automated Exploitation
+2026-03-11 14:01:59,697 - WARNING - ============================================================
+2026-03-11 14:09:53,218 - ERROR - RSS 抓取失败 https://cointelegraph.com/rss: HTTPSConnectionPool(host='cointelegraph.com', port=443): Max retries exceeded with url: /rss (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-11 14:10:20,246 - ERROR - RSS 抓取失败 https://feeds.feedburner.com/TheHackersNews: HTTPSConnectionPool(host='feeds.feedburner.com', port=443): Max retries exceeded with url: /TheHackersNews (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-11 14:10:20,247 - INFO - 💓 心跳正常 - 已监控 6 条新闻
+2026-03-11 14:20:11,557 - INFO - 发现 1 条重大消息！
+2026-03-11 14:20:11,558 - WARNING - ============================================================
+2026-03-11 14:20:11,558 - WARNING - 🚨 重大消息告警！
+2026-03-11 14:20:11,558 - WARNING - NEUTRAL: SlowMist introduces Web3 security stack for autonomous AI agents
+2026-03-11 14:20:11,558 - WARNING - ============================================================
+2026-03-11 14:25:43,647 - INFO - 💓 心跳正常 - 已监控 7 条新闻
+2026-03-11 14:35:27,828 - INFO - 💓 心跳正常 - 已监控 7 条新闻
+2026-03-11 14:40:58,624 - INFO - 💓 心跳正常 - 已监控 7 条新闻
+2026-03-11 14:45:11,290 - INFO - 💓 心跳正常 - 已监控 7 条新闻
+2026-03-11 14:50:56,297 - INFO - 💓 心跳正常 - 已监控 7 条新闻
+2026-03-11 14:55:02,134 - INFO - 💓 心跳正常 - 已监控 7 条新闻
+2026-03-11 15:00:31,584 - INFO - 💓 心跳正常 - 已监控 7 条新闻
+2026-03-11 15:10:25,166 - INFO - 💓 心跳正常 - 已监控 7 条新闻
+2026-03-11 15:13:10,369 - INFO - 发现 1 条重大消息！
+2026-03-11 15:13:10,370 - WARNING - ============================================================
+2026-03-11 15:13:10,370 - WARNING - 🚨 重大消息告警！
+2026-03-11 15:13:10,370 - WARNING - BEARISH: European Central Bank unveils tokenized finance plan to bolster EU's financial autonomy
+2026-03-11 15:13:10,370 - WARNING - ============================================================
+2026-03-11 15:15:57,601 - INFO - 💓 心跳正常 - 已监控 8 条新闻
+2026-03-11 15:20:05,320 - INFO - 💓 心跳正常 - 已监控 8 条新闻
+2026-03-11 15:25:31,818 - INFO - 💓 心跳正常 - 已监控 8 条新闻
+2026-03-11 15:34:53,455 - ERROR - RSS 抓取失败 https://cointelegraph.com/rss: HTTPSConnectionPool(host='cointelegraph.com', port=443): Max retries exceeded with url: /rss (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-11 15:35:15,238 - INFO - 💓 心跳正常 - 已监控 8 条新闻
+2026-03-11 15:40:50,406 - INFO - 💓 心跳正常 - 已监控 8 条新闻
+2026-03-11 15:50:26,824 - INFO - 💓 心跳正常 - 已监控 8 条新闻
+2026-03-11 15:55:47,936 - INFO - 💓 心跳正常 - 已监控 8 条新闻
+2026-03-11 16:01:07,433 - ERROR - RSS 抓取失败 https://openai.com/blog/rss: HTTPSConnectionPool(host='openai.com', port=443): Max retries exceeded with url: /blog/rss (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-11 16:05:30,233 - INFO - 💓 心跳正常 - 已监控 8 条新闻
+2026-03-11 16:15:19,005 - INFO - 💓 心跳正常 - 已监控 8 条新闻
+2026-03-11 16:20:58,246 - INFO - 💓 心跳正常 - 已监控 8 条新闻
+2026-03-11 16:25:06,676 - INFO - 发现 1 条重大消息！
+2026-03-11 16:25:06,676 - WARNING - ============================================================
+2026-03-11 16:25:06,677 - WARNING - 🚨 重大消息告警！
+2026-03-11 16:25:06,677 - WARNING - BEARISH: Iran-Backed Hackers Claim Wiper Attack on Medtech Firm Stryker
+2026-03-11 16:25:06,677 - WARNING - ============================================================
+2026-03-11 16:30:59,358 - INFO - 💓 心跳正常 - 已监控 9 条新闻
+2026-03-11 16:35:05,504 - INFO - 💓 心跳正常 - 已监控 9 条新闻
+2026-03-11 16:40:29,840 - INFO - 💓 心跳正常 - 已监控 9 条新闻
+2026-03-11 16:43:32,355 - INFO - 发现 1 条重大消息！
+2026-03-11 16:43:32,355 - WARNING - ============================================================
+2026-03-11 16:43:32,355 - WARNING - 🚨 重大消息告警！
+2026-03-11 16:43:32,356 - WARNING - BULLISH: Basic adds VanEck crypto ETFs to 401(k) plans amid US retirement shift
+2026-03-11 16:43:32,356 - WARNING - ============================================================
+2026-03-11 16:47:50,583 - INFO - 发现 1 条重大消息！
+2026-03-11 16:47:50,583 - WARNING - ============================================================
+2026-03-11 16:47:50,583 - WARNING - 🚨 重大消息告警！
+2026-03-11 16:47:50,584 - WARNING - BEARISH: Crypto-friendly fintech Revolut gains full UK banking license
+2026-03-11 16:47:50,584 - WARNING - ============================================================
+2026-03-11 16:50:39,132 - INFO - 💓 心跳正常 - 已监控 11 条新闻
+2026-03-11 17:00:29,036 - INFO - 💓 心跳正常 - 已监控 11 条新闻
+2026-03-11 17:05:00,746 - INFO - 💓 心跳正常 - 已监控 11 条新闻
+2026-03-11 17:10:30,999 - INFO - 💓 心跳正常 - 已监控 11 条新闻
+2026-03-11 17:20:26,854 - INFO - 💓 心跳正常 - 已监控 11 条新闻
+2026-03-11 17:27:36,132 - ERROR - RSS 抓取失败 https://cryptoslate.com/feed/: HTTPSConnectionPool(host='cryptoslate.com', port=443): Read timed out. (read timeout=10)
+2026-03-11 17:30:33,091 - INFO - 💓 心跳正常 - 已监控 11 条新闻
+2026-03-11 17:31:41,623 - ERROR - RSS 抓取失败 https://cryptoslate.com/feed/: HTTPSConnectionPool(host='cryptoslate.com', port=443): Max retries exceeded with url: /feed/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-11 17:40:07,870 - ERROR - RSS 抓取失败 https://cointelegraph.com/rss: HTTPSConnectionPool(host='cointelegraph.com', port=443): Max retries exceeded with url: /rss (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-11 17:40:25,957 - INFO - 💓 心跳正常 - 已监控 11 条新闻
+2026-03-11 17:41:39,923 - ERROR - RSS 抓取失败 https://cointelegraph.com/rss: HTTPSConnectionPool(host='cointelegraph.com', port=443): Read timed out. (read timeout=10)
+2026-03-11 17:50:22,065 - INFO - 💓 心跳正常 - 已监控 11 条新闻
+2026-03-11 17:55:57,818 - INFO - 💓 心跳正常 - 已监控 11 条新闻
+2026-03-11 18:00:09,362 - INFO - 💓 心跳正常 - 已监控 11 条新闻
+2026-03-11 18:05:26,723 - INFO - 💓 心跳正常 - 已监控 11 条新闻
+2026-03-11 18:10:54,894 - INFO - 💓 心跳正常 - 已监控 11 条新闻
+2026-03-11 18:20:20,921 - INFO - 💓 心跳正常 - 已监控 11 条新闻
+2026-03-11 18:25:46,646 - INFO - 💓 心跳正常 - 已监控 11 条新闻
+2026-03-11 18:35:16,449 - INFO - 💓 心跳正常 - 已监控 11 条新闻
+2026-03-11 18:40:48,374 - INFO - 💓 心跳正常 - 已监控 11 条新闻
+2026-03-11 18:42:05,940 - ERROR - RSS 抓取失败 https://huggingface.co/blog/feed.xml: HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /blog/feed.xml (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-11 18:50:23,652 - INFO - 💓 心跳正常 - 已监控 11 条新闻
+2026-03-11 18:55:55,127 - INFO - 💓 心跳正常 - 已监控 11 条新闻
+2026-03-11 19:00:18,841 - INFO - 💓 心跳正常 - 已监控 11 条新闻
+2026-03-11 19:10:42,283 - INFO - 💓 心跳正常 - 已监控 11 条新闻
+2026-03-11 19:15:18,987 - INFO - 💓 心跳正常 - 已监控 11 条新闻
+2026-03-11 19:19:57,617 - INFO - 发现 1 条重大消息！
+2026-03-11 19:19:57,617 - WARNING - ============================================================
+2026-03-11 19:19:57,617 - WARNING - 🚨 重大消息告警！
+2026-03-11 19:19:57,617 - WARNING - BULLISH: Ripple's share buyback program values the firm at $50 billion: Bloomberg
+2026-03-11 19:19:57,617 - WARNING - ============================================================
+2026-03-11 19:30:32,915 - INFO - 💓 心跳正常 - 已监控 12 条新闻
+2026-03-11 19:31:40,656 - ERROR - RSS 抓取失败 https://cointelegraph.com/rss: HTTPSConnectionPool(host='cointelegraph.com', port=443): Max retries exceeded with url: /rss (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-11 19:35:34,410 - INFO - 💓 心跳正常 - 已监控 12 条新闻
+2026-03-11 19:40:32,967 - INFO - 💓 心跳正常 - 已监控 12 条新闻
+2026-03-11 19:43:12,831 - ERROR - RSS 抓取失败 https://cryptoslate.com/feed/: HTTPSConnectionPool(host='cryptoslate.com', port=443): Read timed out. (read timeout=10)
+2026-03-11 19:46:07,881 - ERROR - RSS 抓取失败 https://cryptoslate.com/feed/: HTTPSConnectionPool(host='cryptoslate.com', port=443): Read timed out. (read timeout=10)
+2026-03-11 19:47:37,178 - ERROR - RSS 抓取失败 https://cryptoslate.com/feed/: HTTPSConnectionPool(host='cryptoslate.com', port=443): Read timed out. (read timeout=10)
+2026-03-11 19:50:36,811 - INFO - 💓 心跳正常 - 已监控 12 条新闻
+2026-03-11 19:51:51,662 - ERROR - RSS 抓取失败 https://cryptoslate.com/feed/: HTTPSConnectionPool(host='cryptoslate.com', port=443): Read timed out. (read timeout=10)
+2026-03-11 19:57:31,713 - ERROR - RSS 抓取失败 https://cryptoslate.com/feed/: HTTPSConnectionPool(host='cryptoslate.com', port=443): Read timed out. (read timeout=10)
+2026-03-11 20:00:42,975 - INFO - 💓 心跳正常 - 已监控 12 条新闻
+2026-03-11 20:02:06,719 - INFO - 发现 1 条重大消息！
+2026-03-11 20:02:06,720 - WARNING - ============================================================
+2026-03-11 20:02:06,720 - WARNING - 🚨 重大消息告警！
+2026-03-11 20:02:06,720 - WARNING - NEUTRAL: XRP leverage collapses 78%, but $1.4B in ETF money still won’t leave because of Ripple’s expanding footprint
+2026-03-11 20:02:06,720 - WARNING - ============================================================
+2026-03-11 20:03:21,548 - ERROR - RSS 抓取失败 https://cryptoslate.com/feed/: HTTPSConnectionPool(host='cryptoslate.com', port=443): Read timed out. (read timeout=10)
+2026-03-11 20:05:00,029 - INFO - 💓 心跳正常 - 已监控 13 条新闻
+2026-03-11 20:07:36,290 - ERROR - RSS 抓取失败 https://cryptoslate.com/feed/: HTTPSConnectionPool(host='cryptoslate.com', port=443): Read timed out. (read timeout=10)
+2026-03-11 20:09:07,772 - ERROR - RSS 抓取失败 https://cryptoslate.com/feed/: HTTPSConnectionPool(host='cryptoslate.com', port=443): Read timed out. (read timeout=10)
+2026-03-11 20:10:38,229 - ERROR - RSS 抓取失败 https://cryptoslate.com/feed/: HTTPSConnectionPool(host='cryptoslate.com', port=443): Read timed out. (read timeout=10)
+2026-03-11 20:10:54,411 - INFO - 💓 心跳正常 - 已监控 13 条新闻
+2026-03-11 20:12:10,122 - ERROR - RSS 抓取失败 https://cryptoslate.com/feed/: HTTPSConnectionPool(host='cryptoslate.com', port=443): Read timed out. (read timeout=10)
+2026-03-11 20:15:10,264 - INFO - 💓 心跳正常 - 已监控 13 条新闻
+2026-03-11 20:16:25,550 - ERROR - RSS 抓取失败 https://cryptoslate.com/feed/: HTTPSConnectionPool(host='cryptoslate.com', port=443): Read timed out. (read timeout=10)
+2026-03-11 20:17:52,735 - ERROR - RSS 抓取失败 https://cryptoslate.com/feed/: HTTPSConnectionPool(host='cryptoslate.com', port=443): Read timed out. (read timeout=10)
+2026-03-11 20:20:43,401 - ERROR - RSS 抓取失败 https://cryptoslate.com/feed/: HTTPSConnectionPool(host='cryptoslate.com', port=443): Read timed out. (read timeout=10)
+2026-03-11 20:20:57,151 - INFO - 💓 心跳正常 - 已监控 13 条新闻
+2026-03-11 20:23:43,764 - INFO - 发现 1 条重大消息！
+2026-03-11 20:23:43,765 - WARNING - ============================================================
+2026-03-11 20:23:43,765 - WARNING - 🚨 重大消息告警！
+2026-03-11 20:23:43,766 - WARNING - BEARISH: Revolut obtains UK bank license, teases upcoming services
+2026-03-11 20:23:43,766 - WARNING - ============================================================
+2026-03-11 20:25:09,715 - INFO - 发现 1 条重大消息！
+2026-03-11 20:25:09,715 - WARNING - ============================================================
+2026-03-11 20:25:09,715 - WARNING - 🚨 重大消息告警！
+2026-03-11 20:25:09,716 - WARNING - NEUTRAL: Bitcoin holds $70,000, starting to show relative strength versus stocks, software sector, and gold
+2026-03-11 20:25:09,716 - WARNING - ============================================================
+2026-03-11 20:30:38,875 - INFO - 💓 心跳正常 - 已监控 15 条新闻
+2026-03-11 20:40:25,244 - INFO - 💓 心跳正常 - 已监控 15 条新闻
+2026-03-11 20:50:25,981 - ERROR - RSS 抓取失败 https://feeds.feedburner.com/TheHackersNews: HTTPSConnectionPool(host='feeds.feedburner.com', port=443): Max retries exceeded with url: /TheHackersNews (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-11 20:50:25,981 - INFO - 💓 心跳正常 - 已监控 15 条新闻
+2026-03-11 21:00:16,057 - INFO - 💓 心跳正常 - 已监控 15 条新闻
+2026-03-11 21:05:43,169 - INFO - 💓 心跳正常 - 已监控 15 条新闻
+2026-03-11 21:12:32,669 - INFO - 发现 1 条重大消息！
+2026-03-11 21:12:32,670 - WARNING - ============================================================
+2026-03-11 21:12:32,670 - WARNING - 🚨 重大消息告警！
+2026-03-11 21:12:32,670 - WARNING - BULLISH: Ripple's share buyback program values the firm at $50 billion
+2026-03-11 21:12:32,670 - WARNING - ============================================================
+2026-03-11 21:15:15,068 - INFO - 💓 心跳正常 - 已监控 16 条新闻
+2026-03-11 21:20:56,205 - INFO - 💓 心跳正常 - 已监控 16 条新闻
+2026-03-11 21:30:43,193 - INFO - 💓 心跳正常 - 已监控 16 条新闻
+2026-03-11 21:40:12,116 - INFO - 💓 心跳正常 - 已监控 16 条新闻
+2026-03-11 21:45:45,115 - INFO - 💓 心跳正常 - 已监控 16 条新闻
+2026-03-11 21:55:25,148 - INFO - 💓 心跳正常 - 已监控 16 条新闻
+2026-03-11 21:58:10,230 - ERROR - RSS 抓取失败 https://openai.com/blog/rss: HTTPSConnectionPool(host='openai.com', port=443): Max retries exceeded with url: /blog/rss (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-11 22:05:22,779 - INFO - 💓 心跳正常 - 已监控 16 条新闻
+2026-03-11 22:10:56,456 - INFO - 💓 心跳正常 - 已监控 16 条新闻
+2026-03-11 22:15:14,424 - INFO - 💓 心跳正常 - 已监控 16 条新闻
+2026-03-11 22:25:23,371 - INFO - 💓 心跳正常 - 已监控 16 条新闻
+2026-03-11 22:30:44,043 - INFO - 💓 心跳正常 - 已监控 16 条新闻
+2026-03-11 22:40:24,545 - INFO - 💓 心跳正常 - 已监控 16 条新闻
+2026-03-11 22:50:15,586 - INFO - 💓 心跳正常 - 已监控 16 条新闻
+2026-03-11 22:55:56,949 - INFO - 💓 心跳正常 - 已监控 16 条新闻
+2026-03-11 23:00:15,970 - INFO - 💓 心跳正常 - 已监控 16 条新闻
+2026-03-11 23:03:02,922 - INFO - 发现 1 条重大消息！
+2026-03-11 23:03:02,922 - WARNING - ============================================================
+2026-03-11 23:03:02,922 - WARNING - 🚨 重大消息告警！
+2026-03-11 23:03:02,922 - WARNING - NEUTRAL: SEC, CFTC end years of rivalry with deal that will mean combined crypto oversight
+2026-03-11 23:03:02,922 - WARNING - ============================================================
+2026-03-11 23:05:49,208 - INFO - 💓 心跳正常 - 已监控 17 条新闻
+2026-03-11 23:10:31,201 - INFO - 💓 心跳正常 - 已监控 17 条新闻
+2026-03-11 23:13:25,320 - ERROR - RSS 抓取失败 https://feeds.feedburner.com/TheHackersNews: HTTPSConnectionPool(host='feeds.feedburner.com', port=443): Max retries exceeded with url: /TheHackersNews (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-11 23:20:31,497 - INFO - 💓 心跳正常 - 已监控 17 条新闻
+2026-03-11 23:30:30,701 - INFO - 💓 心跳正常 - 已监控 17 条新闻
+2026-03-11 23:35:55,529 - INFO - 💓 心跳正常 - 已监控 17 条新闻
+2026-03-11 23:40:01,875 - INFO - 💓 心跳正常 - 已监控 17 条新闻
+2026-03-11 23:50:36,267 - INFO - 💓 心跳正常 - 已监控 17 条新闻
+2026-03-11 23:55:58,819 - INFO - 💓 心跳正常 - 已监控 17 条新闻
+2026-03-12 00:00:03,312 - INFO - 💓 心跳正常 - 已监控 17 条新闻
+2026-03-12 00:05:27,426 - INFO - 💓 心跳正常 - 已监控 17 条新闻
+2026-03-12 00:10:51,169 - INFO - 💓 心跳正常 - 已监控 17 条新闻
+2026-03-12 00:20:19,878 - ERROR - RSS 抓取失败 https://www.bleepingcomputer.com/feed/: HTTPSConnectionPool(host='www.bleepingcomputer.com', port=443): Max retries exceeded with url: /feed/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-12 00:20:24,989 - INFO - 💓 心跳正常 - 已监控 17 条新闻
+2026-03-12 00:23:13,627 - ERROR - RSS 抓取失败 https://feeds.feedburner.com/TheHackersNews: HTTPSConnectionPool(host='feeds.feedburner.com', port=443): Max retries exceeded with url: /TheHackersNews (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-12 00:24:18,637 - ERROR - RSS 抓取失败 https://www.coindesk.com/arc/outboundfeeds/rss/: HTTPSConnectionPool(host='www.coindesk.com', port=443): Max retries exceeded with url: /arc/outboundfeeds/rss/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-12 00:24:37,030 - ERROR - RSS 抓取失败 https://krebsonsecurity.com/feed/: HTTPSConnectionPool(host='krebsonsecurity.com', port=443): Max retries exceeded with url: /feed/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-12 00:25:51,372 - ERROR - RSS 抓取失败 https://openai.com/blog/rss: HTTPSConnectionPool(host='openai.com', port=443): Max retries exceeded with url: /blog/rss (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-12 00:26:05,525 - ERROR - RSS 抓取失败 https://feeds.feedburner.com/TheHackersNews: HTTPSConnectionPool(host='feeds.feedburner.com', port=443): Max retries exceeded with url: /TheHackersNews (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-12 00:27:27,901 - INFO - 发现 1 条重大消息！
+2026-03-12 00:27:27,902 - WARNING - ============================================================
+2026-03-12 00:27:27,902 - WARNING - 🚨 重大消息告警！
+2026-03-12 00:27:27,902 - WARNING - NEUTRAL: SEC, CFTC sign memo to regulate crypto, other markets in harmony
+2026-03-12 00:27:27,902 - WARNING - ============================================================
+2026-03-12 00:30:12,615 - INFO - 💓 心跳正常 - 已监控 18 条新闻
+2026-03-12 00:35:48,833 - INFO - 💓 心跳正常 - 已监控 18 条新闻
+2026-03-12 00:45:38,228 - INFO - 💓 心跳正常 - 已监控 18 条新闻
+2026-03-12 00:55:15,495 - INFO - 💓 心跳正常 - 已监控 18 条新闻
+2026-03-12 01:00:38,099 - INFO - 💓 心跳正常 - 已监控 18 条新闻
+2026-03-12 01:10:39,182 - INFO - 💓 心跳正常 - 已监控 18 条新闻
+2026-03-12 01:20:37,372 - INFO - 💓 心跳正常 - 已监控 18 条新闻
+2026-03-12 01:25:59,104 - INFO - 💓 心跳正常 - 已监控 18 条新闻
+2026-03-12 01:30:01,568 - INFO - 💓 心跳正常 - 已监控 18 条新闻
+2026-03-12 01:35:25,894 - INFO - 💓 心跳正常 - 已监控 18 条新闻
+2026-03-12 01:40:48,268 - INFO - 💓 心跳正常 - 已监控 18 条新闻
+2026-03-12 01:50:30,199 - INFO - 💓 心跳正常 - 已监控 18 条新闻
+2026-03-12 02:00:04,540 - INFO - 💓 心跳正常 - 已监控 18 条新闻
+2026-03-12 02:05:33,900 - INFO - 💓 心跳正常 - 已监控 18 条新闻
+2026-03-12 02:15:29,362 - INFO - 💓 心跳正常 - 已监控 18 条新闻
+2026-03-12 02:25:14,133 - INFO - 💓 心跳正常 - 已监控 18 条新闻
+2026-03-12 02:30:40,473 - INFO - 💓 心跳正常 - 已监控 18 条新闻
+2026-03-12 02:40:36,606 - INFO - 💓 心跳正常 - 已监控 18 条新闻
+2026-03-12 02:42:01,284 - ERROR - RSS 抓取失败 https://krebsonsecurity.com/feed/: HTTPSConnectionPool(host='krebsonsecurity.com', port=443): Max retries exceeded with url: /feed/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-12 02:50:34,249 - INFO - 💓 心跳正常 - 已监控 18 条新闻
+2026-03-12 02:55:02,127 - INFO - 💓 心跳正常 - 已监控 18 条新闻
+2026-03-12 03:00:41,781 - INFO - 💓 心跳正常 - 已监控 18 条新闻
+2026-03-12 03:10:22,906 - INFO - 💓 心跳正常 - 已监控 18 条新闻
+2026-03-12 03:15:59,873 - INFO - 💓 心跳正常 - 已监控 18 条新闻
+2026-03-12 03:20:05,546 - INFO - 💓 心跳正常 - 已监控 18 条新闻
+2026-03-12 03:25:35,006 - INFO - 💓 心跳正常 - 已监控 18 条新闻
+2026-03-12 03:35:09,201 - INFO - 💓 心跳正常 - 已监控 18 条新闻
+2026-03-12 03:40:42,635 - INFO - 💓 心跳正常 - 已监控 18 条新闻
+2026-03-12 03:50:15,398 - INFO - 💓 心跳正常 - 已监控 18 条新闻
+2026-03-12 03:55:51,488 - INFO - 💓 心跳正常 - 已监控 18 条新闻
+2026-03-12 04:00:14,002 - INFO - 💓 心跳正常 - 已监控 18 条新闻
+2026-03-12 04:05:44,187 - INFO - 💓 心跳正常 - 已监控 18 条新闻
+2026-03-12 04:08:26,794 - INFO - 发现 1 条重大消息！
+2026-03-12 04:08:26,794 - WARNING - ============================================================
+2026-03-12 04:08:26,795 - WARNING - 🚨 重大消息告警！
+2026-03-12 04:08:26,795 - WARNING - BEARISH: MediaTek patches bug enabling crypto seed theft in just 45 seconds
+2026-03-12 04:08:26,795 - WARNING - ============================================================
+2026-03-12 04:15:15,494 - INFO - 💓 心跳正常 - 已监控 19 条新闻
+2026-03-12 04:20:48,164 - INFO - 💓 心跳正常 - 已监控 19 条新闻
+2026-03-12 04:25:02,995 - INFO - 💓 心跳正常 - 已监控 19 条新闻
+2026-03-12 04:29:08,575 - INFO - 发现 1 条重大消息！
+2026-03-12 04:29:08,576 - WARNING - ============================================================
+2026-03-12 04:29:08,576 - WARNING - 🚨 重大消息告警！
+2026-03-12 04:29:08,576 - WARNING - BEARISH: Bonk.fun hacked: Domain hijacked, crypto drainer planted
+2026-03-12 04:29:08,576 - WARNING - ============================================================
+2026-03-12 04:30:36,613 - ERROR - RSS 抓取失败 https://krebsonsecurity.com/feed/: HTTPSConnectionPool(host='krebsonsecurity.com', port=443): Max retries exceeded with url: /feed/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-12 04:30:39,540 - INFO - 💓 心跳正常 - 已监控 20 条新闻
+2026-03-12 04:40:50,027 - INFO - 💓 心跳正常 - 已监控 20 条新闻
+2026-03-12 04:50:43,385 - INFO - 💓 心跳正常 - 已监控 20 条新闻
+2026-03-12 04:53:29,346 - ERROR - RSS 抓取失败 https://openai.com/blog/rss: HTTPSConnectionPool(host='openai.com', port=443): Max retries exceeded with url: /blog/rss (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-12 04:55:15,129 - INFO - 💓 心跳正常 - 已监控 20 条新闻
+2026-03-12 05:02:31,398 - INFO - 发现 1 条重大消息！
+2026-03-12 05:02:31,399 - WARNING - ============================================================
+2026-03-12 05:02:31,399 - WARNING - 🚨 重大消息告警！
+2026-03-12 05:02:31,399 - WARNING - BEARISH: Crypto ATM losses surge 33% in 2025 as AI superpowers scams: CertiK
+2026-03-12 05:02:31,399 - WARNING - ============================================================
+2026-03-12 05:05:13,748 - INFO - 💓 心跳正常 - 已监控 21 条新闻
+2026-03-12 05:10:42,032 - INFO - 💓 心跳正常 - 已监控 21 条新闻
+2026-03-12 05:20:16,239 - INFO - 💓 心跳正常 - 已监控 21 条新闻
+2026-03-12 05:25:59,109 - INFO - 💓 心跳正常 - 已监控 21 条新闻
+2026-03-12 05:30:04,067 - INFO - 💓 心跳正常 - 已监控 21 条新闻
+2026-03-12 05:31:27,918 - INFO - 发现 1 条重大消息！
+2026-03-12 05:31:27,919 - WARNING - ============================================================
+2026-03-12 05:31:27,919 - WARNING - 🚨 重大消息告警！
+2026-03-12 05:31:27,919 - WARNING - BEARISH: CISA Flags Actively Exploited n8n RCE Bug as 24,700 Instances Remain Exposed
+2026-03-12 05:31:27,919 - WARNING - ============================================================
+2026-03-12 05:34:15,617 - INFO - 发现 1 条重大消息！
+2026-03-12 05:34:15,618 - WARNING - ============================================================
+2026-03-12 05:34:15,618 - WARNING - 🚨 重大消息告警！
+2026-03-12 05:34:15,618 - WARNING - BEARISH: Stablecoin yields will bring fresh money to US banks: White House's Witt
+2026-03-12 05:34:15,618 - WARNING - ============================================================
+2026-03-12 05:35:46,737 - INFO - 💓 心跳正常 - 已监控 23 条新闻
+2026-03-12 05:40:10,417 - INFO - 💓 心跳正常 - 已监控 23 条新闻
+2026-03-12 05:50:34,574 - INFO - 💓 心跳正常 - 已监控 23 条新闻
+2026-03-12 05:55:08,635 - INFO - 💓 心跳正常 - 已监控 23 条新闻
+2026-03-12 05:56:10,223 - ERROR - RSS 抓取失败 https://www.coindesk.com/arc/outboundfeeds/rss/: HTTPSConnectionPool(host='www.coindesk.com', port=443): Max retries exceeded with url: /arc/outboundfeeds/rss/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-12 05:57:42,331 - ERROR - RSS 抓取失败 https://www.coindesk.com/arc/outboundfeeds/rss/: HTTPSConnectionPool(host='www.coindesk.com', port=443): Max retries exceeded with url: /arc/outboundfeeds/rss/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-12 05:59:37,283 - INFO - 发现 1 条重大消息！
+2026-03-12 05:59:37,284 - WARNING - ============================================================
+2026-03-12 05:59:37,284 - WARNING - 🚨 重大消息告警！
+2026-03-12 05:59:37,284 - WARNING - BULLISH: AI agent payment volumes lower than reported, but adoption is growing: a16z
+2026-03-12 05:59:37,284 - WARNING - ============================================================
+2026-03-12 06:00:58,671 - INFO - 💓 心跳正常 - 已监控 24 条新闻
+2026-03-12 06:05:06,741 - INFO - 💓 心跳正常 - 已监控 24 条新闻
+2026-03-12 06:06:10,188 - ERROR - RSS 抓取失败 https://cointelegraph.com/rss: HTTPSConnectionPool(host='cointelegraph.com', port=443): Max retries exceeded with url: /rss (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-12 06:10:34,597 - INFO - 💓 心跳正常 - 已监控 24 条新闻
+2026-03-12 06:15:59,876 - INFO - 💓 心跳正常 - 已监控 24 条新闻
+2026-03-12 06:20:04,711 - INFO - 💓 心跳正常 - 已监控 24 条新闻
+2026-03-12 06:25:52,470 - INFO - 💓 心跳正常 - 已监控 24 条新闻
+2026-03-12 06:30:14,039 - INFO - 💓 心跳正常 - 已监控 24 条新闻
+2026-03-12 06:35:54,524 - INFO - 💓 心跳正常 - 已监控 24 条新闻
+2026-03-12 06:45:48,841 - INFO - 💓 心跳正常 - 已监控 24 条新闻
+2026-03-12 06:50:05,083 - INFO - 💓 心跳正常 - 已监控 24 条新闻
+2026-03-12 07:05:52,414 - INFO - 💓 心跳正常 - 已监控 24 条新闻
+2026-03-12 07:10:18,351 - ERROR - RSS 抓取失败 https://www.anthropic.com/rss: HTTPSConnectionPool(host='www.anthropic.com', port=443): Max retries exceeded with url: /rss (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-12 07:10:34,485 - INFO - 💓 心跳正常 - 已监控 24 条新闻
+2026-03-12 07:15:25,575 - INFO - 💓 心跳正常 - 已监控 24 条新闻
+2026-03-12 07:20:11,705 - INFO - 💓 心跳正常 - 已监控 24 条新闻
+2026-03-12 07:25:08,421 - INFO - 💓 心跳正常 - 已监控 24 条新闻
+2026-03-12 07:35:55,524 - INFO - 💓 心跳正常 - 已监控 24 条新闻
+2026-03-12 07:40:22,875 - INFO - 发现 1 条重大消息！
+2026-03-12 07:40:22,876 - WARNING - ============================================================
+2026-03-12 07:40:22,877 - WARNING - 🚨 重大消息告警！
+2026-03-12 07:40:22,877 - WARNING - BEARISH: Bonk.fun warns hackers hijacked domain in wallet-drainer attack
+2026-03-12 07:40:22,877 - WARNING - ============================================================
+2026-03-12 07:50:43,002 - INFO - 💓 心跳正常 - 已监控 25 条新闻
+2026-03-12 07:55:33,039 - INFO - 💓 心跳正常 - 已监控 25 条新闻
+2026-03-12 08:00:12,131 - INFO - 💓 心跳正常 - 已监控 25 条新闻
+2026-03-12 08:05:00,505 - INFO - 💓 心跳正常 - 已监控 25 条新闻
+2026-03-12 08:08:08,753 - INFO - 发现 1 条重大消息！
+2026-03-12 08:08:08,754 - WARNING - ============================================================
+2026-03-12 08:08:08,754 - WARNING - 🚨 重大消息告警！
+2026-03-12 08:08:08,754 - WARNING - BEARISH: US prosecutors urge judge to deny Sam Bankman-Fried retrial bid: Report
+2026-03-12 08:08:08,754 - WARNING - ============================================================
+2026-03-12 08:20:53,169 - INFO - 💓 心跳正常 - 已监控 26 条新闻
+2026-03-12 08:25:21,828 - INFO - 💓 心跳正常 - 已监控 26 条新闻
+2026-03-12 08:35:30,643 - INFO - 💓 心跳正常 - 已监控 26 条新闻
+2026-03-12 08:45:42,534 - INFO - 💓 心跳正常 - 已监控 26 条新闻
+2026-03-12 08:51:35,323 - INFO - 发现 1 条重大消息！
+2026-03-12 08:51:35,324 - WARNING - ============================================================
+2026-03-12 08:51:35,324 - WARNING - 🚨 重大消息告警！
+2026-03-12 08:51:35,324 - WARNING - BEARISH: Six Android Malware Families Target Pix Payments, Banking Apps, and Crypto Wallets
+2026-03-12 08:51:35,324 - WARNING - ============================================================
+2026-03-12 08:55:57,746 - INFO - 💓 心跳正常 - 已监控 27 条新闻
+2026-03-12 08:57:18,481 - ERROR - RSS 抓取失败 https://krebsonsecurity.com/feed/: HTTPSConnectionPool(host='krebsonsecurity.com', port=443): Max retries exceeded with url: /feed/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-12 09:00:06,844 - INFO - 💓 心跳正常 - 已监控 27 条新闻
+2026-03-12 09:05:57,263 - INFO - 💓 心跳正常 - 已监控 27 条新闻
+2026-03-12 09:10:38,971 - INFO - 💓 心跳正常 - 已监控 27 条新闻
+2026-03-12 09:15:32,795 - ERROR - RSS 抓取失败 https://feeds.feedburner.com/TheHackersNews: HTTPSConnectionPool(host='feeds.feedburner.com', port=443): Max retries exceeded with url: /TheHackersNews (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-12 09:15:32,796 - INFO - 💓 心跳正常 - 已监控 27 条新闻
+2026-03-12 09:25:16,790 - INFO - 💓 心跳正常 - 已监控 27 条新闻
+2026-03-12 09:30:44,422 - INFO - 💓 心跳正常 - 已监控 27 条新闻
+2026-03-12 09:40:09,453 - INFO - 💓 心跳正常 - 已监控 27 条新闻
+2026-03-12 09:45:53,278 - INFO - 💓 心跳正常 - 已监控 27 条新闻
+2026-03-12 09:50:24,690 - INFO - 💓 心跳正常 - 已监控 27 条新闻
+2026-03-12 10:00:43,889 - INFO - 💓 心跳正常 - 已监控 27 条新闻
+2026-03-12 10:10:37,654 - INFO - 💓 心跳正常 - 已监控 27 条新闻
+2026-03-12 10:17:37,326 - INFO - 发现 1 条重大消息！
+2026-03-12 10:17:37,327 - WARNING - ============================================================
+2026-03-12 10:17:37,327 - WARNING - 🚨 重大消息告警！
+2026-03-12 10:17:37,327 - WARNING - NEUTRAL: Utah set to block prediction markets as state-federal tensions rise
+2026-03-12 10:17:37,327 - WARNING - ============================================================
+2026-03-12 10:20:23,005 - INFO - 💓 心跳正常 - 已监控 28 条新闻
+2026-03-12 10:25:49,173 - INFO - 💓 心跳正常 - 已监控 28 条新闻
+2026-03-12 10:30:01,699 - INFO - 💓 心跳正常 - 已监控 28 条新闻
+2026-03-12 10:35:37,468 - INFO - 发现 1 条重大消息！
+2026-03-12 10:35:37,468 - WARNING - ============================================================
+2026-03-12 10:35:37,469 - WARNING - 🚨 重大消息告警！
+2026-03-12 10:35:37,469 - WARNING - BEARISH: Apple Issues Security Updates for Older iOS Devices Targeted by Coruna WebKit Exploit
+2026-03-12 10:35:37,469 - WARNING - ============================================================
+2026-03-12 10:45:32,385 - INFO - 💓 心跳正常 - 已监控 29 条新闻
+2026-03-12 10:48:11,573 - ERROR - RSS 抓取失败 https://www.anthropic.com/rss: HTTPSConnectionPool(host='www.anthropic.com', port=443): Max retries exceeded with url: /rss (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-12 10:55:28,636 - INFO - 💓 心跳正常 - 已监控 29 条新闻
+2026-03-12 10:56:58,361 - ERROR - RSS 抓取失败 https://feeds.feedburner.com/TheHackersNews: HTTPSConnectionPool(host='feeds.feedburner.com', port=443): Read timed out. (read timeout=10)
+2026-03-12 11:05:21,505 - INFO - 💓 心跳正常 - 已监控 29 条新闻
+2026-03-12 11:10:58,293 - INFO - 💓 心跳正常 - 已监控 29 条新闻
+2026-03-12 11:15:24,087 - INFO - 💓 心跳正常 - 已监控 29 条新闻
+2026-03-12 11:25:16,588 - INFO - 💓 心跳正常 - 已监控 29 条新闻
+2026-03-12 11:30:42,530 - INFO - 💓 心跳正常 - 已监控 29 条新闻
+2026-03-12 11:40:18,994 - INFO - 💓 心跳正常 - 已监控 29 条新闻
+2026-03-12 11:50:10,704 - INFO - 💓 心跳正常 - 已监控 29 条新闻
+2026-03-12 12:00:03,162 - INFO - 💓 心跳正常 - 已监控 29 条新闻
+2026-03-12 12:01:32,923 - INFO - 发现 1 条重大消息！
+2026-03-12 12:01:32,925 - WARNING - ============================================================
+2026-03-12 12:01:32,925 - WARNING - 🚨 重大消息告警！
+2026-03-12 12:01:32,925 - WARNING - BULLISH: BlackRock debuts staked ether ETF as demand grows for yield in crypto funds
+2026-03-12 12:01:32,925 - WARNING - ============================================================
+2026-03-12 12:04:18,546 - ERROR - RSS 抓取失败 https://feeds.feedburner.com/TheHackersNews: HTTPSConnectionPool(host='feeds.feedburner.com', port=443): Max retries exceeded with url: /TheHackersNews (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-12 12:05:45,980 - INFO - 💓 心跳正常 - 已监控 30 条新闻
+2026-03-12 12:15:34,859 - INFO - 💓 心跳正常 - 已监控 30 条新闻
+2026-03-12 12:20:57,761 - INFO - 💓 心跳正常 - 已监控 30 条新闻
+2026-03-12 12:25:02,767 - INFO - 💓 心跳正常 - 已监控 30 条新闻
+2026-03-12 12:30:32,335 - INFO - 💓 心跳正常 - 已监控 30 条新闻
+2026-03-12 12:35:59,575 - INFO - 💓 心跳正常 - 已监控 30 条新闻
+2026-03-12 12:40:05,388 - INFO - 💓 心跳正常 - 已监控 30 条新闻
+2026-03-12 12:44:06,039 - ERROR - RSS 抓取失败 https://feeds.feedburner.com/TheHackersNews: HTTPSConnectionPool(host='feeds.feedburner.com', port=443): Max retries exceeded with url: /TheHackersNews (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-12 12:45:32,666 - INFO - 💓 心跳正常 - 已监控 30 条新闻
+2026-03-12 12:50:56,695 - INFO - 💓 心跳正常 - 已监控 30 条新闻
+2026-03-12 12:55:09,854 - INFO - 💓 心跳正常 - 已监控 30 条新闻
+2026-03-12 13:00:57,011 - INFO - 💓 心跳正常 - 已监控 30 条新闻
+2026-03-12 13:02:26,588 - INFO - 发现 1 条重大消息！
+2026-03-12 13:02:26,589 - WARNING - ============================================================
+2026-03-12 13:02:26,590 - WARNING - 🚨 重大消息告警！
+2026-03-12 13:02:26,590 - WARNING - BULLISH: BlackRock launches staked Ethereum ETF offering ETH exposure and yield
+2026-03-12 13:02:26,590 - WARNING - ============================================================
+2026-03-12 13:05:13,266 - INFO - 💓 心跳正常 - 已监控 31 条新闻
+2026-03-12 13:10:43,305 - INFO - 💓 心跳正常 - 已监控 31 条新闻
+2026-03-12 13:13:15,707 - ERROR - RSS 抓取失败 https://cointelegraph.com/rss: HTTPSConnectionPool(host='cointelegraph.com', port=443): Max retries exceeded with url: /rss (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-12 13:20:41,822 - INFO - 💓 心跳正常 - 已监控 31 条新闻
+2026-03-12 13:30:18,077 - INFO - 💓 心跳正常 - 已监控 31 条新闻
+2026-03-12 13:33:04,171 - INFO - 发现 1 条重大消息！
+2026-03-12 13:33:04,171 - WARNING - ============================================================
+2026-03-12 13:33:04,172 - WARNING - 🚨 重大消息告警！
+2026-03-12 13:33:04,172 - WARNING - NEUTRAL: Bitcoin hugs $70K range as March Fed rate cut odds fall below 1%
+2026-03-12 13:33:04,172 - WARNING - ============================================================
+2026-03-12 13:35:49,377 - INFO - 💓 心跳正常 - 已监控 32 条新闻
+2026-03-12 13:40:00,511 - INFO - 💓 心跳正常 - 已监控 32 条新闻
+2026-03-12 13:45:31,652 - INFO - 💓 心跳正常 - 已监控 32 条新闻
+2026-03-12 13:50:00,612 - INFO - 💓 心跳正常 - 已监控 32 条新闻
+2026-03-12 13:55:41,452 - INFO - 💓 心跳正常 - 已监控 32 条新闻
+2026-03-12 13:59:44,392 - ERROR - RSS 抓取失败 https://huggingface.co/blog/feed.xml: HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /blog/feed.xml (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-12 14:04:17,254 - INFO - 发现 1 条重大消息！
+2026-03-12 14:04:17,255 - WARNING - ============================================================
+2026-03-12 14:04:17,255 - WARNING - 🚨 重大消息告警！
+2026-03-12 14:04:17,255 - WARNING - BULLISH: Eightco shares jump on $125 million funding commitment, investment in OpenAI, Beast Industries
+2026-03-12 14:04:17,255 - WARNING - ============================================================
+2026-03-12 14:05:38,603 - INFO - 💓 心跳正常 - 已监控 33 条新闻
+2026-03-12 14:15:38,805 - INFO - 💓 心跳正常 - 已监控 33 条新闻
+2026-03-12 14:25:29,849 - INFO - 💓 心跳正常 - 已监控 33 条新闻
+2026-03-12 14:29:26,339 - ERROR - RSS 抓取失败 https://cryptoslate.com/feed/: HTTPSConnectionPool(host='cryptoslate.com', port=443): Read timed out. (read timeout=10)
+2026-03-12 14:35:19,523 - INFO - 发现 1 条重大消息！
+2026-03-12 14:35:19,524 - WARNING - ============================================================
+2026-03-12 14:35:19,524 - WARNING - 🚨 重大消息告警！
+2026-03-12 14:35:19,524 - WARNING - NEUTRAL: ThreatsDay Bulletin: OAuth Trap, EDR Killer, Signal Phishing, Zombie ZIP, AI Platform Hack & More
+2026-03-12 14:35:19,524 - WARNING - ============================================================
+2026-03-12 14:40:44,753 - INFO - 💓 心跳正常 - 已监控 34 条新闻
+2026-03-12 14:50:11,320 - INFO - 💓 心跳正常 - 已监控 34 条新闻
+2026-03-12 14:55:47,425 - INFO - 💓 心跳正常 - 已监控 34 条新闻
+2026-03-12 15:00:14,934 - INFO - 💓 心跳正常 - 已监控 34 条新闻
+2026-03-12 15:05:47,890 - INFO - 💓 心跳正常 - 已监控 34 条新闻
+2026-03-12 15:07:13,382 - INFO - 发现 1 条重大消息！
+2026-03-12 15:07:13,384 - WARNING - ============================================================
+2026-03-12 15:07:13,384 - WARNING - 🚨 重大消息告警！
+2026-03-12 15:07:13,384 - WARNING - NEUTRAL: The SEC finally admits US crypto chaos was caused by its own regulatory turf wars
+2026-03-12 15:07:13,384 - WARNING - ============================================================
+2026-03-12 15:15:36,084 - INFO - 💓 心跳正常 - 已监控 35 条新闻
+2026-03-12 15:25:19,312 - INFO - 💓 心跳正常 - 已监控 35 条新闻
+2026-03-12 15:30:58,593 - INFO - 💓 心跳正常 - 已监控 35 条新闻
+2026-03-12 15:35:07,727 - INFO - 💓 心跳正常 - 已监控 35 条新闻
+2026-03-12 15:40:42,969 - INFO - 💓 心跳正常 - 已监控 35 条新闻
+2026-03-12 15:44:04,296 - ERROR - RSS 抓取失败 https://www.bleepingcomputer.com/feed/: HTTPSConnectionPool(host='www.bleepingcomputer.com', port=443): Max retries exceeded with url: /feed/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-12 15:44:09,303 - ERROR - RSS 抓取失败 https://krebsonsecurity.com/feed/: HTTPSConnectionPool(host='krebsonsecurity.com', port=443): Max retries exceeded with url: /feed/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-12 15:45:39,931 - INFO - 💓 心跳正常 - 已监控 35 条新闻
+2026-03-12 15:50:15,314 - INFO - 发现 1 条重大消息！
+2026-03-12 15:50:15,316 - WARNING - ============================================================
+2026-03-12 15:50:15,316 - WARNING - 🚨 重大消息告警！
+2026-03-12 15:50:15,316 - WARNING - BEARISH: Alleged Ponzi scheme victims sue JPMorgan for banking supposed $328 million scam
+2026-03-12 15:50:15,316 - WARNING - ============================================================
+2026-03-12 15:55:48,814 - INFO - 💓 心跳正常 - 已监控 36 条新闻
+2026-03-12 16:05:44,189 - INFO - 💓 心跳正常 - 已监控 36 条新闻
+2026-03-12 16:10:13,391 - INFO - 💓 心跳正常 - 已监控 36 条新闻
+2026-03-12 16:15:57,796 - INFO - 💓 心跳正常 - 已监控 36 条新闻
+2026-03-12 16:18:30,007 - ERROR - RSS 抓取失败 https://cointelegraph.com/rss: HTTPSConnectionPool(host='cointelegraph.com', port=443): Max retries exceeded with url: /rss (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-12 16:18:41,825 - ERROR - RSS 抓取失败 https://www.anthropic.com/rss: HTTPSConnectionPool(host='www.anthropic.com', port=443): Max retries exceeded with url: /rss (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-12 16:18:53,690 - ERROR - RSS 抓取失败 https://www.bleepingcomputer.com/feed/: HTTPSConnectionPool(host='www.bleepingcomputer.com', port=443): Max retries exceeded with url: /feed/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-12 16:20:26,659 - INFO - 💓 心跳正常 - 已监控 36 条新闻
+2026-03-12 16:23:12,481 - INFO - 发现 1 条重大消息！
+2026-03-12 16:23:12,482 - WARNING - ============================================================
+2026-03-12 16:23:12,482 - WARNING - 🚨 重大消息告警！
+2026-03-12 16:23:12,482 - WARNING - BEARISH: U.S. Senate votes to ban CBDCs in housing bill that may face trouble in the House
+2026-03-12 16:23:12,482 - WARNING - ============================================================
+2026-03-12 16:25:55,817 - INFO - 💓 心跳正常 - 已监控 37 条新闻
+2026-03-12 16:30:12,103 - INFO - 💓 心跳正常 - 已监控 37 条新闻
+2026-03-12 16:40:09,541 - INFO - 💓 心跳正常 - 已监控 37 条新闻
+2026-03-12 16:45:41,599 - INFO - 💓 心跳正常 - 已监控 37 条新闻
+2026-03-12 16:55:30,532 - INFO - 💓 心跳正常 - 已监控 37 条新闻
+2026-03-12 17:05:26,367 - INFO - 💓 心跳正常 - 已监控 37 条新闻
+2026-03-12 17:10:59,419 - INFO - 💓 心跳正常 - 已监控 37 条新闻
+2026-03-12 17:15:17,308 - INFO - 💓 心跳正常 - 已监控 37 条新闻
+2026-03-12 17:20:57,720 - INFO - 💓 心跳正常 - 已监控 37 条新闻
+2026-03-12 17:25:06,405 - INFO - 💓 心跳正常 - 已监控 37 条新闻
+2026-03-12 17:30:45,380 - INFO - 💓 心跳正常 - 已监控 37 条新闻
+2026-03-12 17:40:28,998 - INFO - 💓 心跳正常 - 已监控 37 条新闻
+2026-03-12 17:45:53,021 - INFO - 💓 心跳正常 - 已监控 37 条新闻
+2026-03-12 17:50:01,864 - INFO - 💓 心跳正常 - 已监控 37 条新闻
+2026-03-12 17:55:36,850 - INFO - 💓 心跳正常 - 已监控 37 条新闻
+2026-03-12 18:00:59,123 - INFO - 💓 心跳正常 - 已监控 37 条新闻
+2026-03-12 18:05:05,229 - INFO - 💓 心跳正常 - 已监控 37 条新闻
+2026-03-12 18:06:27,537 - INFO - 发现 1 条重大消息！
+2026-03-12 18:06:27,538 - WARNING - ============================================================
+2026-03-12 18:06:27,538 - WARNING - 🚨 重大消息告警！
+2026-03-12 18:06:27,539 - WARNING - BEARISH: Rust-Based VENON Malware Targets 33 Brazilian Banks with Credential-Stealing Overlays
+2026-03-12 18:06:27,539 - WARNING - ============================================================
+2026-03-12 18:07:50,558 - INFO - 发现 1 条重大消息！
+2026-03-12 18:07:50,559 - WARNING - ============================================================
+2026-03-12 18:07:50,559 - WARNING - 🚨 重大消息告警！
+2026-03-12 18:07:50,559 - WARNING - NEUTRAL: The SEC finally admits what caused the mess US crypto was in before Trump took power
+2026-03-12 18:07:50,559 - WARNING - ============================================================
+2026-03-12 18:10:32,010 - INFO - 💓 心跳正常 - 已监控 39 条新闻
+2026-03-12 18:15:59,128 - INFO - 💓 心跳正常 - 已监控 39 条新闻
+2026-03-12 18:25:36,904 - INFO - 💓 心跳正常 - 已监控 39 条新闻
+2026-03-12 18:30:58,429 - INFO - 💓 心跳正常 - 已监控 39 条新闻
+2026-03-12 18:35:11,201 - INFO - 💓 心跳正常 - 已监控 39 条新闻
+2026-03-12 18:40:52,677 - INFO - 💓 心跳正常 - 已监控 39 条新闻
+2026-03-12 18:45:09,138 - INFO - 💓 心跳正常 - 已监控 39 条新闻
+2026-03-12 18:50:46,490 - INFO - 💓 心跳正常 - 已监控 39 条新闻
+2026-03-12 19:00:39,383 - INFO - 💓 心跳正常 - 已监控 39 条新闻
+2026-03-12 19:07:36,084 - INFO - 发现 1 条重大消息！
+2026-03-12 19:07:36,085 - WARNING - ============================================================
+2026-03-12 19:07:36,085 - WARNING - 🚨 重大消息告警！
+2026-03-12 19:07:36,085 - WARNING - BEARISH: Bitcoin funding rate flips negative: Are bears getting too confident?
+2026-03-12 19:07:36,085 - WARNING - ============================================================
+2026-03-12 19:10:26,345 - INFO - 💓 心跳正常 - 已监控 40 条新闻
+2026-03-12 19:15:56,896 - INFO - 💓 心跳正常 - 已监控 40 条新闻
+2026-03-12 19:17:23,659 - ERROR - RSS 抓取失败 https://feeds.feedburner.com/TheHackersNews: HTTPSConnectionPool(host='feeds.feedburner.com', port=443): Max retries exceeded with url: /TheHackersNews (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-12 19:20:12,767 - INFO - 💓 心跳正常 - 已监控 40 条新闻
+2026-03-12 19:25:33,632 - INFO - 💓 心跳正常 - 已监控 40 条新闻
+2026-03-12 19:30:59,864 - INFO - 💓 心跳正常 - 已监控 40 条新闻
+2026-03-12 19:35:06,433 - INFO - 💓 心跳正常 - 已监控 40 条新闻
+2026-03-12 19:40:29,491 - INFO - 💓 心跳正常 - 已监控 40 条新闻
+2026-03-12 19:50:06,718 - INFO - 💓 心跳正常 - 已监控 40 条新闻
+2026-03-12 19:55:30,096 - INFO - 💓 心跳正常 - 已监控 40 条新闻
+2026-03-12 20:00:53,942 - INFO - 💓 心跳正常 - 已监控 40 条新闻
+2026-03-12 20:10:20,389 - INFO - 💓 心跳正常 - 已监控 40 条新闻
+2026-03-12 20:15:48,466 - INFO - 💓 心跳正常 - 已监控 40 条新闻
+2026-03-12 20:25:27,938 - INFO - 💓 心跳正常 - 已监控 40 条新闻
+2026-03-12 20:28:23,909 - INFO - 发现 1 条重大消息！
+2026-03-12 20:28:23,910 - WARNING - ============================================================
+2026-03-12 20:28:23,910 - WARNING - 🚨 重大消息告警！
+2026-03-12 20:28:23,910 - WARNING - BEARISH: US Senate votes to include CBDC ban in bipartisan housing bill
+2026-03-12 20:28:23,911 - WARNING - ============================================================
+2026-03-12 20:35:14,353 - INFO - 💓 心跳正常 - 已监控 41 条新闻
+2026-03-12 20:40:43,508 - INFO - 💓 心跳正常 - 已监控 41 条新闻
+2026-03-12 20:50:15,548 - INFO - 💓 心跳正常 - 已监控 41 条新闻
+2026-03-12 20:55:44,847 - INFO - 💓 心跳正常 - 已监控 41 条新闻
+2026-03-12 21:05:02,673 - INFO - 💓 心跳正常 - 已监控 41 条新闻
+2026-03-12 21:06:07,681 - ERROR - RSS 抓取失败 https://www.coindesk.com/arc/outboundfeeds/rss/: HTTPSConnectionPool(host='www.coindesk.com', port=443): Max retries exceeded with url: /arc/outboundfeeds/rss/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-12 21:10:23,531 - INFO - 💓 心跳正常 - 已监控 41 条新闻
+2026-03-12 21:15:49,081 - INFO - 💓 心跳正常 - 已监控 41 条新闻
+2026-03-12 21:25:11,775 - INFO - 💓 心跳正常 - 已监控 41 条新闻
+2026-03-12 21:30:34,189 - INFO - 💓 心跳正常 - 已监控 41 条新闻
+2026-03-12 21:35:53,411 - INFO - 💓 心跳正常 - 已监控 41 条新闻
+2026-03-12 21:45:22,390 - INFO - 发现 1 条重大消息！
+2026-03-12 21:45:22,390 - WARNING - ============================================================
+2026-03-12 21:45:22,390 - WARNING - 🚨 重大消息告警！
+2026-03-12 21:45:22,390 - WARNING - NEUTRAL: SEC’s ‘Crypto Mom’ calls for simpler disclosure rules, flags tokenization debate
+2026-03-12 21:45:22,390 - WARNING - ============================================================
+2026-03-12 21:50:42,857 - INFO - 💓 心跳正常 - 已监控 42 条新闻
+2026-03-12 21:57:36,114 - INFO - 发现 1 条重大消息！
+2026-03-12 21:57:36,117 - WARNING - ============================================================
+2026-03-12 21:57:36,117 - WARNING - 🚨 重大消息告警！
+2026-03-12 21:57:36,117 - WARNING - NEUTRAL: SEC's advisory group backs tokenized securities push, outlines how to keep it safe
+2026-03-12 21:57:36,117 - WARNING - ============================================================
+2026-03-12 22:00:21,133 - INFO - 💓 心跳正常 - 已监控 43 条新闻
+2026-03-12 22:05:47,871 - INFO - 💓 心跳正常 - 已监控 43 条新闻
+2026-03-12 22:15:15,520 - INFO - 💓 心跳正常 - 已监控 43 条新闻
+2026-03-12 22:20:41,286 - INFO - 💓 心跳正常 - 已监控 43 条新闻
+2026-03-12 22:30:04,890 - INFO - 💓 心跳正常 - 已监控 43 条新闻
+2026-03-12 22:35:21,721 - INFO - 💓 心跳正常 - 已监控 43 条新闻
+2026-03-12 22:40:43,452 - INFO - 💓 心跳正常 - 已监控 43 条新闻
+2026-03-12 22:50:12,885 - INFO - 💓 心跳正常 - 已监控 43 条新闻
+2026-03-12 22:55:34,785 - ERROR - RSS 抓取失败 https://huggingface.co/blog/feed.xml: HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /blog/feed.xml (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-12 22:55:40,363 - INFO - 💓 心跳正常 - 已监控 43 条新闻
+2026-03-12 23:05:05,773 - INFO - 💓 心跳正常 - 已监控 43 条新闻
+2026-03-12 23:10:24,140 - INFO - 💓 心跳正常 - 已监控 43 条新闻
+2026-03-12 23:15:43,482 - INFO - 💓 心跳正常 - 已监控 43 条新闻
+2026-03-12 23:25:09,395 - INFO - 💓 心跳正常 - 已监控 43 条新闻
+2026-03-12 23:30:29,914 - INFO - 💓 心跳正常 - 已监控 43 条新闻
+2026-03-12 23:35:54,414 - INFO - 💓 心跳正常 - 已监控 43 条新闻
+2026-03-12 23:45:09,622 - INFO - 💓 心跳正常 - 已监控 43 条新闻
+2026-03-12 23:50:27,617 - INFO - 💓 心跳正常 - 已监控 43 条新闻
+2026-03-12 23:55:48,662 - INFO - 💓 心跳正常 - 已监控 43 条新闻
+2026-03-13 00:05:11,981 - INFO - 💓 心跳正常 - 已监控 43 条新闻
+2026-03-13 00:10:39,997 - INFO - 💓 心跳正常 - 已监控 43 条新闻
+2026-03-13 00:20:19,873 - INFO - 💓 心跳正常 - 已监控 43 条新闻
+2026-03-13 00:25:48,144 - INFO - 💓 心跳正常 - 已监控 43 条新闻
+2026-03-13 00:35:07,180 - INFO - 💓 心跳正常 - 已监控 43 条新闻
+2026-03-13 00:39:11,047 - INFO - 发现 1 条重大消息！
+2026-03-13 00:39:11,048 - WARNING - ============================================================
+2026-03-13 00:39:11,048 - WARNING - 🚨 重大消息告警！
+2026-03-13 00:39:11,048 - WARNING - NEUTRAL: Bitcoin climbs to near $72,000 after Treasury Secretary Bessent attempts to calm oil fears
+2026-03-13 00:39:11,048 - WARNING - ============================================================
+2026-03-13 00:40:30,560 - INFO - 💓 心跳正常 - 已监控 44 条新闻
+2026-03-13 00:44:30,312 - INFO - 发现 1 条重大消息！
+2026-03-13 00:44:30,313 - WARNING - ============================================================
+2026-03-13 00:44:30,313 - WARNING - 🚨 重大消息告警！
+2026-03-13 00:44:30,313 - WARNING - BULLISH: BlackRock’s staked Ethereum ETF sees $15.5M volume on debut
+2026-03-13 00:44:30,313 - WARNING - ============================================================
+2026-03-13 00:45:50,047 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 00:55:12,680 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 01:00:30,989 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 01:04:30,779 - ERROR - RSS 抓取失败 https://huggingface.co/blog/feed.xml: HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /blog/feed.xml (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-13 01:05:57,140 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 01:10:06,384 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 01:15:41,511 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 01:25:03,739 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 01:30:29,708 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 01:40:30,845 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 01:45:53,424 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 01:55:20,422 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 02:00:50,374 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 02:10:14,380 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 02:15:35,556 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 02:16:42,882 - ERROR - RSS 抓取失败 https://cointelegraph.com/rss: HTTPSConnectionPool(host='cointelegraph.com', port=443): Max retries exceeded with url: /rss (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-13 02:25:17,011 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 02:30:45,696 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 02:40:12,488 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 02:45:40,912 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 02:55:05,391 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 03:00:28,974 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 03:05:50,191 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 03:14:50,998 - ERROR - RSS 抓取失败 https://www.coindesk.com/arc/outboundfeeds/rss/: HTTPSConnectionPool(host='www.coindesk.com', port=443): Max retries exceeded with url: /arc/outboundfeeds/rss/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-13 03:15:12,714 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 03:20:31,835 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 03:23:12,734 - ERROR - RSS 抓取失败 https://huggingface.co/blog/feed.xml: HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /blog/feed.xml (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-13 03:23:17,745 - ERROR - RSS 抓取失败 https://www.bleepingcomputer.com/feed/: HTTPSConnectionPool(host='www.bleepingcomputer.com', port=443): Max retries exceeded with url: /feed/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-13 03:30:16,882 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 03:35:40,265 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 03:45:03,899 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 03:50:23,938 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 03:55:44,441 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 03:57:03,559 - ERROR - RSS 抓取失败 https://krebsonsecurity.com/feed/: HTTPSConnectionPool(host='krebsonsecurity.com', port=443): Max retries exceeded with url: /feed/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-13 04:05:06,170 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 04:10:25,765 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 04:15:55,238 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 04:20:02,754 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 04:25:25,442 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 04:30:42,863 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 04:40:04,641 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 04:45:28,965 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 04:50:48,237 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 05:00:08,787 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 05:05:29,944 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 05:10:55,222 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 05:20:17,167 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 05:25:38,492 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 05:35:11,316 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 05:40:54,588 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 05:50:31,126 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 06:00:18,359 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 06:04:27,274 - ERROR - RSS 抓取失败 https://www.coindesk.com/arc/outboundfeeds/rss/: HTTPSConnectionPool(host='www.coindesk.com', port=443): Max retries exceeded with url: /arc/outboundfeeds/rss/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-03-13 06:10:23,043 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 06:15:51,708 - INFO - 💓 心跳正常 - 已监控 45 条新闻
+2026-03-13 06:23:54,885 - INFO - 发现 1 条重大消息！
+2026-03-13 06:23:54,885 - WARNING - ============================================================
+2026-03-13 06:23:54,886 - WARNING - 🚨 重大消息告警！
+2026-03-13 06:23:54,886 - WARNING - BULLISH: BlackRock’s staked ether ETF draws $15 million in first-day trading
+2026-03-13 06:23:54,886 - WARNING - ============================================================
+2026-03-13 06:25:13,914 - INFO - 💓 心跳正常 - 已监控 46 条新闻
+2026-03-13 06:30:40,795 - INFO - 💓 心跳正常 - 已监控 46 条新闻
+2026-03-13 06:33:23,696 - INFO - 发现 1 条重大消息！
+2026-03-13 06:33:23,697 - WARNING - ============================================================
+2026-03-13 06:33:23,697 - WARNING - 🚨 重大消息告警！
+2026-03-13 06:33:23,697 - WARNING - BULLISH: BlackRock’s new ether ETF for yield hungry investors debuts with $15 million in trading volume
+2026-03-13 06:33:23,697 - WARNING - ============================================================
+2026-03-13 06:40:12,920 - INFO - 💓 心跳正常 - 已监控 47 条新闻
+2026-03-13 06:44:23,473 - INFO - 发现 1 条重大消息！
+2026-03-13 06:44:23,474 - WARNING - ============================================================
+2026-03-13 06:44:23,474 - WARNING - 🚨 重大消息告警！
+2026-03-13 06:44:23,474 - WARNING - BEARISH: Authorities Disrupt SocksEscort Proxy Botnet Exploiting 369,000 IPs Across 163 Countries
+2026-03-13 06:44:23,474 - WARNING - ============================================================
+2026-03-13 06:45:47,772 - INFO - 💓 心跳正常 - 已监控 48 条新闻
+2026-03-13 06:50:01,591 - INFO - 💓 心跳正常 - 已监控 48 条新闻
+2026-03-13 06:55:32,188 - INFO - 💓 心跳正常 - 已监控 48 条新闻
+2026-03-13 07:00:59,958 - INFO - 💓 心跳正常 - 已监控 48 条新闻
+2026-03-13 07:05:01,614 - INFO - 💓 心跳正常 - 已监控 48 条新闻
+2026-03-13 07:10:27,024 - INFO - 💓 心跳正常 - 已监控 48 条新闻
+2026-03-13 07:15:58,074 - INFO - 💓 心跳正常 - 已监控 48 条新闻
+2026-03-13 07:20:07,924 - INFO - 💓 心跳正常 - 已监控 48 条新闻
+2026-03-13 07:25:46,587 - INFO - 发现 1 条重大消息！
+2026-03-13 07:25:46,588 - WARNING - ============================================================
+2026-03-13 07:25:46,588 - WARNING - 🚨 重大消息告警！
+2026-03-13 07:25:46,588 - WARNING - BEARISH: Bitcoin's early crash to $60,000 now looks like a warning for stocks
+2026-03-13 07:25:46,588 - WARNING - ============================================================
+2026-03-13 07:35:06,735 - INFO - 💓 心跳正常 - 已监控 49 条新闻
+2026-03-13 07:40:38,268 - INFO - 💓 心跳正常 - 已监控 49 条新闻
+2026-03-13 07:50:07,350 - INFO - 💓 心跳正常 - 已监控 49 条新闻
+2026-03-13 07:55:26,702 - INFO - 💓 心跳正常 - 已监控 49 条新闻
+2026-03-13 08:00:55,460 - INFO - 💓 心跳正常 - 已监控 49 条新闻
+2026-03-13 08:10:43,967 - INFO - 💓 心跳正常 - 已监控 49 条新闻
+2026-03-13 08:15:09,399 - INFO - 💓 心跳正常 - 已监控 49 条新闻
+2026-03-13 08:20:35,672 - INFO - 💓 心跳正常 - 已监控 49 条新闻
+2026-03-13 08:30:09,299 - INFO - 💓 心跳正常 - 已监控 49 条新闻
+2026-03-13 08:35:37,388 - INFO - 💓 心跳正常 - 已监控 49 条新闻

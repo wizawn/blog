@@ -27,10 +27,10 @@
  | |____| | (_| |\ V  V /| |__| | |_| | (_| | | | (_| |
   \_____|_|\__,_| \_/\_/  \_____|\__,_|\__,_|_|  \__,_|
 
-        专业量化交易平台 v3.0.0
+        专业量化交易平台 v6.0.1
 ```
 
-[![Version](https://img.shields.io/badge/version-3.0.0-blue)](https://github.com/wizawn/clawguard)
+[![Version](https://img.shields.io/badge/version-6.0.1-blue)](https://github.com/wizawn/clawguard)
 [![Python](https://img.shields.io/badge/python-3.8+-green)](https://www.python.org/)
 [![License](https://img.shields.io/badge/license-MIT-orange)](LICENSE)
 [![Status](https://img.shields.io/badge/status-production-success)](https://github.com/wizawn/clawguard)

@@ -26,6 +26,9 @@ from enum import Enum
 from typing import Optional
 from pathlib import Path
 import yaml
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class TradingMode(Enum):
@@ -65,8 +68,8 @@ class TradingModeManager:
             try:
                 mode_str = self.mode_file.read_text().strip()
                 return TradingMode(mode_str)
-            except:
-                pass
+            except (ValueError, IOError) as e:
+                logger.warning(f"Failed to read mode from file: {e}")
 
         # 3. 检查配置文件
         if self.config_file.exists():
@@ -75,8 +78,8 @@ class TradingModeManager:
                     config = yaml.safe_load(f)
                     mode_str = config.get('trading', {}).get('mode', 'paper')
                     return TradingMode(mode_str)
-            except:
-                pass
+            except (ValueError, IOError, yaml.YAMLError) as e:
+                logger.warning(f"Failed to read mode from config: {e}")
 
         # 4. 默认使用模拟盘（最安全）
         return TradingMode.PAPER
@@ -112,7 +115,7 @@ class TradingModeManager:
 
             return True
         except Exception as e:
-            print(f"设置交易模式失败: {e}")
+            logger.error(f"设置交易模式失败: {e}")
             return False
 
     def get_mode_info(self) -> dict:

@@ -124,6 +124,9 @@ class BinanceClient:
         else:
             self.base_url = self.config.get('binance.base_url', 'https://api.binance.com')
 
+        # 初始化日志（必须在使用logger之前）
+        self.logger = logging.getLogger(__name__)
+
         # 初始化代理管理器
         proxy_config = self.config.get_proxy_config()
         self.proxy_manager = ProxyManager(proxy_config)
@@ -161,9 +164,6 @@ class BinanceClient:
         self.cache_enabled = self.config.get('cache.enabled', True)
         self.cache_ttl = self.config.get('cache.ttl_seconds', 3)
         self._price_cache = {}
-
-        # 日志
-        self.logger = logging.getLogger(__name__)
 
     def __enter__(self):
         """上下文管理器入口"""

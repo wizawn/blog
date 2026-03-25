@@ -18,7 +18,7 @@
 #!/usr/bin/env python3
 """
 模拟交易引擎
-提供完整的模拟盘交易功能，无需连接真实API
+提供完整的模拟盘交易功能，使用真实市场数据
 """
 
 import time
@@ -27,6 +27,9 @@ from typing import Dict, List, Optional
 from datetime import datetime
 import json
 from pathlib import Path
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class PaperTradingEngine:
@@ -46,19 +49,29 @@ class PaperTradingEngine:
         self.trades = []
         self.order_id_counter = 1000000
 
-        # 模拟价格数据
-        self.mock_prices = {
-            'BTCUSDT': 68000.0,
-            'ETHUSDT': 3400.0,
-            'BNBUSDT': 580.0,
-            'SOLUSDT': 140.0,
-            'ADAUSDT': 0.58,
-            'DOGEUSDT': 0.15,
-            'XRPUSDT': 0.52,
-            'DOTUSDT': 7.2,
-            'MATICUSDT': 0.85,
-            'LINKUSDT': 15.5
-        }
+        # Import Binance client for real prices
+        try:
+            from src.api.binance_client import BinanceClient
+            self.binance_client = BinanceClient()
+            self.use_real_prices = True
+            logger.info("Paper trading engine initialized with real market data")
+        except Exception as e:
+            logger.warning(f"Failed to initialize Binance client, using mock prices: {e}")
+            self.binance_client = None
+            self.use_real_prices = False
+            # Fallback mock prices
+            self.mock_prices = {
+                'BTCUSDT': 68000.0,
+                'ETHUSDT': 3400.0,
+                'BNBUSDT': 580.0,
+                'SOLUSDT': 140.0,
+                'ADAUSDT': 0.58,
+                'DOGEUSDT': 0.15,
+                'XRPUSDT': 0.52,
+                'DOTUSDT': 7.2,
+                'MATICUSDT': 0.85,
+                'LINKUSDT': 15.5
+            }
 
         # 加载持久化数据
         self.data_file = Path.home() / ".clawguard" / "paper_trading.json"
@@ -76,7 +89,7 @@ class PaperTradingEngine:
                     self.trades = data.get('trades', [])
                     self.order_id_counter = data.get('order_id_counter', 1000000)
             except Exception as e:
-                print(f"加载模拟盘状态失败: {e}")
+                logger.error(f"加载模拟盘状态失败: {e}")
 
     def _save_state(self):
         """保存持久化状态"""
@@ -91,11 +104,11 @@ class PaperTradingEngine:
                     'order_id_counter': self.order_id_counter
                 }, f, indent=2)
         except Exception as e:
-            print(f"保存模拟盘状态失败: {e}")
+            logger.error(f"保存模拟盘状态失败: {e}")
 
     def get_price(self, symbol: str) -> float:
         """
-        获取模拟价格（带随机波动）
+        获取价格（优先使用真实市场数据）
 
         Args:
             symbol: 交易对
@@ -103,13 +116,27 @@ class PaperTradingEngine:
         Returns:
             当前价格
         """
+        if self.use_real_prices and self.binance_client:
+            try:
+                ticker = self.binance_client.get_ticker_price(symbol)
+                return float(ticker.get('price', 0))
+            except Exception as e:
+                logger.warning(f"Failed to get real price for {symbol}, using mock: {e}")
+
+        # Fallback to mock prices with volatility
         base_price = self.mock_prices.get(symbol, 100.0)
-        # 添加 ±0.5% 的随机波动
         volatility = random.uniform(-0.005, 0.005)
         return base_price * (1 + volatility)
 
     def get_ticker_price(self, symbol: str) -> Dict:
-        """获取价格信息"""
+        """获取价格信息（优先使用真实数据）"""
+        if self.use_real_prices and self.binance_client:
+            try:
+                return self.binance_client.get_ticker_price(symbol)
+            except Exception as e:
+                logger.warning(f"Failed to get real ticker for {symbol}, using mock: {e}")
+
+        # Fallback to mock data
         price = self.get_price(symbol)
         change = random.uniform(-5, 5)
 

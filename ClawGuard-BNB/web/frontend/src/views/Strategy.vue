@@ -1,20 +1,3 @@
-
-# =============================================================================
-# Copyright (C) 2026 言零 (GOV-HACK)
-# All Rights Reserved.
-#
-# 官方网站：https://www.caowo.de | https://www.wizawn.com
-# 技术博客：https://blog.caowo.de | https://blog.wizawn.com
-# 软著材料代生成平台：https://ruanzhu.caowo.de | https://ruanzhu.wizawn.com
-#
-# 开发者：言零
-# 微信号：GOV-HACK
-# QQ：46333839
-#
-# 本软件受著作权法保护，未经授权禁止复制、修改、分发或用于商业用途。
-# 违反者将承担法律责任。
-# =============================================================================
-
 <template>
   <div class="strategy">
     <el-card shadow="hover">
@@ -26,7 +9,6 @@
           </el-button>
         </div>
       </template>
-
       <el-table :data="strategies" style="width: 100%">
         <el-table-column prop="name" label="策略名称" />
         <el-table-column prop="type" label="类型" width="120" />
@@ -76,7 +58,6 @@
         </el-table-column>
       </el-table>
     </el-card>
-
     <!-- 创建策略对话框 -->
     <el-dialog v-model="showCreateDialog" title="创建策略" width="600px">
       <el-form :model="strategyForm" label-width="120px">
@@ -109,12 +90,10 @@
     </el-dialog>
   </div>
 </template>
-
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { apiClient } from '@/api/client'
 import { ElMessage, ElMessageBox } from 'element-plus'
-
 const strategies = ref([])
 const showCreateDialog = ref(false)
 const strategyForm = ref({
@@ -125,7 +104,6 @@ const strategyForm = ref({
   grids: 20,
   amount: 1000
 })
-
 const loadStrategies = async () => {
   try {
     const res = await apiClient.get('/api/strategy/list')
@@ -136,7 +114,6 @@ const loadStrategies = async () => {
     console.error('加载策略失败:', error)
   }
 }
-
 const createStrategy = async () => {
   try {
     const res = await apiClient.post('/api/strategy/create', {
@@ -149,7 +126,6 @@ const createStrategy = async () => {
         amount: strategyForm.value.amount
       }
     })
-
     if (res.data.success) {
       ElMessage.success('策略创建成功')
       showCreateDialog.value = false
@@ -159,7 +135,6 @@ const createStrategy = async () => {
     console.error('创建策略失败:', error)
   }
 }
-
 const stopStrategy = async (id) => {
   try {
     await ElMessageBox.confirm('确定要停止此策略吗？', '确认', { type: 'warning' })
@@ -174,7 +149,6 @@ const stopStrategy = async (id) => {
     }
   }
 }
-
 const startStrategy = async (id) => {
   try {
     const res = await apiClient.post(`/api/strategy/${id}/start`)
@@ -186,7 +160,6 @@ const startStrategy = async (id) => {
     console.error('启动策略失败:', error)
   }
 }
-
 const deleteStrategy = async (id) => {
   try {
     await ElMessageBox.confirm('确定要删除此策略吗？', '确认', { type: 'warning' })
@@ -202,24 +175,29 @@ const deleteStrategy = async (id) => {
   }
 }
 
+let strategyInterval = null
+
 onMounted(() => {
   loadStrategies()
-  setInterval(loadStrategies, 10000)
+  strategyInterval = setInterval(loadStrategies, 10000)
+})
+
+onUnmounted(() => {
+  if (strategyInterval) {
+    clearInterval(strategyInterval)
+  }
 })
 </script>
-
 <style scoped>
 .card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-
 .profit-positive {
   color: #67c23a;
   font-weight: 600;
 }
-
 .profit-negative {
   color: #f56c6c;
   font-weight: 600;

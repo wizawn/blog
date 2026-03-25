@@ -1,20 +1,3 @@
-
-# =============================================================================
-# Copyright (C) 2026 言零 (GOV-HACK)
-# All Rights Reserved.
-#
-# 官方网站：https://www.caowo.de | https://www.wizawn.com
-# 技术博客：https://blog.caowo.de | https://blog.wizawn.com
-# 软著材料代生成平台：https://ruanzhu.caowo.de | https://ruanzhu.wizawn.com
-#
-# 开发者：言零
-# 微信号：GOV-HACK
-# QQ：46333839
-#
-# 本软件受著作权法保护，未经授权禁止复制、修改、分发或用于商业用途。
-# 违反者将承担法律责任。
-# =============================================================================
-
 <template>
   <div class="settings">
     <el-tabs type="border-card">
@@ -41,7 +24,6 @@
           </el-form>
         </el-card>
       </el-tab-pane>
-
       <!-- 代理设置 -->
       <el-tab-pane label="代理设置">
         <el-card shadow="never">
@@ -75,7 +57,6 @@
           </el-form>
         </el-card>
       </el-tab-pane>
-
       <!-- 系统配置 -->
       <el-tab-pane label="系统配置">
         <el-card shadow="never">
@@ -87,7 +68,6 @@
           </el-descriptions>
         </el-card>
       </el-tab-pane>
-
       <!-- NLP 测试 -->
       <el-tab-pane label="NLP 测试">
         <el-card shadow="never">
@@ -112,12 +92,10 @@
     </el-tabs>
   </div>
 </template>
-
 <script setup>
 import { ref, onMounted } from 'vue'
 import { apiClient } from '@/api/client'
 import { ElMessage } from 'element-plus'
-
 const tradingMode = ref('paper')
 const proxyConfig = ref({
   enabled: false,
@@ -129,7 +107,6 @@ const proxyConfig = ref({
 })
 const nlpInput = ref('')
 const nlpResult = ref(null)
-
 const loadTradingMode = async () => {
   try {
     const res = await apiClient.get('/api/settings/trading-mode')
@@ -140,7 +117,6 @@ const loadTradingMode = async () => {
     console.error('加载交易模式失败:', error)
   }
 }
-
 const changeTradingMode = async (mode) => {
   try {
     const res = await apiClient.post('/api/settings/trading-mode', { mode })
@@ -151,7 +127,6 @@ const changeTradingMode = async (mode) => {
     console.error('切换交易模式失败:', error)
   }
 }
-
 const loadProxyConfig = async () => {
   try {
     const res = await apiClient.get('/api/settings/proxy')
@@ -162,7 +137,6 @@ const loadProxyConfig = async () => {
     console.error('加载代理配置失败:', error)
   }
 }
-
 const saveProxyConfig = async () => {
   try {
     const res = await apiClient.post('/api/settings/proxy', proxyConfig.value)
@@ -173,7 +147,6 @@ const saveProxyConfig = async () => {
     console.error('保存代理配置失败:', error)
   }
 }
-
 const testProxy = async () => {
   try {
     const res = await apiClient.post('/api/settings/proxy/test')
@@ -184,7 +157,6 @@ const testProxy = async () => {
     console.error('测试代理失败:', error)
   }
 }
-
 const parseNLP = async () => {
   try {
     const res = await apiClient.post('/api/settings/nlp/parse', {
@@ -197,13 +169,11 @@ const parseNLP = async () => {
     console.error('NLP解析失败:', error)
   }
 }
-
 onMounted(() => {
   loadTradingMode()
   loadProxyConfig()
 })
 </script>
-
 <style scoped>
 pre {
   background-color: #f5f7fa;

@@ -1,20 +1,3 @@
-
-# =============================================================================
-# Copyright (C) 2026 言零 (GOV-HACK)
-# All Rights Reserved.
-#
-# 官方网站：https://www.caowo.de | https://www.wizawn.com
-# 技术博客：https://blog.caowo.de | https://blog.wizawn.com
-# 软著材料代生成平台：https://ruanzhu.caowo.de | https://ruanzhu.wizawn.com
-#
-# 开发者：言零
-# 微信号：GOV-HACK
-# QQ：46333839
-#
-# 本软件受著作权法保护，未经授权禁止复制、修改、分发或用于商业用途。
-# 违反者将承担法律责任。
-# =============================================================================
-
 <template>
   <div class="trading">
     <el-tabs v-model="activeTab" type="border-card">
@@ -29,7 +12,6 @@
               <order-form type="spot" @order-placed="handleOrderPlaced" />
             </el-card>
           </el-col>
-
           <el-col :span="12">
             <el-card shadow="hover">
               <template #header>
@@ -44,7 +26,6 @@
             </el-card>
           </el-col>
         </el-row>
-
         <el-card shadow="hover" style="margin-top: 20px">
           <template #header>
             <div class="card-header">
@@ -89,7 +70,6 @@
           </el-table>
         </el-card>
       </el-tab-pane>
-
       <!-- 合约交易 -->
       <el-tab-pane label="合约交易" name="futures">
         <el-row :gutter="20">
@@ -101,7 +81,6 @@
               <order-form type="futures" @order-placed="handleOrderPlaced" />
             </el-card>
           </el-col>
-
           <el-col :span="12">
             <el-card shadow="hover">
               <template #header>
@@ -115,19 +94,16 @@
     </el-tabs>
   </div>
 </template>
-
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { apiClient } from '@/api/client'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import OrderForm from '@/components/OrderForm.vue'
 import PositionTable from '@/components/PositionTable.vue'
-
 const activeTab = ref('spot')
 const spotBalances = ref([])
 const spotOrders = ref([])
 const futuresPositions = ref([])
-
 const getStatusType = (status) => {
   const types = {
     'NEW': 'info',
@@ -138,7 +114,6 @@ const getStatusType = (status) => {
   }
   return types[status] || 'info'
 }
-
 const loadSpotAccount = async () => {
   try {
     const res = await apiClient.get('/api/trading/account?type=spot')
@@ -156,7 +131,6 @@ const loadSpotAccount = async () => {
     console.error('加载现货账户失败:', error)
   }
 }
-
 const loadSpotOrders = async () => {
   try {
     const res = await apiClient.get('/api/trading/spot/orders?status=open')
@@ -167,7 +141,6 @@ const loadSpotOrders = async () => {
     console.error('加载现货订单失败:', error)
   }
 }
-
 const loadFuturesPositions = async () => {
   try {
     const res = await apiClient.get('/api/trading/futures/positions')
@@ -178,13 +151,11 @@ const loadFuturesPositions = async () => {
     console.error('加载合约持仓失败:', error)
   }
 }
-
 const cancelOrder = async (order) => {
   try {
     await ElMessageBox.confirm('确定要取消此订单吗？', '确认', {
       type: 'warning'
     })
-
     const res = await apiClient.delete(`/api/trading/spot/order/${order.orderId}?symbol=${order.symbol}`)
     if (res.data.success) {
       ElMessage.success('订单已取消')
@@ -196,23 +167,29 @@ const cancelOrder = async (order) => {
     }
   }
 }
-
 const closePosition = async (position) => {
   try {
     await ElMessageBox.confirm('确定要平仓吗？', '确认', {
       type: 'warning'
     })
-
-    // TODO: 实现平仓逻辑
-    ElMessage.success('平仓成功')
-    loadFuturesPositions()
+    // 实现平仓逻辑
+    const response = await apiClient.post('/api/trading/futures/close', {
+      symbol: position.symbol,
+      positionSide: position.positionSide || 'BOTH'
+    })
+    if (response.data.success) {
+      ElMessage.success('平仓成功')
+      loadFuturesPositions()
+    } else {
+      ElMessage.error(response.data.error || '平仓失败')
+    }
   } catch (error) {
     if (error !== 'cancel') {
       console.error('平仓失败:', error)
+      ElMessage.error('平仓失败: ' + (error.response?.data?.error || error.message))
     }
   }
 }
-
 const handleOrderPlaced = () => {
   ElMessage.success('订单已提交')
   loadSpotOrders()
@@ -220,13 +197,14 @@ const handleOrderPlaced = () => {
   loadFuturesPositions()
 }
 
+let refreshInterval = null
+
 onMounted(() => {
   loadSpotAccount()
   loadSpotOrders()
   loadFuturesPositions()
-
   // 定时刷新
-  setInterval(() => {
+  refreshInterval = setInterval(() => {
     if (activeTab.value === 'spot') {
       loadSpotOrders()
       loadSpotAccount()
@@ -235,8 +213,13 @@ onMounted(() => {
     }
   }, 5000)
 })
-</script>
 
+onUnmounted(() => {
+  if (refreshInterval) {
+    clearInterval(refreshInterval)
+  }
+})
+</script>
 <style scoped>
 .card-header {
   display: flex;

@@ -1,20 +1,3 @@
-
-# =============================================================================
-# Copyright (C) 2026 言零 (GOV-HACK)
-# All Rights Reserved.
-#
-# 官方网站：https://www.caowo.de | https://www.wizawn.com
-# 技术博客：https://blog.caowo.de | https://blog.wizawn.com
-# 软著材料代生成平台：https://ruanzhu.caowo.de | https://ruanzhu.wizawn.com
-#
-# 开发者：言零
-# 微信号：GOV-HACK
-# QQ：46333839
-#
-# 本软件受著作权法保护，未经授权禁止复制、修改、分发或用于商业用途。
-# 违反者将承担法律责任。
-# =============================================================================
-
 <template>
   <div class="risk">
     <el-row :gutter="20">
@@ -47,7 +30,6 @@
           </el-form>
         </el-card>
       </el-col>
-
       <el-col :span="12">
         <el-card shadow="hover">
           <template #header>
@@ -80,7 +62,6 @@
         </el-card>
       </el-col>
     </el-row>
-
     <el-card shadow="hover" style="margin-top: 20px">
       <template #header>
         <span>风控告警</span>
@@ -101,12 +82,10 @@
     </el-card>
   </div>
 </template>
-
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { apiClient } from '@/api/client'
 import { ElMessage } from 'element-plus'
-
 const riskConfig = ref({
   max_order_value: 10000,
   max_daily_loss: 1000,
@@ -114,10 +93,8 @@ const riskConfig = ref({
   enable_stop_loss: true,
   default_stop_loss_percent: 0.05
 })
-
 const stats = ref({})
 const alerts = ref([])
-
 const getRiskLevelType = (level) => {
   const types = {
     'low': 'success',
@@ -126,7 +103,6 @@ const getRiskLevelType = (level) => {
   }
   return types[level] || 'info'
 }
-
 const getRiskLevelText = (level) => {
   const texts = {
     'low': '低风险',
@@ -135,7 +111,6 @@ const getRiskLevelText = (level) => {
   }
   return texts[level] || '未知'
 }
-
 const getAlertType = (level) => {
   const types = {
     'info': 'info',
@@ -144,7 +119,6 @@ const getAlertType = (level) => {
   }
   return types[level] || 'info'
 }
-
 const loadRiskConfig = async () => {
   try {
     const res = await apiClient.get('/api/risk/config')
@@ -155,7 +129,6 @@ const loadRiskConfig = async () => {
     console.error('加载风控配置失败:', error)
   }
 }
-
 const saveRiskConfig = async () => {
   try {
     const res = await apiClient.post('/api/risk/config', riskConfig.value)
@@ -166,7 +139,6 @@ const saveRiskConfig = async () => {
     console.error('保存风控配置失败:', error)
   }
 }
-
 const loadStats = async () => {
   try {
     const res = await apiClient.get('/api/risk/stats')
@@ -177,7 +149,6 @@ const loadStats = async () => {
     console.error('加载风控统计失败:', error)
   }
 }
-
 const loadAlerts = async () => {
   try {
     const res = await apiClient.get('/api/risk/alerts')
@@ -189,24 +160,29 @@ const loadAlerts = async () => {
   }
 }
 
+let riskInterval = null
+
 onMounted(() => {
   loadRiskConfig()
   loadStats()
   loadAlerts()
-
-  setInterval(() => {
+  riskInterval = setInterval(() => {
     loadStats()
     loadAlerts()
   }, 30000)
 })
-</script>
 
+onUnmounted(() => {
+  if (riskInterval) {
+    clearInterval(riskInterval)
+  }
+})
+</script>
 <style scoped>
 .loss {
   color: #f56c6c;
   font-weight: 600;
 }
-
 .profit {
   color: #67c23a;
   font-weight: 600;

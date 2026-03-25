@@ -118,10 +118,11 @@ print(f"余额: {account['balances']}")
         print("代码示例:")
         print("""
 import requests
+import os
 
 class ClawGuardAPI:
-    def __init__(self, base_url="http://localhost:5000/api/v1"):
-        self.base_url = base_url
+    def __init__(self, base_url=None):
+        self.base_url = base_url or os.getenv('CLAWGUARD_API_URL', 'http://localhost:5000/api/v1')
 
     def get_price(self, symbol: str):
         response = requests.get(f"{self.base_url}/price/{symbol}")
@@ -147,11 +148,17 @@ print(f"BTC价格: ${price['data']['price']}")
         print("\n实际执行:")
         try:
             import requests
-            response = requests.get("http://localhost:5000/health", timeout=2)
+            import os
+
+            api_url = os.getenv('CLAWGUARD_API_URL', 'http://localhost:5000')
+            health_url = f"{api_url}/health"
+            price_url = f"{api_url}/api/v1/price/BTCUSDT"
+
+            response = requests.get(health_url, timeout=2)
             if response.status_code == 200:
                 print("✅ API服务器运行中")
                 # 尝试获取价格
-                price_response = requests.get("http://localhost:5000/api/v1/price/BTCUSDT", timeout=5)
+                price_response = requests.get(price_url, timeout=5)
                 if price_response.status_code == 200:
                     print(f"✅ 价格查询成功: {price_response.json()}")
             else:

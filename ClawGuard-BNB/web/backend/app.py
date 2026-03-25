@@ -30,6 +30,8 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from flask import Flask, jsonify, send_from_directory
 from flask_cors import CORS
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 import logging
 
 from src.config.config_manager import ConfigManager
@@ -62,11 +64,38 @@ def create_app():
 
     app.config['SECRET_KEY'] = secret_key
 
-    # 启用 CORS
-    CORS(app, resources={r"/api/*": {"origins": "*"}})
+    # Configure CORS with proper restrictions
+    allowed_origins = os.getenv('CORS_ALLOWED_ORIGINS', 'http://localhost:3000,http://localhost:5173').split(',')
+
+    if os.getenv('FLASK_ENV') == 'production':
+        # Production: only allow specific origins
+        CORS(app, resources={
+            r"/api/*": {
+                "origins": allowed_origins,
+                "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+                "allow_headers": ["Content-Type", "Authorization"],
+                "expose_headers": ["Content-Type"],
+                "supports_credentials": True,
+                "max_age": 3600
+            }
+        })
+        logger.info(f"CORS enabled for origins: {allowed_origins}")
+    else:
+        # Development: allow all origins
+        CORS(app, resources={r"/api/*": {"origins": "*"}})
+        logger.warning("CORS enabled for all origins (development mode)")
+
+    # Initialize rate limiter
+    limiter = Limiter(
+        app=app,
+        key_func=get_remote_address,
+        default_limits=["200 per day", "50 per hour"],
+        storage_uri="memory://"
+    )
+    logger.info("Rate limiting enabled")
 
     # 注册路由
-    from .routes import dashboard, trading, strategy, analysis, risk, settings, smart_trading
+    from routes import dashboard, trading, strategy, analysis, risk, settings, smart_trading, paper_trading, notification, performance, funding_arbitrage, advanced_orders
 
     app.register_blueprint(dashboard.bp, url_prefix='/api/dashboard')
     app.register_blueprint(trading.bp, url_prefix='/api/trading')
@@ -75,6 +104,11 @@ def create_app():
     app.register_blueprint(risk.bp, url_prefix='/api/risk')
     app.register_blueprint(settings.bp, url_prefix='/api/settings')
     app.register_blueprint(smart_trading.bp, url_prefix='/api/smart-trading')
+    app.register_blueprint(paper_trading.bp, url_prefix='/api/paper')
+    app.register_blueprint(notification.bp, url_prefix='/api/notification')
+    app.register_blueprint(performance.bp, url_prefix='/api/performance')
+    app.register_blueprint(funding_arbitrage.bp, url_prefix='/api/funding')
+    app.register_blueprint(advanced_orders.bp, url_prefix='/api/orders')
 
     # 健康检查端点
     @app.route('/health')

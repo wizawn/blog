@@ -19,6 +19,7 @@
 """
 合约事件分析系统
 监控和分析链上事件，识别交易机会
+集成 Twitter、Telegram 监控和 NLP 情感分析
 """
 
 import logging
@@ -27,6 +28,57 @@ from datetime import datetime, timedelta
 import numpy as np
 
 logger = logging.getLogger(__name__)
+
+
+def integrate_social_media_monitoring():
+    """集成社交媒体监控到事件分析器"""
+    from ..data_sources.twitter_monitor import get_twitter_monitor
+    from ..data_sources.telegram_monitor import get_telegram_monitor
+    from ..analysis.nlp_sentiment import get_sentiment_analyzer
+
+    twitter = get_twitter_monitor()
+    telegram = get_telegram_monitor()
+    sentiment = get_sentiment_analyzer()
+
+    def on_social_event(event: Dict):
+        """处理社交媒体事件"""
+        text = event.get('text', '')
+
+        # NLP 情感分析
+        sentiment_result = sentiment.analyze(text)
+
+        # 构建事件数据
+        analyzed_event = {
+            'source': event.get('source', 'unknown'),
+            'text': text,
+            'sentiment': sentiment_result['sentiment'],
+            'sentiment_score': sentiment_result['score'],
+            'confidence': sentiment_result['confidence'],
+            'priority': event.get('priority', 'MEDIUM'),
+            'timestamp': datetime.now().isoformat()
+        }
+
+        logger.info(f"社交媒体事件: {analyzed_event['source']} - {analyzed_event['sentiment']} ({analyzed_event['sentiment_score']:.2f})")
+
+        # 这里可以触发交易信号
+        if abs(sentiment_result['score']) > 0.5 and sentiment_result['confidence'] > 0.7:
+            logger.warning(f"强烈情感信号: {sentiment_result['sentiment']} - {text[:100]}")
+
+    # 添加回调
+    twitter.add_callback(on_social_event)
+    telegram.add_callback(on_social_event)
+
+    # 启动监控
+    twitter.start()
+    telegram.start()
+
+    logger.info("社交媒体监控已集成到事件分析器")
+
+    return {
+        'twitter': twitter,
+        'telegram': telegram,
+        'sentiment': sentiment
+    }
 
 
 class EventAnalyzer:

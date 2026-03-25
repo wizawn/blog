@@ -160,8 +160,8 @@ def create_app(config=None):
                     'status': 'running',
                     'url': 'http://localhost:8080'
                 })
-        except:
-            pass
+        except Exception as e:
+            logger.debug(f"Web 界面未运行: {e}")
 
         return jsonify({
             'success': True,

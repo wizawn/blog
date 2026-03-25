@@ -1,20 +1,3 @@
-
-# =============================================================================
-# Copyright (C) 2026 言零 (GOV-HACK)
-# All Rights Reserved.
-#
-# 官方网站：https://www.caowo.de | https://www.wizawn.com
-# 技术博客：https://blog.caowo.de | https://blog.wizawn.com
-# 软著材料代生成平台：https://ruanzhu.caowo.de | https://ruanzhu.wizawn.com
-#
-# 开发者：言零
-# 微信号：GOV-HACK
-# QQ：46333839
-#
-# 本软件受著作权法保护，未经授权禁止复制、修改、分发或用于商业用途。
-# 违反者将承担法律责任。
-# =============================================================================
-
 <template>
   <div class="analysis">
     <el-row :gutter="20">
@@ -44,7 +27,6 @@
         </el-card>
       </el-col>
     </el-row>
-
     <el-row :gutter="20" style="margin-top: 20px">
       <el-col :span="12">
         <el-card shadow="hover">
@@ -78,7 +60,6 @@
           </el-descriptions>
         </el-card>
       </el-col>
-
       <el-col :span="12">
         <el-card shadow="hover">
           <template #header>
@@ -112,24 +93,20 @@
     </el-row>
   </div>
 </template>
-
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { apiClient } from '@/api/client'
 import KLineChart from '@/components/KLineChart.vue'
-
 const selectedSymbol = ref('BTCUSDT')
 const selectedInterval = ref('1h')
 const indicators = ref({})
 const summary = ref(null)
-
 const getRsiType = (rsi) => {
   if (!rsi || !rsi.value) return 'info'
   if (rsi.value > 70) return 'danger'
   if (rsi.value < 30) return 'success'
   return 'warning'
 }
-
 const getSignalType = (signal) => {
   const types = {
     'BUY': 'success',
@@ -138,7 +115,6 @@ const getSignalType = (signal) => {
   }
   return types[signal] || 'info'
 }
-
 const loadIndicators = async () => {
   try {
     const res = await apiClient.get('/api/analysis/indicators', {
@@ -155,7 +131,6 @@ const loadIndicators = async () => {
     console.error('加载技术指标失败:', error)
   }
 }
-
 const loadSummary = async () => {
   try {
     const res = await apiClient.get('/api/analysis/summary', {
@@ -171,70 +146,67 @@ const loadSummary = async () => {
     console.error('加载分析摘要失败:', error)
   }
 }
-
 const loadData = () => {
   loadIndicators()
   loadSummary()
 }
 
+let analysisInterval = null
+
 onMounted(() => {
   loadData()
-  setInterval(loadData, 30000)
+  analysisInterval = setInterval(loadData, 30000)
+})
+
+onUnmounted(() => {
+  if (analysisInterval) {
+    clearInterval(analysisInterval)
+  }
 })
 </script>
-
 <style scoped>
 .card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-
 .summary {
   padding: 10px 0;
 }
-
 .summary-signal {
   display: flex;
   align-items: center;
   gap: 15px;
   margin-bottom: 15px;
 }
-
 .summary-price {
   display: flex;
   align-items: center;
   gap: 15px;
   margin-bottom: 15px;
 }
-
 .label {
   font-weight: 600;
   color: #606266;
 }
-
 .price {
   font-size: 24px;
   font-weight: 700;
   color: #303133;
 }
-
 .confidence {
   color: #909399;
 }
-
 .signals-list h4 {
   margin: 10px 0;
   color: #303133;
 }
-
 .signal-item {
   display: flex;
   align-items: center;
   gap: 10px;
   margin-bottom: 10px;
 }
-
 .signal-reason {
   color: #606266;
   font-size: 14px;

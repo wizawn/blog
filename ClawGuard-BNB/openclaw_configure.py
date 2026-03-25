@@ -237,7 +237,7 @@ class OpenClawConfigurator:
                 },
                 {
                     'name': 'HTTP API',
-                    'base_url': 'http://localhost:5000/api/v1',
+                    'base_url': os.getenv('CLAWGUARD_API_URL', 'http://localhost:5000/api/v1'),
                     'start_command': 'python3 openclaw_server.py',
                     'endpoints': {
                         'price': 'GET /price/{symbol}',

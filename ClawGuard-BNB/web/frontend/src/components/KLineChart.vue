@@ -1,29 +1,10 @@
-
-# =============================================================================
-# Copyright (C) 2026 言零 (GOV-HACK)
-# All Rights Reserved.
-#
-# 官方网站：https://www.caowo.de | https://www.wizawn.com
-# 技术博客：https://blog.caowo.de | https://blog.wizawn.com
-# 软著材料代生成平台：https://ruanzhu.caowo.de | https://ruanzhu.wizawn.com
-#
-# 开发者：言零
-# 微信号：GOV-HACK
-# QQ：46333839
-#
-# 本软件受著作权法保护，未经授权禁止复制、修改、分发或用于商业用途。
-# 违反者将承担法律责任。
-# =============================================================================
-
 <template>
   <div ref="chartRef" style="width: 100%; height: 500px"></div>
 </template>
-
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
 import * as echarts from 'echarts'
 import { apiClient } from '@/api/client'
-
 const props = defineProps({
   symbol: {
     type: String,
@@ -34,10 +15,8 @@ const props = defineProps({
     default: '1h'
   }
 })
-
 const chartRef = ref(null)
 let chart = null
-
 const loadKlines = async () => {
   try {
     const res = await apiClient.get('/api/analysis/klines', {
@@ -47,15 +26,12 @@ const loadKlines = async () => {
         limit: 100
       }
     })
-
     if (res.data.success) {
       const klines = res.data.data
-
       // 准备数据
       const dates = klines.map(k => new Date(k.time).toLocaleString())
       const data = klines.map(k => [k.open, k.close, k.low, k.high])
       const volumes = klines.map(k => k.volume)
-
       // 配置图表
       const option = {
         title: {
@@ -168,7 +144,6 @@ const loadKlines = async () => {
           }
         ]
       }
-
       chart.setOption(option)
     }
   } catch (error) {
@@ -176,14 +151,24 @@ const loadKlines = async () => {
   }
 }
 
+const handleResize = () => {
+  if (chart) {
+    chart.resize()
+  }
+}
+
 onMounted(() => {
   chart = echarts.init(chartRef.value)
   loadKlines()
-
   // 响应式调整
-  window.addEventListener('resize', () => {
-    chart.resize()
-  })
+  window.addEventListener('resize', handleResize)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize)
+  if (chart) {
+    chart.dispose()
+  }
 })
 
 watch(() => [props.symbol, props.interval], () => {

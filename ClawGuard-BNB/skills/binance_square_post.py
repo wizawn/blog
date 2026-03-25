@@ -10,13 +10,15 @@ import hashlib
 import time
 from datetime import datetime, timedelta
 
+import os
+
 # Binance Square API Key
-SQUARE_API_KEY = '48fd76620cac495a93d511fcc2c3b58d'
+SQUARE_API_KEY = os.getenv('SQUARE_API_KEY', '')
 
 # ClawGuard-BNB API 配置
-BINANCE_API_KEY = '8PGspkkBGwh0cS6JaMpff7FHbEOWGWAPzYLG7mGevOBDhjsNJgwk0C2lNSTZLd8K'
-BINANCE_API_SECRET = 'FpM3s9p7MLM1Ze07UVvs3sA1RmzenQFgh34gv42qfGUpluRaiXIxTdcZU9p0Cm0Q'
-PROXY = 'http://127.0.0.1:7890'
+BINANCE_API_KEY = os.getenv('BINANCE_API_KEY', '')
+BINANCE_API_SECRET = os.getenv('BINANCE_API_SECRET', '')
+PROXY = os.getenv('PROXY_URL', 'http://127.0.0.1:7890')
 
 def sign(params):
     """生成币安签名"""

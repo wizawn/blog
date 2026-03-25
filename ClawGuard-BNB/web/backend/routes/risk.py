@@ -103,7 +103,8 @@ def check_risk():
                 'error': '缺少必需参数'
             }), 400
 
-        risk_control = RiskControl()
+        from src.risk.risk_control import RiskControlEngine
+        risk_control = RiskControlEngine()
         allowed = risk_control.check_order_allowed(symbol, side, float(quantity))
 
         if allowed:
@@ -136,58 +137,29 @@ def check_risk():
 def get_risk_alerts():
     """获取风控告警"""
     try:
-        # 从风控引擎获取告警历史
-        risk_engine = RiskControlEngine()
+        # 从数据库获取风控告警
+        from src.database.repository import RiskAlertRepository
 
-        # 读取日志文件获取风控告警
-        from pathlib import Path
-        import json
-        from datetime import datetime, timedelta
+        alert_repo = RiskAlertRepository()
 
+        # 获取未解决的告警
+        db_alerts = alert_repo.get_unresolved()
+
+        # 转换为前端格式
         alerts = []
-        log_file = Path.home() / ".clawguard" / "clawguard.log"
-
-        if log_file.exists():
-            try:
-                # 读取最近的日志
-                with open(log_file, 'r', encoding='utf-8') as f:
-                    lines = f.readlines()[-200:]  # 最近200行
-
-                # 解析风控相关日志
-                for line in lines:
-                    if '风控' in line or 'risk' in line.lower() or '拒绝' in line:
-                        try:
-                            # 简单解析日志格式
-                            parts = line.split(' - ')
-                            if len(parts) >= 3:
-                                timestamp = parts[0].strip()
-                                level = parts[1].strip()
-                                message = parts[2].strip()
-
-                                alert_level = 'warning'
-                                if 'ERROR' in level or '错误' in message:
-                                    alert_level = 'error'
-                                elif 'INFO' in level:
-                                    alert_level = 'info'
-
-                                alerts.append({
-                                    'id': f"alert_{len(alerts)}",
-                                    'type': 'risk_control',
-                                    'level': alert_level,
-                                    'message': message,
-                                    'time': timestamp
-                                })
-                        except:
-                            continue
-            except Exception as e:
-                logger.error(f"读取日志文件失败: {e}")
-
-        # 如果没有告警，返回空列表
-        if not alerts:
-            alerts = []
+        for alert in db_alerts:
+            alerts.append({
+                'id': f"alert_{alert.id}",
+                'type': alert.type,
+                'level': alert.level,
+                'message': alert.message,
+                'symbol': alert.symbol,
+                'time': alert.created_at.isoformat() if alert.created_at else None,
+                'resolved': alert.resolved
+            })
 
         # 限制返回数量
-        alerts = alerts[-50:]  # 最近50条
+        alerts = alerts[:50]  # 最近50条
 
         return jsonify({
             'success': True,
@@ -197,9 +169,9 @@ def get_risk_alerts():
     except Exception as e:
         logger.error(f"获取风控告警失败: {e}")
         return jsonify({
-            'success': True,
-            'data': []
-        })
+            'success': False,
+            'error': str(e)
+        }), 500
 
 
 @bp.route('/stats', methods=['GET'])
@@ -236,10 +208,25 @@ def get_risk_stats():
         # 计算盈亏比
         profit_rate = (total_profit / total_investment * 100) if total_investment > 0 else 0
 
+        # 计算拒绝订单数量（从数据库查询风控告警）
+        rejected_orders = 0
+        try:
+            from src.database.repository import RiskAlertRepository
+            alert_repo = RiskAlertRepository()
+            # 获取所有拒绝类型的告警
+            all_alerts = alert_repo.get_unresolved()
+            rejected_orders = sum(1 for alert in all_alerts if '拒绝' in alert.message or 'reject' in alert.message.lower())
+        except Exception as e:
+            logger.warning(f"获取拒绝订单统计失败: {e}")
+            rejected_orders = 0
+
+        # 计算拒绝率
+        rejection_rate = (rejected_orders / (total_orders + rejected_orders) * 100) if (total_orders + rejected_orders) > 0 else 0
+
         stats = {
             'total_orders': total_orders,
-            'rejected_orders': 0,  # 需要从日志统计
-            'rejection_rate': 0,
+            'rejected_orders': rejected_orders,
+            'rejection_rate': round(rejection_rate, 2),
             'total_value': round(total_investment, 2),
             'total_profit': round(total_profit, 2),
             'profit_rate': round(profit_rate, 2),
@@ -257,14 +244,201 @@ def get_risk_stats():
     except Exception as e:
         logger.error(f"获取风控统计失败: {e}")
         return jsonify({
+            'success': False,
+            'error': str(e)
+        }), 500
+
+# ==================== 新增的风险管理API端点 ====================
+
+@bp.route('/positions', methods=['GET'])
+def get_risk_positions():
+    """获取风险持仓列表（带风险评分）"""
+    try:
+        from src.api.binance_futures_client import BinanceFuturesClient
+        from src.risk.liquidation_risk_monitor import LiquidationRiskMonitor
+        
+        futures_client = BinanceFuturesClient()
+        monitor = LiquidationRiskMonitor(futures_client)
+        
+        # 获取所有持仓
+        position_risk = futures_client.get_position_risk()
+        
+        risk_positions = []
+        for pos in position_risk:
+            position_amt = float(pos.get('positionAmt', 0))
+            if position_amt == 0:
+                continue
+                
+            symbol = pos['symbol']
+            entry_price = float(pos.get('entryPrice', 0))
+            mark_price = float(pos.get('markPrice', 0))
+            leverage = int(pos.get('leverage', 1))
+            liquidation_price = float(pos.get('liquidationPrice', 0))
+            
+            # 计算风险评分
+            side = 'LONG' if position_amt > 0 else 'SHORT'
+            risk_score = monitor.calculate_risk_score(
+                current_price=mark_price,
+                liquidation_price=liquidation_price,
+                position_side=side
+            )
+            
+            risk_positions.append({
+                'symbol': symbol,
+                'positionAmt': position_amt,
+                'entryPrice': entry_price,
+                'markPrice': mark_price,
+                'liquidationPrice': liquidation_price,
+                'leverage': leverage,
+                'side': side,
+                'unRealizedProfit': float(pos.get('unRealizedProfit', 0)),
+                'riskScore': risk_score.get('score', 0),
+                'riskLevel': risk_score.get('level', 'UNKNOWN'),
+                'safetyDistance': risk_score.get('distance_percent', 0),
+                'recommendation': risk_score.get('recommendation', '')
+            })
+        
+        return jsonify({
             'success': True,
             'data': {
-                'total_orders': 0,
-                'rejected_orders': 0,
-                'rejection_rate': 0,
-                'total_value': 0,
-                'total_profit': 0,
-                'profit_rate': 0,
-                'risk_level': 'low'
+                'positions': risk_positions,
+                'count': len(risk_positions)
             }
         })
+        
+    except Exception as e:
+        logger.error(f"获取风险持仓失败: {e}")
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        }), 500
+
+
+@bp.route('/liquidation-price', methods=['POST'])
+def calculate_liquidation_price():
+    """计算爆仓价格"""
+    try:
+        data = request.get_json()
+        
+        side = data.get('side')  # LONG or SHORT
+        entry_price = data.get('entry_price')
+        leverage = data.get('leverage')
+        maintenance_margin_rate = data.get('maintenance_margin_rate', 0.004)
+        
+        if not all([side, entry_price, leverage]):
+            return jsonify({
+                'success': False,
+                'error': '缺少必需参数: side, entry_price, leverage'
+            }), 400
+        
+        from src.risk.liquidation_risk_monitor import LiquidationRiskMonitor
+        monitor = LiquidationRiskMonitor()
+        
+        liquidation_price = monitor.calculate_liquidation_price(
+            side=side,
+            entry_price=float(entry_price),
+            leverage=int(leverage),
+            maintenance_margin_rate=float(maintenance_margin_rate)
+        )
+        
+        # 计算安全距离
+        distance_percent = abs(float(entry_price) - liquidation_price) / float(entry_price) * 100
+        
+        return jsonify({
+            'success': True,
+            'data': {
+                'liquidationPrice': liquidation_price,
+                'entryPrice': float(entry_price),
+                'leverage': int(leverage),
+                'side': side,
+                'safetyDistance': round(distance_percent, 2),
+                'maintenanceMarginRate': float(maintenance_margin_rate)
+            }
+        })
+        
+    except Exception as e:
+        logger.error(f"计算爆仓价格失败: {e}")
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        }), 500
+
+
+@bp.route('/risk-score', methods=['GET'])
+def get_risk_score():
+    """获取账户总体风险评分"""
+    try:
+        from src.api.binance_futures_client import BinanceFuturesClient
+        from src.risk.liquidation_risk_monitor import LiquidationRiskMonitor
+        
+        futures_client = BinanceFuturesClient()
+        monitor = LiquidationRiskMonitor(futures_client)
+        
+        # 获取所有持仓
+        position_risk = futures_client.get_position_risk()
+        
+        total_risk_score = 0
+        high_risk_count = 0
+        critical_risk_count = 0
+        position_count = 0
+        
+        for pos in position_risk:
+            position_amt = float(pos.get('positionAmt', 0))
+            if position_amt == 0:
+                continue
+            
+            position_count += 1
+            mark_price = float(pos.get('markPrice', 0))
+            liquidation_price = float(pos.get('liquidationPrice', 0))
+            side = 'LONG' if position_amt > 0 else 'SHORT'
+            
+            risk_score = monitor.calculate_risk_score(
+                current_price=mark_price,
+                liquidation_price=liquidation_price,
+                position_side=side
+            )
+            
+            score = risk_score.get('score', 0)
+            level = risk_score.get('level', 'LOW')
+            
+            total_risk_score += score
+            
+            if level == 'HIGH':
+                high_risk_count += 1
+            elif level == 'CRITICAL':
+                critical_risk_count += 1
+        
+        # 计算平均风险评分
+        avg_risk_score = total_risk_score / position_count if position_count > 0 else 0
+        
+        # 确定总体风险等级
+        if critical_risk_count > 0:
+            overall_level = 'CRITICAL'
+        elif high_risk_count > 0:
+            overall_level = 'HIGH'
+        elif avg_risk_score > 40:
+            overall_level = 'MEDIUM'
+        else:
+            overall_level = 'LOW'
+        
+        return jsonify({
+            'success': True,
+            'data': {
+                'overallRiskScore': round(avg_risk_score, 2),
+                'overallRiskLevel': overall_level,
+                'positionCount': position_count,
+                'highRiskCount': high_risk_count,
+                'criticalRiskCount': critical_risk_count,
+                'recommendation': '建议立即减仓' if overall_level == 'CRITICAL' else 
+                                 '建议降低杠杆' if overall_level == 'HIGH' else 
+                                 '风险可控' if overall_level == 'MEDIUM' else 
+                                 '风险较低'
+            }
+        })
+        
+    except Exception as e:
+        logger.error(f"获取风险评分失败: {e}")
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        }), 500

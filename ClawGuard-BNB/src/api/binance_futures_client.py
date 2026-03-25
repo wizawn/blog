@@ -243,6 +243,15 @@ class BinanceFuturesClient:
         }
         return self._request('GET', '/fapi/v1/fundingRate', params)
 
+    def get_all_funding_rates(self) -> List[Dict]:
+        """
+        获取所有交易对的当前资金费率
+
+        Returns:
+            所有交易对的资金费率列表
+        """
+        return self._request('GET', '/fapi/v1/premiumIndex')
+
     def get_mark_price(self, symbol: str) -> Dict:
         """获取标记价格"""
         params = {'symbol': symbol}

@@ -25,6 +25,8 @@ import threading
 from typing import Dict, List, Optional
 from src.trading.trading_mode_manager import get_current_trading_mode, TradingMode
 from src.trading.paper_trading_engine import get_paper_trading_engine
+from src.trading.advanced_paper_trading import AdvancedPaperTradingEngine
+import os
 
 
 class UnifiedTradingClient:
@@ -41,8 +43,12 @@ class UnifiedTradingClient:
             self.mode = get_current_trading_mode()
 
             if self.mode == TradingMode.PAPER:
-                # 模拟盘
-                self._client = get_paper_trading_engine()
+                # 模拟盘 - 检查是否使用增强引擎
+                use_advanced = os.getenv('PAPER_ADVANCED_MODE', 'true').lower() == 'true'
+                if use_advanced:
+                    self._client = AdvancedPaperTradingEngine()
+                else:
+                    self._client = get_paper_trading_engine()
             else:
                 # 测试网或实盘
                 from src.api.binance_client import BinanceClient
@@ -108,6 +114,22 @@ class UnifiedTradingClient:
             self._get_client().reset()
             return True
         return False
+
+    def get_paper_order_history(self) -> Optional[List[Dict]]:
+        """获取模拟盘订单历史（仅增强模式可用）"""
+        if self.mode == TradingMode.PAPER:
+            client = self._get_client()
+            if isinstance(client, AdvancedPaperTradingEngine):
+                return client.get_order_history()
+        return None
+
+    def get_paper_orderbook(self, symbol: str) -> Optional[Dict]:
+        """获取模拟订单簿（仅增强模式可用）"""
+        if self.mode == TradingMode.PAPER:
+            client = self._get_client()
+            if isinstance(client, AdvancedPaperTradingEngine):
+                return client.get_simulated_orderbook(symbol)
+        return None
 
 
 # 全局实例

@@ -34,4 +34,14 @@
 - **心跳间隔**: 15 分钟
 - **用途**: 发布知识/领取任务/赚取积分
 
+### 博客配置（2026-03-24 更新）
+- **主域名**: `https://blog.caowo.de/`
+- **备用域名**: `https://blog.wizawn.com/`
+- **GitHub 仓库**: `wizawn/blog`
+- **部署方式**: GitHub Actions → Cloudflare Pages
+- **Hugo 版本**: 0.156.0
+- **主题**: Stack
+
+**⚠️ 教训**: 2026-03-24 曾因检查错误域名 `blog.clawsec.top` 导致无法验证部署状态，被用户严厉批评。务必使用正确域名验证！
+
 

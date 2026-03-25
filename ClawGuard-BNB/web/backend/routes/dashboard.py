@@ -28,10 +28,14 @@ from src.api.binance_client import BinanceClient
 from src.trading.trading_mode_manager import TradingModeManager
 from src.trading.unified_client import UnifiedTradingClient
 from src.config.config_manager import ConfigManager
+from src.database.repository import PerformanceMetricRepository
 import logging
 
 bp = Blueprint('dashboard', __name__)
 logger = logging.getLogger(__name__)
+
+# Initialize repository
+performance_repo = PerformanceMetricRepository()
 
 
 @bp.route('/overview', methods=['GET'])
@@ -122,7 +126,8 @@ def get_overview():
                                     pnl = order.get('pnl_percent', 0)
                                     if pnl:
                                         today_pnl += pnl
-                            except:
+                            except (ValueError, AttributeError) as e:
+                                logger.warning(f"解析订单时间失败: {e}")
                                 continue
 
             # 计算今日盈亏百分比
@@ -133,6 +138,60 @@ def get_overview():
             logger.error(f"计算今日盈亏失败: {e}")
             today_pnl = 0
             today_pnl_percent = 0
+
+        # Save performance metrics to database with actual calculations
+        try:
+            # Calculate actual metrics from trade history
+            from src.database.repository import TradeRepository
+            trade_repo = TradeRepository()
+
+            # Get recent trades (last 30 days)
+            recent_trades = trade_repo.get_recent(days=30, limit=1000)
+
+            total_trades = len(recent_trades)
+            win_rate = 0.0
+            sharpe_ratio = 0.0
+            max_drawdown = 0.0
+
+            if total_trades > 0:
+                # Calculate win rate
+                winning_trades = sum(1 for t in recent_trades if t.realized_pnl > 0)
+                win_rate = (winning_trades / total_trades) * 100
+
+                # Calculate max drawdown
+                cumulative_pnl = 0
+                peak = 0
+                max_dd = 0
+                for trade in recent_trades:
+                    cumulative_pnl += trade.realized_pnl
+                    if cumulative_pnl > peak:
+                        peak = cumulative_pnl
+                    drawdown = peak - cumulative_pnl
+                    if drawdown > max_dd:
+                        max_dd = drawdown
+
+                max_drawdown = (max_dd / peak * 100) if peak > 0 else 0
+
+                # Calculate Sharpe ratio (simplified)
+                if total_trades > 1:
+                    pnls = [t.realized_pnl for t in recent_trades]
+                    avg_pnl = sum(pnls) / len(pnls)
+                    variance = sum((x - avg_pnl) ** 2 for x in pnls) / (len(pnls) - 1)
+                    std_dev = variance ** 0.5
+                    sharpe_ratio = (avg_pnl / std_dev) if std_dev > 0 else 0
+
+            performance_repo.create(
+                total_pnl=today_pnl,
+                win_rate=round(win_rate, 2),
+                sharpe_ratio=round(sharpe_ratio, 4),
+                max_drawdown=round(max_drawdown, 2),
+                total_trades=total_trades,
+                winning_trades=winning_trades,
+                losing_trades=total_trades - winning_trades
+            )
+            logger.info(f"Performance metrics saved: trades={total_trades}, win_rate={win_rate:.2f}%")
+        except Exception as e:
+            logger.error(f"Failed to save performance metrics: {e}")
 
         return jsonify({
             'success': True,
@@ -230,14 +289,15 @@ def get_strategies_status():
     except Exception as e:
         logger.error(f"获取策略状态失败: {e}")
         return jsonify({
-            'success': True,
-            'data': {
-                'total': 0,
-                'running': 0,
-                'stopped': 0,
-                'strategies': []
-            }
-        })
+            'success': False,
+            'error': str(e)
+        }), 500
+
+
+@bp.route('/strategies-status', methods=['GET'])
+def get_strategies_status_alias():
+    """获取策略运行状态（别名路由）"""
+    return get_strategies_status()
 
 
 @bp.route('/recent-orders', methods=['GET'])
@@ -286,9 +346,9 @@ def get_recent_orders():
     except Exception as e:
         logger.error(f"获取最近订单失败: {e}")
         return jsonify({
-            'success': True,
-            'data': []  # 失败时返回空列表，不影响前端显示
-        })
+            'success': False,
+            'error': str(e)
+        }), 500
 
 
 @bp.route('/system-status', methods=['GET'])
@@ -304,7 +364,8 @@ def get_system_status():
             client = UnifiedTradingClient()
             client.get_server_time()
             api_connected = True
-        except:
+        except Exception as e:
+            logger.warning(f"API连接检查失败: {e}")
             pass
 
         # 检查代理状态

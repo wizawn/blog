@@ -1,20 +1,3 @@
-
-# =============================================================================
-# Copyright (C) 2026 言零 (GOV-HACK)
-# All Rights Reserved.
-#
-# 官方网站：https://www.caowo.de | https://www.wizawn.com
-# 技术博客：https://blog.caowo.de | https://blog.wizawn.com
-# 软著材料代生成平台：https://ruanzhu.caowo.de | https://ruanzhu.wizawn.com
-#
-# 开发者：言零
-# 微信号：GOV-HACK
-# QQ：46333839
-#
-# 本软件受著作权法保护，未经授权禁止复制、修改、分发或用于商业用途。
-# 违反者将承担法律责任。
-# =============================================================================
-
 <template>
   <div class="dashboard">
     <el-row :gutter="20">
@@ -47,7 +30,6 @@
           </div>
         </el-card>
       </el-col>
-
       <!-- 实时价格 -->
       <el-col :span="16">
         <el-card shadow="hover">
@@ -69,7 +51,6 @@
         </el-card>
       </el-col>
     </el-row>
-
     <!-- 策略状态 -->
     <el-row :gutter="20" style="margin-top: 20px">
       <el-col :span="12">
@@ -102,7 +83,6 @@
           </el-table>
         </el-card>
       </el-col>
-
       <!-- 最近订单 -->
       <el-col :span="12">
         <el-card shadow="hover">
@@ -132,23 +112,19 @@
     </el-row>
   </div>
 </template>
-
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { apiClient } from '@/api/client'
 import PriceCard from '@/components/PriceCard.vue'
-
 const totalBalance = ref(0)
 const todayPnl = ref(0)
 const positionCount = ref(0)
 const tickers = ref([])
 const strategies = ref([])
 const recentOrders = ref([])
-
 const pnlClass = computed(() => {
   return todayPnl.value >= 0 ? 'profit-positive' : 'profit-negative'
 })
-
 const loadOverview = async () => {
   try {
     const res = await apiClient.get('/api/dashboard/overview')
@@ -161,7 +137,6 @@ const loadOverview = async () => {
     console.error('加载概览失败:', error)
   }
 }
-
 const loadPrices = async () => {
   try {
     const res = await apiClient.get('/api/dashboard/prices')
@@ -172,7 +147,6 @@ const loadPrices = async () => {
     console.error('加载价格失败:', error)
   }
 }
-
 const loadStrategies = async () => {
   try {
     const res = await apiClient.get('/api/dashboard/strategies')
@@ -183,7 +157,6 @@ const loadStrategies = async () => {
     console.error('加载策略失败:', error)
   }
 }
-
 const loadRecentOrders = async () => {
   try {
     const res = await apiClient.get('/api/dashboard/recent-orders')
@@ -195,55 +168,57 @@ const loadRecentOrders = async () => {
   }
 }
 
+let priceInterval = null
+let overviewInterval = null
+
 onMounted(() => {
   loadOverview()
   loadPrices()
   loadStrategies()
   loadRecentOrders()
-
   // 定时刷新
-  setInterval(loadPrices, 5000)
-  setInterval(loadOverview, 10000)
+  priceInterval = setInterval(loadPrices, 5000)
+  overviewInterval = setInterval(loadOverview, 10000)
+})
+
+onUnmounted(() => {
+  if (priceInterval) {
+    clearInterval(priceInterval)
+  }
+  if (overviewInterval) {
+    clearInterval(overviewInterval)
+  }
 })
 </script>
-
 <style scoped>
 .card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-
 .account-info {
   padding: 10px 0;
 }
-
 .balance-item {
   margin-bottom: 20px;
 }
-
 .balance-item:last-child {
   margin-bottom: 0;
 }
-
 .label {
   font-size: 14px;
   color: #909399;
 }
-
 .value {
   margin: 5px 0 0 0;
   font-weight: 600;
 }
-
 .profit-positive {
   color: #67c23a;
 }
-
 .profit-negative {
   color: #f56c6c;
 }
-
 .price-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));

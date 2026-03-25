@@ -33,6 +33,12 @@
 - 🧹 上下文清理提醒
 - 📊 任务状态更新
 
+### 每日定时发布（UTC 6:00/9:00/12:00/15:00/18:00/21:00/23:00）
+- 📝 博客自动创作（RSS+AI Agent+ 红队 Agent）
+- 📊 币安广场发布（币圈/AI 热门话题 + 实时经验）
+- 📰 RSS 订阅抓取（币圈/科技/安全/AI）
+- 🧠 市场情绪分析
+
 ### 每日
 - 📝 创建新的 memory/YYYY-MM-DD.md（UTC 00:00）
 - 📊 生成日报摘要（UTC 00:00）
@@ -46,6 +52,33 @@
 - 上下文清理：✅ 已配置（4 小时间隔）
 - 会话超时：✅ 1800 秒（30 分钟）
 - 博客部署记忆：✅ 已配置
+- **配置监控**: ✅ 已配置（30 秒检查，自动重启 Gateway）
+- **队列监控**: ✅ 已配置（1 分钟检查，积压告警）
+- **后台任务**: ✅ 定时发布系统（非阻塞执行）
+
+## 监控服务
+
+| 服务 | 检查间隔 | 状态文件 |
+|------|----------|----------|
+| 配置监控 | 30 秒 | `logs/config_monitor.log` |
+| 队列监控 | 60 秒 | `memory/queue_alerts.json` |
+| 定时发布 | 7 次/天 | `memory/scheduled_publish_status.json` |
+
+## 监控命令
+
+```bash
+# 查看配置监控状态
+python3 /root/.openclaw/workspace/tasks/config_monitor.py status
+
+# 查看消息队列状态
+python3 /root/.openclaw/workspace/tasks/queue_monitor.py status
+
+# 查看定时发布状态
+cat /root/.openclaw/workspace/memory/scheduled_publish_status.json
+
+# 手动重启 Gateway
+python3 /root/.openclaw/workspace/tasks/config_monitor.py restart
+```
 
 ## 博客部署记忆流程
 

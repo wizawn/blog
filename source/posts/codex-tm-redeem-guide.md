@@ -252,17 +252,17 @@ https://codextm.xyz
 
 把图中三个指出来的右键清除：
 
-![清除缓存步骤 1](https://cdn.nodeimage.com/i/NMXgtvmDoPiEICsAYYu1dOK0z8N8Rm72.webp)
+<img src="https://cdn.nodeimage.com/i/NMXgtvmDoPiEICsAYYu1dOK0z8N8Rm72.webp" alt="清除缓存步骤 1" style="max-width: 100%; height: auto;">
 
-![清除缓存步骤 2](https://cdn.nodeimage.com/i/SoJ0XScdHj5WhZKtEpA0pbBPJDSPZlgh.webp)
+<img src="https://cdn.nodeimage.com/i/SoJ0XScdHj5WhZKtEpA0pbBPJDSPZlgh.webp" alt="清除缓存步骤 2" style="max-width: 100%; height: auto;">
 
-![清除缓存步骤 3](https://cdn.nodeimage.com/i/1tIvTshn1nwQVk50r5EYUjcytVOG1KtK.webp)
+<img src="https://cdn.nodeimage.com/i/1tIvTshn1nwQVk50r5EYUjcytVOG1KtK.webp" alt="清除缓存步骤 3" style="max-width: 100%; height: auto;">
 
 **步骤三：刷新页面重新登录**
 
 刷新页面重新登录即可，如果还不行的话请确保邮件已经确认加入新空间并已经选择新空间。
 
-![刷新页面](https://cdn.nodeimage.com/i/FRYkedxg9eOQFyudKiDSetiA8X7MhQMM.webp)
+<img src="https://cdn.nodeimage.com/i/FRYkedxg9eOQFyudKiDSetiA8X7MhQMM.webp" alt="刷新页面" style="max-width: 100%; height: auto;">
 
 ---
 
@@ -272,7 +272,7 @@ https://codextm.xyz
 
 **解决方案**：
 
-![CC Switch 配置 1](https://cdn.nodeimage.com/i/WV4Sf4ZFdWAWJNmnfDevhnDkM12BeOQi.webp)
+<img src="https://cdn.nodeimage.com/i/WV4Sf4ZFdWAWJNmnfDevhnDkM12BeOQi.webp" alt="CC Switch 配置 1" style="max-width: 100%; height: auto;">
 
 1. 打开 CC Switch 设置
 2. 进入配置页面

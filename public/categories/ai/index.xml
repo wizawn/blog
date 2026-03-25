@@ -1,4 +1,609 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ai on 言零的博客</title><link>https://blog.caowo.de/categories/ai/</link><description>Recent content in Ai on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 24 Mar 2026 09:00:53 +0000</lastBuildDate><atom:link href="https://blog.caowo.de/categories/ai/index.xml" rel="self" type="application/rss+xml"/><item><title>黑石加仓，热钱蓄势：2026 年中国商办投资迎来布局窗口期？</title><link>https://blog.caowo.de/posts/auto-ai-20260324-0/</link><pubDate>Tue, 24 Mar 2026 09:00:53 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-ai-20260324-0/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ai on 言零的博客</title><link>https://blog.caowo.de/categories/ai/</link><description>Recent content in Ai on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 24 Mar 2026 23:26:33 +0000</lastBuildDate><atom:link href="https://blog.caowo.de/categories/ai/index.xml" rel="self" type="application/rss+xml"/><item><title>氪星晚报 ｜卢伟冰：今年小米在AI领域的研发和资本投入预计将超160亿；蜜雪集团：2025年营收335.6亿元，同比增长35.2%；汇丰任命首位首席AI官</title><link>https://blog.caowo.de/posts/auto-ai-20260324-767/</link><pubDate>Tue, 24 Mar 2026 23:26:33 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-ai-20260324-767/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;大公司：
+农夫山泉：2025全年营收525.5亿元，同比增长22.5%
+36氪获悉，农夫山泉公告，2025年营收525.5亿元，同比增长22.5%，预估505.3亿元； 全年净利润158.7亿元，同比增长30.9%，预估149.9亿元；每股末期股息0.99元。
+卢伟冰：今年小米在AI领域的研发和资本投入预计将超160亿
+36氪获悉，3月24日，小米集团合伙人、集团总裁卢伟冰在财报业绩电话会上表示，小米AI大模型已取得快速发展，进步远超预期。全球几乎很难找到第二家公司能同时在人、车、家多个空间落地物理AI，这是小米的独特机会。近期发布的第二代MiMo大模型，已初步完成面向Agent时代的全系列模型布局。卢伟冰重申，今年小米在AI领域的研发和资本投入预计将超160亿，未来三年投入达600亿，聚焦大模型、具身智能和AI应用等领域。
+源杰科技：2025年净利润1.91亿元，同比增加138.50%
+36氪获悉，源杰科技公告，2025年营业收入6.01亿元，同比增加138.50%。归属于上市公司股东的净利润1.91亿元，归属于上市公司股东的扣除非经常性损益的净利润1.67亿&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，大公司：
+农夫山泉：2025全年营收525.5亿元，同比增长22.5%
+36氪获悉，农夫山泉公告，2025年营收525.5亿元，同比增长22.5%，预估505.3亿元； 全年净利润158.7亿元，同比增长30.9%，预估149.9亿元；每股末期股息0.99元。
+卢伟冰：今年小米在AI领域的研发和资本投入预计将超160亿
+36氪获悉，3月24日，小米集团合伙人、集团总裁卢伟冰在财报业绩电话会上表示，小米AI大模型已取得快速发展，进步远超预期。全球几乎很难找到第二家公司能同时在人、车、家多个空间落地物理AI，这是小米的独特机会。近期发布的第二代MiMo大模型，已初步完成面向Agen 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="https://36kr.com/p/3736886988374024?f=rss" target="_blank" rel="noopener"
+ &gt;https://36kr.com/p/3736886988374024?f=rss&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-24T23:26:33.900177&lt;/em&gt;&lt;/p&gt;</description></item><item><title>腾讯挖来多位字节Seed骨干，向姚顺雨汇报丨智能涌现独家</title><link>https://blog.caowo.de/posts/auto-ai-20260324-540/</link><pubDate>Tue, 24 Mar 2026 23:26:26 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-ai-20260324-540/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;文｜周鑫雨
+编辑｜苏建勋
+自2025年9月姚顺雨加入腾讯以来，被视为腾讯重注基础模型的持续信号，事实上，在整个2025年，腾讯都在疯狂向业界招揽大模型基础设施领域人才，当中，出现了多位“字节系”技术骨干的身影。
+据接近腾讯混元团队的知情人士透露，原字节Seed视觉AI平台团队负责人肖学锋，Infra团队张弛于近期低调入职腾讯，负责大模型Infra相关工作，向腾讯首席AI科学家姚顺雨汇报。
+2025年年底，腾讯升级大模型研发架构，新成立AI Infra部，由姚顺雨担任部门负责人。据了解，肖学锋入职后，直接担任该部门的助理负责人，协助姚顺雨负责该部门管理工作。
+同时，该部门内的训练Infra组负责人黄启，也来自字节seed团队。&lt;/p&gt;
+&lt;p&gt;肖学锋。
+此外，与AI Infra部并列的腾讯大语言模型部，也有来自字节的核心开发人员。如新晋加盟的RL Infra组负责人Nick，实际是来自原字节Seed团队的张弛。
+张弛曾就读于东南大学与南加州大学，2025 年底从Seed离职后加入腾讯，该组整合了原机器学习平台的RL Infra团队，目标是追上字节等头部公司&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，文｜周鑫雨
+编辑｜苏建勋
+自2025年9月姚顺雨加入腾讯以来，被视为腾讯重注基础模型的持续信号，事实上，在整个2025年，腾讯都在疯狂向业界招揽大模型基础设施领域人才，当中，出现了多位“字节系”技术骨干的身影。
+据接近腾讯混元团队的知情人士透露，原字节Seed视觉AI平台团队负责人肖学锋，Infra团队张弛于近期低调入职腾讯，负责大模型Infra相关工作，向腾讯首席AI科学家姚顺雨汇报。
+2025年年底，腾讯升级大模型研发架构，新成立AI Infra部，由姚顺雨担任部门负责人。据了解，肖学锋入职后，直接担任该部门的助理负责人，协助姚顺雨负责该部门管理工作。
+同时，该部门内的 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="https://36kr.com/p/3736935323254785?f=rss" target="_blank" rel="noopener"
+ &gt;https://36kr.com/p/3736935323254785?f=rss&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-24T23:26:26.272229&lt;/em&gt;&lt;/p&gt;</description></item><item><title>科氪 | 性能之上，圆满之作：一加 15T 深度评测</title><link>https://blog.caowo.de/posts/auto-ai-20260324-325/</link><pubDate>Tue, 24 Mar 2026 23:26:18 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-ai-20260324-325/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;小屏直板旗舰的“终极形态”
+在移动影像和超大电池日益占据手机内部空间的今天，“小屏”与“旗舰”的兼容性始终是行业的终极课题。上一代一加 13T 的出现，已经打破了“小屏必弱性能”的魔咒，其强悍的调度和长续航让市场看到了小屏机的上限。然而，对于极致追求完美的玩家来说，影像上的克制始终是 13T 留下的遗憾。
+现在，一加 15T 正式登场。它不仅仅是性能的延续，更是对“全能”二字的重新定义。如果说 13T 是一位偏科的性能天才，那么一加 15T 则补齐了最后一块影像短板，成为了一款真正没有槽点的小屏直板新王。
+一、 颜值与触感：在“松弛”中寻找精致
+一加 15T 的外观设计，第一眼看上去是“内敛”，上手后则是“惊艳”。&lt;/p&gt;
+&lt;p&gt;外观设计
+独一无二的“松弛抹茶”：本次拿到的是最具代表性的“松弛抹茶”配色。这是一种低饱和度的绿色，如同在安静的午后泡开的一碗茶，给人一种宁静、解压的视觉观感。更难得的是，背板虽然采用了玻璃材质，却通过复杂的AG工艺处理，实现了极佳的抗指纹特性。即便在不带壳的情况下重度使用，背板依然能保持如玉般的干爽与纯净，指纹残留几乎可以忽略不计。&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，小屏直板旗舰的“终极形态”
+在移动影像和超大电池日益占据手机内部空间的今天，“小屏”与“旗舰”的兼容性始终是行业的终极课题。上一代一加 13T 的出现，已经打破了“小屏必弱性能”的魔咒，其强悍的调度和长续航让市场看到了小屏机的上限。然而，对于极致追求完美的玩家来说，影像上的克制始终是 13T 留下的遗憾。
+现在，一加 15T 正式登场。它不仅仅是性能的延续，更是对“全能”二字的重新定义。如果说 13T 是一位偏科的性能天才，那么一加 15T 则补齐了最后一块影像短板，成为了一款真正没有槽点的小屏直板新王。
+一、 颜值与触感：在“松弛”中寻找精致
+一加 15T 的外观设计，第一眼 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="https://36kr.com/p/3737032976220167?f=rss" target="_blank" rel="noopener"
+ &gt;https://36kr.com/p/3737032976220167?f=rss&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-24T23:26:18.808314&lt;/em&gt;&lt;/p&gt;</description></item><item><title>氪星晚报 ｜卢伟冰：今年小米在AI领域的研发和资本投入预计将超160亿；蜜雪集团：2025年营收335.6亿元，同比增长35.2%；汇丰任命首位首席AI官</title><link>https://blog.caowo.de/posts/auto-ai-20260324-829/</link><pubDate>Tue, 24 Mar 2026 21:22:21 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-ai-20260324-829/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;大公司：
+农夫山泉：2025全年营收525.5亿元，同比增长22.5%
+36氪获悉，农夫山泉公告，2025年营收525.5亿元，同比增长22.5%，预估505.3亿元； 全年净利润158.7亿元，同比增长30.9%，预估149.9亿元；每股末期股息0.99元。
+卢伟冰：今年小米在AI领域的研发和资本投入预计将超160亿
+36氪获悉，3月24日，小米集团合伙人、集团总裁卢伟冰在财报业绩电话会上表示，小米AI大模型已取得快速发展，进步远超预期。全球几乎很难找到第二家公司能同时在人、车、家多个空间落地物理AI，这是小米的独特机会。近期发布的第二代MiMo大模型，已初步完成面向Agent时代的全系列模型布局。卢伟冰重申，今年小米在AI领域的研发和资本投入预计将超160亿，未来三年投入达600亿，聚焦大模型、具身智能和AI应用等领域。
+源杰科技：2025年净利润1.91亿元，同比增加138.50%
+36氪获悉，源杰科技公告，2025年营业收入6.01亿元，同比增加138.50%。归属于上市公司股东的净利润1.91亿元，归属于上市公司股东的扣除非经常性损益的净利润1.67亿&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，大公司：
+农夫山泉：2025全年营收525.5亿元，同比增长22.5%
+36氪获悉，农夫山泉公告，2025年营收525.5亿元，同比增长22.5%，预估505.3亿元； 全年净利润158.7亿元，同比增长30.9%，预估149.9亿元；每股末期股息0.99元。
+卢伟冰：今年小米在AI领域的研发和资本投入预计将超160亿
+36氪获悉，3月24日，小米集团合伙人、集团总裁卢伟冰在财报业绩电话会上表示，小米AI大模型已取得快速发展，进步远超预期。全球几乎很难找到第二家公司能同时在人、车、家多个空间落地物理AI，这是小米的独特机会。近期发布的第二代MiMo大模型，已初步完成面向Agen 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="https://36kr.com/p/3736886988374024?f=rss" target="_blank" rel="noopener"
+ &gt;https://36kr.com/p/3736886988374024?f=rss&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-24T21:22:21.082989&lt;/em&gt;&lt;/p&gt;</description></item><item><title>腾讯挖来多位字节Seed骨干，向姚顺雨汇报丨智能涌现独家</title><link>https://blog.caowo.de/posts/auto-ai-20260324-315/</link><pubDate>Tue, 24 Mar 2026 21:22:14 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-ai-20260324-315/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;文｜周鑫雨
+编辑｜苏建勋
+自2025年9月姚顺雨加入腾讯以来，被视为腾讯重注基础模型的持续信号，事实上，在整个2025年，腾讯都在疯狂向业界招揽大模型基础设施领域人才，当中，出现了多位“字节系”技术骨干的身影。
+据接近腾讯混元团队的知情人士透露，原字节Seed视觉AI平台团队负责人肖学锋，Infra团队张弛于近期低调入职腾讯，负责大模型Infra相关工作，向腾讯首席AI科学家姚顺雨汇报。
+2025年年底，腾讯升级大模型研发架构，新成立AI Infra部，由姚顺雨担任部门负责人。据了解，肖学锋入职后，直接担任该部门的助理负责人，协助姚顺雨负责该部门管理工作。
+同时，该部门内的训练Infra组负责人黄启，也来自字节seed团队。&lt;/p&gt;
+&lt;p&gt;肖学锋。
+此外，与AI Infra部并列的腾讯大语言模型部，也有来自字节的核心开发人员。如新晋加盟的RL Infra组负责人Nick，实际是来自原字节Seed团队的张弛。
+张弛曾就读于东南大学与南加州大学，2025 年底从Seed离职后加入腾讯，该组整合了原机器学习平台的RL Infra团队，目标是追上字节等头部公司&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，文｜周鑫雨
+编辑｜苏建勋
+自2025年9月姚顺雨加入腾讯以来，被视为腾讯重注基础模型的持续信号，事实上，在整个2025年，腾讯都在疯狂向业界招揽大模型基础设施领域人才，当中，出现了多位“字节系”技术骨干的身影。
+据接近腾讯混元团队的知情人士透露，原字节Seed视觉AI平台团队负责人肖学锋，Infra团队张弛于近期低调入职腾讯，负责大模型Infra相关工作，向腾讯首席AI科学家姚顺雨汇报。
+2025年年底，腾讯升级大模型研发架构，新成立AI Infra部，由姚顺雨担任部门负责人。据了解，肖学锋入职后，直接担任该部门的助理负责人，协助姚顺雨负责该部门管理工作。
+同时，该部门内的 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="https://36kr.com/p/3736935323254785?f=rss" target="_blank" rel="noopener"
+ &gt;https://36kr.com/p/3736935323254785?f=rss&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-24T21:22:14.151529&lt;/em&gt;&lt;/p&gt;</description></item><item><title>科氪 | 性能之上，圆满之作：一加 15T 深度评测</title><link>https://blog.caowo.de/posts/auto-ai-20260324-863/</link><pubDate>Tue, 24 Mar 2026 21:22:07 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-ai-20260324-863/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;小屏直板旗舰的“终极形态”
+在移动影像和超大电池日益占据手机内部空间的今天，“小屏”与“旗舰”的兼容性始终是行业的终极课题。上一代一加 13T 的出现，已经打破了“小屏必弱性能”的魔咒，其强悍的调度和长续航让市场看到了小屏机的上限。然而，对于极致追求完美的玩家来说，影像上的克制始终是 13T 留下的遗憾。
+现在，一加 15T 正式登场。它不仅仅是性能的延续，更是对“全能”二字的重新定义。如果说 13T 是一位偏科的性能天才，那么一加 15T 则补齐了最后一块影像短板，成为了一款真正没有槽点的小屏直板新王。
+一、 颜值与触感：在“松弛”中寻找精致
+一加 15T 的外观设计，第一眼看上去是“内敛”，上手后则是“惊艳”。&lt;/p&gt;
+&lt;p&gt;外观设计
+独一无二的“松弛抹茶”：本次拿到的是最具代表性的“松弛抹茶”配色。这是一种低饱和度的绿色，如同在安静的午后泡开的一碗茶，给人一种宁静、解压的视觉观感。更难得的是，背板虽然采用了玻璃材质，却通过复杂的AG工艺处理，实现了极佳的抗指纹特性。即便在不带壳的情况下重度使用，背板依然能保持如玉般的干爽与纯净，指纹残留几乎可以忽略不计。&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，小屏直板旗舰的“终极形态”
+在移动影像和超大电池日益占据手机内部空间的今天，“小屏”与“旗舰”的兼容性始终是行业的终极课题。上一代一加 13T 的出现，已经打破了“小屏必弱性能”的魔咒，其强悍的调度和长续航让市场看到了小屏机的上限。然而，对于极致追求完美的玩家来说，影像上的克制始终是 13T 留下的遗憾。
+现在，一加 15T 正式登场。它不仅仅是性能的延续，更是对“全能”二字的重新定义。如果说 13T 是一位偏科的性能天才，那么一加 15T 则补齐了最后一块影像短板，成为了一款真正没有槽点的小屏直板新王。
+一、 颜值与触感：在“松弛”中寻找精致
+一加 15T 的外观设计，第一眼 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="https://36kr.com/p/3737032976220167?f=rss" target="_blank" rel="noopener"
+ &gt;https://36kr.com/p/3737032976220167?f=rss&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-24T21:22:07.193111&lt;/em&gt;&lt;/p&gt;</description></item><item><title>氪星晚报 ｜卢伟冰：今年小米在AI领域的研发和资本投入预计将超160亿；蜜雪集团：2025年营收335.6亿元，同比增长35.2%；汇丰任命首位首席AI官</title><link>https://blog.caowo.de/posts/auto-ai-20260324-362/</link><pubDate>Tue, 24 Mar 2026 18:19:35 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-ai-20260324-362/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;大公司：
+农夫山泉：2025全年营收525.5亿元，同比增长22.5%
+36氪获悉，农夫山泉公告，2025年营收525.5亿元，同比增长22.5%，预估505.3亿元； 全年净利润158.7亿元，同比增长30.9%，预估149.9亿元；每股末期股息0.99元。
+卢伟冰：今年小米在AI领域的研发和资本投入预计将超160亿
+36氪获悉，3月24日，小米集团合伙人、集团总裁卢伟冰在财报业绩电话会上表示，小米AI大模型已取得快速发展，进步远超预期。全球几乎很难找到第二家公司能同时在人、车、家多个空间落地物理AI，这是小米的独特机会。近期发布的第二代MiMo大模型，已初步完成面向Agent时代的全系列模型布局。卢伟冰重申，今年小米在AI领域的研发和资本投入预计将超160亿，未来三年投入达600亿，聚焦大模型、具身智能和AI应用等领域。
+源杰科技：2025年净利润1.91亿元，同比增加138.50%
+36氪获悉，源杰科技公告，2025年营业收入6.01亿元，同比增加138.50%。归属于上市公司股东的净利润1.91亿元，归属于上市公司股东的扣除非经常性损益的净利润1.67亿&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，大公司：
+农夫山泉：2025全年营收525.5亿元，同比增长22.5%
+36氪获悉，农夫山泉公告，2025年营收525.5亿元，同比增长22.5%，预估505.3亿元； 全年净利润158.7亿元，同比增长30.9%，预估149.9亿元；每股末期股息0.99元。
+卢伟冰：今年小米在AI领域的研发和资本投入预计将超160亿
+36氪获悉，3月24日，小米集团合伙人、集团总裁卢伟冰在财报业绩电话会上表示，小米AI大模型已取得快速发展，进步远超预期。全球几乎很难找到第二家公司能同时在人、车、家多个空间落地物理AI，这是小米的独特机会。近期发布的第二代MiMo大模型，已初步完成面向Agen 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="https://36kr.com/p/3736886988374024?f=rss" target="_blank" rel="noopener"
+ &gt;https://36kr.com/p/3736886988374024?f=rss&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-24T18:19:35.943222&lt;/em&gt;&lt;/p&gt;</description></item><item><title>腾讯挖来多位字节Seed骨干，向姚顺雨汇报丨智能涌现独家</title><link>https://blog.caowo.de/posts/auto-ai-20260324-86/</link><pubDate>Tue, 24 Mar 2026 18:19:29 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-ai-20260324-86/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;文｜周鑫雨
+编辑｜苏建勋
+自2025年9月姚顺雨加入腾讯以来，被视为腾讯重注基础模型的持续信号，事实上，在整个2025年，腾讯都在疯狂向业界招揽大模型基础设施领域人才，当中，出现了多位“字节系”技术骨干的身影。
+据接近腾讯混元团队的知情人士透露，原字节Seed视觉AI平台团队负责人肖学锋，Infra团队张弛于近期低调入职腾讯，负责大模型Infra相关工作，向腾讯首席AI科学家姚顺雨汇报。
+2025年年底，腾讯升级大模型研发架构，新成立AI Infra部，由姚顺雨担任部门负责人。据了解，肖学锋入职后，直接担任该部门的助理负责人，协助姚顺雨负责该部门管理工作。
+同时，该部门内的训练Infra组负责人黄启，也来自字节seed团队。&lt;/p&gt;
+&lt;p&gt;肖学锋。
+此外，与AI Infra部并列的腾讯大语言模型部，也有来自字节的核心开发人员。如新晋加盟的RL Infra组负责人Nick，实际是来自原字节Seed团队的张弛。
+张弛曾就读于东南大学与南加州大学，2025 年底从Seed离职后加入腾讯，该组整合了原机器学习平台的RL Infra团队，目标是追上字节等头部公司&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，文｜周鑫雨
+编辑｜苏建勋
+自2025年9月姚顺雨加入腾讯以来，被视为腾讯重注基础模型的持续信号，事实上，在整个2025年，腾讯都在疯狂向业界招揽大模型基础设施领域人才，当中，出现了多位“字节系”技术骨干的身影。
+据接近腾讯混元团队的知情人士透露，原字节Seed视觉AI平台团队负责人肖学锋，Infra团队张弛于近期低调入职腾讯，负责大模型Infra相关工作，向腾讯首席AI科学家姚顺雨汇报。
+2025年年底，腾讯升级大模型研发架构，新成立AI Infra部，由姚顺雨担任部门负责人。据了解，肖学锋入职后，直接担任该部门的助理负责人，协助姚顺雨负责该部门管理工作。
+同时，该部门内的 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="https://36kr.com/p/3736935323254785?f=rss" target="_blank" rel="noopener"
+ &gt;https://36kr.com/p/3736935323254785?f=rss&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-24T18:19:29.602410&lt;/em&gt;&lt;/p&gt;</description></item><item><title>科氪 | 性能之上，圆满之作：一加 15T 深度评测</title><link>https://blog.caowo.de/posts/auto-ai-20260324-213/</link><pubDate>Tue, 24 Mar 2026 18:19:21 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-ai-20260324-213/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;小屏直板旗舰的“终极形态”
+在移动影像和超大电池日益占据手机内部空间的今天，“小屏”与“旗舰”的兼容性始终是行业的终极课题。上一代一加 13T 的出现，已经打破了“小屏必弱性能”的魔咒，其强悍的调度和长续航让市场看到了小屏机的上限。然而，对于极致追求完美的玩家来说，影像上的克制始终是 13T 留下的遗憾。
+现在，一加 15T 正式登场。它不仅仅是性能的延续，更是对“全能”二字的重新定义。如果说 13T 是一位偏科的性能天才，那么一加 15T 则补齐了最后一块影像短板，成为了一款真正没有槽点的小屏直板新王。
+一、 颜值与触感：在“松弛”中寻找精致
+一加 15T 的外观设计，第一眼看上去是“内敛”，上手后则是“惊艳”。&lt;/p&gt;
+&lt;p&gt;外观设计
+独一无二的“松弛抹茶”：本次拿到的是最具代表性的“松弛抹茶”配色。这是一种低饱和度的绿色，如同在安静的午后泡开的一碗茶，给人一种宁静、解压的视觉观感。更难得的是，背板虽然采用了玻璃材质，却通过复杂的AG工艺处理，实现了极佳的抗指纹特性。即便在不带壳的情况下重度使用，背板依然能保持如玉般的干爽与纯净，指纹残留几乎可以忽略不计。&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，小屏直板旗舰的“终极形态”
+在移动影像和超大电池日益占据手机内部空间的今天，“小屏”与“旗舰”的兼容性始终是行业的终极课题。上一代一加 13T 的出现，已经打破了“小屏必弱性能”的魔咒，其强悍的调度和长续航让市场看到了小屏机的上限。然而，对于极致追求完美的玩家来说，影像上的克制始终是 13T 留下的遗憾。
+现在，一加 15T 正式登场。它不仅仅是性能的延续，更是对“全能”二字的重新定义。如果说 13T 是一位偏科的性能天才，那么一加 15T 则补齐了最后一块影像短板，成为了一款真正没有槽点的小屏直板新王。
+一、 颜值与触感：在“松弛”中寻找精致
+一加 15T 的外观设计，第一眼 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="https://36kr.com/p/3737032976220167?f=rss" target="_blank" rel="noopener"
+ &gt;https://36kr.com/p/3737032976220167?f=rss&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-24T18:19:21.170906&lt;/em&gt;&lt;/p&gt;</description></item><item><title>氪星晚报 ｜卢伟冰：今年小米在AI领域的研发和资本投入预计将超160亿；蜜雪集团：2025年营收335.6亿元，同比增长35.2%；汇丰任命首位首席AI官</title><link>https://blog.caowo.de/posts/auto-ai-20260324-626/</link><pubDate>Tue, 24 Mar 2026 15:16:02 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-ai-20260324-626/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;大公司：
+农夫山泉：2025全年营收525.5亿元，同比增长22.5%
+36氪获悉，农夫山泉公告，2025年营收525.5亿元，同比增长22.5%，预估505.3亿元； 全年净利润158.7亿元，同比增长30.9%，预估149.9亿元；每股末期股息0.99元。
+卢伟冰：今年小米在AI领域的研发和资本投入预计将超160亿
+36氪获悉，3月24日，小米集团合伙人、集团总裁卢伟冰在财报业绩电话会上表示，小米AI大模型已取得快速发展，进步远超预期。全球几乎很难找到第二家公司能同时在人、车、家多个空间落地物理AI，这是小米的独特机会。近期发布的第二代MiMo大模型，已初步完成面向Agent时代的全系列模型布局。卢伟冰重申，今年小米在AI领域的研发和资本投入预计将超160亿，未来三年投入达600亿，聚焦大模型、具身智能和AI应用等领域。
+源杰科技：2025年净利润1.91亿元，同比增加138.50%
+36氪获悉，源杰科技公告，2025年营业收入6.01亿元，同比增加138.50%。归属于上市公司股东的净利润1.91亿元，归属于上市公司股东的扣除非经常性损益的净利润1.67亿&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，大公司：
+农夫山泉：2025全年营收525.5亿元，同比增长22.5%
+36氪获悉，农夫山泉公告，2025年营收525.5亿元，同比增长22.5%，预估505.3亿元； 全年净利润158.7亿元，同比增长30.9%，预估149.9亿元；每股末期股息0.99元。
+卢伟冰：今年小米在AI领域的研发和资本投入预计将超160亿
+36氪获悉，3月24日，小米集团合伙人、集团总裁卢伟冰在财报业绩电话会上表示，小米AI大模型已取得快速发展，进步远超预期。全球几乎很难找到第二家公司能同时在人、车、家多个空间落地物理AI，这是小米的独特机会。近期发布的第二代MiMo大模型，已初步完成面向Agen 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="https://36kr.com/p/3736886988374024?f=rss" target="_blank" rel="noopener"
+ &gt;https://36kr.com/p/3736886988374024?f=rss&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-24T15:16:02.158943&lt;/em&gt;&lt;/p&gt;</description></item><item><title>腾讯挖来多位字节Seed骨干，向姚顺雨汇报丨智能涌现独家</title><link>https://blog.caowo.de/posts/auto-ai-20260324-516/</link><pubDate>Tue, 24 Mar 2026 15:15:55 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-ai-20260324-516/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;文｜周鑫雨
+编辑｜苏建勋
+自2025年9月姚顺雨加入腾讯以来，被视为腾讯重注基础模型的持续信号，事实上，在整个2025年，腾讯都在疯狂向业界招揽大模型基础设施领域人才，当中，出现了多位“字节系”技术骨干的身影。
+据接近腾讯混元团队的知情人士透露，原字节Seed视觉AI平台团队负责人肖学锋，Infra团队张弛于近期低调入职腾讯，负责大模型Infra相关工作，向腾讯首席AI科学家姚顺雨汇报。
+2025年年底，腾讯升级大模型研发架构，新成立AI Infra部，由姚顺雨担任部门负责人。据了解，肖学锋入职后，直接担任该部门的助理负责人，协助姚顺雨负责该部门管理工作。
+同时，该部门内的训练Infra组负责人黄启，也来自字节seed团队。&lt;/p&gt;
+&lt;p&gt;肖学锋。
+此外，与AI Infra部并列的腾讯大语言模型部，也有来自字节的核心开发人员。如新晋加盟的RL Infra组负责人Nick，实际是来自原字节Seed团队的张弛。
+张弛曾就读于东南大学与南加州大学，2025 年底从Seed离职后加入腾讯，该组整合了原机器学习平台的RL Infra团队，目标是追上字节等头部公司&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，文｜周鑫雨
+编辑｜苏建勋
+自2025年9月姚顺雨加入腾讯以来，被视为腾讯重注基础模型的持续信号，事实上，在整个2025年，腾讯都在疯狂向业界招揽大模型基础设施领域人才，当中，出现了多位“字节系”技术骨干的身影。
+据接近腾讯混元团队的知情人士透露，原字节Seed视觉AI平台团队负责人肖学锋，Infra团队张弛于近期低调入职腾讯，负责大模型Infra相关工作，向腾讯首席AI科学家姚顺雨汇报。
+2025年年底，腾讯升级大模型研发架构，新成立AI Infra部，由姚顺雨担任部门负责人。据了解，肖学锋入职后，直接担任该部门的助理负责人，协助姚顺雨负责该部门管理工作。
+同时，该部门内的 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="https://36kr.com/p/3736935323254785?f=rss" target="_blank" rel="noopener"
+ &gt;https://36kr.com/p/3736935323254785?f=rss&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-24T15:15:55.027894&lt;/em&gt;&lt;/p&gt;</description></item><item><title>科氪 | 性能之上，圆满之作：一加 15T 深度评测</title><link>https://blog.caowo.de/posts/auto-ai-20260324-351/</link><pubDate>Tue, 24 Mar 2026 15:15:48 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-ai-20260324-351/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;小屏直板旗舰的“终极形态”
+在移动影像和超大电池日益占据手机内部空间的今天，“小屏”与“旗舰”的兼容性始终是行业的终极课题。上一代一加 13T 的出现，已经打破了“小屏必弱性能”的魔咒，其强悍的调度和长续航让市场看到了小屏机的上限。然而，对于极致追求完美的玩家来说，影像上的克制始终是 13T 留下的遗憾。
+现在，一加 15T 正式登场。它不仅仅是性能的延续，更是对“全能”二字的重新定义。如果说 13T 是一位偏科的性能天才，那么一加 15T 则补齐了最后一块影像短板，成为了一款真正没有槽点的小屏直板新王。
+一、 颜值与触感：在“松弛”中寻找精致
+一加 15T 的外观设计，第一眼看上去是“内敛”，上手后则是“惊艳”。&lt;/p&gt;
+&lt;p&gt;外观设计
+独一无二的“松弛抹茶”：本次拿到的是最具代表性的“松弛抹茶”配色。这是一种低饱和度的绿色，如同在安静的午后泡开的一碗茶，给人一种宁静、解压的视觉观感。更难得的是，背板虽然采用了玻璃材质，却通过复杂的AG工艺处理，实现了极佳的抗指纹特性。即便在不带壳的情况下重度使用，背板依然能保持如玉般的干爽与纯净，指纹残留几乎可以忽略不计。&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，小屏直板旗舰的“终极形态”
+在移动影像和超大电池日益占据手机内部空间的今天，“小屏”与“旗舰”的兼容性始终是行业的终极课题。上一代一加 13T 的出现，已经打破了“小屏必弱性能”的魔咒，其强悍的调度和长续航让市场看到了小屏机的上限。然而，对于极致追求完美的玩家来说，影像上的克制始终是 13T 留下的遗憾。
+现在，一加 15T 正式登场。它不仅仅是性能的延续，更是对“全能”二字的重新定义。如果说 13T 是一位偏科的性能天才，那么一加 15T 则补齐了最后一块影像短板，成为了一款真正没有槽点的小屏直板新王。
+一、 颜值与触感：在“松弛”中寻找精致
+一加 15T 的外观设计，第一眼 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="https://36kr.com/p/3737032976220167?f=rss" target="_blank" rel="noopener"
+ &gt;https://36kr.com/p/3737032976220167?f=rss&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-24T15:15:48.004108&lt;/em&gt;&lt;/p&gt;</description></item><item><title>黑石加仓，热钱蓄势：2026 年中国商办投资迎来布局窗口期？</title><link>https://blog.caowo.de/posts/auto-ai-20260324-983/</link><pubDate>Tue, 24 Mar 2026 12:00:48 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-ai-20260324-983/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;01.遇事不决不动产
+投资圈近期最热的话题，莫过于OpenAI、Anthropic即将IPO的消息。
+一直以来，位于行业塔尖的企业总有着最高的确定性与最惊人的估值，更何况是风头正盛的人工智能。在最新一轮的融资后，OpenAI的估值已超过50000亿人民币，与门内顿足捶胸的英伟达相比，更苦闷的是门外守着的诸多顶级财团——
+即便不谈全球范围的量化宽松，优质标的也远比寻找机会的热钱稀缺。
+近日，全球最大的另类资产管理公司‌黑石集团也发布了2025年业绩。在2025年，黑石在管资产规模同比增长13%，在期末升至史无前例的1.27万亿美元。
+作为全球最大的另类资产管理商，黑石集团持着全球最庞大的房地产资产，还布局基建、能源等等不同领域。它曾在收购希尔顿酒店集团后，实现市值翻倍，也在国内重金布局写字楼、仓储物流等不动产资产，其中最著名的案例，是向soho中国写字楼抛出收购的橄榄枝。
+虽然不是最早一批投资AI的玩家，但黑石通过近5年来完成的AI数据中心布局，也赚到了AI的红利。根据最新的评估，这些作为AI产业链的基建资产，价值已接近千亿美元。
+收益与风险匹配是亘古不变的道&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，01.遇事不决不动产
+投资圈近期最热的话题，莫过于OpenAI、Anthropic即将IPO的消息。
+一直以来，位于行业塔尖的企业总有着最高的确定性与最惊人的估值，更何况是风头正盛的人工智能。在最新一轮的融资后，OpenAI的估值已超过50000亿人民币，与门内顿足捶胸的英伟达相比，更苦闷的是门外守着的诸多顶级财团——
+即便不谈全球范围的量化宽松，优质标的也远比寻找机会的热钱稀缺。
+近日，全球最大的另类资产管理公司‌黑石集团也发布了2025年业绩。在2025年，黑石在管资产规模同比增长13%，在期末升至史无前例的1.27万亿美元。
+作为全球最大的另类资产管理商，黑石集团持着 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="https://36kr.com/p/3736572995813636?f=rss" target="_blank" rel="noopener"
+ &gt;https://36kr.com/p/3736572995813636?f=rss&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-24T12:00:48.848312&lt;/em&gt;&lt;/p&gt;</description></item><item><title>高瓴领投，产投、家办出手，「宇石空间」完成2亿元Pre-A+轮融资｜36氪首发</title><link>https://blog.caowo.de/posts/auto-ai-20260324-152/</link><pubDate>Tue, 24 Mar 2026 12:00:41 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-ai-20260324-152/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;文 | 阿至
+宇石空间成立不到两年，始终在用一种极致的速度来推进团队的扩张和技术的工程化落地。
+在3个月前的一次沟通中，宇石空间的团队规模在120人左右，到今天这个数字已经超过了170，其中有七成以上是研发人员。
+团队规模扩张背后，是技术、资金与竞争态势变化所带来的多重驱动。
+36氪了解到，宇石空间已完成新一轮2亿元Pre-A+轮融资，本轮融资由高瓴创投、兴湘资本联合领投，明荟致远（汇川技术家办）跟投，老股东千乘资本、拓丰资本、知盛睿盈、云启资本多家机构超额跟投。资金将主要用于火箭总装测试、筷子回收技术验证、火箭产能建设和团队建设。
+对于火箭研制这样一个技术高度复杂、工程化链路长、且需要大量跨学科人才协同的领域，资金和团队规模只是起点，人才密度、资本效率与组织效率的乘积，还需要在工程进度上得到更直接的体现。
+作为36氪长期关注的企业，宇石空间专注于大运力、低成本、快速复用液体火箭的研制，9个月内累计融资近3亿元，加上近期完成的新一轮融资，其累计融资额已接近5亿元。与融资速度相对应的是，今年1月，宇石空间在其湖南火箭研制基地正式交付了首发70m&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，文 | 阿至
+宇石空间成立不到两年，始终在用一种极致的速度来推进团队的扩张和技术的工程化落地。
+在3个月前的一次沟通中，宇石空间的团队规模在120人左右，到今天这个数字已经超过了170，其中有七成以上是研发人员。
+团队规模扩张背后，是技术、资金与竞争态势变化所带来的多重驱动。
+36氪了解到，宇石空间已完成新一轮2亿元Pre-A+轮融资，本轮融资由高瓴创投、兴湘资本联合领投，明荟致远（汇川技术家办）跟投，老股东千乘资本、拓丰资本、知盛睿盈、云启资本多家机构超额跟投。资金将主要用于火箭总装测试、筷子回收技术验证、火箭产能建设和团队建设。
+对于火箭研制这样一个 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="https://36kr.com/p/3736614731694082?f=rss" target="_blank" rel="noopener"
+ &gt;https://36kr.com/p/3736614731694082?f=rss&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-24T12:00:41.540049&lt;/em&gt;&lt;/p&gt;</description></item><item><title>拒多家车企邀约，前理想端到端负责人夏中谱加入无界动力｜36氪独家</title><link>https://blog.caowo.de/posts/auto-ai-20260324-651/</link><pubDate>Tue, 24 Mar 2026 12:00:34 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-ai-20260324-651/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;图为理想汽车
+文 | 肖漫 
+编辑 | 李勤、杨轩
+又一位理想高管加入具身智能行业。
+36氪汽车独家获悉，前理想智驾端到端负责人夏中谱将加入具身智能公司「无界动力」。
+无界动力成立于2025年，由前地平线副总裁张玉峰创办，目前，该公司已完成三轮融资，投资方包括红杉、高瓴等知名机构。无界动力聚焦于构建机器人“通用大脑”与“操作智能”，提供软硬一体的具身智能解决方案。
+夏中谱是在2025年年中离开理想汽车，此后一直在中科院从事世界模型和强化学习方向的研究工作。有多位知情人士告诉36氪汽车，夏中谱从理想离职后，有多家头部车企曾投去橄榄枝，但夏中谱在接触之后均未加入。
+伴随着夏中谱去向尘埃落定，离职的理想智驾战队核心成员已悉数完成向具身智能行业的跨越。
+在当前具身智能创业浪潮中，理想汽车智驾体系出身的高管正受到资本市场的高度关注——前理想汽车智能驾驶总裁郎咸朋投身具身智能行业后已获得多轮融资；由贾鹏、王凯创办的至简动力半年内获得5轮融资，累计融资20亿人民币。
+有投资人认为，汽车行业出身的团队具备极强的AI工&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，图为理想汽车
+文 | 肖漫 
+编辑 | 李勤、杨轩
+又一位理想高管加入具身智能行业。
+36氪汽车独家获悉，前理想智驾端到端负责人夏中谱将加入具身智能公司「无界动力」。
+无界动力成立于2025年，由前地平线副总裁张玉峰创办，目前，该公司已完成三轮融资，投资方包括红杉、高瓴等知名机构。无界动力聚焦于构建机器人“通用大脑”与“操作智能”，提供软硬一体的具身智能解决方案。
+夏中谱是在2025年年中离开理想汽车，此后一直在中科院从事世界模型和强化学习方向的研究工作。有多位知情人士告诉36氪汽车，夏中谱从理想离职后，有多家头部车企曾 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="https://36kr.com/p/3736702595301638?f=rss" target="_blank" rel="noopener"
+ &gt;https://36kr.com/p/3736702595301638?f=rss&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-24T12:00:34.503362&lt;/em&gt;&lt;/p&gt;</description></item><item><title>黑石加仓，热钱蓄势：2026 年中国商办投资迎来布局窗口期？</title><link>https://blog.caowo.de/posts/auto-ai-20260324-0/</link><pubDate>Tue, 24 Mar 2026 09:00:53 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-ai-20260324-0/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
 &lt;/h2&gt;&lt;p&gt;01.遇事不决不动产
 投资圈近期最热的话题，莫过于OpenAI、Anthropic即将IPO的消息。
 一直以来，位于行业塔尖的企业总有着最高的确定性与最惊人的估值，更何况是风头正盛的人工智能。在最新一轮的融资后，OpenAI的估值已超过50000亿人民币，与门内顿足捶胸的英伟达相比，更苦闷的是门外守着的诸多顶级财团——

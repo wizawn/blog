@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 言零的博客</title><link>https://blog.caowo.de/posts/</link><description>Recent content in Posts on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 25 Mar 2026 08:00:00 +0000</lastBuildDate><atom:link href="https://blog.caowo.de/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Hello World | 开启 Web 渗透测试之旅</title><link>https://blog.caowo.de/posts/hello-world/</link><pubDate>Sun, 01 Mar 2026 08:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/hello-world/</guid><description>&lt;h1 id="hello-world--开启-web-渗透测试之旅"&gt;Hello World | 开启 Web 渗透测试之旅
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 言零的博客</title><link>https://blog.caowo.de/posts/</link><description>Recent content in Posts on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 25 Mar 2026 10:09:58 +0000</lastBuildDate><atom:link href="https://blog.caowo.de/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Hello World | 开启 Web 渗透测试之旅</title><link>https://blog.caowo.de/posts/hello-world/</link><pubDate>Sun, 01 Mar 2026 08:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/hello-world/</guid><description>&lt;h1 id="hello-world--开启-web-渗透测试之旅"&gt;Hello World | 开启 Web 渗透测试之旅
 &lt;/h1&gt;&lt;p&gt;欢迎来到我的网络安全技术博客！&lt;/p&gt;
 &lt;h2 id="-博客启用"&gt;🎉 博客启用
 &lt;/h2&gt;&lt;p&gt;本站正式启用，专注于 Web 渗透测试、漏洞复现与安全防御技术分享。&lt;/p&gt;
@@ -49,8 +49,207 @@
 &lt;li&gt;❌ 商业牟利&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;em&gt;2026-03-03 | 博客正式启用&lt;/em&gt;&lt;/p&gt;</description></item><item><title>CodeX TM 兑换码使用教程 - 详细步骤与常见问题解答</title><link>https://blog.caowo.de/posts/codex-tm-redeem-guide/</link><pubDate>Wed, 25 Mar 2026 08:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/codex-tm-redeem-guide/</guid><description>&lt;h2 id="-前言"&gt;📋 前言
-&lt;/h2&gt;&lt;p&gt;本文详细介绍 CodeX TM 兑换码的购买、兑换及质保流程，帮助用户顺利完成兑换并加入工作空间。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;2026-03-03 | 博客正式启用&lt;/em&gt;&lt;/p&gt;</description></item><item><title>拓竹和泡泡玛特和解，免费打印大牌IP的日子正在倒计时</title><link>https://blog.caowo.de/posts/auto-ai-20260325-276/</link><pubDate>Wed, 25 Mar 2026 10:09:58 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-ai-20260325-276/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;作者 | 张子怡
+编辑 | 袁斯来
+在野蛮增长几年后，3D打印赛道玩家们一直没有直面的“灰犀牛”，终于冲入大门。
+3月中旬，3D打印企业拓竹科技（Bambu Lab）发布声明，就旗下MakerWorld平台存在的IP侵权问题向潮玩巨头泡泡玛特致歉，双方达成和解，相关未经授权的LABUBU等模型被全面下架。
+这场原定于4月对簿公堂的诉讼以“闪电和解”告终，不过，它为整个消费级3D打印行业敲响的版权警钟，才刚开始回荡。
+这并非拓竹第一次面对侵权纠纷。罗小黑工作室（公司名：北京寒木春华动画技术有限公司）曾于2025年底向拓竹科技发起诉讼，案由是侵害作品信息网络传播权纠纷。最新信息显示，该案件已于3月20日再次开庭。
+消费级3D打印行业，已经形成了新的共识——好的硬件参数只是入场敲门砖，社区生态才能构筑更深的护城河。海量、优质、且可以直接点击打印的模型，是破圈进入千家万户的关键。
+在这一点上，拓竹早已超出同行几个身位。其旗下的Maker World目前是全球月活第一的3D模型社区，其月活用户已达到千万级别，社区内拥有超过20万&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，作者 | 张子怡
+编辑 | 袁斯来
+在野蛮增长几年后，3D打印赛道玩家们一直没有直面的“灰犀牛”，终于冲入大门。
+3月中旬，3D打印企业拓竹科技（Bambu Lab）发布声明，就旗下MakerWorld平台存在的IP侵权问题向潮玩巨头泡泡玛特致歉，双方达成和解，相关未经授权的LABUBU等模型被全面下架。
+这场原定于4月对簿公堂的诉讼以“闪电和解”告终，不过，它为整个消费级3D打印行业敲响的版权警钟，才刚开始回荡。
+这并非拓竹第一次面对侵权纠纷。罗小黑工作室（公司名：北京寒木春华动画技术有限公司）曾于2025年底向拓竹科技发起诉讼，案 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="https://36kr.com/p/3737724614213639?f=rss" target="_blank" rel="noopener"
+ &gt;https://36kr.com/p/3737724614213639?f=rss&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-25T10:09:58.950082&lt;/em&gt;&lt;/p&gt;</description></item><item><title>富力10年前买下的万达酒店，快卖光了</title><link>https://blog.caowo.de/posts/auto-ai-20260325-489/</link><pubDate>Wed, 25 Mar 2026 10:09:51 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-ai-20260325-489/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;2026年3月初，北京银行在银行业信贷资产登记流转中心挂牌转让一笔总额9.3亿元的不良贷款债权。其中，核心债权本金为8亿元，累计孳生利息1.3亿元。
+该笔借款的主体为上海众弘置业发展有限公司。经过股权穿透，上海众弘置业由富力地产的旗下两家子公司100%控股。
+这笔借款的核心抵押物是富力地产在上海虹桥商务区的标杆项目上海富力环球中心，包括了写字楼、丽思卡尔顿五星级酒店、AC四星级酒店及约3万㎡地下商业广场，和这些资产被一起抵押的还有上海众弘置业的1亿元实缴出资股权。
+这笔借款并未逾期，但北京银行认为上海众弘置业已经没有实质性还款能力。2026年3月18日，上海市闵行区人民法院向上海众弘置业发出限制消费令。
+它的母公司富力集团，在两天前也遭受了同样的待遇。2026年3月16日，广州市从化区人民法院再次把广州富力地产股份有限公司和广东恒力建设工程有限公司李某、邝某列入“限制高消费”人员名单。
+富力集团和旗下公司不仅被债权人认为已经没有实质性还款能力，它还在税务等诸多方面出现了巨额欠款。2026年1月，富力在广州大本营新增欠税合计超13.13亿元。（土地增值税、房产税、企业&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，2026年3月初，北京银行在银行业信贷资产登记流转中心挂牌转让一笔总额9.3亿元的不良贷款债权。其中，核心债权本金为8亿元，累计孳生利息1.3亿元。
+该笔借款的主体为上海众弘置业发展有限公司。经过股权穿透，上海众弘置业由富力地产的旗下两家子公司100%控股。
+这笔借款的核心抵押物是富力地产在上海虹桥商务区的标杆项目上海富力环球中心，包括了写字楼、丽思卡尔顿五星级酒店、AC四星级酒店及约3万㎡地下商业广场，和这些资产被一起抵押的还有上海众弘置业的1亿元实缴出资股权。
+这笔借款并未逾期，但北京银行认为上海众弘置业已经没有实质性还款能力。2026年3月18日，上海市闵行区人民法院向上海众 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="https://36kr.com/p/3737788251799561?f=rss" target="_blank" rel="noopener"
+ &gt;https://36kr.com/p/3737788251799561?f=rss&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-25T10:09:51.797013&lt;/em&gt;&lt;/p&gt;</description></item><item><title>瑞识科技实现二维可寻址VCSEL芯片量产，已落地车载激光雷达与智能机器人｜最前线</title><link>https://blog.caowo.de/posts/auto-ai-20260325-855/</link><pubDate>Wed, 25 Mar 2026 10:09:44 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-ai-20260325-855/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;作者｜乔钰杰
+编辑｜袁斯来
+据悉，国内化合物半导体厂商深圳瑞识智能科技有限公司（下称“瑞识科技”）近期实现二维可寻址VCSEL（垂直腔面发射激光器）芯片的大规模量产。该类产品此前长期受制于良率、成本及可靠性等问题，产业化进展缓慢，瑞识科技的量产落地，意味着这一技术路线开始进入实际应用阶段。
+作为光芯片领域的重要分支，VCSEL芯片被广泛应用于3D传感、面部识别以及激光雷达测距与成像等场景。相较于传统边发射激光器，其在功耗、调制速度以及阵列化集成方面具备优势，更适配需要大规模光阵输出的感知系统，能够以更高效率支撑复杂环境下的精准探测。
+自2017年前后消费电子引入结构光方案以来，VCSEL芯片需求逐步放量，并向汽车、机器人等领域延伸。
+成立于2018年的瑞识科技，早期围绕VCSEL芯片的设计、制造与封装展开系统性布局，逐步构建起从研发到量产的全链路能力。并在消费电子、车载及智能传感等多个领域实现规模出货。公司披露数据显示，截至2025年底，其VCSEL芯片累计出货量已超过2亿颗，服务客户超百家。&lt;/p&gt;
+&lt;p&gt;图源企业
+在完成基础产品与产业化能力积累后，瑞识科技开始向&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，作者｜乔钰杰
+编辑｜袁斯来
+据悉，国内化合物半导体厂商深圳瑞识智能科技有限公司（下称“瑞识科技”）近期实现二维可寻址VCSEL（垂直腔面发射激光器）芯片的大规模量产。该类产品此前长期受制于良率、成本及可靠性等问题，产业化进展缓慢，瑞识科技的量产落地，意味着这一技术路线开始进入实际应用阶段。
+作为光芯片领域的重要分支，VCSEL芯片被广泛应用于3D传感、面部识别以及激光雷达测距与成像等场景。相较于传统边发射激光器，其在功耗、调制速度以及阵列化集成方面具备优势，更适配需要大规模光阵输出的感知系统，能够以更高效率支撑复杂环境下的精准探测。
+自2017年前后消费电子引入结构光方案以来， 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="https://36kr.com/p/3737850679377927?f=rss" target="_blank" rel="noopener"
+ &gt;https://36kr.com/p/3737850679377927?f=rss&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-25T10:09:44.975814&lt;/em&gt;&lt;/p&gt;</description></item><item><title>从互连工程到生态协同：TE Connectivity在机器人产业链的双重角色</title><link>https://blog.caowo.de/posts/auto-ai-20260325-304/</link><pubDate>Wed, 25 Mar 2026 10:09:38 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-ai-20260325-304/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;3月20日，TE Connectivity（简称 “TE” ）在苏州举办了 “机器人核心技术赋能智能工厂创新大会” 。活动通过技术交流与工厂参观等形式，邀请机器人产业链上下游企业与生态圈伙伴围绕核心技术与落地问题展开讨论，搭建起面向产业的交流与对接平台。与会讨论折射出一个共同背景：机器人正从技术验证加速走向工程化与规模化落地。
+今年，政府工作报告连续第三年提出“人工智能+”，并首次提出“打造智能经济新形态”，推动重点行业领域加速商业化和规模化应用，同时将具身智能列入未来产业布局。在政策与应用场景共同推动下，机器人产业关注点也从“功能实现”转向“真实工况下的稳定运行与可复制交付”。
+随着机器人系统复杂度不断提升，从感知、决策到执行各个环节对稳定连接与可靠传输提出了更高要求。连接技术虽常被视为基础环节，却直接影响整机在真实工况下的稳定性与一致性。在此背景下，TE一方面以互连解决方案参与机器人系统建设，另一方面也通过搭建交流平台，促进上下游之间更高效的对接与协同。
+互连方案提供者：从元器件到系统架构，面向工程化的互连设计
+随着协作机器人、人形机器人以及具身智能机器人等新形态不&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，3月20日，TE Connectivity（简称 “TE” ）在苏州举办了 “机器人核心技术赋能智能工厂创新大会” 。活动通过技术交流与工厂参观等形式，邀请机器人产业链上下游企业与生态圈伙伴围绕核心技术与落地问题展开讨论，搭建起面向产业的交流与对接平台。与会讨论折射出一个共同背景：机器人正从技术验证加速走向工程化与规模化落地。
+今年，政府工作报告连续第三年提出“人工智能+”，并首次提出“打造智能经济新形态”，推动重点行业领域加速商业化和规模化应用，同时将具身智能列入未来产业布局。在政策与应用场景共同推动下，机器人产业关注点也从“功能实现”转向“真实工况下的稳定运行与可复制交付”。
+随着 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="https://36kr.com/p/3737937096655107?f=rss" target="_blank" rel="noopener"
+ &gt;https://36kr.com/p/3737937096655107?f=rss&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-25T10:09:38.998946&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Vol1.人才留言板｜第一期：这20家AI明星公司正在等你</title><link>https://blog.caowo.de/posts/auto-ai-20260325-742/</link><pubDate>Wed, 25 Mar 2026 10:09:32 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-ai-20260325-742/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;/h2&gt;&lt;p&gt;图源:36kr
+每周精选30+优质岗位，覆盖AI、硬科技等领域，帮你找到下一个职业爆发点。
+本期合作企业：红杉中国、高瓴、鼎晖、经纬被投企业｜B轮及以上占比65%。&lt;/p&gt;
+&lt;p&gt;卷首语
+我们见过太多这样的场景：一家硬科技公司融完B轮，创始人却在朋友圈悄悄挂出招聘启事；一个专注大模型的算法专家，翻遍猎头推荐却找不到真正懂技术的团队。
+这不是供需错配，而是信息失真。
+过去十年，36氪记录了数千家公司的成长轨迹。我们看过他们最早的BP，见证他们一轮轮融资，知道哪家公司的技术栈真正扎实，哪个创始团队对人才有足够耐心。这些认知，不该只留在报道里。
+所以有了“人才留言板”。
+我们想做一个更笨拙也更真诚的连接：一边是经过多轮融资、资金充沛、真正尊重技术的公司——尤其是AI、机器人领域的佼佼者，他们手握充足弹药，唯独渴望能一起冲锋陷阵的顶尖人才；一边是愿意用硬实力换取长期回报的技术高手。36氪不做简单的简历搬运，而是用我们对行业的理解，帮双方建立一条更短、更准的通道。
+这里没有花哨的职位包装，只有我们了解并愿意背书的团队。
+同时，我们也欢迎人才主动“留&lt;/p&gt;
+&lt;h2 id="技术背景分析"&gt;技术背景分析
+&lt;/h2&gt;&lt;p&gt;这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，图源:36kr
+每周精选30+优质岗位，覆盖AI、硬科技等领域，帮你找到下一个职业爆发点。
+本期合作企业：红杉中国、高瓴、鼎晖、经纬被投企业｜B轮及以上占比65%。&lt;/p&gt;
+&lt;p&gt;卷首语
+我们见过太多这样的场景：一家硬科技公司融完B轮，创始人却在朋友圈悄悄挂出招聘启事；一个专注大模型的算法专家，翻遍猎头推荐却找不到真正懂技术的团队。
+这不是供需错配，而是信息失真。
+过去十年，36氪记录了数千家公司的成长轨迹。我们看过他们最早的BP，见证他们一轮轮融资，知道哪家公司的技术栈真正扎实，哪个创始团队对人才有足够耐心。这些认知，不该只留在报道里。
+所以有了“人才留言板”。 这一现象反映了行业发展趋势。&lt;/p&gt;
+&lt;h2 id="关键技术点"&gt;关键技术点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原理&lt;/strong&gt;：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用场景&lt;/strong&gt;：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实施建议&lt;/strong&gt;：开发者在实施时需要注意版本兼容性、配置优化等关键因素。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战建议"&gt;实战建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;建议先在小规模环境测试验证&lt;/li&gt;
+&lt;li&gt;关注官方文档和最新版本更新&lt;/li&gt;
+&lt;li&gt;参考社区最佳实践进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;原文来源：&lt;a class="link" href="https://36kr.com/p/3738023110230272?f=rss" target="_blank" rel="noopener"
+ &gt;https://36kr.com/p/3738023110230272?f=rss&lt;/a&gt;&lt;/em&gt;
+&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="市场背景"&gt;市场背景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;BTC 价格：$0.00&lt;/li&gt;
+&lt;li&gt;24h 涨跌：+0.00%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;
+&lt;em&gt;生成时间：2026-03-25T10:09:32.911813&lt;/em&gt;&lt;/p&gt;</description></item><item><title>CodeX TM 兑换码使用教程 - 详细步骤与常见问题解答</title><link>https://blog.caowo.de/posts/codex-tm-redeem-guide/</link><pubDate>Wed, 25 Mar 2026 08:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/codex-tm-redeem-guide/</guid><description>&lt;h2 id="-前言"&gt;📋 前言
+&lt;/h2&gt;&lt;p&gt;本文详细介绍 CodeX TM 兑换码的购买、兑换及质保流程，帮助用户顺利完成兑换并加入工作空间。包含完整的图文教程、席位额度说明和常见问题解答。&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id="-兑换前注意事项"&gt;⚠️ 兑换前注意事项
 &lt;/h2&gt;&lt;h3 id="1-购买多个兑换码"&gt;1. 购买多个兑换码
@@ -116,6 +315,116 @@
 &lt;li&gt;验证并完成质保&lt;/li&gt;
 &lt;/ol&gt;
 &lt;hr&gt;
+&lt;h2 id="-席位额度规则"&gt;💼 席位额度规则
+&lt;/h2&gt;&lt;h3 id="1-独立额度"&gt;1. 独立额度
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;每个席位均为&lt;strong&gt;独立额度&lt;/strong&gt;，互不共享、互不影响&lt;/li&gt;
+&lt;li&gt;单独使用不受其他席位干扰&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="2-官方固定额度"&gt;2. 官方固定额度
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;每周 &lt;strong&gt;5 小时等效使用时长&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;为平台硬性规则，&lt;strong&gt;无法调整或提升&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="3-滚动刷新机制"&gt;3. 滚动刷新机制
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;采用 &lt;strong&gt;5 小时滚动刷新&lt;/strong&gt;机制&lt;/li&gt;
+&lt;li&gt;每 5 小时恢复对应使用额度&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;非固定自然周重置&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="4-并发任务"&gt;4. 并发任务
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;支持最多 &lt;strong&gt;2 个任务同时运行&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;并发使用更高效&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-重要提示数据备份"&gt;💾 重要提示：数据备份
+&lt;/h2&gt;&lt;h3 id="-空间封禁风险"&gt;⚠️ 空间封禁风险
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;企业空间被封禁后，对应聊天记录会随之消失，通常无法恢复。&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id="备份建议"&gt;备份建议
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;重要资料建议至少每天备份一次&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;让 Codex 在每次任务开始时&lt;strong&gt;自动保存记忆&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;定期导出关键对话记录&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="备份方法"&gt;备份方法
+&lt;/h3&gt;&lt;h4 id="方法一使用浏览器插件导出"&gt;方法一：使用浏览器插件导出
+&lt;/h4&gt;&lt;p&gt;推荐使用 &lt;strong&gt;ExportGPT&lt;/strong&gt; 插件导出聊天记录：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;插件名称&lt;/strong&gt;: ExportGPT - Export ChatGPT Conversations&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;支持浏览器&lt;/strong&gt;: Chrome、Edge 等 Chromium 内核浏览器&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;下载链接&lt;/strong&gt;: &lt;a class="link" href="https://chromewebstore.google.com/detail/exportgpt-export-chatgpt/jamcijfplmgbngnppdhmbbogjebgfimn?hl=zh-CN" target="_blank" rel="noopener"
+ &gt;Chrome 商店&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;使用步骤&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;安装 ExportGPT 插件&lt;/li&gt;
+&lt;li&gt;打开需要导出的对话&lt;/li&gt;
+&lt;li&gt;点击插件图标，选择导出格式（PDF/Markdown/TXT）&lt;/li&gt;
+&lt;li&gt;保存到本地或云存储&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id="方法二手动复制保存"&gt;方法二：手动复制保存
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;定期复制重要对话内容&lt;/li&gt;
+&lt;li&gt;保存到本地文档或云笔记&lt;/li&gt;
+&lt;li&gt;建议按日期或项目分类存储&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="方法三让-codex-自动保存"&gt;方法三：让 Codex 自动保存
+&lt;/h4&gt;&lt;p&gt;在任务开始时明确要求：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;请在任务开始前自动保存当前对话记录到本地
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h2 id="-使用小贴士"&gt;📌 使用小贴士
+&lt;/h2&gt;&lt;hr&gt;
+&lt;h2 id="-cli-命令行任务消耗说明"&gt;💻 CLI 命令行任务消耗说明
+&lt;/h2&gt;&lt;h3 id="普通指令操作"&gt;普通指令操作
+&lt;/h3&gt;&lt;p&gt;仅发送代码相关提问、代码解释、简单代码编写等基础指令：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;消耗&lt;strong&gt;极低&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;单次操作仅占用&lt;strong&gt;少量额度&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;日常轻量使用可&lt;strong&gt;长时间正常运行&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="cli-自动执行任务"&gt;CLI 自动执行任务
+&lt;/h3&gt;&lt;p&gt;通过命令行执行项目初始化、依赖安装、BUG 修复、项目部署、代码运行等实操任务：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;消耗&lt;strong&gt;偏高&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;单次简单自动执行：占用&lt;strong&gt;中等额度&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;多步骤、复杂项目类执行：占用额度&lt;strong&gt;更高&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;连续高强度执行自动任务：会&lt;strong&gt;较快触发 5 小时额度冷却&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-使用小贴士-1"&gt;📌 使用小贴士
+&lt;/h2&gt;&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;使用类型&lt;/th&gt;
+ &lt;th&gt;说明&lt;/th&gt;
+ &lt;th&gt;额度情况&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;轻量使用&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;日常写脚本、改代码、提问答疑&lt;/td&gt;
+ &lt;td&gt;额度充足，几乎不会触达上限&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;中度使用&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;每日少量项目操作&lt;/td&gt;
+ &lt;td&gt;可满足正常使用需求&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;重度使用&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;连续 CLI 自动跑任务、批量开发调试&lt;/td&gt;
+ &lt;td&gt;易触发短时额度限制，建议间隔使用&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+
+ &lt;blockquote&gt;
+ &lt;p&gt;⚠️ &lt;strong&gt;重要提示&lt;/strong&gt;：平台官方限额非人为可控，达到上限后等待对应时间即可恢复使用&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+&lt;hr&gt;
 &lt;h2 id="-常见问题解答"&gt;❓ 常见问题解答
 &lt;/h2&gt;&lt;h3 id="q1-下单后没有收到邀请码怎么办"&gt;Q1: 下单后没有收到邀请码怎么办？
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;A&lt;/strong&gt;: 大概是库存不足，正在等待补货。请留言等待处理，我们会第一时间通知您。&lt;/p&gt;
@@ -137,29 +446,51 @@
 &lt;li&gt;例如：Team 5 小时/一周使用限额是官方限制，具体请查看奥特曼官网&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;h2 id="-重要链接"&gt;🔗 重要链接
-&lt;/h2&gt;&lt;table&gt;
- &lt;thead&gt;
- &lt;tr&gt;
- &lt;th&gt;链接&lt;/th&gt;
- &lt;th&gt;用途&lt;/th&gt;
- &lt;/tr&gt;
- &lt;/thead&gt;
- &lt;tbody&gt;
- &lt;tr&gt;
- &lt;td&gt;&lt;code&gt;https://codextm.xyz&lt;/code&gt;&lt;/td&gt;
- &lt;td&gt;兑换链接&lt;/td&gt;
- &lt;/tr&gt;
- &lt;tr&gt;
- &lt;td&gt;&lt;code&gt;https://code.wqwlkj.cn/help&lt;/code&gt;&lt;/td&gt;
- &lt;td&gt;帮助中心&lt;/td&gt;
- &lt;/tr&gt;
- &lt;tr&gt;
- &lt;td&gt;&lt;code&gt;https://code.wqwlkj.cn/help&lt;/code&gt; 子页面&lt;/td&gt;
- &lt;td&gt;详细帮助文档&lt;/td&gt;
- &lt;/tr&gt;
- &lt;/tbody&gt;
-&lt;/table&gt;
+&lt;h2 id="-错误代码解决方案"&gt;🔧 错误代码解决方案
+&lt;/h2&gt;&lt;h3 id="提示-401-怎么办"&gt;提示 401 怎么办？
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;问题&lt;/strong&gt;：访问时提示 401 错误&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;解决方案&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;检查兑换码是否已使用&lt;/li&gt;
+&lt;li&gt;检查兑换码是否过期&lt;/li&gt;
+&lt;li&gt;清除浏览器缓存后重试&lt;/li&gt;
+&lt;li&gt;如仍无法解决，请留言提供错误截图&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="提示-402-怎么办"&gt;提示 402 怎么办？
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;问题&lt;/strong&gt;：访问时提示 402 错误&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;解决方案&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;检查账号是否已被限制&lt;/li&gt;
+&lt;li&gt;检查是否有未完成的订单&lt;/li&gt;
+&lt;li&gt;联系管理员核实账号状态&lt;/li&gt;
+&lt;li&gt;如仍无法解决，请留言提供错误截图&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="cc-switch-配置问题"&gt;CC Switch 配置问题
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;问题&lt;/strong&gt;：CC Switch 替换中转为官方配置&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;解决方案&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;打开 CC Switch 设置&lt;/li&gt;
+&lt;li&gt;进入配置页面&lt;/li&gt;
+&lt;li&gt;选择官方配置模板&lt;/li&gt;
+&lt;li&gt;保存并重启应用&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id="-邮件收不到怎么办"&gt;📧 邮件收不到怎么办？
+&lt;/h2&gt;&lt;h3 id="可能原因"&gt;可能原因
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;邮箱地址填写错误&lt;/li&gt;
+&lt;li&gt;邮件被归类到垃圾邮件&lt;/li&gt;
+&lt;li&gt;邮件服务器延迟&lt;/li&gt;
+&lt;li&gt;邮箱已满&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="解决方案"&gt;解决方案
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;检查垃圾邮件箱&lt;/strong&gt;：查看垃圾邮件/广告邮件文件夹&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;核对邮箱地址&lt;/strong&gt;：确认兑换时填写的邮箱地址正确&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;等待一段时间&lt;/strong&gt;：邮件可能有延迟，等待 10-30 分钟&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;清理邮箱空间&lt;/strong&gt;：确保邮箱有足够的存储空间&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;联系管理员&lt;/strong&gt;：如以上方法都无效，请留言提供邮箱地址&lt;/li&gt;
+&lt;/ol&gt;
 &lt;hr&gt;
 &lt;h2 id="-沟通与反馈"&gt;💬 沟通与反馈
 &lt;/h2&gt;&lt;h3 id="遇到问题请先沟通"&gt;遇到问题请先沟通
@@ -187,7 +518,7 @@
 &lt;/h2&gt;&lt;p&gt;如有任何问题，请通过以下渠道联系：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;兑换页面留言&lt;/li&gt;
-&lt;li&gt;帮助中心提交工单&lt;/li&gt;
+&lt;li&gt;提交工单&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;em&gt;最后更新：2026-03-25&lt;/em&gt;&lt;/p&gt;

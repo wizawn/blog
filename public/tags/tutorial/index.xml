@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tutorial on 言零的博客</title><link>https://blog.caowo.de/tags/tutorial/</link><description>Recent content in Tutorial on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 25 Mar 2026 08:00:00 +0000</lastBuildDate><atom:link href="https://blog.caowo.de/tags/tutorial/index.xml" rel="self" type="application/rss+xml"/><item><title>CodeX TM 兑换码使用教程 - 详细步骤与常见问题解答</title><link>https://blog.caowo.de/posts/codex-tm-redeem-guide/</link><pubDate>Wed, 25 Mar 2026 08:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/codex-tm-redeem-guide/</guid><description>&lt;h2 id="-前言"&gt;📋 前言
-&lt;/h2&gt;&lt;p&gt;本文详细介绍 CodeX TM 兑换码的购买、兑换及质保流程，帮助用户顺利完成兑换并加入工作空间。&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;本文详细介绍 CodeX TM 兑换码的购买、兑换及质保流程，帮助用户顺利完成兑换并加入工作空间。包含完整的图文教程、席位额度说明和常见问题解答。&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id="-兑换前注意事项"&gt;⚠️ 兑换前注意事项
 &lt;/h2&gt;&lt;h3 id="1-购买多个兑换码"&gt;1. 购买多个兑换码
@@ -65,6 +65,116 @@
 &lt;li&gt;验证并完成质保&lt;/li&gt;
 &lt;/ol&gt;
 &lt;hr&gt;
+&lt;h2 id="-席位额度规则"&gt;💼 席位额度规则
+&lt;/h2&gt;&lt;h3 id="1-独立额度"&gt;1. 独立额度
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;每个席位均为&lt;strong&gt;独立额度&lt;/strong&gt;，互不共享、互不影响&lt;/li&gt;
+&lt;li&gt;单独使用不受其他席位干扰&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="2-官方固定额度"&gt;2. 官方固定额度
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;每周 &lt;strong&gt;5 小时等效使用时长&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;为平台硬性规则，&lt;strong&gt;无法调整或提升&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="3-滚动刷新机制"&gt;3. 滚动刷新机制
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;采用 &lt;strong&gt;5 小时滚动刷新&lt;/strong&gt;机制&lt;/li&gt;
+&lt;li&gt;每 5 小时恢复对应使用额度&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;非固定自然周重置&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="4-并发任务"&gt;4. 并发任务
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;支持最多 &lt;strong&gt;2 个任务同时运行&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;并发使用更高效&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-重要提示数据备份"&gt;💾 重要提示：数据备份
+&lt;/h2&gt;&lt;h3 id="-空间封禁风险"&gt;⚠️ 空间封禁风险
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;企业空间被封禁后，对应聊天记录会随之消失，通常无法恢复。&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id="备份建议"&gt;备份建议
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;重要资料建议至少每天备份一次&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;让 Codex 在每次任务开始时&lt;strong&gt;自动保存记忆&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;定期导出关键对话记录&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="备份方法"&gt;备份方法
+&lt;/h3&gt;&lt;h4 id="方法一使用浏览器插件导出"&gt;方法一：使用浏览器插件导出
+&lt;/h4&gt;&lt;p&gt;推荐使用 &lt;strong&gt;ExportGPT&lt;/strong&gt; 插件导出聊天记录：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;插件名称&lt;/strong&gt;: ExportGPT - Export ChatGPT Conversations&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;支持浏览器&lt;/strong&gt;: Chrome、Edge 等 Chromium 内核浏览器&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;下载链接&lt;/strong&gt;: &lt;a class="link" href="https://chromewebstore.google.com/detail/exportgpt-export-chatgpt/jamcijfplmgbngnppdhmbbogjebgfimn?hl=zh-CN" target="_blank" rel="noopener"
+ &gt;Chrome 商店&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;使用步骤&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;安装 ExportGPT 插件&lt;/li&gt;
+&lt;li&gt;打开需要导出的对话&lt;/li&gt;
+&lt;li&gt;点击插件图标，选择导出格式（PDF/Markdown/TXT）&lt;/li&gt;
+&lt;li&gt;保存到本地或云存储&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id="方法二手动复制保存"&gt;方法二：手动复制保存
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;定期复制重要对话内容&lt;/li&gt;
+&lt;li&gt;保存到本地文档或云笔记&lt;/li&gt;
+&lt;li&gt;建议按日期或项目分类存储&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="方法三让-codex-自动保存"&gt;方法三：让 Codex 自动保存
+&lt;/h4&gt;&lt;p&gt;在任务开始时明确要求：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;请在任务开始前自动保存当前对话记录到本地
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h2 id="-使用小贴士"&gt;📌 使用小贴士
+&lt;/h2&gt;&lt;hr&gt;
+&lt;h2 id="-cli-命令行任务消耗说明"&gt;💻 CLI 命令行任务消耗说明
+&lt;/h2&gt;&lt;h3 id="普通指令操作"&gt;普通指令操作
+&lt;/h3&gt;&lt;p&gt;仅发送代码相关提问、代码解释、简单代码编写等基础指令：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;消耗&lt;strong&gt;极低&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;单次操作仅占用&lt;strong&gt;少量额度&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;日常轻量使用可&lt;strong&gt;长时间正常运行&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="cli-自动执行任务"&gt;CLI 自动执行任务
+&lt;/h3&gt;&lt;p&gt;通过命令行执行项目初始化、依赖安装、BUG 修复、项目部署、代码运行等实操任务：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;消耗&lt;strong&gt;偏高&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;单次简单自动执行：占用&lt;strong&gt;中等额度&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;多步骤、复杂项目类执行：占用额度&lt;strong&gt;更高&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;连续高强度执行自动任务：会&lt;strong&gt;较快触发 5 小时额度冷却&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-使用小贴士-1"&gt;📌 使用小贴士
+&lt;/h2&gt;&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;使用类型&lt;/th&gt;
+ &lt;th&gt;说明&lt;/th&gt;
+ &lt;th&gt;额度情况&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;轻量使用&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;日常写脚本、改代码、提问答疑&lt;/td&gt;
+ &lt;td&gt;额度充足，几乎不会触达上限&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;中度使用&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;每日少量项目操作&lt;/td&gt;
+ &lt;td&gt;可满足正常使用需求&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;重度使用&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;连续 CLI 自动跑任务、批量开发调试&lt;/td&gt;
+ &lt;td&gt;易触发短时额度限制，建议间隔使用&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+
+ &lt;blockquote&gt;
+ &lt;p&gt;⚠️ &lt;strong&gt;重要提示&lt;/strong&gt;：平台官方限额非人为可控，达到上限后等待对应时间即可恢复使用&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+&lt;hr&gt;
 &lt;h2 id="-常见问题解答"&gt;❓ 常见问题解答
 &lt;/h2&gt;&lt;h3 id="q1-下单后没有收到邀请码怎么办"&gt;Q1: 下单后没有收到邀请码怎么办？
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;A&lt;/strong&gt;: 大概是库存不足，正在等待补货。请留言等待处理，我们会第一时间通知您。&lt;/p&gt;
@@ -86,29 +196,51 @@
 &lt;li&gt;例如：Team 5 小时/一周使用限额是官方限制，具体请查看奥特曼官网&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;h2 id="-重要链接"&gt;🔗 重要链接
-&lt;/h2&gt;&lt;table&gt;
- &lt;thead&gt;
- &lt;tr&gt;
- &lt;th&gt;链接&lt;/th&gt;
- &lt;th&gt;用途&lt;/th&gt;
- &lt;/tr&gt;
- &lt;/thead&gt;
- &lt;tbody&gt;
- &lt;tr&gt;
- &lt;td&gt;&lt;code&gt;https://codextm.xyz&lt;/code&gt;&lt;/td&gt;
- &lt;td&gt;兑换链接&lt;/td&gt;
- &lt;/tr&gt;
- &lt;tr&gt;
- &lt;td&gt;&lt;code&gt;https://code.wqwlkj.cn/help&lt;/code&gt;&lt;/td&gt;
- &lt;td&gt;帮助中心&lt;/td&gt;
- &lt;/tr&gt;
- &lt;tr&gt;
- &lt;td&gt;&lt;code&gt;https://code.wqwlkj.cn/help&lt;/code&gt; 子页面&lt;/td&gt;
- &lt;td&gt;详细帮助文档&lt;/td&gt;
- &lt;/tr&gt;
- &lt;/tbody&gt;
-&lt;/table&gt;
+&lt;h2 id="-错误代码解决方案"&gt;🔧 错误代码解决方案
+&lt;/h2&gt;&lt;h3 id="提示-401-怎么办"&gt;提示 401 怎么办？
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;问题&lt;/strong&gt;：访问时提示 401 错误&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;解决方案&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;检查兑换码是否已使用&lt;/li&gt;
+&lt;li&gt;检查兑换码是否过期&lt;/li&gt;
+&lt;li&gt;清除浏览器缓存后重试&lt;/li&gt;
+&lt;li&gt;如仍无法解决，请留言提供错误截图&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="提示-402-怎么办"&gt;提示 402 怎么办？
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;问题&lt;/strong&gt;：访问时提示 402 错误&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;解决方案&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;检查账号是否已被限制&lt;/li&gt;
+&lt;li&gt;检查是否有未完成的订单&lt;/li&gt;
+&lt;li&gt;联系管理员核实账号状态&lt;/li&gt;
+&lt;li&gt;如仍无法解决，请留言提供错误截图&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="cc-switch-配置问题"&gt;CC Switch 配置问题
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;问题&lt;/strong&gt;：CC Switch 替换中转为官方配置&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;解决方案&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;打开 CC Switch 设置&lt;/li&gt;
+&lt;li&gt;进入配置页面&lt;/li&gt;
+&lt;li&gt;选择官方配置模板&lt;/li&gt;
+&lt;li&gt;保存并重启应用&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id="-邮件收不到怎么办"&gt;📧 邮件收不到怎么办？
+&lt;/h2&gt;&lt;h3 id="可能原因"&gt;可能原因
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;邮箱地址填写错误&lt;/li&gt;
+&lt;li&gt;邮件被归类到垃圾邮件&lt;/li&gt;
+&lt;li&gt;邮件服务器延迟&lt;/li&gt;
+&lt;li&gt;邮箱已满&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="解决方案"&gt;解决方案
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;检查垃圾邮件箱&lt;/strong&gt;：查看垃圾邮件/广告邮件文件夹&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;核对邮箱地址&lt;/strong&gt;：确认兑换时填写的邮箱地址正确&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;等待一段时间&lt;/strong&gt;：邮件可能有延迟，等待 10-30 分钟&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;清理邮箱空间&lt;/strong&gt;：确保邮箱有足够的存储空间&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;联系管理员&lt;/strong&gt;：如以上方法都无效，请留言提供邮箱地址&lt;/li&gt;
+&lt;/ol&gt;
 &lt;hr&gt;
 &lt;h2 id="-沟通与反馈"&gt;💬 沟通与反馈
 &lt;/h2&gt;&lt;h3 id="遇到问题请先沟通"&gt;遇到问题请先沟通
@@ -136,7 +268,7 @@
 &lt;/h2&gt;&lt;p&gt;如有任何问题，请通过以下渠道联系：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;兑换页面留言&lt;/li&gt;
-&lt;li&gt;帮助中心提交工单&lt;/li&gt;
+&lt;li&gt;提交工单&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;em&gt;最后更新：2026-03-25&lt;/em&gt;&lt;/p&gt;

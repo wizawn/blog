@@ -172,89 +172,108 @@ https://codextm.xyz
 
 ## 🔧 常见问题解决方案
 
-### 一、401 Unauthorized（未授权）
+### 一、如何兑换激活码
 
-**原因**：token 过期、凭证无效、缓存冲突、环境变量干扰
+**兑换步骤**：
 
-**解决方案**：
+1. 进入首页，选择【兑换激活码】
+2. 输入兑换码和邮箱
+3. 兑换成功后请在邮箱确认
 
-1. **清理本地认证缓存**
-   - Windows：删除 `%USERPROFILE%\.codex\auth\` 下所有文件
-   - macOS/Linux：`rm -rf ~/.codex/auth/`
-
-2. **重新登录**
-   ```bash
-   codex logout
-   codex login
-   ```
-
-3. **检查环境变量**
-   - 删除 `OPENAI_API_KEY` / `OPENAI_BASE_URL`
-   - 重启终端
-
-4. **确认账号权限**
-   - 确认账号有 ChatGPT Plus/Pro 权限（Codex 需订阅）
+兑换并确认成功后即可使用服务。
 
 ---
 
-### 二、402 Payment Required（支付/配额）
+### 二、质保换号说明
 
-**原因**：订阅过期、额度耗尽、账号未开通 Codex 权限
+**如果空间遭封禁按照以下流程进行换空间**：
 
-**解决方案**：
+#### 质保换号流程
 
-1. 登录 OpenAI 账号，确认 Plus 订阅有效、无欠费
-2. 检查 API/模型额度是否用尽
-3. 重新登录并切换到正确的付费账号
+1. 进入"质保换号"页面
+2. 输入原激活码
+3. 输入原邮箱
+4. 点击申请换号
 
----
-
-### 三、不支持的地区（unsupported_country_region_territory）
-
-**原因**：IP 不在支持列表、代理/出口不一致、Node.js fetch 不走代理
-
-**解决方案**：
-
-1. **切换到支持地区 IP**
-   - 使用美国/支持地区纯净 IP
-   - 避免数据中心/黑名单 IP
-
-2. **确保代理一致**
-   - 确保登录与调用用同一出口（浏览器/终端代理一致）
-
-3. **WSL 环境配置**
-   ```bash
-   sudo apt update && sudo apt install wslu
-   wslu <codex login URL>
-   ```
-
-4. **强制终端走代理（Linux/macOS）**
-   ```bash
-   export HTTP_PROXY=http://127.0.0.1:7890
-   export HTTPS_PROXY=http://127.0.0.1:7890
-   codex login
-   ```
+申请兑换成功后请退出原空间，如果使用 Codex 需重新登录清除缓存。
 
 ---
 
-### 四、不支持的邮箱
+### 三、邮件收不到怎么办
 
-**原因**：邮箱未绑定 OpenAI、非 Plus 账号、邮箱类型被风控（如临时邮箱）
+**邮件收不到按照以下步骤**：
 
-**解决方案**：
-
-1. 用绑定了 ChatGPT Plus 的主邮箱登录（不要用子账号/共享号）
-2. 避免临时/企业邮箱，优先 Gmail/Outlook 等主流邮箱
-3. 登录 OpenAI 官网，确认邮箱已验证、订阅正常
-4. 清理浏览器缓存/无痕模式重新登录
+1. 在邮件界面刷新等一会看一下
+2. 如果还是没有的话查看一下网站是否兑换/质保成功
+3. 还是不行的话在网站质保换号，换号成功基本都会收到的
+4. 如果次数用完可以联系客服进行更换兑换码
+5. 如还是不能解决请联系客服
 
 ---
 
-### 五、CC Switch 配置问题
+### 四、401 Unauthorized（未授权）
+
+**如果出现 401 一般有两个问题**：
+
+1. **配置文件问题**：如果之前使用过 API 中转的，需要删除配置文件 config.toml 或者重新配置
+   - 可以使用 [cc-switch](https://github.com/farion1231/cc-switch/) 直接更换官方配置（需要重新登录）
+   - CC-SWITCH 配置请查看相关教程
+
+2. **邮箱确认问题**：没有通过邮箱确认，在收到邀请了请确保进行确认，如果收不到邮箱重新质保
+
+3. **空间选择问题**：请确保登录选择的空间能正常使用，最好手动把停用的空间退出
+
+---
+
+### 五、402 Payment Required（支付/配额）
+
+**402 就是空间被停用了**，这是在使用期间可能遇到的问题，按照以下方法解决：
+
+1. 到兑换网站质保换号，换号成功并且在邮件确认
+2. 如果是使用 Codex，需要重新登录，在登录的时候请确保选择正常的空间
+
+> **PS**: 防止登录选错，可以手动推掉已被停用的空间
+
+---
+
+### 六、切换空间白屏怎么办
+
+**切换空间白屏解决方法**
+
+由于空间可能出现以下情况：ChatGPT 页白屏、额度页打不开，这是因为有旧的缓存。
+
+#### 解决办法
+
+**步骤一：F12 打开开发者工具**
+
+按 F12 打开浏览器开发者工具。
+
+**步骤二：清除缓存**
+
+把图中三个指出来的右键清除：
+
+![清除缓存步骤 1](https://cdn.nodeimage.com/i/NMXgtvmDoPiEICsAYYu1dOK0z8N8Rm72.webp)
+
+![清除缓存步骤 2](https://cdn.nodeimage.com/i/SoJ0XScdHj5WhZKtEpA0pbBPJDSPZlgh.webp)
+
+![清除缓存步骤 3](https://cdn.nodeimage.com/i/1tIvTshn1nwQVk50r5EYUjcytVOG1KtK.webp)
+
+**步骤三：刷新页面重新登录**
+
+刷新页面重新登录即可，如果还不行的话请确保邮件已经确认加入新空间并已经选择新空间。
+
+![刷新页面](https://cdn.nodeimage.com/i/FRYkedxg9eOQFyudKiDSetiA8X7MhQMM.webp)
+
+---
+
+### 七、CC Switch 配置问题
 
 **问题**：CC Switch 替换中转为官方配置
 
 **解决方案**：
+
+![CC Switch 配置 1](https://cdn.nodeimage.com/i/WV4Sf4ZFdWAWJNmnfDevhnDkM12BeOQi.webp)
+
 1. 打开 CC Switch 设置
 2. 进入配置页面
 3. 选择官方配置模板

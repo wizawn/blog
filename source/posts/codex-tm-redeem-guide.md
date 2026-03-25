@@ -99,6 +99,48 @@ https://codextm.xyz
 
 ---
 
+## 💾 重要提示：数据备份
+
+### ⚠️ 空间封禁风险
+**企业空间被封禁后，对应聊天记录会随之消失，通常无法恢复。**
+
+### 备份建议
+- **重要资料建议至少每天备份一次**
+- 让 Codex 在每次任务开始时**自动保存记忆**
+- 定期导出关键对话记录
+
+### 备份方法
+
+#### 方法一：使用浏览器插件导出
+推荐使用 **ExportGPT** 插件导出聊天记录：
+
+- **插件名称**: ExportGPT - Export ChatGPT Conversations
+- **支持浏览器**: Chrome、Edge 等 Chromium 内核浏览器
+- **下载链接**: [Chrome 商店](https://chromewebstore.google.com/detail/exportgpt-export-chatgpt/jamcijfplmgbngnppdhmbbogjebgfimn?hl=zh-CN)
+
+**使用步骤**：
+1. 安装 ExportGPT 插件
+2. 打开需要导出的对话
+3. 点击插件图标，选择导出格式（PDF/Markdown/TXT）
+4. 保存到本地或云存储
+
+#### 方法二：手动复制保存
+- 定期复制重要对话内容
+- 保存到本地文档或云笔记
+- 建议按日期或项目分类存储
+
+#### 方法三：让 Codex 自动保存
+在任务开始时明确要求：
+```
+请在任务开始前自动保存当前对话记录到本地
+```
+
+---
+
+## 📌 使用小贴士
+
+---
+
 ## 💻 CLI 命令行任务消耗说明
 
 ### 普通指令操作

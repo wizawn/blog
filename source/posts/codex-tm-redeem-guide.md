@@ -443,9 +443,9 @@ codex whoami
 
 **收款码**：
 
-**微信**：<img src="https://imgloc.com/image/OHuLEH" alt="微信收款码" style="max-width: 200px; height: auto;">
+**微信**：<img src="/images/wechat-pay.jpg" alt="微信收款码" style="max-width: 200px; height: auto;">
 
-**支付宝**：<img src="https://imgloc.com/image/OHuSqN" alt="支付宝收款码" style="max-width: 200px; height: auto;">
+**支付宝**：<img src="/images/alipay-pay.png" alt="支付宝收款码" style="max-width: 200px; height: auto;">
 
 **购买流程**：
 1. 点击上述链接访问闲鱼店铺

@@ -9,10 +9,13 @@ draft: false
 
 ## 📋 前言
 
-<div style="background: #fff5f5; border: 2px solid #ff6b6b; padding: 20px; border-radius: 10px; margin: 20px 0; text-align: center;">
-<strong style="color: #ff6b6b; font-size: 1.2em;">❤️ 写教程不易，如果对您有帮助，欢迎赞赏支持！</strong><br>
-微信/支付宝收款码已在文章底部 👇
-</div>
+> ❤️ **写教程不易，如果对您有帮助，欢迎赞赏支持！**
+> 
+> 微信收款码：![微信收款码](https://blog.caowo.de/images/wechat-pay.jpg)
+> 
+> 支付宝收款码：![支付宝收款码](https://blog.caowo.de/images/alipay.jpg)
+> 
+> 感谢您的支持！🎉
 
 **这是一篇真正的零基础保姆级教程**，我会手把手带你从零开始，完整部署和使用 Codex Console v1.1.1——一款免费开源的 OpenAI/Codex 账号注册管理工具。
 

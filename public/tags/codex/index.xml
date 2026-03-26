@@ -745,10 +745,40 @@
 &lt;p&gt;&lt;em&gt;最后更新：2026-03-26&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;本教程基于 codex-tools v1.5.4 编写，具体操作请以实际版本为准。&lt;/em&gt;
 &lt;em&gt;使用本工具请遵守 OpenAI 相关服务条款，严禁用于违规用途。&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Codex Console v1.1.1 超详细保姆级教程 - 从零到一完整部署指南（2026 最新版）</title><link>https://blog.caowo.de/posts/codex-console-v111-tutorial/</link><pubDate>Thu, 26 Mar 2026 09:15:00 +0000</pubDate><guid>https://blog.caowo.de/posts/codex-console-v111-tutorial/</guid><description>&lt;h2 id="-前言"&gt;📋 前言
-&lt;/h2&gt;&lt;div style="background: #fff5f5; border: 2px solid #ff6b6b; padding: 20px; border-radius: 10px; margin: 20px 0; text-align: center;"&gt;
-&lt;strong style="color: #ff6b6b; font-size: 1.2em;"&gt;❤️ 写教程不易，如果对您有帮助，欢迎赞赏支持！&lt;/strong&gt;&lt;br&gt;
-微信/支付宝收款码已在文章底部 👇
-&lt;/div&gt;
+&lt;/h2&gt;
+ &lt;blockquote&gt;
+ &lt;p&gt;❤️ &lt;strong&gt;写教程不易，如果对您有帮助，欢迎赞赏支持！&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;微信收款码：&lt;img src="https://blog.caowo.de/wechat-pay_13929368472330189317.jpg"
+	width="1001"
+	height="1001"
+	loading="lazy"
+	
+		alt="微信收款码"
+	
+ 
+	
+		class="gallery-image" 
+		data-flex-grow="100"
+		data-flex-basis="240px"
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;支付宝收款码：&lt;img src="https://blog.caowo.de/alipay_4978204435699197266.jpg"
+	width="1080"
+	height="1620"
+	loading="lazy"
+	
+		alt="支付宝收款码"
+	
+ 
+	
+		class="gallery-image" 
+		data-flex-grow="66"
+		data-flex-basis="160px"
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;感谢您的支持！🎉&lt;/p&gt;
+
+ &lt;/blockquote&gt;
 &lt;p&gt;&lt;strong&gt;这是一篇真正的零基础保姆级教程&lt;/strong&gt;，我会手把手带你从零开始，完整部署和使用 Codex Console v1.1.1——一款免费开源的 OpenAI/Codex 账号注册管理工具。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;本教程特点&lt;/strong&gt;：&lt;/p&gt;
 &lt;ul&gt;
@@ -1264,11 +1294,11 @@ INFO: Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;div &lt;span class="nv"&gt;style&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-bottom: 25px;&amp;#34;&lt;/span&gt;&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;div &lt;span class="nv"&gt;style&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;text-align: center; background: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);&amp;#34;&lt;/span&gt;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;img &lt;span class="nv"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;https://imgloc.com/i/OHuLEH&amp;#34;&lt;/span&gt; &lt;span class="nv"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;微信赞赏&amp;#34;&lt;/span&gt; &lt;span class="nv"&gt;style&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;width: 200px; height: 200px; object-fit: cover; border-radius: 5px;&amp;#34;&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;img &lt;span class="nv"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;/images/wechat-pay.jpg&amp;#34;&lt;/span&gt; &lt;span class="nv"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;微信赞赏&amp;#34;&lt;/span&gt; &lt;span class="nv"&gt;style&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;width: 200px; height: 200px; object-fit: cover; border-radius: 5px;&amp;#34;&lt;/span&gt;&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;p &lt;span class="nv"&gt;style&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;margin-top: 12px; font-weight: bold; font-size: 1.1em; color: #333;&amp;#34;&lt;/span&gt;&amp;gt;微信&amp;lt;/p&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;/div&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;div &lt;span class="nv"&gt;style&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;text-align: center; background: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);&amp;#34;&lt;/span&gt;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;img &lt;span class="nv"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;https://imgloc.com/i/OHuSqN&amp;#34;&lt;/span&gt; &lt;span class="nv"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;支付宝赞赏&amp;#34;&lt;/span&gt; &lt;span class="nv"&gt;style&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;width: 200px; height: 200px; object-fit: cover; border-radius: 5px;&amp;#34;&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;img &lt;span class="nv"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;/images/alipay.jpg&amp;#34;&lt;/span&gt; &lt;span class="nv"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;支付宝赞赏&amp;#34;&lt;/span&gt; &lt;span class="nv"&gt;style&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;width: 200px; height: 200px; object-fit: cover; border-radius: 5px;&amp;#34;&lt;/span&gt;&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;p &lt;span class="nv"&gt;style&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;margin-top: 12px; font-weight: bold; font-size: 1.1em; color: #333;&amp;#34;&lt;/span&gt;&amp;gt;支付宝&amp;lt;/p&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;/div&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;/div&amp;gt;

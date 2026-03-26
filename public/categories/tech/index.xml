@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tech on 言零的博客</title><link>https://blog.caowo.de/categories/tech/</link><description>Recent content in Tech on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 25 Mar 2026 08:00:00 +0000</lastBuildDate><atom:link href="https://blog.caowo.de/categories/tech/index.xml" rel="self" type="application/rss+xml"/><item><title>CodeX TM 兑换码使用教程 - 详细步骤与常见问题解答</title><link>https://blog.caowo.de/posts/codex-tm-redeem-guide/</link><pubDate>Wed, 25 Mar 2026 08:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/codex-tm-redeem-guide/</guid><description>&lt;h2 id="-前言"&gt;📋 前言
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tech on 言零的博客</title><link>https://blog.caowo.de/categories/tech/</link><description>Recent content in Tech on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 25 Mar 2026 14:35:00 +0000</lastBuildDate><atom:link href="https://blog.caowo.de/categories/tech/index.xml" rel="self" type="application/rss+xml"/><item><title>CodeX TM 兑换码使用教程 - 详细步骤与常见问题解答</title><link>https://blog.caowo.de/posts/codex-tm-redeem-guide/</link><pubDate>Wed, 25 Mar 2026 14:35:00 +0000</pubDate><guid>https://blog.caowo.de/posts/codex-tm-redeem-guide/</guid><description>&lt;h2 id="-前言"&gt;📋 前言
 &lt;/h2&gt;&lt;p&gt;本文详细介绍 CodeX TM 兑换码的购买、兑换及质保流程，帮助用户顺利完成兑换并加入工作空间。包含完整的图文教程、席位额度说明和常见问题解答。&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id="-兑换前注意事项"&gt;⚠️ 兑换前注意事项
@@ -174,89 +174,86 @@
  &lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id="-常见问题解决方案"&gt;🔧 常见问题解决方案
-&lt;/h2&gt;&lt;h3 id="一401-unauthorized未授权"&gt;一、401 Unauthorized（未授权）
-&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;原因&lt;/strong&gt;：token 过期、凭证无效、缓存冲突、环境变量干扰&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;解决方案&lt;/strong&gt;：&lt;/p&gt;
+&lt;/h2&gt;&lt;h3 id="一如何兑换激活码"&gt;一、如何兑换激活码
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;兑换步骤&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;进入首页，选择【兑换激活码】&lt;/li&gt;
+&lt;li&gt;输入兑换码和邮箱&lt;/li&gt;
+&lt;li&gt;兑换成功后请在邮箱确认&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;兑换并确认成功后即可使用服务。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="二质保换号说明"&gt;二、质保换号说明
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;如果空间遭封禁按照以下流程进行换空间&lt;/strong&gt;：&lt;/p&gt;
+&lt;h4 id="质保换号流程"&gt;质保换号流程
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;进入&amp;quot;质保换号&amp;quot;页面&lt;/li&gt;
+&lt;li&gt;输入原激活码&lt;/li&gt;
+&lt;li&gt;输入原邮箱&lt;/li&gt;
+&lt;li&gt;点击申请换号&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;申请兑换成功后请退出原空间，如果使用 Codex 需重新登录清除缓存。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="三邮件收不到怎么办"&gt;三、邮件收不到怎么办
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;邮件收不到按照以下步骤&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在邮件界面刷新等一会看一下&lt;/li&gt;
+&lt;li&gt;如果还是没有的话查看一下网站是否兑换/质保成功&lt;/li&gt;
+&lt;li&gt;还是不行的话在网站质保换号，换号成功基本都会收到的&lt;/li&gt;
+&lt;li&gt;如果次数用完可以联系客服进行更换兑换码&lt;/li&gt;
+&lt;li&gt;如还是不能解决请联系客服&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h3 id="四401-unauthorized未授权"&gt;四、401 Unauthorized（未授权）
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;如果出现 401 一般有两个问题&lt;/strong&gt;：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;清理本地认证缓存&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;配置文件问题&lt;/strong&gt;：如果之前使用过 API 中转的，需要删除配置文件 config.toml 或者重新配置&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Windows：删除 &lt;code&gt;%USERPROFILE%\.codex\auth\&lt;/code&gt; 下所有文件&lt;/li&gt;
-&lt;li&gt;macOS/Linux：&lt;code&gt;rm -rf ~/.codex/auth/&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;可以使用 &lt;a class="link" href="https://github.com/farion1231/cc-switch/" target="_blank" rel="noopener"
+ &gt;cc-switch&lt;/a&gt; 直接更换官方配置（需要重新登录）&lt;/li&gt;
+&lt;li&gt;CC-SWITCH 配置请查看相关教程&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;重新登录&lt;/strong&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;codex &lt;span class="nb"&gt;logout&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;codex login
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;检查环境变量&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;删除 &lt;code&gt;OPENAI_API_KEY&lt;/code&gt; / &lt;code&gt;OPENAI_BASE_URL&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;重启终端&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;邮箱确认问题&lt;/strong&gt;：没有通过邮箱确认，在收到邀请了请确保进行确认，如果收不到邮箱重新质保&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;确认账号权限&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;确认账号有 ChatGPT Plus/Pro 权限（Codex 需订阅）&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;空间选择问题&lt;/strong&gt;：请确保登录选择的空间能正常使用，最好手动把停用的空间退出&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;hr&gt;
-&lt;h3 id="二402-payment-required支付配额"&gt;二、402 Payment Required（支付/配额）
-&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;原因&lt;/strong&gt;：订阅过期、额度耗尽、账号未开通 Codex 权限&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;解决方案&lt;/strong&gt;：&lt;/p&gt;
+&lt;h3 id="五402-payment-required支付配额"&gt;五、402 Payment Required（支付/配额）
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;402 就是空间被停用了&lt;/strong&gt;，这是在使用期间可能遇到的问题，按照以下方法解决：&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;登录 OpenAI 账号，确认 Plus 订阅有效、无欠费&lt;/li&gt;
-&lt;li&gt;检查 API/模型额度是否用尽&lt;/li&gt;
-&lt;li&gt;重新登录并切换到正确的付费账号&lt;/li&gt;
+&lt;li&gt;到兑换网站质保换号，换号成功并且在邮件确认&lt;/li&gt;
+&lt;li&gt;如果是使用 Codex，需要重新登录，在登录的时候请确保选择正常的空间&lt;/li&gt;
 &lt;/ol&gt;
+
+ &lt;blockquote&gt;
+ &lt;p&gt;&lt;strong&gt;PS&lt;/strong&gt;: 防止登录选错，可以手动推掉已被停用的空间&lt;/p&gt;
+
+ &lt;/blockquote&gt;
 &lt;hr&gt;
-&lt;h3 id="三不支持的地区unsupported_country_region_territory"&gt;三、不支持的地区（unsupported_country_region_territory）
-&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;原因&lt;/strong&gt;：IP 不在支持列表、代理/出口不一致、Node.js fetch 不走代理&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;解决方案&lt;/strong&gt;：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;切换到支持地区 IP&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;使用美国/支持地区纯净 IP&lt;/li&gt;
-&lt;li&gt;避免数据中心/黑名单 IP&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;确保代理一致&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;确保登录与调用用同一出口（浏览器/终端代理一致）&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;WSL 环境配置&lt;/strong&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo apt update &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; sudo apt install wslu
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;wslu &amp;lt;codex login URL&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;强制终端走代理（Linux/macOS）&lt;/strong&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;HTTP_PROXY&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;http://127.0.0.1:7890
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;HTTPS_PROXY&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;http://127.0.0.1:7890
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;codex login
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ol&gt;
+&lt;h3 id="六切换空间白屏怎么办"&gt;六、切换空间白屏怎么办
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;切换空间白屏解决方法&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;由于空间可能出现以下情况：ChatGPT 页白屏、额度页打不开，这是因为有旧的缓存。&lt;/p&gt;
+&lt;h4 id="解决办法"&gt;解决办法
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;步骤一：F12 打开开发者工具&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;按 F12 打开浏览器开发者工具。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;步骤二：清除缓存&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;把图中三个指出来的右键清除：&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;strong&gt;步骤三：刷新页面重新登录&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;刷新页面重新登录即可，如果还不行的话请确保邮件已经确认加入新空间并已经选择新空间。&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;hr&gt;
-&lt;h3 id="四不支持的邮箱"&gt;四、不支持的邮箱
-&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;原因&lt;/strong&gt;：邮箱未绑定 OpenAI、非 Plus 账号、邮箱类型被风控（如临时邮箱）&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;解决方案&lt;/strong&gt;：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;用绑定了 ChatGPT Plus 的主邮箱登录（不要用子账号/共享号）&lt;/li&gt;
-&lt;li&gt;避免临时/企业邮箱，优先 Gmail/Outlook 等主流邮箱&lt;/li&gt;
-&lt;li&gt;登录 OpenAI 官网，确认邮箱已验证、订阅正常&lt;/li&gt;
-&lt;li&gt;清理浏览器缓存/无痕模式重新登录&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h3 id="五cc-switch-配置问题"&gt;五、CC Switch 配置问题
+&lt;h3 id="七cc-switch-配置问题"&gt;七、CC Switch 配置问题
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;问题&lt;/strong&gt;：CC Switch 替换中转为官方配置&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;解决方案&lt;/strong&gt;：&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;ol&gt;
 &lt;li&gt;打开 CC Switch 设置&lt;/li&gt;
 &lt;li&gt;进入配置页面&lt;/li&gt;

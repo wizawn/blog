@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 言零的博客</title><link>https://blog.caowo.de/posts/</link><description>Recent content in Posts on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 25 Mar 2026 10:09:58 +0000</lastBuildDate><atom:link href="https://blog.caowo.de/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Hello World | 开启 Web 渗透测试之旅</title><link>https://blog.caowo.de/posts/hello-world/</link><pubDate>Sun, 01 Mar 2026 08:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/hello-world/</guid><description>&lt;h1 id="hello-world--开启-web-渗透测试之旅"&gt;Hello World | 开启 Web 渗透测试之旅
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 言零的博客</title><link>https://blog.caowo.de/posts/</link><description>Recent content in Posts on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 25 Mar 2026 14:35:00 +0000</lastBuildDate><atom:link href="https://blog.caowo.de/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Hello World | 开启 Web 渗透测试之旅</title><link>https://blog.caowo.de/posts/hello-world/</link><pubDate>Sun, 01 Mar 2026 08:00:00 +0800</pubDate><guid>https://blog.caowo.de/posts/hello-world/</guid><description>&lt;h1 id="hello-world--开启-web-渗透测试之旅"&gt;Hello World | 开启 Web 渗透测试之旅
 &lt;/h1&gt;&lt;p&gt;欢迎来到我的网络安全技术博客！&lt;/p&gt;
 &lt;h2 id="-博客启用"&gt;🎉 博客启用
 &lt;/h2&gt;&lt;p&gt;本站正式启用，专注于 Web 渗透测试、漏洞复现与安全防御技术分享。&lt;/p&gt;
@@ -49,7 +49,365 @@
 &lt;li&gt;❌ 商业牟利&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;em&gt;2026-03-03 | 博客正式启用&lt;/em&gt;&lt;/p&gt;</description></item><item><title>拓竹和泡泡玛特和解，免费打印大牌IP的日子正在倒计时</title><link>https://blog.caowo.de/posts/auto-ai-20260325-276/</link><pubDate>Wed, 25 Mar 2026 10:09:58 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-ai-20260325-276/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;p&gt;&lt;em&gt;2026-03-03 | 博客正式启用&lt;/em&gt;&lt;/p&gt;</description></item><item><title>CodeX TM 兑换码使用教程 - 详细步骤与常见问题解答</title><link>https://blog.caowo.de/posts/codex-tm-redeem-guide/</link><pubDate>Wed, 25 Mar 2026 14:35:00 +0000</pubDate><guid>https://blog.caowo.de/posts/codex-tm-redeem-guide/</guid><description>&lt;h2 id="-前言"&gt;📋 前言
+&lt;/h2&gt;&lt;p&gt;本文详细介绍 CodeX TM 兑换码的购买、兑换及质保流程，帮助用户顺利完成兑换并加入工作空间。包含完整的图文教程、席位额度说明和常见问题解答。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="-兑换前注意事项"&gt;⚠️ 兑换前注意事项
+&lt;/h2&gt;&lt;h3 id="1-购买多个兑换码"&gt;1. 购买多个兑换码
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;重要&lt;/strong&gt;：购买多个号的请注意&lt;strong&gt;间隔一段时间再兑换&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;原因：连续兑换可能导致多个账号加入同一个空间&lt;/li&gt;
+&lt;li&gt;建议：每个兑换码间隔 5-10 分钟&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="2-兑换失败处理"&gt;2. 兑换失败处理
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;如遇兑换失败，通常是&lt;strong&gt;库存不足&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;系统正在补货中&lt;/li&gt;
+&lt;li&gt;请等待&lt;strong&gt;10 分钟左右&lt;/strong&gt;再重试&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="3-邮箱填写"&gt;3. 邮箱填写
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;⚠️ &lt;strong&gt;请务必填写正确的邮箱地址&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;如填错无法补回邀请邮件&lt;/li&gt;
+&lt;li&gt;兑换后请在邮箱内根据引导加入空间&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-兑换链接"&gt;🔗 兑换链接
+&lt;/h2&gt;&lt;pre tabindex="0"&gt;&lt;code&gt;https://codextm.xyz
+&lt;/code&gt;&lt;/pre&gt;
+ &lt;blockquote&gt;
+ &lt;p&gt;注意：将 &lt;code&gt;-&lt;/code&gt; 替换为 &lt;code&gt;.&lt;/code&gt; 访问&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id="-操作步骤"&gt;📝 操作步骤
+&lt;/h2&gt;&lt;h3 id="第一步访问兑换链接"&gt;第一步：访问兑换链接
+&lt;/h3&gt;&lt;p&gt;打开浏览器访问 &lt;code&gt;https://codextm.xyz&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id="第二步输入邮箱地址"&gt;第二步：输入邮箱地址
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;填写您用于注册的正确邮箱&lt;/li&gt;
+&lt;li&gt;⚠️ 请仔细核对邮箱地址，确保无误&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="第三步输入兑换码"&gt;第三步：输入兑换码
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;将购买获得的兑换码复制到输入框&lt;/li&gt;
+&lt;li&gt;确保没有多余空格或字符&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="第四步验证并兑换"&gt;第四步：验证并兑换
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;完成验证码验证&lt;/li&gt;
+&lt;li&gt;点击&amp;quot;兑换&amp;quot;按钮&lt;/li&gt;
+&lt;li&gt;等待系统处理&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="第五步检查邮箱"&gt;第五步：检查邮箱
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;兑换成功后，系统会发送邀请邮件到您的邮箱&lt;/li&gt;
+&lt;li&gt;根据邮件内的引导加入工作空间&lt;/li&gt;
+&lt;li&gt;⚠️ 如未收到邮件，请检查垃圾邮件箱&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-质保步骤"&gt;🛡️ 质保步骤
+&lt;/h2&gt;&lt;p&gt;质保流程与兑换流程相同：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;访问兑换链接 &lt;code&gt;https://codextm.xyz&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;选择 &lt;strong&gt;&amp;ldquo;质保兑换&amp;rdquo;&lt;/strong&gt; 选项&lt;/li&gt;
+&lt;li&gt;填写邮箱地址&lt;/li&gt;
+&lt;li&gt;输入质保兑换码&lt;/li&gt;
+&lt;li&gt;验证并完成质保&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id="-席位额度规则"&gt;💼 席位额度规则
+&lt;/h2&gt;&lt;h3 id="1-独立额度"&gt;1. 独立额度
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;每个席位均为&lt;strong&gt;独立额度&lt;/strong&gt;，互不共享、互不影响&lt;/li&gt;
+&lt;li&gt;单独使用不受其他席位干扰&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="2-官方固定额度"&gt;2. 官方固定额度
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;每周 &lt;strong&gt;5 小时等效使用时长&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;为平台硬性规则，&lt;strong&gt;无法调整或提升&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="3-滚动刷新机制"&gt;3. 滚动刷新机制
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;采用 &lt;strong&gt;5 小时滚动刷新&lt;/strong&gt;机制&lt;/li&gt;
+&lt;li&gt;每 5 小时恢复对应使用额度&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;非固定自然周重置&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="4-并发任务"&gt;4. 并发任务
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;支持最多 &lt;strong&gt;2 个任务同时运行&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;并发使用更高效&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-重要提示数据备份"&gt;💾 重要提示：数据备份
+&lt;/h2&gt;&lt;h3 id="-空间封禁风险"&gt;⚠️ 空间封禁风险
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;企业空间被封禁后，对应聊天记录会随之消失，通常无法恢复。&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id="备份建议"&gt;备份建议
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;重要资料建议至少每天备份一次&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;让 Codex 在每次任务开始时&lt;strong&gt;自动保存记忆&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;定期导出关键对话记录&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="备份方法"&gt;备份方法
+&lt;/h3&gt;&lt;h4 id="方法一使用浏览器插件导出"&gt;方法一：使用浏览器插件导出
+&lt;/h4&gt;&lt;p&gt;推荐使用 &lt;strong&gt;ExportGPT&lt;/strong&gt; 插件导出聊天记录：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;插件名称&lt;/strong&gt;: ExportGPT - Export ChatGPT Conversations&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;支持浏览器&lt;/strong&gt;: Chrome、Edge 等 Chromium 内核浏览器&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;下载链接&lt;/strong&gt;: &lt;a class="link" href="https://chromewebstore.google.com/detail/exportgpt-export-chatgpt/jamcijfplmgbngnppdhmbbogjebgfimn?hl=zh-CN" target="_blank" rel="noopener"
+ &gt;Chrome 商店&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;使用步骤&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;安装 ExportGPT 插件&lt;/li&gt;
+&lt;li&gt;打开需要导出的对话&lt;/li&gt;
+&lt;li&gt;点击插件图标，选择导出格式（PDF/Markdown/TXT）&lt;/li&gt;
+&lt;li&gt;保存到本地或云存储&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id="方法二手动复制保存"&gt;方法二：手动复制保存
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;定期复制重要对话内容&lt;/li&gt;
+&lt;li&gt;保存到本地文档或云笔记&lt;/li&gt;
+&lt;li&gt;建议按日期或项目分类存储&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="方法三让-codex-自动保存"&gt;方法三：让 Codex 自动保存
+&lt;/h4&gt;&lt;p&gt;在任务开始时明确要求：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;请在任务开始前自动保存当前对话记录到本地
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h2 id="-cli-命令行任务消耗说明"&gt;💻 CLI 命令行任务消耗说明
+&lt;/h2&gt;&lt;h3 id="普通指令操作"&gt;普通指令操作
+&lt;/h3&gt;&lt;p&gt;仅发送代码相关提问、代码解释、简单代码编写等基础指令：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;消耗&lt;strong&gt;极低&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;单次操作仅占用&lt;strong&gt;少量额度&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;日常轻量使用可&lt;strong&gt;长时间正常运行&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="cli-自动执行任务"&gt;CLI 自动执行任务
+&lt;/h3&gt;&lt;p&gt;通过命令行执行项目初始化、依赖安装、BUG 修复、项目部署、代码运行等实操任务：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;消耗&lt;strong&gt;偏高&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;单次简单自动执行：占用&lt;strong&gt;中等额度&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;多步骤、复杂项目类执行：占用额度&lt;strong&gt;更高&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;连续高强度执行自动任务：会&lt;strong&gt;较快触发 5 小时额度冷却&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-使用小贴士"&gt;📌 使用小贴士
+&lt;/h2&gt;&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;使用类型&lt;/th&gt;
+ &lt;th&gt;说明&lt;/th&gt;
+ &lt;th&gt;额度情况&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;轻量使用&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;日常写脚本、改代码、提问答疑&lt;/td&gt;
+ &lt;td&gt;额度充足，几乎不会触达上限&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;中度使用&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;每日少量项目操作&lt;/td&gt;
+ &lt;td&gt;可满足正常使用需求&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;重度使用&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;连续 CLI 自动跑任务、批量开发调试&lt;/td&gt;
+ &lt;td&gt;易触发短时额度限制，建议间隔使用&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+
+ &lt;blockquote&gt;
+ &lt;p&gt;⚠️ &lt;strong&gt;重要提示&lt;/strong&gt;：平台官方限额非人为可控，达到上限后等待对应时间即可恢复使用&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id="-常见问题解决方案"&gt;🔧 常见问题解决方案
+&lt;/h2&gt;&lt;h3 id="一如何兑换激活码"&gt;一、如何兑换激活码
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;兑换步骤&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;进入首页，选择【兑换激活码】&lt;/li&gt;
+&lt;li&gt;输入兑换码和邮箱&lt;/li&gt;
+&lt;li&gt;兑换成功后请在邮箱确认&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;兑换并确认成功后即可使用服务。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="二质保换号说明"&gt;二、质保换号说明
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;如果空间遭封禁按照以下流程进行换空间&lt;/strong&gt;：&lt;/p&gt;
+&lt;h4 id="质保换号流程"&gt;质保换号流程
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;进入&amp;quot;质保换号&amp;quot;页面&lt;/li&gt;
+&lt;li&gt;输入原激活码&lt;/li&gt;
+&lt;li&gt;输入原邮箱&lt;/li&gt;
+&lt;li&gt;点击申请换号&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;申请兑换成功后请退出原空间，如果使用 Codex 需重新登录清除缓存。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="三邮件收不到怎么办"&gt;三、邮件收不到怎么办
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;邮件收不到按照以下步骤&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在邮件界面刷新等一会看一下&lt;/li&gt;
+&lt;li&gt;如果还是没有的话查看一下网站是否兑换/质保成功&lt;/li&gt;
+&lt;li&gt;还是不行的话在网站质保换号，换号成功基本都会收到的&lt;/li&gt;
+&lt;li&gt;如果次数用完可以联系客服进行更换兑换码&lt;/li&gt;
+&lt;li&gt;如还是不能解决请联系客服&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h3 id="四401-unauthorized未授权"&gt;四、401 Unauthorized（未授权）
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;如果出现 401 一般有两个问题&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;配置文件问题&lt;/strong&gt;：如果之前使用过 API 中转的，需要删除配置文件 config.toml 或者重新配置&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;可以使用 &lt;a class="link" href="https://github.com/farion1231/cc-switch/" target="_blank" rel="noopener"
+ &gt;cc-switch&lt;/a&gt; 直接更换官方配置（需要重新登录）&lt;/li&gt;
+&lt;li&gt;CC-SWITCH 配置请查看相关教程&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;邮箱确认问题&lt;/strong&gt;：没有通过邮箱确认，在收到邀请了请确保进行确认，如果收不到邮箱重新质保&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;空间选择问题&lt;/strong&gt;：请确保登录选择的空间能正常使用，最好手动把停用的空间退出&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h3 id="五402-payment-required支付配额"&gt;五、402 Payment Required（支付/配额）
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;402 就是空间被停用了&lt;/strong&gt;，这是在使用期间可能遇到的问题，按照以下方法解决：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;到兑换网站质保换号，换号成功并且在邮件确认&lt;/li&gt;
+&lt;li&gt;如果是使用 Codex，需要重新登录，在登录的时候请确保选择正常的空间&lt;/li&gt;
+&lt;/ol&gt;
+
+ &lt;blockquote&gt;
+ &lt;p&gt;&lt;strong&gt;PS&lt;/strong&gt;: 防止登录选错，可以手动推掉已被停用的空间&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id="六切换空间白屏怎么办"&gt;六、切换空间白屏怎么办
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;切换空间白屏解决方法&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;由于空间可能出现以下情况：ChatGPT 页白屏、额度页打不开，这是因为有旧的缓存。&lt;/p&gt;
+&lt;h4 id="解决办法"&gt;解决办法
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;步骤一：F12 打开开发者工具&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;按 F12 打开浏览器开发者工具。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;步骤二：清除缓存&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;把图中三个指出来的右键清除：&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;strong&gt;步骤三：刷新页面重新登录&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;刷新页面重新登录即可，如果还不行的话请确保邮件已经确认加入新空间并已经选择新空间。&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;hr&gt;
+&lt;h3 id="七cc-switch-配置问题"&gt;七、CC Switch 配置问题
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;问题&lt;/strong&gt;：CC Switch 替换中转为官方配置&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;解决方案&lt;/strong&gt;：&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;ol&gt;
+&lt;li&gt;打开 CC Switch 设置&lt;/li&gt;
+&lt;li&gt;进入配置页面&lt;/li&gt;
+&lt;li&gt;选择官方配置模板&lt;/li&gt;
+&lt;li&gt;保存并重启应用&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h3 id="通用排查步骤必做"&gt;通用排查步骤（必做）
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;退出所有账号，清理缓存，重启终端/编辑器&lt;/li&gt;
+&lt;li&gt;用无痕模式登录，确保代理全局生效&lt;/li&gt;
+&lt;li&gt;登录后执行 &lt;code&gt;codex whoami&lt;/code&gt; 验证身份&lt;/li&gt;
+&lt;li&gt;若仍报错，删除 &lt;code&gt;.codex/&lt;/code&gt; 目录后重试&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id="-邮件收不到怎么办"&gt;📧 邮件收不到怎么办？
+&lt;/h2&gt;&lt;h3 id="可能原因"&gt;可能原因
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;邮箱地址填写错误&lt;/li&gt;
+&lt;li&gt;邮件被归类到垃圾邮件&lt;/li&gt;
+&lt;li&gt;邮件服务器延迟&lt;/li&gt;
+&lt;li&gt;邮箱已满&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="解决方案"&gt;解决方案
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;检查垃圾邮件箱&lt;/strong&gt;：查看垃圾邮件/广告邮件文件夹&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;核对邮箱地址&lt;/strong&gt;：确认兑换时填写的邮箱地址正确&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;等待一段时间&lt;/strong&gt;：邮件可能有延迟，等待 10-30 分钟&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;清理邮箱空间&lt;/strong&gt;：确保邮箱有足够的存储空间&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;联系管理员&lt;/strong&gt;：如以上方法都无效，请留言提供邮箱地址&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id="-沟通与反馈"&gt;💬 沟通与反馈
+&lt;/h2&gt;&lt;h3 id="遇到问题请先沟通"&gt;遇到问题请先沟通
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;任何问题请先留言沟通&lt;/li&gt;
+&lt;li&gt;我们会第一时间处理&lt;/li&gt;
+&lt;li&gt;如实在无法解决会安排退款&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="关于评价"&gt;关于评价
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;因操作、延迟等导致您等待或体验不佳，我们非常抱歉并深表歉意&lt;/li&gt;
+&lt;li&gt;⚠️ &lt;strong&gt;请不要轻易给差评&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;我们会尽力解决您的问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-温馨提示"&gt;📌 温馨提示
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;兑换前&lt;/strong&gt;：仔细核对邮箱地址&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;兑换时&lt;/strong&gt;：多个兑换码请间隔使用&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;兑换后&lt;/strong&gt;：及时检查邮箱（包括垃圾邮件箱）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;遇到问题&lt;/strong&gt;：先沟通，我们会尽力解决&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id="-联系方式"&gt;📞 联系方式
+&lt;/h2&gt;&lt;h3 id="售后支持"&gt;售后支持
+&lt;/h3&gt;&lt;p&gt;如有任何问题，请通过以下渠道联系：&lt;/p&gt;
+&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;渠道&lt;/th&gt;
+ &lt;th&gt;联系方式&lt;/th&gt;
+ &lt;th&gt;说明&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;QQ&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;46333839&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;工作日 9:00-18:00 在线&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;微信&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;GOV-HACK&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;添加后请备注&amp;quot;兑换码购买&amp;quot;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;微信售后群&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;联系微信后邀请&lt;/td&gt;
+ &lt;td&gt;暂无 QQ 售后群&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;兑换页面&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;在线留言&lt;/td&gt;
+ &lt;td&gt;24 小时内回复&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="服务时间"&gt;服务时间
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;工作日&lt;/strong&gt;: 周一至周五 9:00-18:00&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;周末&lt;/strong&gt;: 10:00-16:00（响应可能延迟）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;节假日&lt;/strong&gt;: 轮值服务，响应时间可能延长&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="联系时请提供"&gt;联系时请提供
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;兑换码或订单号&lt;/li&gt;
+&lt;li&gt;问题详细描述&lt;/li&gt;
+&lt;li&gt;错误截图（如有）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;最后更新：2026-03-25&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;本文仅供参考，具体操作请以官方说明为准。&lt;/em&gt;&lt;/p&gt;</description></item><item><title>拓竹和泡泡玛特和解，免费打印大牌IP的日子正在倒计时</title><link>https://blog.caowo.de/posts/auto-ai-20260325-276/</link><pubDate>Wed, 25 Mar 2026 10:09:58 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-ai-20260325-276/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
 &lt;/h2&gt;&lt;p&gt;作者 | 张子怡
 编辑 | 袁斯来
 在野蛮增长几年后，3D打印赛道玩家们一直没有直面的“灰犀牛”，终于冲入大门。
@@ -248,368 +606,7 @@
 &lt;/ul&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;em&gt;AI Agent 加工：AI Agent（技术分析）&lt;/em&gt;
-&lt;em&gt;生成时间：2026-03-25T10:09:32.911813&lt;/em&gt;&lt;/p&gt;</description></item><item><title>CodeX TM 兑换码使用教程 - 详细步骤与常见问题解答</title><link>https://blog.caowo.de/posts/codex-tm-redeem-guide/</link><pubDate>Wed, 25 Mar 2026 08:00:00 +0000</pubDate><guid>https://blog.caowo.de/posts/codex-tm-redeem-guide/</guid><description>&lt;h2 id="-前言"&gt;📋 前言
-&lt;/h2&gt;&lt;p&gt;本文详细介绍 CodeX TM 兑换码的购买、兑换及质保流程，帮助用户顺利完成兑换并加入工作空间。包含完整的图文教程、席位额度说明和常见问题解答。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id="-兑换前注意事项"&gt;⚠️ 兑换前注意事项
-&lt;/h2&gt;&lt;h3 id="1-购买多个兑换码"&gt;1. 购买多个兑换码
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;重要&lt;/strong&gt;：购买多个号的请注意&lt;strong&gt;间隔一段时间再兑换&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;原因：连续兑换可能导致多个账号加入同一个空间&lt;/li&gt;
-&lt;li&gt;建议：每个兑换码间隔 5-10 分钟&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="2-兑换失败处理"&gt;2. 兑换失败处理
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;如遇兑换失败，通常是&lt;strong&gt;库存不足&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;系统正在补货中&lt;/li&gt;
-&lt;li&gt;请等待&lt;strong&gt;10 分钟左右&lt;/strong&gt;再重试&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="3-邮箱填写"&gt;3. 邮箱填写
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;⚠️ &lt;strong&gt;请务必填写正确的邮箱地址&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;如填错无法补回邀请邮件&lt;/li&gt;
-&lt;li&gt;兑换后请在邮箱内根据引导加入空间&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="-兑换链接"&gt;🔗 兑换链接
-&lt;/h2&gt;&lt;pre tabindex="0"&gt;&lt;code&gt;https://codextm.xyz
-&lt;/code&gt;&lt;/pre&gt;
- &lt;blockquote&gt;
- &lt;p&gt;注意：将 &lt;code&gt;-&lt;/code&gt; 替换为 &lt;code&gt;.&lt;/code&gt; 访问&lt;/p&gt;
-
- &lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;h2 id="-操作步骤"&gt;📝 操作步骤
-&lt;/h2&gt;&lt;h3 id="第一步访问兑换链接"&gt;第一步：访问兑换链接
-&lt;/h3&gt;&lt;p&gt;打开浏览器访问 &lt;code&gt;https://codextm.xyz&lt;/code&gt;&lt;/p&gt;
-&lt;h3 id="第二步输入邮箱地址"&gt;第二步：输入邮箱地址
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;填写您用于注册的正确邮箱&lt;/li&gt;
-&lt;li&gt;⚠️ 请仔细核对邮箱地址，确保无误&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="第三步输入兑换码"&gt;第三步：输入兑换码
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;将购买获得的兑换码复制到输入框&lt;/li&gt;
-&lt;li&gt;确保没有多余空格或字符&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="第四步验证并兑换"&gt;第四步：验证并兑换
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;完成验证码验证&lt;/li&gt;
-&lt;li&gt;点击&amp;quot;兑换&amp;quot;按钮&lt;/li&gt;
-&lt;li&gt;等待系统处理&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="第五步检查邮箱"&gt;第五步：检查邮箱
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;兑换成功后，系统会发送邀请邮件到您的邮箱&lt;/li&gt;
-&lt;li&gt;根据邮件内的引导加入工作空间&lt;/li&gt;
-&lt;li&gt;⚠️ 如未收到邮件，请检查垃圾邮件箱&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="-质保步骤"&gt;🛡️ 质保步骤
-&lt;/h2&gt;&lt;p&gt;质保流程与兑换流程相同：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;访问兑换链接 &lt;code&gt;https://codextm.xyz&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;选择 &lt;strong&gt;&amp;ldquo;质保兑换&amp;rdquo;&lt;/strong&gt; 选项&lt;/li&gt;
-&lt;li&gt;填写邮箱地址&lt;/li&gt;
-&lt;li&gt;输入质保兑换码&lt;/li&gt;
-&lt;li&gt;验证并完成质保&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h2 id="-席位额度规则"&gt;💼 席位额度规则
-&lt;/h2&gt;&lt;h3 id="1-独立额度"&gt;1. 独立额度
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;每个席位均为&lt;strong&gt;独立额度&lt;/strong&gt;，互不共享、互不影响&lt;/li&gt;
-&lt;li&gt;单独使用不受其他席位干扰&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="2-官方固定额度"&gt;2. 官方固定额度
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;每周 &lt;strong&gt;5 小时等效使用时长&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;为平台硬性规则，&lt;strong&gt;无法调整或提升&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="3-滚动刷新机制"&gt;3. 滚动刷新机制
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;采用 &lt;strong&gt;5 小时滚动刷新&lt;/strong&gt;机制&lt;/li&gt;
-&lt;li&gt;每 5 小时恢复对应使用额度&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;非固定自然周重置&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="4-并发任务"&gt;4. 并发任务
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;支持最多 &lt;strong&gt;2 个任务同时运行&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;并发使用更高效&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="-重要提示数据备份"&gt;💾 重要提示：数据备份
-&lt;/h2&gt;&lt;h3 id="-空间封禁风险"&gt;⚠️ 空间封禁风险
-&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;企业空间被封禁后，对应聊天记录会随之消失，通常无法恢复。&lt;/strong&gt;&lt;/p&gt;
-&lt;h3 id="备份建议"&gt;备份建议
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;重要资料建议至少每天备份一次&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;让 Codex 在每次任务开始时&lt;strong&gt;自动保存记忆&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;定期导出关键对话记录&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="备份方法"&gt;备份方法
-&lt;/h3&gt;&lt;h4 id="方法一使用浏览器插件导出"&gt;方法一：使用浏览器插件导出
-&lt;/h4&gt;&lt;p&gt;推荐使用 &lt;strong&gt;ExportGPT&lt;/strong&gt; 插件导出聊天记录：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;插件名称&lt;/strong&gt;: ExportGPT - Export ChatGPT Conversations&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;支持浏览器&lt;/strong&gt;: Chrome、Edge 等 Chromium 内核浏览器&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;下载链接&lt;/strong&gt;: &lt;a class="link" href="https://chromewebstore.google.com/detail/exportgpt-export-chatgpt/jamcijfplmgbngnppdhmbbogjebgfimn?hl=zh-CN" target="_blank" rel="noopener"
- &gt;Chrome 商店&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;使用步骤&lt;/strong&gt;：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;安装 ExportGPT 插件&lt;/li&gt;
-&lt;li&gt;打开需要导出的对话&lt;/li&gt;
-&lt;li&gt;点击插件图标，选择导出格式（PDF/Markdown/TXT）&lt;/li&gt;
-&lt;li&gt;保存到本地或云存储&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h4 id="方法二手动复制保存"&gt;方法二：手动复制保存
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;定期复制重要对话内容&lt;/li&gt;
-&lt;li&gt;保存到本地文档或云笔记&lt;/li&gt;
-&lt;li&gt;建议按日期或项目分类存储&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id="方法三让-codex-自动保存"&gt;方法三：让 Codex 自动保存
-&lt;/h4&gt;&lt;p&gt;在任务开始时明确要求：&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;请在任务开始前自动保存当前对话记录到本地
-&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
-&lt;h2 id="-cli-命令行任务消耗说明"&gt;💻 CLI 命令行任务消耗说明
-&lt;/h2&gt;&lt;h3 id="普通指令操作"&gt;普通指令操作
-&lt;/h3&gt;&lt;p&gt;仅发送代码相关提问、代码解释、简单代码编写等基础指令：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;消耗&lt;strong&gt;极低&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;单次操作仅占用&lt;strong&gt;少量额度&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;日常轻量使用可&lt;strong&gt;长时间正常运行&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="cli-自动执行任务"&gt;CLI 自动执行任务
-&lt;/h3&gt;&lt;p&gt;通过命令行执行项目初始化、依赖安装、BUG 修复、项目部署、代码运行等实操任务：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;消耗&lt;strong&gt;偏高&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;单次简单自动执行：占用&lt;strong&gt;中等额度&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;多步骤、复杂项目类执行：占用额度&lt;strong&gt;更高&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;连续高强度执行自动任务：会&lt;strong&gt;较快触发 5 小时额度冷却&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="-使用小贴士"&gt;📌 使用小贴士
-&lt;/h2&gt;&lt;table&gt;
- &lt;thead&gt;
- &lt;tr&gt;
- &lt;th&gt;使用类型&lt;/th&gt;
- &lt;th&gt;说明&lt;/th&gt;
- &lt;th&gt;额度情况&lt;/th&gt;
- &lt;/tr&gt;
- &lt;/thead&gt;
- &lt;tbody&gt;
- &lt;tr&gt;
- &lt;td&gt;&lt;strong&gt;轻量使用&lt;/strong&gt;&lt;/td&gt;
- &lt;td&gt;日常写脚本、改代码、提问答疑&lt;/td&gt;
- &lt;td&gt;额度充足，几乎不会触达上限&lt;/td&gt;
- &lt;/tr&gt;
- &lt;tr&gt;
- &lt;td&gt;&lt;strong&gt;中度使用&lt;/strong&gt;&lt;/td&gt;
- &lt;td&gt;每日少量项目操作&lt;/td&gt;
- &lt;td&gt;可满足正常使用需求&lt;/td&gt;
- &lt;/tr&gt;
- &lt;tr&gt;
- &lt;td&gt;&lt;strong&gt;重度使用&lt;/strong&gt;&lt;/td&gt;
- &lt;td&gt;连续 CLI 自动跑任务、批量开发调试&lt;/td&gt;
- &lt;td&gt;易触发短时额度限制，建议间隔使用&lt;/td&gt;
- &lt;/tr&gt;
- &lt;/tbody&gt;
-&lt;/table&gt;
-
- &lt;blockquote&gt;
- &lt;p&gt;⚠️ &lt;strong&gt;重要提示&lt;/strong&gt;：平台官方限额非人为可控，达到上限后等待对应时间即可恢复使用&lt;/p&gt;
-
- &lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;h2 id="-常见问题解决方案"&gt;🔧 常见问题解决方案
-&lt;/h2&gt;&lt;h3 id="一401-unauthorized未授权"&gt;一、401 Unauthorized（未授权）
-&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;原因&lt;/strong&gt;：token 过期、凭证无效、缓存冲突、环境变量干扰&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;解决方案&lt;/strong&gt;：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;清理本地认证缓存&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Windows：删除 &lt;code&gt;%USERPROFILE%\.codex\auth\&lt;/code&gt; 下所有文件&lt;/li&gt;
-&lt;li&gt;macOS/Linux：&lt;code&gt;rm -rf ~/.codex/auth/&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;重新登录&lt;/strong&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;codex &lt;span class="nb"&gt;logout&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;codex login
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;检查环境变量&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;删除 &lt;code&gt;OPENAI_API_KEY&lt;/code&gt; / &lt;code&gt;OPENAI_BASE_URL&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;重启终端&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;确认账号权限&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;确认账号有 ChatGPT Plus/Pro 权限（Codex 需订阅）&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h3 id="二402-payment-required支付配额"&gt;二、402 Payment Required（支付/配额）
-&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;原因&lt;/strong&gt;：订阅过期、额度耗尽、账号未开通 Codex 权限&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;解决方案&lt;/strong&gt;：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;登录 OpenAI 账号，确认 Plus 订阅有效、无欠费&lt;/li&gt;
-&lt;li&gt;检查 API/模型额度是否用尽&lt;/li&gt;
-&lt;li&gt;重新登录并切换到正确的付费账号&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h3 id="三不支持的地区unsupported_country_region_territory"&gt;三、不支持的地区（unsupported_country_region_territory）
-&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;原因&lt;/strong&gt;：IP 不在支持列表、代理/出口不一致、Node.js fetch 不走代理&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;解决方案&lt;/strong&gt;：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;切换到支持地区 IP&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;使用美国/支持地区纯净 IP&lt;/li&gt;
-&lt;li&gt;避免数据中心/黑名单 IP&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;确保代理一致&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;确保登录与调用用同一出口（浏览器/终端代理一致）&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;WSL 环境配置&lt;/strong&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo apt update &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; sudo apt install wslu
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;wslu &amp;lt;codex login URL&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;强制终端走代理（Linux/macOS）&lt;/strong&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;HTTP_PROXY&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;http://127.0.0.1:7890
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;HTTPS_PROXY&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;http://127.0.0.1:7890
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;codex login
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h3 id="四不支持的邮箱"&gt;四、不支持的邮箱
-&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;原因&lt;/strong&gt;：邮箱未绑定 OpenAI、非 Plus 账号、邮箱类型被风控（如临时邮箱）&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;解决方案&lt;/strong&gt;：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;用绑定了 ChatGPT Plus 的主邮箱登录（不要用子账号/共享号）&lt;/li&gt;
-&lt;li&gt;避免临时/企业邮箱，优先 Gmail/Outlook 等主流邮箱&lt;/li&gt;
-&lt;li&gt;登录 OpenAI 官网，确认邮箱已验证、订阅正常&lt;/li&gt;
-&lt;li&gt;清理浏览器缓存/无痕模式重新登录&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h3 id="五cc-switch-配置问题"&gt;五、CC Switch 配置问题
-&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;问题&lt;/strong&gt;：CC Switch 替换中转为官方配置&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;解决方案&lt;/strong&gt;：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;打开 CC Switch 设置&lt;/li&gt;
-&lt;li&gt;进入配置页面&lt;/li&gt;
-&lt;li&gt;选择官方配置模板&lt;/li&gt;
-&lt;li&gt;保存并重启应用&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h3 id="通用排查步骤必做"&gt;通用排查步骤（必做）
-&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;退出所有账号，清理缓存，重启终端/编辑器&lt;/li&gt;
-&lt;li&gt;用无痕模式登录，确保代理全局生效&lt;/li&gt;
-&lt;li&gt;登录后执行 &lt;code&gt;codex whoami&lt;/code&gt; 验证身份&lt;/li&gt;
-&lt;li&gt;若仍报错，删除 &lt;code&gt;.codex/&lt;/code&gt; 目录后重试&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h2 id="-邮件收不到怎么办"&gt;📧 邮件收不到怎么办？
-&lt;/h2&gt;&lt;h3 id="可能原因"&gt;可能原因
-&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;邮箱地址填写错误&lt;/li&gt;
-&lt;li&gt;邮件被归类到垃圾邮件&lt;/li&gt;
-&lt;li&gt;邮件服务器延迟&lt;/li&gt;
-&lt;li&gt;邮箱已满&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id="解决方案"&gt;解决方案
-&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;检查垃圾邮件箱&lt;/strong&gt;：查看垃圾邮件/广告邮件文件夹&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;核对邮箱地址&lt;/strong&gt;：确认兑换时填写的邮箱地址正确&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;等待一段时间&lt;/strong&gt;：邮件可能有延迟，等待 10-30 分钟&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;清理邮箱空间&lt;/strong&gt;：确保邮箱有足够的存储空间&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;联系管理员&lt;/strong&gt;：如以上方法都无效，请留言提供邮箱地址&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h2 id="-沟通与反馈"&gt;💬 沟通与反馈
-&lt;/h2&gt;&lt;h3 id="遇到问题请先沟通"&gt;遇到问题请先沟通
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;任何问题请先留言沟通&lt;/li&gt;
-&lt;li&gt;我们会第一时间处理&lt;/li&gt;
-&lt;li&gt;如实在无法解决会安排退款&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="关于评价"&gt;关于评价
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;因操作、延迟等导致您等待或体验不佳，我们非常抱歉并深表歉意&lt;/li&gt;
-&lt;li&gt;⚠️ &lt;strong&gt;请不要轻易给差评&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;我们会尽力解决您的问题&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="-温馨提示"&gt;📌 温馨提示
-&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;兑换前&lt;/strong&gt;：仔细核对邮箱地址&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;兑换时&lt;/strong&gt;：多个兑换码请间隔使用&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;兑换后&lt;/strong&gt;：及时检查邮箱（包括垃圾邮件箱）&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;遇到问题&lt;/strong&gt;：先沟通，我们会尽力解决&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h2 id="-联系方式"&gt;📞 联系方式
-&lt;/h2&gt;&lt;h3 id="售后支持"&gt;售后支持
-&lt;/h3&gt;&lt;p&gt;如有任何问题，请通过以下渠道联系：&lt;/p&gt;
-&lt;table&gt;
- &lt;thead&gt;
- &lt;tr&gt;
- &lt;th&gt;渠道&lt;/th&gt;
- &lt;th&gt;联系方式&lt;/th&gt;
- &lt;th&gt;说明&lt;/th&gt;
- &lt;/tr&gt;
- &lt;/thead&gt;
- &lt;tbody&gt;
- &lt;tr&gt;
- &lt;td&gt;&lt;strong&gt;QQ&lt;/strong&gt;&lt;/td&gt;
- &lt;td&gt;&lt;code&gt;46333839&lt;/code&gt;&lt;/td&gt;
- &lt;td&gt;工作日 9:00-18:00 在线&lt;/td&gt;
- &lt;/tr&gt;
- &lt;tr&gt;
- &lt;td&gt;&lt;strong&gt;微信&lt;/strong&gt;&lt;/td&gt;
- &lt;td&gt;&lt;code&gt;GOV-HACK&lt;/code&gt;&lt;/td&gt;
- &lt;td&gt;添加后请备注&amp;quot;兑换码购买&amp;quot;&lt;/td&gt;
- &lt;/tr&gt;
- &lt;tr&gt;
- &lt;td&gt;&lt;strong&gt;微信售后群&lt;/strong&gt;&lt;/td&gt;
- &lt;td&gt;联系微信后邀请&lt;/td&gt;
- &lt;td&gt;暂无 QQ 售后群&lt;/td&gt;
- &lt;/tr&gt;
- &lt;tr&gt;
- &lt;td&gt;&lt;strong&gt;兑换页面&lt;/strong&gt;&lt;/td&gt;
- &lt;td&gt;在线留言&lt;/td&gt;
- &lt;td&gt;24 小时内回复&lt;/td&gt;
- &lt;/tr&gt;
- &lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id="服务时间"&gt;服务时间
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;工作日&lt;/strong&gt;: 周一至周五 9:00-18:00&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;周末&lt;/strong&gt;: 10:00-16:00（响应可能延迟）&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;节假日&lt;/strong&gt;: 轮值服务，响应时间可能延长&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="联系时请提供"&gt;联系时请提供
-&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;兑换码或订单号&lt;/li&gt;
-&lt;li&gt;问题详细描述&lt;/li&gt;
-&lt;li&gt;错误截图（如有）&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;em&gt;最后更新：2026-03-25&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;本文仅供参考，具体操作请以官方说明为准。&lt;/em&gt;&lt;/p&gt;</description></item><item><title>套壳中国大模型撑起500亿美元估值？扒一扒 Cursor 的套壳疑云</title><link>https://blog.caowo.de/posts/auto-tech-20260324-139/</link><pubDate>Tue, 24 Mar 2026 23:26:41 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-tech-20260324-139/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
+&lt;em&gt;生成时间：2026-03-25T10:09:32.911813&lt;/em&gt;&lt;/p&gt;</description></item><item><title>套壳中国大模型撑起500亿美元估值？扒一扒 Cursor 的套壳疑云</title><link>https://blog.caowo.de/posts/auto-tech-20260324-139/</link><pubDate>Tue, 24 Mar 2026 23:26:41 +0000</pubDate><guid>https://blog.caowo.de/posts/auto-tech-20260324-139/</guid><description>&lt;h2 id="核心摘要"&gt;核心摘要
 &lt;/h2&gt;&lt;p&gt;1、&lt;/p&gt;
 &lt;p&gt;本周末，有一条最热闹的 AI 新闻，震动了太平洋两岸，连马斯克都关注了。&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt; 昨天，AI 编程工具 Cursor 推出了&amp;quot;自己的&amp;quot;模型 Composer 2。

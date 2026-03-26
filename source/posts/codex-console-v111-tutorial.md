@@ -13,11 +13,11 @@ draft: false
 > 
 > **微信收款码**：
 > 
-> ![微信收款码](https://imgloc.com/image/OHuLEH)
+> <img src="https://imgloc.com/image/OHuLEH" alt="微信收款码" style="max-width: 200px; height: auto;">
 > 
 > **支付宝收款码**：
 > 
-> ![支付宝收款码](https://imgloc.com/image/OHuSqN)
+> <img src="https://imgloc.com/image/OHuSqN" alt="支付宝收款码" style="max-width: 200px; height: auto;">
 > 
 > 感谢您的支持！🎉
 

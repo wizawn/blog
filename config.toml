@@ -47,10 +47,15 @@ paginate = 10
     enabled = true
     token = "SDZvDCIq-3er2UKht5fIrl2UvvIrJxi6hZVxBfIa"
   
-  # Google Analytics 4
+  # Google Analytics 4 - blog.caowo.de
   [params.googleAnalytics]
     enabled = true
-    id = "G-XXXXXXXXXX"  # 替换为你的 Google Analytics 测量 ID
+    id = "G-M3JN483VK6"
+  
+  # Google Analytics 4 - blog.wizawn.com
+  [params.googleAnalyticsWizawn]
+    enabled = false
+    id = "G-SPGY6F5H5M"
   
   # 百度统计 - blog.caowo.de
   [params.baiduAnalytics]

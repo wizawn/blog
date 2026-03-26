@@ -1,7 +1,7 @@
 ---
 title: "Codex Console v1.1.1 超详细保姆级教程 - 从零到一完整部署指南（2026 最新版）"
 date: 2026-03-26T09:15:00+00:00
-lastmod: 2026-03-26T09:20:00+00:00
+lastmod: 2026-03-26T09:25:00+00:00
 categories: ["tech"]
 tags: ["tutorial", "codex", "guide", "open-source", "step-by-step"]
 draft: false
@@ -23,8 +23,11 @@ draft: false
 - **基于项目**：cnlimiter/codex-manager（修复增强版）
 - **许可证**：MIT（免费开源）
 - **当前版本**：v1.1.1
-- **QQ 交流群**：291638849
-- **Telegram 频道**：https://t.me/codex_console
+
+**购买与售后**：
+- **闲鱼店铺**：https://m.tb.cn/h.i7QE4Wd?tk=p30e5bSCPx2
+- **商品**：Business Teams 席位/停车位拼车名额
+- **售后支持**：请在闲鱼私信联系
 
 ---
 

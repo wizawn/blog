@@ -52,10 +52,15 @@ paginate = 10
     enabled = true
     id = "G-XXXXXXXXXX"  # 替换为你的 Google Analytics 测量 ID
   
-  # 百度统计
+  # 百度统计 - blog.caowo.de
   [params.baiduAnalytics]
+    enabled = true
+    id = "459a34335680d2c2b91885b9497df7ff"
+  
+  # 百度统计 - blog.wizawn.com（备用域名）
+  [params.baiduAnalyticsWizawn]
     enabled = false
-    id = "xxxxxxxxxxxxxxxx"  # 替换为你的百度统计 ID
+    id = "af4b0bac159ccbc7fec135fb16d457d5"
   
   # Google AdSense
   [params.adsense]

@@ -1,7 +1,7 @@
 ---
 title: "CodeX TM 兑换码使用教程 - 详细步骤与常见问题解答"
 date: 2026-03-25T14:35:00+00:00
-lastmod: 2026-03-26T07:05:00+00:00
+lastmod: 2026-03-26T07:55:00+00:00
 categories: ["tech"]
 tags: ["tutorial", "codex", "guide"]
 draft: false
@@ -17,11 +17,11 @@ draft: false
 
 ### 🚨 重要时段提醒（新增）
 
-<div style="background-color: #ffe6e6; border-left: 4px solid #ff4444; padding: 15px; margin: 20px 0;">
+<div style="background-color: #ffcccc; border: 2px solid #cc0000; border-left: 5px solid #cc0000; padding: 20px; margin: 20px 0; border-radius: 5px;">
 
-**<span style="color: #cc0000; font-size: 1.1em;">⚠️ 避免北京时间 14:00 左右兑换</span>**
+**<span style="color: #990000; font-size: 1.2em; font-weight: bold;">⚠️ 避免北京时间 14:00 左右兑换</span>**
 
-根据大量用户反馈和观察数据，**北京时间 14:00 前后（对应美国午夜时段）封号情况极为严重**。
+根据大量用户反馈和观察数据，**<span style="color: #cc0000;">北京时间 14:00 前后（对应美国午夜时段）封号情况极为严重</span>**。
 
 **建议**：
 - ❌ **避免此时段兑换新号**

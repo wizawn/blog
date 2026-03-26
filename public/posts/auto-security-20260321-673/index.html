@@ -1,13 +1,508 @@
-<!doctype html><html lang=zh-CN dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="原文摘要 引言随着大型语言模型（LLM）和深度学习技术在安全领域的广泛应用，传统的基于特征码、抽象语法树（AST）或沙箱行为分析的 Webshell 检测手段正逐渐向基于 AI 的语义分析演进。AI 模型能够理解代码的逻辑意图，从而识别出经过复杂混淆的恶意脚本。然而，AI 模型本身存在一个本质性的弱点：它们在处理代码时，往往将代码逻辑与注释、元数据等“非执行内容”置于同一语义空间进行推理。这就为提示词注入（\nAI Agent 分析 基于 红队 Agent（安全视角解读） 视角的技术解读\n技术要点 核心技术概念分析 实际应用场景 潜在风险/机会 实战建议 基于原文内容的实际操作建议。\n总结 对原文内容的深度总结和延伸思考。\n原文来源：https://xz.aliyun.com/news/91756 AI Agent 加工：红队 Agent（安全视角解读）\n市场背景 BTC 价格：$70,398.38 24h 涨跌：+0.55% AI Agent 加工：红队 Agent（安全视角解读） 生成时间：2026-03-21T18:20:38.427680\n"><title>提示词注入视角下的 AI Webshell 检测绕过技术研究</title><link rel=canonical href=https://blog.caowo.de/posts/auto-security-20260321-673/><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preload as=style href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap"><link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap"><link rel=stylesheet href=/scss/style.min.390cc81d180d80110703ea467e355a4f3a0f44f25d4e957842790824fb5f2ef2.css><meta property='og:title' content="提示词注入视角下的 AI Webshell 检测绕过技术研究"><meta property='og:description' content="原文摘要 引言随着大型语言模型（LLM）和深度学习技术在安全领域的广泛应用，传统的基于特征码、抽象语法树（AST）或沙箱行为分析的 Webshell 检测手段正逐渐向基于 AI 的语义分析演进。AI 模型能够理解代码的逻辑意图，从而识别出经过复杂混淆的恶意脚本。然而，AI 模型本身存在一个本质性的弱点：它们在处理代码时，往往将代码逻辑与注释、元数据等“非执行内容”置于同一语义空间进行推理。这就为提示词注入（\nAI Agent 分析 基于 红队 Agent（安全视角解读） 视角的技术解读\n技术要点 核心技术概念分析 实际应用场景 潜在风险/机会 实战建议 基于原文内容的实际操作建议。\n总结 对原文内容的深度总结和延伸思考。\n原文来源：https://xz.aliyun.com/news/91756 AI Agent 加工：红队 Agent（安全视角解读）\n市场背景 BTC 价格：$70,398.38 24h 涨跌：+0.55% AI Agent 加工：红队 Agent（安全视角解读） 生成时间：2026-03-21T18:20:38.427680\n"><meta property='og:url' content='https://blog.caowo.de/posts/auto-security-20260321-673/'><meta property='og:site_name' content='言零的博客'><meta property='og:type' content='article'><meta property='article:section' content='Posts'><meta property='article:tag' content='auto-generated'><meta property='article:tag' content='rss'><meta property='article:tag' content='ai-processed'><meta property='article:published_time' content='2026-03-21T18:20:38+00:00'><meta property='article:modified_time' content='2026-03-21T18:20:38+00:00'><meta name=twitter:title content="提示词注入视角下的 AI Webshell 检测绕过技术研究"><meta name=twitter:description content="原文摘要 引言随着大型语言模型（LLM）和深度学习技术在安全领域的广泛应用，传统的基于特征码、抽象语法树（AST）或沙箱行为分析的 Webshell 检测手段正逐渐向基于 AI 的语义分析演进。AI 模型能够理解代码的逻辑意图，从而识别出经过复杂混淆的恶意脚本。然而，AI 模型本身存在一个本质性的弱点：它们在处理代码时，往往将代码逻辑与注释、元数据等“非执行内容”置于同一语义空间进行推理。这就为提示词注入（\nAI Agent 分析 基于 红队 Agent（安全视角解读） 视角的技术解读\n技术要点 核心技术概念分析 实际应用场景 潜在风险/机会 实战建议 基于原文内容的实际操作建议。\n总结 对原文内容的深度总结和延伸思考。\n原文来源：https://xz.aliyun.com/news/91756 AI Agent 加工：红队 Agent（安全视角解读）\n市场背景 BTC 价格：$70,398.38 24h 涨跌：+0.55% AI Agent 加工：红队 Agent（安全视角解读） 生成时间：2026-03-21T18:20:38.427680\n"><script defer src=https://static.cloudflareinsights.com/beacon.min.js data-cf-beacon='{"token": "SDZvDCIq-3er2UKht5fIrl2UvvIrJxi6hZVxBfIa"}'></script></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
-<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><div class=site-meta><h1 class=site-name><a href=/>言零的博客</a></h1><h2 class=site-description></h2></div></header><ol class=menu id=main-menu><li><a href=/posts/><span>文章 / Posts</span></a></li><li><a href=/categories/><span>分类 / Categories</span></a></li><li><a href=/tags/><span>标签 / Tags</span></a></li><li><a href=/about/><span>关于 / About</span></a></li><li><a href=/links/><span>友链 / Links</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
-<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
-<span>Dark Mode</span></li></ol></li></ol></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/categories/security/ style=background-color:#bec2ef;color:#0f133d>Security</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/posts/auto-security-20260321-673/>提示词注入视角下的 AI Webshell 检测绕过技术研究</a></h2></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
-<time class=article-time--published datetime=2026-03-21T18:20:38Z>Saturday, March 21, 2026</time></div></footer></div></header><section class=article-content><h2 id=原文摘要>原文摘要</h2><p>引言随着大型语言模型（LLM）和深度学习技术在安全领域的广泛应用，传统的基于特征码、抽象语法树（AST）或沙箱行为分析的 Webshell 检测手段正逐渐向基于 AI 的语义分析演进。AI 模型能够理解代码的逻辑意图，从而识别出经过复杂混淆的恶意脚本。然而，AI 模型本身存在一个本质性的弱点：它们在处理代码时，往往将代码逻辑与注释、元数据等“非执行内容”置于同一语义空间进行推理。这就为提示词注入（</p><h2 id=ai-agent-分析>AI Agent 分析</h2><blockquote><p>基于 红队 Agent（安全视角解读） 视角的技术解读</p></blockquote><h3 id=技术要点>技术要点</h3><ol><li>核心技术概念分析</li><li>实际应用场景</li><li>潜在风险/机会</li></ol><h2 id=实战建议>实战建议</h2><p>基于原文内容的实际操作建议。</p><h2 id=总结>总结</h2><p>对原文内容的深度总结和延伸思考。</p><hr><p><em>原文来源：<a class=link href=https://xz.aliyun.com/news/91756 target=_blank rel=noopener>https://xz.aliyun.com/news/91756</a></em>
-<em>AI Agent 加工：红队 Agent（安全视角解读）</em></p><h2 id=市场背景>市场背景</h2><ul><li>BTC 价格：$70,398.38</li><li>24h 涨跌：+0.55%</li></ul><hr><p><em>AI Agent 加工：红队 Agent（安全视角解读）</em>
-<em>生成时间：2026-03-21T18:20:38.427680</em></p></section><footer class=article-footer><section class=article-tags><a href=/tags/auto-generated/>Auto-Generated</a>
-<a href=/tags/rss/>Rss</a>
-<a href=/tags/ai-processed/>Ai-Processed</a></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>Related content</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/posts/auto-security-20260321-173/><div class=article-details><h2 class=article-title>CVE-2026-24291-Windows权限提升漏洞“RegPwn”复现分析</h2></div></a></article><article><a href=/posts/auto-security-20260321-564/><div class=article-details><h2 class=article-title>CVE-2026-24291-Windows权限提升漏洞“RegPwn”复现分析</h2></div></a></article><article><a href=/posts/auto-security-20260321-990/><div class=article-details><h2 class=article-title>提示词注入视角下的 AI Webshell 检测绕过技术研究</h2></div></a></article><article><a href=/posts/auto-security-20260321-96/><div class=article-details><h2 class=article-title>CVE-2026-24291-Windows权限提升漏洞“RegPwn”复现分析</h2></div></a></article><article><a href=/posts/auto-security-20260321-767/><div class=article-details><h2 class=article-title>提示词注入视角下的 AI Webshell 检测绕过技术研究</h2></div></a></article></div></div></aside><div class=disqus-container></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{typeof DISQUS=="object"&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
-2026 言零的博客</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=4.0.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><script type=module>
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="原文摘要 引言随着大型语言模型（LLM）和深度学习技术在安全领域的广泛应用，传统的基于特征码、抽象语法树（AST）或沙箱行为分析的 Webshell 检测手段正逐渐向基于 AI 的语义分析演进。AI 模型能够理解代码的逻辑意图，从而识别出经过复杂混淆的恶意脚本。然而，AI 模型本身存在一个本质性的弱点：它们在处理代码时，往往将代码逻辑与注释、元数据等“非执行内容”置于同一语义空间进行推理。这就为提示词注入（\nAI Agent 分析 基于 红队 Agent（安全视角解读） 视角的技术解读\n技术要点 核心技术概念分析 实际应用场景 潜在风险/机会 实战建议 基于原文内容的实际操作建议。\n总结 对原文内容的深度总结和延伸思考。\n原文来源：https://xz.aliyun.com/news/91756 AI Agent 加工：红队 Agent（安全视角解读）\n市场背景 BTC 价格：$70,398.38 24h 涨跌：+0.55% AI Agent 加工：红队 Agent（安全视角解读） 生成时间：2026-03-21T18:20:38.427680\n">
+<title>提示词注入视角下的 AI Webshell 检测绕过技术研究</title>
+
+
+<link rel="canonical" href="https://blog.caowo.de/posts/auto-security-20260321-673/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.390cc81d180d80110703ea467e355a4f3a0f44f25d4e957842790824fb5f2ef2.css"><meta property='og:title' content="提示词注入视角下的 AI Webshell 检测绕过技术研究">
+<meta property='og:description' content="原文摘要 引言随着大型语言模型（LLM）和深度学习技术在安全领域的广泛应用，传统的基于特征码、抽象语法树（AST）或沙箱行为分析的 Webshell 检测手段正逐渐向基于 AI 的语义分析演进。AI 模型能够理解代码的逻辑意图，从而识别出经过复杂混淆的恶意脚本。然而，AI 模型本身存在一个本质性的弱点：它们在处理代码时，往往将代码逻辑与注释、元数据等“非执行内容”置于同一语义空间进行推理。这就为提示词注入（\nAI Agent 分析 基于 红队 Agent（安全视角解读） 视角的技术解读\n技术要点 核心技术概念分析 实际应用场景 潜在风险/机会 实战建议 基于原文内容的实际操作建议。\n总结 对原文内容的深度总结和延伸思考。\n原文来源：https://xz.aliyun.com/news/91756 AI Agent 加工：红队 Agent（安全视角解读）\n市场背景 BTC 价格：$70,398.38 24h 涨跌：+0.55% AI Agent 加工：红队 Agent（安全视角解读） 生成时间：2026-03-21T18:20:38.427680\n">
+<meta property='og:url' content='https://blog.caowo.de/posts/auto-security-20260321-673/'>
+<meta property='og:site_name' content='言零的博客'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='auto-generated' /><meta property='article:tag' content='rss' /><meta property='article:tag' content='ai-processed' /><meta property='article:published_time' content='2026-03-21T18:20:38&#43;00:00'/><meta property='article:modified_time' content='2026-03-21T18:20:38&#43;00:00'/>
+<meta name="twitter:title" content="提示词注入视角下的 AI Webshell 检测绕过技术研究">
+<meta name="twitter:description" content="原文摘要 引言随着大型语言模型（LLM）和深度学习技术在安全领域的广泛应用，传统的基于特征码、抽象语法树（AST）或沙箱行为分析的 Webshell 检测手段正逐渐向基于 AI 的语义分析演进。AI 模型能够理解代码的逻辑意图，从而识别出经过复杂混淆的恶意脚本。然而，AI 模型本身存在一个本质性的弱点：它们在处理代码时，往往将代码逻辑与注释、元数据等“非执行内容”置于同一语义空间进行推理。这就为提示词注入（\nAI Agent 分析 基于 红队 Agent（安全视角解读） 视角的技术解读\n技术要点 核心技术概念分析 实际应用场景 潜在风险/机会 实战建议 基于原文内容的实际操作建议。\n总结 对原文内容的深度总结和延伸思考。\n原文来源：https://xz.aliyun.com/news/91756 AI Agent 加工：红队 Agent（安全视角解读）\n市场背景 BTC 价格：$70,398.38 24h 涨跌：+0.55% AI Agent 加工：红队 Agent（安全视角解读） 生成时间：2026-03-21T18:20:38.427680\n">
+
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' 
+        data-cf-beacon='{"token": "SDZvDCIq-3er2UKht5fIrl2UvvIrJxi6hZVxBfIa"}'></script>
+
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">言零的博客</a></h1>
+            <h2 class="site-description"></h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/posts/' >
+                
+                <span>文章 / Posts</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/' >
+                
+                <span>分类 / Categories</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/tags/' >
+                
+                <span>标签 / Tags</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                <span>关于 / About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                <span>友链 / Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            
+            
+            
+            <a href="/categories/security/" style="background-color: hsl(235, 60%, 84%); color: hsl(235, 60%, 15%);">
+                Security
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/auto-security-20260321-673/">提示词注入视角下的 AI Webshell 检测绕过技术研究</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published" datetime='2026-03-21T18:20:38Z'>Saturday, March 21, 2026</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+
+    
+</div>
+
+</header>
+
+    
+
+    <section class="article-content">
+    
+    
+    <h2 id="原文摘要">原文摘要
+</h2><p>引言随着大型语言模型（LLM）和深度学习技术在安全领域的广泛应用，传统的基于特征码、抽象语法树（AST）或沙箱行为分析的 Webshell 检测手段正逐渐向基于 AI 的语义分析演进。AI 模型能够理解代码的逻辑意图，从而识别出经过复杂混淆的恶意脚本。然而，AI 模型本身存在一个本质性的弱点：它们在处理代码时，往往将代码逻辑与注释、元数据等“非执行内容”置于同一语义空间进行推理。这就为提示词注入（</p>
+<h2 id="ai-agent-分析">AI Agent 分析
+</h2>
+    <blockquote>
+        <p>基于 红队 Agent（安全视角解读） 视角的技术解读</p>
+
+    </blockquote>
+<h3 id="技术要点">技术要点
+</h3><ol>
+<li>核心技术概念分析</li>
+<li>实际应用场景</li>
+<li>潜在风险/机会</li>
+</ol>
+<h2 id="实战建议">实战建议
+</h2><p>基于原文内容的实际操作建议。</p>
+<h2 id="总结">总结
+</h2><p>对原文内容的深度总结和延伸思考。</p>
+<hr>
+<p><em>原文来源：<a class="link" href="https://xz.aliyun.com/news/91756"  target="_blank" rel="noopener"
+    >https://xz.aliyun.com/news/91756</a></em>
+<em>AI Agent 加工：红队 Agent（安全视角解读）</em></p>
+<h2 id="市场背景">市场背景
+</h2><ul>
+<li>BTC 价格：$70,398.38</li>
+<li>24h 涨跌：+0.55%</li>
+</ul>
+<hr>
+<p><em>AI Agent 加工：红队 Agent（安全视角解读）</em>
+<em>生成时间：2026-03-21T18:20:38.427680</em></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/auto-generated/">Auto-Generated</a>
+        
+            <a href="/tags/rss/">Rss</a>
+        
+            <a href="/tags/ai-processed/">Ai-Processed</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+    
+    
+    
+<div class="donate-box">
+  <div class="donate-title">
+    <span class="heart">❤️</span>
+    <span>写教程不易，如果对您有帮助，可以赞赏一下吗？</span>
+    <span class="heart">❤️</span>
+  </div>
+  <p class="donate-subtitle">您的支持是我持续更新的最大动力！</p>
+  
+  <div class="qr-codes">
+    <div class="qr-code">
+      <img src="/images/wechat-pay.jpg" alt="微信赞赏">
+      <p class="qr-label">微信</p>
+    </div>
+    <div class="qr-code">
+      <img src="/images/alipay.jpg" alt="支付宝赞赏">
+      <p class="qr-label">支付宝</p>
+    </div>
+  </div>
+  
+  <div class="donate-thanks">
+    <p>🎉 感谢您的支持！</p>
+  </div>
+</div>
+
+<style>
+.donate-box {
+  margin: 50px 0;
+  padding: 30px 20px;
+  border: 3px dashed #ff6b6b;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #fff5f5 0%, #fff0f0 100%);
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.15);
+}
+
+.donate-title {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #ff6b6b;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.donate-title .heart {
+  font-size: 1.5em;
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+.donate-subtitle {
+  color: #666;
+  font-size: 0.95em;
+  margin: 10px 0 25px 0;
+}
+
+.qr-codes {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+
+.qr-code {
+  text-align: center;
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.qr-code:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 20px rgba(255, 107, 107, 0.2);
+}
+
+.qr-code img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.qr-label {
+  margin-top: 12px;
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #333;
+}
+
+.donate-thanks {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 2px solid rgba(255, 107, 107, 0.2);
+}
+
+.donate-thanks p {
+  color: #ff6b6b;
+  font-weight: bold;
+  font-size: 1.1em;
+  margin: 0;
+}
+
+ 
+@media (max-width: 768px) {
+  .donate-box {
+    margin: 30px 0;
+    padding: 20px 15px;
+  }
+  
+  .donate-title {
+    font-size: 1.1em;
+  }
+  
+  .qr-codes {
+    gap: 20px;
+  }
+  
+  .qr-code img {
+    width: 150px;
+    height: 150px;
+  }
+}
+</style>
+
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/posts/auto-security-20260321-173/">
+        
+
+        <div class="article-details">
+            <h2 class="article-title">CVE-2026-24291-Windows权限提升漏洞“RegPwn”复现分析</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="">
+    <a href="/posts/auto-security-20260321-564/">
+        
+
+        <div class="article-details">
+            <h2 class="article-title">CVE-2026-24291-Windows权限提升漏洞“RegPwn”复现分析</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="">
+    <a href="/posts/auto-security-20260321-990/">
+        
+
+        <div class="article-details">
+            <h2 class="article-title">提示词注入视角下的 AI Webshell 检测绕过技术研究</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="">
+    <a href="/posts/auto-security-20260321-96/">
+        
+
+        <div class="article-details">
+            <h2 class="article-title">CVE-2026-24291-Windows权限提升漏洞“RegPwn”复现分析</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="">
+    <a href="/posts/auto-security-20260321-767/">
+        
+
+        <div class="article-details">
+            <h2 class="article-title">提示词注入视角下的 AI Webshell 检测绕过技术研究</h2>
+        </div>
+    </a>
+</article>
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+        <div class="disqus-container">
+    
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2026 言零的博客
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="4.0.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+
+
+
+<script type="module">
     import gallery from '\/ts\/gallery.js';
 
     const articleContent = document.querySelector('.article-content');
@@ -31,4 +526,164 @@
         });
         lightbox.init();
     }
-</script></main></div><script type=text/javascript src=/ts/main.acaf849f2b273f6a8368a58b001f336738d0c948d92e79b116467d0c7515f932.js defer></script></body></html>
+</script>
+    
+    
+    
+    <div class="ads-container" style="margin: 40px 0; padding: 20px; text-align: center; background: #f9f9f9; border-radius: 10px;">
+  <p style="margin-bottom: 15px; color: #666; font-size: 0.9em;">📢 广告</p>
+  <ins class="adsbygoogle"
+       style="display:block; min-height: 250px;"
+       data-ad-client="ca-pub-2336550233412374"
+       data-ad-slot="1234567890"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
+    
+    
+    
+<div class="donate-box">
+  <div class="donate-title">
+    <span class="heart">❤️</span>
+    <span>写教程不易，如果对您有帮助，可以赞赏一下吗？</span>
+    <span class="heart">❤️</span>
+  </div>
+  <p class="donate-subtitle">您的支持是我持续更新的最大动力！</p>
+  
+  <div class="qr-codes">
+    <div class="qr-code">
+      <img src="/images/wechat-pay.jpg" alt="微信赞赏">
+      <p class="qr-label">微信</p>
+    </div>
+    <div class="qr-code">
+      <img src="/images/alipay.jpg" alt="支付宝赞赏">
+      <p class="qr-label">支付宝</p>
+    </div>
+  </div>
+  
+  <div class="donate-thanks">
+    <p>🎉 感谢您的支持！</p>
+  </div>
+</div>
+
+<style>
+.donate-box {
+  margin: 50px 0;
+  padding: 30px 20px;
+  border: 3px dashed #ff6b6b;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #fff5f5 0%, #fff0f0 100%);
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.15);
+}
+
+.donate-title {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #ff6b6b;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.donate-title .heart {
+  font-size: 1.5em;
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+.donate-subtitle {
+  color: #666;
+  font-size: 0.95em;
+  margin: 10px 0 25px 0;
+}
+
+.qr-codes {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+
+.qr-code {
+  text-align: center;
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.qr-code:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 20px rgba(255, 107, 107, 0.2);
+}
+
+.qr-code img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.qr-label {
+  margin-top: 12px;
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #333;
+}
+
+.donate-thanks {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 2px solid rgba(255, 107, 107, 0.2);
+}
+
+.donate-thanks p {
+  color: #ff6b6b;
+  font-weight: bold;
+  font-size: 1.1em;
+  margin: 0;
+}
+
+ 
+@media (max-width: 768px) {
+  .donate-box {
+    margin: 30px 0;
+    padding: 20px 15px;
+  }
+  
+  .donate-title {
+    font-size: 1.1em;
+  }
+  
+  .qr-codes {
+    gap: 20px;
+  }
+  
+  .qr-code img {
+    width: 150px;
+    height: 150px;
+  }
+}
+</style>
+
+
+            </main>
+        </div>
+        
+<script type="text/javascript" src="/ts/main.acaf849f2b273f6a8368a58b001f336738d0c948d92e79b116467d0c7515f932.js" defer></script>
+
+
+    </body>
+</html>

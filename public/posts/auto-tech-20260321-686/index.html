@@ -1,16 +1,559 @@
-<!doctype html><html lang=zh-CN dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content='原文摘要 1、\n本周末，有一条最热闹的 AI 新闻，震动了太平洋两岸，连马斯克都关注了。\n昨天，AI 编程工具 Cursor 推出了"自己的"模型 Composer 2。 上图是官网截图，现在点进去还写着"自有模型"。\n自从2024年10月，Composer 1 发布以来，外界就一直怀疑，它是套壳的中国模型，因为行为很类似，但苦于找不到证据。\n现在 Composer 2 来了，很多人就开始研究，它的背后到底是什么模型，真的是 Cursor 自家的吗？\nCursor 为了防止破解，做了很多限制，但是百密一疏。国外推友 @fynnso 发现，有一个地方在上一个版本是禁止的，但是这个版本却可以执行。\n首先，你自己架设一台服务器，充当 AI 模型的调用接口，有没有模型无所谓，只要能收到客户端请求就行。\n然后，你在本地的 Cursor 里面，设置使用的模型为 Composer 2，模型网址就是你刚架设的服务器。这样一来，Cursor 就会向你的服务器发出请求，从而可以看到它到底在请求什么模型。\n真相就暴露了，它请求的模型 ID 居然是 kimi-k2p5-rl-0317-s515-fast（下图）。\n2、\n这位国外推友就把上面的截图，发布到网上。这下炸锅了，明眼人都看出来，这是铁证，Composer 2 实际上是套壳的 Kimi K2.5。\n可笑的是，事情一爆发，Cursor 第一时间就把漏洞堵上，现在已经没法复现这个请求（下图）。\n但是为时已晚，网上传遍了，就连马斯克也发推：&ldquo;它就是 Kimi K2.5&rdquo;。\n这下好了，变成了公开的秘密，再也无法掩盖了。\n3、\n大家的关注点，很快就转移到 Cursor 是否侵权。因为 Kimi K2.5 虽然是开源模型，但是采用的是修改的 MIT 许可证（下图）。\n许可证这样说：你可以任意使用这个模型，唯一的条件是如果你的商业产品月活用户超过1亿，或者月收入超过2000万美元，你必须在用户界面的醒目位置披露，你使用了 Kimi K2.5。\nCursor 最新披露的年化收入是20亿美元，相当于月收入1.67亿美元，显然满足上面的条件。但是，它隐藏了使用 K2.5 的事实。\n就在大家认定 Cursor 侵权的时候，他们的一个负责人终于坐不住了，出来说话了。\n'><title>套壳中国大模型撑起500亿美元估值？扒一扒 Cursor 的套壳疑云</title><link rel=canonical href=https://blog.caowo.de/posts/auto-tech-20260321-686/><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preload as=style href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap"><link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap"><link rel=stylesheet href=/scss/style.min.390cc81d180d80110703ea467e355a4f3a0f44f25d4e957842790824fb5f2ef2.css><meta property='og:title' content="套壳中国大模型撑起500亿美元估值？扒一扒 Cursor 的套壳疑云"><meta property='og:description' content='原文摘要 1、\n本周末，有一条最热闹的 AI 新闻，震动了太平洋两岸，连马斯克都关注了。\n昨天，AI 编程工具 Cursor 推出了"自己的"模型 Composer 2。 上图是官网截图，现在点进去还写着"自有模型"。\n自从2024年10月，Composer 1 发布以来，外界就一直怀疑，它是套壳的中国模型，因为行为很类似，但苦于找不到证据。\n现在 Composer 2 来了，很多人就开始研究，它的背后到底是什么模型，真的是 Cursor 自家的吗？\nCursor 为了防止破解，做了很多限制，但是百密一疏。国外推友 @fynnso 发现，有一个地方在上一个版本是禁止的，但是这个版本却可以执行。\n首先，你自己架设一台服务器，充当 AI 模型的调用接口，有没有模型无所谓，只要能收到客户端请求就行。\n然后，你在本地的 Cursor 里面，设置使用的模型为 Composer 2，模型网址就是你刚架设的服务器。这样一来，Cursor 就会向你的服务器发出请求，从而可以看到它到底在请求什么模型。\n真相就暴露了，它请求的模型 ID 居然是 kimi-k2p5-rl-0317-s515-fast（下图）。\n2、\n这位国外推友就把上面的截图，发布到网上。这下炸锅了，明眼人都看出来，这是铁证，Composer 2 实际上是套壳的 Kimi K2.5。\n可笑的是，事情一爆发，Cursor 第一时间就把漏洞堵上，现在已经没法复现这个请求（下图）。\n但是为时已晚，网上传遍了，就连马斯克也发推：&ldquo;它就是 Kimi K2.5&rdquo;。\n这下好了，变成了公开的秘密，再也无法掩盖了。\n3、\n大家的关注点，很快就转移到 Cursor 是否侵权。因为 Kimi K2.5 虽然是开源模型，但是采用的是修改的 MIT 许可证（下图）。\n许可证这样说：你可以任意使用这个模型，唯一的条件是如果你的商业产品月活用户超过1亿，或者月收入超过2000万美元，你必须在用户界面的醒目位置披露，你使用了 Kimi K2.5。\nCursor 最新披露的年化收入是20亿美元，相当于月收入1.67亿美元，显然满足上面的条件。但是，它隐藏了使用 K2.5 的事实。\n就在大家认定 Cursor 侵权的时候，他们的一个负责人终于坐不住了，出来说话了。\n'><meta property='og:url' content='https://blog.caowo.de/posts/auto-tech-20260321-686/'><meta property='og:site_name' content='言零的博客'><meta property='og:type' content='article'><meta property='article:section' content='Posts'><meta property='article:tag' content='auto-generated'><meta property='article:tag' content='rss'><meta property='article:tag' content='ai-processed'><meta property='article:published_time' content='2026-03-21T12:00:53+00:00'><meta property='article:modified_time' content='2026-03-21T12:00:53+00:00'><meta name=twitter:title content="套壳中国大模型撑起500亿美元估值？扒一扒 Cursor 的套壳疑云"><meta name=twitter:description content='原文摘要 1、\n本周末，有一条最热闹的 AI 新闻，震动了太平洋两岸，连马斯克都关注了。\n昨天，AI 编程工具 Cursor 推出了"自己的"模型 Composer 2。 上图是官网截图，现在点进去还写着"自有模型"。\n自从2024年10月，Composer 1 发布以来，外界就一直怀疑，它是套壳的中国模型，因为行为很类似，但苦于找不到证据。\n现在 Composer 2 来了，很多人就开始研究，它的背后到底是什么模型，真的是 Cursor 自家的吗？\nCursor 为了防止破解，做了很多限制，但是百密一疏。国外推友 @fynnso 发现，有一个地方在上一个版本是禁止的，但是这个版本却可以执行。\n首先，你自己架设一台服务器，充当 AI 模型的调用接口，有没有模型无所谓，只要能收到客户端请求就行。\n然后，你在本地的 Cursor 里面，设置使用的模型为 Composer 2，模型网址就是你刚架设的服务器。这样一来，Cursor 就会向你的服务器发出请求，从而可以看到它到底在请求什么模型。\n真相就暴露了，它请求的模型 ID 居然是 kimi-k2p5-rl-0317-s515-fast（下图）。\n2、\n这位国外推友就把上面的截图，发布到网上。这下炸锅了，明眼人都看出来，这是铁证，Composer 2 实际上是套壳的 Kimi K2.5。\n可笑的是，事情一爆发，Cursor 第一时间就把漏洞堵上，现在已经没法复现这个请求（下图）。\n但是为时已晚，网上传遍了，就连马斯克也发推：&ldquo;它就是 Kimi K2.5&rdquo;。\n这下好了，变成了公开的秘密，再也无法掩盖了。\n3、\n大家的关注点，很快就转移到 Cursor 是否侵权。因为 Kimi K2.5 虽然是开源模型，但是采用的是修改的 MIT 许可证（下图）。\n许可证这样说：你可以任意使用这个模型，唯一的条件是如果你的商业产品月活用户超过1亿，或者月收入超过2000万美元，你必须在用户界面的醒目位置披露，你使用了 Kimi K2.5。\nCursor 最新披露的年化收入是20亿美元，相当于月收入1.67亿美元，显然满足上面的条件。但是，它隐藏了使用 K2.5 的事实。\n就在大家认定 Cursor 侵权的时候，他们的一个负责人终于坐不住了，出来说话了。\n'><script defer src=https://static.cloudflareinsights.com/beacon.min.js data-cf-beacon='{"token": "SDZvDCIq-3er2UKht5fIrl2UvvIrJxi6hZVxBfIa"}'></script></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
-<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><div class=site-meta><h1 class=site-name><a href=/>言零的博客</a></h1><h2 class=site-description></h2></div></header><ol class=menu id=main-menu><li><a href=/posts/><span>文章 / Posts</span></a></li><li><a href=/categories/><span>分类 / Categories</span></a></li><li><a href=/tags/><span>标签 / Tags</span></a></li><li><a href=/about/><span>关于 / About</span></a></li><li><a href=/links/><span>友链 / Links</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
-<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
-<span>Dark Mode</span></li></ol></li></ol></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/categories/tech/ style=background-color:#beefd2;color:#0f3d22>Tech</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/posts/auto-tech-20260321-686/>套壳中国大模型撑起500亿美元估值？扒一扒 Cursor 的套壳疑云</a></h2></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
-<time class=article-time--published datetime=2026-03-21T12:00:53Z>Saturday, March 21, 2026</time></div></footer></div></header><section class=article-content><h2 id=原文摘要>原文摘要</h2><p>1、</p><p>本周末，有一条最热闹的 AI 新闻，震动了太平洋两岸，连马斯克都关注了。</p><pre><code>    昨天，AI 编程工具 Cursor 推出了&quot;自己的&quot;模型 Composer 2。
-</code></pre><p>上图是官网截图，现在点进去还写着"自有模型"。</p><p>自从2024年10月，Composer 1 发布以来，外界就一直怀疑，它是套壳的中国模型，因为行为很类似，但苦于找不到证据。</p><p>现在 Composer 2 来了，很多人就开始研究，它的背后到底是什么模型，真的是 Cursor 自家的吗？</p><p>Cursor 为了防止破解，做了很多限制，但是百密一疏。国外推友 @fynnso 发现，有一个地方在上一个版本是禁止的，但是这个版本却可以执行。</p><p>首先，你自己架设一台服务器，充当 AI 模型的调用接口，有没有模型无所谓，只要能收到客户端请求就行。</p><p>然后，你在本地的 Cursor 里面，设置使用的模型为 Composer 2，模型网址就是你刚架设的服务器。这样一来，Cursor 就会向你的服务器发出请求，从而可以看到它到底在请求什么模型。</p><p>真相就暴露了，它请求的模型 ID 居然是 kimi-k2p5-rl-0317-s515-fast（下图）。</p><p>2、</p><p>这位国外推友就把上面的截图，发布到网上。这下炸锅了，明眼人都看出来，这是铁证，Composer 2 实际上是套壳的 Kimi K2.5。</p><p>可笑的是，事情一爆发，Cursor 第一时间就把漏洞堵上，现在已经没法复现这个请求（下图）。</p><p>但是为时已晚，网上传遍了，就连马斯克也发推：&ldquo;它就是 Kimi K2.5&rdquo;。</p><p>这下好了，变成了公开的秘密，再也无法掩盖了。</p><p>3、</p><p>大家的关注点，很快就转移到 Cursor 是否侵权。因为 Kimi K2.5 虽然是开源模型，但是采用的是修改的 MIT 许可证（下图）。</p><p>许可证这样说：你可以任意使用这个模型，唯一的条件是如果你的商业产品月活用户超过1亿，或者月收入超过2000万美元，你必须在用户界面的醒目位置披露，你使用了 Kimi K2.5。</p><p>Cursor 最新披露的年化收入是20亿美元，相当于月收入1.67亿美元，显然满足上面的条件。但是，它隐藏了使用 K2.5 的事实。</p><p>就在大家认定 Cursor 侵权的时候，他们的一个负责人终于坐不住了，出来说话了。</p><p>他承认确实使用 Kimi K2.5，但是没有侵权，他们的许可证来自合作伙伴 Fireworks AI。</p><p>稍后，Kimi 官方也发推了。</p><p>Kimi 官方确认，Cursor 是从 Fireworks AI 得到了授权。后者是一家硅谷的华人 AI 公司，从事 AI 模型的微调和强化学习，它从 Kimi 得到授权对模型进行再训练，然后又转授权给了 Cursor。</p><p>4、</p><p>事情到这里就基本清楚了，Cursor 并没有违反 Kimi 的授权条款，因此不存在侵权。</p><p>既然如此，为什么它拼命掩盖这个事实，大大方方承认，提供 Kimi K2.5 的修改版模型，很难吗？</p><p>我猜测，原因跟 Cursor 不断膨胀的估值有关。</p><p>彭博社本月报道，Cursor 正在进行下一轮融资，估值达到500亿美元。</p><p>大家知道吗，它以前的估值是多少？</p><p>2023年10月，Cursor 成立时的估值是5000万美元；2024年8月的 A 轮融资，估值上升到4亿美元；12月的 B 轮融资，估值快速上升到26美元；2025年11月的最新一轮融资，估值已经到了293亿美元。</p><p>可以看到，每过几个月，估值就会翻倍。这种火箭式的上升速度，需要有业绩支持。但它本身只是一个 VS Code 的修改版，使用的都是开源技术。</p><p>为了支撑越来越高的估值，它有动机把自己从 AI 工具，包装成具有模型研发能力的大模型公司。</p><p>我认为，这才是它不愿意披露使用了 Kimi K2.5 的主要原因。</p><p>5、</p><p>纵观整个事件，Cursor 无疑是输家，Kimi 则是这次的赢家，免费得到一大波高价值的曝光。</p><p>Cursor 发布 Composer 2 时，披露了性能和成本比较。</p><p>Composer 2 的性能低于 GPT-5.4，但高于 Opus 4.6。</p><p>但是，它的生成速度比 GPT-5.4 和 Opus 4.6 都快，成本也是最低的。</p><p>既然 Composer 2 就是微调的 Kimi K2.5，那么直接使用 Kimi，也能得到同样的效果。</p><p>6、</p><p>以前，国外总是有人指责，中国公司窃取外国技术。但是，这个事件证明了，中国公司也有技术输出。那些国外的明星公司，背地也在偷偷摸摸使用中国技术。</p><p>联想到上周，Kimi 的创始人杨植麟收到黄仁勋的邀请，在 Nvidia GTC 大会演讲，是唯一的中国大模型公司代表。</p><p>他在台上宣讲，Kimi 团队刚刚发表的论文《注意力残差》（Attention Residuals）。</p><p>这种新技术据说可以显著提升大模型的推理能力。</p><p>我的想法是，大家要对国产大模型有信心，日常工作完全可以放心使用。国产大模型与国外旗舰模型的差距，正在不断缩小，而且价格实惠。</p><p>据杨植麟说，下一个要发布的 K3 模型性能提升巨大，即便没有强10倍，也比 K2.5 强得多，我们可以期待一下。</p><p>（完）</p><pre><code>    文档信息
-</code></pre><p>版权声明：自由转载-非商用-非衍生-保持署名（创意共享3.0许可证）
-发表日期： 2026年3月21日</p><h2 id=ai-agent-分析>AI Agent 分析</h2><blockquote><p>基于 内容工厂（润色 + 结构化） 视角的技术解读</p></blockquote><h3 id=技术要点>技术要点</h3><ol><li>核心技术概念分析</li><li>实际应用场景</li><li>潜在风险/机会</li></ol><h2 id=实战建议>实战建议</h2><p>基于原文内容的实际操作建议。</p><h2 id=总结>总结</h2><p>对原文内容的深度总结和延伸思考。</p><hr><p><em>原文来源：<a class=link href=http://www.ruanyifeng.com/blog/2026/03/kimi-cursor.html target=_blank rel=noopener>http://www.ruanyifeng.com/blog/2026/03/kimi-cursor.html</a></em>
-<em>AI Agent 加工：内容工厂（润色 + 结构化）</em></p><h2 id=市场背景>市场背景</h2><ul><li>BTC 价格：$70,676.19</li><li>24h 涨跌：+0.21%</li></ul><hr><p><em>AI Agent 加工：内容工厂（润色 + 结构化）</em>
-<em>生成时间：2026-03-21T12:00:53.090983</em></p></section><footer class=article-footer><section class=article-tags><a href=/tags/auto-generated/>Auto-Generated</a>
-<a href=/tags/rss/>Rss</a>
-<a href=/tags/ai-processed/>Ai-Processed</a></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>Related content</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/posts/auto-security-20260321-296/><div class=article-details><h2 class=article-title>CVE-2026-24291-Windows权限提升漏洞“RegPwn”复现分析</h2></div></a></article><article><a href=/posts/auto-security-20260321-183/><div class=article-details><h2 class=article-title>提示词注入视角下的 AI Webshell 检测绕过技术研究</h2></div></a></article><article><a href=/posts/auto-tech-20260321-793/><div class=article-details><h2 class=article-title>科技爱好者周刊（第 388 期）：测试是新的护城河</h2></div></a></article><article><a href=/posts/auto-tech-20260321-589/><div class=article-details><h2 class=article-title>科技爱好者周刊（第 389 期）：未来如何招聘程序员</h2></div></a></article><article><a href=/posts/auto-security-20260321-316/><div class=article-details><h2 class=article-title>CVE-2026-24291-Windows权限提升漏洞“RegPwn”复现分析</h2></div></a></article></div></div></aside><div class=disqus-container></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{typeof DISQUS=="object"&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
-2026 言零的博客</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=4.0.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><script type=module>
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="原文摘要 1、\n本周末，有一条最热闹的 AI 新闻，震动了太平洋两岸，连马斯克都关注了。\n昨天，AI 编程工具 Cursor 推出了&quot;自己的&quot;模型 Composer 2。 上图是官网截图，现在点进去还写着&quot;自有模型&quot;。\n自从2024年10月，Composer 1 发布以来，外界就一直怀疑，它是套壳的中国模型，因为行为很类似，但苦于找不到证据。\n现在 Composer 2 来了，很多人就开始研究，它的背后到底是什么模型，真的是 Cursor 自家的吗？\nCursor 为了防止破解，做了很多限制，但是百密一疏。国外推友 @fynnso 发现，有一个地方在上一个版本是禁止的，但是这个版本却可以执行。\n首先，你自己架设一台服务器，充当 AI 模型的调用接口，有没有模型无所谓，只要能收到客户端请求就行。\n然后，你在本地的 Cursor 里面，设置使用的模型为 Composer 2，模型网址就是你刚架设的服务器。这样一来，Cursor 就会向你的服务器发出请求，从而可以看到它到底在请求什么模型。\n真相就暴露了，它请求的模型 ID 居然是 kimi-k2p5-rl-0317-s515-fast（下图）。\n2、\n这位国外推友就把上面的截图，发布到网上。这下炸锅了，明眼人都看出来，这是铁证，Composer 2 实际上是套壳的 Kimi K2.5。\n可笑的是，事情一爆发，Cursor 第一时间就把漏洞堵上，现在已经没法复现这个请求（下图）。\n但是为时已晚，网上传遍了，就连马斯克也发推：&ldquo;它就是 Kimi K2.5&rdquo;。\n这下好了，变成了公开的秘密，再也无法掩盖了。\n3、\n大家的关注点，很快就转移到 Cursor 是否侵权。因为 Kimi K2.5 虽然是开源模型，但是采用的是修改的 MIT 许可证（下图）。\n许可证这样说：你可以任意使用这个模型，唯一的条件是如果你的商业产品月活用户超过1亿，或者月收入超过2000万美元，你必须在用户界面的醒目位置披露，你使用了 Kimi K2.5。\nCursor 最新披露的年化收入是20亿美元，相当于月收入1.67亿美元，显然满足上面的条件。但是，它隐藏了使用 K2.5 的事实。\n就在大家认定 Cursor 侵权的时候，他们的一个负责人终于坐不住了，出来说话了。\n">
+<title>套壳中国大模型撑起500亿美元估值？扒一扒 Cursor 的套壳疑云</title>
+
+
+<link rel="canonical" href="https://blog.caowo.de/posts/auto-tech-20260321-686/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.390cc81d180d80110703ea467e355a4f3a0f44f25d4e957842790824fb5f2ef2.css"><meta property='og:title' content="套壳中国大模型撑起500亿美元估值？扒一扒 Cursor 的套壳疑云">
+<meta property='og:description' content="原文摘要 1、\n本周末，有一条最热闹的 AI 新闻，震动了太平洋两岸，连马斯克都关注了。\n昨天，AI 编程工具 Cursor 推出了&quot;自己的&quot;模型 Composer 2。 上图是官网截图，现在点进去还写着&quot;自有模型&quot;。\n自从2024年10月，Composer 1 发布以来，外界就一直怀疑，它是套壳的中国模型，因为行为很类似，但苦于找不到证据。\n现在 Composer 2 来了，很多人就开始研究，它的背后到底是什么模型，真的是 Cursor 自家的吗？\nCursor 为了防止破解，做了很多限制，但是百密一疏。国外推友 @fynnso 发现，有一个地方在上一个版本是禁止的，但是这个版本却可以执行。\n首先，你自己架设一台服务器，充当 AI 模型的调用接口，有没有模型无所谓，只要能收到客户端请求就行。\n然后，你在本地的 Cursor 里面，设置使用的模型为 Composer 2，模型网址就是你刚架设的服务器。这样一来，Cursor 就会向你的服务器发出请求，从而可以看到它到底在请求什么模型。\n真相就暴露了，它请求的模型 ID 居然是 kimi-k2p5-rl-0317-s515-fast（下图）。\n2、\n这位国外推友就把上面的截图，发布到网上。这下炸锅了，明眼人都看出来，这是铁证，Composer 2 实际上是套壳的 Kimi K2.5。\n可笑的是，事情一爆发，Cursor 第一时间就把漏洞堵上，现在已经没法复现这个请求（下图）。\n但是为时已晚，网上传遍了，就连马斯克也发推：&ldquo;它就是 Kimi K2.5&rdquo;。\n这下好了，变成了公开的秘密，再也无法掩盖了。\n3、\n大家的关注点，很快就转移到 Cursor 是否侵权。因为 Kimi K2.5 虽然是开源模型，但是采用的是修改的 MIT 许可证（下图）。\n许可证这样说：你可以任意使用这个模型，唯一的条件是如果你的商业产品月活用户超过1亿，或者月收入超过2000万美元，你必须在用户界面的醒目位置披露，你使用了 Kimi K2.5。\nCursor 最新披露的年化收入是20亿美元，相当于月收入1.67亿美元，显然满足上面的条件。但是，它隐藏了使用 K2.5 的事实。\n就在大家认定 Cursor 侵权的时候，他们的一个负责人终于坐不住了，出来说话了。\n">
+<meta property='og:url' content='https://blog.caowo.de/posts/auto-tech-20260321-686/'>
+<meta property='og:site_name' content='言零的博客'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='auto-generated' /><meta property='article:tag' content='rss' /><meta property='article:tag' content='ai-processed' /><meta property='article:published_time' content='2026-03-21T12:00:53&#43;00:00'/><meta property='article:modified_time' content='2026-03-21T12:00:53&#43;00:00'/>
+<meta name="twitter:title" content="套壳中国大模型撑起500亿美元估值？扒一扒 Cursor 的套壳疑云">
+<meta name="twitter:description" content="原文摘要 1、\n本周末，有一条最热闹的 AI 新闻，震动了太平洋两岸，连马斯克都关注了。\n昨天，AI 编程工具 Cursor 推出了&quot;自己的&quot;模型 Composer 2。 上图是官网截图，现在点进去还写着&quot;自有模型&quot;。\n自从2024年10月，Composer 1 发布以来，外界就一直怀疑，它是套壳的中国模型，因为行为很类似，但苦于找不到证据。\n现在 Composer 2 来了，很多人就开始研究，它的背后到底是什么模型，真的是 Cursor 自家的吗？\nCursor 为了防止破解，做了很多限制，但是百密一疏。国外推友 @fynnso 发现，有一个地方在上一个版本是禁止的，但是这个版本却可以执行。\n首先，你自己架设一台服务器，充当 AI 模型的调用接口，有没有模型无所谓，只要能收到客户端请求就行。\n然后，你在本地的 Cursor 里面，设置使用的模型为 Composer 2，模型网址就是你刚架设的服务器。这样一来，Cursor 就会向你的服务器发出请求，从而可以看到它到底在请求什么模型。\n真相就暴露了，它请求的模型 ID 居然是 kimi-k2p5-rl-0317-s515-fast（下图）。\n2、\n这位国外推友就把上面的截图，发布到网上。这下炸锅了，明眼人都看出来，这是铁证，Composer 2 实际上是套壳的 Kimi K2.5。\n可笑的是，事情一爆发，Cursor 第一时间就把漏洞堵上，现在已经没法复现这个请求（下图）。\n但是为时已晚，网上传遍了，就连马斯克也发推：&ldquo;它就是 Kimi K2.5&rdquo;。\n这下好了，变成了公开的秘密，再也无法掩盖了。\n3、\n大家的关注点，很快就转移到 Cursor 是否侵权。因为 Kimi K2.5 虽然是开源模型，但是采用的是修改的 MIT 许可证（下图）。\n许可证这样说：你可以任意使用这个模型，唯一的条件是如果你的商业产品月活用户超过1亿，或者月收入超过2000万美元，你必须在用户界面的醒目位置披露，你使用了 Kimi K2.5。\nCursor 最新披露的年化收入是20亿美元，相当于月收入1.67亿美元，显然满足上面的条件。但是，它隐藏了使用 K2.5 的事实。\n就在大家认定 Cursor 侵权的时候，他们的一个负责人终于坐不住了，出来说话了。\n">
+
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' 
+        data-cf-beacon='{"token": "SDZvDCIq-3er2UKht5fIrl2UvvIrJxi6hZVxBfIa"}'></script>
+
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">言零的博客</a></h1>
+            <h2 class="site-description"></h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/posts/' >
+                
+                <span>文章 / Posts</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/' >
+                
+                <span>分类 / Categories</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/tags/' >
+                
+                <span>标签 / Tags</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                <span>关于 / About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                <span>友链 / Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            
+            
+            
+            <a href="/categories/tech/" style="background-color: hsl(145, 60%, 84%); color: hsl(145, 60%, 15%);">
+                Tech
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/auto-tech-20260321-686/">套壳中国大模型撑起500亿美元估值？扒一扒 Cursor 的套壳疑云</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published" datetime='2026-03-21T12:00:53Z'>Saturday, March 21, 2026</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+
+    
+</div>
+
+</header>
+
+    
+
+    <section class="article-content">
+    
+    
+    <h2 id="原文摘要">原文摘要
+</h2><p>1、</p>
+<p>本周末，有一条最热闹的 AI 新闻，震动了太平洋两岸，连马斯克都关注了。</p>
+<pre><code>    昨天，AI 编程工具 Cursor 推出了&quot;自己的&quot;模型 Composer 2。
+</code></pre>
+<p>上图是官网截图，现在点进去还写着&quot;自有模型&quot;。</p>
+<p>自从2024年10月，Composer 1 发布以来，外界就一直怀疑，它是套壳的中国模型，因为行为很类似，但苦于找不到证据。</p>
+<p>现在 Composer 2 来了，很多人就开始研究，它的背后到底是什么模型，真的是 Cursor 自家的吗？</p>
+<p>Cursor 为了防止破解，做了很多限制，但是百密一疏。国外推友 @fynnso 发现，有一个地方在上一个版本是禁止的，但是这个版本却可以执行。</p>
+<p>首先，你自己架设一台服务器，充当 AI 模型的调用接口，有没有模型无所谓，只要能收到客户端请求就行。</p>
+<p>然后，你在本地的 Cursor 里面，设置使用的模型为 Composer 2，模型网址就是你刚架设的服务器。这样一来，Cursor 就会向你的服务器发出请求，从而可以看到它到底在请求什么模型。</p>
+<p>真相就暴露了，它请求的模型 ID 居然是 kimi-k2p5-rl-0317-s515-fast（下图）。</p>
+<p>2、</p>
+<p>这位国外推友就把上面的截图，发布到网上。这下炸锅了，明眼人都看出来，这是铁证，Composer 2 实际上是套壳的 Kimi K2.5。</p>
+<p>可笑的是，事情一爆发，Cursor 第一时间就把漏洞堵上，现在已经没法复现这个请求（下图）。</p>
+<p>但是为时已晚，网上传遍了，就连马斯克也发推：&ldquo;它就是 Kimi K2.5&rdquo;。</p>
+<p>这下好了，变成了公开的秘密，再也无法掩盖了。</p>
+<p>3、</p>
+<p>大家的关注点，很快就转移到 Cursor 是否侵权。因为 Kimi K2.5 虽然是开源模型，但是采用的是修改的 MIT 许可证（下图）。</p>
+<p>许可证这样说：你可以任意使用这个模型，唯一的条件是如果你的商业产品月活用户超过1亿，或者月收入超过2000万美元，你必须在用户界面的醒目位置披露，你使用了 Kimi K2.5。</p>
+<p>Cursor 最新披露的年化收入是20亿美元，相当于月收入1.67亿美元，显然满足上面的条件。但是，它隐藏了使用 K2.5 的事实。</p>
+<p>就在大家认定 Cursor 侵权的时候，他们的一个负责人终于坐不住了，出来说话了。</p>
+<p>他承认确实使用 Kimi K2.5，但是没有侵权，他们的许可证来自合作伙伴 Fireworks AI。</p>
+<p>稍后，Kimi 官方也发推了。</p>
+<p>Kimi 官方确认，Cursor 是从 Fireworks AI 得到了授权。后者是一家硅谷的华人 AI 公司，从事 AI 模型的微调和强化学习，它从 Kimi 得到授权对模型进行再训练，然后又转授权给了 Cursor。</p>
+<p>4、</p>
+<p>事情到这里就基本清楚了，Cursor 并没有违反 Kimi 的授权条款，因此不存在侵权。</p>
+<p>既然如此，为什么它拼命掩盖这个事实，大大方方承认，提供 Kimi K2.5 的修改版模型，很难吗？</p>
+<p>我猜测，原因跟 Cursor 不断膨胀的估值有关。</p>
+<p>彭博社本月报道，Cursor 正在进行下一轮融资，估值达到500亿美元。</p>
+<p>大家知道吗，它以前的估值是多少？</p>
+<p>2023年10月，Cursor 成立时的估值是5000万美元；2024年8月的 A 轮融资，估值上升到4亿美元；12月的 B 轮融资，估值快速上升到26美元；2025年11月的最新一轮融资，估值已经到了293亿美元。</p>
+<p>可以看到，每过几个月，估值就会翻倍。这种火箭式的上升速度，需要有业绩支持。但它本身只是一个 VS Code 的修改版，使用的都是开源技术。</p>
+<p>为了支撑越来越高的估值，它有动机把自己从 AI 工具，包装成具有模型研发能力的大模型公司。</p>
+<p>我认为，这才是它不愿意披露使用了 Kimi K2.5 的主要原因。</p>
+<p>5、</p>
+<p>纵观整个事件，Cursor 无疑是输家，Kimi 则是这次的赢家，免费得到一大波高价值的曝光。</p>
+<p>Cursor 发布 Composer 2 时，披露了性能和成本比较。</p>
+<p>Composer 2 的性能低于 GPT-5.4，但高于 Opus 4.6。</p>
+<p>但是，它的生成速度比 GPT-5.4 和 Opus 4.6 都快，成本也是最低的。</p>
+<p>既然 Composer 2 就是微调的 Kimi K2.5，那么直接使用 Kimi，也能得到同样的效果。</p>
+<p>6、</p>
+<p>以前，国外总是有人指责，中国公司窃取外国技术。但是，这个事件证明了，中国公司也有技术输出。那些国外的明星公司，背地也在偷偷摸摸使用中国技术。</p>
+<p>联想到上周，Kimi 的创始人杨植麟收到黄仁勋的邀请，在 Nvidia GTC 大会演讲，是唯一的中国大模型公司代表。</p>
+<p>他在台上宣讲，Kimi 团队刚刚发表的论文《注意力残差》（Attention Residuals）。</p>
+<p>这种新技术据说可以显著提升大模型的推理能力。</p>
+<p>我的想法是，大家要对国产大模型有信心，日常工作完全可以放心使用。国产大模型与国外旗舰模型的差距，正在不断缩小，而且价格实惠。</p>
+<p>据杨植麟说，下一个要发布的 K3 模型性能提升巨大，即便没有强10倍，也比 K2.5 强得多，我们可以期待一下。</p>
+<p>（完）</p>
+<pre><code>    文档信息
+</code></pre>
+<p>版权声明：自由转载-非商用-非衍生-保持署名（创意共享3.0许可证）
+发表日期： 2026年3月21日</p>
+<h2 id="ai-agent-分析">AI Agent 分析
+</h2>
+    <blockquote>
+        <p>基于 内容工厂（润色 + 结构化） 视角的技术解读</p>
+
+    </blockquote>
+<h3 id="技术要点">技术要点
+</h3><ol>
+<li>核心技术概念分析</li>
+<li>实际应用场景</li>
+<li>潜在风险/机会</li>
+</ol>
+<h2 id="实战建议">实战建议
+</h2><p>基于原文内容的实际操作建议。</p>
+<h2 id="总结">总结
+</h2><p>对原文内容的深度总结和延伸思考。</p>
+<hr>
+<p><em>原文来源：<a class="link" href="http://www.ruanyifeng.com/blog/2026/03/kimi-cursor.html"  target="_blank" rel="noopener"
+    >http://www.ruanyifeng.com/blog/2026/03/kimi-cursor.html</a></em>
+<em>AI Agent 加工：内容工厂（润色 + 结构化）</em></p>
+<h2 id="市场背景">市场背景
+</h2><ul>
+<li>BTC 价格：$70,676.19</li>
+<li>24h 涨跌：+0.21%</li>
+</ul>
+<hr>
+<p><em>AI Agent 加工：内容工厂（润色 + 结构化）</em>
+<em>生成时间：2026-03-21T12:00:53.090983</em></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/auto-generated/">Auto-Generated</a>
+        
+            <a href="/tags/rss/">Rss</a>
+        
+            <a href="/tags/ai-processed/">Ai-Processed</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+    
+    
+    
+<div class="donate-box">
+  <div class="donate-title">
+    <span class="heart">❤️</span>
+    <span>写教程不易，如果对您有帮助，可以赞赏一下吗？</span>
+    <span class="heart">❤️</span>
+  </div>
+  <p class="donate-subtitle">您的支持是我持续更新的最大动力！</p>
+  
+  <div class="qr-codes">
+    <div class="qr-code">
+      <img src="/images/wechat-pay.jpg" alt="微信赞赏">
+      <p class="qr-label">微信</p>
+    </div>
+    <div class="qr-code">
+      <img src="/images/alipay.jpg" alt="支付宝赞赏">
+      <p class="qr-label">支付宝</p>
+    </div>
+  </div>
+  
+  <div class="donate-thanks">
+    <p>🎉 感谢您的支持！</p>
+  </div>
+</div>
+
+<style>
+.donate-box {
+  margin: 50px 0;
+  padding: 30px 20px;
+  border: 3px dashed #ff6b6b;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #fff5f5 0%, #fff0f0 100%);
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.15);
+}
+
+.donate-title {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #ff6b6b;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.donate-title .heart {
+  font-size: 1.5em;
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+.donate-subtitle {
+  color: #666;
+  font-size: 0.95em;
+  margin: 10px 0 25px 0;
+}
+
+.qr-codes {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+
+.qr-code {
+  text-align: center;
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.qr-code:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 20px rgba(255, 107, 107, 0.2);
+}
+
+.qr-code img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.qr-label {
+  margin-top: 12px;
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #333;
+}
+
+.donate-thanks {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 2px solid rgba(255, 107, 107, 0.2);
+}
+
+.donate-thanks p {
+  color: #ff6b6b;
+  font-weight: bold;
+  font-size: 1.1em;
+  margin: 0;
+}
+
+ 
+@media (max-width: 768px) {
+  .donate-box {
+    margin: 30px 0;
+    padding: 20px 15px;
+  }
+  
+  .donate-title {
+    font-size: 1.1em;
+  }
+  
+  .qr-codes {
+    gap: 20px;
+  }
+  
+  .qr-code img {
+    width: 150px;
+    height: 150px;
+  }
+}
+</style>
+
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/posts/auto-security-20260321-296/">
+        
+
+        <div class="article-details">
+            <h2 class="article-title">CVE-2026-24291-Windows权限提升漏洞“RegPwn”复现分析</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="">
+    <a href="/posts/auto-security-20260321-183/">
+        
+
+        <div class="article-details">
+            <h2 class="article-title">提示词注入视角下的 AI Webshell 检测绕过技术研究</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="">
+    <a href="/posts/auto-tech-20260321-793/">
+        
+
+        <div class="article-details">
+            <h2 class="article-title">科技爱好者周刊（第 388 期）：测试是新的护城河</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="">
+    <a href="/posts/auto-tech-20260321-589/">
+        
+
+        <div class="article-details">
+            <h2 class="article-title">科技爱好者周刊（第 389 期）：未来如何招聘程序员</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="">
+    <a href="/posts/auto-security-20260321-316/">
+        
+
+        <div class="article-details">
+            <h2 class="article-title">CVE-2026-24291-Windows权限提升漏洞“RegPwn”复现分析</h2>
+        </div>
+    </a>
+</article>
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+        <div class="disqus-container">
+    
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2026 言零的博客
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="4.0.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+
+
+
+<script type="module">
     import gallery from '\/ts\/gallery.js';
 
     const articleContent = document.querySelector('.article-content');
@@ -34,4 +577,164 @@
         });
         lightbox.init();
     }
-</script></main></div><script type=text/javascript src=/ts/main.acaf849f2b273f6a8368a58b001f336738d0c948d92e79b116467d0c7515f932.js defer></script></body></html>
+</script>
+    
+    
+    
+    <div class="ads-container" style="margin: 40px 0; padding: 20px; text-align: center; background: #f9f9f9; border-radius: 10px;">
+  <p style="margin-bottom: 15px; color: #666; font-size: 0.9em;">📢 广告</p>
+  <ins class="adsbygoogle"
+       style="display:block; min-height: 250px;"
+       data-ad-client="ca-pub-2336550233412374"
+       data-ad-slot="1234567890"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
+    
+    
+    
+<div class="donate-box">
+  <div class="donate-title">
+    <span class="heart">❤️</span>
+    <span>写教程不易，如果对您有帮助，可以赞赏一下吗？</span>
+    <span class="heart">❤️</span>
+  </div>
+  <p class="donate-subtitle">您的支持是我持续更新的最大动力！</p>
+  
+  <div class="qr-codes">
+    <div class="qr-code">
+      <img src="/images/wechat-pay.jpg" alt="微信赞赏">
+      <p class="qr-label">微信</p>
+    </div>
+    <div class="qr-code">
+      <img src="/images/alipay.jpg" alt="支付宝赞赏">
+      <p class="qr-label">支付宝</p>
+    </div>
+  </div>
+  
+  <div class="donate-thanks">
+    <p>🎉 感谢您的支持！</p>
+  </div>
+</div>
+
+<style>
+.donate-box {
+  margin: 50px 0;
+  padding: 30px 20px;
+  border: 3px dashed #ff6b6b;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #fff5f5 0%, #fff0f0 100%);
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.15);
+}
+
+.donate-title {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #ff6b6b;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.donate-title .heart {
+  font-size: 1.5em;
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+.donate-subtitle {
+  color: #666;
+  font-size: 0.95em;
+  margin: 10px 0 25px 0;
+}
+
+.qr-codes {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+
+.qr-code {
+  text-align: center;
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.qr-code:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 20px rgba(255, 107, 107, 0.2);
+}
+
+.qr-code img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.qr-label {
+  margin-top: 12px;
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #333;
+}
+
+.donate-thanks {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 2px solid rgba(255, 107, 107, 0.2);
+}
+
+.donate-thanks p {
+  color: #ff6b6b;
+  font-weight: bold;
+  font-size: 1.1em;
+  margin: 0;
+}
+
+ 
+@media (max-width: 768px) {
+  .donate-box {
+    margin: 30px 0;
+    padding: 20px 15px;
+  }
+  
+  .donate-title {
+    font-size: 1.1em;
+  }
+  
+  .qr-codes {
+    gap: 20px;
+  }
+  
+  .qr-code img {
+    width: 150px;
+    height: 150px;
+  }
+}
+</style>
+
+
+            </main>
+        </div>
+        
+<script type="text/javascript" src="/ts/main.acaf849f2b273f6a8368a58b001f336738d0c948d92e79b116467d0c7515f932.js" defer></script>
+
+
+    </body>
+</html>

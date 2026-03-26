@@ -1,15 +1,583 @@
-<!doctype html><html lang=zh-CN dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content='原文摘要 一、引言\n大家这两天，有没有被"龙虾"（OpenClaw）刷屏？\n到处是它的新闻，就连两会代表和新华社都在谈论。真让人跌破眼镜，一个 AI 软件竟能引起这么大的反响。 人们的热情高涨，免费的线下安装活动人满为患，网上的"付费安装"生意兴隆。\n很多人大概还不知道，现在有一种最简单的龙虾使用方法：ArkClaw。\n简单到你根本不需要操心安装，因为这是一个免安装的方案，它直接内置了龙虾，开箱即用。\n我也是昨天才开始用，迫不及待跟大家分享，初步使用的感受。没有用过的同学，也可以把它当作《龙虾零门槛上手》教程，看看龙虾到底是怎么回事。\n二、ArkClaw 是什么\n事情是这样的，老读者可能还记得，我在春节前测评了字节最新发布的 Seed 2.0 模型。\n我在文章里说，这是字节目前最强的基础模型，手机豆包用的就是它，测试表现很不错。\n字节的同学后来就向我赠送了 Coding Plan 套餐，方便继续测试这个模型，各种 AI 编程工具都可以调用它的 API（当然套餐还包含其他国产模型，也是自由使用）。\n本周一，我突然发现，字节的这个 Coding Plan 套餐开通了一个捆绑服务，就是 ArkClaw。\n我问了客服才知道，只要现在开通 Coding Plan，就能免费使用龙虾。\n也就是说，只要你用字节的 AI 编程套餐，不用多花一分钱，字节就提供一台远程主机，里面安装好了龙虾，你可以自由使用。\n需要说明的是，Coding Plan 分成 lite（首月9.9元）和 Pro（首月49.9元）两种套餐。lite 套餐只能免费体验7天，只有 Pro 套餐可以长期使用 ArkClaw。\n三、云养虾\nArkClaw 属于"云养虾"（又称"云龙虾"），就是把龙虾（OpenClaw）安装在火山方舟（字节的 AI 云服务品牌）的云主机上，它名字里的 ark 就是"方舟"的意思。\n除了"云养虾"，也可以把龙虾安装在本地计算机。\n不了解的朋友可能会好奇，两者有什么区别，我简单说一下。\n首先，你要知道OpenClaw 属于自动化软件，它的作用就是让用户使用自然语言描述需求，它通过大模型找出满足需求的方法，然后自动去完成。\n当它安装在本地计算机（你的笔记本），就方便自动操作本地文件和本地设备，比如"找出拍摄于去年今日的照片"或者"关闭客厅的智能灯，并查询最近一周的耗电量"。\n当它安装在云端，就能 7x24 小时跟各种网络服务互动，比如"收到电子邮件时，自动生成30字的内容摘要，向手机发送通知"。\n所以，如果你需要自动化操作网络服务，并且需要长时间在线或者每天定时运行，那么就合适使用"云养虾"。\n四、ArkClaw 基本操作\n4.1 界面\n我给大家看一下，ArkClaw 的样子。\n进入控制台，点击"立即创建"，创建一个龙虾实例。\n创建完成后，就已经安装好了，直接使用。\n'><title>零安装的云养虾：ArkClaw 使用指南</title><link rel=canonical href=https://blog.caowo.de/posts/auto-tech-20260321-405/><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preload as=style href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap"><link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap"><link rel=stylesheet href=/scss/style.min.390cc81d180d80110703ea467e355a4f3a0f44f25d4e957842790824fb5f2ef2.css><meta property='og:title' content="零安装的云养虾：ArkClaw 使用指南"><meta property='og:description' content='原文摘要 一、引言\n大家这两天，有没有被"龙虾"（OpenClaw）刷屏？\n到处是它的新闻，就连两会代表和新华社都在谈论。真让人跌破眼镜，一个 AI 软件竟能引起这么大的反响。 人们的热情高涨，免费的线下安装活动人满为患，网上的"付费安装"生意兴隆。\n很多人大概还不知道，现在有一种最简单的龙虾使用方法：ArkClaw。\n简单到你根本不需要操心安装，因为这是一个免安装的方案，它直接内置了龙虾，开箱即用。\n我也是昨天才开始用，迫不及待跟大家分享，初步使用的感受。没有用过的同学，也可以把它当作《龙虾零门槛上手》教程，看看龙虾到底是怎么回事。\n二、ArkClaw 是什么\n事情是这样的，老读者可能还记得，我在春节前测评了字节最新发布的 Seed 2.0 模型。\n我在文章里说，这是字节目前最强的基础模型，手机豆包用的就是它，测试表现很不错。\n字节的同学后来就向我赠送了 Coding Plan 套餐，方便继续测试这个模型，各种 AI 编程工具都可以调用它的 API（当然套餐还包含其他国产模型，也是自由使用）。\n本周一，我突然发现，字节的这个 Coding Plan 套餐开通了一个捆绑服务，就是 ArkClaw。\n我问了客服才知道，只要现在开通 Coding Plan，就能免费使用龙虾。\n也就是说，只要你用字节的 AI 编程套餐，不用多花一分钱，字节就提供一台远程主机，里面安装好了龙虾，你可以自由使用。\n需要说明的是，Coding Plan 分成 lite（首月9.9元）和 Pro（首月49.9元）两种套餐。lite 套餐只能免费体验7天，只有 Pro 套餐可以长期使用 ArkClaw。\n三、云养虾\nArkClaw 属于"云养虾"（又称"云龙虾"），就是把龙虾（OpenClaw）安装在火山方舟（字节的 AI 云服务品牌）的云主机上，它名字里的 ark 就是"方舟"的意思。\n除了"云养虾"，也可以把龙虾安装在本地计算机。\n不了解的朋友可能会好奇，两者有什么区别，我简单说一下。\n首先，你要知道OpenClaw 属于自动化软件，它的作用就是让用户使用自然语言描述需求，它通过大模型找出满足需求的方法，然后自动去完成。\n当它安装在本地计算机（你的笔记本），就方便自动操作本地文件和本地设备，比如"找出拍摄于去年今日的照片"或者"关闭客厅的智能灯，并查询最近一周的耗电量"。\n当它安装在云端，就能 7x24 小时跟各种网络服务互动，比如"收到电子邮件时，自动生成30字的内容摘要，向手机发送通知"。\n所以，如果你需要自动化操作网络服务，并且需要长时间在线或者每天定时运行，那么就合适使用"云养虾"。\n四、ArkClaw 基本操作\n4.1 界面\n我给大家看一下，ArkClaw 的样子。\n进入控制台，点击"立即创建"，创建一个龙虾实例。\n创建完成后，就已经安装好了，直接使用。\n'><meta property='og:url' content='https://blog.caowo.de/posts/auto-tech-20260321-405/'><meta property='og:site_name' content='言零的博客'><meta property='og:type' content='article'><meta property='article:section' content='Posts'><meta property='article:tag' content='auto-generated'><meta property='article:tag' content='rss'><meta property='article:tag' content='ai-processed'><meta property='article:published_time' content='2026-03-21T06:00:47+00:00'><meta property='article:modified_time' content='2026-03-21T06:00:47+00:00'><meta name=twitter:title content="零安装的云养虾：ArkClaw 使用指南"><meta name=twitter:description content='原文摘要 一、引言\n大家这两天，有没有被"龙虾"（OpenClaw）刷屏？\n到处是它的新闻，就连两会代表和新华社都在谈论。真让人跌破眼镜，一个 AI 软件竟能引起这么大的反响。 人们的热情高涨，免费的线下安装活动人满为患，网上的"付费安装"生意兴隆。\n很多人大概还不知道，现在有一种最简单的龙虾使用方法：ArkClaw。\n简单到你根本不需要操心安装，因为这是一个免安装的方案，它直接内置了龙虾，开箱即用。\n我也是昨天才开始用，迫不及待跟大家分享，初步使用的感受。没有用过的同学，也可以把它当作《龙虾零门槛上手》教程，看看龙虾到底是怎么回事。\n二、ArkClaw 是什么\n事情是这样的，老读者可能还记得，我在春节前测评了字节最新发布的 Seed 2.0 模型。\n我在文章里说，这是字节目前最强的基础模型，手机豆包用的就是它，测试表现很不错。\n字节的同学后来就向我赠送了 Coding Plan 套餐，方便继续测试这个模型，各种 AI 编程工具都可以调用它的 API（当然套餐还包含其他国产模型，也是自由使用）。\n本周一，我突然发现，字节的这个 Coding Plan 套餐开通了一个捆绑服务，就是 ArkClaw。\n我问了客服才知道，只要现在开通 Coding Plan，就能免费使用龙虾。\n也就是说，只要你用字节的 AI 编程套餐，不用多花一分钱，字节就提供一台远程主机，里面安装好了龙虾，你可以自由使用。\n需要说明的是，Coding Plan 分成 lite（首月9.9元）和 Pro（首月49.9元）两种套餐。lite 套餐只能免费体验7天，只有 Pro 套餐可以长期使用 ArkClaw。\n三、云养虾\nArkClaw 属于"云养虾"（又称"云龙虾"），就是把龙虾（OpenClaw）安装在火山方舟（字节的 AI 云服务品牌）的云主机上，它名字里的 ark 就是"方舟"的意思。\n除了"云养虾"，也可以把龙虾安装在本地计算机。\n不了解的朋友可能会好奇，两者有什么区别，我简单说一下。\n首先，你要知道OpenClaw 属于自动化软件，它的作用就是让用户使用自然语言描述需求，它通过大模型找出满足需求的方法，然后自动去完成。\n当它安装在本地计算机（你的笔记本），就方便自动操作本地文件和本地设备，比如"找出拍摄于去年今日的照片"或者"关闭客厅的智能灯，并查询最近一周的耗电量"。\n当它安装在云端，就能 7x24 小时跟各种网络服务互动，比如"收到电子邮件时，自动生成30字的内容摘要，向手机发送通知"。\n所以，如果你需要自动化操作网络服务，并且需要长时间在线或者每天定时运行，那么就合适使用"云养虾"。\n四、ArkClaw 基本操作\n4.1 界面\n我给大家看一下，ArkClaw 的样子。\n进入控制台，点击"立即创建"，创建一个龙虾实例。\n创建完成后，就已经安装好了，直接使用。\n'><script defer src=https://static.cloudflareinsights.com/beacon.min.js data-cf-beacon='{"token": "SDZvDCIq-3er2UKht5fIrl2UvvIrJxi6hZVxBfIa"}'></script></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
-<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><div class=site-meta><h1 class=site-name><a href=/>言零的博客</a></h1><h2 class=site-description></h2></div></header><ol class=menu id=main-menu><li><a href=/posts/><span>文章 / Posts</span></a></li><li><a href=/categories/><span>分类 / Categories</span></a></li><li><a href=/tags/><span>标签 / Tags</span></a></li><li><a href=/about/><span>关于 / About</span></a></li><li><a href=/links/><span>友链 / Links</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
-<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
-<span>Dark Mode</span></li></ol></li></ol></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/categories/tech/ style=background-color:#beefd2;color:#0f3d22>Tech</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/posts/auto-tech-20260321-405/>零安装的云养虾：ArkClaw 使用指南</a></h2></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
-<time class=article-time--published datetime=2026-03-21T06:00:47Z>Saturday, March 21, 2026</time></div></footer></div></header><section class=article-content><h2 id=原文摘要>原文摘要</h2><p>一、引言</p><p>大家这两天，有没有被"龙虾"（OpenClaw）刷屏？</p><pre><code>    到处是它的新闻，就连两会代表和新华社都在谈论。真让人跌破眼镜，一个 AI 软件竟能引起这么大的反响。
-</code></pre><p>人们的热情高涨，免费的线下安装活动人满为患，网上的"付费安装"生意兴隆。</p><p>很多人大概还不知道，现在有一种最简单的龙虾使用方法：ArkClaw。</p><p>简单到你根本不需要操心安装，因为这是一个免安装的方案，它直接内置了龙虾，开箱即用。</p><p>我也是昨天才开始用，迫不及待跟大家分享，初步使用的感受。没有用过的同学，也可以把它当作《龙虾零门槛上手》教程，看看龙虾到底是怎么回事。</p><p>二、ArkClaw 是什么</p><p>事情是这样的，老读者可能还记得，我在春节前测评了字节最新发布的 Seed 2.0 模型。</p><p>我在文章里说，这是字节目前最强的基础模型，手机豆包用的就是它，测试表现很不错。</p><p>字节的同学后来就向我赠送了 Coding Plan 套餐，方便继续测试这个模型，各种 AI 编程工具都可以调用它的 API（当然套餐还包含其他国产模型，也是自由使用）。</p><p>本周一，我突然发现，字节的这个 Coding Plan 套餐开通了一个捆绑服务，就是 ArkClaw。</p><p>我问了客服才知道，只要现在开通 Coding Plan，就能免费使用龙虾。</p><p>也就是说，只要你用字节的 AI 编程套餐，不用多花一分钱，字节就提供一台远程主机，里面安装好了龙虾，你可以自由使用。</p><p>需要说明的是，Coding Plan 分成 lite（首月9.9元）和 Pro（首月49.9元）两种套餐。lite 套餐只能免费体验7天，只有 Pro 套餐可以长期使用 ArkClaw。</p><p>三、云养虾</p><p>ArkClaw 属于"云养虾"（又称"云龙虾"），就是把龙虾（OpenClaw）安装在火山方舟（字节的 AI 云服务品牌）的云主机上，它名字里的 ark 就是"方舟"的意思。</p><p>除了"云养虾"，也可以把龙虾安装在本地计算机。</p><p>不了解的朋友可能会好奇，两者有什么区别，我简单说一下。</p><p>首先，你要知道OpenClaw 属于自动化软件，它的作用就是让用户使用自然语言描述需求，它通过大模型找出满足需求的方法，然后自动去完成。</p><p>当它安装在本地计算机（你的笔记本），就方便自动操作本地文件和本地设备，比如"找出拍摄于去年今日的照片"或者"关闭客厅的智能灯，并查询最近一周的耗电量"。</p><p>当它安装在云端，就能 7x24 小时跟各种网络服务互动，比如"收到电子邮件时，自动生成30字的内容摘要，向手机发送通知"。</p><p>所以，如果你需要自动化操作网络服务，并且需要长时间在线或者每天定时运行，那么就合适使用"云养虾"。</p><p>四、ArkClaw 基本操作</p><p>4.1 界面</p><p>我给大家看一下，ArkClaw 的样子。</p><p>进入控制台，点击"立即创建"，创建一个龙虾实例。</p><p>创建完成后，就已经安装好了，直接使用。</p><p>界面非常简洁，就是一个对话框。ArkClaw 对龙虾的官方控制台做了定制，简化了操作界面。</p><p>4.2 抓取信息</p><p>你可以在对话框里面，跟 AI 模型对话，这跟其他模型的用法并无二致。</p><p>举例来说，我们可以让它抓取信息。</p><p>可以看到，由于抓取的是动态内容，所以模型想到了很多实施方案，最后顺利完成。</p><p>大家要记住，ArkClaw 就是一台远程主机，任何服务器可以用的技术方案，它都能用，这比安装在一般个人工作电脑上的龙虾更强大。</p><p>4.3 发送消息</p><p>获取信息以后，龙虾可以把这些信息发到手机。</p><p>目前，ArkClaw 支持与企业微信、钉钉和飞书绑定。其中，飞书因为是自家的产品，绑定操作最简单，便捷快速，扫码即可。其他两家操作都比较麻烦，具体见官方文档。</p><p>点击对话框上方的"飞书配对"按钮。（前面的"消息渠道"按钮，用于绑定企业微信和钉钉。）</p><p>系统会打开一个终端窗口，输出一个二维码，飞书扫描后可以创建一个机器人，跟当前的 ArkClaw 实例绑定。</p><p>通过这个机器人，你就可以在手机上跟当前这台 ArkClaw 实例对话了。</p><p>你也可以在电脑上，通过 ArkClaw 网页控制台，向你的手机发消息。</p><p>电脑端输入上面指令后，手机端就会推送消息（下图）。</p><p>4.4 定时任务</p><p>我们还可以规定，龙虾执行某些任务的时间和频率，也就是定时任务。</p><p>首先，使用自然语言，在对话框设置定时任务。</p><p>设置完成后，你的手机就会每天收到消息了。</p><p>如果要删除定时任务，也是使用自然语言发出指令。</p><p>五、Skill 和其他设置</p><p>5.1 Skill</p><p>龙虾本身的能力是有限的，总会遇到一些它不知道如何处理的问题。这时，就可以通过 Skill（技能）扩展它的能力，这大大增加了龙虾的用途。</p><p>什么是 Skill？简单理解，它就是一个文件包，里面包含了指令和示例，用来教模型如何完成某些特定的任务。</p><p>网上已经有很多别人写好、分享出来的 Skill，只要挑一些自己需要的，让龙虾加载，就能扩展对应的能力。网站 ClawHub.ai 就收集龙虾专用 Skill，已经有近20000个了。</p><p>我本来想用小红书 SKill 来举例，演示龙虾如何学会写小红书。但是，官方昨天发公告了，最近这样做的人太多了，现在开始封账号了。</p><p>那么就换一个例子。</p><p>上面截图就是使用自然语言，让龙虾从 ClawHub 网站下载安装高德地图（amap）的技能。</p><p>龙虾本来不知道怎么使用高德地图，有了这个技能就学会了，可以从中查询信息。这个技能的具体详细，可以查看它的主页。</p><p>使用的时候，也是直接用自然语言描述需求，模型会自己加载调用所需的技能。</p><p>上图的截图就是通过高德地图，查询实时路况。</p><p>5.2 其他设置</p><p>ArkClaw 的其他功能，都在"设置"菜单（下图），比如调整底层模型。</p><p>只要是 Coding Plan 套餐提供的模型，这里都能使用。</p><p>&ldquo;设置"菜单还有两个很有用的功能。</p><p>一个是"打开终端&rdquo;，它会在网页上打开一个终端窗口，让你通过命令行直接操作 ArkClaw 所在的远程主机。</p><p>从上面的终端窗口截图可以看到，ArkClaw 底层是 Ubuntu 系统。</p><p>另一个是"配置网盘"。某些情况下，你可能需要向 ArkClaw 上传/下载文件，这个功能允许当前主机与火山引擎的对象存储服务 TOS 绑定，相当于有了一个无限容量的网盘。</p><p>六、总结</p><p>以上就是我昨天第一天使用 ArkClaw 的主要内容。</p><p>我的感受是，它确实大大简化了龙虾的使用，免安装、开箱即用，让龙虾的操作变得简单直观。通过自然语言加载调用 Skill，也很自然流畅。</p><p>它最大的强项就是跟字节生态深度融合，配合得十分丝滑：底层 Seed 2.0 模型 + 飞书推送 + 火山引擎网盘，完全不必复杂的配置。</p><p>它是一个跟字节 Coding Plan 捆绑的服务，不用额外付费。相比自己从头搭建"云龙虾"，云主机和 AI 模型的费用就省掉了，这是一笔不小的费用。</p><p>作为程序员，这个 AI 编程的 Coding Plan + 云龙虾 ArkClaw 主机的捆绑方案，还是很有吸引力的。</p><p>（完）</p><pre><code>    文档信息
-</code></pre><p>版</p><h2 id=ai-agent-分析>AI Agent 分析</h2><blockquote><p>基于 内容工厂（润色 + 结构化） 视角的技术解读</p></blockquote><h3 id=技术要点>技术要点</h3><ol><li>核心技术概念分析</li><li>实际应用场景</li><li>潜在风险/机会</li></ol><h2 id=实战建议>实战建议</h2><p>基于原文内容的实际操作建议。</p><h2 id=总结>总结</h2><p>对原文内容的深度总结和延伸思考。</p><hr><p><em>原文来源：<a class=link href=http://www.ruanyifeng.com/blog/2026/03/arkclaw.html target=_blank rel=noopener>http://www.ruanyifeng.com/blog/2026/03/arkclaw.html</a></em>
-<em>AI Agent 加工：内容工厂（润色 + 结构化）</em></p><h2 id=市场背景>市场背景</h2><ul><li>BTC 价格：$70,720.59</li><li>24h 涨跌：+0.26%</li></ul><hr><p><em>AI Agent 加工：内容工厂（润色 + 结构化）</em>
-<em>生成时间：2026-03-21T06:00:47.244313</em></p></section><footer class=article-footer><section class=article-tags><a href=/tags/auto-generated/>Auto-Generated</a>
-<a href=/tags/rss/>Rss</a>
-<a href=/tags/ai-processed/>Ai-Processed</a></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>Related content</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/posts/auto-security-20260321-686/><div class=article-details><h2 class=article-title>CVE-2026-24291-Windows权限提升漏洞“RegPwn”复现分析</h2></div></a></article><article><a href=/posts/auto-security-20260321-950/><div class=article-details><h2 class=article-title>提示词注入视角下的 AI Webshell 检测绕过技术研究</h2></div></a></article><article><a href=/posts/auto-tech-20260321-443/><div class=article-details><h2 class=article-title>科技爱好者周刊（第 388 期）：测试是新的护城河</h2></div></a></article><article><a href=/posts/auto-tech-20260321-953/><div class=article-details><h2 class=article-title>科技爱好者周刊（第 389 期）：未来如何招聘程序员</h2></div></a></article><article><a href=/posts/auto-tech-20260320-7/><div class=article-details><h2 class=article-title>科技爱好者周刊（第 388 期）：测试是新的护城河</h2></div></a></article></div></div></aside><div class=disqus-container></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{typeof DISQUS=="object"&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
-2026 言零的博客</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=4.0.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><script type=module>
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="原文摘要 一、引言\n大家这两天，有没有被&quot;龙虾&quot;（OpenClaw）刷屏？\n到处是它的新闻，就连两会代表和新华社都在谈论。真让人跌破眼镜，一个 AI 软件竟能引起这么大的反响。 人们的热情高涨，免费的线下安装活动人满为患，网上的&quot;付费安装&quot;生意兴隆。\n很多人大概还不知道，现在有一种最简单的龙虾使用方法：ArkClaw。\n简单到你根本不需要操心安装，因为这是一个免安装的方案，它直接内置了龙虾，开箱即用。\n我也是昨天才开始用，迫不及待跟大家分享，初步使用的感受。没有用过的同学，也可以把它当作《龙虾零门槛上手》教程，看看龙虾到底是怎么回事。\n二、ArkClaw 是什么\n事情是这样的，老读者可能还记得，我在春节前测评了字节最新发布的 Seed 2.0 模型。\n我在文章里说，这是字节目前最强的基础模型，手机豆包用的就是它，测试表现很不错。\n字节的同学后来就向我赠送了 Coding Plan 套餐，方便继续测试这个模型，各种 AI 编程工具都可以调用它的 API（当然套餐还包含其他国产模型，也是自由使用）。\n本周一，我突然发现，字节的这个 Coding Plan 套餐开通了一个捆绑服务，就是 ArkClaw。\n我问了客服才知道，只要现在开通 Coding Plan，就能免费使用龙虾。\n也就是说，只要你用字节的 AI 编程套餐，不用多花一分钱，字节就提供一台远程主机，里面安装好了龙虾，你可以自由使用。\n需要说明的是，Coding Plan 分成 lite（首月9.9元）和 Pro（首月49.9元）两种套餐。lite 套餐只能免费体验7天，只有 Pro 套餐可以长期使用 ArkClaw。\n三、云养虾\nArkClaw 属于&quot;云养虾&quot;（又称&quot;云龙虾&quot;），就是把龙虾（OpenClaw）安装在火山方舟（字节的 AI 云服务品牌）的云主机上，它名字里的 ark 就是&quot;方舟&quot;的意思。\n除了&quot;云养虾&quot;，也可以把龙虾安装在本地计算机。\n不了解的朋友可能会好奇，两者有什么区别，我简单说一下。\n首先，你要知道OpenClaw 属于自动化软件，它的作用就是让用户使用自然语言描述需求，它通过大模型找出满足需求的方法，然后自动去完成。\n当它安装在本地计算机（你的笔记本），就方便自动操作本地文件和本地设备，比如&quot;找出拍摄于去年今日的照片&quot;或者&quot;关闭客厅的智能灯，并查询最近一周的耗电量&quot;。\n当它安装在云端，就能 7x24 小时跟各种网络服务互动，比如&quot;收到电子邮件时，自动生成30字的内容摘要，向手机发送通知&quot;。\n所以，如果你需要自动化操作网络服务，并且需要长时间在线或者每天定时运行，那么就合适使用&quot;云养虾&quot;。\n四、ArkClaw 基本操作\n4.1 界面\n我给大家看一下，ArkClaw 的样子。\n进入控制台，点击&quot;立即创建&quot;，创建一个龙虾实例。\n创建完成后，就已经安装好了，直接使用。\n">
+<title>零安装的云养虾：ArkClaw 使用指南</title>
+
+
+<link rel="canonical" href="https://blog.caowo.de/posts/auto-tech-20260321-405/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.390cc81d180d80110703ea467e355a4f3a0f44f25d4e957842790824fb5f2ef2.css"><meta property='og:title' content="零安装的云养虾：ArkClaw 使用指南">
+<meta property='og:description' content="原文摘要 一、引言\n大家这两天，有没有被&quot;龙虾&quot;（OpenClaw）刷屏？\n到处是它的新闻，就连两会代表和新华社都在谈论。真让人跌破眼镜，一个 AI 软件竟能引起这么大的反响。 人们的热情高涨，免费的线下安装活动人满为患，网上的&quot;付费安装&quot;生意兴隆。\n很多人大概还不知道，现在有一种最简单的龙虾使用方法：ArkClaw。\n简单到你根本不需要操心安装，因为这是一个免安装的方案，它直接内置了龙虾，开箱即用。\n我也是昨天才开始用，迫不及待跟大家分享，初步使用的感受。没有用过的同学，也可以把它当作《龙虾零门槛上手》教程，看看龙虾到底是怎么回事。\n二、ArkClaw 是什么\n事情是这样的，老读者可能还记得，我在春节前测评了字节最新发布的 Seed 2.0 模型。\n我在文章里说，这是字节目前最强的基础模型，手机豆包用的就是它，测试表现很不错。\n字节的同学后来就向我赠送了 Coding Plan 套餐，方便继续测试这个模型，各种 AI 编程工具都可以调用它的 API（当然套餐还包含其他国产模型，也是自由使用）。\n本周一，我突然发现，字节的这个 Coding Plan 套餐开通了一个捆绑服务，就是 ArkClaw。\n我问了客服才知道，只要现在开通 Coding Plan，就能免费使用龙虾。\n也就是说，只要你用字节的 AI 编程套餐，不用多花一分钱，字节就提供一台远程主机，里面安装好了龙虾，你可以自由使用。\n需要说明的是，Coding Plan 分成 lite（首月9.9元）和 Pro（首月49.9元）两种套餐。lite 套餐只能免费体验7天，只有 Pro 套餐可以长期使用 ArkClaw。\n三、云养虾\nArkClaw 属于&quot;云养虾&quot;（又称&quot;云龙虾&quot;），就是把龙虾（OpenClaw）安装在火山方舟（字节的 AI 云服务品牌）的云主机上，它名字里的 ark 就是&quot;方舟&quot;的意思。\n除了&quot;云养虾&quot;，也可以把龙虾安装在本地计算机。\n不了解的朋友可能会好奇，两者有什么区别，我简单说一下。\n首先，你要知道OpenClaw 属于自动化软件，它的作用就是让用户使用自然语言描述需求，它通过大模型找出满足需求的方法，然后自动去完成。\n当它安装在本地计算机（你的笔记本），就方便自动操作本地文件和本地设备，比如&quot;找出拍摄于去年今日的照片&quot;或者&quot;关闭客厅的智能灯，并查询最近一周的耗电量&quot;。\n当它安装在云端，就能 7x24 小时跟各种网络服务互动，比如&quot;收到电子邮件时，自动生成30字的内容摘要，向手机发送通知&quot;。\n所以，如果你需要自动化操作网络服务，并且需要长时间在线或者每天定时运行，那么就合适使用&quot;云养虾&quot;。\n四、ArkClaw 基本操作\n4.1 界面\n我给大家看一下，ArkClaw 的样子。\n进入控制台，点击&quot;立即创建&quot;，创建一个龙虾实例。\n创建完成后，就已经安装好了，直接使用。\n">
+<meta property='og:url' content='https://blog.caowo.de/posts/auto-tech-20260321-405/'>
+<meta property='og:site_name' content='言零的博客'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='auto-generated' /><meta property='article:tag' content='rss' /><meta property='article:tag' content='ai-processed' /><meta property='article:published_time' content='2026-03-21T06:00:47&#43;00:00'/><meta property='article:modified_time' content='2026-03-21T06:00:47&#43;00:00'/>
+<meta name="twitter:title" content="零安装的云养虾：ArkClaw 使用指南">
+<meta name="twitter:description" content="原文摘要 一、引言\n大家这两天，有没有被&quot;龙虾&quot;（OpenClaw）刷屏？\n到处是它的新闻，就连两会代表和新华社都在谈论。真让人跌破眼镜，一个 AI 软件竟能引起这么大的反响。 人们的热情高涨，免费的线下安装活动人满为患，网上的&quot;付费安装&quot;生意兴隆。\n很多人大概还不知道，现在有一种最简单的龙虾使用方法：ArkClaw。\n简单到你根本不需要操心安装，因为这是一个免安装的方案，它直接内置了龙虾，开箱即用。\n我也是昨天才开始用，迫不及待跟大家分享，初步使用的感受。没有用过的同学，也可以把它当作《龙虾零门槛上手》教程，看看龙虾到底是怎么回事。\n二、ArkClaw 是什么\n事情是这样的，老读者可能还记得，我在春节前测评了字节最新发布的 Seed 2.0 模型。\n我在文章里说，这是字节目前最强的基础模型，手机豆包用的就是它，测试表现很不错。\n字节的同学后来就向我赠送了 Coding Plan 套餐，方便继续测试这个模型，各种 AI 编程工具都可以调用它的 API（当然套餐还包含其他国产模型，也是自由使用）。\n本周一，我突然发现，字节的这个 Coding Plan 套餐开通了一个捆绑服务，就是 ArkClaw。\n我问了客服才知道，只要现在开通 Coding Plan，就能免费使用龙虾。\n也就是说，只要你用字节的 AI 编程套餐，不用多花一分钱，字节就提供一台远程主机，里面安装好了龙虾，你可以自由使用。\n需要说明的是，Coding Plan 分成 lite（首月9.9元）和 Pro（首月49.9元）两种套餐。lite 套餐只能免费体验7天，只有 Pro 套餐可以长期使用 ArkClaw。\n三、云养虾\nArkClaw 属于&quot;云养虾&quot;（又称&quot;云龙虾&quot;），就是把龙虾（OpenClaw）安装在火山方舟（字节的 AI 云服务品牌）的云主机上，它名字里的 ark 就是&quot;方舟&quot;的意思。\n除了&quot;云养虾&quot;，也可以把龙虾安装在本地计算机。\n不了解的朋友可能会好奇，两者有什么区别，我简单说一下。\n首先，你要知道OpenClaw 属于自动化软件，它的作用就是让用户使用自然语言描述需求，它通过大模型找出满足需求的方法，然后自动去完成。\n当它安装在本地计算机（你的笔记本），就方便自动操作本地文件和本地设备，比如&quot;找出拍摄于去年今日的照片&quot;或者&quot;关闭客厅的智能灯，并查询最近一周的耗电量&quot;。\n当它安装在云端，就能 7x24 小时跟各种网络服务互动，比如&quot;收到电子邮件时，自动生成30字的内容摘要，向手机发送通知&quot;。\n所以，如果你需要自动化操作网络服务，并且需要长时间在线或者每天定时运行，那么就合适使用&quot;云养虾&quot;。\n四、ArkClaw 基本操作\n4.1 界面\n我给大家看一下，ArkClaw 的样子。\n进入控制台，点击&quot;立即创建&quot;，创建一个龙虾实例。\n创建完成后，就已经安装好了，直接使用。\n">
+
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' 
+        data-cf-beacon='{"token": "SDZvDCIq-3er2UKht5fIrl2UvvIrJxi6hZVxBfIa"}'></script>
+
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">言零的博客</a></h1>
+            <h2 class="site-description"></h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/posts/' >
+                
+                <span>文章 / Posts</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/' >
+                
+                <span>分类 / Categories</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/tags/' >
+                
+                <span>标签 / Tags</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                <span>关于 / About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                <span>友链 / Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            
+            
+            
+            <a href="/categories/tech/" style="background-color: hsl(145, 60%, 84%); color: hsl(145, 60%, 15%);">
+                Tech
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/auto-tech-20260321-405/">零安装的云养虾：ArkClaw 使用指南</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published" datetime='2026-03-21T06:00:47Z'>Saturday, March 21, 2026</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+
+    
+</div>
+
+</header>
+
+    
+
+    <section class="article-content">
+    
+    
+    <h2 id="原文摘要">原文摘要
+</h2><p>一、引言</p>
+<p>大家这两天，有没有被&quot;龙虾&quot;（OpenClaw）刷屏？</p>
+<pre><code>    到处是它的新闻，就连两会代表和新华社都在谈论。真让人跌破眼镜，一个 AI 软件竟能引起这么大的反响。
+</code></pre>
+<p>人们的热情高涨，免费的线下安装活动人满为患，网上的&quot;付费安装&quot;生意兴隆。</p>
+<p>很多人大概还不知道，现在有一种最简单的龙虾使用方法：ArkClaw。</p>
+<p>简单到你根本不需要操心安装，因为这是一个免安装的方案，它直接内置了龙虾，开箱即用。</p>
+<p>我也是昨天才开始用，迫不及待跟大家分享，初步使用的感受。没有用过的同学，也可以把它当作《龙虾零门槛上手》教程，看看龙虾到底是怎么回事。</p>
+<p>二、ArkClaw 是什么</p>
+<p>事情是这样的，老读者可能还记得，我在春节前测评了字节最新发布的 Seed 2.0 模型。</p>
+<p>我在文章里说，这是字节目前最强的基础模型，手机豆包用的就是它，测试表现很不错。</p>
+<p>字节的同学后来就向我赠送了 Coding Plan 套餐，方便继续测试这个模型，各种 AI 编程工具都可以调用它的 API（当然套餐还包含其他国产模型，也是自由使用）。</p>
+<p>本周一，我突然发现，字节的这个 Coding Plan 套餐开通了一个捆绑服务，就是 ArkClaw。</p>
+<p>我问了客服才知道，只要现在开通 Coding Plan，就能免费使用龙虾。</p>
+<p>也就是说，只要你用字节的 AI 编程套餐，不用多花一分钱，字节就提供一台远程主机，里面安装好了龙虾，你可以自由使用。</p>
+<p>需要说明的是，Coding Plan 分成 lite（首月9.9元）和 Pro（首月49.9元）两种套餐。lite 套餐只能免费体验7天，只有 Pro 套餐可以长期使用 ArkClaw。</p>
+<p>三、云养虾</p>
+<p>ArkClaw 属于&quot;云养虾&quot;（又称&quot;云龙虾&quot;），就是把龙虾（OpenClaw）安装在火山方舟（字节的 AI 云服务品牌）的云主机上，它名字里的 ark 就是&quot;方舟&quot;的意思。</p>
+<p>除了&quot;云养虾&quot;，也可以把龙虾安装在本地计算机。</p>
+<p>不了解的朋友可能会好奇，两者有什么区别，我简单说一下。</p>
+<p>首先，你要知道OpenClaw 属于自动化软件，它的作用就是让用户使用自然语言描述需求，它通过大模型找出满足需求的方法，然后自动去完成。</p>
+<p>当它安装在本地计算机（你的笔记本），就方便自动操作本地文件和本地设备，比如&quot;找出拍摄于去年今日的照片&quot;或者&quot;关闭客厅的智能灯，并查询最近一周的耗电量&quot;。</p>
+<p>当它安装在云端，就能 7x24 小时跟各种网络服务互动，比如&quot;收到电子邮件时，自动生成30字的内容摘要，向手机发送通知&quot;。</p>
+<p>所以，如果你需要自动化操作网络服务，并且需要长时间在线或者每天定时运行，那么就合适使用&quot;云养虾&quot;。</p>
+<p>四、ArkClaw 基本操作</p>
+<p>4.1 界面</p>
+<p>我给大家看一下，ArkClaw 的样子。</p>
+<p>进入控制台，点击&quot;立即创建&quot;，创建一个龙虾实例。</p>
+<p>创建完成后，就已经安装好了，直接使用。</p>
+<p>界面非常简洁，就是一个对话框。ArkClaw 对龙虾的官方控制台做了定制，简化了操作界面。</p>
+<p>4.2 抓取信息</p>
+<p>你可以在对话框里面，跟 AI 模型对话，这跟其他模型的用法并无二致。</p>
+<p>举例来说，我们可以让它抓取信息。</p>
+<p>可以看到，由于抓取的是动态内容，所以模型想到了很多实施方案，最后顺利完成。</p>
+<p>大家要记住，ArkClaw 就是一台远程主机，任何服务器可以用的技术方案，它都能用，这比安装在一般个人工作电脑上的龙虾更强大。</p>
+<p>4.3 发送消息</p>
+<p>获取信息以后，龙虾可以把这些信息发到手机。</p>
+<p>目前，ArkClaw 支持与企业微信、钉钉和飞书绑定。其中，飞书因为是自家的产品，绑定操作最简单，便捷快速，扫码即可。其他两家操作都比较麻烦，具体见官方文档。</p>
+<p>点击对话框上方的&quot;飞书配对&quot;按钮。（前面的&quot;消息渠道&quot;按钮，用于绑定企业微信和钉钉。）</p>
+<p>系统会打开一个终端窗口，输出一个二维码，飞书扫描后可以创建一个机器人，跟当前的 ArkClaw 实例绑定。</p>
+<p>通过这个机器人，你就可以在手机上跟当前这台 ArkClaw 实例对话了。</p>
+<p>你也可以在电脑上，通过 ArkClaw 网页控制台，向你的手机发消息。</p>
+<p>电脑端输入上面指令后，手机端就会推送消息（下图）。</p>
+<p>4.4 定时任务</p>
+<p>我们还可以规定，龙虾执行某些任务的时间和频率，也就是定时任务。</p>
+<p>首先，使用自然语言，在对话框设置定时任务。</p>
+<p>设置完成后，你的手机就会每天收到消息了。</p>
+<p>如果要删除定时任务，也是使用自然语言发出指令。</p>
+<p>五、Skill 和其他设置</p>
+<p>5.1 Skill</p>
+<p>龙虾本身的能力是有限的，总会遇到一些它不知道如何处理的问题。这时，就可以通过 Skill（技能）扩展它的能力，这大大增加了龙虾的用途。</p>
+<p>什么是 Skill？简单理解，它就是一个文件包，里面包含了指令和示例，用来教模型如何完成某些特定的任务。</p>
+<p>网上已经有很多别人写好、分享出来的 Skill，只要挑一些自己需要的，让龙虾加载，就能扩展对应的能力。网站 ClawHub.ai 就收集龙虾专用 Skill，已经有近20000个了。</p>
+<p>我本来想用小红书 SKill 来举例，演示龙虾如何学会写小红书。但是，官方昨天发公告了，最近这样做的人太多了，现在开始封账号了。</p>
+<p>那么就换一个例子。</p>
+<p>上面截图就是使用自然语言，让龙虾从 ClawHub 网站下载安装高德地图（amap）的技能。</p>
+<p>龙虾本来不知道怎么使用高德地图，有了这个技能就学会了，可以从中查询信息。这个技能的具体详细，可以查看它的主页。</p>
+<p>使用的时候，也是直接用自然语言描述需求，模型会自己加载调用所需的技能。</p>
+<p>上图的截图就是通过高德地图，查询实时路况。</p>
+<p>5.2 其他设置</p>
+<p>ArkClaw 的其他功能，都在&quot;设置&quot;菜单（下图），比如调整底层模型。</p>
+<p>只要是 Coding Plan 套餐提供的模型，这里都能使用。</p>
+<p>&ldquo;设置&quot;菜单还有两个很有用的功能。</p>
+<p>一个是&quot;打开终端&rdquo;，它会在网页上打开一个终端窗口，让你通过命令行直接操作 ArkClaw 所在的远程主机。</p>
+<p>从上面的终端窗口截图可以看到，ArkClaw 底层是 Ubuntu 系统。</p>
+<p>另一个是&quot;配置网盘&quot;。某些情况下，你可能需要向 ArkClaw 上传/下载文件，这个功能允许当前主机与火山引擎的对象存储服务 TOS 绑定，相当于有了一个无限容量的网盘。</p>
+<p>六、总结</p>
+<p>以上就是我昨天第一天使用 ArkClaw 的主要内容。</p>
+<p>我的感受是，它确实大大简化了龙虾的使用，免安装、开箱即用，让龙虾的操作变得简单直观。通过自然语言加载调用 Skill，也很自然流畅。</p>
+<p>它最大的强项就是跟字节生态深度融合，配合得十分丝滑：底层 Seed 2.0 模型 + 飞书推送 + 火山引擎网盘，完全不必复杂的配置。</p>
+<p>它是一个跟字节 Coding Plan 捆绑的服务，不用额外付费。相比自己从头搭建&quot;云龙虾&quot;，云主机和 AI 模型的费用就省掉了，这是一笔不小的费用。</p>
+<p>作为程序员，这个 AI 编程的 Coding Plan + 云龙虾 ArkClaw 主机的捆绑方案，还是很有吸引力的。</p>
+<p>（完）</p>
+<pre><code>    文档信息
+</code></pre>
+<p>版</p>
+<h2 id="ai-agent-分析">AI Agent 分析
+</h2>
+    <blockquote>
+        <p>基于 内容工厂（润色 + 结构化） 视角的技术解读</p>
+
+    </blockquote>
+<h3 id="技术要点">技术要点
+</h3><ol>
+<li>核心技术概念分析</li>
+<li>实际应用场景</li>
+<li>潜在风险/机会</li>
+</ol>
+<h2 id="实战建议">实战建议
+</h2><p>基于原文内容的实际操作建议。</p>
+<h2 id="总结">总结
+</h2><p>对原文内容的深度总结和延伸思考。</p>
+<hr>
+<p><em>原文来源：<a class="link" href="http://www.ruanyifeng.com/blog/2026/03/arkclaw.html"  target="_blank" rel="noopener"
+    >http://www.ruanyifeng.com/blog/2026/03/arkclaw.html</a></em>
+<em>AI Agent 加工：内容工厂（润色 + 结构化）</em></p>
+<h2 id="市场背景">市场背景
+</h2><ul>
+<li>BTC 价格：$70,720.59</li>
+<li>24h 涨跌：+0.26%</li>
+</ul>
+<hr>
+<p><em>AI Agent 加工：内容工厂（润色 + 结构化）</em>
+<em>生成时间：2026-03-21T06:00:47.244313</em></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/auto-generated/">Auto-Generated</a>
+        
+            <a href="/tags/rss/">Rss</a>
+        
+            <a href="/tags/ai-processed/">Ai-Processed</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+    
+    
+    
+<div class="donate-box">
+  <div class="donate-title">
+    <span class="heart">❤️</span>
+    <span>写教程不易，如果对您有帮助，可以赞赏一下吗？</span>
+    <span class="heart">❤️</span>
+  </div>
+  <p class="donate-subtitle">您的支持是我持续更新的最大动力！</p>
+  
+  <div class="qr-codes">
+    <div class="qr-code">
+      <img src="/images/wechat-pay.jpg" alt="微信赞赏">
+      <p class="qr-label">微信</p>
+    </div>
+    <div class="qr-code">
+      <img src="/images/alipay.jpg" alt="支付宝赞赏">
+      <p class="qr-label">支付宝</p>
+    </div>
+  </div>
+  
+  <div class="donate-thanks">
+    <p>🎉 感谢您的支持！</p>
+  </div>
+</div>
+
+<style>
+.donate-box {
+  margin: 50px 0;
+  padding: 30px 20px;
+  border: 3px dashed #ff6b6b;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #fff5f5 0%, #fff0f0 100%);
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.15);
+}
+
+.donate-title {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #ff6b6b;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.donate-title .heart {
+  font-size: 1.5em;
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+.donate-subtitle {
+  color: #666;
+  font-size: 0.95em;
+  margin: 10px 0 25px 0;
+}
+
+.qr-codes {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+
+.qr-code {
+  text-align: center;
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.qr-code:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 20px rgba(255, 107, 107, 0.2);
+}
+
+.qr-code img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.qr-label {
+  margin-top: 12px;
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #333;
+}
+
+.donate-thanks {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 2px solid rgba(255, 107, 107, 0.2);
+}
+
+.donate-thanks p {
+  color: #ff6b6b;
+  font-weight: bold;
+  font-size: 1.1em;
+  margin: 0;
+}
+
+ 
+@media (max-width: 768px) {
+  .donate-box {
+    margin: 30px 0;
+    padding: 20px 15px;
+  }
+  
+  .donate-title {
+    font-size: 1.1em;
+  }
+  
+  .qr-codes {
+    gap: 20px;
+  }
+  
+  .qr-code img {
+    width: 150px;
+    height: 150px;
+  }
+}
+</style>
+
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/posts/auto-security-20260321-686/">
+        
+
+        <div class="article-details">
+            <h2 class="article-title">CVE-2026-24291-Windows权限提升漏洞“RegPwn”复现分析</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="">
+    <a href="/posts/auto-security-20260321-950/">
+        
+
+        <div class="article-details">
+            <h2 class="article-title">提示词注入视角下的 AI Webshell 检测绕过技术研究</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="">
+    <a href="/posts/auto-tech-20260321-443/">
+        
+
+        <div class="article-details">
+            <h2 class="article-title">科技爱好者周刊（第 388 期）：测试是新的护城河</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="">
+    <a href="/posts/auto-tech-20260321-953/">
+        
+
+        <div class="article-details">
+            <h2 class="article-title">科技爱好者周刊（第 389 期）：未来如何招聘程序员</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="">
+    <a href="/posts/auto-tech-20260320-7/">
+        
+
+        <div class="article-details">
+            <h2 class="article-title">科技爱好者周刊（第 388 期）：测试是新的护城河</h2>
+        </div>
+    </a>
+</article>
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+        <div class="disqus-container">
+    
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2026 言零的博客
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="4.0.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+
+
+
+<script type="module">
     import gallery from '\/ts\/gallery.js';
 
     const articleContent = document.querySelector('.article-content');
@@ -33,4 +601,164 @@
         });
         lightbox.init();
     }
-</script></main></div><script type=text/javascript src=/ts/main.acaf849f2b273f6a8368a58b001f336738d0c948d92e79b116467d0c7515f932.js defer></script></body></html>
+</script>
+    
+    
+    
+    <div class="ads-container" style="margin: 40px 0; padding: 20px; text-align: center; background: #f9f9f9; border-radius: 10px;">
+  <p style="margin-bottom: 15px; color: #666; font-size: 0.9em;">📢 广告</p>
+  <ins class="adsbygoogle"
+       style="display:block; min-height: 250px;"
+       data-ad-client="ca-pub-2336550233412374"
+       data-ad-slot="1234567890"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
+    
+    
+    
+<div class="donate-box">
+  <div class="donate-title">
+    <span class="heart">❤️</span>
+    <span>写教程不易，如果对您有帮助，可以赞赏一下吗？</span>
+    <span class="heart">❤️</span>
+  </div>
+  <p class="donate-subtitle">您的支持是我持续更新的最大动力！</p>
+  
+  <div class="qr-codes">
+    <div class="qr-code">
+      <img src="/images/wechat-pay.jpg" alt="微信赞赏">
+      <p class="qr-label">微信</p>
+    </div>
+    <div class="qr-code">
+      <img src="/images/alipay.jpg" alt="支付宝赞赏">
+      <p class="qr-label">支付宝</p>
+    </div>
+  </div>
+  
+  <div class="donate-thanks">
+    <p>🎉 感谢您的支持！</p>
+  </div>
+</div>
+
+<style>
+.donate-box {
+  margin: 50px 0;
+  padding: 30px 20px;
+  border: 3px dashed #ff6b6b;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #fff5f5 0%, #fff0f0 100%);
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.15);
+}
+
+.donate-title {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #ff6b6b;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.donate-title .heart {
+  font-size: 1.5em;
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+.donate-subtitle {
+  color: #666;
+  font-size: 0.95em;
+  margin: 10px 0 25px 0;
+}
+
+.qr-codes {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+
+.qr-code {
+  text-align: center;
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.qr-code:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 20px rgba(255, 107, 107, 0.2);
+}
+
+.qr-code img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.qr-label {
+  margin-top: 12px;
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #333;
+}
+
+.donate-thanks {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 2px solid rgba(255, 107, 107, 0.2);
+}
+
+.donate-thanks p {
+  color: #ff6b6b;
+  font-weight: bold;
+  font-size: 1.1em;
+  margin: 0;
+}
+
+ 
+@media (max-width: 768px) {
+  .donate-box {
+    margin: 30px 0;
+    padding: 20px 15px;
+  }
+  
+  .donate-title {
+    font-size: 1.1em;
+  }
+  
+  .qr-codes {
+    gap: 20px;
+  }
+  
+  .qr-code img {
+    width: 150px;
+    height: 150px;
+  }
+}
+</style>
+
+
+            </main>
+        </div>
+        
+<script type="text/javascript" src="/ts/main.acaf849f2b273f6a8368a58b001f336738d0c948d92e79b116467d0c7515f932.js" defer></script>
+
+
+    </body>
+</html>

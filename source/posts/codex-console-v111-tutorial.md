@@ -515,3 +515,30 @@ Error: [Errno 98] Address already in use
 ```bash
 # 方式 1：更换端口
 python webui.py --port
+---
+
+## 💖 赞赏支持
+
+<div style="margin: 50px 0; padding: 30px 20px; border: 3px dashed #ff6b6b; border-radius: 15px; background: linear-gradient(135deg, #fff5f5 0%, #fff0f0 100%); text-align: center; box-shadow: 0 4px 15px rgba(255, 107, 107, 0.15);">
+  <div style="font-size: 1.3em; font-weight: bold; color: #ff6b6b; margin-bottom: 10px;">
+    <span style="font-size: 1.5em;">❤️</span>
+    写教程不易，如果对您有帮助，可以赞赏一下吗？
+    <span style="font-size: 1.5em;">❤️</span>
+  </div>
+  <p style="color: #666; font-size: 0.95em; margin: 10px 0 25px 0;">您的支持是我持续更新的最大动力！</p>
+  
+  <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-bottom: 25px;">
+    <div style="text-align: center; background: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);">
+      <img src="/images/wechat-pay.jpg" alt="微信赞赏" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+      <p style="margin-top: 12px; font-weight: bold; font-size: 1.1em; color: #333;">微信</p>
+    </div>
+    <div style="text-align: center; background: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);">
+      <img src="/images/alipay.jpg" alt="支付宝赞赏" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+      <p style="margin-top: 12px; font-weight: bold; font-size: 1.1em; color: #333;">支付宝</p>
+    </div>
+  </div>
+  
+  <div style="margin-top: 20px; padding-top: 20px; border-top: 2px solid rgba(255, 107, 107, 0.2);">
+    <p style="color: #ff6b6b; font-weight: bold; font-size: 1.1em; margin: 0;">🎉 感谢您的支持！</p>
+  </div>
+</div>

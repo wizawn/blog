@@ -1,7 +1,7 @@
 ---
 title: "CodeX TM 兑换码使用教程 - 详细步骤与常见问题解答"
 date: 2026-03-25T14:35:00+00:00
-lastmod: 2026-03-25T14:35:00+00:00
+lastmod: 2026-03-26T07:05:00+00:00
 categories: ["tech"]
 tags: ["tutorial", "codex", "guide"]
 draft: false
@@ -279,6 +279,86 @@ https://codextm.xyz
 2. 进入配置页面
 3. 选择官方配置模板
 4. 保存并重启应用
+
+---
+
+### 八、Reconnecting 重连超过五次怎么办
+
+**问题描述**：Codex 频繁重连，显示 "Reconnecting..." 超过 5 次后断开连接。
+
+**问题原因**：WebSocket 连接不稳定，Codex 默认优先使用 WebSocket 传输，但某些网络环境下 WebSocket 容易断开。
+
+**参考 Issue**：[WebSocket upgrade succeeds then server closes with 1008 Policy (falls back to HTTPS) · Issue #13041 · openai/codex](https://github.com/openai/codex/issues/13041#issuecomment-3981110494)
+
+#### 解决方案：禁用 WebSocket，强制使用 HTTPS
+
+**步骤一：修改 config.toml 配置文件**
+
+找到 Codex 配置文件（通常位于 `~/.codex/config.toml`），添加以下配置：
+
+```toml
+# 禁用 WebSocket，强制使用 HTTP
+model_provider = "openai_http"
+
+[model_providers.openai_http]
+name = "OpenAI HTTP only"
+wire_api = "responses"
+requires_openai_auth = true
+supports_websockets = false
+base_url = "https://chatgpt.com/backend-api/codex"
+```
+
+**步骤二：修改现有对话记录的 provider**
+
+由于 provider 变更，对话记录会清空，但数据仍保存在本地。需要让 Codex 自动迁移对话记录：
+
+```bash
+# 找到对话记录 JSONL 文件
+cd ~/.codex/sessions/
+
+# 备份现有对话记录（可选但推荐）
+cp -r sessions/ sessions_backup/
+
+# 让 Codex 自动迁移对话记录
+# 方法：修改对话记录中的 provider 字段
+find . -name "*.jsonl" -exec sed -i 's/"provider": "openai"/"provider": "openai_http"/g' {} \;
+```
+
+**步骤三：重启 Codex**
+
+```bash
+# 完全退出 Codex
+codex logout
+
+# 重新启动 Codex
+codex
+```
+
+**步骤四：验证配置**
+
+启动后执行以下命令验证配置是否生效：
+
+```bash
+# 检查当前配置
+codex config show
+
+# 验证连接状态
+codex whoami
+```
+
+#### 注意事项
+
+1. **对话记录迁移**：provider 变更后，Codex 会自动查找并迁移本地对话记录，但建议先备份
+2. **配置持久化**：修改后的 config.toml 会持久化保存，无需每次重启都修改
+3. **网络兼容性**：此方案适用于 WebSocket 被防火墙或不稳定网络环境
+4. **性能影响**：HTTP 传输相比 WebSocket 可能有轻微延迟，但稳定性更好
+
+#### 如果问题仍未解决
+
+1. 检查代理配置是否正确
+2. 尝试切换代理节点
+3. 清理 `.codex/` 目录后重新登录
+4. 联系技术支持反馈具体错误日志
 
 ---
 

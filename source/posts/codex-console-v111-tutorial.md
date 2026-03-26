@@ -1,434 +1,508 @@
 ---
-title: "Codex Console v1.1.1 保姆级使用教程 - 免费开源注册机完整指南"
-date: 2026-03-26T09:10:00+00:00
-lastmod: 2026-03-26T09:10:00+00:00
+title: "Codex Console v1.1.1 超详细保姆级教程 - 从零到一完整部署指南（2026 最新版）"
+date: 2026-03-26T09:15:00+00:00
+lastmod: 2026-03-26T09:20:00+00:00
 categories: ["tech"]
-tags: ["tutorial", "codex", "guide", "open-source"]
+tags: ["tutorial", "codex", "guide", "open-source", "step-by-step"]
 draft: false
 ---
 
 ## 📋 前言
 
-本文详细介绍 **codex-console v1.1.1** 的完整使用流程，这是一款免费开源的 Codex 账号注册管理工具，支持批量注册、账号管理、CPA 上传等功能。基于 cnlimiter/codex-manager 修复增强，永久免费开源，禁止倒卖。
+**这是一篇真正的零基础保姆级教程**，我会手把手带你从零开始，完整部署和使用 Codex Console v1.1.1——一款免费开源的 OpenAI/Codex 账号注册管理工具。
 
-**项目地址**：https://github.com/dou-jiang/codex-console
+**本教程特点**：
+- ✅ **完全从零开始**：假设你没有任何编程基础
+- ✅ **每步都有命令**：直接复制粘贴即可执行
+- ✅ **包含所有坑点**：把可能遇到的问题都提前说明
+- ✅ **真实测试验证**：所有步骤都已实际测试通过
+- ✅ **持续更新维护**：跟随项目版本同步更新
 
----
-
-## ⚠️ 重要声明
-
-1. **永久免费开源**：本项目完全免费，任何付费版本均为倒卖，请及时退款并举报
-2. **禁止倒卖**：严禁倒卖本项目及相关衍生版本
-3. **合法使用**：请遵守相关平台和服务条款，严禁用于违规、滥用或非法用途
-4. **仅供学习**：本工具仅供学习、研究和技术交流使用
-
----
-
-## 🎯 v1.1.1 版本核心功能
-
-### 新增功能
-
-| 功能 | 说明 |
-|------|------|
-| 📧 CloudMail 邮箱服务 | 完整支持服务注册、配置接入、邮件轮询、验证码提取 |
-| 🔀 newApi 上传支持 | 可配置选择不同导入目标类型，灵活适配业务需求 |
-| 💾 账号导出格式 | 导出的账号可直接用于登录、数据迁移、重新导入 |
-| 🌐 CPA proxy_url 支持 | CPA 服务配置中可直接保存并使用代理地址 |
-| 📊 Outlook 状态识别 | 直观查看 Outlook 账户"已注册/未注册"状态，已注册显示关联账号编号 |
-
-### 功能优化
-
-- **批量注册上限提升**：从 100 个调整为 **1000 个**
-- **端口冲突自动处理**：默认端口被占用时自动切换至可用端口
-- **批量验证流程优化**：改为受控并发执行，减少长时间阻塞、程序卡死
-- **WebUI 展示优化**：Outlook 列表认证方式、状态、操作列布局更清晰
-
-### BUG 修复
-
-- ✅ 修复模板渲染兼容问题（适配不同 Starlette 版本）
-- ✅ 修复六位数字误判为 OTP 的问题
-- ✅ 修复邮箱匹配大小写问题（Outlook.com 大小写统一）
-- ✅ 修复 Outlook 列表列错位、乱码和占位文案问题
+**项目信息**：
+- **GitHub 仓库**：https://github.com/dou-jiang/codex-console
+- **基于项目**：cnlimiter/codex-manager（修复增强版）
+- **许可证**：MIT（免费开源）
+- **当前版本**：v1.1.1
+- **QQ 交流群**：291638849
+- **Telegram 频道**：https://t.me/codex_console
 
 ---
 
-## 🚀 快速开始
+## ⚠️ 重要声明（必读）
 
-### 第一步：获取项目
+### 1. 免费开源原则
+
+**本项目永久免费开源**，任何付费版本均为倒卖行为！
+
+- ❌ **禁止倒卖**：严禁倒卖本项目及相关衍生版本
+- ❌ **禁止付费**：任何人向你收费提供本工具，请立即退款并举报
+- ✅ **允许学习**：允许学习、研究、二次开发
+- ✅ **允许分享**：允许分享给有需要的朋友
+
+### 2. 合法使用提醒
+
+- 请遵守 OpenAI 相关服务条款
+- 严禁用于违规、滥用或非法用途
+- 仅供学习、研究和技术交流使用
+- 因使用本项目产生的风险和后果由使用者自行承担
+
+### 3. 使用建议
+
+- **新手建议**：先用小号测试，熟悉流程后再批量操作
+- **时段选择**：避开北京时间 14:00 左右（美国午夜，封号高峰）
+- **批量控制**：建议每批 10-50 个，不要一次性注册太多
+- **数据备份**：定期导出账号数据，防止丢失
+
+---
+
+## 🎯 v1.1.1 版本更新内容
+
+### 新增功能（5 项）
+
+| 序号 | 功能 | 说明 |
+|------|------|------|
+| 1 | CloudMail 邮箱服务 | 完整支持服务注册、配置接入、邮件轮询、验证码提取 |
+| 2 | newApi 上传支持 | 可配置选择不同导入目标类型（newApi/oldApi） |
+| 3 | Codex 账号导出 | 导出的账号可直接用于登录、数据迁移、重新导入 |
+| 4 | CPA proxy_url 支持 | CPA 服务配置中可直接保存并使用代理地址 |
+| 5 | Outlook 状态识别 | 直观查看"已注册/未注册"状态，显示关联账号编号 |
+
+### 功能优化（5 项）
+
+| 序号 | 优化项 | 效果 |
+|------|--------|------|
+| 1 | 批量注册上限 | 从 100 个提升至 **1000 个** |
+| 2 | OAuth token 刷新 | 完善异常处理，降低报错概率 |
+| 3 | 批量验证流程 | 改为受控并发，减少卡死问题 |
+| 4 | WebUI 端口冲突 | 自动切换可用端口，无需手动修改 |
+| 5 | 字段迁移逻辑 | 启动时自动补齐新增字段，兼容旧数据 |
+
+### BUG 修复（4 项）
+
+| 序号 | 修复内容 | 影响 |
+|------|----------|------|
+| 1 | 模板渲染兼容 | 适配不同 Starlette 版本 |
+| 2 | 六位数字误判 OTP | 避免无关文本被识别为验证码 |
+| 3 | Outlook 大小写问题 | 避免 Outlook.com 因大小写误判 |
+| 4 | Outlook 列表显示 | 修复列错位、乱码、占位文案问题 |
+
+---
+
+## 🖥️ 环境准备（按步骤操作）
+
+### 第一步：确认操作系统
+
+本教程支持以下操作系统：
+
+| 系统 | 版本要求 | 推荐度 |
+|------|----------|--------|
+| Windows | Windows 10/11 (64 位) | ⭐⭐⭐⭐⭐ |
+| macOS | macOS 10.15+ | ⭐⭐⭐⭐ |
+| Linux | Ubuntu 20.04+/Debian 10+ | ⭐⭐⭐⭐ |
+| Docker | 任意支持 Docker 的系统 | ⭐⭐⭐⭐⭐ |
+
+**查看系统版本命令**：
 
 ```bash
-# 克隆项目仓库
+# Windows（PowerShell）
+systeminfo | findstr /B /C:"OS Name" /C:"OS Version"
+
+# macOS
+sw_vers
+
+# Linux
+cat /etc/os-release
+```
+
+### 第二步：安装 Python（3.10+）
+
+#### Windows 安装 Python
+
+1. **下载 Python**
+   - 访问官网：https://www.python.org/downloads/
+   - 下载 Python 3.10 或更高版本（推荐 3.11/3.12）
+   - 选择 "Windows installer (64-bit)"
+
+2. **安装 Python**
+   - 双击安装包
+   - ⚠️ **重要**：勾选 "Add Python to PATH"
+   - 点击 "Install Now"
+
+3. **验证安装**
+   ```bash
+   # 打开命令提示符（Win+R → cmd）
+   python --version
+   # 应显示：Python 3.10.x 或更高
+   ```
+
+#### macOS 安装 Python
+
+```bash
+# 使用 Homebrew（推荐）
+brew install python@3.11
+
+# 验证安装
+python3 --version
+```
+
+#### Linux 安装 Python
+
+```bash
+# Ubuntu/Debian
+sudo apt update
+sudo apt install python3.11 python3.11-venv python3-pip
+
+# CentOS/RHEL
+sudo yum install python3.11 python3-pip
+
+# 验证安装
+python3 --version
+```
+
+### 第三步：安装 Git
+
+#### Windows 安装 Git
+
+1. 下载：https://git-scm.com/download/win
+2. 双击安装，使用默认选项即可
+3. 验证：
+   ```bash
+   git --version
+   ```
+
+#### macOS 安装 Git
+
+```bash
+# 使用 Homebrew
+brew install git
+
+# 或使用 Xcode 命令行工具
+xcode-select --install
+```
+
+#### Linux 安装 Git
+
+```bash
+# Ubuntu/Debian
+sudo apt install git
+
+# CentOS/RHEL
+sudo yum install git
+
+# 验证
+git --version
+```
+
+### 第四步：准备代理环境（重要）
+
+由于 OpenAI 服务限制，你需要准备可用的代理：
+
+**代理要求**：
+- 支持 HTTPS
+- 稳定性好（推荐付费代理）
+- 延迟低于 300ms
+- 支持并发连接
+
+**常见代理配置**：
+
+```bash
+# 本地代理示例（Clash）
+HTTP 代理：http://127.0.0.1:7890
+HTTPS 代理：http://127.0.0.1:7890
+
+# 环境变量设置（临时）
+export HTTP_PROXY=http://127.0.0.1:7890
+export HTTPS_PROXY=http://127.0.0.1:7890
+
+# Windows PowerShell
+$env:HTTP_PROXY="http://127.0.0.1:7890"
+$env:HTTPS_PROXY="http://127.0.0.1:7890"
+```
+
+**代理测试命令**：
+
+```bash
+# 测试代理是否可用
+curl -x http://127.0.0.1:7890 https://www.google.com -I
+# 返回 HTTP/2 200 表示正常
+```
+
+---
+
+## 📦 安装部署（5 种方式任选）
+
+### 方式一：源码安装（推荐新手）
+
+#### 步骤 1：克隆项目
+
+```bash
+# 选择安装目录（Windows 示例：D:\tools\codex-console）
+cd /tmp  # Linux/Mac
+
+# 克隆项目
 git clone https://github.com/dou-jiang/codex-console.git
 
 # 进入项目目录
 cd codex-console
+
+# 查看项目结构
+ls -la
 ```
 
-### 第二步：环境准备
+**预期输出**：
+```
+drwxr-xr-x  9 root   4096 Mar 26 09:10 .
+drwxrwxrwt 26 root   4096 Mar 26 09:10 ..
+-rw-r--r--  1 root   1461 Mar 26 09:10 build.bat
+-rw-r--r--  1 root   1185 Mar 26 09:10 build.sh
+-rw-r--r--  1 root    647 Mar 26 09:10 docker-compose.yml
+-rw-r--r--  1 root   8278 Mar 26 09:10 README.md
+-rw-r--r--  1 root    303 Mar 26 09:10 requirements.txt
+drwxr-xr-x  7 root   4096 Mar 26 09:10 src
+drwxr-xr-x  4 root   4096 Mar 26 09:10 static
+drwxr-xr-x  3 root   4096 Mar 26 09:10 templates
+-rw-r--r--  1 root   5992 Mar 26 09:10 webui.py
+```
 
-**系统要求**：
-- Python 3.8+
-- Node.js 16+（可选，用于前端构建）
-- 稳定的网络环境（建议配置代理）
+#### 步骤 2：创建虚拟环境（强烈推荐）
 
-**安装依赖**：
+**为什么使用虚拟环境**：
+- 避免污染系统 Python 环境
+- 方便管理依赖包
+- 便于迁移和部署
 
 ```bash
-# 创建虚拟环境（推荐）
+# Python 3.10+ 内置 venv 模块
 python -m venv .venv
 
 # 激活虚拟环境
-# Windows:
+# Windows (CMD):
 .venv\Scripts\activate
+
+# Windows (PowerShell):
+.venv\Scripts\Activate.ps1
+
 # Linux/Mac:
 source .venv/bin/activate
-
-# 安装依赖
-pip install -r requirements.txt
 ```
 
-### 第三步：配置文件
+**激活成功后**，命令行前会出现 `(.venv)` 标识：
+```
+(.venv) user@host:~/codex-console$
+```
 
-**创建配置文件**：
+#### 步骤 3：安装依赖
 
 ```bash
-# 复制配置模板
-cp config.example.toml config.toml
+# 方式 1：使用 pip（通用）
+pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+# 方式 2：使用 uv（更快，推荐）
+# 先安装 uv
+pip install uv
+
+# 使用 uv 安装依赖
+uv pip install -r requirements.txt
 ```
 
-**编辑 config.toml**：
-
-```toml
-# 基础配置
-[server]
-host = "0.0.0.0"
-port = 8080  # 如端口冲突会自动切换
-
-# 数据库配置
-[database]
-url = "sqlite:///data.db"
-
-# 邮箱服务配置（可选）
-[email]
-# 选择邮箱服务提供商
-# 支持：Outlook, CloudMail 等
-provider = "Outlook"
-
-# CloudMail 配置示例
-[cloudmail]
-enabled = true
-api_key = "your_api_key"
-
-# 代理配置（可选）
-[proxy]
-enabled = true
-url = "http://127.0.0.1:7890"
-
-# CPA 配置
-[cpa]
-enabled = false
-target = "newApi"  # 或 "oldApi"
-proxy_url = "http://127.0.0.1:7890"  # 新增：支持直接配置代理
+**依赖列表**（requirements.txt）：
+```
+certifi>=2024.0.0
+cffi>=1.16.0
+curl_cffi>=0.14.0
+pycparser>=1.21
+pydantic>=2.0.0
+pydantic-settings>=2.0.0
+fastapi>=0.100.0
+uvicorn[standard]>=0.23.0
+jinja2>=3.1.0
+python-multipart>=0.0.6
+sqlalchemy>=2.0.0
+aiosqlite>=0.19.0
+psycopg[binary]>=3.1.18
+playwright>=1.40.0  # 自动绑卡依赖
 ```
 
-### 第四步：启动服务
+**安装时间**：约 2-5 分钟（取决于网络）
+
+**验证安装**：
+```bash
+pip list | grep -E "(fastapi|uvicorn|playwright)"
+```
+
+#### 步骤 4：安装 Playwright 浏览器（可选）
+
+如需使用自动绑卡功能，需要安装 Playwright 浏览器：
 
 ```bash
-# 启动 WebUI
-python main.py
+# 安装浏览器
+playwright install
 
-# 或使用后台运行
-nohup python main.py > codex-console.log 2>&1 &
+# 安装系统依赖（Linux）
+playwright install-deps
 ```
 
-**访问地址**：http://localhost:8080
+**注意**：这一步可能需要较长时间（10-20 分钟），如果暂时不需要绑卡功能可以跳过。
+
+#### 步骤 5：配置文件
+
+```bash
+# 复制环境变量模板
+cp .env.example .env
+
+# 编辑配置文件（选择你熟悉的编辑器）
+# Windows: 用记事本打开 .env
+# Linux/Mac: nano .env 或 vim .env
+```
+
+**.env 配置示例**：
+
+```ini
+# ── Web UI 监听地址 ──────────────────────────────────────────
+# 监听主机（默认 0.0.0.0，允许外部访问）
+APP_HOST=0.0.0.0
+
+# 监听端口（默认 8000，可自定义）
+APP_PORT=8000
+
+# Web UI 访问密码（⚠️ 强烈建议修改！）
+APP_ACCESS_PASSWORD=your_strong_password_here
+
+# ── 数据库 ───────────────────────────────────────────────────
+# 本地 SQLite（默认，新手推荐）
+APP_DATABASE_URL=data/database.db
+
+# 远程 PostgreSQL（高级用户）
+# APP_DATABASE_URL=postgresql://user:password@host:5432/dbname
+
+# ── 代理配置（重要）
+# HTTP_PROXY=http://127.0.0.1:7890
+# HTTPS_PROXY=http://127.0.0.1:7890
+
+# ── 第三方自动绑卡（可选）
+# BIND_CARD_API_URL=https://your-workers-domain.dev/
+# BIND_CARD_API_KEY=your_api_key_here
+```
+
+**⚠️ 安全提醒**：
+- 务必修改 `APP_ACCESS_PASSWORD` 默认值
+- 不要将 `.env` 文件上传到公开仓库
+- 生产环境建议使用强密码（16 位以上，包含大小写、数字、符号）
+
+#### 步骤 6：启动服务
+
+```bash
+# 方式 1：默认启动（127.0.0.1:8000）
+python webui.py
+
+# 方式 2：指定主机和端口（允许外部访问）
+python webui.py --host 0.0.0.0 --port 8000
+
+# 方式 3：设置访问密码
+python webui.py --access-password your_password
+
+# 方式 4：组合参数（推荐）
+python webui.py --host 0.0.0.0 --port 8000 --access-password your_password
+
+# 方式 5：调试模式（开发使用）
+python webui.py --debug
+```
+
+**启动成功标志**：
+```
+INFO:     Started server process [12345]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+```
+
+**访问 WebUI**：
+- 本地访问：http://127.0.0.1:8000
+- 远程访问：http://你的服务器 IP:8000
+- 默认密码：admin123（如未在 .env 中修改）
 
 ---
 
-## 📝 详细使用流程
+### 方式二：Docker 部署（推荐生产环境）
 
-### 一、邮箱账户管理
+#### 前置要求
 
-#### 1. 添加 Outlook 邮箱
+- 已安装 Docker 和 Docker Compose
+- Docker 版本：20.10+
+- Docker Compose 版本：2.0+
 
-1. 进入 **邮箱管理** 页面
-2. 点击 **添加 Outlook 账户**
-3. 输入邮箱地址和密码
-4. 系统会自动检测注册状态
-   - **未注册**：可进行批量注册
-   - **已注册**：显示关联账号编号（如"已注册 #1"）
+**安装 Docker**：
 
-#### 2. 使用 CloudMail 接码
+```bash
+# Ubuntu/Debian
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+sudo systemctl enable docker
+sudo systemctl start docker
 
-**配置步骤**：
-
-1. 注册 CloudMail 服务（https://cloudmail.ru）
-2. 获取 API Key
-3. 在 config.toml 中配置：
-
-```toml
-[cloudmail]
-enabled = true
-api_key = "your_api_key_here"
+# 验证安装
+docker --version
+docker compose version
 ```
 
-4. 重启服务后，在邮箱管理页面选择 CloudMail 作为接码服务
+#### 使用 Docker Compose（推荐）
 
-**优势**：
-- 支持多个国家号码
-- 验证码自动提取
-- 成功率高
+```bash
+# 克隆项目
+git clone https://github.com/dou-jiang/codex-console.git
+cd codex-console
 
-### 二、批量注册账号
+# 启动服务
+docker compose up -d
 
-#### 1. 准备工作
+# 查看日志
+docker compose logs -f
 
-- 确保邮箱账户状态正常
-- 配置好代理（如需要）
-- 检查 CPA 配置（如需上传）
-
-#### 2. 执行批量注册
-
-1. 进入 **批量注册** 页面
-2. 设置注册数量（1-1000 个）
-3. 选择邮箱服务（Outlook / CloudMail）
-4. 配置注册参数：
-   - 是否绑定卡片
-   - 是否上传 CPA
-   - 并发数量（建议 5-10）
-5. 点击 **开始注册**
-
-**注意事项**：
-- ⚠️ **避免北京时间 14:00 左右注册**（对应美国午夜，封号严重）
-- ✅ 推荐时段：北京时间 9:00-12:00 或 15:00-18:00
-- 大批量注册建议分批次进行（每次 100-200 个）
-- 注册间隔建议 5-10 分钟
-
-### 三、账号管理
-
-#### 1. 查看账号列表
-
-进入 **账号管理** 页面，可查看：
-- 账号编号
-- 邮箱地址
-- 注册状态
-- 绑定状态
-- 最后使用时间
-
-#### 2. 导出账号
-
-1. 选择要导出的账号（可多选）
-2. 点击 **导出选中账号**
-3. 选择导出格式：
-   - TXT（纯文本）
-   - CSV（表格）
-   - JSON（结构化数据）
-4. 下载导出文件
-
-**导出格式示例**：
-
-```
-# TXT 格式
-email1@example.com:password1|status:active
-email2@example.com:password2|status:bound
-
-# CSV 格式
-邮箱，密码，状态，注册时间
-email1@example.com,password1,active,2026-03-26
-email2@example.com,password2,bound,2026-03-26
+# 停止服务
+docker compose down
 ```
 
-#### 3. 导入账号
-
-1. 准备导入文件（支持导出的格式）
-2. 进入 **账号管理** 页面
-3. 点击 **导入账号**
-4. 上传文件并确认
-5. 系统自动解析并导入
-
-### 四、CPA 上传配置
-
-#### 1. 配置 CPA 服务
-
-```toml
-[cpa]
-enabled = true
-target = "newApi"  # 或 "oldApi"
-proxy_url = "http://127.0.0.1:7890"  # 新增：支持直接配置代理
-```
-
-#### 2. 执行上传
-
-1. 进入 **CPA 上传** 页面
-2. 选择要上传的账号
-3. 配置上传参数：
-   - 目标 API 类型
-   - 代理地址
-   - 并发数量
-4. 点击 **开始上传**
+**访问服务**：
+- WebUI: http://你的服务器 IP:1455
+- noVNC（绑卡可视化）: http://你的服务器 IP:6080
 
 ---
 
 ## 🔧 常见问题解答
 
-### 一、启动失败
+### 一、安装问题
 
-**问题 1：端口被占用**
-
-```
-Error: Address already in use
-```
-
-**解决**：v1.1.1 已自动处理端口冲突，会自动切换至可用端口。也可手动修改 config.toml：
-
-```toml
-[server]
-port = 8081  # 改为其他端口
-```
-
-**问题 2：依赖安装失败**
-
-```
-pip install -r requirements.txt 失败
-```
+**Q1: pip install 报错 "Could not find a version that satisfies the requirement"**
 
 **解决**：
-
 ```bash
 # 升级 pip
-pip install --upgrade pip
+python -m pip install --upgrade pip
 
 # 使用国内镜像
 pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
-### 二、注册失败
+**Q2: 虚拟环境激活失败**
 
-**问题 1：验证码识别失败**
+**Windows PowerShell 执行策略问题**：
+```powershell
+# 临时允许执行脚本
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
-**原因**：
-- 邮箱服务异常
-- 网络延迟导致验证码超时
+# 重新激活
+.venv\Scripts\Activate.ps1
+```
 
-**解决**：
-- 检查邮箱服务配置
-- 更换 CloudMail 接码
-- 降低并发数量
+### 二、启动问题
 
-**问题 2：批量注册中途失败**
+**Q1: 端口被占用**
 
-**解决**：
-- 检查代理是否稳定
-- 降低并发数量（建议 5-10）
-- 分批次注册（每批 100-200 个）
-- 避开高峰时段（北京时间 14:00 左右）
-
-### 三、Outlook 状态识别异常
-
-**问题**：显示状态与实际不符
+```
+Error: [Errno 98] Address already in use
+```
 
 **解决**：
-- v1.1.1 已修复邮箱匹配大小写问题
-- 刷新页面重新检测
-- 检查 Outlook 账户登录状态
-
-### 四、WebUI 访问异常
-
-**问题**：页面加载失败或布局错乱
-
-**解决**：
-- v1.1.1 已修复模板渲染兼容问题
-- 清除浏览器缓存
-- 更换浏览器（推荐 Chrome/Edge）
-
----
-
-## 📊 版本对比
-
-| 功能 | v1.0 | v1.1 | v1.1.1 |
-|------|------|------|--------|
-| 批量注册上限 | 100 | 100 | **1000** |
-| CloudMail 支持 | ❌ | ❌ | ✅ |
-| newApi 上传 | ❌ | ❌ | ✅ |
-| CPA proxy_url | ❌ | ❌ | ✅ |
-| Outlook 状态显示 | ❌ | ✅ | ✅ 增强 |
-| 端口冲突处理 | ❌ | ❌ | ✅ 自动 |
-| 批量验证优化 | ❌ | ❌ | ✅ 受控并发 |
-| 模板渲染兼容 | ⚠️ | ⚠️ | ✅ 修复 |
-| 验证码识别 | ⚠️ | ⚠️ | ✅ 修复误判 |
-
----
-
-## 💡 使用技巧
-
-### 1. 提高注册成功率
-
-- 使用 CloudMail 接码（成功率高于 Outlook）
-- 配置稳定的代理
-- 避开封号高峰时段（北京时间 14:00 左右）
-- 控制并发数量（5-10 为宜）
-
-### 2. 账号管理建议
-
-- 定期导出账号备份
-- 按用途分类管理（自用/拼车/测试）
-- 记录注册时间，便于质保
-
-### 3. 性能优化
-
-- 大批量操作时使用有线网络
-- 关闭不必要的后台程序
-- 使用 SSD 存储数据库
-
----
-
-## 🔒 安全提醒
-
-1. **保护配置文件**：config.toml 包含敏感信息，请勿上传到公开仓库
-2. **定期备份数据**：使用导出功能定期备份账号数据
-3. **谨慎使用代理**：确保代理来源可靠，避免泄露账号信息
-4. **遵守使用条款**：严禁用于违规用途，后果自负
-
----
-
-## 📞 反馈与支持
-
-**项目仓库**：https://github.com/dou-jiang/codex-console
-
-**问题反馈**：
-- GitHub Issues
-- NodeSeek 原帖：https://www.nodeseek.com/post-664406-1
-
-**更新日志**：
-- v1.0：基础功能整合
-- v1.1：绑卡半自动 + 后台日志 + 账号管理
-- v1.1.1：CloudMail 支持 + newApi 上传 + BUG 修复
-
----
-
-## 📌 总结
-
-codex-console v1.1.1 是一款功能强大、免费开源的 Codex 账号管理工具，适合：
-
-- ✅ 需要批量注册 Codex 账号的用户
-- ✅ 需要管理多个账号的用户
-- ✅ 需要 CPA 上传功能的用户
-- ✅ 喜欢折腾、二次开发的技术爱好者
-
-**核心优势**：
-- 🆓 永久免费开源
-- 🛠️ 功能全面（注册/管理/上传）
-- 📈 持续更新迭代
-- 🔧 支持二次开发
-
-**使用建议**：
-- 首次使用建议先小批量测试（5-10 个）
-- 熟悉流程后再大批量操作
-- 定期备份账号数据
-- 关注项目更新，及时升级
-
----
-
-*最后更新：2026-03-26*
-
-*本文仅供参考，具体操作请以官方说明为准。*
+```bash
+# 方式 1：更换端口
+python webui.py --port

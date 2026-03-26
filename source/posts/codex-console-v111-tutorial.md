@@ -522,7 +522,6 @@ Error: [Errno 98] Address already in use
 python webui.py --port
 ---
 
-{{< rawhtml >}}
 ## 💖 赞赏支持
 
 <div style="margin: 50px 0; padding: 30px 20px; border: 3px dashed #ff6b6b; border-radius: 15px; background: linear-gradient(135deg, #fff5f5 0%, #fff0f0 100%); text-align: center; box-shadow: 0 4px 15px rgba(255, 107, 107, 0.15);">
@@ -548,4 +547,3 @@ python webui.py --port
     <p style="color: #ff6b6b; font-weight: bold; font-size: 1.1em; margin: 0;">🎉 感谢您的支持！</p>
   </div>
 </div>
-{{< /rawhtml >}}

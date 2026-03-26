@@ -69,8 +69,8 @@ paginate = 10
   
   # Google AdSense
   [params.adsense]
-    enabled = false
-    client = "ca-pub-xxxxxxxxxxxxxxxx"  # 替换为你的 AdSense 客户 ID
+    enabled = true
+    client = "ca-pub-2336550233412374"
 
 [markup]
   [markup.goldmark.renderer]

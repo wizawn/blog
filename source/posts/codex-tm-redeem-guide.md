@@ -1,7 +1,7 @@
 ---
 title: "CodeX TM 兑换码使用教程 - 详细步骤与常见问题解答"
 date: 2026-03-25T14:35:00+00:00
-lastmod: 2026-03-26T09:25:00+00:00
+lastmod: 2026-03-26T09:28:00+00:00
 categories: ["tech"]
 tags: ["tutorial", "codex", "guide"]
 draft: false
@@ -430,6 +430,27 @@ codex whoami
 2. **兑换时**：多个兑换码请间隔使用
 3. **兑换后**：及时检查邮箱（包括垃圾邮件箱）
 4. **遇到问题**：先沟通，我们会尽力解决
+
+---
+
+## 🛒 购买渠道
+
+### 闲鱼店铺
+
+**商品**：Business Teams 席位/停车位拼车名额
+
+**店铺链接**：[https://m.tb.cn/h.i7QE4Wd?tk=p30e5bSCPx2](https://m.tb.cn/h.i7QE4Wd?tk=p30e5bSCPx2)
+
+**商品海报**：
+
+<img src="/images/codex-tm-poster.jpg" alt="Codex TM 兑换码商品海报" style="max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 5px;">
+
+**购买流程**：
+1. 点击上述链接访问闲鱼店铺
+2. 选择需要的商品规格（席位数量）
+3. 下单付款
+4. 等待卖家发货（自动发送兑换码）
+5. 根据兑换码在本教程上方进行兑换
 
 ---
 

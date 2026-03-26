@@ -441,10 +441,11 @@ codex whoami
 
 **店铺链接**：[https://m.tb.cn/h.i7QE4Wd?tk=p30e5bSCPx2](https://m.tb.cn/h.i7QE4Wd?tk=p30e5bSCPx2)
 
-**商品海报**：
+**收款码**：
 
-<img src="https://imgloc.com/i/OHuLEH" alt="微信收款码" style="max-width: 200px; height: auto; border: 1px solid #ddd; border-radius: 5px;">
-<img src="https://imgloc.com/i/OHuSqN" alt="支付宝收款码" style="max-width: 200px; height: auto; border: 1px solid #ddd; border-radius: 5px;">
+**微信**：![微信收款码](https://imgloc.com/image/OHuLEH)
+
+**支付宝**：![支付宝收款码](https://imgloc.com/image/OHuSqN)
 
 **购买流程**：
 1. 点击上述链接访问闲鱼店铺

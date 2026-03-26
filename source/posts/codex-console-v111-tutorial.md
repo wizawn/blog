@@ -11,9 +11,13 @@ draft: false
 
 > ❤️ **写教程不易，如果对您有帮助，欢迎赞赏支持！**
 > 
-> 微信收款码：![微信收款码](https://blog.caowo.de/images/wechat-pay.jpg)
+> **微信收款码**：
 > 
-> 支付宝收款码：![支付宝收款码](https://blog.caowo.de/images/alipay.jpg)
+> ![微信收款码](https://imgloc.com/image/OHuLEH)
+> 
+> **支付宝收款码**：
+> 
+> ![支付宝收款码](https://imgloc.com/image/OHuSqN)
 > 
 > 感谢您的支持！🎉
 

@@ -1,7 +1,7 @@
 ---
 title: "CodeX TM 兑换码使用教程 - 详细步骤与常见问题解答"
 date: 2026-03-25T14:35:00+00:00
-lastmod: 2026-03-26T08:00:00+00:00
+lastmod: 2026-03-26T08:42:00+00:00
 categories: ["tech"]
 tags: ["tutorial", "codex", "guide"]
 draft: false
@@ -286,8 +286,6 @@ https://codextm.xyz
 **步骤三：刷新页面重新登录**
 
 刷新页面重新登录即可，如果还不行的话请确保邮件已经确认加入新空间并已经选择新空间。
-
-<img src="https://cdn.nodeimage.com/i/FRYkedxg9eOQFyudKiDSetiA8X7MhQMM.webp" alt="刷新页面" style="max-width: 100%; height: auto;">
 
 ---
 

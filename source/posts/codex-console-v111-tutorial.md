@@ -1,7 +1,7 @@
 ---
 title: "Codex Console v1.1.1 超详细保姆级教程 - 从零到一完整部署指南（2026 最新版）"
 date: 2026-03-26T09:15:00+00:00
-lastmod: 2026-03-26T09:28:00+00:00
+lastmod: 2026-03-26T09:30:00+00:00
 categories: ["tech"]
 tags: ["tutorial", "codex", "guide", "open-source", "step-by-step"]
 draft: false
@@ -25,9 +25,11 @@ draft: false
 - **当前版本**：v1.1.1
 
 **购买与售后**：
+- **微信**：`GOV-HACK`（添加请备注"兑换码购买"）
+- **QQ**：`46333839`（工作日 9:00-18:00 在线）
 - **闲鱼店铺**：[https://m.tb.cn/h.i7QE4Wd?tk=p30e5bSCPx2](https://m.tb.cn/h.i7QE4Wd?tk=p30e5bSCPx2)
 - **商品**：Business Teams 席位/停车位拼车名额
-- **售后支持**：请在闲鱼私信联系
+- **售后支持**：微信/QQ/闲鱼私信均可联系
 
 **商品海报**：
 

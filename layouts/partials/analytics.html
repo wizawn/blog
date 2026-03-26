@@ -1,0 +1,31 @@
+{{/* 访问统计代码 */}}
+
+{{/* Google Analytics 4 */}}
+{{- if and .Site.Params.googleAnalytics.enabled .Site.Params.googleAnalytics.id -}}
+{{- if ne .Site.Params.googleAnalytics.id "G-XXXXXXXXXX" -}}
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ .Site.Params.googleAnalytics.id }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '{{ .Site.Params.googleAnalytics.id }}', {
+    'anonymize_ip': true
+  });
+</script>
+{{- end -}}
+{{- end -}}
+
+{{/* 百度统计 */}}
+{{- if and .Site.Params.baiduAnalytics.enabled .Site.Params.baiduAnalytics.id -}}
+{{- if ne .Site.Params.baiduAnalytics.id "xxxxxxxxxxxxxxxx" -}}
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?{{ .Site.Params.baiduAnalytics.id }}";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+{{- end -}}
+{{- end -}}

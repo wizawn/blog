@@ -1,0 +1,747 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Api-Proxy on 言零的博客</title><link>https://blog.caowo.de/tags/api-proxy/</link><description>Recent content in Api-Proxy on 言零的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 26 Mar 2026 11:35:00 +0000</lastBuildDate><atom:link href="https://blog.caowo.de/tags/api-proxy/index.xml" rel="self" type="application/rss+xml"/><item><title>Codex Tools v1.5.4 超详细教程 - 多账号管理 + API 反代完整指南（2026 最新版）</title><link>https://blog.caowo.de/posts/codex-tools-tutorial/</link><pubDate>Thu, 26 Mar 2026 11:35:00 +0000</pubDate><guid>https://blog.caowo.de/posts/codex-tools-tutorial/</guid><description>&lt;h2 id="-前言"&gt;📋 前言
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;这是一篇真正的零基础保姆级教程&lt;/strong&gt;，我会手把手带你从零开始，完整了解和使用 &lt;strong&gt;Codex Tools v1.5.4&lt;/strong&gt;——一款基于 React + Tauri 的桌面工具，用来管理多个 Codex 账号，并提供本地 API 反代能力。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;本教程特点&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;✅ &lt;strong&gt;完全从零开始&lt;/strong&gt;：假设你没有任何开发基础&lt;/li&gt;
+&lt;li&gt;✅ &lt;strong&gt;真实测试验证&lt;/strong&gt;：所有步骤都已实际测试通过&lt;/li&gt;
+&lt;li&gt;✅ &lt;strong&gt;包含所有坑点&lt;/strong&gt;：把可能遇到的问题都提前说明&lt;/li&gt;
+&lt;li&gt;✅ &lt;strong&gt;持续更新维护&lt;/strong&gt;：跟随项目版本同步更新&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;项目信息&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;GitHub 仓库&lt;/strong&gt;：https://github.com/170-carry/codex-tools&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;当前版本&lt;/strong&gt;：v1.5.4&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;技术栈&lt;/strong&gt;：React + Tauri (Rust)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;支持系统&lt;/strong&gt;：macOS / Windows&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;许可证&lt;/strong&gt;：MIT（免费开源）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-重要声明"&gt;⚠️ 重要声明
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;本项目仅供学习研究&lt;/strong&gt;：请遵守 OpenAI 相关服务条款&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;严禁用于违规用途&lt;/strong&gt;：不要用于滥用、非法用途&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;风险自担&lt;/strong&gt;：因使用本项目产生的风险和后果由使用者自行承担&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;免费开源&lt;/strong&gt;：任何付费版本均为倒卖行为&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id="-核心功能"&gt;🎯 核心功能
+&lt;/h2&gt;&lt;h3 id="1-多账号管理"&gt;1. 多账号管理
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;✅ 支持 OAuth 登录导入&lt;/li&gt;
+&lt;li&gt;✅ 支持 JSON 文件批量导入&lt;/li&gt;
+&lt;li&gt;✅ 支持读取文件夹下的全部账号文件&lt;/li&gt;
+&lt;li&gt;✅ 导入后保留当前本机登录态&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="2-用量查看与智能切换"&gt;2. 用量查看与智能切换
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;✅ 展示每个账号的 &lt;strong&gt;5 小时&lt;/strong&gt; 用量窗口&lt;/li&gt;
+&lt;li&gt;✅ 展示每个账号的 &lt;strong&gt;1 周&lt;/strong&gt; 用量窗口&lt;/li&gt;
+&lt;li&gt;✅ 显示计划类型（Free/Plus/Team 等）&lt;/li&gt;
+&lt;li&gt;✅ 支持手动刷新和定时自动刷新&lt;/li&gt;
+&lt;li&gt;✅ 支持按余量排序和智能切换&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="3-一键切换账号"&gt;3. 一键切换账号
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;✅ 一键切换账号并启动 Codex&lt;/li&gt;
+&lt;li&gt;✅ 找不到桌面应用时自动回退到 &lt;code&gt;codex app&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;✅ 可选同步 Opencode OpenAI 授权&lt;/li&gt;
+&lt;li&gt;✅ 可选在切换后重启已选编辑器&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="4-api-反代核心功能"&gt;4. API 反代（核心功能）
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;✅ 本地提供 OpenAI 兼容的 &lt;code&gt;/v1&lt;/code&gt; 接口&lt;/li&gt;
+&lt;li&gt;✅ 使用已登录的 Codex 账号作为上游&lt;/li&gt;
+&lt;li&gt;✅ 支持固定端口、自定义端口&lt;/li&gt;
+&lt;li&gt;✅ 支持固定 API Key 和手动刷新&lt;/li&gt;
+&lt;li&gt;✅ 按账号余量自动挑选可用账号转发&lt;/li&gt;
+&lt;li&gt;✅ 可设置应用启动时自动启动 API 反代&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="5-公网访问与桌面能力"&gt;5. 公网访问与桌面能力
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;✅ 集成 cloudflared，可将本地反代暴露到公网&lt;/li&gt;
+&lt;li&gt;✅ 支持快速隧道和命名隧道&lt;/li&gt;
+&lt;li&gt;✅ 可选 HTTP/2 协议&lt;/li&gt;
+&lt;li&gt;✅ 支持后台驻留、状态栏菜单&lt;/li&gt;
+&lt;li&gt;✅ 支持应用内更新和多语言界面&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-环境准备"&gt;🖥️ 环境准备
+&lt;/h2&gt;&lt;h3 id="系统要求"&gt;系统要求
+&lt;/h3&gt;&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;系统&lt;/th&gt;
+ &lt;th&gt;版本要求&lt;/th&gt;
+ &lt;th&gt;推荐度&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;macOS&lt;/td&gt;
+ &lt;td&gt;macOS 10.15+&lt;/td&gt;
+ &lt;td&gt;⭐⭐⭐⭐⭐&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Windows&lt;/td&gt;
+ &lt;td&gt;Windows 10/11 (64 位)&lt;/td&gt;
+ &lt;td&gt;⭐⭐⭐⭐&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Linux&lt;/td&gt;
+ &lt;td&gt;暂不支持&lt;/td&gt;
+ &lt;td&gt;❌&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="前置软件"&gt;前置软件
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;如果你只是使用（不开发）&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;✅ 不需要安装任何额外软件&lt;/li&gt;
+&lt;li&gt;✅ 直接下载安装包即可&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;如果你要开发/打包&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Node.js 20+&lt;/li&gt;
+&lt;li&gt;Rust stable&lt;/li&gt;
+&lt;li&gt;pnpm 9.15.9+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;查看系统版本&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# macOS&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sw_vers
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Windows (PowerShell)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;systeminfo &lt;span class="p"&gt;|&lt;/span&gt; findstr /B /C:&lt;span class="s2"&gt;&amp;#34;OS Name&amp;#34;&lt;/span&gt; /C:&lt;span class="s2"&gt;&amp;#34;OS Version&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="-安装部署3-种方式"&gt;📦 安装部署（3 种方式）
+&lt;/h2&gt;&lt;h3 id="方式一下载预编译版本推荐新手"&gt;方式一：下载预编译版本（推荐新手）
+&lt;/h3&gt;&lt;h4 id="步骤-1访问发布页面"&gt;步骤 1：访问发布页面
+&lt;/h4&gt;&lt;p&gt;打开浏览器访问：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;GitHub Releases&lt;/strong&gt;：https://github.com/170-carry/codex-tools/releases&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="步骤-2下载对应版本"&gt;步骤 2：下载对应版本
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;macOS 用户&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Intel 芯片：下载 &lt;code&gt;Codex_Tools_x64.dmg&lt;/code&gt; 或 &lt;code&gt;Codex_Tools_x64.app.tar.gz&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Apple Silicon (M1/M2/M3)：下载 &lt;code&gt;Codex_Tools_aarch64.dmg&lt;/code&gt; 或 &lt;code&gt;Codex_Tools_aarch64.app.tar.gz&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Windows 用户&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;下载 &lt;code&gt;Codex_Tools_x64-setup.exe&lt;/code&gt; 或 &lt;code&gt;Codex_Tools_x64.zip&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="步骤-3安装应用"&gt;步骤 3：安装应用
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;macOS&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;双击 &lt;code&gt;.dmg&lt;/code&gt; 文件&lt;/li&gt;
+&lt;li&gt;将 &lt;code&gt;Codex Tools.app&lt;/code&gt; 拖拽到「应用程序」文件夹&lt;/li&gt;
+&lt;li&gt;如果提示&amp;quot;已损坏&amp;quot;，执行以下命令修复：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo spctl --master-disable
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo xattr -r -d com.apple.quarantine /Applications/Codex&lt;span class="se"&gt;\ &lt;/span&gt;Tools.app
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Windows&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;双击 &lt;code&gt;.exe&lt;/code&gt; 安装包&lt;/li&gt;
+&lt;li&gt;按照安装向导完成安装&lt;/li&gt;
+&lt;li&gt;或在开始菜单找到应用&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id="步骤-4首次启动"&gt;步骤 4：首次启动
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;打开「应用程序」文件夹（macOS）或开始菜单（Windows）&lt;/li&gt;
+&lt;li&gt;找到并打开 &lt;code&gt;Codex Tools&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;首次启动可能会提示确认，点击&amp;quot;打开&amp;quot;即可&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h3 id="方式二源码安装适合开发者"&gt;方式二：源码安装（适合开发者）
+&lt;/h3&gt;&lt;h4 id="步骤-1安装前置环境"&gt;步骤 1：安装前置环境
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;安装 Node.js 20+&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# macOS (使用 Homebrew)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;brew install node@20
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Windows&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 访问 https://nodejs.org/ 下载安装包&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 验证安装&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;node --version &lt;span class="c1"&gt;# 应显示 v20.x.x&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;安装 Rust&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# macOS/Linux&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl --proto &lt;span class="s1"&gt;&amp;#39;=https&amp;#39;&lt;/span&gt; --tlsv1.2 -sSf https://sh.rustup.rs &lt;span class="p"&gt;|&lt;/span&gt; sh
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;source&lt;/span&gt; &lt;span class="nv"&gt;$HOME&lt;/span&gt;/.cargo/env
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Windows&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 访问 https://rustup.rs/ 下载 rustup-init.exe&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 验证安装&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;rustc --version &lt;span class="c1"&gt;# 应显示 rustc 1.x.x&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;安装 pnpm&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;npm install -g pnpm
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 验证安装&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;pnpm --version &lt;span class="c1"&gt;# 应显示 9.15.9+&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="步骤-2克隆项目"&gt;步骤 2：克隆项目
+&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 选择安装目录&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /tmp &lt;span class="c1"&gt;# macOS/Linux&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 或 D:\tools # Windows&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 克隆项目&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git clone https://github.com/170-carry/codex-tools.git
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 进入项目目录&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; codex-tools
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="步骤-3安装依赖"&gt;步骤 3：安装依赖
+&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 安装 Node.js 依赖&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;pnpm install
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 安装时间：约 2-5 分钟（取决于网络）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="步骤-4启动开发环境"&gt;步骤 4：启动开发环境
+&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 启动桌面应用（开发模式）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;pnpm run tauri dev
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 启动时间：约 30-60 秒&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 启动后会打开应用窗口&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;开发模式特点&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;✅ 支持热重载&lt;/li&gt;
+&lt;li&gt;✅ 修改代码后自动刷新&lt;/li&gt;
+&lt;li&gt;✅ 控制台会显示日志&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id="方式三自行打包适合高级用户"&gt;方式三：自行打包（适合高级用户）
+&lt;/h3&gt;&lt;h4 id="步骤-1完成方式二的所有步骤"&gt;步骤 1：完成方式二的所有步骤
+&lt;/h4&gt;&lt;h4 id="步骤-2执行打包命令"&gt;步骤 2：执行打包命令
+&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# macOS&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;pnpm run tauri build
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Windows&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;pnpm run tauri build
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;打包时间&lt;/strong&gt;：约 5-15 分钟（首次打包需要编译 Rust 代码）&lt;/p&gt;
+&lt;h4 id="步骤-3查找打包产物"&gt;步骤 3：查找打包产物
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;macOS&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ls -la src-tauri/target/release/bundle/dmg/
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ls -la src-tauri/target/release/bundle/macos/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Windows&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dir src-tauri&lt;span class="se"&gt;\t&lt;/span&gt;arget&lt;span class="se"&gt;\r&lt;/span&gt;elease&lt;span class="se"&gt;\b&lt;/span&gt;undle&lt;span class="se"&gt;\m&lt;/span&gt;si&lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dir src-tauri&lt;span class="se"&gt;\t&lt;/span&gt;arget&lt;span class="se"&gt;\r&lt;/span&gt;elease&lt;span class="se"&gt;\b&lt;/span&gt;undle&lt;span class="se"&gt;\a&lt;/span&gt;pp&lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;产物说明&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;.dmg&lt;/code&gt; / &lt;code&gt;.app&lt;/code&gt; - macOS 安装包&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.exe&lt;/code&gt; / &lt;code&gt;.msi&lt;/code&gt; - Windows 安装包&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-界面介绍"&gt;🎨 界面介绍
+&lt;/h2&gt;&lt;h3 id="主界面布局"&gt;主界面布局
+&lt;/h3&gt;&lt;pre tabindex="0"&gt;&lt;code&gt;┌─────────────────────────────────────────┐
+│ Codex Tools [设置] │
+├─────────────────────────────────────────┤
+│ │
+│ ┌─────────────────────────────────┐ │
+│ │ 账号列表 │ │
+│ │ ┌─────────────────────────────┐ │ │
+│ │ │ 🟢 账号 1 (Free) │ │ │
+│ │ │ 5h: 2.5h / 1w: 15h │ │ │
+│ │ └─────────────────────────────┘ │ │
+│ │ ┌─────────────────────────────┐ │ │
+│ │ │ 🟡 账号 2 (Plus) │ │ │
+│ │ │ 5h: 4.8h / 1w: 20h │ │ │
+│ │ └─────────────────────────────┘ │ │
+│ └─────────────────────────────────┘ │
+│ │
+│ [刷新] [切换账号] [启动 Codex] │
+│ │
+├─────────────────────────────────────────┤
+│ [账号管理] [API 反代] [设置] [关于] │
+└─────────────────────────────────────────┘
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id="底部导航栏"&gt;底部导航栏
+&lt;/h3&gt;&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;标签&lt;/th&gt;
+ &lt;th&gt;功能&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;账号管理&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;查看和管理所有账号&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;API 反代&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;配置和启动 API 代理服务&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;设置&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;应用设置和偏好配置&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;关于&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;版本信息和帮助&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id="-详细使用教程"&gt;🔧 详细使用教程
+&lt;/h2&gt;&lt;h3 id="一导入账号"&gt;一、导入账号
+&lt;/h3&gt;&lt;h4 id="方法-1oauth-登录导入推荐"&gt;方法 1：OAuth 登录导入（推荐）
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;点击「账号管理」标签&lt;/li&gt;
+&lt;li&gt;点击「+ 添加账号」按钮&lt;/li&gt;
+&lt;li&gt;选择「OAuth 登录」&lt;/li&gt;
+&lt;li&gt;应用会自动生成授权链接并打开浏览器&lt;/li&gt;
+&lt;li&gt;在浏览器中登录你的 Codex/ChatGPT 账号&lt;/li&gt;
+&lt;li&gt;授权完成后会自动跳转回应用&lt;/li&gt;
+&lt;li&gt;账号会自动导入并保存&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;优点&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;✅ 最简单快捷&lt;/li&gt;
+&lt;li&gt;✅ 自动获取完整认证信息&lt;/li&gt;
+&lt;li&gt;✅ 不需要手动操作文件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="方法-2上传-json-文件"&gt;方法 2：上传 JSON 文件
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;点击「账号管理」标签&lt;/li&gt;
+&lt;li&gt;点击「+ 添加账号」按钮&lt;/li&gt;
+&lt;li&gt;选择「导入 JSON 文件」&lt;/li&gt;
+&lt;li&gt;选择一个或多个 &lt;code&gt;.json&lt;/code&gt; 账号文件&lt;/li&gt;
+&lt;li&gt;点击「导入」&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;JSON 文件格式&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;label&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;我的账号 1&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;account_id&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;xxx-xxx-xxx&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;auth_json&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;access_token&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;xxx&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;refresh_token&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;xxx&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;session_token&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;xxx&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;plan_type&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;free&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="方法-3读取文件夹"&gt;方法 3：读取文件夹
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;点击「账号管理」标签&lt;/li&gt;
+&lt;li&gt;点击「+ 添加账号」按钮&lt;/li&gt;
+&lt;li&gt;选择「读取文件夹」&lt;/li&gt;
+&lt;li&gt;选择包含多个 &lt;code&gt;.json&lt;/code&gt; 文件的文件夹&lt;/li&gt;
+&lt;li&gt;应用会自动读取所有账号文件&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;适用场景&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;✅ 有大量账号需要批量导入&lt;/li&gt;
+&lt;li&gt;✅ 从其他工具迁移账号&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="方法-4同步当前设备登录"&gt;方法 4：同步当前设备登录
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;确保你已经在 Codex 桌面应用或网页版登录&lt;/li&gt;
+&lt;li&gt;点击「账号管理」标签&lt;/li&gt;
+&lt;li&gt;点击「+ 添加账号」按钮&lt;/li&gt;
+&lt;li&gt;选择「同步当前登录」&lt;/li&gt;
+&lt;li&gt;应用会自动读取本机的登录凭证&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;⚠️ 只会同步当前登录的账号&lt;/li&gt;
+&lt;li&gt;⚠️ 不会覆盖正在使用的账号&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id="二查看账号用量"&gt;二、查看账号用量
+&lt;/h3&gt;&lt;h4 id="手动刷新"&gt;手动刷新
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;进入「账号管理」页面&lt;/li&gt;
+&lt;li&gt;点击「刷新」按钮&lt;/li&gt;
+&lt;li&gt;等待几秒钟，用量信息会更新&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id="自动刷新"&gt;自动刷新
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;进入「设置」页面&lt;/li&gt;
+&lt;li&gt;找到「用量自动刷新」选项&lt;/li&gt;
+&lt;li&gt;设置刷新间隔（默认 30 分钟）&lt;/li&gt;
+&lt;li&gt;开启自动刷新&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id="用量信息说明"&gt;用量信息说明
+&lt;/h4&gt;&lt;p&gt;每个账号会显示：&lt;/p&gt;
+&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;字段&lt;/th&gt;
+ &lt;th&gt;说明&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;5h 用量&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;过去 5 小时的使用时长&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;1w 用量&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;过去 1 周的使用时长&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;计划类型&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;Free / Plus / Team 等&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;状态&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;🟢 可用 / 🟡 受限 / 🔴 不可用&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id="按余量排序"&gt;按余量排序
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;点击「用量」列标题&lt;/li&gt;
+&lt;li&gt;账号会按余量从高到低排序&lt;/li&gt;
+&lt;li&gt;再次点击会从低到高排序&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h3 id="三切换账号并启动-codex"&gt;三、切换账号并启动 Codex
+&lt;/h3&gt;&lt;h4 id="一键切换"&gt;一键切换
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;在账号列表中选择一个可用账号&lt;/li&gt;
+&lt;li&gt;点击「切换账号」按钮&lt;/li&gt;
+&lt;li&gt;等待应用切换到目标账号&lt;/li&gt;
+&lt;li&gt;切换成功后会显示提示&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id="切换并启动-codex"&gt;切换并启动 Codex
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;在账号列表中选择一个可用账号&lt;/li&gt;
+&lt;li&gt;点击「启动 Codex」按钮&lt;/li&gt;
+&lt;li&gt;应用会：
+&lt;ul&gt;
+&lt;li&gt;切换到目标账号&lt;/li&gt;
+&lt;li&gt;自动启动 Codex 桌面应用&lt;/li&gt;
+&lt;li&gt;如果找不到桌面应用，会回退到 &lt;code&gt;codex app&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id="编辑器联动可选"&gt;编辑器联动（可选）
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;进入「设置」页面&lt;/li&gt;
+&lt;li&gt;找到「编辑器联动」部分&lt;/li&gt;
+&lt;li&gt;开启「切换账号后重启编辑器」&lt;/li&gt;
+&lt;li&gt;选择你的编辑器（Cursor / VSCode 等）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;效果&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;切换账号后会自动重启编辑器&lt;/li&gt;
+&lt;li&gt;编辑器会使用新的账号认证&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="opencode-授权同步可选"&gt;Opencode 授权同步（可选）
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;进入「设置」页面&lt;/li&gt;
+&lt;li&gt;找到「Opencode」部分&lt;/li&gt;
+&lt;li&gt;开启「同步 Opencode 授权」&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;效果&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;切换 Codex 账号时会同步更新 Opencode 的认证&lt;/li&gt;
+&lt;li&gt;适合同时使用两个工具的用户&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id="四api-反代核心功能"&gt;四、API 反代（核心功能）
+&lt;/h3&gt;&lt;h4 id="什么是-api-反代"&gt;什么是 API 反代？
+&lt;/h4&gt;&lt;p&gt;简单说，就是在你的电脑上运行一个本地的 API 服务，让其他工具可以通过 OpenAI 兼容的接口调用 Codex 能力。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;工作原理&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;客户端（如 Cursor） → 本地 API (127.0.0.1:8787) → Codex 上游
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id="启动-api-反代"&gt;启动 API 反代
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;点击底部导航栏的「API 反代」标签&lt;/li&gt;
+&lt;li&gt;设置端口号（默认 8787）&lt;/li&gt;
+&lt;li&gt;点击「启动」按钮&lt;/li&gt;
+&lt;li&gt;等待服务启动成功&lt;/li&gt;
+&lt;li&gt;界面会显示：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Base URL&lt;/strong&gt;: &lt;code&gt;http://127.0.0.1:8787/v1&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;API Key&lt;/strong&gt;: &lt;code&gt;sk-xxxxxxxx&lt;/code&gt;（自动生成）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id="在-cursor-中使用"&gt;在 Cursor 中使用
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;打开 Cursor&lt;/li&gt;
+&lt;li&gt;点击设置图标 → Cursor Settings&lt;/li&gt;
+&lt;li&gt;选择「Models」页面&lt;/li&gt;
+&lt;li&gt;开启「OpenAI API Key」&lt;/li&gt;
+&lt;li&gt;填入 API Key（从 Codex Tools 复制）&lt;/li&gt;
+&lt;li&gt;开启「Override OpenAI Base URL」&lt;/li&gt;
+&lt;li&gt;填入 Base URL：&lt;code&gt;http://127.0.0.1:8787/v1&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;在「Add or search model」中输入 &lt;code&gt;gpt-4&lt;/code&gt;（或其他支持的模型）&lt;/li&gt;
+&lt;li&gt;点击「Add Custom Model」&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;完成！&lt;/strong&gt; 现在你可以在 Cursor 中使用 Codex 的能力了。&lt;/p&gt;
+&lt;h4 id="在其他客户端中使用"&gt;在其他客户端中使用
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;通用配置&lt;/strong&gt;：&lt;/p&gt;
+&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;配置项&lt;/th&gt;
+ &lt;th&gt;值&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;API 类型&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;OpenAI Compatible&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;Base URL&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;http://127.0.0.1:8787/v1&lt;/code&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;API Key&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;sk-xxxxxxxx&lt;/code&gt;（从 Codex Tools 复制）&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;模型名称&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;gpt-4&lt;/code&gt; 或 &lt;code&gt;gpt-5&lt;/code&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;支持的工具&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;✅ Cursor&lt;/li&gt;
+&lt;li&gt;✅ VSCode (Continue 插件)&lt;/li&gt;
+&lt;li&gt;✅ JetBrains IDEs&lt;/li&gt;
+&lt;li&gt;✅ Any API 客户端&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="支持的接口"&gt;支持的接口
+&lt;/h4&gt;&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;接口&lt;/th&gt;
+ &lt;th&gt;说明&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;code&gt;GET /health&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;健康检查&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;code&gt;GET /v1/models&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;获取模型列表&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;code&gt;POST /v1/chat/completions&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;聊天补全（兼容 OpenAI）&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;code&gt;POST /v1/responses&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;Responses 接口&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id="请求示例"&gt;请求示例
+&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 健康检查&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl http://127.0.0.1:8787/health
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 获取模型列表&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl http://127.0.0.1:8787/v1/models &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s1"&gt;&amp;#39;Authorization: Bearer sk-xxxx&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 聊天补全&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl http://127.0.0.1:8787/v1/chat/completions &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s1"&gt;&amp;#39;Content-Type: application/json&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s1"&gt;&amp;#39;Authorization: Bearer sk-xxxx&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -d &lt;span class="s1"&gt;&amp;#39;{
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;model&amp;#34;: &amp;#34;gpt-4&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;messages&amp;#34;: [
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; {&amp;#34;role&amp;#34;: &amp;#34;user&amp;#34;, &amp;#34;content&amp;#34;: &amp;#34;1+1 等于几？&amp;#34;}
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; ]
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; }&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="自动启动-api-反代"&gt;自动启动 API 反代
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;进入「设置」页面&lt;/li&gt;
+&lt;li&gt;找到「API 反代」部分&lt;/li&gt;
+&lt;li&gt;开启「应用启动时自动启动」&lt;/li&gt;
+&lt;li&gt;设置端口和 API Key（可选）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;效果&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;✅ 每次打开应用都会自动启动 API 反代&lt;/li&gt;
+&lt;li&gt;✅ 不需要手动操作&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="公网访问cloudflared"&gt;公网访问（Cloudflared）
+&lt;/h4&gt;&lt;p&gt;如果你想让其他设备也能访问 API 反代：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;点击「API 反代」标签&lt;/li&gt;
+&lt;li&gt;找到「Cloudflared 公网访问」部分&lt;/li&gt;
+&lt;li&gt;选择隧道类型：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;快速隧道&lt;/strong&gt;：临时隧道，重启后失效&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;命名隧道&lt;/strong&gt;：持久隧道，需要配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;点击「启动隧道」&lt;/li&gt;
+&lt;li&gt;等待隧道建立成功&lt;/li&gt;
+&lt;li&gt;复制公网地址（如 &lt;code&gt;https://xxx.trycloudflare.com&lt;/code&gt;）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;⚠️ 公网访问会暴露你的 API 到互联网&lt;/li&gt;
+&lt;li&gt;⚠️ 请确保 API Key 足够安全&lt;/li&gt;
+&lt;li&gt;⚠️ 建议设置访问限制&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-故障排查"&gt;🔍 故障排查
+&lt;/h2&gt;&lt;h3 id="问题-1应用无法启动"&gt;问题 1：应用无法启动
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;macOS 提示&amp;quot;已损坏&amp;quot;&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo spctl --master-disable
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo xattr -r -d com.apple.quarantine /Applications/Codex&lt;span class="se"&gt;\ &lt;/span&gt;Tools.app
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Windows 闪退&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;右键应用 → 以管理员身份运行&lt;/li&gt;
+&lt;li&gt;检查是否有杀毒软件拦截&lt;/li&gt;
+&lt;li&gt;重新下载安装包&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="问题-2账号导入失败"&gt;问题 2：账号导入失败
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;OAuth 登录失败&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;检查网络连接&lt;/li&gt;
+&lt;li&gt;确保浏览器能正常访问 ChatGPT&lt;/li&gt;
+&lt;li&gt;清除浏览器缓存后重试&lt;/li&gt;
+&lt;li&gt;尝试使用 JSON 文件导入&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;JSON 文件导入失败&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;检查 JSON 格式是否正确&lt;/li&gt;
+&lt;li&gt;确保包含必要字段（&lt;code&gt;access_token&lt;/code&gt;, &lt;code&gt;account_id&lt;/code&gt;）&lt;/li&gt;
+&lt;li&gt;检查文件编码是否为 UTF-8&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="问题-3用量刷新失败"&gt;问题 3：用量刷新失败
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;检查账号是否已登录&lt;/li&gt;
+&lt;li&gt;检查网络连接&lt;/li&gt;
+&lt;li&gt;手动点击刷新按钮&lt;/li&gt;
+&lt;li&gt;如果所有账号都失败，可能是网络问题&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="问题-4api-反代无法启动"&gt;问题 4：API 反代无法启动
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;端口被占用&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# macOS/Linux&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;lsof -i :8787
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Windows&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;netstat -ano &lt;span class="p"&gt;|&lt;/span&gt; findstr :8787
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;解决方案&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;关闭占用端口的应用&lt;/li&gt;
+&lt;li&gt;或在 Codex Tools 中更换端口&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;API Key 无效&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;确保从「API 反代」页面复制正确的 API Key&lt;/li&gt;
+&lt;li&gt;检查是否有多余空格&lt;/li&gt;
+&lt;li&gt;尝试重新生成 API Key&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="问题-5cursor-无法连接"&gt;问题 5：Cursor 无法连接
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;检查 API 反代是否已启动&lt;/li&gt;
+&lt;li&gt;检查 Base URL 是否正确（&lt;code&gt;http://127.0.0.1:8787/v1&lt;/code&gt;）&lt;/li&gt;
+&lt;li&gt;检查 API Key 是否正确&lt;/li&gt;
+&lt;li&gt;尝试访问 &lt;code&gt;http://127.0.0.1:8787/health&lt;/code&gt; 确认服务正常&lt;/li&gt;
+&lt;li&gt;检查 Cursor 是否支持自定义 API&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id="-使用技巧"&gt;💡 使用技巧
+&lt;/h2&gt;&lt;h3 id="1-账号管理技巧"&gt;1. 账号管理技巧
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;定期刷新用量&lt;/strong&gt;：设置自动刷新，保持用量信息最新&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;按余量排序&lt;/strong&gt;：快速找到可用额度最高的账号&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;使用标签&lt;/strong&gt;：给账号添加标签（如&amp;quot;工作&amp;quot;、&amp;ldquo;个人&amp;rdquo;）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;备份账号&lt;/strong&gt;：定期导出账号 JSON 文件备份&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="2-api-反代技巧"&gt;2. API 反代技巧
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;固定端口&lt;/strong&gt;：避免每次启动端口变化&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;设置强 API Key&lt;/strong&gt;：不要使用默认的弱 Key&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;监控日志&lt;/strong&gt;：查看 API 调用日志，了解使用情况&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;限制访问&lt;/strong&gt;：如果开启公网访问，设置 IP 白名单&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="3-性能优化"&gt;3. 性能优化
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;关闭不用的功能&lt;/strong&gt;：如不需要 API 反代，可以关闭&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;减少自动刷新频率&lt;/strong&gt;：设置为 1 小时或更长&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;清理旧账号&lt;/strong&gt;：删除不再使用的账号&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-版本历史"&gt;📊 版本历史
+&lt;/h2&gt;&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;版本&lt;/th&gt;
+ &lt;th&gt;日期&lt;/th&gt;
+ &lt;th&gt;主要更新&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;v1.5.4&lt;/td&gt;
+ &lt;td&gt;2026-03&lt;/td&gt;
+ &lt;td&gt;修复端口占用、稳定性优化&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;v1.5.3&lt;/td&gt;
+ &lt;td&gt;2026-03&lt;/td&gt;
+ &lt;td&gt;修复稳定性问题&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;v1.5.0&lt;/td&gt;
+ &lt;td&gt;2026-03&lt;/td&gt;
+ &lt;td&gt;重做账号导入、OAuth 登录优化&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;v1.4.1&lt;/td&gt;
+ &lt;td&gt;2026-02&lt;/td&gt;
+ &lt;td&gt;去除工作区相关功能&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;v1.4.0&lt;/td&gt;
+ &lt;td&gt;2026-02&lt;/td&gt;
+ &lt;td&gt;支持自定义 Codex 路径&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;v1.3.2&lt;/td&gt;
+ &lt;td&gt;2026-02&lt;/td&gt;
+ &lt;td&gt;UI 优化&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;v1.0.0&lt;/td&gt;
+ &lt;td&gt;2026-01&lt;/td&gt;
+ &lt;td&gt;重构为 Tauri 应用&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id="-相关链接"&gt;🔗 相关链接
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;GitHub 仓库&lt;/strong&gt;：https://github.com/170-carry/codex-tools&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;问题反馈&lt;/strong&gt;：https://github.com/170-carry/codex-tools/issues&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;更新日志&lt;/strong&gt;：https://github.com/170-carry/codex-tools/blob/main/changelog.md&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;API 反代文档&lt;/strong&gt;：https://github.com/170-carry/codex-tools/blob/main/docs/api-proxy.md&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-总结"&gt;📝 总结
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Codex Tools&lt;/strong&gt; 是一款功能强大的多账号管理工具，核心优势：&lt;/p&gt;
+&lt;h3 id="-优点"&gt;✅ 优点
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;界面简洁，易于上手&lt;/li&gt;
+&lt;li&gt;支持多种账号导入方式&lt;/li&gt;
+&lt;li&gt;用量查看直观清晰&lt;/li&gt;
+&lt;li&gt;API 反代功能强大&lt;/li&gt;
+&lt;li&gt;支持公网访问&lt;/li&gt;
+&lt;li&gt;免费开源&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="-注意事项"&gt;⚠️ 注意事项
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;目前仅支持 macOS 和 Windows&lt;/li&gt;
+&lt;li&gt;Linux 暂不支持&lt;/li&gt;
+&lt;li&gt;公网访问需注意安全&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="-适用人群"&gt;🎯 适用人群
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;有多个 Codex 账号的用户&lt;/li&gt;
+&lt;li&gt;需要在多个工具间切换账号&lt;/li&gt;
+&lt;li&gt;需要使用 API 反代功能&lt;/li&gt;
+&lt;li&gt;开发者和技术爱好者&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;最后更新：2026-03-26&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;本教程基于 codex-tools v1.5.4 编写，具体操作请以实际版本为准。&lt;/em&gt;
+&lt;em&gt;使用本工具请遵守 OpenAI 相关服务条款，严禁用于违规用途。&lt;/em&gt;&lt;/p&gt;</description></item></channel></rss>

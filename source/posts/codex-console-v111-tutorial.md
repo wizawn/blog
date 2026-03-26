@@ -522,6 +522,7 @@ Error: [Errno 98] Address already in use
 python webui.py --port
 ---
 
+{{< rawhtml >}}
 ## 💖 赞赏支持
 
 <div style="margin: 50px 0; padding: 30px 20px; border: 3px dashed #ff6b6b; border-radius: 15px; background: linear-gradient(135deg, #fff5f5 0%, #fff0f0 100%); text-align: center; box-shadow: 0 4px 15px rgba(255, 107, 107, 0.15);">
@@ -534,11 +535,11 @@ python webui.py --port
   
   <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-bottom: 25px;">
     <div style="text-align: center; background: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);">
-      <img src="https://imgloc.com/i/OHuLEH" alt="微信赞赏" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+      <img src="/images/wechat-pay.jpg" alt="微信赞赏" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
       <p style="margin-top: 12px; font-weight: bold; font-size: 1.1em; color: #333;">微信</p>
     </div>
     <div style="text-align: center; background: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);">
-      <img src="https://imgloc.com/i/OHuSqN" alt="支付宝赞赏" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+      <img src="/images/alipay.jpg" alt="支付宝赞赏" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
       <p style="margin-top: 12px; font-weight: bold; font-size: 1.1em; color: #333;">支付宝</p>
     </div>
   </div>
@@ -547,3 +548,4 @@ python webui.py --port
     <p style="color: #ff6b6b; font-weight: bold; font-size: 1.1em; margin: 0;">🎉 感谢您的支持！</p>
   </div>
 </div>
+{{< /rawhtml >}}

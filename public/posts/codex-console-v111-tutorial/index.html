@@ -1,517 +1,72 @@
-<!DOCTYPE html>
-<html lang="zh-CN" dir="ltr">
-    <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="📋 前言 这是一篇真正的零基础保姆级教程，我会手把手带你从零开始，完整部署和使用 Codex Console v1.1.1——一款免费开源的 OpenAI/Codex 账号注册管理工具。\n本教程特点：\n✅ 完全从零开始：假设你没有任何编程基础 ✅ 每步都有命令：直接复制粘贴即可执行 ✅ 包含所有坑点：把可能遇到的问题都提前说明 ✅ 真实测试验证：所有步骤都已实际测试通过 ✅ 持续更新维护：跟随项目版本同步更新 项目信息：\nGitHub 仓库：https://github.com/dou-jiang/codex-console 基于项目：cnlimiter/codex-manager（修复增强版） 许可证：MIT（免费开源） 当前版本：v1.1.1 购买与售后：\n微信：GOV-HACK（添加请备注&quot;兑换码购买&quot;） QQ：46333839（工作日 9:00-18:00 在线） 闲鱼店铺：https://m.tb.cn/h.i7QE4Wd?tk=p30e5bSCPx2 商品：Business Teams 席位/停车位拼车名额 售后支持：微信/QQ/闲鱼私信均可联系 商品海报：\n⚠️ 重要声明（必读） 1. 免费开源原则 本项目永久免费开源，任何付费版本均为倒卖行为！\n❌ 禁止倒卖：严禁倒卖本项目及相关衍生版本 ❌ 禁止付费：任何人向你收费提供本工具，请立即退款并举报 ✅ 允许学习：允许学习、研究、二次开发 ✅ 允许分享：允许分享给有需要的朋友 2. 合法使用提醒 请遵守 OpenAI 相关服务条款 严禁用于违规、滥用或非法用途 仅供学习、研究和技术交流使用 因使用本项目产生的风险和后果由使用者自行承担 3. 使用建议 新手建议：先用小号测试，熟悉流程后再批量操作 时段选择：避开北京时间 14:00 左右（美国午夜，封号高峰） 批量控制：建议每批 10-50 个，不要一次性注册太多 数据备份：定期导出账号数据，防止丢失 🎯 v1.1.1 版本更新内容 新增功能（5 项） 序号 功能 说明 1 CloudMail 邮箱服务 完整支持服务注册、配置接入、邮件轮询、验证码提取 2 newApi 上传支持 可配置选择不同导入目标类型（newApi/oldApi） 3 Codex 账号导出 导出的账号可直接用于登录、数据迁移、重新导入 4 CPA proxy_url 支持 CPA 服务配置中可直接保存并使用代理地址 5 Outlook 状态识别 直观查看&quot;已注册/未注册&quot;状态，显示关联账号编号 功能优化（5 项） 序号 优化项 效果 1 批量注册上限 从 100 个提升至 1000 个 2 OAuth token 刷新 完善异常处理，降低报错概率 3 批量验证流程 改为受控并发，减少卡死问题 4 WebUI 端口冲突 自动切换可用端口，无需手动修改 5 字段迁移逻辑 启动时自动补齐新增字段，兼容旧数据 BUG 修复（4 项） 序号 修复内容 影响 1 模板渲染兼容 适配不同 Starlette 版本 2 六位数字误判 OTP 避免无关文本被识别为验证码 3 Outlook 大小写问题 避免 Outlook.com 因大小写误判 4 Outlook 列表显示 修复列错位、乱码、占位文案问题 🖥️ 环境准备（按步骤操作） 第一步：确认操作系统 本教程支持以下操作系统：\n">
-<title>Codex Console v1.1.1 超详细保姆级教程 - 从零到一完整部署指南（2026 最新版）</title>
-
-
-<link rel="canonical" href="https://blog.caowo.de/posts/codex-console-v111-tutorial/">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
-
-
-<link rel="stylesheet" href="/scss/style.min.390cc81d180d80110703ea467e355a4f3a0f44f25d4e957842790824fb5f2ef2.css"><meta property='og:title' content="Codex Console v1.1.1 超详细保姆级教程 - 从零到一完整部署指南（2026 最新版）">
-<meta property='og:description' content="📋 前言 这是一篇真正的零基础保姆级教程，我会手把手带你从零开始，完整部署和使用 Codex Console v1.1.1——一款免费开源的 OpenAI/Codex 账号注册管理工具。\n本教程特点：\n✅ 完全从零开始：假设你没有任何编程基础 ✅ 每步都有命令：直接复制粘贴即可执行 ✅ 包含所有坑点：把可能遇到的问题都提前说明 ✅ 真实测试验证：所有步骤都已实际测试通过 ✅ 持续更新维护：跟随项目版本同步更新 项目信息：\nGitHub 仓库：https://github.com/dou-jiang/codex-console 基于项目：cnlimiter/codex-manager（修复增强版） 许可证：MIT（免费开源） 当前版本：v1.1.1 购买与售后：\n微信：GOV-HACK（添加请备注&quot;兑换码购买&quot;） QQ：46333839（工作日 9:00-18:00 在线） 闲鱼店铺：https://m.tb.cn/h.i7QE4Wd?tk=p30e5bSCPx2 商品：Business Teams 席位/停车位拼车名额 售后支持：微信/QQ/闲鱼私信均可联系 商品海报：\n⚠️ 重要声明（必读） 1. 免费开源原则 本项目永久免费开源，任何付费版本均为倒卖行为！\n❌ 禁止倒卖：严禁倒卖本项目及相关衍生版本 ❌ 禁止付费：任何人向你收费提供本工具，请立即退款并举报 ✅ 允许学习：允许学习、研究、二次开发 ✅ 允许分享：允许分享给有需要的朋友 2. 合法使用提醒 请遵守 OpenAI 相关服务条款 严禁用于违规、滥用或非法用途 仅供学习、研究和技术交流使用 因使用本项目产生的风险和后果由使用者自行承担 3. 使用建议 新手建议：先用小号测试，熟悉流程后再批量操作 时段选择：避开北京时间 14:00 左右（美国午夜，封号高峰） 批量控制：建议每批 10-50 个，不要一次性注册太多 数据备份：定期导出账号数据，防止丢失 🎯 v1.1.1 版本更新内容 新增功能（5 项） 序号 功能 说明 1 CloudMail 邮箱服务 完整支持服务注册、配置接入、邮件轮询、验证码提取 2 newApi 上传支持 可配置选择不同导入目标类型（newApi/oldApi） 3 Codex 账号导出 导出的账号可直接用于登录、数据迁移、重新导入 4 CPA proxy_url 支持 CPA 服务配置中可直接保存并使用代理地址 5 Outlook 状态识别 直观查看&quot;已注册/未注册&quot;状态，显示关联账号编号 功能优化（5 项） 序号 优化项 效果 1 批量注册上限 从 100 个提升至 1000 个 2 OAuth token 刷新 完善异常处理，降低报错概率 3 批量验证流程 改为受控并发，减少卡死问题 4 WebUI 端口冲突 自动切换可用端口，无需手动修改 5 字段迁移逻辑 启动时自动补齐新增字段，兼容旧数据 BUG 修复（4 项） 序号 修复内容 影响 1 模板渲染兼容 适配不同 Starlette 版本 2 六位数字误判 OTP 避免无关文本被识别为验证码 3 Outlook 大小写问题 避免 Outlook.com 因大小写误判 4 Outlook 列表显示 修复列错位、乱码、占位文案问题 🖥️ 环境准备（按步骤操作） 第一步：确认操作系统 本教程支持以下操作系统：\n">
-<meta property='og:url' content='https://blog.caowo.de/posts/codex-console-v111-tutorial/'>
-<meta property='og:site_name' content='言零的博客'>
-<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='tutorial' /><meta property='article:tag' content='codex' /><meta property='article:tag' content='guide' /><meta property='article:tag' content='open-source' /><meta property='article:tag' content='step-by-step' /><meta property='article:published_time' content='2026-03-26T09:15:00&#43;00:00'/><meta property='article:modified_time' content='2026-03-26T09:30:00&#43;00:00'/>
-<meta name="twitter:title" content="Codex Console v1.1.1 超详细保姆级教程 - 从零到一完整部署指南（2026 最新版）">
-<meta name="twitter:description" content="📋 前言 这是一篇真正的零基础保姆级教程，我会手把手带你从零开始，完整部署和使用 Codex Console v1.1.1——一款免费开源的 OpenAI/Codex 账号注册管理工具。\n本教程特点：\n✅ 完全从零开始：假设你没有任何编程基础 ✅ 每步都有命令：直接复制粘贴即可执行 ✅ 包含所有坑点：把可能遇到的问题都提前说明 ✅ 真实测试验证：所有步骤都已实际测试通过 ✅ 持续更新维护：跟随项目版本同步更新 项目信息：\nGitHub 仓库：https://github.com/dou-jiang/codex-console 基于项目：cnlimiter/codex-manager（修复增强版） 许可证：MIT（免费开源） 当前版本：v1.1.1 购买与售后：\n微信：GOV-HACK（添加请备注&quot;兑换码购买&quot;） QQ：46333839（工作日 9:00-18:00 在线） 闲鱼店铺：https://m.tb.cn/h.i7QE4Wd?tk=p30e5bSCPx2 商品：Business Teams 席位/停车位拼车名额 售后支持：微信/QQ/闲鱼私信均可联系 商品海报：\n⚠️ 重要声明（必读） 1. 免费开源原则 本项目永久免费开源，任何付费版本均为倒卖行为！\n❌ 禁止倒卖：严禁倒卖本项目及相关衍生版本 ❌ 禁止付费：任何人向你收费提供本工具，请立即退款并举报 ✅ 允许学习：允许学习、研究、二次开发 ✅ 允许分享：允许分享给有需要的朋友 2. 合法使用提醒 请遵守 OpenAI 相关服务条款 严禁用于违规、滥用或非法用途 仅供学习、研究和技术交流使用 因使用本项目产生的风险和后果由使用者自行承担 3. 使用建议 新手建议：先用小号测试，熟悉流程后再批量操作 时段选择：避开北京时间 14:00 左右（美国午夜，封号高峰） 批量控制：建议每批 10-50 个，不要一次性注册太多 数据备份：定期导出账号数据，防止丢失 🎯 v1.1.1 版本更新内容 新增功能（5 项） 序号 功能 说明 1 CloudMail 邮箱服务 完整支持服务注册、配置接入、邮件轮询、验证码提取 2 newApi 上传支持 可配置选择不同导入目标类型（newApi/oldApi） 3 Codex 账号导出 导出的账号可直接用于登录、数据迁移、重新导入 4 CPA proxy_url 支持 CPA 服务配置中可直接保存并使用代理地址 5 Outlook 状态识别 直观查看&quot;已注册/未注册&quot;状态，显示关联账号编号 功能优化（5 项） 序号 优化项 效果 1 批量注册上限 从 100 个提升至 1000 个 2 OAuth token 刷新 完善异常处理，降低报错概率 3 批量验证流程 改为受控并发，减少卡死问题 4 WebUI 端口冲突 自动切换可用端口，无需手动修改 5 字段迁移逻辑 启动时自动补齐新增字段，兼容旧数据 BUG 修复（4 项） 序号 修复内容 影响 1 模板渲染兼容 适配不同 Starlette 版本 2 六位数字误判 OTP 避免无关文本被识别为验证码 3 Outlook 大小写问题 避免 Outlook.com 因大小写误判 4 Outlook 列表显示 修复列错位、乱码、占位文案问题 🖥️ 环境准备（按步骤操作） 第一步：确认操作系统 本教程支持以下操作系统：\n">
-
-<script defer src='https://static.cloudflareinsights.com/beacon.min.js' 
-        data-cf-beacon='{"token": "SDZvDCIq-3er2UKht5fIrl2UvvIrJxi6hZVxBfIa"}'></script>
-
-
-    </head>
-    <body class="
-    article-page
-    ">
-    <script>
-        (function() {
-            const colorSchemeKey = 'StackColorScheme';
-            if(!localStorage.getItem(colorSchemeKey)){
-                localStorage.setItem(colorSchemeKey, "auto");
-            }
-        })();
-    </script><script>
-    (function() {
-        const colorSchemeKey = 'StackColorScheme';
-        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
-        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
-
-        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
-            
-
-            document.documentElement.dataset.scheme = 'dark';
-        } else {
-            document.documentElement.dataset.scheme = 'light';
-        }
-    })();
-</script>
-<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky ">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
-        <span class="hamburger-box">
-            <span class="hamburger-inner"></span>
-        </span>
-    </button>
-
-    <header>
-        
-        
-        <div class="site-meta">
-            <h1 class="site-name"><a href="/">言零的博客</a></h1>
-            <h2 class="site-description"></h2>
-        </div>
-    </header><ol class="menu" id="main-menu">
-        
-        
-        
-        <li >
-            <a href='/posts/' >
-                
-                <span>文章 / Posts</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/categories/' >
-                
-                <span>分类 / Categories</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/tags/' >
-                
-                <span>标签 / Tags</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/about/' >
-                
-                <span>关于 / About</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/links/' >
-                
-                <span>友链 / Links</span>
-            </a>
-        </li>
-        
-        <li class="menu-bottom-section">
-            <ol class="menu">
-
-                
-                    <li id="dark-mode-toggle">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="8" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="16" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                        <span>Dark Mode</span>
-                    </li>
-                
-            </ol>
-        </li>
-    </ol>
-</aside>
-
-    
-
-            <main class="main full-width">
-    <article class="main-article">
-    <header class="article-header">
-
-    <div class="article-details">
-    
-    <header class="article-category">
-        
-            
-            
-            
-            <a href="/categories/tech/" style="background-color: hsl(145, 60%, 84%); color: hsl(145, 60%, 15%);">
-                Tech
-            </a>
-        
-    </header>
-    
-
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/posts/codex-console-v111-tutorial/">Codex Console v1.1.1 超详细保姆级教程 - 从零到一完整部署指南（2026 最新版）</a>
-        </h2>
-    
-        
-    </div>
-
-    
-    
-    
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published" datetime='2026-03-26T09:15:00Z'>Thursday, March 26, 2026</time>
-            </div>
-        
-
-        
-    </footer>
-    
-
-    
-
-    
-</div>
-
-</header>
-
-    
-
-    <section class="article-content">
-    
-    
-    <h2 id="-前言">📋 前言
-</h2><p><strong>这是一篇真正的零基础保姆级教程</strong>，我会手把手带你从零开始，完整部署和使用 Codex Console v1.1.1——一款免费开源的 OpenAI/Codex 账号注册管理工具。</p>
-<p><strong>本教程特点</strong>：</p>
-<ul>
-<li>✅ <strong>完全从零开始</strong>：假设你没有任何编程基础</li>
-<li>✅ <strong>每步都有命令</strong>：直接复制粘贴即可执行</li>
-<li>✅ <strong>包含所有坑点</strong>：把可能遇到的问题都提前说明</li>
-<li>✅ <strong>真实测试验证</strong>：所有步骤都已实际测试通过</li>
-<li>✅ <strong>持续更新维护</strong>：跟随项目版本同步更新</li>
-</ul>
-<p><strong>项目信息</strong>：</p>
-<ul>
-<li><strong>GitHub 仓库</strong>：https://github.com/dou-jiang/codex-console</li>
-<li><strong>基于项目</strong>：cnlimiter/codex-manager（修复增强版）</li>
-<li><strong>许可证</strong>：MIT（免费开源）</li>
-<li><strong>当前版本</strong>：v1.1.1</li>
-</ul>
-<p><strong>购买与售后</strong>：</p>
-<ul>
-<li><strong>微信</strong>：<code>GOV-HACK</code>（添加请备注&quot;兑换码购买&quot;）</li>
-<li><strong>QQ</strong>：<code>46333839</code>（工作日 9:00-18:00 在线）</li>
-<li><strong>闲鱼店铺</strong>：<a class="link" href="https://m.tb.cn/h.i7QE4Wd?tk=p30e5bSCPx2"  target="_blank" rel="noopener"
-    >https://m.tb.cn/h.i7QE4Wd?tk=p30e5bSCPx2</a></li>
-<li><strong>商品</strong>：Business Teams 席位/停车位拼车名额</li>
-<li><strong>售后支持</strong>：微信/QQ/闲鱼私信均可联系</li>
-</ul>
-<p><strong>商品海报</strong>：</p>
-<img src="/images/codex-tm-poster.jpg" alt="Codex 拼车商品海报" style="max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 5px;">
-<hr>
-<h2 id="-重要声明必读">⚠️ 重要声明（必读）
-</h2><h3 id="1-免费开源原则">1. 免费开源原则
-</h3><p><strong>本项目永久免费开源</strong>，任何付费版本均为倒卖行为！</p>
-<ul>
-<li>❌ <strong>禁止倒卖</strong>：严禁倒卖本项目及相关衍生版本</li>
-<li>❌ <strong>禁止付费</strong>：任何人向你收费提供本工具，请立即退款并举报</li>
-<li>✅ <strong>允许学习</strong>：允许学习、研究、二次开发</li>
-<li>✅ <strong>允许分享</strong>：允许分享给有需要的朋友</li>
-</ul>
-<h3 id="2-合法使用提醒">2. 合法使用提醒
-</h3><ul>
-<li>请遵守 OpenAI 相关服务条款</li>
-<li>严禁用于违规、滥用或非法用途</li>
-<li>仅供学习、研究和技术交流使用</li>
-<li>因使用本项目产生的风险和后果由使用者自行承担</li>
-</ul>
-<h3 id="3-使用建议">3. 使用建议
-</h3><ul>
-<li><strong>新手建议</strong>：先用小号测试，熟悉流程后再批量操作</li>
-<li><strong>时段选择</strong>：避开北京时间 14:00 左右（美国午夜，封号高峰）</li>
-<li><strong>批量控制</strong>：建议每批 10-50 个，不要一次性注册太多</li>
-<li><strong>数据备份</strong>：定期导出账号数据，防止丢失</li>
-</ul>
-<hr>
-<h2 id="-v111-版本更新内容">🎯 v1.1.1 版本更新内容
-</h2><h3 id="新增功能5-项">新增功能（5 项）
-</h3><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>序号</th>
-          <th>功能</th>
-          <th>说明</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>1</td>
-          <td>CloudMail 邮箱服务</td>
-          <td>完整支持服务注册、配置接入、邮件轮询、验证码提取</td>
-      </tr>
-      <tr>
-          <td>2</td>
-          <td>newApi 上传支持</td>
-          <td>可配置选择不同导入目标类型（newApi/oldApi）</td>
-      </tr>
-      <tr>
-          <td>3</td>
-          <td>Codex 账号导出</td>
-          <td>导出的账号可直接用于登录、数据迁移、重新导入</td>
-      </tr>
-      <tr>
-          <td>4</td>
-          <td>CPA proxy_url 支持</td>
-          <td>CPA 服务配置中可直接保存并使用代理地址</td>
-      </tr>
-      <tr>
-          <td>5</td>
-          <td>Outlook 状态识别</td>
-          <td>直观查看&quot;已注册/未注册&quot;状态，显示关联账号编号</td>
-      </tr>
-  </tbody>
-</table></div>
-<h3 id="功能优化5-项">功能优化（5 项）
-</h3><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>序号</th>
-          <th>优化项</th>
-          <th>效果</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>1</td>
-          <td>批量注册上限</td>
-          <td>从 100 个提升至 <strong>1000 个</strong></td>
-      </tr>
-      <tr>
-          <td>2</td>
-          <td>OAuth token 刷新</td>
-          <td>完善异常处理，降低报错概率</td>
-      </tr>
-      <tr>
-          <td>3</td>
-          <td>批量验证流程</td>
-          <td>改为受控并发，减少卡死问题</td>
-      </tr>
-      <tr>
-          <td>4</td>
-          <td>WebUI 端口冲突</td>
-          <td>自动切换可用端口，无需手动修改</td>
-      </tr>
-      <tr>
-          <td>5</td>
-          <td>字段迁移逻辑</td>
-          <td>启动时自动补齐新增字段，兼容旧数据</td>
-      </tr>
-  </tbody>
-</table></div>
-<h3 id="bug-修复4-项">BUG 修复（4 项）
-</h3><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>序号</th>
-          <th>修复内容</th>
-          <th>影响</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>1</td>
-          <td>模板渲染兼容</td>
-          <td>适配不同 Starlette 版本</td>
-      </tr>
-      <tr>
-          <td>2</td>
-          <td>六位数字误判 OTP</td>
-          <td>避免无关文本被识别为验证码</td>
-      </tr>
-      <tr>
-          <td>3</td>
-          <td>Outlook 大小写问题</td>
-          <td>避免 Outlook.com 因大小写误判</td>
-      </tr>
-      <tr>
-          <td>4</td>
-          <td>Outlook 列表显示</td>
-          <td>修复列错位、乱码、占位文案问题</td>
-      </tr>
-  </tbody>
-</table></div>
-<hr>
-<h2 id="-环境准备按步骤操作">🖥️ 环境准备（按步骤操作）
-</h2><h3 id="第一步确认操作系统">第一步：确认操作系统
-</h3><p>本教程支持以下操作系统：</p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>系统</th>
-          <th>版本要求</th>
-          <th>推荐度</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Windows</td>
-          <td>Windows 10/11 (64 位)</td>
-          <td>⭐⭐⭐⭐⭐</td>
-      </tr>
-      <tr>
-          <td>macOS</td>
-          <td>macOS 10.15+</td>
-          <td>⭐⭐⭐⭐</td>
-      </tr>
-      <tr>
-          <td>Linux</td>
-          <td>Ubuntu 20.04+/Debian 10+</td>
-          <td>⭐⭐⭐⭐</td>
-      </tr>
-      <tr>
-          <td>Docker</td>
-          <td>任意支持 Docker 的系统</td>
-          <td>⭐⭐⭐⭐⭐</td>
-      </tr>
-  </tbody>
-</table></div>
-<p><strong>查看系统版本命令</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Windows（PowerShell）</span>
-</span></span><span class="line"><span class="cl">systeminfo <span class="p">|</span> findstr /B /C:<span class="s2">&#34;OS Name&#34;</span> /C:<span class="s2">&#34;OS Version&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># macOS</span>
-</span></span><span class="line"><span class="cl">sw_vers
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Linux</span>
-</span></span><span class="line"><span class="cl">cat /etc/os-release
-</span></span></code></pre></div><h3 id="第二步安装-python310">第二步：安装 Python（3.10+）
-</h3><h4 id="windows-安装-python">Windows 安装 Python
-</h4><ol>
-<li>
-<p><strong>下载 Python</strong></p>
-<ul>
-<li>访问官网：https://www.python.org/downloads/</li>
-<li>下载 Python 3.10 或更高版本（推荐 3.11/3.12）</li>
-<li>选择 &ldquo;Windows installer (64-bit)&rdquo;</li>
-</ul>
-</li>
-<li>
-<p><strong>安装 Python</strong></p>
-<ul>
-<li>双击安装包</li>
-<li>⚠️ <strong>重要</strong>：勾选 &ldquo;Add Python to PATH&rdquo;</li>
-<li>点击 &ldquo;Install Now&rdquo;</li>
-</ul>
-</li>
-<li>
-<p><strong>验证安装</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 打开命令提示符（Win+R → cmd）</span>
-</span></span><span class="line"><span class="cl">python --version
-</span></span><span class="line"><span class="cl"><span class="c1"># 应显示：Python 3.10.x 或更高</span>
-</span></span></code></pre></div></li>
-</ol>
-<h4 id="macos-安装-python">macOS 安装 Python
-</h4><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 使用 Homebrew（推荐）</span>
-</span></span><span class="line"><span class="cl">brew install python@3.11
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 验证安装</span>
-</span></span><span class="line"><span class="cl">python3 --version
-</span></span></code></pre></div><h4 id="linux-安装-python">Linux 安装 Python
-</h4><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Ubuntu/Debian</span>
-</span></span><span class="line"><span class="cl">sudo apt update
-</span></span><span class="line"><span class="cl">sudo apt install python3.11 python3.11-venv python3-pip
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># CentOS/RHEL</span>
-</span></span><span class="line"><span class="cl">sudo yum install python3.11 python3-pip
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 验证安装</span>
-</span></span><span class="line"><span class="cl">python3 --version
-</span></span></code></pre></div><h3 id="第三步安装-git">第三步：安装 Git
-</h3><h4 id="windows-安装-git">Windows 安装 Git
-</h4><ol>
-<li>下载：https://git-scm.com/download/win</li>
-<li>双击安装，使用默认选项即可</li>
-<li>验证：
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git --version
-</span></span></code></pre></div></li>
-</ol>
-<h4 id="macos-安装-git">macOS 安装 Git
-</h4><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 使用 Homebrew</span>
-</span></span><span class="line"><span class="cl">brew install git
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 或使用 Xcode 命令行工具</span>
-</span></span><span class="line"><span class="cl">xcode-select --install
-</span></span></code></pre></div><h4 id="linux-安装-git">Linux 安装 Git
-</h4><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Ubuntu/Debian</span>
-</span></span><span class="line"><span class="cl">sudo apt install git
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># CentOS/RHEL</span>
-</span></span><span class="line"><span class="cl">sudo yum install git
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 验证</span>
-</span></span><span class="line"><span class="cl">git --version
-</span></span></code></pre></div><h3 id="第四步准备代理环境重要">第四步：准备代理环境（重要）
-</h3><p>由于 OpenAI 服务限制，你需要准备可用的代理：</p>
-<p><strong>代理要求</strong>：</p>
-<ul>
-<li>支持 HTTPS</li>
-<li>稳定性好（推荐付费代理）</li>
-<li>延迟低于 300ms</li>
-<li>支持并发连接</li>
-</ul>
-<p><strong>常见代理配置</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 本地代理示例（Clash）</span>
-</span></span><span class="line"><span class="cl">HTTP 代理：http://127.0.0.1:7890
-</span></span><span class="line"><span class="cl">HTTPS 代理：http://127.0.0.1:7890
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 环境变量设置（临时）</span>
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">HTTP_PROXY</span><span class="o">=</span>http://127.0.0.1:7890
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">HTTPS_PROXY</span><span class="o">=</span>http://127.0.0.1:7890
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Windows PowerShell</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$env</span>:HTTP_PROXY<span class="o">=</span><span class="s2">&#34;http://127.0.0.1:7890&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$env</span>:HTTPS_PROXY<span class="o">=</span><span class="s2">&#34;http://127.0.0.1:7890&#34;</span>
-</span></span></code></pre></div><p><strong>代理测试命令</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 测试代理是否可用</span>
-</span></span><span class="line"><span class="cl">curl -x http://127.0.0.1:7890 https://www.google.com -I
-</span></span><span class="line"><span class="cl"><span class="c1"># 返回 HTTP/2 200 表示正常</span>
-</span></span></code></pre></div><hr>
-<h2 id="-安装部署5-种方式任选">📦 安装部署（5 种方式任选）
-</h2><h3 id="方式一源码安装推荐新手">方式一：源码安装（推荐新手）
-</h3><h4 id="步骤-1克隆项目">步骤 1：克隆项目
-</h4><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 选择安装目录（Windows 示例：D:\tools\codex-console）</span>
-</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /tmp  <span class="c1"># Linux/Mac</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 克隆项目</span>
-</span></span><span class="line"><span class="cl">git clone https://github.com/dou-jiang/codex-console.git
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 进入项目目录</span>
-</span></span><span class="line"><span class="cl"><span class="nb">cd</span> codex-console
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 查看项目结构</span>
-</span></span><span class="line"><span class="cl">ls -la
-</span></span></code></pre></div><p><strong>预期输出</strong>：</p>
-<pre tabindex="0"><code>drwxr-xr-x  9 root   4096 Mar 26 09:10 .
+<!doctype html><html lang=zh-CN dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content='📋 前言 ❤️ 写教程不易，如果对您有帮助，欢迎赞赏支持！\n微信/支付宝收款码已在文章底部 👇 这是一篇真正的零基础保姆级教程，我会手把手带你从零开始，完整部署和使用 Codex Console v1.1.1——一款免费开源的 OpenAI/Codex 账号注册管理工具。\n本教程特点：\n✅ 完全从零开始：假设你没有任何编程基础 ✅ 每步都有命令：直接复制粘贴即可执行 ✅ 包含所有坑点：把可能遇到的问题都提前说明 ✅ 真实测试验证：所有步骤都已实际测试通过 ✅ 持续更新维护：跟随项目版本同步更新 项目信息：\nGitHub 仓库：https://github.com/dou-jiang/codex-console 基于项目：cnlimiter/codex-manager（修复增强版） 许可证：MIT（免费开源） 当前版本：v1.1.1 购买与售后：\n微信：GOV-HACK（添加请备注"兑换码购买"） QQ：46333839（工作日 9:00-18:00 在线） 闲鱼店铺：https://m.tb.cn/h.i7QE4Wd?tk=p30e5bSCPx2 商品：Business Teams 席位/停车位拼车名额 售后支持：微信/QQ/闲鱼私信均可联系 商品海报：\n⚠️ 重要声明（必读） 1. 免费开源原则 本项目永久免费开源，任何付费版本均为倒卖行为！\n'><title>Codex Console v1.1.1 超详细保姆级教程 - 从零到一完整部署指南（2026 最新版）</title><link rel=canonical href=https://blog.caowo.de/posts/codex-console-v111-tutorial/><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preload as=style href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap"><link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap"><link rel=stylesheet href=/scss/style.min.390cc81d180d80110703ea467e355a4f3a0f44f25d4e957842790824fb5f2ef2.css><meta property='og:title' content="Codex Console v1.1.1 超详细保姆级教程 - 从零到一完整部署指南（2026 最新版）"><meta property='og:description' content='📋 前言 ❤️ 写教程不易，如果对您有帮助，欢迎赞赏支持！\n微信/支付宝收款码已在文章底部 👇 这是一篇真正的零基础保姆级教程，我会手把手带你从零开始，完整部署和使用 Codex Console v1.1.1——一款免费开源的 OpenAI/Codex 账号注册管理工具。\n本教程特点：\n✅ 完全从零开始：假设你没有任何编程基础 ✅ 每步都有命令：直接复制粘贴即可执行 ✅ 包含所有坑点：把可能遇到的问题都提前说明 ✅ 真实测试验证：所有步骤都已实际测试通过 ✅ 持续更新维护：跟随项目版本同步更新 项目信息：\nGitHub 仓库：https://github.com/dou-jiang/codex-console 基于项目：cnlimiter/codex-manager（修复增强版） 许可证：MIT（免费开源） 当前版本：v1.1.1 购买与售后：\n微信：GOV-HACK（添加请备注"兑换码购买"） QQ：46333839（工作日 9:00-18:00 在线） 闲鱼店铺：https://m.tb.cn/h.i7QE4Wd?tk=p30e5bSCPx2 商品：Business Teams 席位/停车位拼车名额 售后支持：微信/QQ/闲鱼私信均可联系 商品海报：\n⚠️ 重要声明（必读） 1. 免费开源原则 本项目永久免费开源，任何付费版本均为倒卖行为！\n'><meta property='og:url' content='https://blog.caowo.de/posts/codex-console-v111-tutorial/'><meta property='og:site_name' content='言零的博客'><meta property='og:type' content='article'><meta property='article:section' content='Posts'><meta property='article:tag' content='tutorial'><meta property='article:tag' content='codex'><meta property='article:tag' content='guide'><meta property='article:tag' content='open-source'><meta property='article:tag' content='step-by-step'><meta property='article:published_time' content='2026-03-26T09:15:00+00:00'><meta property='article:modified_time' content='2026-03-26T09:30:00+00:00'><meta name=twitter:title content="Codex Console v1.1.1 超详细保姆级教程 - 从零到一完整部署指南（2026 最新版）"><meta name=twitter:description content='📋 前言 ❤️ 写教程不易，如果对您有帮助，欢迎赞赏支持！\n微信/支付宝收款码已在文章底部 👇 这是一篇真正的零基础保姆级教程，我会手把手带你从零开始，完整部署和使用 Codex Console v1.1.1——一款免费开源的 OpenAI/Codex 账号注册管理工具。\n本教程特点：\n✅ 完全从零开始：假设你没有任何编程基础 ✅ 每步都有命令：直接复制粘贴即可执行 ✅ 包含所有坑点：把可能遇到的问题都提前说明 ✅ 真实测试验证：所有步骤都已实际测试通过 ✅ 持续更新维护：跟随项目版本同步更新 项目信息：\nGitHub 仓库：https://github.com/dou-jiang/codex-console 基于项目：cnlimiter/codex-manager（修复增强版） 许可证：MIT（免费开源） 当前版本：v1.1.1 购买与售后：\n微信：GOV-HACK（添加请备注"兑换码购买"） QQ：46333839（工作日 9:00-18:00 在线） 闲鱼店铺：https://m.tb.cn/h.i7QE4Wd?tk=p30e5bSCPx2 商品：Business Teams 席位/停车位拼车名额 售后支持：微信/QQ/闲鱼私信均可联系 商品海报：\n⚠️ 重要声明（必读） 1. 免费开源原则 本项目永久免费开源，任何付费版本均为倒卖行为！\n'><script defer src=https://static.cloudflareinsights.com/beacon.min.js data-cf-beacon='{"token": "SDZvDCIq-3er2UKht5fIrl2UvvIrJxi6hZVxBfIa"}'></script></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><div class=site-meta><h1 class=site-name><a href=/>言零的博客</a></h1><h2 class=site-description></h2></div></header><ol class=menu id=main-menu><li><a href=/posts/><span>文章 / Posts</span></a></li><li><a href=/categories/><span>分类 / Categories</span></a></li><li><a href=/tags/><span>标签 / Tags</span></a></li><li><a href=/about/><span>关于 / About</span></a></li><li><a href=/links/><span>友链 / Links</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>Dark Mode</span></li></ol></li></ol></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/categories/tech/ style=background-color:#beefd2;color:#0f3d22>Tech</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/posts/codex-console-v111-tutorial/>Codex Console v1.1.1 超详细保姆级教程 - 从零到一完整部署指南（2026 最新版）</a></h2></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published datetime=2026-03-26T09:15:00Z>Thursday, March 26, 2026</time></div></footer></div></header><section class=article-content><h2 id=-前言>📋 前言</h2><div style="background:#fff5f5;border:2px solid #ff6b6b;padding:20px;border-radius:10px;margin:20px 0;text-align:center"><strong style=color:#ff6b6b;font-size:1.2em>❤️ 写教程不易，如果对您有帮助，欢迎赞赏支持！</strong><br>微信/支付宝收款码已在文章底部 👇</div><p><strong>这是一篇真正的零基础保姆级教程</strong>，我会手把手带你从零开始，完整部署和使用 Codex Console v1.1.1——一款免费开源的 OpenAI/Codex 账号注册管理工具。</p><p><strong>本教程特点</strong>：</p><ul><li>✅ <strong>完全从零开始</strong>：假设你没有任何编程基础</li><li>✅ <strong>每步都有命令</strong>：直接复制粘贴即可执行</li><li>✅ <strong>包含所有坑点</strong>：把可能遇到的问题都提前说明</li><li>✅ <strong>真实测试验证</strong>：所有步骤都已实际测试通过</li><li>✅ <strong>持续更新维护</strong>：跟随项目版本同步更新</li></ul><p><strong>项目信息</strong>：</p><ul><li><strong>GitHub 仓库</strong>：https://github.com/dou-jiang/codex-console</li><li><strong>基于项目</strong>：cnlimiter/codex-manager（修复增强版）</li><li><strong>许可证</strong>：MIT（免费开源）</li><li><strong>当前版本</strong>：v1.1.1</li></ul><p><strong>购买与售后</strong>：</p><ul><li><strong>微信</strong>：<code>GOV-HACK</code>（添加请备注"兑换码购买"）</li><li><strong>QQ</strong>：<code>46333839</code>（工作日 9:00-18:00 在线）</li><li><strong>闲鱼店铺</strong>：<a class=link href="https://m.tb.cn/h.i7QE4Wd?tk=p30e5bSCPx2" target=_blank rel=noopener>https://m.tb.cn/h.i7QE4Wd?tk=p30e5bSCPx2</a></li><li><strong>商品</strong>：Business Teams 席位/停车位拼车名额</li><li><strong>售后支持</strong>：微信/QQ/闲鱼私信均可联系</li></ul><p><strong>商品海报</strong>：</p><img src=/images/codex-tm-poster.jpg alt="Codex 拼车商品海报" style="max-width:100%;height:auto;border:1px solid #ddd;border-radius:5px"><hr><h2 id=-重要声明必读>⚠️ 重要声明（必读）</h2><h3 id=1-免费开源原则>1. 免费开源原则</h3><p><strong>本项目永久免费开源</strong>，任何付费版本均为倒卖行为！</p><ul><li>❌ <strong>禁止倒卖</strong>：严禁倒卖本项目及相关衍生版本</li><li>❌ <strong>禁止付费</strong>：任何人向你收费提供本工具，请立即退款并举报</li><li>✅ <strong>允许学习</strong>：允许学习、研究、二次开发</li><li>✅ <strong>允许分享</strong>：允许分享给有需要的朋友</li></ul><h3 id=2-合法使用提醒>2. 合法使用提醒</h3><ul><li>请遵守 OpenAI 相关服务条款</li><li>严禁用于违规、滥用或非法用途</li><li>仅供学习、研究和技术交流使用</li><li>因使用本项目产生的风险和后果由使用者自行承担</li></ul><h3 id=3-使用建议>3. 使用建议</h3><ul><li><strong>新手建议</strong>：先用小号测试，熟悉流程后再批量操作</li><li><strong>时段选择</strong>：避开北京时间 14:00 左右（美国午夜，封号高峰）</li><li><strong>批量控制</strong>：建议每批 10-50 个，不要一次性注册太多</li><li><strong>数据备份</strong>：定期导出账号数据，防止丢失</li></ul><hr><h2 id=-v111-版本更新内容>🎯 v1.1.1 版本更新内容</h2><h3 id=新增功能5-项>新增功能（5 项）</h3><div class=table-wrapper><table><thead><tr><th>序号</th><th>功能</th><th>说明</th></tr></thead><tbody><tr><td>1</td><td>CloudMail 邮箱服务</td><td>完整支持服务注册、配置接入、邮件轮询、验证码提取</td></tr><tr><td>2</td><td>newApi 上传支持</td><td>可配置选择不同导入目标类型（newApi/oldApi）</td></tr><tr><td>3</td><td>Codex 账号导出</td><td>导出的账号可直接用于登录、数据迁移、重新导入</td></tr><tr><td>4</td><td>CPA proxy_url 支持</td><td>CPA 服务配置中可直接保存并使用代理地址</td></tr><tr><td>5</td><td>Outlook 状态识别</td><td>直观查看"已注册/未注册"状态，显示关联账号编号</td></tr></tbody></table></div><h3 id=功能优化5-项>功能优化（5 项）</h3><div class=table-wrapper><table><thead><tr><th>序号</th><th>优化项</th><th>效果</th></tr></thead><tbody><tr><td>1</td><td>批量注册上限</td><td>从 100 个提升至 <strong>1000 个</strong></td></tr><tr><td>2</td><td>OAuth token 刷新</td><td>完善异常处理，降低报错概率</td></tr><tr><td>3</td><td>批量验证流程</td><td>改为受控并发，减少卡死问题</td></tr><tr><td>4</td><td>WebUI 端口冲突</td><td>自动切换可用端口，无需手动修改</td></tr><tr><td>5</td><td>字段迁移逻辑</td><td>启动时自动补齐新增字段，兼容旧数据</td></tr></tbody></table></div><h3 id=bug-修复4-项>BUG 修复（4 项）</h3><div class=table-wrapper><table><thead><tr><th>序号</th><th>修复内容</th><th>影响</th></tr></thead><tbody><tr><td>1</td><td>模板渲染兼容</td><td>适配不同 Starlette 版本</td></tr><tr><td>2</td><td>六位数字误判 OTP</td><td>避免无关文本被识别为验证码</td></tr><tr><td>3</td><td>Outlook 大小写问题</td><td>避免 Outlook.com 因大小写误判</td></tr><tr><td>4</td><td>Outlook 列表显示</td><td>修复列错位、乱码、占位文案问题</td></tr></tbody></table></div><hr><h2 id=-环境准备按步骤操作>🖥️ 环境准备（按步骤操作）</h2><h3 id=第一步确认操作系统>第一步：确认操作系统</h3><p>本教程支持以下操作系统：</p><div class=table-wrapper><table><thead><tr><th>系统</th><th>版本要求</th><th>推荐度</th></tr></thead><tbody><tr><td>Windows</td><td>Windows 10/11 (64 位)</td><td>⭐⭐⭐⭐⭐</td></tr><tr><td>macOS</td><td>macOS 10.15+</td><td>⭐⭐⭐⭐</td></tr><tr><td>Linux</td><td>Ubuntu 20.04+/Debian 10+</td><td>⭐⭐⭐⭐</td></tr><tr><td>Docker</td><td>任意支持 Docker 的系统</td><td>⭐⭐⭐⭐⭐</td></tr></tbody></table></div><p><strong>查看系统版本命令</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Windows（PowerShell）</span>
+</span></span><span class=line><span class=cl>systeminfo <span class=p>|</span> findstr /B /C:<span class=s2>&#34;OS Name&#34;</span> /C:<span class=s2>&#34;OS Version&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># macOS</span>
+</span></span><span class=line><span class=cl>sw_vers
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Linux</span>
+</span></span><span class=line><span class=cl>cat /etc/os-release
+</span></span></code></pre></div><h3 id=第二步安装-python310>第二步：安装 Python（3.10+）</h3><h4 id=windows-安装-python>Windows 安装 Python</h4><ol><li><p><strong>下载 Python</strong></p><ul><li>访问官网：https://www.python.org/downloads/</li><li>下载 Python 3.10 或更高版本（推荐 3.11/3.12）</li><li>选择 &ldquo;Windows installer (64-bit)&rdquo;</li></ul></li><li><p><strong>安装 Python</strong></p><ul><li>双击安装包</li><li>⚠️ <strong>重要</strong>：勾选 &ldquo;Add Python to PATH&rdquo;</li><li>点击 &ldquo;Install Now&rdquo;</li></ul></li><li><p><strong>验证安装</strong></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 打开命令提示符（Win+R → cmd）</span>
+</span></span><span class=line><span class=cl>python --version
+</span></span><span class=line><span class=cl><span class=c1># 应显示：Python 3.10.x 或更高</span>
+</span></span></code></pre></div></li></ol><h4 id=macos-安装-python>macOS 安装 Python</h4><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 使用 Homebrew（推荐）</span>
+</span></span><span class=line><span class=cl>brew install python@3.11
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 验证安装</span>
+</span></span><span class=line><span class=cl>python3 --version
+</span></span></code></pre></div><h4 id=linux-安装-python>Linux 安装 Python</h4><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Ubuntu/Debian</span>
+</span></span><span class=line><span class=cl>sudo apt update
+</span></span><span class=line><span class=cl>sudo apt install python3.11 python3.11-venv python3-pip
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># CentOS/RHEL</span>
+</span></span><span class=line><span class=cl>sudo yum install python3.11 python3-pip
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 验证安装</span>
+</span></span><span class=line><span class=cl>python3 --version
+</span></span></code></pre></div><h3 id=第三步安装-git>第三步：安装 Git</h3><h4 id=windows-安装-git>Windows 安装 Git</h4><ol><li>下载：https://git-scm.com/download/win</li><li>双击安装，使用默认选项即可</li><li>验证：<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>git --version
+</span></span></code></pre></div></li></ol><h4 id=macos-安装-git>macOS 安装 Git</h4><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 使用 Homebrew</span>
+</span></span><span class=line><span class=cl>brew install git
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 或使用 Xcode 命令行工具</span>
+</span></span><span class=line><span class=cl>xcode-select --install
+</span></span></code></pre></div><h4 id=linux-安装-git>Linux 安装 Git</h4><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Ubuntu/Debian</span>
+</span></span><span class=line><span class=cl>sudo apt install git
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># CentOS/RHEL</span>
+</span></span><span class=line><span class=cl>sudo yum install git
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 验证</span>
+</span></span><span class=line><span class=cl>git --version
+</span></span></code></pre></div><h3 id=第四步准备代理环境重要>第四步：准备代理环境（重要）</h3><p>由于 OpenAI 服务限制，你需要准备可用的代理：</p><p><strong>代理要求</strong>：</p><ul><li>支持 HTTPS</li><li>稳定性好（推荐付费代理）</li><li>延迟低于 300ms</li><li>支持并发连接</li></ul><p><strong>常见代理配置</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 本地代理示例（Clash）</span>
+</span></span><span class=line><span class=cl>HTTP 代理：http://127.0.0.1:7890
+</span></span><span class=line><span class=cl>HTTPS 代理：http://127.0.0.1:7890
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 环境变量设置（临时）</span>
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>HTTP_PROXY</span><span class=o>=</span>http://127.0.0.1:7890
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>HTTPS_PROXY</span><span class=o>=</span>http://127.0.0.1:7890
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Windows PowerShell</span>
+</span></span><span class=line><span class=cl><span class=nv>$env</span>:HTTP_PROXY<span class=o>=</span><span class=s2>&#34;http://127.0.0.1:7890&#34;</span>
+</span></span><span class=line><span class=cl><span class=nv>$env</span>:HTTPS_PROXY<span class=o>=</span><span class=s2>&#34;http://127.0.0.1:7890&#34;</span>
+</span></span></code></pre></div><p><strong>代理测试命令</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 测试代理是否可用</span>
+</span></span><span class=line><span class=cl>curl -x http://127.0.0.1:7890 https://www.google.com -I
+</span></span><span class=line><span class=cl><span class=c1># 返回 HTTP/2 200 表示正常</span>
+</span></span></code></pre></div><hr><h2 id=-安装部署5-种方式任选>📦 安装部署（5 种方式任选）</h2><h3 id=方式一源码安装推荐新手>方式一：源码安装（推荐新手）</h3><h4 id=步骤-1克隆项目>步骤 1：克隆项目</h4><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 选择安装目录（Windows 示例：D:\tools\codex-console）</span>
+</span></span><span class=line><span class=cl><span class=nb>cd</span> /tmp  <span class=c1># Linux/Mac</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 克隆项目</span>
+</span></span><span class=line><span class=cl>git clone https://github.com/dou-jiang/codex-console.git
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 进入项目目录</span>
+</span></span><span class=line><span class=cl><span class=nb>cd</span> codex-console
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 查看项目结构</span>
+</span></span><span class=line><span class=cl>ls -la
+</span></span></code></pre></div><p><strong>预期输出</strong>：</p><pre tabindex=0><code>drwxr-xr-x  9 root   4096 Mar 26 09:10 .
 drwxrwxrwt 26 root   4096 Mar 26 09:10 ..
 -rw-r--r--  1 root   1461 Mar 26 09:10 build.bat
 -rw-r--r--  1 root   1185 Mar 26 09:10 build.sh
@@ -522,39 +77,29 @@ drwxr-xr-x  7 root   4096 Mar 26 09:10 src
 drwxr-xr-x  4 root   4096 Mar 26 09:10 static
 drwxr-xr-x  3 root   4096 Mar 26 09:10 templates
 -rw-r--r--  1 root   5992 Mar 26 09:10 webui.py
-</code></pre><h4 id="步骤-2创建虚拟环境强烈推荐">步骤 2：创建虚拟环境（强烈推荐）
-</h4><p><strong>为什么使用虚拟环境</strong>：</p>
-<ul>
-<li>避免污染系统 Python 环境</li>
-<li>方便管理依赖包</li>
-<li>便于迁移和部署</li>
-</ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Python 3.10+ 内置 venv 模块</span>
-</span></span><span class="line"><span class="cl">python -m venv .venv
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 激活虚拟环境</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># Windows (CMD):</span>
-</span></span><span class="line"><span class="cl">.venv<span class="se">\S</span>cripts<span class="se">\a</span>ctivate
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Windows (PowerShell):</span>
-</span></span><span class="line"><span class="cl">.venv<span class="se">\S</span>cripts<span class="se">\A</span>ctivate.ps1
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Linux/Mac:</span>
-</span></span><span class="line"><span class="cl"><span class="nb">source</span> .venv/bin/activate
-</span></span></code></pre></div><p><strong>激活成功后</strong>，命令行前会出现 <code>(.venv)</code> 标识：</p>
-<pre tabindex="0"><code>(.venv) user@host:~/codex-console$
-</code></pre><h4 id="步骤-3安装依赖">步骤 3：安装依赖
-</h4><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 方式 1：使用 pip（通用）</span>
-</span></span><span class="line"><span class="cl">pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 方式 2：使用 uv（更快，推荐）</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 先安装 uv</span>
-</span></span><span class="line"><span class="cl">pip install uv
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 使用 uv 安装依赖</span>
-</span></span><span class="line"><span class="cl">uv pip install -r requirements.txt
-</span></span></code></pre></div><p><strong>依赖列表</strong>（requirements.txt）：</p>
-<pre tabindex="0"><code>certifi&gt;=2024.0.0
+</code></pre><h4 id=步骤-2创建虚拟环境强烈推荐>步骤 2：创建虚拟环境（强烈推荐）</h4><p><strong>为什么使用虚拟环境</strong>：</p><ul><li>避免污染系统 Python 环境</li><li>方便管理依赖包</li><li>便于迁移和部署</li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Python 3.10+ 内置 venv 模块</span>
+</span></span><span class=line><span class=cl>python -m venv .venv
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 激活虚拟环境</span>
+</span></span><span class=line><span class=cl><span class=c1># Windows (CMD):</span>
+</span></span><span class=line><span class=cl>.venv<span class=se>\S</span>cripts<span class=se>\a</span>ctivate
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Windows (PowerShell):</span>
+</span></span><span class=line><span class=cl>.venv<span class=se>\S</span>cripts<span class=se>\A</span>ctivate.ps1
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Linux/Mac:</span>
+</span></span><span class=line><span class=cl><span class=nb>source</span> .venv/bin/activate
+</span></span></code></pre></div><p><strong>激活成功后</strong>，命令行前会出现 <code>(.venv)</code> 标识：</p><pre tabindex=0><code>(.venv) user@host:~/codex-console$
+</code></pre><h4 id=步骤-3安装依赖>步骤 3：安装依赖</h4><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 方式 1：使用 pip（通用）</span>
+</span></span><span class=line><span class=cl>pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 方式 2：使用 uv（更快，推荐）</span>
+</span></span><span class=line><span class=cl><span class=c1># 先安装 uv</span>
+</span></span><span class=line><span class=cl>pip install uv
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 使用 uv 安装依赖</span>
+</span></span><span class=line><span class=cl>uv pip install -r requirements.txt
+</span></span></code></pre></div><p><strong>依赖列表</strong>（requirements.txt）：</p><pre tabindex=0><code>certifi&gt;=2024.0.0
 cffi&gt;=1.16.0
 curl_cffi&gt;=0.14.0
 pycparser&gt;=1.21
@@ -568,385 +113,130 @@ sqlalchemy&gt;=2.0.0
 aiosqlite&gt;=0.19.0
 psycopg[binary]&gt;=3.1.18
 playwright&gt;=1.40.0  # 自动绑卡依赖
-</code></pre><p><strong>安装时间</strong>：约 2-5 分钟（取决于网络）</p>
-<p><strong>验证安装</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">pip list <span class="p">|</span> grep -E <span class="s2">&#34;(fastapi|uvicorn|playwright)&#34;</span>
-</span></span></code></pre></div><h4 id="步骤-4安装-playwright-浏览器可选">步骤 4：安装 Playwright 浏览器（可选）
-</h4><p>如需使用自动绑卡功能，需要安装 Playwright 浏览器：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 安装浏览器</span>
-</span></span><span class="line"><span class="cl">playwright install
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 安装系统依赖（Linux）</span>
-</span></span><span class="line"><span class="cl">playwright install-deps
-</span></span></code></pre></div><p><strong>注意</strong>：这一步可能需要较长时间（10-20 分钟），如果暂时不需要绑卡功能可以跳过。</p>
-<h4 id="步骤-5配置文件">步骤 5：配置文件
-</h4><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 复制环境变量模板</span>
-</span></span><span class="line"><span class="cl">cp .env.example .env
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 编辑配置文件（选择你熟悉的编辑器）</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># Windows: 用记事本打开 .env</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># Linux/Mac: nano .env 或 vim .env</span>
-</span></span></code></pre></div><p><strong>.env 配置示例</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="c1"># ── Web UI 监听地址 ──────────────────────────────────────────</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 监听主机（默认 0.0.0.0，允许外部访问）</span>
-</span></span><span class="line"><span class="cl"><span class="na">APP_HOST</span><span class="o">=</span><span class="s">0.0.0.0</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 监听端口（默认 8000，可自定义）</span>
-</span></span><span class="line"><span class="cl"><span class="na">APP_PORT</span><span class="o">=</span><span class="s">8000</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Web UI 访问密码（⚠️ 强烈建议修改！）</span>
-</span></span><span class="line"><span class="cl"><span class="na">APP_ACCESS_PASSWORD</span><span class="o">=</span><span class="s">your_strong_password_here</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># ── 数据库 ───────────────────────────────────────────────────</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 本地 SQLite（默认，新手推荐）</span>
-</span></span><span class="line"><span class="cl"><span class="na">APP_DATABASE_URL</span><span class="o">=</span><span class="s">data/database.db</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 远程 PostgreSQL（高级用户）</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># APP_DATABASE_URL=postgresql://user:password@host:5432/dbname</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># ── 代理配置（重要）</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># HTTP_PROXY=http://127.0.0.1:7890</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># HTTPS_PROXY=http://127.0.0.1:7890</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># ── 第三方自动绑卡（可选）</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># BIND_CARD_API_URL=https://your-workers-domain.dev/</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># BIND_CARD_API_KEY=your_api_key_here</span>
-</span></span></code></pre></div><p><strong>⚠️ 安全提醒</strong>：</p>
-<ul>
-<li>务必修改 <code>APP_ACCESS_PASSWORD</code> 默认值</li>
-<li>不要将 <code>.env</code> 文件上传到公开仓库</li>
-<li>生产环境建议使用强密码（16 位以上，包含大小写、数字、符号）</li>
-</ul>
-<h4 id="步骤-6启动服务">步骤 6：启动服务
-</h4><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 方式 1：默认启动（127.0.0.1:8000）</span>
-</span></span><span class="line"><span class="cl">python webui.py
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 方式 2：指定主机和端口（允许外部访问）</span>
-</span></span><span class="line"><span class="cl">python webui.py --host 0.0.0.0 --port <span class="m">8000</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 方式 3：设置访问密码</span>
-</span></span><span class="line"><span class="cl">python webui.py --access-password your_password
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 方式 4：组合参数（推荐）</span>
-</span></span><span class="line"><span class="cl">python webui.py --host 0.0.0.0 --port <span class="m">8000</span> --access-password your_password
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 方式 5：调试模式（开发使用）</span>
-</span></span><span class="line"><span class="cl">python webui.py --debug
-</span></span></code></pre></div><p><strong>启动成功标志</strong>：</p>
-<pre tabindex="0"><code>INFO:     Started server process [12345]
+</code></pre><p><strong>安装时间</strong>：约 2-5 分钟（取决于网络）</p><p><strong>验证安装</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>pip list <span class=p>|</span> grep -E <span class=s2>&#34;(fastapi|uvicorn|playwright)&#34;</span>
+</span></span></code></pre></div><h4 id=步骤-4安装-playwright-浏览器可选>步骤 4：安装 Playwright 浏览器（可选）</h4><p>如需使用自动绑卡功能，需要安装 Playwright 浏览器：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 安装浏览器</span>
+</span></span><span class=line><span class=cl>playwright install
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 安装系统依赖（Linux）</span>
+</span></span><span class=line><span class=cl>playwright install-deps
+</span></span></code></pre></div><p><strong>注意</strong>：这一步可能需要较长时间（10-20 分钟），如果暂时不需要绑卡功能可以跳过。</p><h4 id=步骤-5配置文件>步骤 5：配置文件</h4><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 复制环境变量模板</span>
+</span></span><span class=line><span class=cl>cp .env.example .env
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 编辑配置文件（选择你熟悉的编辑器）</span>
+</span></span><span class=line><span class=cl><span class=c1># Windows: 用记事本打开 .env</span>
+</span></span><span class=line><span class=cl><span class=c1># Linux/Mac: nano .env 或 vim .env</span>
+</span></span></code></pre></div><p><strong>.env 配置示例</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-ini data-lang=ini><span class=line><span class=cl><span class=c1># ── Web UI 监听地址 ──────────────────────────────────────────</span>
+</span></span><span class=line><span class=cl><span class=c1># 监听主机（默认 0.0.0.0，允许外部访问）</span>
+</span></span><span class=line><span class=cl><span class=na>APP_HOST</span><span class=o>=</span><span class=s>0.0.0.0</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 监听端口（默认 8000，可自定义）</span>
+</span></span><span class=line><span class=cl><span class=na>APP_PORT</span><span class=o>=</span><span class=s>8000</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Web UI 访问密码（⚠️ 强烈建议修改！）</span>
+</span></span><span class=line><span class=cl><span class=na>APP_ACCESS_PASSWORD</span><span class=o>=</span><span class=s>your_strong_password_here</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># ── 数据库 ───────────────────────────────────────────────────</span>
+</span></span><span class=line><span class=cl><span class=c1># 本地 SQLite（默认，新手推荐）</span>
+</span></span><span class=line><span class=cl><span class=na>APP_DATABASE_URL</span><span class=o>=</span><span class=s>data/database.db</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 远程 PostgreSQL（高级用户）</span>
+</span></span><span class=line><span class=cl><span class=c1># APP_DATABASE_URL=postgresql://user:password@host:5432/dbname</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># ── 代理配置（重要）</span>
+</span></span><span class=line><span class=cl><span class=c1># HTTP_PROXY=http://127.0.0.1:7890</span>
+</span></span><span class=line><span class=cl><span class=c1># HTTPS_PROXY=http://127.0.0.1:7890</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># ── 第三方自动绑卡（可选）</span>
+</span></span><span class=line><span class=cl><span class=c1># BIND_CARD_API_URL=https://your-workers-domain.dev/</span>
+</span></span><span class=line><span class=cl><span class=c1># BIND_CARD_API_KEY=your_api_key_here</span>
+</span></span></code></pre></div><p><strong>⚠️ 安全提醒</strong>：</p><ul><li>务必修改 <code>APP_ACCESS_PASSWORD</code> 默认值</li><li>不要将 <code>.env</code> 文件上传到公开仓库</li><li>生产环境建议使用强密码（16 位以上，包含大小写、数字、符号）</li></ul><h4 id=步骤-6启动服务>步骤 6：启动服务</h4><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 方式 1：默认启动（127.0.0.1:8000）</span>
+</span></span><span class=line><span class=cl>python webui.py
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 方式 2：指定主机和端口（允许外部访问）</span>
+</span></span><span class=line><span class=cl>python webui.py --host 0.0.0.0 --port <span class=m>8000</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 方式 3：设置访问密码</span>
+</span></span><span class=line><span class=cl>python webui.py --access-password your_password
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 方式 4：组合参数（推荐）</span>
+</span></span><span class=line><span class=cl>python webui.py --host 0.0.0.0 --port <span class=m>8000</span> --access-password your_password
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 方式 5：调试模式（开发使用）</span>
+</span></span><span class=line><span class=cl>python webui.py --debug
+</span></span></code></pre></div><p><strong>启动成功标志</strong>：</p><pre tabindex=0><code>INFO:     Started server process [12345]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
 INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
-</code></pre><p><strong>访问 WebUI</strong>：</p>
-<ul>
-<li>本地访问：http://127.0.0.1:8000</li>
-<li>远程访问：http://你的服务器 IP:8000</li>
-<li>默认密码：admin123（如未在 .env 中修改）</li>
-</ul>
-<hr>
-<h3 id="方式二docker-部署推荐生产环境">方式二：Docker 部署（推荐生产环境）
-</h3><h4 id="前置要求">前置要求
-</h4><ul>
-<li>已安装 Docker 和 Docker Compose</li>
-<li>Docker 版本：20.10+</li>
-<li>Docker Compose 版本：2.0+</li>
-</ul>
-<p><strong>安装 Docker</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Ubuntu/Debian</span>
-</span></span><span class="line"><span class="cl">curl -fsSL https://get.docker.com -o get-docker.sh
-</span></span><span class="line"><span class="cl">sudo sh get-docker.sh
-</span></span><span class="line"><span class="cl">sudo systemctl <span class="nb">enable</span> docker
-</span></span><span class="line"><span class="cl">sudo systemctl start docker
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 验证安装</span>
-</span></span><span class="line"><span class="cl">docker --version
-</span></span><span class="line"><span class="cl">docker compose version
-</span></span></code></pre></div><h4 id="使用-docker-compose推荐">使用 Docker Compose（推荐）
-</h4><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 克隆项目</span>
-</span></span><span class="line"><span class="cl">git clone https://github.com/dou-jiang/codex-console.git
-</span></span><span class="line"><span class="cl"><span class="nb">cd</span> codex-console
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 启动服务</span>
-</span></span><span class="line"><span class="cl">docker compose up -d
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 查看日志</span>
-</span></span><span class="line"><span class="cl">docker compose logs -f
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 停止服务</span>
-</span></span><span class="line"><span class="cl">docker compose down
-</span></span></code></pre></div><p><strong>访问服务</strong>：</p>
-<ul>
-<li>WebUI: http://你的服务器 IP:1455</li>
-<li>noVNC（绑卡可视化）: http://你的服务器 IP:6080</li>
-</ul>
-<hr>
-<h2 id="-常见问题解答">🔧 常见问题解答
-</h2><h3 id="一安装问题">一、安装问题
-</h3><p><strong>Q1: pip install 报错 &ldquo;Could not find a version that satisfies the requirement&rdquo;</strong></p>
-<p><strong>解决</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 升级 pip</span>
-</span></span><span class="line"><span class="cl">python -m pip install --upgrade pip
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 使用国内镜像</span>
-</span></span><span class="line"><span class="cl">pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
-</span></span></code></pre></div><p><strong>Q2: 虚拟环境激活失败</strong></p>
-<p><strong>Windows PowerShell 执行策略问题</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># 临时允许执行脚本</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Set-ExecutionPolicy</span> <span class="n">-ExecutionPolicy</span> <span class="n">RemoteSigned</span> <span class="n">-Scope</span> <span class="n">CurrentUser</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 重新激活</span>
-</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">Activate</span><span class="p">.</span><span class="py">ps1</span>
-</span></span></code></pre></div><h3 id="二启动问题">二、启动问题
-</h3><p><strong>Q1: 端口被占用</strong></p>
-<pre tabindex="0"><code>Error: [Errno 98] Address already in use
-</code></pre><p><strong>解决</strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 方式 1：更换端口</span>
-</span></span><span class="line"><span class="cl">python webui.py --port
-</span></span></code></pre></div>
-</section>
-
-
-    <footer class="article-footer">
-    
-    <section class="article-tags">
-        
-            <a href="/tags/tutorial/">Tutorial</a>
-        
-            <a href="/tags/codex/">Codex</a>
-        
-            <a href="/tags/guide/">Guide</a>
-        
-            <a href="/tags/open-source/">Open-Source</a>
-        
-            <a href="/tags/step-by-step/">Step-by-Step</a>
-        
-    </section>
-
-
-    <section class="article-lastmod">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <polyline points="12 7 12 12 15 15" />
-</svg>
-
-
-
-        <span>
-            Last updated on Thursday, March 26, 2026
-        </span>
-    </section></footer>
-
-
-    
-    
-    
-    
-<div class="donate-box">
-  <div class="donate-title">
-    <span class="heart">❤️</span>
-    <span>写教程不易，如果对您有帮助，可以赞赏一下吗？</span>
-    <span class="heart">❤️</span>
-  </div>
-  <p class="donate-subtitle">您的支持是我持续更新的最大动力！</p>
-  
-  <div class="qr-codes">
-    <div class="qr-code">
-      <img src="/images/wechat-pay.jpg" alt="微信赞赏">
-      <p class="qr-label">微信</p>
-    </div>
-    <div class="qr-code">
-      <img src="/images/alipay.jpg" alt="支付宝赞赏">
-      <p class="qr-label">支付宝</p>
-    </div>
-  </div>
-  
-  <div class="donate-thanks">
-    <p>🎉 感谢您的支持！</p>
-  </div>
-</div>
-
-<style>
-.donate-box {
-  margin: 50px 0;
-  padding: 30px 20px;
-  border: 3px dashed #ff6b6b;
-  border-radius: 15px;
-  background: linear-gradient(135deg, #fff5f5 0%, #fff0f0 100%);
-  text-align: center;
-  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.15);
-}
-
-.donate-title {
-  font-size: 1.3em;
-  font-weight: bold;
-  color: #ff6b6b;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-
-.donate-title .heart {
-  font-size: 1.5em;
-  animation: heartbeat 1.5s ease-in-out infinite;
-}
-
-@keyframes heartbeat {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-}
-
-.donate-subtitle {
-  color: #666;
-  font-size: 0.95em;
-  margin: 10px 0 25px 0;
-}
-
-.qr-codes {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  flex-wrap: wrap;
-  margin-bottom: 25px;
-}
-
-.qr-code {
-  text-align: center;
-  background: white;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease;
-}
-
-.qr-code:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 20px rgba(255, 107, 107, 0.2);
-}
-
-.qr-code img {
-  width: 200px;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 5px;
-}
-
-.qr-label {
-  margin-top: 12px;
-  font-weight: bold;
-  font-size: 1.1em;
-  color: #333;
-}
-
-.donate-thanks {
-  margin-top: 20px;
-  padding-top: 20px;
-  border-top: 2px solid rgba(255, 107, 107, 0.2);
-}
-
-.donate-thanks p {
-  color: #ff6b6b;
-  font-weight: bold;
-  font-size: 1.1em;
-  margin: 0;
-}
-
- 
-@media (max-width: 768px) {
-  .donate-box {
-    margin: 30px 0;
-    padding: 20px 15px;
-  }
-  
-  .donate-title {
-    font-size: 1.1em;
-  }
-  
-  .qr-codes {
-    gap: 20px;
-  }
-  
-  .qr-code img {
-    width: 150px;
-    height: 150px;
-  }
-}
-</style>
-
-</article>
-
-    
-
-    
-
-<aside class="related-content--wrapper">
-    <h2 class="section-title">Related content</h2>
-    <div class="related-content">
-        <div class="flex article-list--tile">
-            
-                
-<article class="">
-    <a href="/posts/codex-tm-redeem-guide/">
-        
-
-        <div class="article-details">
-            <h2 class="article-title">CodeX TM 兑换码使用教程 - 详细步骤与常见问题解答</h2>
-        </div>
-    </a>
-</article>
-            
-        </div>
-    </div>
-</aside>
-
-     
-    
-        
-        <div class="disqus-container">
-    
-</div>
-
-<style>
-    .disqus-container {
-        background-color: var(--card-background);
-        border-radius: var(--card-border-radius);
-        box-shadow: var(--shadow-l1);
-        padding: var(--card-padding);
-    }
-</style>
-
-<script>
-    window.addEventListener('onColorSchemeChange', (e) => {
-        if (typeof DISQUS == 'object') {
-            DISQUS.reset({
-                reload: true
-            });
-        }
-    })
-</script>
-    
-
-    <footer class="site-footer">
-    <section class="copyright">
-        &copy; 
-        
-        2026 言零的博客
-    </section>
-    
-    <section class="powerby">
-        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="4.0.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
-    </section>
-</footer>
-
-
-    
-
-
-
-<script type="module">
+</code></pre><p><strong>访问 WebUI</strong>：</p><ul><li>本地访问：http://127.0.0.1:8000</li><li>远程访问：http://你的服务器 IP:8000</li><li>默认密码：admin123（如未在 .env 中修改）</li></ul><hr><h3 id=方式二docker-部署推荐生产环境>方式二：Docker 部署（推荐生产环境）</h3><h4 id=前置要求>前置要求</h4><ul><li>已安装 Docker 和 Docker Compose</li><li>Docker 版本：20.10+</li><li>Docker Compose 版本：2.0+</li></ul><p><strong>安装 Docker</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Ubuntu/Debian</span>
+</span></span><span class=line><span class=cl>curl -fsSL https://get.docker.com -o get-docker.sh
+</span></span><span class=line><span class=cl>sudo sh get-docker.sh
+</span></span><span class=line><span class=cl>sudo systemctl <span class=nb>enable</span> docker
+</span></span><span class=line><span class=cl>sudo systemctl start docker
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 验证安装</span>
+</span></span><span class=line><span class=cl>docker --version
+</span></span><span class=line><span class=cl>docker compose version
+</span></span></code></pre></div><h4 id=使用-docker-compose推荐>使用 Docker Compose（推荐）</h4><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 克隆项目</span>
+</span></span><span class=line><span class=cl>git clone https://github.com/dou-jiang/codex-console.git
+</span></span><span class=line><span class=cl><span class=nb>cd</span> codex-console
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 启动服务</span>
+</span></span><span class=line><span class=cl>docker compose up -d
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 查看日志</span>
+</span></span><span class=line><span class=cl>docker compose logs -f
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 停止服务</span>
+</span></span><span class=line><span class=cl>docker compose down
+</span></span></code></pre></div><p><strong>访问服务</strong>：</p><ul><li>WebUI: http://你的服务器 IP:1455</li><li>noVNC（绑卡可视化）: http://你的服务器 IP:6080</li></ul><hr><h2 id=-常见问题解答>🔧 常见问题解答</h2><h3 id=一安装问题>一、安装问题</h3><p><strong>Q1: pip install 报错 &ldquo;Could not find a version that satisfies the requirement&rdquo;</strong></p><p><strong>解决</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 升级 pip</span>
+</span></span><span class=line><span class=cl>python -m pip install --upgrade pip
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 使用国内镜像</span>
+</span></span><span class=line><span class=cl>pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+</span></span></code></pre></div><p><strong>Q2: 虚拟环境激活失败</strong></p><p><strong>Windows PowerShell 执行策略问题</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=c># 临时允许执行脚本</span>
+</span></span><span class=line><span class=cl><span class=nb>Set-ExecutionPolicy</span> <span class=n>-ExecutionPolicy</span> <span class=n>RemoteSigned</span> <span class=n>-Scope</span> <span class=n>CurrentUser</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 重新激活</span>
+</span></span><span class=line><span class=cl><span class=p>.</span><span class=n>venv</span><span class=p>\</span><span class=n>Scripts</span><span class=p>\</span><span class=n>Activate</span><span class=p>.</span><span class=py>ps1</span>
+</span></span></code></pre></div><h3 id=二启动问题>二、启动问题</h3><p><strong>Q1: 端口被占用</strong></p><pre tabindex=0><code>Error: [Errno 98] Address already in use
+</code></pre><p><strong>解决</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 方式 1：更换端口</span>
+</span></span><span class=line><span class=cl>python webui.py --port
+</span></span><span class=line><span class=cl>---
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>## 💖 赞赏支持</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>&lt;div <span class=nv>style</span><span class=o>=</span><span class=s2>&#34;margin: 50px 0; padding: 30px 20px; border: 3px dashed #ff6b6b; border-radius: 15px; background: linear-gradient(135deg, #fff5f5 0%, #fff0f0 100%); text-align: center; box-shadow: 0 4px 15px rgba(255, 107, 107, 0.15);&#34;</span>&gt;
+</span></span><span class=line><span class=cl>  &lt;div <span class=nv>style</span><span class=o>=</span><span class=s2>&#34;font-size: 1.3em; font-weight: bold; color: #ff6b6b; margin-bottom: 10px;&#34;</span>&gt;
+</span></span><span class=line><span class=cl>    &lt;span <span class=nv>style</span><span class=o>=</span><span class=s2>&#34;font-size: 1.5em;&#34;</span>&gt;❤️&lt;/span&gt;
+</span></span><span class=line><span class=cl>    写教程不易，如果对您有帮助，可以赞赏一下吗？
+</span></span><span class=line><span class=cl>    &lt;span <span class=nv>style</span><span class=o>=</span><span class=s2>&#34;font-size: 1.5em;&#34;</span>&gt;❤️&lt;/span&gt;
+</span></span><span class=line><span class=cl>  &lt;/div&gt;
+</span></span><span class=line><span class=cl>  &lt;p <span class=nv>style</span><span class=o>=</span><span class=s2>&#34;color: #666; font-size: 0.95em; margin: 10px 0 25px 0;&#34;</span>&gt;您的支持是我持续更新的最大动力！&lt;/p&gt;
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>  &lt;div <span class=nv>style</span><span class=o>=</span><span class=s2>&#34;display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-bottom: 25px;&#34;</span>&gt;
+</span></span><span class=line><span class=cl>    &lt;div <span class=nv>style</span><span class=o>=</span><span class=s2>&#34;text-align: center; background: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);&#34;</span>&gt;
+</span></span><span class=line><span class=cl>      &lt;img <span class=nv>src</span><span class=o>=</span><span class=s2>&#34;https://imgloc.com/i/OHuLEH&#34;</span> <span class=nv>alt</span><span class=o>=</span><span class=s2>&#34;微信赞赏&#34;</span> <span class=nv>style</span><span class=o>=</span><span class=s2>&#34;width: 200px; height: 200px; object-fit: cover; border-radius: 5px;&#34;</span>&gt;
+</span></span><span class=line><span class=cl>      &lt;p <span class=nv>style</span><span class=o>=</span><span class=s2>&#34;margin-top: 12px; font-weight: bold; font-size: 1.1em; color: #333;&#34;</span>&gt;微信&lt;/p&gt;
+</span></span><span class=line><span class=cl>    &lt;/div&gt;
+</span></span><span class=line><span class=cl>    &lt;div <span class=nv>style</span><span class=o>=</span><span class=s2>&#34;text-align: center; background: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);&#34;</span>&gt;
+</span></span><span class=line><span class=cl>      &lt;img <span class=nv>src</span><span class=o>=</span><span class=s2>&#34;https://imgloc.com/i/OHuSqN&#34;</span> <span class=nv>alt</span><span class=o>=</span><span class=s2>&#34;支付宝赞赏&#34;</span> <span class=nv>style</span><span class=o>=</span><span class=s2>&#34;width: 200px; height: 200px; object-fit: cover; border-radius: 5px;&#34;</span>&gt;
+</span></span><span class=line><span class=cl>      &lt;p <span class=nv>style</span><span class=o>=</span><span class=s2>&#34;margin-top: 12px; font-weight: bold; font-size: 1.1em; color: #333;&#34;</span>&gt;支付宝&lt;/p&gt;
+</span></span><span class=line><span class=cl>    &lt;/div&gt;
+</span></span><span class=line><span class=cl>  &lt;/div&gt;
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>  &lt;div <span class=nv>style</span><span class=o>=</span><span class=s2>&#34;margin-top: 20px; padding-top: 20px; border-top: 2px solid rgba(255, 107, 107, 0.2);&#34;</span>&gt;
+</span></span><span class=line><span class=cl>    &lt;p <span class=nv>style</span><span class=o>=</span><span class=s2>&#34;color: #ff6b6b; font-weight: bold; font-size: 1.1em; margin: 0;&#34;</span>&gt;🎉 感谢您的支持！&lt;/p&gt;
+</span></span><span class=line><span class=cl>  &lt;/div&gt;
+</span></span><span class=line><span class=cl>&lt;/div&gt;
+</span></span></code></pre></div></section><footer class=article-footer><section class=article-tags><a href=/tags/tutorial/>Tutorial</a>
+<a href=/tags/codex/>Codex</a>
+<a href=/tags/guide/>Guide</a>
+<a href=/tags/open-source/>Open-Source</a>
+<a href=/tags/step-by-step/>Step-by-Step</a></section><section class=article-lastmod><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<span>Last updated on Thursday, March 26, 2026</span></section></footer><div class=donate-box><div class=donate-title><span class=heart>❤️</span>
+<span>写教程不易，如果对您有帮助，可以赞赏一下吗？</span>
+<span class=heart>❤️</span></div><p class=donate-subtitle>您的支持是我持续更新的最大动力！</p><div class=qr-codes><div class=qr-code><img src=/images/wechat-pay.jpg alt=微信赞赏><p class=qr-label>微信</p></div><div class=qr-code><img src=/images/alipay.jpg alt=支付宝赞赏><p class=qr-label>支付宝</p></div></div><div class=donate-thanks><p>🎉 感谢您的支持！</p></div></div><style>.donate-box{margin:50px 0;padding:30px 20px;border:3px dashed #ff6b6b;border-radius:15px;background:linear-gradient(135deg,#fff5f5 0%,#fff0f0 100%);text-align:center;box-shadow:0 4px 15px rgba(255,107,107,.15)}.donate-title{font-size:1.3em;font-weight:700;color:#ff6b6b;margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:10px}.donate-title .heart{font-size:1.5em;animation:heartbeat 1.5s ease-in-out infinite}@keyframes heartbeat{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}.donate-subtitle{color:#666;font-size:.95em;margin:10px 0 25px}.qr-codes{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;margin-bottom:25px}.qr-code{text-align:center;background:#fff;padding:15px;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,8%);transition:transform .3s ease}.qr-code:hover{transform:translateY(-5px);box-shadow:0 5px 20px rgba(255,107,107,.2)}.qr-code img{width:200px;height:200px;object-fit:cover;border-radius:5px}.qr-label{margin-top:12px;font-weight:700;font-size:1.1em;color:#333}.donate-thanks{margin-top:20px;padding-top:20px;border-top:2px solid rgba(255,107,107,.2)}.donate-thanks p{color:#ff6b6b;font-weight:700;font-size:1.1em;margin:0}@media(max-width:768px){.donate-box{margin:30px 0;padding:20px 15px}.donate-title{font-size:1.1em}.qr-codes{gap:20px}.qr-code img{width:150px;height:150px}}</style></article><aside class=related-content--wrapper><h2 class=section-title>Related content</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/posts/codex-tm-redeem-guide/><div class=article-details><h2 class=article-title>CodeX TM 兑换码使用教程 - 详细步骤与常见问题解答</h2></div></a></article></div></div></aside><div class=disqus-container></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{typeof DISQUS=="object"&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
+2026 言零的博客</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=4.0.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><script type=module>
     import gallery from '\/ts\/gallery.js';
 
     const articleContent = document.querySelector('.article-content');
@@ -970,164 +260,6 @@ INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
         });
         lightbox.init();
     }
-</script>
-    
-    
-    
-    <div class="ads-container" style="margin: 40px 0; padding: 20px; text-align: center; background: #f9f9f9; border-radius: 10px;">
-  <p style="margin-bottom: 15px; color: #666; font-size: 0.9em;">📢 广告</p>
-  <ins class="adsbygoogle"
-       style="display:block; min-height: 250px;"
-       data-ad-client="ca-pub-2336550233412374"
-       data-ad-slot="1234567890"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
-  <script>
-       (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
-</div>
-    
-    
-    
-<div class="donate-box">
-  <div class="donate-title">
-    <span class="heart">❤️</span>
-    <span>写教程不易，如果对您有帮助，可以赞赏一下吗？</span>
-    <span class="heart">❤️</span>
-  </div>
-  <p class="donate-subtitle">您的支持是我持续更新的最大动力！</p>
-  
-  <div class="qr-codes">
-    <div class="qr-code">
-      <img src="/images/wechat-pay.jpg" alt="微信赞赏">
-      <p class="qr-label">微信</p>
-    </div>
-    <div class="qr-code">
-      <img src="/images/alipay.jpg" alt="支付宝赞赏">
-      <p class="qr-label">支付宝</p>
-    </div>
-  </div>
-  
-  <div class="donate-thanks">
-    <p>🎉 感谢您的支持！</p>
-  </div>
-</div>
-
-<style>
-.donate-box {
-  margin: 50px 0;
-  padding: 30px 20px;
-  border: 3px dashed #ff6b6b;
-  border-radius: 15px;
-  background: linear-gradient(135deg, #fff5f5 0%, #fff0f0 100%);
-  text-align: center;
-  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.15);
-}
-
-.donate-title {
-  font-size: 1.3em;
-  font-weight: bold;
-  color: #ff6b6b;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-
-.donate-title .heart {
-  font-size: 1.5em;
-  animation: heartbeat 1.5s ease-in-out infinite;
-}
-
-@keyframes heartbeat {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-}
-
-.donate-subtitle {
-  color: #666;
-  font-size: 0.95em;
-  margin: 10px 0 25px 0;
-}
-
-.qr-codes {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  flex-wrap: wrap;
-  margin-bottom: 25px;
-}
-
-.qr-code {
-  text-align: center;
-  background: white;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease;
-}
-
-.qr-code:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 20px rgba(255, 107, 107, 0.2);
-}
-
-.qr-code img {
-  width: 200px;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 5px;
-}
-
-.qr-label {
-  margin-top: 12px;
-  font-weight: bold;
-  font-size: 1.1em;
-  color: #333;
-}
-
-.donate-thanks {
-  margin-top: 20px;
-  padding-top: 20px;
-  border-top: 2px solid rgba(255, 107, 107, 0.2);
-}
-
-.donate-thanks p {
-  color: #ff6b6b;
-  font-weight: bold;
-  font-size: 1.1em;
-  margin: 0;
-}
-
- 
-@media (max-width: 768px) {
-  .donate-box {
-    margin: 30px 0;
-    padding: 20px 15px;
-  }
-  
-  .donate-title {
-    font-size: 1.1em;
-  }
-  
-  .qr-codes {
-    gap: 20px;
-  }
-  
-  .qr-code img {
-    width: 150px;
-    height: 150px;
-  }
-}
-</style>
-
-
-            </main>
-        </div>
-        
-<script type="text/javascript" src="/ts/main.acaf849f2b273f6a8368a58b001f336738d0c948d92e79b116467d0c7515f932.js" defer></script>
-
-
-    </body>
-</html>
+</script><div class=ads-container style="margin:40px 0;padding:20px;text-align:center;background:#f9f9f9;border-radius:10px"><p style=margin-bottom:15px;color:#666;font-size:.9em>📢 广告</p><ins class=adsbygoogle style=display:block;min-height:250px data-ad-client=ca-pub-2336550233412374 data-ad-slot=1234567890 data-ad-format=auto data-full-width-responsive=true></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({})</script></div><div class=donate-box><div class=donate-title><span class=heart>❤️</span>
+<span>写教程不易，如果对您有帮助，可以赞赏一下吗？</span>
+<span class=heart>❤️</span></div><p class=donate-subtitle>您的支持是我持续更新的最大动力！</p><div class=qr-codes><div class=qr-code><img src=/images/wechat-pay.jpg alt=微信赞赏><p class=qr-label>微信</p></div><div class=qr-code><img src=/images/alipay.jpg alt=支付宝赞赏><p class=qr-label>支付宝</p></div></div><div class=donate-thanks><p>🎉 感谢您的支持！</p></div></div><style>.donate-box{margin:50px 0;padding:30px 20px;border:3px dashed #ff6b6b;border-radius:15px;background:linear-gradient(135deg,#fff5f5 0%,#fff0f0 100%);text-align:center;box-shadow:0 4px 15px rgba(255,107,107,.15)}.donate-title{font-size:1.3em;font-weight:700;color:#ff6b6b;margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:10px}.donate-title .heart{font-size:1.5em;animation:heartbeat 1.5s ease-in-out infinite}@keyframes heartbeat{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}.donate-subtitle{color:#666;font-size:.95em;margin:10px 0 25px}.qr-codes{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;margin-bottom:25px}.qr-code{text-align:center;background:#fff;padding:15px;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,8%);transition:transform .3s ease}.qr-code:hover{transform:translateY(-5px);box-shadow:0 5px 20px rgba(255,107,107,.2)}.qr-code img{width:200px;height:200px;object-fit:cover;border-radius:5px}.qr-label{margin-top:12px;font-weight:700;font-size:1.1em;color:#333}.donate-thanks{margin-top:20px;padding-top:20px;border-top:2px solid rgba(255,107,107,.2)}.donate-thanks p{color:#ff6b6b;font-weight:700;font-size:1.1em;margin:0}@media(max-width:768px){.donate-box{margin:30px 0;padding:20px 15px}.donate-title{font-size:1.1em}.qr-codes{gap:20px}.qr-code img{width:150px;height:150px}}</style></main></div><script type=text/javascript src=/ts/main.acaf849f2b273f6a8368a58b001f336738d0c948d92e79b116467d0c7515f932.js defer></script></body></html>

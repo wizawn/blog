@@ -1,7 +1,7 @@
 ---
 title: "CodeX TM 兑换码使用教程 - 详细步骤与常见问题解答"
 date: 2026-03-25T14:35:00+00:00
-lastmod: 2026-03-26T07:55:00+00:00
+lastmod: 2026-03-26T08:00:00+00:00
 categories: ["tech"]
 tags: ["tutorial", "codex", "guide"]
 draft: false
@@ -254,6 +254,10 @@ https://codextm.xyz
 2. 如果是使用 Codex，需要重新登录，在登录的时候请确保选择正常的空间
 
 > **PS**: 防止登录选错，可以手动推掉已被停用的空间
+
+**402 空间停用示意图**：
+
+<img src="https://cdn.nodeimage.com/i/FRYkedxg9eOQFyudKiDSetiA8X7MhQMM.webp" alt="402 空间停用示意" style="max-width: 100%; height: auto;">
 
 ---
 

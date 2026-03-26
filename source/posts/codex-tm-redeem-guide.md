@@ -443,7 +443,8 @@ codex whoami
 
 **商品海报**：
 
-<img src="/images/codex-tm-poster.jpg" alt="Codex TM 兑换码商品海报" style="max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 5px;">
+<img src="https://imgloc.com/i/OHuLEH" alt="微信收款码" style="max-width: 200px; height: auto; border: 1px solid #ddd; border-radius: 5px;">
+<img src="https://imgloc.com/i/OHuSqN" alt="支付宝收款码" style="max-width: 200px; height: auto; border: 1px solid #ddd; border-radius: 5px;">
 
 **购买流程**：
 1. 点击上述链接访问闲鱼店铺

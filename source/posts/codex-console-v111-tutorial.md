@@ -9,6 +9,11 @@ draft: false
 
 ## 📋 前言
 
+<div style="background: #fff5f5; border: 2px solid #ff6b6b; padding: 20px; border-radius: 10px; margin: 20px 0; text-align: center;">
+<strong style="color: #ff6b6b; font-size: 1.2em;">❤️ 写教程不易，如果对您有帮助，欢迎赞赏支持！</strong><br>
+微信/支付宝收款码已在文章底部 👇
+</div>
+
 **这是一篇真正的零基础保姆级教程**，我会手把手带你从零开始，完整部署和使用 Codex Console v1.1.1——一款免费开源的 OpenAI/Codex 账号注册管理工具。
 
 **本教程特点**：
@@ -529,11 +534,11 @@ python webui.py --port
   
   <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-bottom: 25px;">
     <div style="text-align: center; background: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);">
-      <img src="/images/wechat-pay.jpg" alt="微信赞赏" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+      <img src="https://imgloc.com/i/OHuLEH" alt="微信赞赏" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
       <p style="margin-top: 12px; font-weight: bold; font-size: 1.1em; color: #333;">微信</p>
     </div>
     <div style="text-align: center; background: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);">
-      <img src="/images/alipay.jpg" alt="支付宝赞赏" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
+      <img src="https://imgloc.com/i/OHuSqN" alt="支付宝赞赏" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
       <p style="margin-top: 12px; font-weight: bold; font-size: 1.1em; color: #333;">支付宝</p>
     </div>
   </div>

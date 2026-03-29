@@ -36,16 +36,9 @@ draft: false
 - **许可证**：MIT（免费开源）
 - **当前版本**：v1.1.1
 
-**购买与售后**：
+**联系方式**：
 - **微信**：`GOV-HACK`（添加请备注"兑换码购买"）
 - **QQ**：`46333839`（工作日 9:00-18:00 在线）
-- **闲鱼店铺**：[https://m.tb.cn/h.i7QE4Wd?tk=p30e5bSCPx2](https://m.tb.cn/h.i7QE4Wd?tk=p30e5bSCPx2)
-- **商品**：Business Teams 席位/停车位拼车名额
-- **售后支持**：微信/QQ/闲鱼私信均可联系
-
-**商品海报**：
-
-<img src="/images/codex-tm-poster.jpg" alt="Codex 拼车商品海报" style="max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 5px;">
 
 ---
 

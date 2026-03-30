@@ -547,3 +547,5 @@ python webui.py --port
     <p style="color: #ff6b6b; font-weight: bold; font-size: 1.1em; margin: 0;">🎉 感谢您的支持！</p>
   </div>
 </div>
+
+<!-- 强制刷新缓存 -->

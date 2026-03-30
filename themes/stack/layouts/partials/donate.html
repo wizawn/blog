@@ -1,0 +1,133 @@
+<!-- 赞赏支持 -->
+<div class="donate-box">
+  <div class="donate-title">
+    <span class="heart">❤️</span>
+    <span>写教程不易，如果对您有帮助，可以赞赏一下吗？</span>
+    <span class="heart">❤️</span>
+  </div>
+  <p class="donate-subtitle">您的支持是我持续更新的最大动力！</p>
+  
+  <div class="qr-codes">
+    <div class="qr-code">
+      <img src="/images/wechat-pay.jpg" alt="微信赞赏">
+      <p class="qr-label">微信</p>
+    </div>
+    <div class="qr-code">
+      <img src="/images/alipay.jpg" alt="支付宝赞赏">
+      <p class="qr-label">支付宝</p>
+    </div>
+  </div>
+  
+  <div class="donate-thanks">
+    <p>🎉 感谢您的支持！</p>
+  </div>
+</div>
+
+<style>
+.donate-box {
+  margin: 50px 0;
+  padding: 30px 20px;
+  border: 3px dashed #ff6b6b;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #fff5f5 0%, #fff0f0 100%);
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.15);
+}
+
+.donate-title {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #ff6b6b;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.donate-title .heart {
+  font-size: 1.5em;
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+.donate-subtitle {
+  color: #666;
+  font-size: 0.95em;
+  margin: 10px 0 25px 0;
+}
+
+.qr-codes {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+
+.qr-code {
+  text-align: center;
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.qr-code:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 20px rgba(255, 107, 107, 0.2);
+}
+
+.qr-code img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.qr-label {
+  margin-top: 12px;
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #333;
+}
+
+.donate-thanks {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 2px solid rgba(255, 107, 107, 0.2);
+}
+
+.donate-thanks p {
+  color: #ff6b6b;
+  font-weight: bold;
+  font-size: 1.1em;
+  margin: 0;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+  .donate-box {
+    margin: 30px 0;
+    padding: 20px 15px;
+  }
+  
+  .donate-title {
+    font-size: 1.1em;
+  }
+  
+  .qr-codes {
+    gap: 20px;
+  }
+  
+  .qr-code img {
+    width: 150px;
+    height: 150px;
+  }
+}
+</style>

@@ -24,7 +24,4 @@
     {{ if or .Params.math .Site.Params.article.math }}
         {{ partialCached "article/components/math.html" . }}
     {{ end }}
-    
-    <!-- 赞赏功能 -->
-    {{ partial "donate.html" . }}
 </article>

@@ -1,0 +1,7 @@
+name = "blog-worker"
+main = "src/index.ts"
+compatibility_date = "2026-03-26"
+
+[assets]
+directory = "./public"
+binding = "__STATIC_CONTENT"

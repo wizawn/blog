@@ -2,6 +2,7 @@
 title: "OpenClaw 部署教程 - Windows 篇（2026 终极版）"
 date: 2026-03-17T15:00:00+08:00
 draft: false
+weight: 1
 categories: ["OpenClaw", "部署教程"]
 tags: ["OpenClaw", "Windows", "PowerShell", "部署", "AI 助手", "保姆级教程"]
 image: "/static/tech-cover-1.jpg"

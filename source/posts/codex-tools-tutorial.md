@@ -5,6 +5,7 @@ lastmod: 2026-03-26T11:35:00+00:00
 categories: ["tech"]
 tags: ["tutorial", "codex", "tools", "api-proxy", "guide"]
 draft: false
+weight: 1
 ---
 
 ## 📋 前言

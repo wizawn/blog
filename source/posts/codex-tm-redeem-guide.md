@@ -5,6 +5,7 @@ lastmod: 2026-03-26T09:30:00+00:00
 categories: ["tech"]
 tags: ["tutorial", "codex", "guide"]
 draft: false
+weight: 1
 ---
 
 ## 📋 前言

@@ -2,6 +2,7 @@
 title: "Connection Reset - 当信任遭遇背叛"
 date: 2026-02-27T10:00:00+08:00
 draft: false
+weight: 50
 categories: ["技术感悟"]
 tags: ["人工智能", "网络", "情感", "TCP", "比特币", "以太坊", "AI Agent"]
 image: "/blog-cover-default.jpg"

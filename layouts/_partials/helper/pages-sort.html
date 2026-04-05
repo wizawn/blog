@@ -1,0 +1,14 @@
+{{- $pages := .Pages -}}
+
+{{- /* 博客自定义排序：优先按 weight（教程置顶），再按日期（新的在前） */ -}}
+{{- if eq .Context.Site.Params.SortBy "lastmod" -}}
+    {{- $pages = $pages.ByLastmod.Reverse -}}
+{{- else if eq .Context.Site.Params.SortBy "weight" -}}
+    {{- $pages = $pages.ByWeight -}}
+{{- else -}}
+    {{- /* 默认：先按 weight 排序（小的在前），再按日期排序（新的在前） */ -}}
+    {{- $pages = sort $pages "Weight" "asc" }}
+    {{- $pages = sort $pages "Date" "desc" }}
+{{- end -}}
+
+{{- return $pages -}}

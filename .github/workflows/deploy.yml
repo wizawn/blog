@@ -36,3 +36,4 @@ jobs:
           directory: public
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 # 强制触发部署 - Sun Apr  5 03:26:47 PM UTC 2026
+# 强制清除 Hugo 缓存 - Sun Apr  5 03:42:36 PM UTC 2026

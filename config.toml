@@ -1,6 +1,6 @@
 baseURL = 'https://blog.caowo.de/'
 languageCode = 'zh-CN'
-title = '言零的博客'
+title = "言零的博客 - 20260405"
 theme = 'stack'
 contentDir = 'source'
 paginate = 10

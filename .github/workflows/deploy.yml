@@ -35,3 +35,4 @@ jobs:
           projectName: blog
           directory: public
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+# 强制触发部署 - Sun Apr  5 03:26:47 PM UTC 2026

@@ -441,31 +441,58 @@ def process_with_agent(topic):
             raise Exception(f"API 返回 {response.status_code}")
             
     except Exception as e:
-        log_message(f"   ⚠️  AI 调用失败：{str(e)[:100]}，使用备用方案")
-        # 备用方案：基于摘要生成有内容的文章
-        backup_content = f"""## 核心摘要
+        log_message(f"   ⚠️  AI 调用失败：{str(e)[:100]}，尝试备选模型 gpt-5.4")
+        # 尝试使用备选模型 gpt-5.4
+        try:
+            backup_api_key = "sk-MeFWSQuc6FvJAjjg0jXQ9pdRLYXwhr12OgOaR05AIHp7CDn1"
+            backup_headers = {
+                "Authorization": f"Bearer {backup_api_key}",
+                "Content-Type": "application/json"
+            }
+            backup_payload = {
+                "model": "gpt-5.4",
+                "messages": [
+                    {"role": "system", "content": "你是专业技术内容创作者，输出具体有深度的技术文章，禁止模板和占位符。"},
+                    {"role": "user", "content": prompt}
+                ],
+                "max_tokens": 2000,
+                "temperature": 0.7
+            }
+            
+            backup_response = requests.post(
+                "https://caowo.xin/v1/chat/completions",
+                headers=backup_headers,
+                json=backup_payload,
+                timeout=30
+            )
+            
+            if backup_response.status_code == 200:
+                ai_content = backup_response.json()['choices'][0]['message']['content']
+                log_message(f"   ✅ 备选模型 gpt-5.4 调用成功")
+            else:
+                raise Exception(f"备选模型 API 返回 {backup_response.status_code}")
+        except Exception as backup_e:
+            log_message(f"   ❌ 备选模型也失败：{str(backup_e)[:100]}，使用完整原文摘要")
+            # 最后方案：输出完整原文摘要，不简化
+            ai_content = f"""## 原文摘要
 
-{topic['summary'][:500]}
+{topic['summary']}
 
-## 技术背景分析
+## 文章来源
 
-这篇文章讨论的技术主题在当前行业中具有重要意义。从技术角度来看，{topic['summary'][:300]} 这一现象反映了行业发展趋势。
+- **标题**: {topic['title']}
+- **来源**: {topic['source']}
+- **链接**: [{topic['link']}]({topic['link']})
+- **时间**: {topic.get('published', 'N/A')}
 
-## 关键技术点
+## 核心内容
 
-1. **技术原理**：基于原文描述，该技术涉及核心原理包括数据处理、系统集成等方面。
-2. **应用场景**：在实际应用中，这类技术通常用于解决企业级安全问题、性能优化等挑战。
-3. **实施建议**：开发者在实施时需要注意版本兼容性、配置优化等关键因素。
+{topic['summary']}
 
-## 实战建议
-
-- 建议先在小规模环境测试验证
-- 关注官方文档和最新版本更新
-- 参考社区最佳实践进行配置
-
-## 总结
-
-这篇文章提供了有价值的技术见解，对于相关领域的从业者具有参考意义。建议读者结合自身实际场景进行评估和应用。
+---
+*内容来源：{topic['source']}*
+*原文链接：[{topic['link']}]({topic['link']})*
+"""
 
 ---
 *原文来源：[{topic['link']}]({topic['link']})*

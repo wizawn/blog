@@ -4,6 +4,8 @@ title = "言零的博客 - 20260405"
 theme = 'stack'
 contentDir = 'source'
 paginate = 10
+enableFuturePages = true
+buildFuture = true
 
 [params]
   # 允许发布未来日期的文章

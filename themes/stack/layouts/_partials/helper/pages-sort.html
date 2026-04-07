@@ -1,13 +1,7 @@
 {{- $pages := .Pages -}}
 
-{{- /* 排序优先级：weight → date → lastmod */ -}}
 {{- if eq .Context.Site.Params.SortBy "lastmod" -}}
     {{- $pages = $pages.ByLastmod.Reverse -}}
-{{- else if eq .Context.Site.Params.SortBy "weight" -}}
-    {{- $pages = $pages.ByWeight -}}
-{{- else -}}
-    {{- /* 默认：先按 weight 排序（小的在前），再按日期排序（新的在前） */ -}}
-    {{- $pages = $pages.ByWeight.ByDate.Reverse -}}
 {{- end -}}
 
 {{- return $pages -}}

@@ -36,10 +36,6 @@ WEBbabydc网络 桥接靶机：10.190.20.23Workgroup/Domain Name: XMCVEHostnames
 *AI Agent 加工：红队 Agent（安全视角解读）*
 
 
-## 市场背景
-
-- BTC 价格：$0.00
-- 24h 涨跌：+0.00%
 
 ---
 *AI Agent 加工：红队 Agent（安全视角解读）*

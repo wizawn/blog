@@ -2,11 +2,26 @@
 title: "OpenClaw 部署教程 - macOS 篇（2026 最新版）"
 date: 2026-03-10T16:00:00+08:00
 draft: false
-weight: 1
+weight: 100
 categories: ["OpenClaw"]
 tags: ["OpenClaw", "部署", "教程"]
 image: "/static/tech-cover-1.jpg"
 description: "OpenClaw 部署教程 - macOS 篇（2026 最新版） - 详细部署教程"
+---
+
+
+> **💬 ChatGPT Plus 充值服务**
+> 
+> | 套餐 | 价格 | 说明 |
+> |------|------|------|
+> | Plus 一个月 (无质保) | ¥15 | 掉了不补 |
+> | Plus 一个月 (有质保) | ¥35 | 掉了包补 |
+> | Pro 200 刀 (一个月无质保) | ¥350 | - |
+> | Pro 200 刀 (一个月质保) | ¥550 | - |
+> | Pro 100 刀 (一个月无质保) | ¥200 | - |
+> 
+> **微信联系购买，秒发货！**
+
 ---
 
 # OpenClaw 部署教程 - macOS 篇（2026 最新版）

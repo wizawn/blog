@@ -2,11 +2,26 @@
 title: "OpenClaw 部署教程 - Windows 篇（2026 终极版）"
 date: 2026-03-17T15:00:00+08:00
 draft: false
-weight: 1
+weight: 100
 categories: ["OpenClaw", "部署教程"]
 tags: ["OpenClaw", "Windows", "PowerShell", "部署", "AI 助手", "保姆级教程"]
 image: "/static/tech-cover-1.jpg"
 description: "OpenClaw Windows 部署终极指南 - 含 PowerShell 一键安装、Node.js 22 配置、Git 环境、初始化向导、故障排查，基于 Windows 11 实测验证"
+---
+
+
+> **💬 ChatGPT Plus 充值服务**
+> 
+> | 套餐 | 价格 | 说明 |
+> |------|------|------|
+> | Plus 一个月 (无质保) | ¥15 | 掉了不补 |
+> | Plus 一个月 (有质保) | ¥35 | 掉了包补 |
+> | Pro 200 刀 (一个月无质保) | ¥350 | - |
+> | Pro 200 刀 (一个月质保) | ¥550 | - |
+> | Pro 100 刀 (一个月无质保) | ¥200 | - |
+> 
+> **微信联系购买，秒发货！**
+
 ---
 
 # OpenClaw 部署教程 - Windows 篇（2026 终极版）

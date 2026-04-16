@@ -7,6 +7,21 @@ draft: false
 weight: 100
 ---
 
+
+> **💬 ChatGPT Plus 充值服务**
+> 
+> | 套餐 | 价格 | 说明 |
+> |------|------|------|
+> | Plus 一个月 (无质保) | ¥15 | 掉了不补 |
+> | Plus 一个月 (有质保) | ¥35 | 掉了包补 |
+> | Pro 200 刀 (一个月无质保) | ¥350 | - |
+> | Pro 200 刀 (一个月质保) | ¥550 | - |
+> | Pro 100 刀 (一个月无质保) | ¥200 | - |
+> 
+> **微信联系购买，秒发货！**
+
+---
+
 ## 核心摘要
 
 WEBbabydc网络 桥接靶机：10.190.20.23Workgroup/Domain Name: XMCVEHostnames: CASTLEVANIADomain Controllers: XMCVEActive Directory（活动目录）的 Windows 域环境内网1 台 DC 域控（核心，存所有账号、哈希、权限）多台 成员服务器（Web、邮件、数据库等）一堆 Win10/Win1

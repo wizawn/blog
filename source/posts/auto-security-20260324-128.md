@@ -7,6 +7,21 @@ draft: false
 weight: 100
 ---
 
+
+> **💬 ChatGPT Plus 充值服务**
+> 
+> | 套餐 | 价格 | 说明 |
+> |------|------|------|
+> | Plus 一个月 (无质保) | ¥15 | 掉了不补 |
+> | Plus 一个月 (有质保) | ¥35 | 掉了包补 |
+> | Pro 200 刀 (一个月无质保) | ¥350 | - |
+> | Pro 200 刀 (一个月质保) | ¥550 | - |
+> | Pro 100 刀 (一个月无质保) | ¥200 | - |
+> 
+> **微信联系购买，秒发货！**
+
+---
+
 ## 核心摘要
 
 漏洞描述该漏洞本质上是由于JeecgBoot内置的WAF存在逻辑缺陷，导致针对特定接口的SQL注入防护被绕过。影响版本: JeecgBoot 版本 3.9.1/3.9.0需要任意用户权限漏洞分析来到SysDictController.java入口路由为 GET /sys/dict/getDictItems/{dictCode}控制器直接将 dictCode 传入sysDictService.get

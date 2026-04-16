@@ -15,6 +15,12 @@ weight: 1
 > **微信**: GOV-HACK  
 > 
 > 添加微信进微信交流群，各位觉得文章对你有帮助的话可否打赏一些呀~
+> 
+> ![微信赞赏码](/images/wechat-pay.jpg)
+> 
+> ![支付宝收款码](/images/alipay-pay.jpg)
+> 
+> ![微信二维码](/images/wechat-qr.jpg)
 
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: "ChatGPT Pro 免费试用漏洞汇总 - 2026 年 4 月最新白嫖指南"
+title: "ChatGPT 免费试用漏洞汇总 - 2026 年 4 月最新白嫖指南"
 date: 2026-04-16T12:32:00Z
 draft: false
 categories: ["AI 工具", "技术教程"]

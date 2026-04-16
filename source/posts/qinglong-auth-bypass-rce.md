@@ -10,18 +10,23 @@ description: "青龙面板鉴权绕过漏洞复现 - 从路径大小写到 RCE -
 ---
 
 
-> **💬 联系方式 & 交流群**
-> 
-> **QQ**: 46333839  
-> **微信**: GOV-HACK  
-> 
-> 添加微信进微信交流群，各位觉得文章对你有帮助的话可否打赏一些呀~
-> 
-> ![微信赞赏码](/images/wechat-pay.jpg)
-> 
-> ![支付宝收款码](/images/alipay-pay.jpg)
-> 
-> ![微信二维码](/images/wechat-qr.jpg)
+
+{{< figure src="/images/wechat-pay.jpg" alt="微信赞赏码" width="200" >}}
+
+{{< figure src="/images/alipay-pay.jpg" alt="支付宝收款码" width="200" >}}
+
+{{< figure src="/images/wechat-qr.jpg" alt="微信二维码" width="200" >}}
+
+**联系方式 & 交流群**
+
+- **QQ**: 46333839
+- **微信**: GOV-HACK
+
+添加微信进微信交流群，各位觉得文章对你有帮助的话可否打赏一些呀~
+
+---
+
+
 
 ---
 

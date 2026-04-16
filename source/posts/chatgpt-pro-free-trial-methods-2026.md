@@ -261,6 +261,200 @@ weight: -998
 
 ---
 
+## 方法四：英区 0 刀卡密转移法（技术流）
+
+这个是 2026 年 4 月最新流出的高级玩法，利用谷歌商店的 bug 实现 0 刀开通 Plus。
+
+### 原理
+
+```
+利用谷歌商店的 bug 把新号的 0 刀试用转移到任何账号上
+```
+
+### 准备工作
+
+| 项目 | 要求 | 用途 |
+|------|------|------|
+| **英区谷歌账号** | 必须英区 | 享受 0 刀试用 |
+| **能付钱的卡** | 任意信用卡 | 验证用（不扣费） |
+| **root 过的手机** | Android | 安装证书和抓包 |
+| **Reqable** | 电脑 + 手机 | 抓包软件 |
+| **Frida** | 电脑端 | 编写钩子函数 |
+| **CA 证书** | Reqable 生成 | 让 GPT App 信任 |
+
+### 完整流程
+
+#### 第 1 步：准备英区谷歌账号
+
+```
+1. 注册一个英区谷歌账号
+   - 用英国 IP 注册
+   - 或者买现成的英区号
+2. 登录到手机上
+```
+
+#### 第 2 步：安装 Reqable
+
+```
+1. 电脑上下载 Reqable
+   - 官网：https://reqable.com/
+2. 手机上也下载 Reqable
+3. 配置好抓包环境
+```
+
+#### 第 3 步：安装 CA 证书到系统目录
+
+```
+⚠️ 这一步需要 root 权限！
+
+1. 在 Reqable 生成 CA 证书
+2. 把证书安装到手机的系统目录
+   - 路径：/system/etc/security/cacerts/
+3. 设置证书信任
+```
+
+**为什么需要系统证书？**
+- ChatGPT App 只信任系统级证书
+- 用户安装的证书不被信任
+- 必须 root 后才能安装到系统目录
+
+#### 第 4 步：编写 Frida 钩子函数
+
+```
+1. 在电脑上下载 Frida
+2. 编写钩子函数让 GPT 应用信任手机上的证书
+3. 注入到 ChatGPT App 进程
+```
+
+**Frida 脚本示例**：
+```javascript
+Java.perform(function() {
+    var CertificateFactory = Java.use("java.security.cert.CertificateFactory");
+    var X509Certificate = Java.use("java.security.cert.X509Certificate");
+    
+    // Hook 证书验证逻辑
+    // 让 App 信任我们安装的证书
+});
+```
+
+#### 第 5 步：抓包获取 PurchaseToken
+
+```
+1. 打开 ChatGPT App
+2. 在 Reqable 中开始抓包
+3. 点击订阅 ChatGPT Plus
+4. 捕获到购买请求
+5. 提取 PurchaseToken
+```
+
+**关键数据**：
+- `PurchaseToken`：购买凭证
+- `packageName`：包名（com.openai.chatgpt）
+- `productId`：产品 ID（chatgpt.plus.monthly）
+- `orderId`：订单 ID
+
+#### 第 6 步：分析 Token 结构
+
+```
+分析捕获的 token，找出：
+1. 哪些是变量（每次变化）
+2. 哪些是不变量（固定值）
+```
+
+**典型 Token 结构**：
+```
+purchase_token = base64(
+    package_name + 
+    product_id + 
+    order_id + 
+    timestamp + 
+    signature
+)
+```
+
+#### 第 7 步：伪造新的 Token
+
+```
+1. 保留不变量部分
+2. 替换变量部分（用自己的账号信息）
+3. 重新计算签名
+4. 生成新的 PurchaseToken
+```
+
+**⚠️ 技术难点**：
+- 签名算法需要逆向分析
+- 可能需要反编译 Play 商店
+- 签名密钥可能在服务器端
+
+#### 第 8 步：调用 OpenAI 充值接口
+
+```
+1. 用伪造的 token 访问 OpenAI 充值接口
+2. 接口验证 token 通过
+3. 账号获得 ChatGPT Plus
+```
+
+**充值接口**：
+```
+POST https://chat.openai.com/backend-api/payments/subscribe
+Content-Type: application/json
+Authorization: Bearer <你的账号 token>
+
+{
+  "purchase_token": "<伪造的 token>",
+  "package_name": "com.openai.chatgpt",
+  "product_id": "chatgpt.plus.monthly"
+}
+```
+
+### 技术要点总结
+
+**核心思路**：
+1. root 手机 → 安装系统证书
+2. Frida Hook → 绕过证书验证
+3. Reqable 抓包 → 获取 PurchaseToken
+4. 分析 Token → 找出变量和不变量
+5. 伪造 Token → 用自己的账号信息
+6. 调用接口 → 完成充值
+
+**技术门槛**：
+- ✅ 需要 root 过的 Android 手机
+- ✅ 需要懂 Frida 脚本编写
+- ✅ 需要懂抓包和逆向分析
+- ✅ 需要懂 Token 结构和签名算法
+
+### 风险提示
+
+**⚠️ 高风险操作**：
+- 需要 root 手机（失去保修）
+- 需要逆向工程（技术门槛高）
+- 可能被 OpenAI 检测到
+- 可能被谷歌商店封禁
+
+**建议**：
+- 仅技术研究和测试
+- 不要用于商业用途
+- 做好手机备份（root 有风险）
+
+---
+
+## 方法对比总结
+
+| 方法 | 成本 | 成功率 | 风险 | 技术门槛 |
+|------|------|--------|------|----------|
+| 方法一（取消订阅） | ¥0 | 80% | 低 | ⭐ |
+| 方法二（PayPal 虚拟卡） | ¥10-30 | 90% | 中 | ⭐⭐ |
+| 方法三（Token 替换） | ¥0 | 50% | 高 | ⭐⭐⭐ |
+| 方法四（英区 0 刀卡密） | ¥0 | 70% | 高 | ⭐⭐⭐⭐⭐ |
+
+**推荐顺序**：
+1. **方法一** - 最简单，零成本，适合新手
+2. **方法二** - 成功率高，适合新号
+3. **方法四** - 技术流首选，完全免费但门槛高
+4. **方法三** - 仅技术测试，不推荐日常使用
+
+---
+
 ## 常见问题
 
 ### Q1: 方法一弹窗不出现怎么办？

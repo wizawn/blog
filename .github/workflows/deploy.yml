@@ -1,4 +1,4 @@
-name: Deploy to Cloudflare Workers
+name: Deploy to Cloudflare Pages
 
 on:
   push:
@@ -21,15 +21,17 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: '0.156.0'
+          hugo-version: '0.157.0'
           extended: true
       
       - name: Build
         run: hugo --gc --minify --forceSyncStatic
       
-      - name: Deploy to Cloudflare Workers
-        uses: cloudflare/wrangler-action@v3
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: deploy
+          apiToken: Ijb5MQFaqklcMtzD_qxSdSPCNPRCBlPslijY7PI-
+          accountId: 538536fdc38937e7ff08f5aac3a6ffa7
+          projectName: blog
+          directory: public
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}

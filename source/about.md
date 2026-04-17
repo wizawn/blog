@@ -10,7 +10,7 @@ type: "page"
 
 ## 👤 站长介绍
 
-**昵称**: 言零 / ClawSec  
+**昵称**: 言零  
 **方向**: Web 渗透测试、漏洞挖掘、AI 安全  
 **坐标**: 中国  
 
@@ -26,14 +26,18 @@ type: "page"
 ## 🛠️ 技术栈
 
 - **静态生成**: Hugo + Stack 主题
-- **部署**: Cloudflare Pages
-- **域名**: blog.caowo.de
+- **部署**: Cloudflare Workers
+- **域名**: 
+  - blog.caowo.de
+  - blog.wizawn.com
 - **内容工厂**: OpenClaw + AIVectorMemory
 
 ## 📬 联系方式
 
 - **GitHub**: [wizawn](https://github.com/wizawn)
 - **邮箱**: hihacker@foxmail.com
+- **微信**: GOV-HACK
+- **QQ**: 46333839
 
 ## 📜 免责声明
 
@@ -43,4 +47,4 @@ type: "page"
 
 ---
 
-*Last updated: 2026-03-03*
+*Last updated: 2026-04-17*

@@ -10,12 +10,10 @@ weight: 1
 
 
 
-{{< figure src="/images/wechat-pay.jpg" alt="微信赞赏码" width="200" >}}
 
-{{< figure src="/images/alipay-pay.jpg" alt="支付宝收款码" width="200" >}}
+
 
 {{< figure src="/images/wechat-qr.jpg" alt="微信二维码" width="200" >}}
-
 **联系方式 & 交流群**
 
 - **QQ**: 46333839
@@ -35,11 +33,9 @@ weight: 1
 > 
 > **微信收款码**：
 > 
-> <img src="/images/wechat-pay.jpg" alt="微信收款码" style="max-width: 200px; height: auto;">
 > 
 > **支付宝收款码**：
 > 
-> <img src="/images/alipay-pay.png" alt="支付宝收款码" style="max-width: 200px; height: auto;">
 > 
 > 感谢您的支持！🎉
 
@@ -58,6 +54,7 @@ weight: 1
 - **许可证**：MIT（免费开源）
 - **当前版本**：v1.1.1
 
+{{< figure src="/images/wechat-qr.jpg" alt="微信二维码" width="200" >}}
 **联系方式**：
 - **微信**：`GOV-HACK`（添加请备注"兑换码购买"）
 - **QQ**：`46333839`（工作日 9:00-18:00 在线）
@@ -556,11 +553,9 @@ python webui.py --port
   
   <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-bottom: 25px;">
     <div style="text-align: center; background: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);">
-      <img src="/images/wechat-pay.jpg" alt="微信赞赏" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
       <p style="margin-top: 12px; font-weight: bold; font-size: 1.1em; color: #333;">微信</p>
     </div>
     <div style="text-align: center; background: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);">
-      <img src="/images/alipay.jpg" alt="支付宝赞赏" style="width: 200px; height: 200px; object-fit: cover; border-radius: 5px;">
       <p style="margin-top: 12px; font-weight: bold; font-size: 1.1em; color: #333;">支付宝</p>
     </div>
   </div>

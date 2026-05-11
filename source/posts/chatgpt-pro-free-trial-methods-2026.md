@@ -16,11 +16,8 @@ weight: -998
 > 
 > 添加微信进微信交流群，各位觉得文章对你有帮助的话可否打赏一些呀~
 > 
-> {{< figure src="/images/wechat-pay.jpg" alt="微信赞赏码" width="200" >}}
 > 
-> {{< figure src="/images/alipay-pay.jpg" alt="支付宝收款码" width="200" >}}
 > 
-> {{< figure src="/images/wechat-qr.jpg" alt="微信二维码" width="200" >}}
 
 ---
 

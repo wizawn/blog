@@ -11,12 +11,10 @@ description: "502 Bad Gateway - 当理想遭遇现实 - 谨以此文献给所有
 
 
 
-{{< figure src="/images/wechat-pay.jpg" alt="微信赞赏码" width="200" >}}
 
-{{< figure src="/images/alipay-pay.jpg" alt="支付宝收款码" width="200" >}}
+
 
 {{< figure src="/images/wechat-qr.jpg" alt="微信二维码" width="200" >}}
-
 **联系方式 & 交流群**
 
 - **QQ**: 46333839

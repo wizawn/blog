@@ -5,7 +5,6 @@ lastmod: 2026-03-26T09:30:00+00:00
 categories: ["tech"]
 tags: ["tutorial", "codex", "guide", "open-source", "step-by-step"]
 draft: false
-weight: 1
 ---
 
 

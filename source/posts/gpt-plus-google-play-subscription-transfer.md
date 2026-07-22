@@ -5,7 +5,6 @@ date: 2026-07-17T16:00:00+08:00
 draft: false
 categories: ["安全研究", "支付安全", "技术科普"]
 tags: ["ChatGPT", "GPT Plus", "Google Play", "RevenueCat", "订阅转移", "Android", "ADB", "MITM", "Python"]
-weight: -994
 ---
 
 {{< figure src="/images/wechat-qr.jpg" alt="微信二维码" width="200" >}}

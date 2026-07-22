@@ -78,6 +78,20 @@ timeZone = 'UTC'
     enabled = true
     client = "ca-pub-2336550233412374"
 
+  # Widgets
+  [[params.widgets.page]]
+    type = "toc"
+
+  [[params.widgets.homepage]]
+    type = "archives"
+    [params.widgets.homepage.params]
+      limit = 5
+
+  [[params.widgets.homepage]]
+    type = "tag-cloud"
+    [params.widgets.homepage.params]
+      limit = 20
+
 [markup]
   [markup.goldmark.renderer]
     unsafe = true

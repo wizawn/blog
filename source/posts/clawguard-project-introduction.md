@@ -2,7 +2,6 @@
 title: "ClawGuard - 基于 AI 的加密货币实时监控系统"
 date: 2026-03-17T14:00:00+08:00
 draft: false
-weight: 100
 categories: ["项目介绍"]
 tags: ["ClawGuard", "AI", "加密货币", "实时监控", "价格预警", "技术分析"]
 image: "/static/security-cover.jpg"

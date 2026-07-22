@@ -4,7 +4,6 @@ date: 2026-05-19T16:10:00+00:00
 categories: ["security"]
 tags: ["Cloudflare", "计费安全", "竞态条件", "逻辑漏洞", "安全研究"]
 draft: false
-weight: 90
 link: "https://blog.hyun.cc/post/yong-jiu-bai-piao-cloudfire-pro-huo-business/"
 description: "深度分析 Cloudflare 订阅结算链路中的竞态条件漏洞：权限发放与支付确认的时序错位，以及分布式系统状态一致性的工程教训。"
 ---
@@ -13,12 +12,17 @@ description: "深度分析 Cloudflare 订阅结算链路中的竞态条件漏洞
 
 ---
 
+{{< figure src="/images/wechat-qr.jpg" alt="微信二维码" width="200" >}}
 **联系方式 & 交流群**
 
 - **QQ**: 46333839
 - **微信**: GOV-HACK
 
 添加微信进微信交流群，各位觉得文章对你有帮助的话可否打赏一些呀~
+
+---
+
+> **⚠️ 时效性提醒（2026-07 更新）**：本文发布于 2026 年 5 月，距今已过去 2 个月。Cloudflare 对安全漏洞响应迅速，该计费竞态条件大概率已被修复，**当前可用性存疑**。本文保留仅供分布式系统安全设计参考。
 
 ---
 

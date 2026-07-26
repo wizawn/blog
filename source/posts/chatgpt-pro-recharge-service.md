@@ -2,6 +2,7 @@
 title: "ChatGPT Pro / Claude Pro / Grok 会员代充 ｜ 正规渠道，30秒自动到账"
 date: 2026-05-10T10:30:00+00:00
 draft: false
+weight: 1
 categories: ["服务"]
 tags: ["ChatGPT Pro", "Claude Pro", "Grok", "AI会员", "代充", "正规渠道"]
 image: "/images/chatgpt-pro-ad-1.jpg"

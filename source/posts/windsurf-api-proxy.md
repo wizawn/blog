@@ -3,6 +3,7 @@ title: "Windsurf 开源反代工具：59 个 AI 模型一站式接入"
 description: "有人把 Windsurf AI 编程 IDE 的后端扒出来，做成了 OpenAI 兼容的 API 代理。零 npm 依赖，支持多账号池轮转，5 分钟完成部署。"
 date: 2026-04-19T14:45:00+08:00
 draft: false
+weight: 1
 categories: ["教程"]
 tags: ["Windsurf", "AI", "API 代理", "Claude", "开源工具"]
 ---

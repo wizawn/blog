@@ -2,6 +2,7 @@
 title: "OpenClaw 部署教程 - macOS 篇（2026 最新版）"
 date: 2026-03-10T16:00:00+08:00
 draft: false
+weight: 1
 categories: ["OpenClaw"]
 tags: ["OpenClaw", "部署", "教程"]
 image: "/static/tech-cover-1.jpg"

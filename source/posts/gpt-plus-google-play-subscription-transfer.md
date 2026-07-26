@@ -3,6 +3,7 @@ title: "GPT Plus 订阅转移全解析 - 从 Google Play Token 到一键开通�
 description: "深度剖析 GPT Plus Android 订阅架构：Google Play purchase token 如何通过 RevenueCat 中间层实现跨账号转移，从原理到 ADB 提取、MITM 拦截、API 调用的完整实战指南。"
 date: 2026-07-17T16:00:00+08:00
 draft: false
+weight: 1
 categories: ["安全研究", "支付安全", "技术科普"]
 tags: ["ChatGPT", "GPT Plus", "Google Play", "RevenueCat", "订阅转移", "Android", "ADB", "MITM", "Python"]
 ---

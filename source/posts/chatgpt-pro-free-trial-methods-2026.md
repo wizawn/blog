@@ -2,6 +2,7 @@
 title: "ChatGPT 免费试用漏洞汇总 - 2026 年 4 月最新白嫖指南"
 date: 2026-04-16T12:32:00Z
 draft: false
+weight: 1
 categories: ["AI 工具", "技术教程"]
 tags: ["ChatGPT", "Pro 试用", "漏洞", "白嫖", "PayPal", "虚拟卡"]
 description: "2026 年 4 月最新 ChatGPT Pro 免费试用方法汇总，包含取消订阅保留 Pro、PayPal 虚拟卡 0 元试用、指纹浏览器 + 住宅 IP 完整流程"

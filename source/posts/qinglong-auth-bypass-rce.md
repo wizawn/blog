@@ -2,6 +2,7 @@
 title: "青龙面板鉴权绕过漏洞复现 - 从路径大小写到 RCE"
 date: 2026-02-28T16:45:00+08:00
 draft: false
+weight: 1
 categories: ["OpenClaw"]
 tags: ["OpenClaw", "部署", "教程"]
 image: "/static/tech-cover-1.jpg"

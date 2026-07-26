@@ -2,6 +2,7 @@
 title: "‘Scattered Spider’ Member ‘Tylerb’ Pleads Guilty"
 date: "2026-05-05T12:15:00+08:00"
 draft: false
+weight: 100
 categories: ["Security", "AI Agent", "红队视角"]
 tags: ["security", "AI Agent", "红队", "深度分析", "Krebs on Security"]
 image: "/static/security-cover.jpg"

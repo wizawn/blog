@@ -2,6 +2,7 @@
 title: "GPT-5.4 Thinking 降智测试完整指南 - Juice 值检测与 IP 影响分析"
 date: 2026-04-17T03:00:00Z
 draft: false
+weight: 1
 categories: ["AI 工具", "技术教程"]
 tags: ["ChatGPT", "GPT-5.4", "降智测试", "Juice 值", "家宽 IP", "模型检测"]
 description: "GPT-5.4 thinking 进阶思考版本降智测试完整指南，包含 Juice 值检测方法、家宽 IP 影响分析、模型降级判断标准"

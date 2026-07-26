@@ -3,6 +3,7 @@ title: "aBaiAutoplus 深度拆解：当「注册机」进化成 AI 账号工厂"
 description: "从协议层到浏览器层，从 PayPal 到 GoPay，从邮箱轮换到代理池——完整解析这款 300+ Star 的 AI 账号自动注册系统的技术架构，并与同类工具横向对比。"
 date: 2026-06-01T17:00:00+08:00
 draft: false
+weight: 1
 categories: ["技术分析"]
 tags: ["AI", "自动化", "开源工具", "架构分析", "注册机", "GoPay", "PayPal"]
 ---

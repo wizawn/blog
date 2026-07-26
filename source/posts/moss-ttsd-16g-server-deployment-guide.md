@@ -2,6 +2,7 @@
 title: "MOSS-TTSD 语音合成模型部署教程：16G 内存服务器优化方案"
 date: 2026-04-17T05:00:00+08:00
 draft: false
+weight: 1
 categories: ["AI 部署"]
 tags: ["MOSS-TTSD", "语音合成", "AI 模型", "量化", "Swap"]
 description: "MOSS-TTSD 是效果顶尖的开源语音合成模型，但完整权重达 16.7GB。本文详解如何在 6 核 16G 无 GPU 云服务器上，通过虚拟内存 +4-bit 量化技术成功部署运行。"

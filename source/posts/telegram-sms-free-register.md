@@ -3,6 +3,7 @@ title: "Telegram 免短信验证码注册教程（2026 年最新）"
 description: "分享 Telegram 注册全程不触发收费短信的完整流程，包含 IP 选择、环境配置、手机号推荐等关键细节。"
 date: 2026-04-19T07:25:00+08:00
 draft: false
+weight: 1
 categories: ["教程"]
 tags: ["Telegram", "隐私保护", "注册教程"]
 ---

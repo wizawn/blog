@@ -264,7 +264,7 @@ expected_payment_method_type=kakao_pay
 
 你付的是 Stripe 价格表上对应区域的标准价格——荷兰 €20/月，印度 ₹1,950/月，巴西 R$99.90/月。没有优惠码，没有金额篡改。
 
-这也是我们的工具（[redeemai.me/paylink](https://redeemai.me/paylink)）的设计原则：**不注入 `promo_campaign`，不传 `discount`，不覆盖 `amount`。** 工具只做一件事——把 Stripe 的本地支付能力释放出来，让没有信用卡的用户也能正常订阅。
+正常的提链工具的设计原则应该是：**不注入 `promo_campaign`，不传 `discount`，不覆盖 `amount`。** 工具只做一件事——把 Stripe 的本地支付能力释放出来，让没有信用卡的用户也能正常订阅。
 
 ---
 
@@ -318,42 +318,61 @@ Stripe 的 Checkout Session 维护了一个内部状态。每次 API 调用后�
 
 ---
 
-## 七、我们的实现——redeemai.me/paylink
+## 七、开源提链脚本
 
-说了这么多原理，说说我们自己怎么做的。
+说了这么多原理，给一些现成的实现参考。
 
-工具地址：[https://redeemai.me/paylink](https://redeemai.me/paylink)
+> **⚠️ 时效性声明**：以下脚本收集于 2026 年 7 月。OpenAI/Stripe 的 API 接口、Stripe runtime 版本、风控策略随时可能变更，脚本**可能已不可用**。仅供学习协议流程和理解技术原理，不保证当前可运行。使用前请自行验证。
 
-### 技术栈
+### 多支付方式提链套件
 
-- **后端**：Go（跑在 Linux 服务器上，走代理池确保 IP 一致性）
-- **前端**：Vue 3 + TypeScript（三步向导 UI，支持中/英/俄三语）
-- **反滥用**：Cloudflare Turnstile（每次提取前验证人机）
-- **速率限制**：每 IP 每分钟 5 次
+来源：社区开源的 `ideal-link-extractor`，MIT License。
 
-### 使用流程
+包含 6 种支付方式的独立提取脚本：
 
-1. 登录 chatgpt.com，打开 `chatgpt.com/api/auth/session`，复制全部 JSON（或者只复制 `accessToken` 字段）
-2. 到 [redeemai.me/paylink](https://redeemai.me/paylink)，粘贴 JSON，选择支付方式和套餐
-3. 通过 Turnstile 验证，点击"提取支付链接"
-4. 等待 10~90 秒，得到支付链接
-5. 在浏览器中打开链接，完成支付
+| 脚本 | 支付方式 | 说明 |
+|------|---------|------|
+| `ideal_qr_extract.py` | iDEAL（荷兰） | 核心脚本（3263 行），其他脚本的参考实现 |
+| `upi/upi_extract.py` | UPI（印度） | 含多代理轮转、并行模式 |
+| `pix/pix_extract.py` | PIX（巴西） | 二维码提取 |
+| `twint/twint_extract.py` | TWINT（瑞士） | App 跳转链接 |
+| `kakao/kakao_extract.py` | Kakao Pay（韩国） | 含 pre_confirm 处理 |
+| `blik/blik_qr_extract.py` | BLIK（波兰） | 6 位码输入链接 |
+| `detect_payment_methods.py` | 通用 | 按国家检测可用的 Stripe 支付方式 |
 
-### 支持的组合
+依赖：`requests`、`curl_cffi`、`qrcode[pil]`
 
-- **支付方式**：iDEAL / UPI / PIX / TWINT / Kakao Pay / BLIK / MoMo / GCash
-- **套餐**：Plus ($20) / Pro ($200) / Pro 5X ($100)
+基本用法（以 UPI 为例）：
 
-### 代理池
+```bash
+pip install requests curl_cffi
+export UPI_TOKEN="eyJhbGciOi..."
+export UPI_PROXY="socks5://user:pass@host:port"  # 自备代理
+python upi_extract.py
+```
 
-整个 12 步流程通过我们的代理池执行，确保所有请求使用同一个出口 IP。如果当前代理被 OpenAI 标记（返回 401/403），系统会自动轮转到下一个代理重试。
+每个脚本通过环境变量配置代理（`XXX_PROXY`）和 Token（`XXX_TOKEN` 或 `token.txt` 文件）。代理需自备——脚本不内置任何代理。
 
-### 不做什么
+### MoMo 提取脚本（越南）
 
-- **不存储你的 Access Token**——用完即弃，不写数据库
-- **不注入优惠码**——没有 `promo_campaign`，没有 `discount`
-- **不篡改金额**——Stripe 价格表说多少就是多少
-- **不代付**——链接直接返回给你，你自己在浏览器里完成支付
+独立维护的 MoMo/Kakao 脚本集，包含：
+
+- `kakao_extract.py`——共享的会话管理和 Stripe 协议辅助函数
+- `momo_channel_probe.py`——只读模式探测 MoMo 通道可用性
+- `momo_probe.py`——默认只读，设置 `MOMO_EXTRACT_REDIRECT=1` 才尝试提取
+
+依赖额外的 Playwright（需要 Chromium）。
+
+### 脚本的核心设计
+
+这些脚本的技术亮点：
+
+1. **代理状态持久化**——`proxy_state.json` 记录每个代理的健康状态、成功/失败计数、冷却时间
+2. **日志脱敏**——自动将代理地址、Token 等敏感信息替换为安全标签
+3. **多 Worker 并行**——支持多线程并发提取，自动分配代理
+4. **Stripe 协议完整实现**——Session state 管理、`eid`/`mrid` 追踪、tax region 更新，完整复刻浏览器行为
+
+> **注意**：部分脚本包含 `promo_campaign` 注入逻辑和 `REQUIRE_ZERO` 选项（用于上一篇文章分析的 0 PHP 攻击路径）。这些属于漏洞利用代码，**不建议使用**——OpenAI 大概率已做修复，强行使用可能导致账号风控。
 
 ---
 
@@ -418,11 +437,9 @@ Stripe 的 Checkout Session 维护了一个内部状态。每次 API 调用后�
 
 从技术角度看，12 步协议流程的每一步都有其必要性——IP 一致性、状态管理、税务更新、pre_confirm。跳过任何一步都会导致最终拿不到 redirect URL。这也是为什么"提链"不是简单地抓个包就能搞定的——你需要理解 Stripe 的完整 Checkout 流程。
 
-从商业角度看，提链让全球用户有了一种不依赖信用卡的方式来使用 ChatGPT。在信用卡渗透率不到 10% 的印度，UPI 是 8 亿人的默认支付方式。提链工具不是在做什么灰色的事——它只是把 Stripe 的能力释放给了真正需要的人。
+从商业角度看，提链让全球用户有了一种不依赖信用卡的方式来使用 ChatGPT。在信用卡渗透率不到 10% 的印度，UPI 是 8 亿人的默认支付方式。提链本身不是什么灰色操作——它只是把 Stripe 的能力释放给了真正需要的人。
 
-工具地址：[https://redeemai.me/paylink](https://redeemai.me/paylink)
-
-试试看？
+> **最后的最后**：本文提到的所有脚本和协议细节都有时效性。OpenAI 和 Stripe 的接口在持续变化——Stripe runtime version 会更新，API 字段会调整，风控规则会收紧。今天能跑的脚本，明天可能就 403 了。理解原理比收藏脚本更重要。
 
 ---
 

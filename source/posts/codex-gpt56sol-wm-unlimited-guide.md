@@ -406,6 +406,12 @@ codex --ask-for-approval never exec `
 
 ---
 
+## 推荐项目
+
+- **[RikkaHub Agent](https://github.com/AAAelina/rikkahub-agent)** — 朋友的开源项目，感兴趣的可以看看。
+
+---
+
 *觉得有用？别忘了分享给更多需要的朋友！*
 
 *关注我，下期继续扒更多 AI 白嫖技巧~*

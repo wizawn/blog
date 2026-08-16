@@ -78,6 +78,9 @@ timeZone = 'UTC'
     enabled = true
     client = "ca-pub-2336550233412374"
 
+  [params.comments]
+    enabled = false
+
   # Widgets
   [[params.widgets.page]]
     type = "toc"

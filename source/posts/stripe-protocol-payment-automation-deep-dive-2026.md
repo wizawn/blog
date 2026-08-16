@@ -194,7 +194,7 @@ Hosted 模式的版本串后面带了两个 beta flag。如果在 cs_live_ 请�
 | `rv_timestamp` | 无 | 有 |
 | `expected_amount` | 无 | 有 |
 
-**这两套字段集完全不能混用**。这也是很多人协议支付做不通的原因——用了 oaics_ 的字段去调 cs_live_ 的接口，反过来也一样
+**这两套字段集完全不能混用**。这也是很多人协议支付做不通的原因——用了 oaics_ 的字段去调 cs_live_ 的接口，反过来也一样。
 
 ---
 
@@ -549,7 +549,7 @@ X-Vendor-Challenge-Token: {sentinel_token}
   "p": "gAAAAAB...",     // 主负载（加密后的 PoW + session 信息）
   "c": "...",            // enforcement_token（基于 FNV-1a 的算力证明结果）
   "id": "<UUID>",        // 一次性标识
-  "flow": "chatgpt_checkout",  // 标记来源流程
+  "flow": "platform_checkout",  // 标记来源流程
   "t": "<turnstile_dx_token>"  // 4000+ 字符的 Turnstile 验证 token
 }
 ```
@@ -675,7 +675,7 @@ sitekey = elements_session["passive_captcha"]["sitekey"]
 
 **重要澄清**：Stripe 的 `verify_with_challenge` 并非传统银行 3DS 验证（3D Secure）。它是 Stripe 自有的风控挑战，使用 hCaptcha 作为人机验证手段。
 
-真正的银行 3DS（如 Visa Secure）会打开银行页面要求输入 OTP/密码，这个在纯协议支付中**无法绕过**——但使用虚拟信用卡（如 SpaceXCard）通常不会触发银行 3DS，只会触发 Stripe 自身的 hCaptcha challenge。
+真正的银行 3DS（如 Visa Secure）会打开银行页面要求输入 OTP/密码，这个在纯协议支付中**无法绕过**——但使用虚拟信用卡（VCC）通常不会触发银行 3DS，只会触发 Stripe 自身的 hCaptcha challenge。
 
 ---
 

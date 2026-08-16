@@ -22,6 +22,10 @@
             <main class="main full-width">
                 {{- block "main" . }}{{- end }}
             </main>
+            <div class="ads-mobile-inline">
+                {{ partial "switchbase-ad-sidebar" . }}
+                {{ partial "florence-ad-sidebar" . }}
+            </div>
         </div>
         {{ partial "footer/include.html" . }}
     </body>

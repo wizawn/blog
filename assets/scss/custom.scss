@@ -12,7 +12,7 @@
     }
 }
 
-/* Left sidebar ads — hide on mobile, show on desktop */
+/* Left sidebar ads — desktop only, fit sidebar width */
 .sidebar-ads-desktop {
     display: none;
 
@@ -21,5 +21,30 @@
         flex-direction: column;
         gap: var(--sidebar-element-separation, 16px);
         margin-top: auto;
+
+        .widget {
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 0.9em;
+        }
+    }
+}
+
+/* Mobile inline ads — after main content, mobile only */
+.ads-mobile-inline {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    width: 100%;
+    order: 0;
+    padding: 0;
+
+    .widget {
+        flex: 1;
+        min-width: 0;
+    }
+
+    @media (min-width: 768px) {
+        display: none;
     }
 }

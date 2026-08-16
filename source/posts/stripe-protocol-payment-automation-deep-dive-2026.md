@@ -1091,13 +1091,13 @@ async with sem:
 
 ## 推荐：虚拟卡平台
 
-协议支付离不开信用卡。如果你需要一张支持 Stripe 的虚拟信用卡用于订阅海外 SaaS 服务（ChatGPT、Claude、Cursor 等），推荐 **SpaceXCard**：
+协议支付离不开信用卡。如果你需要一张支持 Stripe 的虚拟信用卡用于订阅海外 SaaS 服务（ChatGPT、Claude、Cursor 等），推荐 **ZovoCard**：
 
 - 支持 Visa / Mastercard，全球 Stripe 商户可用
 - 即开即用，无需实体卡，支持 USDT 充值
 - 多卡管理，适合批量订阅场景
 
-<a href="https://spacexcard.com/register?invite=DW6AYPAP" target="_blank" rel="noopener" style="display:inline-block;padding:8px 20px;font-size:14px;color:#fff;background:#6366f1;border-radius:6px;text-decoration:none;font-weight:600;">注册 SpaceXCard →</a>
+<a href="https://zovocard.com/register?invite=DW6AYPAP" target="_blank" rel="noopener" style="display:inline-block;padding:8px 20px;font-size:14px;color:#fff;background:#6366f1;border-radius:6px;text-decoration:none;font-weight:600;">注册 ZovoCard →</a>
 
 ---
 

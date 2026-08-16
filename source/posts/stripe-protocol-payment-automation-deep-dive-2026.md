@@ -200,7 +200,7 @@ Hosted 模式的版本串后面带了两个 beta flag。如果在 cs_live_ 请�
 
 ## 三、Custom 模式协议流程详解
 
-Custom 模式是最干净的协议支付路径。完整流程只需 7 步：
+Custom 模式是最干净的协议支付路径。完整流程 8 步：
 
 ```
 ┌──────────────────────────────────────┐
@@ -254,7 +254,7 @@ HAR 验证发现，浏览器发送的卡号**带空格**（`4004 1641 0185 9397`
 这三个指纹 ID 的格式比很多人以为的更复杂。HAR 验证的正确格式是 **42 字符**：
 
 ```
-guid = randomUUID() + randomHex(3)
+guid = randomUUID() + randomHex(6)
      = xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx + 6位hex
      = 36字符UUID + 6字符 = 42字符
 ```
@@ -762,9 +762,9 @@ Stripe 的 `confirmation_tokens` 和 `payment_intents/confirm` 接口都需要�
 
 | 参数 | 含义 | 生成方式 |
 |------|------|---------|
-| `guid` | 全局唯一 ID | UUID v4 格式 (`xxxxxxxx-xxxx-4xxx-xxxx-xxxxxxxxxxxx`) |
-| `muid` | 设备 ID | 随机 hex，32 字符 |
-| `sid` | 会话 ID | 随机 hex，32 字符 |
+| `guid` | 全局唯一 ID | UUID + 6位 hex = 42 字符（见 3.1 节） |
+| `muid` | 设备 ID | 同 guid 格式，42 字符 |
+| `sid` | 会话 ID | 同 guid 格式，42 字符 |
 | `time_on_page` | 页面停留时间 | 随机 8-30 秒（模拟真实用户） |
 | `key` | Publishable Key | 从 Checkout Session 获取 |
 | `_stripe_version` | API 版本 | 从 Stripe.js 的 basil 部署中提取 |

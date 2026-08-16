@@ -15,12 +15,13 @@ description: "502 Bad Gateway - 当理想遭遇现实 - 谨以此文献给所有
 
 
 {{< figure src="/images/wechat-qr.jpg" alt="微信二维码" width="200" >}}
+{{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}
 **联系方式 & 交流群**
 
 - **QQ**: 46333839
 - **微信**: GOV-HACK
 
-添加微信进微信交流群，各位觉得文章对你有帮助的话可否打赏一些呀~
+进微信群请联系博主，各位觉得文章对你有帮助的话可否打赏一些呀~
 
 ---
 

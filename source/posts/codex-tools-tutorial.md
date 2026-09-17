@@ -15,10 +15,10 @@ weight: 1
 
 {{< figure src="/images/wechat-qr.jpg" alt="微信二维码" width="200" >}}
 {{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}
-**联系方式 & 交流群**
+联系方式 & 交流群
 
 - **QQ**: 46333839
-- **微信**: GOV-HACK
+- **微信**: GOV-HACK  ⚠️ **博主微信暂时被封，请优先加入上方 QQ 群（46333839）**
 
 进微信群请联系博主，各位觉得文章对你有帮助的话可否打赏一些呀~
 
@@ -28,94 +28,88 @@ weight: 1
 
 ---
 
-## 📋 前言
+## 前言
 
-**这是一篇真正的零基础保姆级教程**，我会手把手带你从零开始，完整了解和使用 **Codex Tools v1.5.4**——一款基于 React + Tauri 的桌面工具，用来管理多个 Codex 账号，并提供本地 API 反代能力。
+这篇教程面向零基础用户，从安装到使用完整覆盖 Codex Tools v1.5.4 的各项功能。Codex Tools 是一款基于 React + Tauri 的桌面工具，用来管理多个 Codex 账号，并提供本地 API 反代能力。
 
-**本教程特点**：
-- ✅ **完全从零开始**：假设你没有任何开发基础
-- ✅ **真实测试验证**：所有步骤都已实际测试通过
-- ✅ **包含所有坑点**：把可能遇到的问题都提前说明
-- ✅ **持续更新维护**：跟随项目版本同步更新
+教程里的所有步骤都经过实际测试，常见的坑也会提前标注。内容跟随项目版本同步更新。
 
-**项目信息**：
-- **GitHub 仓库**：https://github.com/170-carry/codex-tools
-- **当前版本**：v1.5.4
-- **技术栈**：React + Tauri (Rust)
-- **支持系统**：macOS / Windows
-- **许可证**：MIT（免费开源）
+项目信息：
+- GitHub 仓库：https://github.com/170-carry/codex-tools
+- 当前版本：v1.5.4
+- 技术栈：React + Tauri (Rust)
+- 支持系统：macOS / Windows
+- 许可证：MIT（免费开源）
 
 ---
 
-## ⚠️ 重要声明
+## 重要声明
 
-1. **本项目仅供学习研究**：请遵守 OpenAI 相关服务条款
-2. **严禁用于违规用途**：不要用于滥用、非法用途
-3. **风险自担**：因使用本项目产生的风险和后果由使用者自行承担
-4. **免费开源**：任何付费版本均为倒卖行为
+1. 本项目仅供学习研究，请遵守 OpenAI 相关服务条款
+2. 严禁用于滥用、非法用途
+3. 因使用本项目产生的风险和后果由使用者自行承担
+4. 项目免费开源，任何付费版本均为倒卖行为
 
 ---
 
-## 🎯 核心功能
+## 核心功能
 
 ### 1. 多账号管理
-- ✅ 支持 OAuth 登录导入
-- ✅ 支持 JSON 文件批量导入
-- ✅ 支持读取文件夹下的全部账号文件
-- ✅ 导入后保留当前本机登录态
+- 支持 OAuth 登录导入
+- 支持 JSON 文件批量导入
+- 支持读取文件夹下的全部账号文件
+- 导入后保留当前本机登录态
 
 ### 2. 用量查看与智能切换
-- ✅ 展示每个账号的 **5 小时** 用量窗口
-- ✅ 展示每个账号的 **1 周** 用量窗口
-- ✅ 显示计划类型（Free/Plus/Team 等）
-- ✅ 支持手动刷新和定时自动刷新
-- ✅ 支持按余量排序和智能切换
+- 展示每个账号的 5 小时用量窗口
+- 展示每个账号的 1 周用量窗口
+- 显示计划类型（Free/Plus/Team 等）
+- 支持手动刷新和定时自动刷新
+- 支持按余量排序和智能切换
 
 ### 3. 一键切换账号
-- ✅ 一键切换账号并启动 Codex
-- ✅ 找不到桌面应用时自动回退到 `codex app`
-- ✅ 可选同步 Opencode OpenAI 授权
-- ✅ 可选在切换后重启已选编辑器
+- 一键切换账号并启动 Codex
+- 找不到桌面应用时自动回退到 `codex app`
+- 可选同步 Opencode OpenAI 授权
+- 可选在切换后重启已选编辑器
 
 ### 4. API 反代（核心功能）
-- ✅ 本地提供 OpenAI 兼容的 `/v1` 接口
-- ✅ 使用已登录的 Codex 账号作为上游
-- ✅ 支持固定端口、自定义端口
-- ✅ 支持固定 API Key 和手动刷新
-- ✅ 按账号余量自动挑选可用账号转发
-- ✅ 可设置应用启动时自动启动 API 反代
+- 本地提供 OpenAI 兼容的 `/v1` 接口
+- 使用已登录的 Codex 账号作为上游
+- 支持固定端口、自定义端口
+- 支持固定 API Key 和手动刷新
+- 按账号余量自动挑选可用账号转发
+- 可设置应用启动时自动启动 API 反代
 
 ### 5. 公网访问与桌面能力
-- ✅ 集成 cloudflared，可将本地反代暴露到公网
-- ✅ 支持快速隧道和命名隧道
-- ✅ 可选 HTTP/2 协议
-- ✅ 支持后台驻留、状态栏菜单
-- ✅ 支持应用内更新和多语言界面
+- 集成 cloudflared，可将本地反代暴露到公网
+- 支持快速隧道和命名隧道
+- 可选 HTTP/2 协议
+- 支持后台驻留、状态栏菜单
+- 支持应用内更新和多语言界面
 
 ---
 
-## 🖥️ 环境准备
+## 环境准备
 
 ### 系统要求
 
 | 系统 | 版本要求 | 推荐度 |
 |------|----------|--------|
-| macOS | macOS 10.15+ | ⭐⭐⭐⭐⭐ |
-| Windows | Windows 10/11 (64 位) | ⭐⭐⭐⭐ |
-| Linux | 暂不支持 | ❌ |
+| macOS | macOS 10.15+ | 推荐 |
+| Windows | Windows 10/11 (64 位) | 支持 |
+| Linux | 暂不支持 | - |
 
 ### 前置软件
 
-**如果你只是使用（不开发）**：
-- ✅ 不需要安装任何额外软件
-- ✅ 直接下载安装包即可
+如果只是使用（不做开发），不需要安装任何额外软件，直接下载安装包即可。
 
-**如果你要开发/打包**：
+如果你要开发或打包：
 - Node.js 20+
 - Rust stable
 - pnpm 9.15.9+
 
-**查看系统版本**：
+查看系统版本：
 
 ```bash
 # macOS
@@ -127,22 +121,22 @@ systeminfo | findstr /B /C:"OS Name" /C:"OS Version"
 
 ---
 
-## 📦 安装部署（3 种方式）
+## 安装部署（3 种方式）
 
 ### 方式一：下载预编译版本（推荐新手）
 
 #### 步骤 1：访问发布页面
 
 打开浏览器访问：
-- **GitHub Releases**：https://github.com/170-carry/codex-tools/releases
+- GitHub Releases：https://github.com/170-carry/codex-tools/releases
 
 #### 步骤 2：下载对应版本
 
-**macOS 用户**：
+macOS 用户：
 - Intel 芯片：下载 `Codex_Tools_x64.dmg` 或 `Codex_Tools_x64.app.tar.gz`
 - Apple Silicon (M1/M2/M3)：下载 `Codex_Tools_aarch64.dmg` 或 `Codex_Tools_aarch64.app.tar.gz`
 
-**Windows 用户**：
+Windows 用户：
 - 下载 `Codex_Tools_x64-setup.exe` 或 `Codex_Tools_x64.zip`
 
 #### 步骤 3：安装应用
@@ -157,7 +151,7 @@ sudo spctl --master-disable
 sudo xattr -r -d com.apple.quarantine /Applications/Codex\ Tools.app
 ```
 
-**Windows**：
+Windows：
 1. 双击 `.exe` 安装包
 2. 按照安装向导完成安装
 3. 或在开始菜单找到应用
@@ -174,7 +168,7 @@ sudo xattr -r -d com.apple.quarantine /Applications/Codex\ Tools.app
 
 #### 步骤 1：安装前置环境
 
-**安装 Node.js 20+**：
+安装 Node.js 20+：
 
 ```bash
 # macOS (使用 Homebrew)
@@ -187,7 +181,7 @@ brew install node@20
 node --version  # 应显示 v20.x.x
 ```
 
-**安装 Rust**：
+安装 Rust：
 
 ```bash
 # macOS/Linux
@@ -201,7 +195,7 @@ source $HOME/.cargo/env
 rustc --version  # 应显示 rustc 1.x.x
 ```
 
-**安装 pnpm**：
+安装 pnpm：
 
 ```bash
 npm install -g pnpm
@@ -244,9 +238,9 @@ pnpm run tauri dev
 ```
 
 **开发模式特点**：
-- ✅ 支持热重载
-- ✅ 修改代码后自动刷新
-- ✅ 控制台会显示日志
+- 支持热重载
+- 修改代码后自动刷新
+- 控制台会显示日志
 
 ---
 
@@ -274,7 +268,7 @@ ls -la src-tauri/target/release/bundle/dmg/
 ls -la src-tauri/target/release/bundle/macos/
 ```
 
-**Windows**：
+Windows：
 ```bash
 dir src-tauri\target\release\bundle\msi\
 dir src-tauri\target\release\bundle\app\
@@ -286,7 +280,7 @@ dir src-tauri\target\release\bundle\app\
 
 ---
 
-## 🎨 界面介绍
+## 界面介绍
 
 ### 主界面布局
 
@@ -325,7 +319,7 @@ dir src-tauri\target\release\bundle\app\
 
 ---
 
-## 🔧 详细使用教程
+## 详细使用教程
 
 ### 一、导入账号
 
@@ -340,9 +334,9 @@ dir src-tauri\target\release\bundle\app\
 7. 账号会自动导入并保存
 
 **优点**：
-- ✅ 最简单快捷
-- ✅ 自动获取完整认证信息
-- ✅ 不需要手动操作文件
+- 最简单快捷
+- 自动获取完整认证信息
+- 不需要手动操作文件
 
 #### 方法 2：上传 JSON 文件
 
@@ -352,7 +346,7 @@ dir src-tauri\target\release\bundle\app\
 4. 选择一个或多个 `.json` 账号文件
 5. 点击「导入」
 
-**JSON 文件格式**：
+JSON 文件格式：
 ```json
 {
   "label": "我的账号 1",
@@ -375,8 +369,8 @@ dir src-tauri\target\release\bundle\app\
 5. 应用会自动读取所有账号文件
 
 **适用场景**：
-- ✅ 有大量账号需要批量导入
-- ✅ 从其他工具迁移账号
+- 有大量账号需要批量导入
+- 从其他工具迁移账号
 
 #### 方法 4：同步当前设备登录
 
@@ -387,8 +381,8 @@ dir src-tauri\target\release\bundle\app\
 5. 应用会自动读取本机的登录凭证
 
 **注意**：
-- ⚠️ 只会同步当前登录的账号
-- ⚠️ 不会覆盖正在使用的账号
+- 只会同步当前登录的账号
+- 不会覆盖正在使用的账号
 
 ---
 
@@ -416,7 +410,7 @@ dir src-tauri\target\release\bundle\app\
 | **5h 用量** | 过去 5 小时的使用时长 |
 | **1w 用量** | 过去 1 周的使用时长 |
 | **计划类型** | Free / Plus / Team 等 |
-| **状态** | 🟢 可用 / 🟡 受限 / 🔴 不可用 |
+| **状态** | 可用 / 受限 / 不可用 |
 
 #### 按余量排序
 
@@ -471,7 +465,7 @@ dir src-tauri\target\release\bundle\app\
 
 #### 什么是 API 反代？
 
-简单说，就是在你的电脑上运行一个本地的 API 服务，让其他工具可以通过 OpenAI 兼容的接口调用 Codex 能力。
+在你的电脑上跑一个本地 API 服务，让其他工具通过 OpenAI 兼容的接口调用 Codex 能力。
 
 **工作原理**：
 ```
@@ -485,8 +479,8 @@ dir src-tauri\target\release\bundle\app\
 3. 点击「启动」按钮
 4. 等待服务启动成功
 5. 界面会显示：
-   - **Base URL**: `http://127.0.0.1:8787/v1`
-   - **API Key**: `sk-xxxxxxxx`（自动生成）
+   - Base URL: `http://127.0.0.1:8787/v1`
+   - API Key: `sk-xxxxxxxx`（自动生成）
 
 #### 在 Cursor 中使用
 
@@ -509,15 +503,15 @@ dir src-tauri\target\release\bundle\app\
 | 配置项 | 值 |
 |--------|-----|
 | **API 类型** | OpenAI Compatible |
-| **Base URL** | `http://127.0.0.1:8787/v1` |
-| **API Key** | `sk-xxxxxxxx`（从 Codex Tools 复制） |
+| Base URL | `http://127.0.0.1:8787/v1` |
+| API Key | `sk-xxxxxxxx`（从 Codex Tools 复制） |
 | **模型名称** | `gpt-4` 或 `gpt-5` |
 
 **支持的工具**：
-- ✅ Cursor
-- ✅ VSCode (Continue 插件)
-- ✅ JetBrains IDEs
-- ✅ Any API 客户端
+- Cursor
+- VSCode (Continue 插件)
+- JetBrains IDEs
+- Any API 客户端
 
 #### 支持的接口
 
@@ -558,8 +552,8 @@ curl http://127.0.0.1:8787/v1/chat/completions \
 4. 设置端口和 API Key（可选）
 
 **效果**：
-- ✅ 每次打开应用都会自动启动 API 反代
-- ✅ 不需要手动操作
+- 每次打开应用都会自动启动 API 反代
+- 不需要手动操作
 
 #### 公网访问（Cloudflared）
 
@@ -575,37 +569,37 @@ curl http://127.0.0.1:8787/v1/chat/completions \
 6. 复制公网地址（如 `https://xxx.trycloudflare.com`）
 
 **注意**：
-- ⚠️ 公网访问会暴露你的 API 到互联网
-- ⚠️ 请确保 API Key 足够安全
-- ⚠️ 建议设置访问限制
+- 公网访问会暴露你的 API 到互联网
+- 请确保 API Key 足够安全
+- 建议设置访问限制
 
 ---
 
-## 🔍 故障排查
+## 故障排查
 
 ### 问题 1：应用无法启动
 
-**macOS 提示"已损坏"**：
+macOS 提示"已损坏"：
 
 ```bash
 sudo spctl --master-disable
 sudo xattr -r -d com.apple.quarantine /Applications/Codex\ Tools.app
 ```
 
-**Windows 闪退**：
+Windows 闪退：
 1. 右键应用 → 以管理员身份运行
 2. 检查是否有杀毒软件拦截
 3. 重新下载安装包
 
 ### 问题 2：账号导入失败
 
-**OAuth 登录失败**：
+OAuth 登录失败：
 1. 检查网络连接
 2. 确保浏览器能正常访问 ChatGPT
 3. 清除浏览器缓存后重试
 4. 尝试使用 JSON 文件导入
 
-**JSON 文件导入失败**：
+JSON 文件导入失败：
 1. 检查 JSON 格式是否正确
 2. 确保包含必要字段（`access_token`, `account_id`）
 3. 检查文件编码是否为 UTF-8
@@ -632,7 +626,7 @@ netstat -ano | findstr :8787
 1. 关闭占用端口的应用
 2. 或在 Codex Tools 中更换端口
 
-**API Key 无效**：
+API Key 无效：
 1. 确保从「API 反代」页面复制正确的 API Key
 2. 检查是否有多余空格
 3. 尝试重新生成 API Key
@@ -647,7 +641,7 @@ netstat -ano | findstr :8787
 
 ---
 
-## 💡 使用技巧
+## 使用技巧
 
 ### 1. 账号管理技巧
 
@@ -659,19 +653,19 @@ netstat -ano | findstr :8787
 ### 2. API 反代技巧
 
 - **固定端口**：避免每次启动端口变化
-- **设置强 API Key**：不要使用默认的弱 Key
+- 设置强 API Key：不要使用默认的弱 Key
 - **监控日志**：查看 API 调用日志，了解使用情况
 - **限制访问**：如果开启公网访问，设置 IP 白名单
 
 ### 3. 性能优化
 
-- **关闭不用的功能**：如不需要 API 反代，可以关闭
-- **减少自动刷新频率**：设置为 1 小时或更长
+- 关闭不用的功能：如不需要 API 反代，可以关闭
+- 减少自动刷新频率：设置为 1 小时或更长
 - **清理旧账号**：删除不再使用的账号
 
 ---
 
-## 📊 版本历史
+## 版本历史
 
 | 版本 | 日期 | 主要更新 |
 |------|------|----------|
@@ -685,20 +679,20 @@ netstat -ano | findstr :8787
 
 ---
 
-## 🔗 相关链接
+## 相关链接
 
-- **GitHub 仓库**：https://github.com/170-carry/codex-tools
+- GitHub 仓库：https://github.com/170-carry/codex-tools
 - **问题反馈**：https://github.com/170-carry/codex-tools/issues
 - **更新日志**：https://github.com/170-carry/codex-tools/blob/main/changelog.md
-- **API 反代文档**：https://github.com/170-carry/codex-tools/blob/main/docs/api-proxy.md
+- API 反代文档：https://github.com/170-carry/codex-tools/blob/main/docs/api-proxy.md
 
 ---
 
-## 📝 总结
+## 总结
 
-**Codex Tools** 是一款功能强大的多账号管理工具，核心优势：
+Codex Tools 的定位就是多账号管理 + API 反代：
 
-### ✅ 优点
+### 优点
 - 界面简洁，易于上手
 - 支持多种账号导入方式
 - 用量查看直观清晰
@@ -706,12 +700,12 @@ netstat -ano | findstr :8787
 - 支持公网访问
 - 免费开源
 
-### ⚠️ 注意事项
+### 注意事项
 - 目前仅支持 macOS 和 Windows
 - Linux 暂不支持
 - 公网访问需注意安全
 
-### 🎯 适用人群
+### 适用人群
 - 有多个 Codex 账号的用户
 - 需要在多个工具间切换账号
 - 需要使用 API 反代功能

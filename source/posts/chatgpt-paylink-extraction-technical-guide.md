@@ -11,16 +11,16 @@ image: "/blog-cover-default.jpg"
 
 {{< figure src="/images/wechat-qr.jpg" alt="微信二维码" width="200" >}}
 {{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}
-**联系方式 & 交流群**
+联系方式 & 交流群
 
 - **QQ**: 46333839
-- **微信**: GOV-HACK
+- **微信**: GOV-HACK  ⚠️ **博主微信暂时被封，请优先加入上方 QQ 群（46333839）**
 
 进微信群请联系博主，各位觉得文章对你有帮助的话可否打赏一些呀~
 
 ---
 
-> **⚠️ 免责声明**：本文仅供安全研究与技术讨论。文中不提供可直接复用的攻击工具或完整利用脚本。本文目的是帮助开发者理解 Stripe 跨区支付的工作原理，以及为什么某些支付方式在不同区域可见性不同。提链工具不篡改金额、不注入优惠码，用户以正常价格通过本地支付方式完成订阅。
+> **免责声明**：本文仅供安全研究与技术讨论。文中不提供可直接复用的攻击工具或完整利用脚本。本文目的是帮助开发者理解 Stripe 跨区支付的工作原理，以及为什么某些支付方式在不同区域可见性不同。提链工具不篡改金额、不注入优惠码，用户以正常价格通过本地支付方式完成订阅。
 
 ---
 
@@ -28,25 +28,25 @@ image: "/blog-cover-default.jpg"
 
 "提链"这个词，最近在各种 ChatGPT 合租群、代充群里频繁出现。
 
-什么意思呢？简单来说：**把 ChatGPT 的信用卡结账页面，转换成一个本地支付方式（iDEAL / UPI / PIX / Kakao Pay / GCash…）的跳转链接。**
+就是把 ChatGPT 的信用卡结账页面，转换成一个本地支付方式（iDEAL / UPI / PIX / Kakao Pay / GCash…）的跳转链接。
 
-你可能会问——OpenAI 不是只接受信用卡吗？
+你可能会问，OpenAI 不是只接受信用卡吗？
 
-准确地说，**OpenAI 的前端只展示信用卡表单**。但后端用的是 Stripe，而 Stripe 在全球支持几十种本地支付方式。这些支付方式对应的国家、货币、支付类型都不同，OpenAI 在结账页面上做了筛选，只让你看到"信用卡 / 借记卡"一个选项。
+准确地说，OpenAI 的前端只展示信用卡表单，但后端用的是 Stripe，而 Stripe 在全球支持几十种本地支付方式。这些支付方式对应的国家、货币、支付类型都不同，OpenAI 在结账页面上做了筛选，只让你看到"信用卡 / 借记卡"一个选项。
 
-但 Stripe 的能力是在的。只要你能在创建 Checkout Session 时告诉 Stripe "我要用荷兰 iDEAL 支付"——Stripe 就会老老实实返回一个 iDEAL 的跳转链接。
+但 Stripe 的能力是在的。只要你能在创建 Checkout Session 时告诉 Stripe "我要用荷兰 iDEAL 支付"，Stripe 就会返回一个 iDEAL 的跳转链接。
 
-提链，就是**从 Stripe 的 Checkout Session 里把这个跳转链接提出来**。
+提链，就是从 Stripe 的 Checkout Session 里把这个跳转链接提出来。
 
-上一篇文章我们拆了 [0 PHP 白嫖 ChatGPT Plus](/posts/chatgpt-plus-0php-cross-region-pricing-exploit-2026/) 的跨区定价混淆攻击。那个是利用区域信号碎片化 + 工具注入参数让金额变成 0——纯粹的漏洞利用，现在大概率已经被修了。
+上一篇文章我们拆了 [0 PHP 白嫖 ChatGPT Plus](/posts/chatgpt-plus-0php-cross-region-pricing-exploit-2026/) 的跨区定价混淆攻击，那是利用区域信号碎片化加上工具注入参数让金额变成 0，属于纯粹的漏洞利用，现在大概率已经被修了。
 
-而提链不同。**提链是正常的商业行为**——用户以当地正常价格、通过当地正常的支付方式付款。只不过 OpenAI 的 UI 不展示这些选项，你得自己绕过前端的限制，直接和 Stripe 对话。
+而提链不同，它更接近正常的商业行为：用户以当地正常价格、通过当地正常的支付方式付款。只不过 OpenAI 的 UI 不展示这些选项，你得自己绕过前端的限制，直接和 Stripe 对话。
 
 今天把它从协议层完整拆开。
 
 ---
 
-## 一、为什么需要提链——信用卡的困境
+## 一、为什么需要提链：信用卡的困境
 
 全球 80 亿人，有信用卡的不到 20 亿。
 
@@ -58,22 +58,22 @@ image: "/blog-cover-default.jpg"
 
 | 国家 | 货币 | 可用支付方式 | 月费 |
 |------|------|-------------|------|
-| ??🇱 荷兰 | EUR | iDEAL | €20 |
-| 🇮🇳 印度 | INR | UPI | ₹1,950 |
-| 🇧🇷 巴西 | BRL | PIX | R$99.90 |
-| ??🇭 瑞士 | CHF | TWINT | CHF 20 |
-| 🇰🇷 韩国 | KRW | Kakao Pay | ₩26,400 |
-| 🇵🇱 波兰 | PLN | BLIK | zł79.99 |
-| 🇻🇳 越南 | VND | MoMo | ₫460,000 |
-| ??🇭 菲律宾 | PHP | GCash | ₱990 |
+| 荷兰 | EUR | iDEAL | €20 |
+| 印度 | INR | UPI | ₹1,950 |
+| 巴西 | BRL | PIX | R$99.90 |
+| 瑞士 | CHF | TWINT | CHF 20 |
+| 韩国 | KRW | Kakao Pay | ₩26,400 |
+| 波兰 | PLN | BLIK | zł79.99 |
+| 越南 | VND | MoMo | ₫460,000 |
+| 菲律宾 | PHP | GCash | ₱990 |
 
-这些价格不是我编的——它们真实存在于 Stripe 的 Checkout Session 响应里。OpenAI 按照区域设置了不同的定价，Stripe 负责处理。只是 OpenAI 的前端选择性地隐藏了这些支付方式。
+这些价格不是我编的，它们真实存在于 Stripe 的 Checkout Session 响应里。OpenAI 按照区域设置了不同的定价，Stripe 负责处理。只是 OpenAI 的前端选择性地隐藏了这些支付方式。
 
-提链工具要做的，就是**绕过前端的限制，以目标国家/货币创建 Checkout Session，然后从 Stripe 的 confirm 响应中提取第三方支付的跳转链接**。
+提链工具要做的，就是绕过前端的限制，以目标国家/货币创建 Checkout Session，然后从 Stripe 的 confirm 响应中提取第三方支付的跳转链接。
 
 ---
 
-## 二、提链的技术原理——四步拆解
+## 二、提链的技术原理：四步拆解
 
 ### Step 1：获取 Access Token
 
@@ -153,7 +153,7 @@ Authorization: Bearer eyJ...
 └──────────────────────────┘
 ```
 
-每一步都有自己的参数格式和必要的状态管理。Stripe 的 Checkout Session 是有状态的——它跟踪你的 `eid`（element ID）、`mrid`（merchant reference ID）、`expected_amount` 等等。如果你跳过了某一步或者参数不对，后续步骤就会报错。
+每一步都有自己的参数格式和必要的状态管理。Stripe 的 Checkout Session 是有状态的，它跟踪你的 `eid`（element ID）、`mrid`（merchant reference ID）、`expected_amount` 等等。如果你跳过了某一步或者参数不对，后续步骤就会报错。
 
 ### Step 4：提取支付链接
 
@@ -173,7 +173,7 @@ Authorization: Bearer eyJ...
 
 这个 URL 就是最终的支付链接。用户在浏览器中打开它，会被重定向到对应的支付方式页面（iDEAL 的银行选择页、UPI 的付款确认页、PIX 的二维码页面等）。完成支付后，Stripe webhook 通知 OpenAI，OpenAI 确认订阅生效。
 
-**整个流程，金额由 Stripe 的价格表决定，提链工具不篡改任何金额字段。** 用户付的就是对应国家/地区的标准月费。
+整个流程中，金额由 Stripe 的价格表决定，提链工具不篡改任何金额字段。用户付的就是对应国家/地区的标准月费。
 
 ---
 
@@ -218,14 +218,14 @@ POST https://api.stripe.com/v1/payment_pages/{oaics_xxx}/init
 
 | 支付方式 | PM Type | 国家 | 货币 | 需要 pre_confirm | 重定向类型 | 特殊处理 |
 |---------|---------|------|------|:---:|------|------|
-| iDEAL | `ideal` | NL | EUR | ✗ | 银行选择页 | 无 |
-| UPI | `upi` | IN | INR | ✗ | VPA 输入页 | 无 |
-| PIX | `pix` | BR | BRL | ✗ | 二维码页 | 无 |
-| TWINT | `twint` | CH | CHF | ✗ | App 跳转 | 无 |
-| Kakao Pay | `kakao_pay` | KR | KRW | ✓ | Kakao 确认页 | 需要 pre_confirm 调用 |
-| BLIK | `blik` | PL | PLN | ✗ | 6位码输入 | 无 |
-| MoMo | `momo` | VN | VND | ✓ | MoMo App | 需要 pre_confirm 调用 |
-| GCash | `gcash` | PH | PHP | ✗ | GCash 确认页 | 无 |
+| iDEAL | `ideal` | NL | EUR | | 银行选择页 | 无 |
+| UPI | `upi` | IN | INR | | VPA 输入页 | 无 |
+| PIX | `pix` | BR | BRL | | 二维码页 | 无 |
+| TWINT | `twint` | CH | CHF | | App 跳转 | 无 |
+| Kakao Pay | `kakao_pay` | KR | KRW | | Kakao 确认页 | 需要 pre_confirm 调用 |
+| BLIK | `blik` | PL | PLN | | 6位码输入 | 无 |
+| MoMo | `momo` | VN | VND | | MoMo App | 需要 pre_confirm 调用 |
+| GCash | `gcash` | PH | PHP | | GCash 确认页 | 无 |
 
 大多数支付方式流程一致：创建 PM → Confirm → 提取 redirect URL。但 Kakao Pay 和 MoMo 需要额外的 `pre_confirm` 调用——如果跳过这一步，Confirm 会返回 `incomplete` 状态，没有 redirect URL。
 
@@ -246,7 +246,7 @@ expected_payment_method_type=kakao_pay
 
 上一篇文章分析了 [0 PHP 攻击](/posts/chatgpt-plus-0php-cross-region-pricing-exploit-2026/)，里面提到第三方工具在创建 Checkout Session 时可能注入了零元参数（如 `promo_campaign`）。那么问题来了：
 
-**提链工具和那个"CDK 提炼"工具是一回事吗？**
+提链工具和那个"CDK 提炼"工具是一回事吗？
 
 不是。区别在于：
 
@@ -257,7 +257,7 @@ expected_payment_method_type=kakao_pay
 | 金额来源 | 工具操纵 | Stripe 价格表 |
 | 合法性 | 灰色/违法 | 正常商业行为 |
 
-正常的提链工具**不注入任何优惠参数**。它只是：
+正常的提链工具不注入任何优惠参数。它只是：
 
 1. 用你的 AT 创建一个以目标国家/货币计价的 Checkout Session
 2. 走完 Stripe 的协议流程
@@ -265,7 +265,7 @@ expected_payment_method_type=kakao_pay
 
 你付的是 Stripe 价格表上对应区域的标准价格——荷兰 €20/月，印度 ₹1,950/月，巴西 R$99.90/月。没有优惠码，没有金额篡改。
 
-正常的提链工具的设计原则应该是：**不注入 `promo_campaign`，不传 `discount`，不覆盖 `amount`。** 工具只做一件事——把 Stripe 的本地支付能力释放出来，让没有信用卡的用户也能正常订阅。
+正常提链工具的设计原则：不注入 `promo_campaign`，不传 `discount`，不覆盖 `amount`。工具只做一件事，把 Stripe 的本地支付能力释放出来，让没有信用卡的用户也能正常订阅。
 
 ---
 
@@ -279,7 +279,7 @@ Stripe Checkout Session 在创建和确认时需要使用同一个 IP。如果�
 
 这不是 Stripe 的 bug，是安全机制。Stripe 检测到 session 的创建 IP 和确认 IP 不一致，会认为可能是中间人攻击。
 
-解决方案：**整个 12 步流程使用同一个 HTTP client（或 cookie jar），确保所有请求走同一个出口 IP。**
+解决方案：整个 12 步流程使用同一个 HTTP client（或 cookie jar），确保所有请求走同一个出口 IP。
 
 ### 坑 2：`expected_amount`
 
@@ -315,7 +315,7 @@ Stripe 的 Checkout Session 维护了一个内部状态。每次 API 调用后�
 
 整个流程从创建 Checkout Session 到拿到 redirect URL，通常需要 10~30 秒。某些支付方式（如 Kakao Pay）可能需要更长时间，因为 Stripe 需要和第三方支付系统交互。
 
-如果 Confirm 之后没有立刻返回 redirect URL，需要轮询 Init 接口。URL 可能在 Confirm 后几秒到几十秒内才出现。我们的工具最多等 90 秒——超过这个时间通常意味着哪里出了问题。
+如果 Confirm 之后没有立刻返回 redirect URL，需要轮询 Init 接口。URL 可能在 Confirm 后几秒到几十秒内才出现。我们的工具最多等 90 秒，超过这个时间通常意味着哪里出了问题。
 
 ---
 
@@ -323,7 +323,7 @@ Stripe 的 Checkout Session 维护了一个内部状态。每次 API 调用后�
 
 说了这么多原理，给一些现成的实现参考。
 
-> **⚠️ 时效性声明**：以下脚本收集于 2026 年 7 月。OpenAI/Stripe 的 API 接口、Stripe runtime 版本、风控策略随时可能变更，脚本**可能已不可用**。仅供学习协议流程和理解技术原理，不保证当前可运行。使用前请自行验证。
+> ** 时效性声明**：以下脚本收集于 2026 年 7 月。OpenAI/Stripe 的 API 接口、Stripe runtime 版本、风控策略随时可能变更，脚本**可能已不可用**。仅供学习协议流程和理解技术原理，不保证当前可运行。使用前请自行验证。
 
 ### 多支付方式提链套件
 
@@ -366,12 +366,7 @@ python upi_extract.py
 
 ### 脚本的核心设计
 
-这些脚本的技术亮点：
-
-1. **代理状态持久化**——`proxy_state.json` 记录每个代理的健康状态、成功/失败计数、冷却时间
-2. **日志脱敏**——自动将代理地址、Token 等敏感信息替换为安全标签
-3. **多 Worker 并行**——支持多线程并发提取，自动分配代理
-4. **Stripe 协议完整实现**——Session state 管理、`eid`/`mrid` 追踪、tax region 更新，完整复刻浏览器行为
+值得一看的几个设计：代理状态持久化（`proxy_state.json` 记录健康状态、成功/失败计数、冷却时间），日志脱敏（自动将代理地址和 Token 替换为安全标签），多 Worker 并行（多线程并发提取，自动分配代理），以及 Stripe 协议的完整实现（Session state 管理、`eid`/`mrid` 追踪、tax region 更新，完整复刻浏览器行为）。
 
 > **注意**：部分脚本包含 `promo_campaign` 注入逻辑和 `REQUIRE_ZERO` 选项（用于上一篇文章分析的 0 PHP 攻击路径）。这些属于漏洞利用代码，**不建议使用**——OpenAI 大概率已做修复，强行使用可能导致账号风控。
 
@@ -434,19 +429,19 @@ python upi_extract.py
 
 ## 十、写在最后
 
-提链的本质是一个简单的事实：**Stripe 是一个全球支付平台，它天然支持几十种本地支付方式。OpenAI 的 UI 做了限制，但 API 没有。**
+提链的本质是一个简单的事实：Stripe 是一个全球支付平台，它天然支持几十种本地支付方式。OpenAI 的 UI 做了限制，但 API 没有。
 
 从技术角度看，12 步协议流程的每一步都有其必要性——IP 一致性、状态管理、税务更新、pre_confirm。跳过任何一步都会导致最终拿不到 redirect URL。这也是为什么"提链"不是简单地抓个包就能搞定的——你需要理解 Stripe 的完整 Checkout 流程。
 
 从商业角度看，提链让全球用户有了一种不依赖信用卡的方式来使用 ChatGPT。在信用卡渗透率不到 10% 的印度，UPI 是 8 亿人的默认支付方式。提链本身不是什么灰色操作——它只是把 Stripe 的能力释放给了真正需要的人。
 
-> **最后的最后**：本文提到的所有脚本和协议细节都有时效性。OpenAI 和 Stripe 的接口在持续变化——Stripe runtime version 会更新，API 字段会调整，风控规则会收紧。今天能跑的脚本，明天可能就 403 了。理解原理比收藏脚本更重要。
+> 本文提到的所有脚本和协议细节都有时效性。OpenAI 和 Stripe 的接口在持续变化——Stripe runtime version 会更新，API 字段会调整，风控规则会收紧。今天能跑的脚本，明天可能就 403 了。理解原理比收藏脚本更重要。
 
 ---
 
 ## 附录：直卡绑定——另一条路
 
-除了提链，还有一种完全不同的思路：**直接给 ChatGPT 账号绑一张卡，然后正常走 checkout。**
+除了提链，还有一种完全不同的思路：直接给 ChatGPT 账号绑一张卡，然后正常走 checkout。
 
 这就是"直卡焚决"方法的核心。它不绕过前端、不走第三方支付——它解决的是"没有美区信用卡"这个前置问题。
 
@@ -456,9 +451,9 @@ OpenAI 的 `/backend-api/payments/payment_method` 接口支持创建 Stripe `Set
 
 配套的控制台脚本（在 chatgpt.com 的 Console 里运行）做了这几件事：
 
-1. **自动发现 Stripe 公钥**——OpenAI 有两个 Stripe 商户分片（`KslHRdbaPg` 和 `C6h1nxGoI3`），脚本通过 `retrieveSetupIntent` 自动匹配当前账号属于哪个分片
-2. **创建 SetupIntent**——调用 OpenAI 的 `payment_method` API，拿到 `client_secret`
-3. **渲染 Stripe Card Element**——在页面上弹出一个模态框，内嵌 Stripe 的标准卡输入组件
+1. 自动发现 Stripe 公钥——OpenAI 有两个 Stripe 商户分片（`KslHRdbaPg` 和 `C6h1nxGoI3`），脚本通过 `retrieveSetupIntent` 自动匹配当前账号属于哪个分片
+2. 创建 SetupIntent——调用 OpenAI 的 `payment_method` API，拿到 `client_secret`
+3. 渲染 Stripe Card Element——在页面上弹出一个模态框，内嵌 Stripe 的标准卡输入组件
 4. **确认绑定**——`stripe.confirmCardSetup` + `set_as_default_payment_method: true`
 
 ```javascript

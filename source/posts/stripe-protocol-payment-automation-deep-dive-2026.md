@@ -11,34 +11,34 @@ image: "/blog-cover-default.jpg"
 
 {{< figure src="/images/wechat-qr.jpg" alt="微信二维码" width="200" >}}
 {{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}
-**联系方式 & 交流群**
+联系方式 & 交流群
 
 - **QQ**: 46333839
-- **微信**: GOV-HACK
+- **微信**: GOV-HACK  ⚠️ **博主微信暂时被封，请优先加入上方 QQ 群（46333839）**
 
 进微信群请联系博主，各位觉得文章对你有帮助的话可否打赏一些呀~
 
 ---
 
-> **⚠️ 免责声明**：本文仅供安全研究与技术学习。文中描述的技术手段仅用于分析 Stripe 支付协议的工作原理，帮助支付系统开发者理解安全边界。请勿将相关技术用于任何未授权的操作。
+> **免责声明**：本文仅供安全研究与技术学习。文中描述的技术手段仅用于分析 Stripe 支付协议的工作原理，帮助支付系统开发者理解安全边界。请勿将相关技术用于任何未授权的操作。
 
 ---
 
 ## 前言
 
-做过 SaaS 订阅的人都知道，Stripe 是全球最主流的支付处理商。几乎所有主流 AI 平台——从对话类到图像类——都用 Stripe 处理信用卡支付。
+Stripe 是全球最主流的支付处理商，几乎所有主流 AI 平台（对话类、图像类）都用它处理信用卡支付。
 
-但很少有人去研究 Stripe Checkout 背后的协议细节。大多数人的认知停留在"调一下 API、跳个 Checkout 页面、信用卡扣完款就行了"。
+但很少有人深入研究 Stripe Checkout 背后的协议细节。多数认知停留在"调一下 API、跳个 Checkout 页面、扣完款就行"的层面。
 
-实际上，Stripe 的 Checkout Session 协议远比你想象的复杂。从 `checkout_ui_mode` 的 `custom` 与 `hosted` 两种模式，到 `ConfirmationToken` 的创建机制，再到 `PaymentIntent` 的 `requires_action` 状态下 3DS 验证挑战的处理——每一步都有大量的协议细节、反欺诈检测和时序要求。
+实际上 Stripe 的 Checkout Session 协议远比想象的复杂：从 `checkout_ui_mode` 的 `custom` 与 `hosted` 两种模式，到 `ConfirmationToken` 的创建机制，再到 `PaymentIntent` 在 `requires_action` 状态下如何处理 3DS 验证挑战，每一步都牵涉大量协议细节、反欺诈检测和时序要求。
 
-今天我把这些全拆开。从 HAR 抓包出发，逐层剖析 Stripe 协议支付的完整链路，并提供 5 套不同技术栈的实现源码。
+本文从 HAR 抓包出发，逐层拆解 Stripe 协议支付的完整链路，并附 5 套不同技术栈的实现源码。
 
 ---
 
 ## 零、方法论：如何逆向 Stripe 支付协议
 
-在开始之前，先讲方法论。所有协议支付的起点都是 **HAR 抓包**。
+所有协议支付的起点都是 HAR 抓包。
 
 ### 0.1 什么是 HAR 文件
 
@@ -46,15 +46,15 @@ HAR（HTTP Archive）是浏览器开发者工具导出的完整 HTTP 交互记�
 
 打开 Chrome DevTools → Network → 完成一次真实支付 → 右键 → Save all as HAR with content。
 
-**这个 HAR 文件就是你的 ground truth**。所有协议支付的字段、值、顺序、编码方式，都以 HAR 为准。代码实现、第三方文档、安全审计报告——全部都可能过时或有误，只有 HAR 是当时浏览器真实发出的请求。
+这个 HAR 文件就是 ground truth。所有协议支付的字段、值、顺序、编码方式，都以 HAR 为准。代码实现、第三方文档、安全审计报告都可能过时或有误，只有 HAR 是当时浏览器真实发出的请求。
 
 ### 0.2 HAR 分析流程
 
-1. **筛选关键域名**：`api.stripe.com`、`m.stripe.com`、`checkout.stripe.com`、平台 API 域名
-2. **按时间排序**：找出完整的请求链路
-3. **对比成功和失败**：同一流程的成功 HAR 和失败 HAR，diff 出关键差异
-4. **提取稳定字段**：跨多个 HAR 都一致的值可以硬编码
-5. **标记动态字段**：每次不同的值（Session ID、Token、时间戳）需要运行时获取
+1. 筛选关键域名：`api.stripe.com`、`m.stripe.com`、`checkout.stripe.com`、平台 API 域名
+2. 按时间排序：找出完整的请求链路
+3. 对比成功和失败：同一流程的成功 HAR 和失败 HAR，diff 出关键差异
+4. 提取稳定字段：跨多个 HAR 都一致的值可以硬编码
+5. 标记动态字段：每次不同的值（Session ID、Token、时间戳）需要运行时获取
 
 ### 0.3 经过验证的 HAR 请求链路
 
@@ -77,18 +77,14 @@ HAR（HTTP Archive）是浏览器开发者工具导出的完整 HTTP 交互记�
 
 ## 一、为什么要做"协议支付"
 
-先搞清楚一个概念：什么是协议支付（Protocol Payment）？
+协议支付（Protocol Payment）的定义：用纯 HTTP API 请求模拟浏览器的完整操作链路，包括 Stripe 的内部 API（非官方 SDK 暴露的那些），直接在协议层完成支付，无需浏览器。
 
-**浏览器支付**：用户打开 Stripe Checkout 页面 → 手动填写信用卡号 → 点击支付 → 完成。这是正常流程。
+对比浏览器支付（用户打开 Checkout 页面 → 填卡号 → 点支付 → 完成），协议支付的优势在于：
 
-**协议支付**：用纯 HTTP API 请求模拟浏览器的完整操作链路，包括 Stripe 的内部 API（不是官方 SDK 暴露的那些），直接在协议层完成支付，不需要浏览器。
-
-为什么要这么做？
-
-1. **自动化需求**：批量管理订阅时，手动操作不现实
-2. **性能需求**：浏览器（Puppeteer/Playwright）启动慢、占内存大、不稳定；协议支付 <5s 完成
-3. **环境隔离**：服务端运行，不需要 GUI 环境
-4. **学习价值**：深入理解支付系统的工作原理
+1. 自动化：批量管理订阅时手动操作不现实
+2. 性能：浏览器（Puppeteer/Playwright）启动慢、占内存大、不稳定；协议支付 <5s 完成
+3. 环境隔离：服务端运行，不需要 GUI 环境
+4. 学习价值：深入理解支付系统的工作原理
 
 ---
 
@@ -112,7 +108,7 @@ Custom 模式返回的 Session ID 以 `oaics_` 开头。这种模式下：
 - 前端需要自己挂载 Stripe Elements
 - 通过 Stripe.js 创建 `ConfirmationToken`
 - 调用平台的 `confirm` 接口完成支付
-- **直接**在 Stripe API 上确认 PaymentIntent
+- 直接在 Stripe API 上确认 PaymentIntent
 
 ### 2.2 Hosted 模式 (`cs_live_` 前缀)
 
@@ -138,7 +134,7 @@ Hosted 模式返回 `cs_live_` 前缀的 Session。这种模式下：
 
 ### 2.3 决定性参数：`checkout_ui_mode`
 
-通过大量测试验证，**决定返回 `oaics_` 还是 `cs_live_` 的唯一参数就是 `checkout_ui_mode`**。
+通过大量测试验证，决定返回 `oaics_` 还是 `cs_live_` 的唯一参数就是 `checkout_ui_mode`。
 
 ```json
 // 返回 oaics_ 的请求
@@ -160,15 +156,15 @@ Hosted 模式返回 `cs_live_` 前缀的 Session。这种模式下：
 ```
 
 注意差异：
-- **`entry_point`**：Custom 模式有，Hosted 模式没有
-- **`cancel_url`**：Hosted 模式需要（Stripe 托管页面的返回按钮用）
-- **`locale`**：Hosted 模式建议传（影响 Stripe 页面语言）
+- `entry_point`：Custom 模式有，Hosted 模式没有
+- `cancel_url`：Hosted 模式需要（Stripe 托管页面的返回按钮用）
+- `locale`：Hosted 模式建议传（影响 Stripe 页面语言）
 
 Hosted 模式的响应多一个 `url` 字段——这是 Stripe 托管页面的完整 URL，可以直接在浏览器中打开。
 
 ### 2.4 `_stripe_version` 的版本差异
 
-这是一个极其容易忽略的细节。两种模式使用**不同的 `_stripe_version`**：
+这是一个极其容易忽略的细节。两种模式使用不同的 `_stripe_version`：
 
 | 模式 | `_stripe_version` 值 |
 |------|---------------------|
@@ -195,7 +191,7 @@ Hosted 模式的版本串后面带了两个 beta flag。如果在 cs_live_ 请�
 | `rv_timestamp` | 无 | 有 |
 | `expected_amount` | 无 | 有 |
 
-**这两套字段集完全不能混用**。这也是很多人协议支付做不通的原因——用了 oaics_ 的字段去调 cs_live_ 的接口，反过来也一样。
+这两套字段集完全不能混用。这也是很多人协议支付做不通的原因——用了 oaics_ 的字段去调 cs_live_ 的接口，反过来也一样。
 
 ---
 
@@ -241,10 +237,10 @@ type=card
 
 几个关键细节：
 
-1. **`key` 必须是平台的 Stripe Publishable Key**，不是你自己的
-2. **`_stripe_version` 必须匹配**当前 Stripe.js 的 API 版本
-3. **需要传 Stripe.js 的指纹参数**：`guid`、`muid`、`sid`、`time_on_page`
-4. **Referer 必须是平台域名**，Stripe 会校验
+1. `key` 必须是平台的 Stripe Publishable Key，不是你自己的
+2. `_stripe_version` 必须匹配当前 Stripe.js 的 API 版本
+3. 需要传 Stripe.js 的指纹参数：`guid`、`muid`、`sid`、`time_on_page`
+4. Referer 必须是平台域名，Stripe 会校验
 
 #### 卡号格式细节
 
@@ -279,7 +275,7 @@ payment_method_selection_flow = merchant_specified    # ← oaics_ 固定
 additional_elements = [expressCheckout, payment, address]
 ```
 
-这些字段在 `confirmation_tokens` 请求中出现两次——一次在 `payment_method_data` 内部，一次在顶层。**两层的值大部分相同，但 `merchant_integration_source` 在 confirm 请求中变成 `l1`**。这个细节从 HAR 中才能发现。
+这些字段在 `confirmation_tokens` 请求中出现两次——一次在 `payment_method_data` 内部，一次在顶层。两层的值大部分相同，但 `merchant_integration_source` 在 confirm 请求中变成 `l1`。这个细节从 HAR 中才能发现。
 
 #### 请求头
 
@@ -351,9 +347,9 @@ GET https://api.stripe.com/v1/elements/sessions?deferred_intent[mode]=subscripti
 ```
 
 关键返回值：
-- **`elements_session_id`**：`elements_session_xxx`，后续 confirm 请求需要
-- **`customer_session_client_secret`**：`cuss_xxx`，客户会话密钥
-- **`payment_method_configuration`**：`pmc_xxx`，支付方式配置 ID
+- `elements_session_id`：`elements_session_xxx`，后续 confirm 请求需要
+- `customer_session_client_secret`：`cuss_xxx`，客户会话密钥
+- `payment_method_configuration`：`pmc_xxx`，支付方式配置 ID
 
 ### 3.4 税务地址优化 — US 免税地址消除 VAT
 
@@ -381,11 +377,11 @@ POST /api/v1/payments/checkout/taxes
 ```
 
 美国有 5 个无销售税的州：
-- **Oregon (OR)** — 无销售税
-- **Montana (MT)** — 无销售税
-- **Delaware (DE)** — 无销售税
-- **New Hampshire (NH)** — 无销售税
-- **Alaska (AK)** — 大部分地区无销售税
+- Oregon (OR) — 无销售税
+- Montana (MT) — 无销售税
+- Delaware (DE) — 无销售税
+- New Hampshire (NH) — 无销售税
+- Alaska (AK) — 大部分地区无销售税
 
 HAR 验证：使用 US 地址后 tax=0，最终金额保持 ₱982.14。
 
@@ -411,7 +407,7 @@ client_attribution_metadata[merchant_integration_source] = l1
 
 #### PI 拒卡重试
 
-HAR 验证了一个重要特性：**同一个 PaymentIntent 被拒卡后可以用新的 ConfirmationToken 重试**。
+HAR 验证了一个重要特性：同一个 PaymentIntent 被拒卡后可以用新的 ConfirmationToken 重试。
 
 流程：
 1. 第一张卡 → `generic_decline` → PI 状态 `requires_payment_method`
@@ -419,7 +415,7 @@ HAR 验证了一个重要特性：**同一个 PaymentIntent 被拒卡后可以�
 3. 再次调用 `payment_intents/confirm`
 4. 第二张卡 → `succeeded`
 
-**这意味着拒卡不需要重建整个 Checkout Session**，只需要换卡重建 token。
+这意味着拒卡不需要重建整个 Checkout Session，只需要换卡重建 token。
 
 ### 3.6 Cookie 隔离架构
 
@@ -555,7 +551,7 @@ X-Vendor-Challenge-Token: {sentinel_token}
 }
 ```
 
-**`t` 字段是核心**——如果为空字符串，approve 立即返回 `blocked`。它来自 Cloudflare Turnstile 的隐式挑战验证（不是肉眼可见的验证码）。
+`t` 字段是核心——如果为空字符串，approve 立即返回 `blocked`。它来自 Cloudflare Turnstile 的隐式挑战验证（不是肉眼可见的验证码）。
 
 #### Sentinel Token 生成流程
 
@@ -573,13 +569,13 @@ X-Vendor-Challenge-Token: {sentinel_token}
 
 关键点：
 - PoW 使用 **FNV-1a** 哈希算法，difficulty 对 checkout 流程通常是 "0"（即几乎不需要算力）
-- Turnstile SDK 必须在**真实的 DOM 环境**中执行——简单的字符串拼接无法通过验证
+- Turnstile SDK 必须在真实的 DOM 环境中执行——简单的字符串拼接无法通过验证
 - 实际生产中需要 Node.js + jsdom 来执行官方 Turnstile VM
 - SDK 代码需要定期更新（随平台版本迭代）
 
 #### Approve 的正确时机
 
-**关键发现**：Approve 不应该主动调用。正确的流程是 **fall-through**：
+**关键发现**：Approve 不应该主动调用。正确的流程是 fall-through：
 
 ```
 confirm → status=open, requires_approval
@@ -649,11 +645,11 @@ client_secret = pi_xxx_secret_xxx        # PI 的 client_secret
 
 ### 5.3 hCaptcha Enterprise 的特殊性
 
-Stripe 使用的不是普通 hCaptcha，而是 **hCaptcha Enterprise**。区别：
+Stripe 使用的不是普通 hCaptcha，而是 hCaptcha Enterprise。区别：
 
-1. **有 `rqdata` 参数**：普通 hCaptcha 不需要 rqdata，Enterprise 必须传
-2. **sitekey 是 Stripe 专有的**：从 `elements/sessions` 响应的 `passive_captcha` 字段中提取
-3. **invisible 模式**：浏览器里看不到验证码图片，但后台在做风控评估
+1. 有 `rqdata` 参数：普通 hCaptcha 不需要 rqdata，Enterprise 必须传
+2. sitekey 是 Stripe 专有的：从 `elements/sessions` 响应的 `passive_captcha` 字段中提取
+3. invisible 模式：浏览器里看不到验证码图片，但后台在做风控评估
 
 ```python
 # 从 elements_session 响应中提取
@@ -663,9 +659,9 @@ sitekey = elements_session["passive_captcha"]["sitekey"]
 
 ### 5.4 时效性问题
 
-**hCaptcha token 有时效性**——浏览器里 ~4 秒解出即有效，但远程打码服务可能需要 30-120 秒。如果超时：
+hCaptcha token 有时效性——浏览器里 ~4 秒解出即有效，但远程打码服务可能需要 30-120 秒。如果超时：
 - `verify_challenge` 返回 `payment_intent_authentication_failure`
-- 但 PI 状态仍然是 `requires_action`——**可以重新 verify_challenge**
+- 但 PI 状态仍然是 `requires_action`——可以重新 verify_challenge
 
 解决方案分级：
 1. **最优**：本地 headless 浏览器解 hCaptcha（<5s，成功率 95%+）
@@ -847,8 +843,8 @@ Hosted 模式需要追加 beta flags：
 
 Hosted 模式的 `payment_pages/confirm` 需要两个动态校验值：
 
-- **`js_checksum`**：当前 Stripe.js bundle 的 SHA 校验和，从 deploy status 提取
-- **`rv_timestamp`**：当前 Stripe.js 的部署时间戳（Unix 毫秒），也从 deploy status 提取
+- `js_checksum`：当前 Stripe.js bundle 的 SHA 校验和，从 deploy status 提取
+- `rv_timestamp`：当前 Stripe.js 的部署时间戳（Unix 毫秒），也从 deploy status 提取
 
 这两个值随 Stripe.js 版本更新而变化。如果使用过期的 checksum/timestamp，confirm 可能会被静默拒绝。
 
@@ -868,7 +864,7 @@ rv_timestamp = deploy["basil"]["rv_timestamp"]
 
 最佳实践是使用两个独立的代理池：
 - **平台代理池**：用于访问 SaaS 平台的 API（需要与账号注册地匹配）
-- **Stripe 代理池**：用于访问 Stripe API（需要住宅 IP，避免被 Radar 标记）
+- Stripe 代理池：用于访问 Stripe API（需要住宅 IP，避免被 Radar 标记）
 
 ### 8.2 代理健康检查
 
@@ -883,7 +879,7 @@ class ProxyVerifier:
 
 ### 8.3 出口 IP 一致性
 
-**关键规则**：创建 Checkout Session 和确认支付时，必须使用**同一个出口 IP**。Stripe 会比对两次请求的 IP，如果不一致会拒绝交易。
+**关键规则**：创建 Checkout Session 和确认支付时，必须使用同一个出口 IP。Stripe 会比对两次请求的 IP，如果不一致会拒绝交易。
 
 这意味着整个支付流程中的所有请求（从创建 session 到 confirm）必须绑定同一个代理出口。如果代理池做了负载均衡，需要在支付流程中"钉住"一个代理节点。
 
@@ -938,21 +934,21 @@ async def get_proxy_with_fallback(pool, country):
 ```
 
 每个状态转移都需要处理：
-- **卡被拒（Card Declined）**：分类拒绝原因（余额不足/CVV错误/风控拒绝），决定是换卡重试还是放弃
+- 卡被拒（Card Declined）：分类拒绝原因（余额不足/CVV错误/风控拒绝），决定是换卡重试还是放弃
 - **3DS 验证**：进入 Challenge 流程
-- **Session 过期**：创建新 Session 重试
-- **Rate Limiting**：TLS 指纹轮换 + 退避重试
+- Session 过期：创建新 Session 重试
+- Rate Limiting：TLS 指纹轮换 + 退避重试
 
 ### 9.1 Decline 错误分类
 
 Stripe 的卡拒绝错误不是一个笼统的"失败"，而是分为可重试和不可重试两类：
 
-**可重试（换卡后重试）**：
+可重试（换卡后重试）：
 - `generic_decline` — 最常见，通常是风控拒绝，换卡几乎总能过
 - `insufficient_funds` — 余额不足，充值后或换卡可过
 - `processing_error` — Stripe 侧临时错误，直接重试
 
-**不可重试（放弃本次 session）**：
+不可重试（放弃本次 session）：
 - `stolen_card` / `lost_card` — 卡已被标记，不能再用
 - `card_not_supported` — 卡类型不支持（如某些预付卡）
 - `currency_not_supported` — 卡不支持目标币种
@@ -964,11 +960,11 @@ Stripe 的卡拒绝错误不是一个笼统的"失败"，而是分为可重试�
 
 ### 9.2 Fast-Path 优化
 
-一个重要的状态机优化：**如果 PI 已经 `succeeded`，跳过 hCaptcha**。
+一个重要的状态机优化：如果 PI 已经 `succeeded`，跳过 hCaptcha。
 
 HAR 中发现，有时 confirm 返回 `requires_action`（hCaptcha challenge），但 PI 实际上已经扣款成功。这时如果盲目去解 captcha，反而可能出错。
 
-正确做法是在收到 `requires_action` 后，**先查询 PI 状态**：
+正确做法是在收到 `requires_action` 后，先查询 PI 状态：
 
 ```python
 pi = stripe.get(f"/v1/payment_intents/{pi_id}", key=pk_live)
@@ -1040,7 +1036,7 @@ await sleep(random.uniform(0.5, 1.5))   # confirm 前
 
 批量处理多个账号时，不要让所有请求同时发出：
 
-- **Stripe API**：有 rate limit，同一 publishable key 下大量并发 confirm 会触发 429
+- Stripe API：有 rate limit，同一 publishable key 下大量并发 confirm 会触发 429
 - **平台 API**：多个账号同时操作可能触发风控
 - **代理池**：每个代理 IP 上同时只运行 1-2 个支付流程
 
@@ -1060,11 +1056,11 @@ async with sem:
 
 | 实现 | 语言/框架 | 模式 | 特点 |
 |------|----------|------|------|
-| **saas-pay-sdk** | Python / CLI | Custom | 最精简的 CLI 工具，TLS 指纹轮换，daemon 上报 |
-| **subscription-manager** | Python Flask / Web UI | Both | 完整 Web 管理面板，支持绑卡、查账单、升级降级 |
-| **payment-gateway** | Python Flask / Web UI | Both | 批量支付面板，账号池管理，barrier 模式批量确认 |
-| **checkout-server** | Python / Local HTTP | Both | 本地支付编排服务器，Playwright 降级，SQLite 持久化 |
-| **protocol-engine** | Node.js / Modules | Both | 模块化协议引擎，CycleTLS，动态 Stripe.js 版本抓取 |
+| saas-pay-sdk | Python / CLI | Custom | 最精简的 CLI 工具，TLS 指纹轮换，daemon 上报 |
+| subscription-manager | Python Flask / Web UI | Both | 完整 Web 管理面板，支持绑卡、查账单、升级降级 |
+| payment-gateway | Python Flask / Web UI | Both | 批量支付面板，账号池管理，barrier 模式批量确认 |
+| checkout-server | Python / Local HTTP | Both | 本地支付编排服务器，Playwright 降级，SQLite 持久化 |
+| protocol-engine | Node.js / Modules | Both | 模块化协议引擎，CycleTLS，动态 Stripe.js 版本抓取 |
 
 每个实现都有自己的优缺点：
 - 想要最快上手 → `saas-pay-sdk`（纯 CLI，pip install 即可）
@@ -1092,13 +1088,13 @@ async with sem:
 
 ## 推荐：虚拟卡平台
 
-协议支付离不开信用卡。如果你需要一张支持 Stripe 的虚拟信用卡用于订阅海外 SaaS 服务（ChatGPT、Claude、Cursor 等），推荐 **ZovoCard**：
+协议支付离不开信用卡。如果你需要一张支持 Stripe 的虚拟信用卡用于订阅海外 SaaS 服务（ChatGPT、Claude、Cursor 等），推荐 ZovoCard：
 
 - 支持 Visa / Mastercard，全球 Stripe 商户可用
 - 即开即用，无需实体卡，支持 USDT 充值
 - 多卡管理，适合批量订阅场景
 
-<a href="https://zovocard.com/register?invite=DW6AYPAP" target="_blank" rel="noopener" style="display:inline-block;padding:8px 20px;font-size:14px;color:#fff;background:#6366f1;border-radius:6px;text-decoration:none;font-weight:600;">注册 ZovoCard →</a>
+<a href="https://zovocard.com/register?invite=7777777" target="_blank" rel="noopener" style="display:inline-block;padding:8px 20px;font-size:14px;color:#fff;background:#6366f1;border-radius:6px;text-decoration:none;font-weight:600;">注册 ZovoCard →</a>
 
 ---
 

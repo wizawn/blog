@@ -13,13 +13,13 @@ tags: ["Windsurf", "AI", "API 代理", "Claude", "开源工具"]
 **联系方式 & 交流群**
 
 - **QQ**: 46333839
-- **微信**: GOV-HACK
+- **微信**: GOV-HACK  ⚠️ **博主微信暂时被封，请优先加入上方 QQ 群（46333839）**
 
 进微信群请联系博主，各位觉得文章对你有帮助的话可否打赏一些呀~
 
 ---
 
-> 一分钟速读：WindsurfAPI 把 Windsurf IDE 的后端 Language Server 独立部署，封装成 OpenAI 兼容接口，支持 59 个大模型调用，自带账号管理和负载均衡。
+> WindsurfAPI 把 Windsurf IDE 的后端 Language Server 独立部署，封装成 OpenAI 兼容接口，支持 59 个大模型调用，自带账号管理和负载均衡。
 
 ---
 
@@ -27,11 +27,11 @@ tags: ["Windsurf", "AI", "API 代理", "Claude", "开源工具"]
 
 Windsurf 是一款专注于 AI 辅助编程的集成开发环境（之前叫 Codeium），在开发者圈子里口碑不错。它内置的 Language Server 负责与各种大模型通信，让开发者能在 IDE 里直接调用 Claude、GPT 等模型的能力。
 
-一位 GitHub 开发者（@dwgx）发现，这个 Language Server 其实可以独立运行。于是他做了个有趣的尝试——把它从 IDE 里抽离出来，包装成标准的 OpenAI API 格式。
+一位 GitHub 开发者（@dwgx）发现这个 Language Server 其实可以独立运行，于是把它从 IDE 里抽出来，包装成了标准的 OpenAI API 格式。
 
-**项目仓库**：https://github.com/dwgx/WindsurfAPI
+项目仓库：https://github.com/dwgx/WindsurfAPI
 
-这样一来，你不需要打开 Windsurf 编辑器，也能通过 HTTP 接口调用那些 AI 模型。任何支持 OpenAI 协议的工具或 SDK，改个配置就能接入。
+这样你不需要打开 Windsurf 编辑器，也能通过 HTTP 接口调用那些 AI 模型。任何支持 OpenAI 协议的工具或 SDK，改个配置就能接入。
 
 ---
 
@@ -67,7 +67,7 @@ model: "claude-opus-4-7-max"  # 切换模型
 
 ### 3. 零外部依赖
 
-这个项目最让人印象深刻的是代码风格——完全不依赖第三方 npm 包，全部使用 Node.js 原生模块：
+代码风格上有个特点：完全不依赖第三方 npm 包，全部使用 Node.js 原生模块：
 
 - HTTP 服务：`http`
 - 文件系统：`fs`
@@ -81,19 +81,19 @@ model: "claude-opus-4-7-max"  # 切换模型
 
 访问 `http://你的服务器:3003/dashboard` 可以打开管理后台：
 
-**账号管理功能**：
+账号管理：
 - 添加或删除 Windsurf 账号
 - 启用/禁用特定账号
 - 查看各账号的使用统计
 - 批量导入 Token
 
-**监控仪表盘**：
+监控仪表盘：
 - 实时请求量
 - 平均响应时间
 - 错误率变化趋势
 - 各模型调用占比
 
-**代理与限流**：
+代理与限流：
 - 全局 HTTP/SOCKS5 代理配置
 - 单账号独立代理设置
 - 模型访问白名单/黑名单
@@ -333,8 +333,8 @@ curl -X POST http://localhost:3003/account/1/proxy \
 
 Windsurf 对不同订阅等级的账号开放了不同的模型：
 
-- **免费账号**：gpt-4o-mini、gemini-2.5-flash 等基础模型
-- **Pro 订阅**：Claude 系列、GPT-5.4、Kimi 2.5 等高级模型
+- 免费账号：gpt-4o-mini、gemini-2.5-flash 等基础模型
+- Pro 订阅：Claude 系列、GPT-5.4、Kimi 2.5 等高级模型
 
 具体可用模型列表可在管理后台查看。
 
@@ -353,13 +353,11 @@ Windsurf 对账号实行周限额制度：
 
 ## 结语
 
-开源社区的魅力在于，总有人能发现工具的新用法。
-
-把 IDE 的后端独立出来变成通用 API 代理，这种思路值得借鉴。如果你对这类项目感兴趣，不妨去 GitHub 上给作者点个 Star。
+把 IDE 的后端独立出来做成通用 API 代理，想法挺有意思。感兴趣的话可以去 GitHub 看看。
 
 ---
 
-**项目仓库**：https://github.com/dwgx/WindsurfAPI
+项目仓库：https://github.com/dwgx/WindsurfAPI
 
 ---
 

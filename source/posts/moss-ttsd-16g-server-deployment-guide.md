@@ -8,15 +8,15 @@ tags: ["MOSS-TTSD", "语音合成", "AI 模型", "量化", "Swap"]
 description: "MOSS-TTSD 是效果顶尖的开源语音合成模型，但完整权重达 16.7GB。本文详解如何在 6 核 16G 无 GPU 云服务器上，通过虚拟内存 +4-bit 量化技术成功部署运行。"
 ---
 
-> **💬 联系方式 & 交流群**
+>  联系方式 & 交流群
 > 
 > **QQ**: 46333839  
 {{< figure src="/images/wechat-qr.jpg" alt="微信二维码" width="200" >}}
 {{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}
-**联系方式 & 交流群**
+联系方式 & 交流群
 
 - **QQ**: 46333839
-- **微信**: GOV-HACK
+- **微信**: GOV-HACK  ⚠️ **博主微信暂时被封，请优先加入上方 QQ 群（46333839）**
 
 进微信群请联系博主，各位觉得文章对你有帮助的话可否打赏一些呀~
 
@@ -31,9 +31,9 @@ description: "MOSS-TTSD 是效果顶尖的开源语音合成模型，但完整�
 
 ## 项目介绍
 
-**MOSS-TTSD** 是目前效果顶尖的开源语音合成模型，但其完整权重达 **16.7GB**。在 16G 内存的普通云服务器上，直接部署会导致 **Out of Memory (OOM)** 被系统杀掉进程（Killed）。
+MOSS-TTSD 是目前效果顶尖的开源语音合成模型，但其完整权重达 **16.7GB**。在 16G 内存的普通云服务器上，直接部署会导致 Out of Memory (OOM) 被系统杀掉进程（Killed）。
 
-本文分享如何在 **Debian 11** 环境下通过 **虚拟内存 (Swap)** 与 **4-bit 量化技术** 强行"瘦身"并成功运行。
+本文分享如何在 Debian 11 环境下通过 虚拟内存 (Swap) 与 4-bit 量化技术 强行"瘦身"并成功运行。
 
 ### 为什么需要这个教程？
 
@@ -58,7 +58,7 @@ description: "MOSS-TTSD 是效果顶尖的开源语音合成模型，但完整�
 
 ### 关键前提
 
-⚠️ **必须手动配置 Swap**，物理内存不足以支撑模型加载。
+ 必须手动配置 Swap，物理内存不足以支撑模型加载。
 
 ---
 
@@ -102,7 +102,7 @@ Swap:          16Gi          0B        16Gi
 
 ### 第二步：环境管理（Conda）
 
-Debian 自带 Python 版本过低，且该项目强制要求 **Python 3.10+** 的语法（如 `|` 联合类型提示）。
+Debian 自带 Python 版本过低，且该项目强制要求 Python 3.10+ 的语法（如 `|` 联合类型提示）。
 
 ```bash
 # 下载 Miniconda 安装脚本
@@ -125,7 +125,7 @@ conda activate moss
 
 ### 第三步：安装依赖（CPU 优化版）
 
-⚠️ **注意**: 安装官方 CPU 版本的 PyTorch，避免安装冗余的 CUDA 驱动。
+ **注意**: 安装官方 CPU 版本的 PyTorch，避免安装冗余的 CUDA 驱动。
 
 ```bash
 # 安装 CPU 版 PyTorch
@@ -146,7 +146,7 @@ pip install gradio soundfile sentencepiece transformers accelerate librosa bitsa
 
 ### 第四步：代码魔改（4-bit 量化加载）
 
-🔥 **这是成功部署的核心**。直接运行会爆内存，我们需要修改 `gradio_demo.py` 的第 143 行，引入 `BitsAndBytesConfig` 进行 4-bit 量化。
+ 这是成功部署的核心。直接运行会爆内存，我们需要修改 `gradio_demo.py` 的第 143 行，引入 `BitsAndBytesConfig` 进行 4-bit 量化。
 
 #### 修改前（原始代码）
 
@@ -240,7 +240,7 @@ ufw status
 
 ### 音质表现
 
-虽然 CPU 模式生成速度较慢，但音质依然保持了 **MOSS-TTSD 的极高水准**！
+虽然 CPU 模式生成速度较慢，但音质依然保持了 MOSS-TTSD 的极高水准！
 
 ---
 
@@ -366,7 +366,7 @@ systemctl status moss-ttsd
 
 ## 安全提醒
 
-⚠️ **重要提示**:
+ **重要提示**:
 
 1. **内容责任**: 使用该项目生成的内容均由使用者自行承担后果
 2. **服务保修**: 本教程仅提供技术指导，不保证服务稳定性
@@ -385,10 +385,10 @@ systemctl status moss-ttsd
 
 ## 总结
 
-通过 **Swap 虚拟内存** + **4-bit 量化** 的组合拳，我们成功在 16G 内存的无 GPU 服务器上部署了 MOSS-TTSD 语音合成模型。虽然生成速度不如 GPU 模式，但音质依然出色，适合个人学习和小规模使用。
+通过 Swap 虚拟内存 + 4-bit 量化 的组合拳，我们成功在 16G 内存的无 GPU 服务器上部署了 MOSS-TTSD 语音合成模型。虽然生成速度不如 GPU 模式，但音质依然出色，适合个人学习和小规模使用。
 
 **核心要点**:
-1. ✅ 必须配置 Swap（至少 16G）
-2. ✅ 必须使用 Python 3.10+
-3. ✅ 必须修改代码启用 4-bit 量化
-4. ✅ 必须开放防火墙端口
+1. 必须配置 Swap（至少 16G）
+2. 必须使用 Python 3.10+
+3. 必须修改代码启用 4-bit 量化
+4. 必须开放防火墙端口

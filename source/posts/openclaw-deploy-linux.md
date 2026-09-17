@@ -19,7 +19,7 @@ description: "OpenClaw Linux 部署终极指南 - 含环境配置、NVM 安装�
 **联系方式 & 交流群**
 
 - **QQ**: 46333839
-- **微信**: GOV-HACK
+- **微信**: GOV-HACK  ⚠️ **博主微信暂时被封，请优先加入上方 QQ 群（46333839）**
 
 进微信群请联系博主，各位觉得文章对你有帮助的话可否打赏一些呀~
 
@@ -31,61 +31,61 @@ description: "OpenClaw Linux 部署终极指南 - 含环境配置、NVM 安装�
 
 # OpenClaw 部署教程 - Linux 篇（2026 终极版）
 
-> 📅 **更新时间**：2026-03-17  
-> ⏱️ **阅读时间**：20 分钟  
-> 💡 **难度等级**：⭐⭐☆☆☆  
-> ✅ **实测环境**：Ubuntu 22.04 LTS / Node.js v22.12.0 / Python 3.10.12
+> 更新时间：2026-03-17
+> 阅读时间：约 20 分钟
+> 难度等级：初级
+> 实测环境：Ubuntu 22.04 LTS / Node.js v22.12.0 / Python 3.10.12
 
 ---
 
-## ⚠️ 部署前必读（安全警示）
+## 部署前必读
 
 ### 电气安全
-- **服务器供电**：确保使用稳压电源，电压波动 < ±5%
-- **散热要求**：工作环境温度 15-35℃，湿度 40-60%
-- **ESD 防护**：接触服务器前佩戴防静电手环
+- 服务器供电：确保使用稳压电源，电压波动 < ±5%
+- 散热要求：工作环境温度 15-35℃，湿度 40-60%
+- ESD 防护：接触服务器前佩戴防静电手环
 
 ### 系统安全
-- **root 权限**：生产环境建议使用普通用户 + sudo
-- **防火墙**：仅开放必要端口（默认 18789）
-- **备份**：部署前备份重要数据
+- root 权限：生产环境建议使用普通用户 + sudo
+- 防火墙：仅开放必要端口（默认 18789）
+- 备份：部署前备份重要数据
 
 ### 网络要求
-- **带宽**：≥ 10Mbps（推荐 100Mbps+）
-- **代理**：中国大陆用户需配置 Clash 代理（端口 7890）
-- **域名**：可选，用于 HTTPS 访问
+- 带宽：≥ 10Mbps（推荐 100Mbps+）
+- 代理：中国大陆用户需配置 Clash 代理（端口 7890）
+- 域名：可选，用于 HTTPS 访问
 
-### 内存要求（重要！）
-- **最低**：2GB（需配置 Swap）
-- **推荐**：4GB+（无需 Swap）
-- **生产**：8GB+（流畅运行）
+### 内存要求
+- 最低：2GB（需配置 Swap）
+- 推荐：4GB+（无需 Swap）
+- 生产：8GB+（流畅运行）
 
-**⚠️ 2GB 内存服务器必须配置 Swap**，否则会出现 OOM（内存溢出）导致安装失败。
+**2GB 内存服务器必须配置 Swap**，否则 OOM（内存溢出）会导致安装失败。
 
 ---
 
-## 📋 系统要求（精准参数）
+## 系统要求
 
-| 项目 | 最低要求 | 推荐配置 | **生产环境** |
+| 项目 | 最低要求 | 推荐配置 | 生产环境 |
 |------|----------|----------|-------------|
-| **操作系统** | Ubuntu 20.04 | Ubuntu 22.04 LTS | Ubuntu 22.04.3 LTS |
-| **CPU** | 1 核心 | 2 核心+ | 4 核心+ |
-| **内存** | 2GB | 4GB+ | **8GB+** |
-| **磁盘** | 5GB | 10GB SSD | **20GB+ NVMe SSD** |
-| **Node.js** | v18+ | v20+ | **v22.12.0** (最新 LTS) |
-| **Python** | 3.8+ | 3.10+ | **3.10.12** (系统自带) |
-| **Git** | 任意版本 | 最新 | 2.34.1+ |
+| 操作系统 | Ubuntu 20.04 | Ubuntu 22.04 LTS | Ubuntu 22.04.3 LTS |
+| CPU | 1 核心 | 2 核心+ | 4 核心+ |
+| 内存 | 2GB | 4GB+ | 8GB+ |
+| 磁盘 | 5GB | 10GB SSD | 20GB+ NVMe SSD |
+| Node.js | v18+ | v20+ | v22.12.0 (最新 LTS) |
+| Python | 3.8+ | 3.10+ | 3.10.12 (系统自带) |
+| Git | 任意版本 | 最新 | 2.34.1+ |
 
-**⚠️ 关键说明**：
-1. **Node.js v22**：OpenClaw 官方推荐版本，兼容性最佳
-2. **Swap 配置**：2GB 内存服务器必须配置 2GB+ Swap
-3. **Git 必须**：用于克隆仓库和管理依赖
+说明：
+1. Node.js v22 是 OpenClaw 官方推荐版本，兼容性最佳
+2. 2GB 内存服务器必须配置 2GB+ Swap
+3. Git 用于克隆仓库和管理依赖，必装
 
 ---
 
-## 🔧 快速安装（10 分钟完成）
+## 快速安装
 
-### 方法一：官方一键安装脚本（最简单）
+### 方法一：官方一键安装脚本
 
 ```bash
 # ============ 步骤 1：系统更新及基础依赖 ============
@@ -99,18 +99,18 @@ curl -fsSL https://openclaw.ai/install.sh | bash
 openclaw --version
 ```
 
-**⏱️ 预计耗时**：5-10 分钟（取决于网络）
+预计耗时：5-10 分钟（取决于网络）
 
-**⚠️ 注意事项**：
-- **国内服务器**：若安装失败，需先配置代理
-- **2GB 内存**：可能出现 OOM，需先配置 Swap（见下文）
-- **安装过程**：耗时较长，需耐心等待
+注意事项：
+- 国内服务器若安装失败，需先配置代理
+- 2GB 内存可能出现 OOM，需先配置 Swap（见下文）
+- 安装过程耗时较长，请耐心等待
 
 ---
 
 ### 方法二：手动安装（可控性更强）
 
-适合需要**精确控制版本**的生产环境：
+适合需要精确控制版本的生产环境。
 
 #### 步骤 1：安装 Git
 
@@ -124,13 +124,13 @@ git --version  # 应显示：git version 2.34.1+
 
 #### 步骤 2：安装 NVM（Node 版本管理器）
 
-**国内服务器（使用 Gitee 镜像源）**：
+国内服务器（使用 Gitee 镜像源）：
 
 ```bash
 curl -o- https://gitee.com/RubyMetric/nvm-cn/raw/main/install.sh | bash
 ```
 
-**海外服务器（使用官方源）**：
+海外服务器（使用官方源）：
 
 ```bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
@@ -171,9 +171,9 @@ openclaw --version  # 应显示：openclaw/x.x.x linux-x64 node-v22.12.0
 
 ---
 
-## ⚙️ 初始化配置（Onboarding 向导）
+## 初始化配置（Onboarding 向导）
 
-安装成功后会自动进入**初始化向导**，按以下步骤操作：
+安装成功后会自动进入初始化向导，按以下步骤操作。
 
 ### 步骤详解
 
@@ -191,14 +191,14 @@ openclaw --version  # 应显示：openclaw/x.x.x linux-x64 node-v22.12.0
 
 ### 详细流程
 
-**1. 安全提示确认**：
+1. 安全提示确认：
 ```
 OpenClaw is a hobby project and still in beta...
 Do you want to continue? (Yes/No)
 > Yes
 ```
 
-**2. 选择部署模式**：
+2. 选择部署模式：
 ```
 Select deployment mode:
   1) QuickStart (推荐)
@@ -206,7 +206,7 @@ Select deployment mode:
 > 1
 ```
 
-**3. 选择模型服务商**：
+3. 选择模型服务商：
 ```
 Select model provider:
   1) OpenAI
@@ -216,7 +216,7 @@ Select model provider:
 > 1
 ```
 
-**4. 模型授权**：
+4. 模型授权：
 ```
 Please visit the following URL to authorize:
 https://openclaw.ai/auth/xxxxx
@@ -225,14 +225,14 @@ Enter the authorization code:
 > [粘贴授权码]
 ```
 
-**5-7. 跳过可选配置**：
+5-7. 跳过可选配置：
 ```
 Configure communication channels? (y/N) > N
 Configure skills? (y/N) > N
 Configure hooks? (y/N) > N
 ```
 
-**8. 启动 TUI 测试**：
+8. 启动 TUI 测试：
 ```
 Start OpenClaw in TUI mode? (Y/n) > Y
 
@@ -242,25 +242,25 @@ Start OpenClaw in TUI mode? (Y/n) > Y
 # 应收到 AI 回复
 ```
 
-**9. 退出 TUI**：
+9. 退出 TUI：
 ```
 按 Ctrl+C 退出
 ```
 
 ---
 
-## 🔧 高级配置（生产环境必备）
+## 高级配置
 
 ### 1. 配置 Swap（2GB 内存服务器必须）
 
-**检查当前 Swap**：
+检查当前 Swap：
 
 ```bash
 free -h
 # 如果 Swap 为 0B，需要配置
 ```
 
-**创建 2GB Swap**：
+创建 2GB Swap：
 
 ```bash
 # 1. 创建 swap 文件
@@ -280,13 +280,13 @@ swapon --show
 # 应显示：/swapfile  file  2G  0B
 ```
 
-**永久生效**（重启后自动挂载）：
+永久生效（重启后自动挂载）：
 
 ```bash
 echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 ```
 
-**调整 Swappiness**（降低使用 swap 的频率）：
+调整 Swappiness（降低使用 swap 的频率）：
 
 ```bash
 # 查看当前值（默认 60）
@@ -301,57 +301,57 @@ echo 'vm.swappiness=10' | sudo tee -a /etc/sysctl.conf
 
 ### 2. 配置 API Keys
 
-**编辑配置文件**：
+编辑配置文件：
 
 ```bash
 nano ~/.openclaw/workspace/TOOLS.md
 ```
 
-**添加以下内容**（替换为你的 Key）：
+添加以下内容（替换为你的 Key）：
 
 ```markdown
-## 🔑 API Keys
+## API Keys
 
 ### 阿里云百炼（推荐，国内访问快）
-- **API Key**: `sk-sp-xxxxxxxxxxxxxxxx`
-- **模型**: qwen3.5-plus, qwen3-max-2026-01-23
-- **状态**: ✅ 已配置
-- **用途**: 代码生成/审查/优化
+- API Key: `sk-sp-xxxxxxxxxxxxxxxx`
+- 模型: qwen3.5-plus, qwen3-max-2026-01-23
+- 状态: 已配置
+- 用途: 代码生成/审查/优化
 
 ### OpenAI（备选）
-- **API Key**: `sk-proj-xxxxxxxxxxxxxxxx`
-- **模型**: gpt-4o, gpt-4-turbo
+- API Key: `sk-proj-xxxxxxxxxxxxxxxx`
+- 模型: gpt-4o, gpt-4-turbo
 
 ### 火山引擎（备选）
-- **API Key**: `xxxxxxxxxxxxxxxx`
-- **模型**: doubao-seed-2.0-code
+- API Key: `xxxxxxxxxxxxxxxx`
+- 模型: doubao-seed-2.0-code
 ```
 
-**Key 获取地址**：
-- **阿里云百炼**：https://bailian.console.aliyun.com/
-- **OpenAI**：https://platform.openai.com/api-keys
-- **火山引擎**：https://www.volcengine.com/
+Key 获取地址：
+- 阿里云百炼：https://bailian.console.aliyun.com/
+- OpenAI：https://platform.openai.com/api-keys
+- 火山引擎：https://www.volcengine.com/
 
 ### 3. 配置 Clash 代理（中国大陆用户必须）
 
-**检查 Clash 是否运行**：
+检查 Clash 是否运行：
 
 ```bash
 ps aux | grep clash
-# 应看到：clash -d /root/.config/clash/
+# 应看到：clash -d ~/.config/clash/
 ```
 
-**如未运行，启动 Clash**：
+如未运行，启动 Clash：
 
 ```bash
 # 后台启动 Clash
-nohup clash -d /root/.config/clash/ > /tmp/clash.log 2>&1 &
+nohup clash -d ~/.config/clash/ > /tmp/clash.log 2>&1 &
 
 # 验证端口（7890 应处于 LISTEN 状态）
 netstat -tlnp | grep 7890
 ```
 
-**配置环境变量**：
+配置环境变量：
 
 ```bash
 # 临时生效
@@ -364,7 +364,7 @@ echo 'export HTTPS_PROXY=http://127.0.0.1:7890' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-**验证代理**：
+验证代理：
 
 ```bash
 curl -x http://127.0.0.1:7890 -I https://www.google.com
@@ -373,7 +373,7 @@ curl -x http://127.0.0.1:7890 -I https://www.google.com
 
 ---
 
-## 🚀 systemd 服务配置（开机自启）
+## systemd 服务配置（开机自启）
 
 ### 创建服务文件
 
@@ -461,13 +461,13 @@ sudo journalctl -u openclaw-gateway --vacuum-size=100M
 
 ---
 
-## 🔍 故障排查（精准诊断）
+## 故障排查
 
 ### 问题 1：安装过程中 OOM（内存溢出）
 
-**症状**：安装过程中服务器卡死，SSH 断开连接
+症状：安装过程中服务器卡死，SSH 断开连接
 
-**诊断**：
+诊断：
 
 ```bash
 # 查看内存使用
@@ -477,7 +477,7 @@ free -h
 dmesg | grep -i "out of memory"
 ```
 
-**解决方案**：
+解决方案：
 
 ```bash
 # 1. 配置 Swap（见上文）
@@ -492,9 +492,9 @@ npm install -g openclaw
 
 ### 问题 2：Node.js 版本不兼容
 
-**症状**：`Error: Unsupported Node.js version`
+症状：`Error: Unsupported Node.js version`
 
-**解决方案**：
+解决方案：
 
 ```bash
 # 1. 查看当前版本
@@ -512,9 +512,9 @@ npm install -g openclaw
 
 ### 问题 3：网络超时
 
-**症状**：`Error: connect ETIMEDOUT`
+症状：`Error: connect ETIMEDOUT`
 
-**诊断步骤**：
+诊断步骤：
 
 ```bash
 # 1. 测试基础网络
@@ -528,11 +528,11 @@ ps aux | grep clash
 netstat -tlnp | grep 7890
 ```
 
-**解决方案**：
+解决方案：
 
 ```bash
 # 启动 Clash
-nohup clash -d /root/.config/clash/ > /tmp/clash.log 2>&1 &
+nohup clash -d ~/.config/clash/ > /tmp/clash.log 2>&1 &
 
 # 配置环境变量
 export HTTP_PROXY=http://127.0.0.1:7890
@@ -541,9 +541,9 @@ export HTTPS_PROXY=http://127.0.0.1:7890
 
 ### 问题 4：初始化向导卡住
 
-**症状**：卡在某个步骤无法继续
+症状：卡在某个步骤无法继续
 
-**解决方案**：
+解决方案：
 
 ```bash
 # 1. 退出向导（Ctrl+C）
@@ -558,9 +558,9 @@ nano ~/.openclaw/config.json
 
 ### 问题 5：TUI 界面无法启动
 
-**症状**：选择 TUI 后黑屏或闪退
+症状：选择 TUI 后黑屏或闪退
 
-**解决方案**：
+解决方案：
 
 ```bash
 # 1. 检查终端兼容性
@@ -579,9 +579,9 @@ openclaw gateway start
 
 ---
 
-## ✅ 验证安装（完整测试清单）
+## 验证安装
 
-**逐项检查，全部通过才算成功**：
+逐项检查，全部通过才算部署成功：
 
 ```bash
 # □ 1. 检查版本号
@@ -619,24 +619,24 @@ sudo systemctl status openclaw-gateway
 # 期望：服务自动启动
 ```
 
-**成功标志**：
-- ✅ 8 项检查全部通过
-- ✅ 日志无 ERROR 级别错误
-- ✅ 服务重启后自动恢复
+成功标志：
+- 8 项检查全部通过
+- 日志无 ERROR 级别错误
+- 服务重启后自动恢复
 
 ---
 
-## 📊 性能优化（生产环境）
+## 性能优化
 
 ### 1. Node.js 内存优化
 
-**编辑 systemd 服务**：
+编辑 systemd 服务：
 
 ```bash
 sudo nano /etc/systemd/system/openclaw-gateway.service
 ```
 
-**添加内存配置**（根据服务器内存调整）：
+根据服务器内存调整配置：
 
 ```ini
 # 4GB 内存服务器
@@ -649,7 +649,7 @@ Environment="NODE_OPTIONS=--max-old-space-size=4096"
 Environment="NODE_OPTIONS=--max-old-space-size=8192"
 ```
 
-**重载并重启**：
+重载并重启：
 
 ```bash
 sudo systemctl daemon-reload
@@ -658,45 +658,45 @@ sudo systemctl restart openclaw-gateway
 
 ### 2. 定期清理缓存
 
-**创建清理脚本**：
+创建清理脚本：
 
 ```bash
 nano ~/cleanup-openclaw.sh
 ```
 
-**脚本内容**：
+脚本内容：
 
 ```bash
 #!/bin/bash
-echo "🧹 开始清理 OpenClaw 缓存..."
+echo "开始清理 OpenClaw 缓存..."
 
 # 清理 npm 缓存
 npm cache clean --force
-echo "✅ npm 缓存已清理"
+echo "npm 缓存已清理"
 
 # 清理系统日志（保留 7 天）
 sudo journalctl --vacuum-time=7d
-echo "✅ 系统日志已清理"
+echo "系统日志已清理"
 
 # 清理 OpenClaw 日志（保留 100MB）
 sudo journalctl -u openclaw-gateway --vacuum-size=100M
-echo "✅ OpenClaw 日志已清理"
+echo "OpenClaw 日志已清理"
 
 # 清理临时文件
 rm -rf /tmp/openclaw-*
-echo "✅ 临时文件已清理"
+echo "临时文件已清理"
 
-echo "🎉 清理完成！"
+echo "清理完成"
 ```
 
-**赋予执行权限并运行**：
+赋予执行权限并运行：
 
 ```bash
 chmod +x ~/cleanup-openclaw.sh
 ~/cleanup-openclaw.sh
 ```
 
-**添加到 crontab（每周日凌晨 3 点自动清理）**：
+添加到 crontab（每周日凌晨 3 点自动清理）：
 
 ```bash
 crontab -e
@@ -706,7 +706,7 @@ crontab -e
 
 ---
 
-## 📚 更多资源
+## 更多资源
 
 ### 官方文档
 - [OpenClaw 官方指南](https://open-claw.online/zh/docs/getting-started)
@@ -725,7 +725,7 @@ crontab -e
 
 ---
 
-## 📝 更新日志
+## 更新日志
 
 | 版本 | 日期 | 更新内容 |
 |------|------|----------|
@@ -736,9 +736,6 @@ crontab -e
 
 ---
 
-*最后更新：2026-03-17*  
-*作者：OpenClaw 社区*  
-*许可：MIT*  
-*审核：嵌入式硬件专家（15 年 + 经验）*
-
-**觉得有用？欢迎分享给更多朋友！** 🚀
+*最后更新：2026-03-17*
+*作者：OpenClaw 社区*
+*许可：MIT*

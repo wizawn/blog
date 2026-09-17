@@ -11,22 +11,22 @@ image: "/blog-cover-default.jpg"
 
 {{< figure src="/images/wechat-qr.jpg" alt="微信二维码" width="200" >}}
 {{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}
-**联系方式 & 交流群**
+联系方式 & 交流群
 
 - **QQ**: 46333839
-- **微信**: GOV-HACK
+- **微信**: GOV-HACK  ⚠️ **博主微信暂时被封，请优先加入上方 QQ 群（46333839）**
 
 进微信群请联系博主，各位觉得文章对你有帮助的话可否打赏一些呀~
 
 ---
 
-> **⚠️ 免责声明**：本文仅供安全研究与技术讨论。文中不提供可直接复用的攻击工具或完整利用脚本。利用类似手段对正式服务进行未授权操作属违法行为，后果自负。本文目的是帮助支付系统开发者理解并发支付场景下的攻击面并加固防御。
+> ** 免责声明**：本文仅供安全研究与技术讨论。文中不提供可直接复用的攻击工具或完整利用脚本。利用类似手段对正式服务进行未授权操作属违法行为，后果自负。本文目的是帮助支付系统开发者理解并发支付场景下的攻击面并加固防御。
 
 ---
 
 ## 前言
 
-LINUX DO 上出现了一个帖子：**"50R 的 20X 甚至还是正规充值非 bug 求教学"**。
+LINUX DO 上出现了一个帖子："50R 的 20X 甚至还是正规充值非 bug 求教学"。
 
 楼主的意思是：他花了大约 50 人民币（菲律宾区 ₱982.14），拿到了 ChatGPT Pro 20X 订阅——月费 ₱8,919.64 的那个。Stripe 后台显示的是正规扣款，不是什么 bug 单、退款单、也不是沙盒环境。
 
@@ -70,7 +70,7 @@ LINUX DO 上出现了一个帖子：**"50R 的 20X 甚至还是正规充值非 b
 
 `psp_override` 是 Stripe 实际收取的金额，tax exclusive。也就是说在 Stripe 这一层，Plus 的价格是 ₱982.14，Pro 20X 的价格是 ₱8,919.64。
 
-**₱982.14 只能买 Plus，买不了 Pro 20X。** 差价是 ₱7,937.50——就算在 billing 周期最后一天升级，Stripe proration 补差价也是按 (新价 - 旧价) × 剩余天数 / 总天数 来算的，不可能出现 ₱0 差价。
+₱982.14 只能买 Plus，买不了 Pro 20X。 差价是 ₱7,937.50——就算在 billing 周期最后一天升级，Stripe proration 补差价也是按 (新价 - 旧价) × 剩余天数 / 总天数 来算的，不可能出现 ₱0 差价。
 
 那 ₱982 是怎么变成 Pro 20X 的？
 
@@ -78,7 +78,7 @@ LINUX DO 上出现了一个帖子：**"50R 的 20X 甚至还是正规充值非 b
 
 ## 二、Stripe PaymentIntent 的金额锁定
 
-要理解这个漏洞，先要理解 Stripe 的一个核心设计：**PaymentIntent (PI) 金额在创建时锁定，confirm 时不可变。**
+要理解这个漏洞，先要理解 Stripe 的一个核心设计：PaymentIntent (PI) 金额在创建时锁定，confirm 时不可变。
 
 OpenAI 的结账流程是这样的：
 
@@ -98,7 +98,7 @@ POST /payments/checkout/confirm
     → PI 状态: succeeded
 ```
 
-关键点在第二步：Stripe 创建 PI 时就把 `amount=98214` 写死了。后续不管发生什么——换卡、换 IP、甚至换订阅计划——**这个 PI 的金额不会变。** 除非你取消这个 checkout session 重新创建一个。
+关键点在第二步：Stripe 创建 PI 时就把 `amount=98214` 写死了。后续不管发生什么——换卡、换 IP、甚至换订阅计划——这个 PI 的金额不会变。 除非你取消这个 checkout session 重新创建一个。
 
 这不是 bug，这是 Stripe 的设计。PI 是一个"支付意图"，它代表的是"在某个时间点，用户同意支付某个金额"。金额是意图的一部分，不可变。
 
@@ -144,7 +144,7 @@ Phase 2 在 Phase 1 **完成之后**才开始。中间有身份验证、计划�
 
 这就是漏洞所在。
 
-**TOCTOU（Time-of-Check to Time-of-Use）** 是一类经典的竞态条件漏洞：在"检查条件"和"执行操作"之间存在时间差，攻击者在这个时间差内改变了条件，导致操作基于过时的前提执行。
+TOCTOU（Time-of-Check to Time-of-Use） 是一类经典的竞态条件漏洞：在"检查条件"和"执行操作"之间存在时间差，攻击者在这个时间差内改变了条件，导致操作基于过时的前提执行。
 
 在这个场景里：
 
@@ -170,7 +170,7 @@ T2: PI confirm
     UI 显示: Pro 20X 已开通，已收取 ₱982.14
 ```
 
-两个操作——PI confirm 和 subscriptions/update——走的是**两条独立的管道**。PI 不知道订阅计划变了，subscriptions/update 不知道有个 PI 正在以旧价格 confirm。没有互斥锁，没有原子事务，各走各的。
+两个操作——PI confirm 和 subscriptions/update——走的是两条独立的管道。PI 不知道订阅计划变了，subscriptions/update 不知道有个 PI 正在以旧价格 confirm。没有互斥锁，没有原子事务，各走各的。
 
 这正是审计数据包中观察到的行为：
 
@@ -183,9 +183,9 @@ T2: PI confirm
 
 ### Token 绑定的防御效果
 
-但事情没有上面描述的那么简单。**2026-08-03 的 HAR 抓包数据揭示了一个关键的防御机制：Token 与 plan_type 的绑定。**
+但事情没有上面描述的那么简单。2026-08-03 的 HAR 抓包数据揭示了一个关键的防御机制：Token 与 plan_type 的绑定。
 
-OpenAI 的 JWT access token 在 claims 中包含 `chatgpt_plan_type` 字段。当账户的订阅计划发生变化时（比如 free→plus），**旧 token 会被服务端立即作废**，任何使用旧 token 的 API 调用都会返回 401。
+OpenAI 的 JWT access token 在 claims 中包含 `chatgpt_plan_type` 字段。当账户的订阅计划发生变化时（比如 free→plus），旧 token 会被服务端立即作废，任何使用旧 token 的 API 调用都会返回 401。
 
 这意味着攻击者面临一个因果依赖问题：
 
@@ -200,9 +200,9 @@ T2: 必须调用 refresh 获取新 token (plan_type=plus)
 T3: 拿到新 token 后，才能调 subscriptions/update
 ```
 
-**简单的并发攻击行不通。** 攻击者不可能用 `plan_type=free` 的 token 去调用 `subscriptions/update` 把计划改成 Pro——这个请求会因为 token 已失效而被 401 拒绝。他必须等 checkout/confirm 成功后，先刷新 token 拿到 `plan_type=plus` 的凭证，然后才能发起升级请求。
+简单的并发攻击行不通。 攻击者不可能用 `plan_type=free` 的 token 去调用 `subscriptions/update` 把计划改成 Pro——这个请求会因为 token 已失效而被 401 拒绝。他必须等 checkout/confirm 成功后，先刷新 token 拿到 `plan_type=plus` 的凭证，然后才能发起升级请求。
 
-这就把上面假设的 T1（并发 subscriptions/update）打破了——**confirm 和 update 之间存在强制的序列化点（token refresh）**，不可能真正并发。
+这就把上面假设的 T1（并发 subscriptions/update）打破了——confirm 和 update 之间存在强制的序列化点（token refresh），不可能真正并发。
 
 那 ₱982 的 Pro 20X 到底是怎么做到的？后面会重新分析可能的真实攻击路径。
 
@@ -210,7 +210,7 @@ T3: 拿到新 token 后，才能调 subscriptions/update
 
 ## 五、关键证据：升级协议更新引入了并发窗口
 
-这个漏洞不是一直存在的。它是在 **2026 年 8 月 2-3 日前后**，OpenAI 对 `subscriptions/update` API 的行为进行了某种更新之后才出现的。
+这个漏洞不是一直存在的。它是在 2026 年 8 月 2-3 日前后，OpenAI 对 `subscriptions/update` API 的行为进行了某种更新之后才出现的。
 
 证据来自我们自己系统的日志。我们的系统 24/7 运行 Plus 开通 + Pro 升级流程，日志里记录了每一次 API 调用的结果。
 
@@ -242,7 +242,7 @@ T3: 拿到新 token 后，才能调 subscriptions/update
 
 一天之内 12 次 upgrade_pending 失败，错误类型从之前的偶发 `preview 400` 变成了密集的 `unknown` / `Failed to fetch` / `check/v4 HTTP 401`。
 
-但有意思的是——**这些"失败"的任务最终都被我们的 watchdog 自动恢复了**：
+但有意思的是——这些"失败"的任务最终都被我们的 watchdog 自动恢复了：
 
 ```
 2026/08/02 15:15 → AUTO-RECOVERED via billing sync: invoice=JEO1VWUV-0002
@@ -251,15 +251,15 @@ T3: 拿到新 token 后，才能调 subscriptions/update
 2026/08/02 15:16 → AUTO-RECOVERED via billing sync: invoice=9HFURK7L-0002
 ```
 
-这说明 **Stripe 侧扣款和订阅变更实际上是成功的**，但 OpenAI 的 API 返回了异常响应——要么是新增了 session 验证步骤导致 401，要么是改变了响应格式。
+这说明 Stripe 侧扣款和订阅变更实际上是成功的，但 OpenAI 的 API 返回了异常响应——要么是新增了 session 验证步骤导致 401，要么是改变了响应格式。
 
 ### HAR 实证：Token plan_type 绑定与双重 401 模式
 
 2026-08-03 的 HAR 抓包（3.har）完整记录了 OpenAI 的 token 生命周期管理机制，揭示了 Phase 2 失败的真正原因。
 
-**Token plan_type 失效机制：**
+Token plan_type 失效机制：
 
-每次订阅计划变更后，当前 access token 会被服务端立即作废。HAR 中清楚地记录了**双重 401 模式**：
+每次订阅计划变更后，当前 access token 会被服务端立即作废。HAR 中清楚地记录了双重 401 模式：
 
 ```
 ── Phase 1: checkout/confirm (free → plus) ──
@@ -277,9 +277,9 @@ GET /api/auth/session?refresh=true&reason=token_expired → 200 OK
     → 返回新 token (plan_type=pro)
 ```
 
-每次 plan 变更都触发一次 token 作废 → refresh 循环。这就是为什么 8 月 2 日起我们的 Phase 2 大面积 401——**不是 OpenAI 改了互斥逻辑，而是 token 与 plan_type 的绑定变得更严格了。**
+每次 plan 变更都触发一次 token 作废 → refresh 循环。这就是为什么 8 月 2 日起我们的 Phase 2 大面积 401——不是 OpenAI 改了互斥逻辑，而是 token 与 plan_type 的绑定变得更严格了。
 
-**subscriptions 端点新增 account_id 要求：**
+subscriptions 端点新增 account_id 要求：
 
 HAR 还显示 `GET /subscriptions` 接口现在要求显式传入 account_id：
 
@@ -292,7 +292,7 @@ GET /backend-api/subscriptions?account_id=aeae1c92-... → 200 OK
 
 这两个变更合在一起解释了我们 Phase 2 的失败模式：旧的调用方式既没有正确处理 token refresh（用了失效的 token），也没有在 subscriptions 请求中带上 account_id。
 
-**关键结论：** 8 月 2 日的协议变更不是"移除了互斥锁"，而是**强化了 token 与订阅状态的绑定**。这个变更让我们的 Phase 2 更难了（需要正确处理 token refresh），同时也让简单的 TOCTOU 并发攻击变得不可行（旧 token 无法跨 plan_type 使用）。
+8 月 2 日的协议变更不是"移除了互斥锁"，而是强化了 token 与订阅状态的绑定。我们的 Phase 2 变得更难了（需要正确处理 token refresh），同时简单的 TOCTOU 并发攻击也变得不可行（旧 token 无法跨 plan_type 使用）。
 
 ---
 
@@ -332,8 +332,8 @@ POST /backend-api/subscriptions/update
 
 ### Step 4：两个操作各自成功
 
-- **PI confirm**：Stripe 扣款 ₱982.14，amount 是 T0 时锁定的，不受计划变更影响
-- **subscriptions/update**：OpenAI 后端把订阅计划改成了 chatgptpro
+- PI confirm：Stripe 扣款 ₱982.14，amount 是 T0 时锁定的，不受计划变更影响
+- subscriptions/update：OpenAI 后端把订阅计划改成了 chatgptpro
 
 ### 结果
 
@@ -341,7 +341,7 @@ POST /backend-api/subscriptions/update
 - Invoice 1: Plus ₱982.14（checkout 扣款）
 - Invoice 2: Pro upgrade（如果 Stripe 来得及生成 proration invoice 的话）
 
-但因为时间窗口极短，proration invoice 可能来不及创建或者金额极小。最终效果：**₱982.14 + Pro 20X 权益**。
+但因为时间窗口极短，proration invoice 可能来不及创建或者金额极小。最终效果：₱982.14 + Pro 20X 权益。
 
 ### "最后一天"的线索
 
@@ -355,7 +355,7 @@ proration = (₱8,919.64 - ₱982.14) × 0/30 ≈ ₱0
 
 ### Token 绑定的阻碍
 
-> **⚠️ 重要更新**：上述 Step 3 面临 token 绑定问题。
+> ** 重要更新**：上述 Step 3 面临 token 绑定问题。
 >
 > 根据 2026-08-03 的 HAR 分析，攻击者在 Step 3 中无法简单地"在 confirm 的同时发起 subscriptions/update"。原因是：
 >
@@ -364,7 +364,7 @@ proration = (₱8,919.64 - ₱982.14) × 0/30 ≈ ₱0
 > - checkout/confirm 成功后，旧 token 立即作废，必须先 refresh 拿到 `plan_type=plus` 的新 token
 > - 这个 refresh 步骤引入了强制的序列化点，打破了并发窗口
 >
-> 因此，**上述"简单 TOCTOU"攻击路径在 token 绑定机制下可能不成立**。真实的攻击路径更可能是利用 proration 计算逻辑——见后文"真实攻击路径推测"一节。
+> 因此，上述"简单 TOCTOU"攻击路径在 token 绑定机制下可能不成立。真实的攻击路径更可能是利用 proration 计算逻辑——见后文"真实攻击路径推测"一节。
 
 ---
 
@@ -395,11 +395,11 @@ proration = (₱8,919.64 - ₱982.14) × 0/30 ≈ ₱0
 | 1 | [0 PHP 跨区定价混淆](/posts/chatgpt-plus-0php-cross-region-pricing-exploit-2026/) | 区域信号碎片化 + 第三方工具注入 promo_campaign | Checkout session 创建 | 特定工具 |
 | 2 | [prorationMode Hook](/posts/google-play-ccmax-proration-vulnerability-2026/) | Google Play `putInt` 从 mode 1 改成 mode 3 | Google Play Billing | Frida/Xposed |
 | 3 | [RevenueCat 凭证转移](/posts/gpt-plus-exploit-revenuecat-vulnerability/) | 匿名购买 + restore 归属偷渡 | RevenueCat receipt | 两个设备 |
-| 4 | **₱982 Pro 20X (本文)** | TOCTOU: PI 金额锁定 + 计划独立变更 | subscriptions/update 并发 | 精确时序 |
+| 4 | ₱982 Pro 20X (本文) | TOCTOU: PI 金额锁定 + 计划独立变更 | subscriptions/update 并发 | 精确时序 |
 
-前三种都需要在客户端侧做手脚——Hook 参数、注入请求、操纵凭证。**第四种什么都不需要改。** 不需要 Frida，不需要 Xposed，不需要中间人。只需要在正确的时间窗口里发两个合法的 HTTP 请求。
+前三种都需要在客户端侧做手脚——Hook 参数、注入请求、操纵凭证。第四种什么都不需要改。 不需要 Frida，不需要 Xposed，不需要中间人。只需要在正确的时间窗口里发两个合法的 HTTP 请求。
 
-这也是它最危险的地方：**攻击面完全在服务端，客户端侧无法检测也无法防御。**
+这也是它最危险的地方：攻击面完全在服务端，客户端侧无法检测也无法防御。
 
 ---
 
@@ -411,7 +411,7 @@ proration = (₱8,919.64 - ₱982.14) × 0/30 ≈ ₱0
 
 ### 假说 1：Proration 最后一天定时攻击（最可能）
 
-群聊截图里的关键线索：**"plus 最后一天升级"**。
+群聊截图里的关键线索："plus 最后一天升级"。
 
 Stripe 的 proration 计算公式：
 ```
@@ -437,7 +437,7 @@ Day 30: subscriptions/update → 升级 Pro, proration ≈ ₱0
         下个月开始按 Pro 价格续费（但攻击者可以取消自动续费）
 ```
 
-**这与"最后一天"的线索完全吻合，也与 ₱982.14 的实际扣款金额完全匹配。**
+这与"最后一天"的线索完全吻合，也与 ₱982.14 的实际扣款金额完全匹配。
 
 ### 假说 2：Delinquent / Grace Period 异常 proration
 
@@ -450,7 +450,7 @@ Day 30: subscriptions/update → 升级 Pro, proration ≈ ₱0
 
 ### 假说 3：服务端 Webhook 竞态窗口
 
-虽然 token 绑定阻止了客户端侧的并发，但 **Stripe webhook 处理和 OpenAI 内部订阅状态更新之间**可能存在服务端竞态：
+虽然 token 绑定阻止了客户端侧的并发，但 Stripe webhook 处理和 OpenAI 内部订阅状态更新之间可能存在服务端竞态：
 
 ```
 T0: Stripe PI confirm 成功 → 发送 webhook
@@ -467,13 +467,13 @@ T2: 在 T1 和 subscription plan 更新之间，存在一个窗口
 
 ### 小结
 
-**Proration 最后一天定时攻击是最可能的真实路径。** 它不需要竞态条件，不受 token 绑定限制，与所有已知线索（₱982 金额、"最后一天升级"、Stripe 正规扣款记录）完全吻合。TOCTOU 并发假说虽然在理论上优雅，但在 token plan_type 绑定机制下面临实际障碍。
+综合来看，proration 最后一天定时攻击是最合理的解释。它不需要竞态条件，不受 token 绑定限制，与所有已知线索（₱982 金额、"最后一天升级"、Stripe 正规扣款记录）吻合。TOCTOU 并发假说理论上成立，但在 token plan_type 绑定机制下有实际障碍。
 
 ---
 
 ## 十、为什么我们不受影响
 
-我们的自动化系统（Chrome Extension + Go 后端）使用的是**严格顺序的两阶段流程**：
+我们的自动化系统（Chrome Extension + Go 后端）使用的是严格顺序的两阶段流程：
 
 ```
 Phase 1:
@@ -520,7 +520,7 @@ if (hasActiveCheckoutSession(accountId)) {
 }
 ```
 
-这是最基本的防御。如果一个账号有进行中的 checkout session（PI 已创建但未 settle），拒绝 subscriptions/update 请求。**这正是旧协议在做的事情。**
+这是最基本的防御。如果一个账号有进行中的 checkout session（PI 已创建但未 settle），拒绝 subscriptions/update 请求。这正是旧协议在做的事情。
 
 ### 2. PI Confirm 后验证计划一致性
 
@@ -553,13 +553,13 @@ Stripe webhook 里的 `checkout.session.completed` 事件包含了 PI 金额和�
 
 最初的假设是经典 TOCTOU：checkout confirm 和 subscriptions/update 并发执行，PI 金额锁定 + 计划独立变更 = 以 Plus 价格拿 Pro。理论上很优雅，逻辑上也自洽。
 
-但 2026-08-03 的 HAR 抓包打破了这个假设。**Token 与 plan_type 的绑定机制**在 confirm 和 update 之间插入了一个强制的序列化点——旧 token 在计划变更后立即失效，攻击者必须 refresh 拿到新 token 才能继续操作。这让简单的客户端并发攻击变得不可行。
+但 2026-08-03 的 HAR 抓包打破了这个假设。Token 与 plan_type 的绑定机制在 confirm 和 update 之间插入了一个强制的序列化点——旧 token 在计划变更后立即失效，攻击者必须 refresh 拿到新 token 才能继续操作。这让简单的客户端并发攻击变得不可行。
 
-真实的攻击路径更可能是 **proration 最后一天定时攻击**——在 Plus 订阅周期的最后一天升级 Pro，利用 proration 剩余天数趋近于 0 来规避补差价。这与群聊截图中"最后一天升级"的线索完全吻合，也不需要任何竞态条件。
+真实的攻击路径更可能是 proration 最后一天定时攻击——在 Plus 订阅周期的最后一天升级 Pro，利用 proration 剩余天数趋近于 0 来规避补差价。这与群聊截图中"最后一天升级"的线索完全吻合，也不需要任何竞态条件。
 
-同时，8 月 2 日的协议更新实际上是**强化了 token 与订阅状态的绑定**，而非移除互斥锁。这个变更导致了我们 Phase 2 的 401 失败潮——因为我们的旧代码没有正确处理 token refresh。在用 HAR 数据逆向出官方的 `reason=token_expired` + `x-openai-failed-access-token-iat` 模式后，问题得到了解决。
+同时，8 月 2 日的协议更新实际上是强化了 token 与订阅状态的绑定，而非移除互斥锁。这个变更导致了我们 Phase 2 的 401 失败潮——因为我们的旧代码没有正确处理 token refresh。在用 HAR 数据逆向出官方的 `reason=token_expired` + `x-openai-failed-access-token-iat` 模式后，问题得到了解决。
 
-从 [0 PHP 跨区混淆](/posts/chatgpt-plus-0php-cross-region-pricing-exploit-2026/)到 [prorationMode Hook](/posts/google-play-ccmax-proration-vulnerability-2026/)到今天的 proration 定时攻击——每一个漏洞都指向同一个根本问题：**支付系统中，任何两步操作之间如果没有原子性保证，就是潜在的攻击面。** 价格检查和扣款之间、计划变更和金额计算之间、proration 计算和时间边界之间——每一个"之间"都是攻击者的机会。
+从 [0 PHP 跨区混淆](/posts/chatgpt-plus-0php-cross-region-pricing-exploit-2026/)到 [prorationMode Hook](/posts/google-play-ccmax-proration-vulnerability-2026/)到今天的 proration 定时攻击——每一个漏洞都指向同一个根本问题：支付系统中，任何两步操作之间如果没有原子性保证，就是潜在的攻击面。 价格检查和扣款之间、计划变更和金额计算之间、proration 计算和时间边界之间——每一个"之间"都是攻击者的机会。
 
 而且有时候，第一个假设不是对的那个。拿到数据再说话。
 

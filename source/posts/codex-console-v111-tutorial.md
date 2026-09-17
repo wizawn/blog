@@ -15,10 +15,10 @@ weight: 1
 
 {{< figure src="/images/wechat-qr.jpg" alt="微信二维码" width="200" >}}
 {{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}
-**联系方式 & 交流群**
+联系方式 & 交流群
 
 - **QQ**: 46333839
-- **微信**: GOV-HACK
+- **微信**: GOV-HACK  ⚠️ **博主微信暂时被封，请优先加入上方 QQ 群（46333839）**
 
 进微信群请联系博主，各位觉得文章对你有帮助的话可否打赏一些呀~
 
@@ -28,9 +28,9 @@ weight: 1
 
 ---
 
-## 📋 前言
+## 前言
 
-> ❤️ **写教程不易，如果对您有帮助，欢迎赞赏支持！**
+> 写教程不易，如果对您有帮助，欢迎赞赏支持！
 > 
 > **微信收款码**：
 > 
@@ -38,19 +38,14 @@ weight: 1
 > **支付宝收款码**：
 > 
 > 
-> 感谢您的支持！🎉
+> 感谢您的支持！
 
-**这是一篇真正的零基础保姆级教程**，我会手把手带你从零开始，完整部署和使用 Codex Console v1.1.1——一款免费开源的 OpenAI/Codex 账号注册管理工具。
+这篇教程覆盖 Codex Console v1.1.1 的完整部署和使用流程。Codex Console 是一款免费开源的 OpenAI/Codex 账号注册管理工具。
 
-**本教程特点**：
-- ✅ **完全从零开始**：假设你没有任何编程基础
-- ✅ **每步都有命令**：直接复制粘贴即可执行
-- ✅ **包含所有坑点**：把可能遇到的问题都提前说明
-- ✅ **真实测试验证**：所有步骤都已实际测试通过
-- ✅ **持续更新维护**：跟随项目版本同步更新
+假设你没有编程基础，每一步都给出了可直接复制执行的命令，常见的坑也提前标注了。内容跟随项目版本同步更新。
 
 **项目信息**：
-- **GitHub 仓库**：https://github.com/dou-jiang/codex-console
+- GitHub 仓库：https://github.com/dou-jiang/codex-console
 - **基于项目**：cnlimiter/codex-manager（修复增强版）
 - **许可证**：MIT（免费开源）
 - **当前版本**：v1.1.1
@@ -63,16 +58,16 @@ weight: 1
 
 ---
 
-## ⚠️ 重要声明（必读）
+## 重要声明（必读）
 
 ### 1. 免费开源原则
 
-**本项目永久免费开源**，任何付费版本均为倒卖行为！
+本项目永久免费开源，任何付费版本均为倒卖行为！
 
-- ❌ **禁止倒卖**：严禁倒卖本项目及相关衍生版本
-- ❌ **禁止付费**：任何人向你收费提供本工具，请立即退款并举报
-- ✅ **允许学习**：允许学习、研究、二次开发
-- ✅ **允许分享**：允许分享给有需要的朋友
+- **禁止倒卖**：严禁倒卖本项目及相关衍生版本
+- **禁止付费**：任何人向你收费提供本工具，请立即退款并举报
+- **允许学习**：允许学习、研究、二次开发
+- **允许分享**：允许分享给有需要的朋友
 
 ### 2. 合法使用提醒
 
@@ -90,7 +85,7 @@ weight: 1
 
 ---
 
-## 🎯 v1.1.1 版本更新内容
+## v1.1.1 版本更新内容
 
 ### 新增功能（5 项）
 
@@ -123,7 +118,7 @@ weight: 1
 
 ---
 
-## 🖥️ 环境准备（按步骤操作）
+## 环境准备（按步骤操作）
 
 ### 第一步：确认操作系统
 
@@ -131,12 +126,12 @@ weight: 1
 
 | 系统 | 版本要求 | 推荐度 |
 |------|----------|--------|
-| Windows | Windows 10/11 (64 位) | ⭐⭐⭐⭐⭐ |
-| macOS | macOS 10.15+ | ⭐⭐⭐⭐ |
-| Linux | Ubuntu 20.04+/Debian 10+ | ⭐⭐⭐⭐ |
-| Docker | 任意支持 Docker 的系统 | ⭐⭐⭐⭐⭐ |
+| Windows | Windows 10/11 (64 位) | |
+| macOS | macOS 10.15+ | |
+| Linux | Ubuntu 20.04+/Debian 10+ | |
+| Docker | 任意支持 Docker 的系统 | |
 
-**查看系统版本命令**：
+查看系统版本命令：
 
 ```bash
 # Windows（PowerShell）
@@ -153,14 +148,14 @@ cat /etc/os-release
 
 #### Windows 安装 Python
 
-1. **下载 Python**
+1. 下载 Python
    - 访问官网：https://www.python.org/downloads/
    - 下载 Python 3.10 或更高版本（推荐 3.11/3.12）
    - 选择 "Windows installer (64-bit)"
 
-2. **安装 Python**
+2. 安装 Python
    - 双击安装包
-   - ⚠️ **重要**：勾选 "Add Python to PATH"
+ - **重要**：勾选 "Add Python to PATH"
    - 点击 "Install Now"
 
 3. **验证安装**
@@ -264,7 +259,7 @@ curl -x http://127.0.0.1:7890 https://www.google.com -I
 
 ---
 
-## 📦 安装部署（5 种方式任选）
+## 安装部署（5 种方式任选）
 
 ### 方式一：源码安装（推荐新手）
 
@@ -301,7 +296,7 @@ drwxr-xr-x  3 root   4096 Mar 26 09:10 templates
 
 #### 步骤 2：创建虚拟环境（强烈推荐）
 
-**为什么使用虚拟环境**：
+为什么使用虚拟环境：
 - 避免污染系统 Python 环境
 - 方便管理依赖包
 - 便于迁移和部署
@@ -390,7 +385,7 @@ cp .env.example .env
 # Linux/Mac: nano .env 或 vim .env
 ```
 
-**.env 配置示例**：
+.env 配置示例：
 
 ```ini
 # ── Web UI 监听地址 ──────────────────────────────────────────
@@ -419,7 +414,7 @@ APP_DATABASE_URL=data/database.db
 # BIND_CARD_API_KEY=your_api_key_here
 ```
 
-**⚠️ 安全提醒**：
+** 安全提醒**：
 - 务必修改 `APP_ACCESS_PASSWORD` 默认值
 - 不要将 `.env` 文件上传到公开仓库
 - 生产环境建议使用强密码（16 位以上，包含大小写、数字、符号）
@@ -451,7 +446,7 @@ INFO:     Application startup complete.
 INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
 ```
 
-**访问 WebUI**：
+访问 WebUI：
 - 本地访问：http://127.0.0.1:8000
 - 远程访问：http://你的服务器 IP:8000
 - 默认密码：admin123（如未在 .env 中修改）
@@ -466,7 +461,7 @@ INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
 - Docker 版本：20.10+
 - Docker Compose 版本：2.0+
 
-**安装 Docker**：
+安装 Docker：
 
 ```bash
 # Ubuntu/Debian
@@ -503,11 +498,11 @@ docker compose down
 
 ---
 
-## 🔧 常见问题解答
+## 常见问题解答
 
 ### 一、安装问题
 
-**Q1: pip install 报错 "Could not find a version that satisfies the requirement"**
+Q1: pip install 报错 "Could not find a version that satisfies the requirement"
 
 **解决**：
 ```bash
@@ -518,9 +513,9 @@ python -m pip install --upgrade pip
 pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
-**Q2: 虚拟环境激活失败**
+Q2: 虚拟环境激活失败
 
-**Windows PowerShell 执行策略问题**：
+Windows PowerShell 执行策略问题：
 ```powershell
 # 临时允许执行脚本
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
@@ -531,7 +526,7 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 ### 二、启动问题
 
-**Q1: 端口被占用**
+Q1: 端口被占用
 
 ```
 Error: [Errno 98] Address already in use

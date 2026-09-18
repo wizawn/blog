@@ -1,14 +1,41 @@
 {{- $pages := .Pages -}}
 
-{{- /* 博客自定义排序：优先按 weight（教程置顶），再按日期（新的在前） */ -}}
-{{- if eq .Context.Site.Params.SortBy "lastmod" -}}
-    {{- $pages = $pages.ByLastmod.Reverse -}}
-{{- else if eq .Context.Site.Params.SortBy "weight" -}}
-    {{- $pages = $pages.ByWeight -}}
+{{- /*
+  Codex 常见问题不参加 weight 优先级：在手工文章之后随机展示，
+  但始终放在自动文章（weight >= 100）之前。
+*/ -}}
+{{- $codexPages := where $pages "Params.categories" "intersect" (slice "Codex常见问题") -}}
+{{- if gt (len $codexPages) 0 -}}
+    {{- $otherPages := $pages | complement $codexPages -}}
+    {{- $manualPages := where $otherPages "Weight" "lt" 100 -}}
+    {{- $autoPages := where $otherPages "Weight" "ge" 100 -}}
+
+    {{- if eq .Context.Site.Params.SortBy "lastmod" -}}
+        {{- $manualPages = $manualPages.ByLastmod.Reverse -}}
+        {{- $autoPages = $autoPages.ByLastmod.Reverse -}}
+    {{- else if eq .Context.Site.Params.SortBy "weight" -}}
+        {{- $manualPages = $manualPages.ByWeight -}}
+        {{- $autoPages = $autoPages.ByWeight -}}
+    {{- else -}}
+        {{- $manualPages = sort $manualPages "Weight" "asc" -}}
+        {{- $manualPages = sort $manualPages "Date" "desc" -}}
+        {{- $autoPages = sort $autoPages "Weight" "asc" -}}
+        {{- $autoPages = sort $autoPages "Date" "desc" -}}
+    {{- end -}}
+
+    {{- /* append adds the earlier arguments to the final slice argument */ -}}
+    {{- $pages = append (shuffle $codexPages) $manualPages -}}
+    {{- $pages = append $autoPages $pages -}}
 {{- else -}}
-    {{- /* 默认：先按 weight 排序（小的在前），再按日期排序（新的在前） */ -}}
-    {{- $pages = sort $pages "Weight" "asc" }}
-    {{- $pages = sort $pages "Date" "desc" }}
+    {{- /* 原有排序：weight 升序，日期降序 */ -}}
+    {{- if eq .Context.Site.Params.SortBy "lastmod" -}}
+        {{- $pages = $pages.ByLastmod.Reverse -}}
+    {{- else if eq .Context.Site.Params.SortBy "weight" -}}
+        {{- $pages = $pages.ByWeight -}}
+    {{- else -}}
+        {{- $pages = sort $pages "Weight" "asc" -}}
+        {{- $pages = sort $pages "Date" "desc" -}}
+    {{- end -}}
 {{- end -}}
 
 {{- return $pages -}}

@@ -5,7 +5,7 @@ draft: false
 weight: 1
 categories: ["技术分析", "逆向工程"]
 tags: ["ChatGPT", "Codex", "OpenAI", "292", "降智", "Overload", "429", "current_turn_state", "逆向", "代理注入"]
-description: "拆解 ChatGPT/Codex 降智的底层机制：292 响应携带的 current_turn_state 是不降智的凭据，注入到 Codex 请求中即可绕过 overload。附 keeper 自动续期 + 注入代理的完整架构。"
+description: "拆解 ChatGPT/Codex 降智的底层机制：292 响应携带 current_turn_state 是不降智的凭据，312 是服务端主动下发的降智信号。通过注入 292 state + 监控 312 立即轮换，稳定绕过 overload 和降智。附 codex-state-kit 完整架构。"
 image: "/blog-cover-default.jpg"
 ---
 
@@ -53,11 +53,22 @@ image: "/blog-cover-default.jpg"
 
 截图中可以看到一个实际运行的例子：使用美国住宅宽带，第一次请求就拿到了 292，state 写入凭据文件，倒计时显示约 59 分钟剩余。
 
+### 292 不是免死金牌——312 降智信号
+
+拿到 292 并不意味着这一个小时内高枕无忧。OpenAI 会在使用过程中**主动下发 312 响应**，312 是一个降智信号：即使你手上的 292 state 还没过有效期，一旦收到 312，当前 state 实质上已经失效——后续请求会开始降智。
+
+这说明 OpenAI 的调度不是"发了 292 就不管了"，而是**持续评估**的。292 给你的只是一个初始通行证，服务端保留了随时撤销的能力。312 就是撤销信号。
+
+因此，正确的应对不是"拿到 292 就等一小时再续"，而是**同时监控 312**：一旦检测到 312，立即重新采集 292，不用等倒计时归零。
+
 ### 这意味着什么
 
-OpenAI 在 chat completion 的响应中嵌入了一个"通行证"。持有有效通行证的请求，后续不会被降智或 overload；没有通行证的请求，服务质量不确定。
+OpenAI 在 chat completion 的响应中嵌入了一套双向信号机制：
 
-这就是降智"时好时坏"的根源：你可能碰巧拿到了一次 292，在 state 有效的一小时内体验正常；过期之后，下一次请求如果没能拿到新的 292，就掉回去了。用户的感知就是"刚才还好好的怎么突然变蠢了"。
+- **292**：通行证签发，携带 `current_turn_state`，表示当前资源充足、可以获得完整服务
+- **312**：通行证撤销，表示服务端决定降级你的后续请求，需要立即重新获取 292
+
+降智"时好时坏"的原因就在这里：你拿到 292 后体验正常，但中途可能被 312 打断；或者 state 过期后没能续上新的 292。用户的感知就是"刚才还好好的怎么突然变蠢了"——你不知道是 state 到期了还是被 312 撤销了，表现完全一样。
 
 ---
 
@@ -94,7 +105,10 @@ OpenAI 在 chat completion 的响应中嵌入了一个"通行证"。持有有效
 1. 打一条请求，拿到 292 响应中的 `current_turn_state`
 2. 把 state 写入本地文件
 3. 后续所有 Codex / ChatGPT 请求经过本地代理，代理读取文件，把 state 注入到请求中
-4. state 有效期约 1 小时，到期前自动重新采集
+4. 代理同时监控响应：如果收到 312，立即触发重新采集
+5. 即使没收到 312，到期前也自动续期
+
+两个触发续期的条件：**312 降智信号**（立即续）和**TTL 倒计时不足 5 分钟**（定时续）。两条线并行，哪个先触发就先续。
 
 **采集和使用可以在不同的网络环境下进行。** 截图明确显示：采集时切到住宅 IP，采完切回 IPLC，后续使用都在 IPLC 上。state 在切换 IP 后依然有效——至少在当前的观察中是这样。
 
@@ -103,7 +117,7 @@ OpenAI 在 chat completion 的响应中嵌入了一个"通行证"。持有有效
 ### 注入流程
 
 ```
-[采集 — 每小时一次]
+[采集 — 292 过期前 或 收到 312 时]
 
   Clash 切到住宅/原生V6
        |
@@ -121,6 +135,8 @@ OpenAI 在 chat completion 的响应中嵌入了一个"通行证"。持有有效
   inject_proxy 拦截 → 读 state 文件 → 注入到请求
        |
   请求到达 OpenAI → state 有效 → 正常响应
+       |
+  如果响应是 312 → 通知 keeper 立即续期
 ```
 
 对 Codex 完全透明。不需要重启 Codex，不需要改 Codex 的配置（除了把 Base URL 指向本地代理）。state 文件更新了，下一次请求自动用新的。
@@ -153,23 +169,30 @@ OpenAI 在 chat completion 的响应中嵌入了一个"通行证"。持有有效
 ```python
 while True:
     remaining = state_expires_at - now()
+    got_312 = check_312_signal()    # inject_proxy 检测到 312 时写入信号
     
-    if remaining > 5 minutes:
+    if remaining > 5 minutes and not got_312:
         sleep(45)
         continue
     
-    # 续期
+    # 续期（两种触发：TTL 不足 5 分钟 或 收到 312）
+    if got_312:
+        log("312 detected, immediate renewal")
+    
     clash.switch_to("住宅/原生V6")
     resp = chat_completion(model="gpt-6-astra", messages=[...])
     
     if resp 包含 292:
         save(resp.current_turn_state)
+        clear_312_signal()
         log("292 acquired")
     else:
         log("failed, will retry in 45s")
     
     clash.switch_back()
 ```
+
+注意 312 触发的续期是**立即**的，不等 45 秒轮询周期。inject_proxy 在检测到 312 响应时写入一个信号文件（或通过进程间通信），keeper 下一次循环检查到信号就立刻启动采集。
 
 ### 客户端配置
 
@@ -189,7 +212,9 @@ Codex 或其他兼容 OpenAI API 的客户端把 Base URL 指向本地代理即�
 
 ### 5.1 空窗期
 
-采不到 292 的时候，旧 state 过期后就回到裸奔状态。keeper 会持续重试，但如果你的住宅 IP 出了问题或 OpenAI 那边全局限流，空窗可能持续一段时间。
+两种情况会导致空窗：**state 到期续不上**，或者**收到 312 但新的 292 采不到**。后者更棘手——312 可能在你工作到一半的时候突然出现，如果此时住宅 IP 不可用或 OpenAI 全局限流，你的 Codex 会立刻降智，直到采到新的 292。
+
+keeper 会持续重试，但空窗期内没有什么可以补救的。
 
 ### 5.2 模型要对齐
 
@@ -225,9 +250,10 @@ state 和账号关联。一个账号的 state 不能注入到另一个账号的�
 
 写这篇文章时我刻意区分了三类信息：
 
-**确认的事实**（截图直接显示 + 工具实际运行）：
+**确认的事实**（截图直接显示 + 工具实际运行 + 用户反馈）：
 - 292 响应存在，携带 `current_turn_state`
-- state 有效期约 1 小时
+- 312 响应存在，是服务端主动下发的降智信号，收到后需立即重新采集 292
+- 292 state 的名义有效期约 1 小时，但可被 312 提前撤销
 - state 可以被提取、存储、注入到后续请求
 - 注入后确实可以避免降智和 overload
 - 采集时使用住宅 IP，使用时可以在其他 IP 上

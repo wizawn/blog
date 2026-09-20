@@ -274,6 +274,14 @@ state 和账号关联。一个账号的 state 不能注入到另一个账号的�
 
 ---
 
+## 开源工具
+
+基于本文描述的 292 state 注入原理，社区已有开发者做出了轻量级实现，实测成功率很高：
+
+**[ccodex-sleep-state](https://github.com/gylive/ccodex-sleep-state)** — 一个基于 292 state 注入原理的小工具，封装了采集、注入和自动续期的核心流程，开箱即用。
+
+---
+
 ## 相关阅读
 
 - [Stripe 协议支付自动化深度拆解](/posts/stripe-protocol-payment-automation-deep-dive-2026/)

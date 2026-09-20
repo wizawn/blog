@@ -11,9 +11,9 @@ description: "Florence AI — 一站式 AI 会员充值平台。ChatGPT Plus/Pro
 
 ## 一站式 AI 会员充值，就来 Florence AI
 
-[Florence AI](https://faka.redeemai.me) 支持 ChatGPT Plus、ChatGPT Pro、Claude Pro、Grok Super 全线 AI 会员充值。正规信用卡渠道，自动发货。
+[Florence AI](https://faka.redeemai.org) 支持 ChatGPT Plus、ChatGPT Pro、Claude Pro、Grok Super 全线 AI 会员充值。正规信用卡渠道，自动发货。
 
-[立即前往 Florence AI 充值 →](https://faka.redeemai.me)
+[立即前往 Florence AI 充值 →](https://faka.redeemai.org)
 
 ---
 
@@ -40,7 +40,7 @@ description: "Florence AI — 一站式 AI 会员充值平台。ChatGPT Plus/Pro
 下单付款后系统自动发货，无需等待人工处理。从下单到收到充值结果，最快只要 30 秒。
 
 ### 订单全程可查
-每一笔订单都有唯一订单号，随时在 [订单查询页](https://faka.redeemai.me/order-query) 输入即可查看状态。
+每一笔订单都有唯一订单号，随时在 [订单查询页](https://faka.redeemai.org/order-query) 输入即可查看状态。
 
 ### 价格透明，无隐藏费用
 所见即所得，标价即最终价。
@@ -53,7 +53,7 @@ description: "Florence AI — 一站式 AI 会员充值平台。ChatGPT Plus/Pro
 ## 3 步完成充值
 
 第一步：选择商品
-进入 [Florence AI 商城](https://faka.redeemai.me)，选择你需要的 AI 会员产品。
+进入 [Florence AI 商城](https://faka.redeemai.org)，选择你需要的 AI 会员产品。
 
 第二步：付款下单
 支持支付宝等多种支付方式，付款后系统自动处理。
@@ -61,7 +61,7 @@ description: "Florence AI — 一站式 AI 会员充值平台。ChatGPT Plus/Pro
 第三步：查收结果
 30 秒内自动发货，邮件或订单页查看充值结果。
 
-[现在就去充值 →](https://faka.redeemai.me)
+[现在就去充值 →](https://faka.redeemai.org)
 
 ---
 
@@ -72,4 +72,4 @@ description: "Florence AI — 一站式 AI 会员充值平台。ChatGPT Plus/Pro
 
 ---
 
-[立即前往 Florence AI 充值 → faka.redeemai.me](https://faka.redeemai.me)
+[立即前往 Florence AI 充值 → faka.redeemai.org](https://faka.redeemai.org)

@@ -1,13 +1,13 @@
 ---
-title: "Google AI Pro 两年“零成本”脚本拆解：代码到底做了什么"
+title: "Google AI Pro 两年“零成本”脚本分析"
 date: 2026-11-04T22:00:00+08:00
 draft: false
 weight: 1
 categories: ["安全研究", "技术分析"]
 tags: ["Google One", "Google Play", "Playwright", "源码分析", "支付安全", "Offer Token"]
-description: "从本地控制台读到请求改写，再看脚本怎样判断订阅成功。拆开 Offer Token、Mode 5、日期、代理和自动取消这些环节，看看“零成本两年完成”这句话是怎么来的。"
+description: "Ngbm 请求改写、Google Play 结账弹窗、代理桥接，以及源码中几处影响订阅结果判断的细节。"
 image: "/blog-cover-default.jpg"
-lastmod: 2026-11-04T23:30:06+08:00
+lastmod: 2026-11-04T23:51:15+08:00
 ---
 
 {{< figure src="/images/wechat-qr.jpg" alt="微信二维码" width="200" >}}
@@ -23,197 +23,341 @@ lastmod: 2026-11-04T23:30:06+08:00
 
 ## 0x00 这东西是什么
 
-手头这份工具叫 `Google_AI_Pro_2Year_ZeroCost_Auto`。名字把目标写得很满：Google AI Pro、两年、零成本、全自动。
+拿到一份打包好的工具：`Google_AI_Pro_2Year_ZeroCost_Auto`。
 
-顺着代码看，它想做的事倒不复杂：接管 Chrome，把几组优惠参数塞进 Google One 的结账请求，按作者标注的 12、6、6 个月连做三次，最后尝试取消续订。
+工具用 Playwright 操作 Google One 的结账流程，分三次换入作者标作 12、6、6 个月的优惠，最后取消续订。名字里的“两年”就是这么来的。
 
-这次只读源码，顺着它走完这五步，看看最后那句“零成本两年完成”是怎么来的。
+我主要看了 `automation_engine.py`。1794 行，前面是一段注入页面的 JavaScript，后面负责登录、找弹窗、绑卡、点击订阅和读取结果。改请求的地方不算长，处理页面状态占了大半。
 
 ## 0x01 整体架构：一个本地 Web 控制台
 
-文件不多，主要就这几份：
+先看文件结构：
 
-```text
-├── app.py                  # FastAPI 后端，配置、账号列表和任务入口
-├── automation_engine.py    # Playwright + Chrome CDP 自动化
-├── config.json             # 配置及账号数据
-├── requirements.txt        # fastapi、uvicorn、playwright、pydantic
+```
+├── app.py                  # FastAPI 后端，提供 Web API 和控制台页面
+├── automation_engine.py    # 核心自动化引擎，Playwright + Chrome CDP
+├── config.json             # 配置文件：卡信息、账号列表、代理模板
+├── requirements.txt        # 依赖：fastapi, uvicorn, playwright, pydantic
 ├── templates/
-│   └── index.html          # 原生 JS 写的控制台
+│   └── index.html          # 控制台前端，暗色主题的单页应用
 ├── 1_首次运行_安装依赖并启动.bat
 └── 2_启动控制台.bat
 ```
 
-README 按 Windows 10/11、系统 Chrome、Python 3.10 以上来写。两个 bat 分别负责装依赖并启动、直接启动，pip 用的是清华镜像源。服务监听 `127.0.0.1:8765`。
+两个 bat 文件，一个装依赖并启动，一个直接启动。依赖用的清华镜像源，README 写的是 Windows 10/11、Python 3.10 以上和系统 Chrome。服务跑在 `127.0.0.1:8765`，本地访问。
 
-`app.py` 提供保存配置、导入账号、单号运行、批量运行、停止任务、手动打开浏览器和测试代理这些接口。前端每 1.5 秒取一次 `/api/state`，刷新账号表格、步骤和日志。
+`app.py` 是一个标准的 FastAPI 应用，提供了这些 API：
 
-“批量”在这里是串行的：一个账号执行完，再等两秒，才轮到下一个。页面上的完成数量也只是统计后端标成 `completed` 的记录，不会另外去 Google 查一遍订阅。
+- `POST /api/config` — 保存全局配置（地区、卡信息、代理模板）
+- `POST /api/accounts/import` — 批量导入 Google 账号
+- `POST /api/run/single` — 单账号执行
+- `POST /api/run/batch` — 批量队列执行
+- `POST /api/stop` — 停止任务
+- `POST /api/open_browser` — 为指定账号手动打开独立 Chrome 窗口
+- `POST /api/proxy/test` — 测试代理连通性
+- `GET /api/state` — 轮询当前状态（前端每 1.5 秒调一次）
 
-## 0x02 HOOK_JS：改请求的地方
+前端是一个纯静态的单页应用，没用任何框架，原生 JS + CSS 变量做的暗色主题。左边填卡信息和代理，右边批量粘贴账号，下面是账号队列表格和实时日志终端。每 1.5 秒 fetch 一次 `/api/state` 刷新界面。
 
-`automation_engine.py` 里有一段约 150 行的 `HOOK_JS`。Python 通过 `context.add_init_script` 注册它，脚本检查页面主机名后，挂上几处浏览器接口的钩子。
+批量任务是排队执行的，一个账号结束，等两秒，再跑下一个。实际浏览器操作在 `automation_engine.py` 里。
 
-第一处是 `XMLHttpRequest.prototype.send`。遇到包含 `Ngbm` 的字符串 body，它会继续找 `f.req`，解码里面嵌套的 JSON，再让 `patchTargetNode` 替换商品和订阅参数。这个函数兼容了两种数组形状，并非所有请求都走同一组下标。
+## 0x02 HOOK_JS：Ngbm 请求拦截器
 
-这里有个容易读漏的地方：解析出错时，它会把原 body 放回去。也就是说，网页照样能发请求，并不意味着替换已经成功。
+`HOOK_JS` 大约 150 行，通过 `context.add_init_script` 注入。它先检查页面主机名，再接管 XHR 发送和几处 iframe URL 设置。
 
-第二处是结账 iframe 的 URL。`rewriteUrl` 找的是 `/eacquire/multiline`，然后修改 query 里的 `ear` 参数。商品信息既有外层的一份，也有藏在 base64 编码内容里的一份，代码两处都处理了。它还把 `ear[24]` 设成 `null`，但没有说明这个字段是什么，不能顺手给它起个“签名字段”或“防重放字段”的名字。
+它做了四件事：
 
-为了接到这些 URL，作者同时包装了 iframe 的 `src` setter、`setAttribute`，以及存在时的 `TrustedTypePolicy.prototype.createScriptURL`。这是几条具体的 URL 设置路径，还谈不上拦住了结账流程里的所有请求。
+### 第一件：劫持 XMLHttpRequest.send
 
-配置则通过 `window.__setDirectTest` 切换。几次订阅操作可以复用同一段 Hook，换进去的商品和优惠参数不同。登录和取消续订并不是各自再注入一组优惠。
+脚本针对的是带有 `Ngbm` 调用的 XHR 请求。body 中的 `f.req` 解码后是一层套一层的 JSON，里面放着商品、Offer Token 和订阅参数。
 
-## 0x03 Offer Token：名字能告诉我们多少
+HOOK_JS 重写了 `XMLHttpRequest.prototype.send`，先检查 body 是不是包含 `Ngbm` 的字符串，再交给 `rewriteFreq` 解析。`patchTargetNode` 负责替换里面的商品列表和订阅参数，代码兼容了两种数组形状。
 
-文件开头放了一组固定的 Offer Token。变量名里有 `12M`、`6M`、`6M_SS`，步骤日志又把其中两组叫作 Pixel 和 S25 活动。作者显然是按这些优惠的预期时长来组织流程的。
+```javascript
+const origSend = XMLHttpRequest.prototype.send;
+XMLHttpRequest.prototype.send = function(body) {
+    if (typeof body === 'string' && body.includes('Ngbm')) {
+        body = rewriteFreq(body);
+    }
+    return origSend.call(this, body);
+};
+```
 
-不过，压缩包没有附 Token 的来源记录或活动规则。“通用”也是代码注释里的说法。光看这一串值，认不出它是否仍有效，更认不出某个账号是否符合资格。
+`rewriteFreq` 的异常处理很短，解析失败就返回原 body，继续发请求。Hook 没改成功时，浏览器也不会因此停下来。
 
-容量的命名也不统一：常量叫 `PRO5TB`，请求里的商品标识却含有 `g1.2tb.ai.subs_variant`，执行类还叫 `GoogleUltraAutomator`。构造函数收下了 `target_plan`，后面的步骤却没有用它来选择套餐。这里不能挑一个名字，就把最终权益写成固定的 5 TB。
+### 第二件：劫持 iframe src 设置
 
-三次订阅配置都带了 YouTube Premium 附加项。作者没有解释这项搭配的原因。
+Google One 的结账弹窗是通过 iframe 加载 `eacquire/multiline` 这个 URL 实现的。这个 URL 的 query string 里有一个 `ear` 参数，也是一个 JSON 数组，结构和 Ngbm payload 类似，包含了商品列表和订阅模式。
 
-## 0x04 五步流程，以及写死的日历
+这里一共挂了三处钩子，Trusted Types 那一处只在接口存在时安装：
 
-流水线依次调用登录、第一层、第二层、第三层、取消续订五个方法。中间三层的骨架相近，分别取作者标作 12、6、6 个月的 Token；第三层还准备了一个备用值。
+1. `HTMLIFrameElement.prototype.src` 的 setter — 通过 `Object.defineProperty` 重写
+2. `Element.prototype.setAttribute` — 拦截对 iframe src 属性的设置
+3. `TrustedTypePolicy.prototype.createScriptURL` — 拦截 Trusted Types 策略下的 URL 创建
 
-文章里最容易讲错的是 Mode 5。代码确实会把数字 `5` 放进订阅参数，也会带上它找到的已有订阅 ID。但这是 Google One 网页里的内部数组，不能因为数字一样，就直接套用 Android Billing 的 `CHARGE_FULL_PRICE` 枚举。更不能从这个数字推出免费时长必定顺延。
+`rewriteUrl` 解析 URL 中的 `ear`，修改商品信息和订阅参数。除了外层的商品项，它还会解开 `ear[4][0]` 里的 base64，把内层那份商品信息一起改掉。`ear[24]` 被清空了，字段含义在这份代码里没有说明。
 
-12 + 6 + 6 等于 24，是作者安排步骤的思路。实际的跳过判断却没有这么认真地算日期：第一层看到整页出现 `2028` 就跳过，另一些分支匹配的是 `2027年10月`、`Apr 2028`、`Oct 2028` 这类固定文字。
+```javascript
+function rewriteUrl(val) {
+    const s = String(val || '');
+    if (!s.includes('/eacquire/multiline') || !currentTest) return val;
+    // 中间省略 ear 的解析及参数替换
+    ear[24] = null;
+    u.searchParams.set('ear', JSON.stringify(ear));
+    return u.toString();
+}
+```
 
-这套日历明显围着 2026 年 10 月写的。换一个开始时间，它不会重新算出十二个月或两年后的日期；页面上有多个订阅时，也没有先把文字限定在目标套餐里。第三层最后所谓的“验真”，更是只查整页有没有 `2028`。
+### 第三件：捕获当前订阅 ID
 
-每层之后的 45 秒、45 秒、40 秒，都是固定等待。日志说“让后台彻底完成清算”，代码做的仍然只是睡一会儿。
+替换过程中，Hook 会把原始请求中的订阅值存进 `window.__capturedSubId`。Python 端没有提前找到 ID 时，后续参数有机会沿用这里捕获的值。
 
-最后的取消续订也有开关。开启时，它先看整页有没有“已取消”“重新订阅”等词，没有才去点第一个可见的“管理”。这里同样没有认准是哪一条订阅。前面一旦抛错，流水线就退出，取消步骤也不会自动补做。
+### 第四件：通过 window.__setDirectTest 动态切换注入配置
 
-收尾时会截图，再从页面文字里取日期，没有 OCR。它取的还可能是“续订日期”；没读到日期时，程序自己填上的是“已激活（详见截图）”，接着写入 `completed`。这个绿色的“完成”，并不是 Google 返回给它的结论。
+HOOK_JS 暴露了一个 `window.__setDirectTest(config)` 方法。Python 在几次订阅操作之间传入不同的 Token 和模式参数，不用每次重装整段 Hook。
 
-## 0x05 结账弹窗为什么占了这么多代码
+## 0x03 写死的 Offer Token
 
-`_poll_eacquire_modal` 大部分篇幅都在处理弹窗里冒出来的下一步：找 frame、过中间提示、等输入框、尝试绑卡，再等订阅按钮。
+代码开头是一组固定 Token，下面只保留变量名。注释按作者的命名和步骤日志标注：
 
-循环名义上从 60 次开始，但不能把它叫作“60 秒超时”。里面有点击和认证等待，点过某些过渡按钮后，还会把剩余次数补回至少 60。外层也会再次尝试触发弹窗。
+```python
+TOK_PRO5TB_12M   = "<省略>"  # 12 个月
+TOK_PRO5TB_6M    = "<省略>"  # 日志中标作 Pixel 6 个月
+TOK_PRO5TB_6M_2  = "<省略>"  # 备用值
+TOK_PRO5TB_6M_SS = "<省略>"  # 日志中标作 S25 6 个月
+YT_FREE_TOK     = "<省略>"  # YouTube Premium 试用
+```
 
-绑卡这段尤其依赖页面长相。代码会遍历 frame，找到至少四个可见输入框后，按位置填写卡号、有效期和 CVC，并不是先确认这是 `instrumentmanager`，再按字段名称逐一识别。持卡人和邮编还有各自的条件分支。输入框顺序一变，原来的位置就未必对得上。
+这些值直接跟着程序发走，包里没有附活动规则或获取记录。Pixel、S25 和时长目前只能按作者的标注理解。
 
-保存卡之后，它会等 `instrumentmanager` 消失。不过，即使等满次数仍没消失，后面也会把 `inline_card_saved` 设成真。所以日志里的“保存完成”，不能直接当作银行卡已经保存成功。
+代码里还有一个前缀常量：
 
-默认邮编写了 `97201`。这是一个表单默认值，不是免税开关，更不是防止扣款的第二层保险。
+```python
+PREFIX = "subs:com.google.android.apps.subscriptions.red:"
+```
 
-过渡按钮的处理倒是比单纯搜文字细一些：代码检查了尺寸、透明度、`aria-hidden`、`pointerEvents`，还用 `elementFromPoint` 看按钮是否被遮住。它能减少点到隐藏元素的机会，但按钮点到了，后续步骤是否办成，还得看后面的判断。
+这是 Google One 订阅商品的前缀。程序用它拼出 `g1.2tb.ai.subs_variant` 和 `g1.youtube_premium_individual_add_on` 两个商品。前者的名字含 `2tb`，常量却叫 `PRO5TB`，类名又叫 `GoogleUltraAutomator`，命名混在了一起。`target_plan` 虽然传进构造函数，后面的套餐选择并没用到它。
 
-## 0x06 点击订阅之后，它凭什么说成功
+每次配置都附带 YouTube Premium 那一项，作者没解释这样搭配的原因。
 
-订阅按钮先走普通点击，失败后再尝试强制点击和 JavaScript 触发。随后是最多 35 轮的等待，处理 CVC、密码和 2FA 等提示，必要时也会去处理弹出的认证页。
+## 0x04 五步流水线
 
-真正值得停下来看的是成功词列表。里面有“已订阅”“感谢您订阅”，也有“备用付款方式”“以后再说”“知道了”。这些词只要有一个出现在所读的 frame 文字里，函数就可能返回成功。
+整个自动化流程分五步，每一步都是 `GoogleUltraAutomator` 类里的一个 async 方法。
 
-“以后再说”当然不是购买回执。更麻烦的是，这组成功词排在错误词判断前面；同一段文字里如果两边都命中，先走的会是成功分支。
+### Step 1: 登录 Google 账号
 
-另一个分支会在弹窗消失后找 Google One 的欢迎文字，`Welcome` 也算。它确实没有把所有“弹窗关了”都当成功，但所用的几个标志仍然太宽。
+`step1_login` 打开登录页，处理账号选择，再进入邮箱、密码和后续验证。
 
-前面的登录过程也有类似问题。作者给账号选择、密码、辅助邮箱、TOTP 和一些中间页写了分支；reCAPTCHA 部分只尝试点复选框，没有接着处理图片题。遇到 `signin/rejected`，认证函数直接返回。外层最后仍可能打出“登录完成”的日志。
+账号选择器在 `step1_login` 里，其余不少中间页交给 `pass_reauth_on_page`：
 
-TOTP 部分是自己实现的，按 30 秒计数、HMAC-SHA1 和六位数字生成验证码。当前周期剩余不超过三秒时，会等到下一个周期再填，免得刚填进去就过期。
+- 邮箱、密码输入页
+- 辅助邮箱验证（`challenge/kpe`）
+- Google Authenticator 选择页及 TOTP 输入框
+- “试试其他方式”一类验证方式切换
+- gds.google.com 辅助信息提示页
+- “以后再说”“跳过”“不用了”等弹窗
 
-所以这里能说的是“写了这些处理分支”，不能顺势写成“各种验证都能自动通过”。
+这个方法最多跑 16 轮，每轮看 URL 和 body 文本，再执行对应操作。reCAPTCHA 只写了点击复选框，图片题没有处理；遇到 `signin/rejected` 会直接返回。外层最后仍会打“登录完成”的日志，这里没有一个明确的登录成功结果传回来。
 
-## 0x07 本地代理桥接
+2FA 动态码生成是脚本自己实现的，没有依赖任何第三方库。`get_totp` 函数手写了标准的 TOTP 算法：base32 解码密钥 → 当前时间戳除以 30 得到计数器 → HMAC-SHA1 → 动态截断 → 取模得到 6 位数字。在填入前还会检查当前 TOTP 周期剩余时间，如果不超过 3 秒就等下一个周期，避免填进去的码过期。
 
-`LocalHttpProxyAuthBridge` 的作用很明确：Chrome 连到本机的代理端口，桥接器再向上游发 HTTP 请求或 CONNECT，并加上 Basic 认证头。作者用这层转发避开 Chrome 的代理认证弹窗。
+### Step 2: 第一组订阅配置
 
-本机端口是 Chrome 调试端口加 200，`9520` 只是默认情况下的值。
+`step2_layer1_12m` 先读取 Play 订阅页。整页出现 `2028`，或者命中写死的 `2027年10月`、`Oct 2027` 等日期文字，就跳过这一步。页面上出现“重新订阅”时，还会尝试把订阅恢复。它没有先把文字定位到某个套餐。
 
-这里要把“解析得了”和“连得上”分开。代理字符串解析器接受多种写法，包括 `socks5://`；但运行时只要有用户名，就进这套 HTTP 桥。桥里没有 SOCKS5 握手，也没有给 HTTPS 上游建立 TLS，不能据此说带认证的代理协议都支持。
+然后构建注入配置：
 
-出错后，它会尝试改用户名里的会话标识。只有用户名本来就含 `-session-`，这个替换才会真正发生；至于上游是否因此换了出口 IP，要看代理商的处理。
+```python
+cfg_l1 = {
+    "name": "Step2_Layer1_12M_YTFree_ZeroCost",
+    "full_items": [
+        [[PREFIX + "g1.2tb.ai.subs_variant", 21], None, None, None, 1, [TOK_PRO5TB_12M]],
+        [[PREFIX + "g1.youtube_premium_individual_add_on", 21], None, None, None, 1, [YT_FREE_TOK]],
+    ],
+    "ear8": [None, 5, None, None, None, [sub_id]] if sub_id else None,
+}
+```
 
-代理模板确实支持 `{country}`、`{COUNTRY}`、`{session}`、`{SESSION}`。另有一条 FloppyData 分支，会把足够长、又不含 `:` 和 `@` 的字符串当作 API Key 去请求代理资料。这个识别规则并没有检查它是不是纯字母数字。
+`full_items` 是商品列表，里面放了主套餐和 YouTube 附加项，每项最后带一个 Token 数组。这里保留了源码中的数组结构，`21` 的具体协议含义没有定义。
 
-桥接器还屏蔽了一些 Chrome 后台域名，其中包括 Safe Browsing。把这些请求一概叫作“无用噪音”不合适，列表里也有安全功能用到的地址。
+`ear8` 的第二项设成了 `5`，有订阅 ID 时一起传入。作者把它用于后续叠加，但源码没有提供这组内部字段的协议定义，也没有与 Android Billing 枚举的对应关系。
 
-## 0x08 账号导入没那么会猜
+### Step 3 & Step 4: 二层和三层叠加
 
-`import_accounts` 支持几种分隔符，但处理方式是按优先级选一种来拆，再把固定位置当作账号和密码。剩下的字段才拿去认辅助邮箱、代理、TOTP 密钥。
+`step3_layer2_6mss` 和 `step4_layer3_6m` 继续调用同一个订阅函数，换用另外两组 Token：
 
-密码本身带着选中的分隔符，就会被拆开；空字段会被过滤，位置也可能跟着移动。斜杠分隔分支避开了 `http://` 和 `https://`，却没有避开 `socks5://`。有些不带 scheme 的认证代理还会因为包含 `@`，先被当成辅助邮箱。
+- Step 3 用 `TOK_PRO5TB_6M_SS`
+- Step 4 先用 `TOK_PRO5TB_6M`，失败后换 `TOK_PRO5TB_6M_2`
 
-去重也有个明显问题。代码对整个邮箱做了 `lower().replace(".", "")`，不区分 Gmail 和其他邮箱，连域名里的点都删。Gmail 用户名里的点号规则，不能这样推广到所有地址。
+跳过条件也跟着换成了几组 2028 年的月份。这里没有根据开始日期计算十二个月、十八个月或两年，用的都是固定日期。三层分别停 45、45、40 秒再继续；第三层最后只检查整页有没有 `2028`，没有比较目标订阅前后的日期。
 
-自动编号用的是当前列表长度加一。删过中间的账号再导入，就有可能撞上已经存在的编号。
+### Step 5: 取消续订
 
-## 0x09 手动打开 Chrome 的那段 Windows 代码
+`step5_cancel_and_verify` 先看自动取消开关。开启后，如果整页没有“已取消”“重新订阅”“取消日期”，就点第一个可见的“管理”，再尝试取消、选择原因和确认。
 
-控制台上手动点“浏览器”时，`app.py` 会调用 `_launch_on_interactive_desktop`。Windows 分支用 `CreateProcessW`，把 `lpDesktop` 设为 `winsta0\default`，再用 `wShowWindow = 3` 请求最大化。
+这几处都是全页查找，没有按 Google AI 的那条订阅定位。最后也没有再检查它是否真的变成了已取消。
 
-这里指定的是桌面，没有切换用户会话。它不能把 Session 0 或另一远程会话里的进程，凭空送到当前用户眼前，把它叫作“桌面会话穿透”就说大了。
+截图之后，日期是从页面文字里读的，没有用 OCR：
 
-这段函数也只用于手动打开浏览器的入口。自动流水线启动 Chrome，走的还是 `subprocess.Popen`。
+```python
+exp_str = m_date.group(1) if m_date else "已激活 (详见截图)"
+```
 
-## 0x0A Chrome 的独立目录
+日期正则同时接受“取消日期”和“续订日期”。没找到匹配，就填上面这句“已激活”，随后把任务标成 `completed`。
 
-每个账号会按邮箱生成一个 `profiles/profile_...` 目录，里面保存 Chrome 的 Cookie、缓存和其他网站数据。这样至少不用把所有账号塞进同一个浏览器 profile，之前的登录状态也能留下来。
+## 0x05 eacquire 弹窗轮询
 
-但目录名只是把邮箱里的部分字符换成下划线，没有额外处理重名。独立 profile 也不会顺带把设备、付款资料和网络出口变成不同身份，更不等于下次一定不用登录。
+`_poll_eacquire_modal` 这一段很长，主要是在等结账弹窗，以及处理它加载过程里的各种中间页面。
 
-启动参数里有关闭首次运行提示、关闭同步、减少后台请求等选项，也设置了限制 WebRTC 非代理 UDP 的参数。这些是启动时传给 Chrome 的设置，文件里没有接着检查实际的 WebRTC 出口，不能直接写成“不会泄露真实 IP”。
+**先等弹窗。** 点击 Google One 的按钮后，脚本遍历 frame，查找 URL 里含 `eacquire` 的那一个。循环从 60 次起步，但点过某些过渡按钮还会补回次数，内部又有等待，所以总耗时并不是 60 秒。
 
-Chrome 启动后，Playwright 通过本机 CDP 端口接入已有浏览器，再注册前面那段 Hook。这条调用关系在代码里很清楚。
+**碰到绑卡页就填卡。** 这段按输入框位置填写，使用 `press_sequentially` 逐字输入。它会扫描 frame，找到至少四个可见 input 就开始处理，没先确认这些字段属于哪张表单。持卡人为空时才填，邮编也有输入框数量条件。保存后会等 `instrumentmanager` 消失，但等满次数仍没消失，也会设 `inline_card_saved = True`。
 
-## 0x0B 订阅 ID 是怎么找的
+邮编默认值是 `97201`。代码没有计算税额，前端把这里叫“免税绑卡”只是界面文案。
 
-`get_current_sub_id` 会打开几个 Google One 页面，从 HTML 里找符合特定形状的 24 位小写字符串。直接匹配不到时，再到 `AF_initDataCallback` 的数据块里找。
+**再处理过渡按钮。** “继续订阅”“换用此方案”“前往结账”这些文字都在匹配列表里。找到可见按钮后，程序直接点击。
 
-问题在于，它没有把找出的字符串和目标套餐逐一对应。部分分支还先用 `set` 去重，再取第一个，碰上多个候选时，取到哪个并不稳定。
+可见性判断不只看 `display`，还看了 `opacity`、`aria-hidden`、`pointerEvents`，并用 `elementFromPoint` 检查遮挡。
 
-Hook 另有一条后备路径：修改请求时，顺手保留原数组里的订阅值。它能用上这个值的前提，是页面真的发出了符合那种结构的请求。
+## 0x06 点击“订阅”之后
 
-## 0x0C “零消费保护”到底保护了什么
+`open_and_click_subscribe` 方法在弹窗加载完成后，先做一系列检查：
 
-所谓保护，最关键的判断就是在整段弹窗文字里找 `0.00`、`免费` 或 `Free`。
+1. 按银行卡尾号尝试切换付款方式；找不到、切换失败时仍可能继续。
+2. 在弹窗文字里找 `0.00`、`免费` 或 `Free`，没有就返回失败。这处判断后面单独看。
+3. 点击“订阅”。先用普通 click，再尝试强制点击，最后才走 JS 事件。
 
-这个问题甚至不需要跑账号就能看出来：`10.00` 也包含 `0.00`。一个订单里既有免费附加项又有付费主商品，同样可能出现“免费”两个字。程序没有从这里取出整张订单的应付金额和币种。
+点击之后进入最多 35 轮的等待循环，处理可能出现的各种验证：
 
-函数还留了一个预期关键词参数，但这三层调用都没传进去。切换银行卡也只是尝试：找不到目标尾号、切换出错后，流程仍可能往下走。
+- **CVC 安全码验证** — 有时 Google Play 会要求重新输入 CVC，脚本自动从配置中取出 CVC 填入
+- **Google 账号密码二次验证** — 结账时可能触发身份验证，脚本自动填入密码
+- **2FA TOTP 验证** — 同上，自动生成并填入动态码
+- **「验证是您本人」按钮** — 没有输入框的情况下，直接点击验证按钮
 
-至于执行前检查卡号长度、有效期和 CVC 是否填了，那是在检查表单有没有东西，和有没有收费没有关系。
+循环主要读取当前页面的 frame，也会对最后一个弹出的页面调用认证处理。成功词列表里除了“已订阅”，还有这些：
 
-工具确实想避开付费操作，但这几条文字判断撑不起“一分钱都不会扣”的承诺。尤其后面还有重新订阅、失败重试等会再次操作订阅的分支，不能把工具名称当账单。
+```python
+"Google Play 积分",
+"备用付款方式",
+"以后再说",
+"知道了",
+"Got it",
+```
 
-## 0x0D 控制台里存下了什么
+命中一个就可能返回 `True`。而错误词的检查排在后面，同一段文字同时命中两边时，会先走成功分支。弹窗关闭后的另一处判断还接受 `Welcome`。这些普通提示很容易被算成订阅成功。
 
-这份工具把卡信息、账号密码、辅助邮箱和 TOTP 密钥写进 `config.json`，都是明文。`/api/state` 又把这些字段发回页面。它监听的是本机地址，应用本身没有登录鉴权。
+## 0x07 代理隧道桥接
 
-日志也不是只记步骤。认证处理中，CVC 和生成的动态验证码会被直接写进去。这比终端里一排绿色对勾更值得留意。
+`LocalHttpProxyAuthBridge` 是一个本地 HTTP 代理桥。Chrome 连接本机端口，它再向上游转发请求或建立 CONNECT 隧道，并加上 `Proxy-Authorization: Basic ...`，省去 Chrome 里的代理认证弹窗。
 
-前端对日志做了 HTML 转义，账号表格却是另一套写法：邮箱、密码、编号等值被直接拼进 `innerHTML`，部分还进入内联点击事件。字段里有引号或标签时，就可能影响页面，甚至被当成代码。
+本机端口按调试端口加 200 算，默认情况下是 `9520`。这里实现的是 HTTP 代理转发，没有 SOCKS5 握手，也没有到 HTTPS 上游的 TLS 连接。解析器虽然接受 `socks5://`，带用户名时却同样送进这个 HTTP 桥。
 
-还有个小细节：“已打开”这个标签会先亮起来，打开浏览器的请求随后才发出去。
+这个桥接器还做了几件事：
 
-## 0x0E IP 检测查了什么
+1. 屏蔽 `_BLOCKED_PROXY_HOSTS` 中的域名，里面既有 Chrome 后台连接，也有 Safe Browsing 相关地址。
+2. 检查 CONNECT 返回状态，不是 200 时进入重试。
+3. 失败后尝试轮换用户名里的会话标识。用户名里要有 `-session-` 才会实际改值，换不换 IP 由上游决定。
 
-`verify_ip_environment` 会先访问 `ipinfo.io/json`，不行再试 `ipwho.is`，把查到的 IP、国家、城市和运营商显示出来。
+代理模板支持 `{country}` / `{COUNTRY}` / `{session}` / `{SESSION}` 四个占位符。另有一个 FloppyData 分支：proxy 字符串长度至少 24、又不含 `:` 和 `@` 时，就按 API Key 请求代理资料。
 
-函数名叫环境验证，实际并没有把查到的国家和 `target_region` 比较，也没有判断是不是住宅 IP。两个查询站都没拿到结果，它照样继续执行。
+## 0x08 账号导入与格式兼容
 
-## 0x0F 重试、停止，以及没被接住的情况
+`import_accounts` 支持 `----`、`—`、`|`、`/`、制表符、逗号和空格。它按优先级选一种分隔符，再按固定位置取邮箱、密码，其余字段才做识别。
 
-重试确实写了不少。`safe_goto` 总共尝试四次，第一、二层订阅失败后会再试一次，第三层还会换备用 Token。
+辅助字段大致按下面的顺序判断：
 
-但“没等到成功”和“上次什么都没发生”不是一回事。这里连“您的订单仍在处理中”都被归进错误词，外层拿到失败结果后，又可能重新操作。次数多，并不能说明它更可靠。
+- 排除带协议头的代理后，含 `@` 的当作辅助邮箱
+- URL 或匹配 IP、端口格式的当作代理
+- 符合 Base32 形状的当作 TOTP 密钥
 
-停止按钮设置的是标志，程序走到 `check_stop` 才会响应，已经开始的页面等待或网络动作不会立即取消。点某个单号的停止时，后端还会一起设置批量队列的停止标志。
+密码里带分隔符会被拆开，空字段被过滤后也会改变位置。斜杠分隔没有避开 `socks5://`；带 `@` 的部分代理写法还会先被认成邮箱。去重则把整个邮箱的点都删掉了，连域名也一起处理，并不限于 Gmail 用户名。自动编号取当前列表长度加一，删过账号后可能撞号。
 
-单号入口和批量队列之间也没有统一拦住同一账号重复启动，运行记录可能互相覆盖。启动前的清场更直接：查到调试端口有进程监听，就按 PID 强制结束，没有先确认是不是本工具留下的 Chrome。
+## 0x09 Windows 下手动打开浏览器
 
-## 0x10 读完之后
+`_launch_on_interactive_desktop` 用 `ctypes` 调用 `CreateProcessW`，把 `STARTUPINFOW.lpDesktop` 设为 `winsta0\default`。
 
-这套工具里，接管浏览器、改写请求和处理弹窗的路径都能顺着代码找到。让我存疑的主要是后半段：它怎样从几个页面词语，得出了“零成本两年完成”这个结论。
+这是手动“打开浏览器”按钮用的入口。它指定当前会话里的桌面，没有切换 Windows 用户会话。自动流水线仍用 `subprocess.Popen` 启动 Chrome。
 
-`10.00` 里的 `0.00`、“以后再说”这样的成功词、整页出现一次 `2028`，再加上读不到日期时补上的“已激活”，几处判断一连起来，最后那句完成提示就显得过于轻巧。想了解这份脚本，最该细看的恰恰是这些地方。
+`wShowWindow = 3` 对应 `SW_MAXIMIZE`，请求最大化窗口。
+
+## 0x0A Chrome 独立目录
+
+每个账号按邮箱生成 Chrome 用户数据目录，形式是 `profiles/profile_...`，特殊字符会替换成下划线。Cookie、localStorage 等浏览器数据因此分开保存，后续能继续使用已有 profile。
+
+目录名没有额外的重名检查，登录状态是否还有效也要看 Google。
+
+启动 Chrome 时带了一堆参数：
+
+```
+--no-first-run               # 跳过首次运行向导
+--no-default-browser-check    # 跳过默认浏览器检查
+--disable-popup-blocking      # 禁用弹窗拦截（结账弹窗需要）
+--disable-background-networking  # 减少后台网络请求
+--disable-sync                # 禁用 Chrome 同步
+--disable-component-update    # 禁用组件更新
+--disable-domain-reliability  # 禁用域名可靠性追踪
+--no-pings                    # 禁用 ping 追踪
+--webrtc-ip-handling-policy=disable_non_proxied_udp  # 限制非代理 UDP
+--enforce-webrtc-ip-permission-check               # 配套的 WebRTC 权限检查
+```
+
+末尾两项是 WebRTC 的代理相关设置，脚本没有接着检查它们在当前 Chrome 上的实际效果。
+
+然后通过 `--remote-debugging-port` 暴露 Chrome DevTools Protocol 端口，Playwright 通过 `connect_over_cdp` 连接上去操控。
+
+## 0x0B 订阅 ID 动态提取
+
+`get_current_sub_id` 从 Google One 页面的 HTML 里找 24 位小写字符串，填进订阅参数。
+
+提取逻辑有三层 fallback：
+
+1. 正则匹配 `[a-z]{24}\.AO-` 格式
+2. 正则匹配 `[a-z]{24}\.AO-J1O` 格式
+3. 从 `AF_initDataCallback` 的 script block 中提取含 `subscriptions.red` 或 `g1.` 的数据块里的 24 位字符串
+
+找到多个候选时，部分分支先转成 `set`，再拿第一个，没有按套餐核对。找不到就返回 `None`，之后依靠 Hook 在符合结构的请求中保留原订阅值。
+
+## 0x0C 零消费检查
+
+这里最需要仔细看的就是这个条件：
+
+```python
+if "ultra" not in step_tag.lower() and "0.00" not in clean_txt and "免费" not in clean_txt and "Free" not in clean_txt:
+    self.last_subscribe_error = f"零消费保护拦截：弹窗未显示 0.00 免费试用 ({clean_txt[:180]})"
+    return False
+```
+
+`clean_txt` 是整段弹窗文字。`10.00` 里也有 `0.00`；订单中某个附加项写着免费，也能让这条判断放行。这里并没读取应付总额或币种。函数另有预期关键词参数，不过三层订阅都没传。前面检查卡号、有效期和 CVC 是否填写，也只是在检查表单完整性。
+
+## 0x0D 配置文件和日志
+
+`config.json` 直接存卡信息、账号密码、辅助邮箱和 TOTP 密钥，`/api/state` 又把这些字段发回控制台。程序只监听本机，但没有自己的登录鉴权。
+
+认证过程中还有几条日志直接写出了 CVC 和动态验证码。
+
+前端的日志显示做了 HTML 转义，账号表格却直接把邮箱、密码、编号等拼进 `innerHTML`，部分字段还进入内联 `onclick`。引号可能把按钮的 `onclick` 拼坏，HTML 标签也会被浏览器解析。
+
+## 0x0E IP 环境检测
+
+`verify_ip_environment` 先访问 `ipinfo.io/json`，失败再试 `ipwho.is`，把 IP、国家、城市和运营商显示出来。
+
+查询出错时，有代理桥就尝试轮换会话。两个站都查不到结果，也会继续执行。
+
+这里没有将查询到的国家和 `target_region` 对比，也没有判断出口是不是住宅 IP。日志中的“检测通过”是在取到查询结果后写的。
+
+## 0x0F 重试和停止
+
+重试分散在几个地方：
+
+- `safe_goto` 总共尝试四次；还有下一次尝试且使用了代理桥时，会轮换会话
+- 第一、二层订阅失败后，等三秒再试一次
+- 第三层换用备用 Token
+- 登录流程最多跑三轮
+
+需要留意的是，“订单仍在处理中”也在错误词列表里，外层收到失败后仍可能再次操作订阅。前面的步骤如果抛错，则直接退出，不会补做最后的取消续订。停止按钮也只是设置标志，要等执行器下次检查才能停；点单号停止还会一起停掉后续批量队列。
+
+单号与批量入口之间没有统一排除重复任务，运行记录可能互相覆盖。启动前还会按调试端口找 PID 并强制结束，没有核对进程归属。
 
 ---
 
-原版工具开源仓库：[worldonlyu/Google_AI_Pro_2Year_ZeroCost_Auto](https://github.com/worldonlyu/Google_AI_Pro_2Year_ZeroCost_Auto)
+原版工具开源仓库：[https://github.com/worldonlyu/Google_AI_Pro_2Year_ZeroCost_Auto](https://github.com/worldonlyu/Google_AI_Pro_2Year_ZeroCost_Auto)

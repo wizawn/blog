@@ -11,7 +11,6 @@ description: "MOSS-TTSD 是效果顶尖的开源语音合成模型，但完整�
 >  联系方式 & 交流群
 > 
 > **QQ**: 46333839  
-{{< figure src="/images/wechat-qr.jpg" alt="微信二维码" width="200" >}}
 {{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}
 联系方式 & 交流群
 

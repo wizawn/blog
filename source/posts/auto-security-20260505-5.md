@@ -5,7 +5,7 @@ draft: false
 weight: 100
 categories: ["Security", "AI Agent", "红队视角"]
 tags: ["security", "AI Agent", "红队", "深度分析", "Krebs on Security"]
-image: "/static/security-cover.jpg"
+image: "/security-cover.jpg"
 description: "AI Agent + 红队 Agent 联合创作：‘Scattered Spider’ Member ‘Tylerb’ Pleads Guilty..."
 geo_target: "cn"
 ---

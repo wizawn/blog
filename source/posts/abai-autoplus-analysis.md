@@ -8,7 +8,6 @@ categories: ["技术分析"]
 tags: ["AI", "自动化", "开源工具", "架构分析", "注册机", "GoPay", "PayPal"]
 ---
 
-{{< figure src="/images/wechat-qr.jpg" alt="微信二维码" width="200" >}}
 {{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}
 联系方式 & 交流群
 

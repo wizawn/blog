@@ -8,7 +8,6 @@ tags: ["Claude", "订阅漏洞", "API 劫持", "Tampermonkey", "SEPA", "支付�
 description: "深入拆解传说中的「焚决」——通过 Tampermonkey 油猴脚本劫持 checkout_capabilities API 响应，前端注入 cassia 支付流，配合随机德国 IBAN 实现 Claude Max/Pro 零元订阅。完整技术分析：Fetch/XHR 双通道拦截、SEPA CORE 直接借记清算机制、MOD 97-10 校验算法局限性、客户端信任边界漏洞的通用攻击框架与防御方案。"
 ---
 
-{{< figure src="/images/wechat-qr.jpg" alt="微信二维码" width="200" >}}
 {{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}
 联系方式 & 交流群
 

@@ -10,7 +10,6 @@ description: "Codex 卡住或提交消息失败时，从审批、终端、会话
 image: "/blog-cover-default.jpg"
 ---
 
-{{< figure src="/images/wechat-qr.jpg" alt="微信二维码" width="200" >}}
 {{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}
 联系方式 & 交流群
 

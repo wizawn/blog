@@ -66,7 +66,6 @@ weight: -997
 有疑问或发现冒充行为的话，可以通过以下方式联系我：
 
 - **QQ 群**: 754842541
-{{< figure src="/images/wechat-qr.jpg" alt="微信二维码" width="200" >}}
 {{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}
 **联系方式 & 交流群**
 

@@ -4,7 +4,7 @@ date: 2026-03-13
 draft: false
 categories: ["币安广场", "行情分析", "ETF"]
 tags: ["ETH", "以太坊", "ETF", "行情分析", "投资策略"]
-image: "/static/eth-etf-cover.jpg"
+image: "/blog-cover-default.jpg"
 description: "以太坊 ETF 传闻再起，SEC 即将做出决定。本文深度分析 ETF 通过概率、价格影响，并给出具体买入点和操作策略。"
 ---
 

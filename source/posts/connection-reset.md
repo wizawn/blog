@@ -14,7 +14,6 @@ description: "Connection Reset - 当信任遭遇背叛 - 谨以此文献给所�
 
 
 
-{{< figure src="/images/wechat-qr.jpg" alt="微信二维码" width="200" >}}
 {{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}
 **联系方式 & 交流群**
 

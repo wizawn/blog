@@ -5,7 +5,7 @@ draft: false
 weight: 1
 categories: ["OpenClaw", "部署教程"]
 tags: ["OpenClaw", "Windows", "PowerShell", "部署", "AI 助手", "保姆级教程"]
-image: "/static/tech-cover-1.jpg"
+image: "/tech-cover-1.jpg"
 description: "OpenClaw Windows 部署终极指南 - 含 PowerShell 一键安装、Node.js 22 配置、Git 环境、初始化向导、故障排查，基于 Windows 11 实测验证"
 ---
 
@@ -14,7 +14,6 @@ description: "OpenClaw Windows 部署终极指南 - 含 PowerShell 一键安装�
 
 
 
-{{< figure src="/images/wechat-qr.jpg" alt="微信二维码" width="200" >}}
 {{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}
 **联系方式 & 交流群**
 

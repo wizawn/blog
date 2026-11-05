@@ -5,7 +5,7 @@ draft: false
 weight: 1
 categories: ["OpenClaw"]
 tags: ["OpenClaw", "部署", "教程"]
-image: "/static/tech-cover-1.jpg"
+image: "/tech-cover-1.jpg"
 description: "OpenClaw 部署教程 - macOS 篇（2026 最新版） - 详细部署教程"
 ---
 
@@ -14,7 +14,6 @@ description: "OpenClaw 部署教程 - macOS 篇（2026 最新版） - 详细部�
 
 
 
-{{< figure src="/images/wechat-qr.jpg" alt="微信二维码" width="200" >}}
 {{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}
 **联系方式 & 交流群**
 

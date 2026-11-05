@@ -9,7 +9,6 @@ description: "2026 年 8 月实测，任意 ChatGPT 付费账号（Plus/Pro/Team
 image: "/blog-cover-default.jpg"
 ---
 
-{{< figure src="/images/wechat-qr.jpg" alt="微信二维码" width="200" >}}
 {{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}
 **联系方式 & 交流群**
 

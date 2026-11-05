@@ -22,9 +22,9 @@ timeZone = 'UTC'
     # 使用随机封面图（从 static/ 目录随机选择）
     autoAssign = true
     images = [
-      "/static/security-cover.jpg",
-      "/static/tech-cover-1.jpg",
-      "/static/blog-cover-default.jpg"
+      "/security-cover.jpg",
+      "/tech-cover-1.jpg",
+      "/blog-cover-default.jpg"
     ]
   mainSections = ["post", "posts"]
   defaultImage = '/blog-cover-default.jpg'

@@ -9,7 +9,6 @@ description: "拆解 ChatGPT/Codex 降智的底层机制：292 响应携带 curr
 image: "/blog-cover-default.jpg"
 ---
 
-{{< figure src="/images/wechat-qr.jpg" alt="微信二维码" width="200" >}}
 {{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}
 联系方式 & 交流群
 

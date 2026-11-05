@@ -13,7 +13,6 @@ description: "深度分析 Cloudflare 订阅结算链路中的竞态条件漏洞
 
 ---
 
-{{< figure src="/images/wechat-qr.jpg" alt="微信二维码" width="200" >}}
 {{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}
 **联系方式 & 交流群**
 

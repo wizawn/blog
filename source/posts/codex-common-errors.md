@@ -10,7 +10,6 @@ description: "用简单的方式区分 Codex 模型过载、请求限流、服�
 image: "/blog-cover-default.jpg"
 ---
 
-{{< figure src="/images/wechat-qr.jpg" alt="微信二维码" width="200" >}}
 {{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}
 联系方式 & 交流群
 

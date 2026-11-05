@@ -9,7 +9,6 @@ description: "OpenAI 关闭了 Pro 20x 新订阅入口，但 App Store 的 IAP �
 image: "/blog-cover-default.jpg"
 ---
 
-{{< figure src="/images/wechat-qr.jpg" alt="微信二维码" width="200" >}}
 {{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}
 **联系方式 & 交流群**
 

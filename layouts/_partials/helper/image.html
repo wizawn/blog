@@ -1,0 +1,79 @@
+/// Params:
+///     Resources: Where to search for images
+///     Image: Image URL
+///     Context: page context (used to access the configuration)
+
+/// Returns:
+///     Resource: Hugo image resource object
+///     Permalink: Image URL
+///     Height: Image height
+///     Width: Image width
+
+{{ $result := dict }}
+
+{{ if .Image }}
+    {{ $url := urls.Parse .Image }}
+    {{ $permalink := .Image }}
+    {{ $resource := dict
+        "Resource" nil
+        "Permalink" $permalink
+        "Height" nil
+        "Width" nil
+    }}
+    {{ $local := true }}
+
+    {{ if not (in (slice "https" "http") $url.Scheme) }}
+        {{/* Local image */}}
+        {{ $resource = .Resources.Get (printf "%s" (.Image | safeURL)) }}
+    {{ else }}
+        {{/* Remote image */}}
+        {{ with try (resources.GetRemote $url (dict "timeout" .Context.Site.Params.imageProcessing.external.timeout)) }}
+            {{ with .Err }}
+                {{ warnf "Failed to fetch remote resource %q: %s" $url . }}
+            {{ else with .Value }}
+                {{ $resource = . }}
+                {{ $local = false }}
+            {{ else }}
+                {{ warnf "Unable to get remote resource %q" $url }}
+            {{ end }}
+        {{ end }}   
+    {{ end }}
+
+    {{ if $resource }}
+        {{ if and .Context.Site.Params.imageProcessing.autoOrient (reflect.IsImageResourceProcessable $resource) }}
+            {{ $filter := images.AutoOrient }}
+            {{ $resource = $resource | images.Filter $filter }}
+        {{ end }}
+
+        {{ if $local }}
+            {{ $permalink = $resource.RelPermalink }}
+        {{ end }}
+
+        {{ if reflect.IsImageResourceWithMeta $resource }}
+            {{ $result = dict
+                "Resource" $resource
+                "Permalink" $permalink
+                "Height" $resource.Height
+                "Width" $resource.Width
+            }}
+        {{ else }}
+            {{ $result = dict
+                "Resource" $resource
+                "Permalink" $permalink
+                "Height" nil
+                "Width" nil
+            }}
+        {{ end }}
+    {{ end }}
+    {{/* static 目录中的图片不属于页面资源，保留它们的公开路径。 */}}
+    {{ $staticPath := printf "static/%s" (strings.TrimPrefix "/" $url.Path) }}
+    {{ if and (not $result) $local (os.FileExists $staticPath) }}
+        {{ $result = dict "Resource" nil "Permalink" (.Image | relURL) "Height" nil "Width" nil }}
+        {{ if in (slice ".jpg" ".jpeg" ".png" ".gif" ".webp") (lower (path.Ext $url.Path)) }}
+            {{ $dimensions := images.Config $staticPath }}
+            {{ $result = merge $result (dict "Height" $dimensions.Height "Width" $dimensions.Width) }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+
+{{ return $result }}

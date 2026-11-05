@@ -9,7 +9,6 @@ description: "深度拆解 ChatGPT Pro 20X 的 ₱982 漏洞：从最初的 TOCT
 image: "/blog-cover-default.jpg"
 ---
 
-{{< figure src="/images/wechat-qr.jpg" alt="微信二维码" width="200" >}}
 {{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}
 联系方式 & 交流群
 

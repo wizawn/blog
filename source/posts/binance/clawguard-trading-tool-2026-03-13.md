@@ -4,7 +4,7 @@ date: 2026-03-13
 draft: false
 categories: ["币安广场", "工具分享", "实战技巧"]
 tags: ["交易工具", "监控系统", "胜率提升", "开源项目", "实战分享"]
-image: "/static/trading-tool-cover.jpg"
+image: "/blog-cover-default.jpg"
 description: "公开我的交易监控系统 ClawGuard，包含实时价格推送、技术面分析、清算地图等功能。附实盘数据证明胜率提升 40%。"
 ---
 

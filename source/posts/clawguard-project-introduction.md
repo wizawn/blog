@@ -5,7 +5,7 @@ draft: false
 weight: 1
 categories: ["项目介绍"]
 tags: ["ClawGuard", "AI", "加密货币", "实时监控", "价格预警", "技术分析"]
-image: "/static/security-cover.jpg"
+image: "/security-cover.jpg"
 description: "ClawGuard 是一个基于 AI 的加密货币实时监控系统，提供 60 秒级价格监控、技术指标分析、多交易所数据聚合和实时预警推送"
 ---
 
@@ -14,7 +14,6 @@ description: "ClawGuard 是一个基于 AI 的加密货币实时监控系统，�
 
 
 
-{{< figure src="/images/wechat-qr.jpg" alt="微信二维码" width="200" >}}
 {{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}
 联系方式 & 交流群
 

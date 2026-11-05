@@ -13,7 +13,6 @@ weight: 1
 
 
 
-{{< figure src="/images/wechat-qr.jpg" alt="微信二维码" width="200" >}}
 {{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}
 联系方式 & 交流群
 
@@ -50,7 +49,6 @@ weight: 1
 - **许可证**：MIT（免费开源）
 - **当前版本**：v1.1.1
 
-{{< figure src="/images/wechat-qr.jpg" alt="微信二维码" width="200" >}}
 {{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}
 **联系方式**：
 - **微信**：`GOV-HACK`（添加请备注"兑换码购买"）

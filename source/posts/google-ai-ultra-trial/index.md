@@ -150,3 +150,7 @@ sqlite3 /tmp/plans.db ".dump" | strings | grep "g1\."
 这次用的脚本放在这里：[下载 Google Trial Tool（ZIP）](google-trial-tool.zip)。
 
 包里有 `auto-trial.sh`、`frida-auto-trial.js` 和 README，用法见 README。
+
+### 网页端参考脚本
+
+另附一份[网页端参考脚本（google-one-console.js）](google-one-console.js)，供对照查看。

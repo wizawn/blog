@@ -143,4 +143,10 @@ sqlite3 /tmp/plans.db ".dump" | strings | grep "g1\."
 
 ---
 
-*文里略去了脚本中涉及的具体账号、卡信息以及完整代码和 token。*
+*文里略去了具体账号、卡信息和 token。*
+
+## 0x08 工具下载
+
+这次用的脚本放在这里：[下载 Google Trial Tool（ZIP）](google-trial-tool.zip)。
+
+包里有 `auto-trial.sh`、`frida-auto-trial.js` 和 README，用法见 README。

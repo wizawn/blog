@@ -1,5 +1,5 @@
 ---
-title: "用 Frida 借 Google One 进程调 BillingClient，开出 AI Ultra 的 $0 试用"
+title: "用 Frida 借 Google One 进程调 BillingClient，开出 Google Ultra 的 $0 试用"
 date: 2026-11-17
 description: "在 MuMu 模拟器里用 Frida 挂进 Google One 进程，动态加载 BillingClient 查出 Ultra 5x（12 个月）和 20x（1 个月）的隐藏免费试用，顺便记一下找商品 ID 和调脚本时踩的坑。"
 categories: ["安全研究", "技术分析"]

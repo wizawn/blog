@@ -1,0 +1,12 @@
+{{- if and (in (slice "post" "posts") .Section) (not (strings.Contains .RawContent "/images/qq-group-qr.jpg")) -}}
+<div class="article-community">
+    <figure><img src="{{ "/images/qq-group-qr.jpg" | relURL }}" alt="QQ群二维码" width="200"></figure>
+    <p>联系方式 &amp; 交流群</p>
+    <ul>
+        <li><strong>QQ群</strong>：797481450</li>
+        <li><strong>QQ</strong>：46333839</li>
+        <li><strong>微信</strong>：GOV-HACK</li>
+    </ul>
+    <hr>
+</div>
+{{- end -}}

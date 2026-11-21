@@ -1,19 +1,7 @@
 <section class="article-content">
   {{- $content := .Content -}}
   {{- if eq .Section "posts" -}}
-    {{- $inlineAd := partial "ads/in-article.html" . -}}
-    {{- $parts := split $content "<h2" -}}
-    {{- if ge (len $parts) 3 -}}
-      {{- index $parts 0 | safeHTML -}}
-      {{ printf "<h2%s" (index $parts 1) | safeHTML }}
-      {{- $inlineAd -}}
-      {{- range after 2 $parts -}}
-        {{ printf "<h2%s" . | safeHTML }}
-      {{- end -}}
-    {{- else -}}
-      {{- $content -}}
-    {{- end -}}
-
+    {{- $content -}}
     {{- partial "ads/post-footer-matrix.html" . -}}
   {{- else -}}
     {{- $content -}}

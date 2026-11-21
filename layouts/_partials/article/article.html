@@ -17,6 +17,10 @@
     </aside>
     {{ end }}
 
+    {{ if eq .Section "posts" }}
+        {{ partial "ads/in-article.html" . }}
+    {{ end }}
+
     {{ partial "article/components/content" . }}
 
 

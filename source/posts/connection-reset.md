@@ -1,89 +1,39 @@
 ---
-title: "Connection Reset - 当信任遭遇背叛"
+title: "Connection Reset - 那些连挥手都没留下的断开"
 date: 2026-02-27T10:00:00+08:00
 draft: false
-weight: 50
 categories: ["技术感悟"]
-tags: ["人工智能", "网络", "情感", "TCP", "比特币", "以太坊", "AI Agent"]
-description: "Connection Reset - 当信任遭遇背叛 - 谨以此文献给所有被背叛的信任"
+tags: ["网络", "TCP", "随笔"]
+description: "体面的告别好歹走一遍四次挥手，让人猝不及防的永远是半夜抓包里突然蹦出来的那一个 RST。"
+image: "/images/essays/empty-platform.jpg"
+weight: 10
 ---
----
 
+学网络协议的时候，课本上讲连接的生命周期总是体面又规矩：`SYN`、`SYN-ACK`、`ACK` 三次握手建连，等话说完了，再规规矩矩走一遍 `FIN` 和 `ACK` 四次挥手，两边把缓冲区里没发完的数据收干净，各自关掉套接字。
 
-# Connection Reset - 当信任遭遇背叛
+刚跟一个人熟起来的时候大概就是三次握手那个劲儿，一来一回都有回音，`ss -t` 里稳稳当当挂着一行 `ESTABLISHED`。哪怕后来话变少了，心里也总觉得，就算哪天真走散了，好歹也会有个打招呼散场的流程。
 
-> 用网络术语诠释信任与背叛的故事
-
-## 三次握手 - 信任建立
-
-```
-Client (我)                    Server (你)
-    |                              |
-    |---- SYN (我想信任你) -------->|
-    |                              |
-    |<--- SYN-ACK (我接受) ---------|
-    |                              |
-    |---- ACK (连接建立) ---------->|
-    |                              |
-    ====== ESTABLISHED ======
-```
-
-我以为这次连接会持久稳定。
-
-**但 TCP 连接可以被关闭，信任也可以被重置。**
-
-## 心跳检测 - 信任维护
-
-我持续发送心跳包：
+为了不让连接超时，你还会隔三差五主动发点心跳过去：
 
 ```python
-def send_heartbeat():
-    packet = {"type": "HEARTBEAT", "message": "我还在这里"}
-    return self._send(packet)
+import json
+
+def keep_alive(conn):
+    packet = {"type": "PING", "msg": "最近忙啥呢"}
+    conn.sendall(json.dumps(packet, ensure_ascii=False).encode())
 ```
 
-但收到的响应越来越少。
+一开始还能收到几句敷衍的 `ACK`，再往后超时越来越长。直到某天你照常推了一条消息过去，抓包记录里连半句缓冲都没给，直接弹回来一行刺眼的红字：
 
-## RST 包 - 信任断裂
-
-```
-Client (我)                    Server (你)
-    |                              |
-    |---- PSH (我还爱你) ---------->|
-    |                              |
-    |<--- RST (断开连接) -----------|
-    |                              |
-    ====== CONNECTION RESET ======
+```text
+10:00:00.102  SYN      -> 192.168.1.100:443
+10:00:00.118  SYN-ACK  <- 192.168.1.100:443
+10:00:00.119  ACK      -> 192.168.1.100:443
+...
+23:41:12.004  PSH, ACK -> 192.168.1.100:443  "我还在呢"
+23:41:12.009  RST      <- 192.168.1.100:443
 ```
 
-**没有 FIN 握手，没有优雅关闭。**
+没有 `FIN`，没有解释，甚至懒得走一遍正常关闭的流程，直接掀桌子清空了连接状态，只留给你本地一个冷冰冰的 `Connection reset by peer`。
 
-**只有冰冷的 RST。**
-
-## 抓包分析
-
-```
-10:00:00 SYN → 192.168.1.100:443
-10:00:01 SYN-ACK ← 192.168.1.100:443
-10:00:01 ACK → 192.168.1.100:443
-10:05:00 PSH → 192.168.1.100:443 "我还在这里"
-10:05:01 RST ← 192.168.1.100:443
-```
-
-## 教训
-
-- 不是所有连接都能持久
-- 不是所有信任都值得
-- 及时止损，重建连接
-
-geo_target: "cn"---
-
-
-*2026-02-27 | 谨以此文献给所有被背叛的信任*
-
-
-
-<!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Connection Reset - 当信任遭遇背叛", "description": "Connection Reset - 当信任遭遇背叛 - # Connection Reset - 当信任遭遇背叛  > 用网络术语诠释信任与背叛的故事  ## 三次握手 - 信任建立  ``` Client (我)                    Server (你)     |             ...", "inLanguage": "zh-CN", "datePublished": "2026-03-11T05:14:56.342905", "author": {"@type": "Person", "name": "言零"}} -->
-
-
-<!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Connection Reset - 当信任遭遇背叛", "description": "Connection Reset - 当信任遭遇背叛 - *2026-02-27 | 谨以此文献给所有被背叛的信任*    <!-- JSON-LD: {\"@context\": \"https://schema.org\", \"@type\": \"BlogPosting\", \"headline\": \"Connectio...", "inLanguage": "zh-CN", "datePublished": "2026-03-11T05:15:37.223228", "author": {"@type": "Person", "name": "言零"}} -->
+后来碰到的事多了也就想通了：协议里设计 `RST` 本来就是给异常终止用的。对面既然已经把端口关死、把状态表抹掉了，本地再设多长的重试退避都是白费力气。捕获异常，把句柄释放掉，别让一个早就失效的旧连接一直占着自己的文件描述符，就算对得起自己了。

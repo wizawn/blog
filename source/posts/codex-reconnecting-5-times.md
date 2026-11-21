@@ -3,66 +3,58 @@ title: "Codex 提示 Reconnecting 5 次，怎么处理？"
 slug: "codex-reconnecting-5-times"
 date: 2026-09-18T12:20:00+08:00
 draft: false
-weight: 50
 categories: ["Codex常见问题"]
 tags: ["Codex", "Reconnecting", "网络排查", "Responses API"]
-description: "Codex 反复 Reconnecting，重试五次后才响应时，按网络、客户端和传输方式逐步排查。"
+description: "看到 Codex 连跳 5 次 Reconnecting 先别慌着换号，那是默认的流式重连上限，按网络、模型和协议顺序排一遍很快就能定位。"
+weight: 10
 ---
 
-{{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}
-联系方式 & 交流群
+群里隔三差五就有人截图问：Codex 界面上连着蹦了 5 次 `Reconnecting`，最后直接断掉，是不是账号被风控封了？
 
-- **QQ**: 46333839
-- **微信**: GOV-HACK
+其实跟封号没半毛钱关系。Codex 在流式接收响应时一旦中途断流就会尝试重连，官方配置里控制流式重连次数的 `stream_max_retries` 默认值是 `5`（普通 HTTP 请求重试 `request_max_retries` 默认是 `4`）。跳满 5 次只说明这一轮重连配额用光了，真正说明病因的是重连耗尽后吐出来的最后那一行具体报错和 HTTP 状态码。
 
----
+## 0x00 先看症状对号入座，别连着狂点
 
-## 先给结论：5 次是重试上限，不是封号提示
+撞上断流先停手别每秒狂按发送，不然本来只是瞬时抖动，硬生生被你点成真限流。对照现象大概分四种情况处理：
 
-`Reconnecting` 表示流式连接中断，Codex 正在重新建立连接。官方配置参考中，`stream_max_retries` 的默认值是 5，所以“重试 5 次”只说明这一次请求的连接重试用完了，不能据此判断账号被封、订阅失效或额度用完。真正要看的是最后一条错误、HTTP 状态码和是否只影响某一个模型。
+如果半天只偶发这么一回，多半是 Wi-Fi 抖了、代理节点切线或者上游瞬时抽风，如果响应头里带了 `Retry-After` 就按秒数等够，没带就缓几十秒重发一次。如果是死磕某一个模型必断、换个别的模型立马顺畅，那是目标模型算力池拥堵，先换模型干活并看一眼官方状态页，千万别手欠去改认证文件。
 
-## 先判断是哪一类
+要是所有模型、开新会话全断，就得做一次干净的网络对照：拿手机开个热点连上去发一句短话试试，同时看一眼本机系统时间准不准、DNS 和 IPv6 有没有抽风、公司内网防火墙有没有拦 HTTPS 或 WebSocket。手机热点秒通而家里宽带死活不通，锅多半在本地路由、运营商 DNS 或代理分流规则上；跑官方登录的顺手敲一下 `codex login status` 看凭据还在不在，跑中转的确认终端里对应的 API Key 环境变量没丢。
 
-- **只有偶尔一次**：更像 Wi-Fi、代理节点、DNS 或服务端瞬时抖动。等几十秒后重新发一次即可。
-- **同一个模型总失败，换模型正常**：优先按模型容量或临时过载处理，先换模型或查看状态页。
-- **所有模型、所有会话都失败**：再检查登录状态、代理出口、时间/证书、工作区权限和客户端版本。
-- **一输入就重连，换网络也一样**：可能是配置中的 `base_url`、协议或认证方式不匹配，不要盲目增加重试次数。
+最后一种是一敲回车秒进重连，怎么换网都没用，这基本都是自己改过的 `config.toml` 出了岔子：`base_url` 拼错了、服务商根本不支持 Responses API，或者中间网关拦了 WebSocket。
 
-## 按顺序排查，避免反复点击
+## 0x01 兼容网关拦 WebSocket 时，切回 HTTP/SSE
 
-1. **停止连点，等待一次完整重试**。如果错误中有 `Retry-After`，至少等够该时间；没有时也不要每秒重复发送，这会把临时限流变成更严重的限流。
-2. **做一次网络对照**。暂时关闭不必要的代理规则，或用手机热点测试；同时检查 DNS、系统时间、IPv6 和公司防火墙是否拦截 HTTPS/WebSocket。热点正常而家中网络失败，通常不是账号问题。
-3. **更新并完全重启 Codex**。保存当前输入，升级到较新的稳定版本，退出应用（不是只关窗口）后重新打开，再用一句很短的请求测试。
-4. **检查登录和模型范围**。官方登录可以运行 `codex login status`；API/中转则检查对应环境变量是否仍存在、模型名是否由服务商支持。只换模型就恢复时，不要先改认证文件。
-5. **只有确认是兼容端点的传输问题时，才改配置**。先备份配置，改一项，重启后测试；不要同时改代理、模型和登录方式，否则无法知道是哪一步起作用。
+部分反代、CDN 或兼容网关已经支持了 OpenAI 的 `/responses` 接口，但没配好 WebSocket 升级头（`Upgrade: websocket`），导致客户端一建 WebSocket 流就断。确认是这个毛病时，先备份好原配置，在提供商段里加一行 `supports_websockets = false` 强制退回走 HTTP SSE 流。
 
-## 需要 HTTP/SSE 时的配置示例
-
-下面只适用于**明确支持 OpenAI Responses API 的兼容端点**。它把 WebSocket 关闭，改为 HTTP/SSE；不是所有 Codex 版本或内置提供商都支持同样的覆盖方式。
+这里一定要分清你接的是第三方中转还是公司内网底下的官方认证端点，两者的鉴权写法绝对不能混：
 
 ```toml
-model_provider = "openai_http"
+# 情况 A：接第三方兼容服务商（用 env_key 传中转 Key，严禁开启 requires_openai_auth！）
+model_provider = "custom_http"
 
-[model_providers.openai_http]
-name = "OpenAI HTTP"
+[model_providers.custom_http]
+name = "Custom Responses HTTP"
 base_url = "https://你的兼容服务地址/v1"
+env_key = "CUSTOM_API_KEY"
 wire_api = "responses"
-requires_openai_auth = true
 supports_websockets = false
 ```
 
-这相当于要求该提供商使用 HTTP/SSE。注意三点：
+```toml
+# 情况 B：仅限走官方自有端点但公司防火墙拦了 WebSocket（切勿填任何第三方地址！）
+model_provider = "openai_http"
 
-1. `requires_openai_auth = true` **只**适用于端点明确支持 OpenAI/ChatGPT 登录的情况；普通中转不要填 OAuth 登录信息。
-2. 第三方中转应按其文档使用 `env_key` 或环境变量密钥，不能把 API Key 直接写进公开仓库或截图。
-3. 如果服务商只支持 Chat Completions、不支持 Responses API，`wire_api = "responses"` 也会失败；先看服务商文档，不要靠猜。
+[model_providers.openai_http]
+name = "OpenAI Responses HTTP"
+base_url = "https://chatgpt.com/backend-api/codex"
+requires_openai_auth = true
+wire_api = "responses"
+supports_websockets = false
+```
 
-改完后完全退出并重新打开 Codex。仍失败就删除新增配置段、恢复备份，再回到原来的配置验证。不要把 `stream_max_retries` 无限制调大：连接本身不通时，只会让你等更久，也可能造成重复请求。
+面对任何第三方中转地址千万别开 `requires_openai_auth = true`，否则 Codex 会把你本机的官方 ChatGPT OAuth 令牌直接发给第三方服务器。另外如果中转商压根没实现 Responses API、只支持旧版 Chat Completions，单关 WebSocket 也救不活，得先翻服务商文档确认协议支持情况。
 
-## 仍然不行：这样收集信息最有用
+每次只改一项配置，别一着急把重装客户端、清凭据、换中转全搅在一块儿干，更别去删整个 `~/.codex` 目录；改完把 Codex 彻底退出重开（光关窗口没退出后台进程是不生效的），测完没改善就把备份文件覆盖回去。也别去把 `stream_max_retries` 调成几十上百，底层链路不通的时候硬拉高重试上限，除了干等更久和多发一堆重复请求之外没有任何意义。
 
-恢复备份后，记录以下内容再提交到[OpenAI 帮助中心](https://help.openai.com/)：客户端版本、操作系统、所用模型、发生时间和时区、是官方登录还是 API/中转、最后一条完整报错、请求 ID（如果有）、换网络或换模型后的结果。可以截取错误文字，但要遮住邮箱、代码、API Key、OAuth/access token、`auth.json` 和中转密钥。
-
-不要先删除整个 `~/.codex` 目录，也不要把“重装、清空凭据、换多个中转”同时做掉；这些操作可能丢失本地配置和排查线索。
-
-参考：[Codex 配置参考](https://developers.openai.com/zh-Hans/docs/config-file/config-reference)｜[OpenAI 错误代码](https://developers.openai.com/zh-Hans/api/docs/guides/error-codes)。
+要是更新到最新稳定版、切手机热点、恢复默认配置全试过了还是断，把客户端版本、操作系统、模型名、当前走的是官方登录还是 API/中转、带时区的发生时间、请求 ID、换网络或换模型后的结果以及最后一条完整报错（隐去邮箱、代码、`auth.json` 和各类密钥）记下来发给 [OpenAI 帮助中心](https://help.openai.com/) 就行。相关字段定义见 [Codex 配置参考](https://developers.openai.com/codex/config-reference) 与 [OpenAI 错误代码说明](https://developers.openai.com/zh-Hans/api/docs/guides/error-codes)。

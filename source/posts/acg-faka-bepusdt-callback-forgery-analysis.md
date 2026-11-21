@@ -1,432 +1,120 @@
 ---
-title: "虚拟发卡系统回调伪造漏洞全链路拆解 — 从备份文件泄露到批量盗取卡密"
-description: "深度分析一起针对 ACG-Faka + BEpusdt 的真实攻击事件：攻击者通过两条路径窃取支付密钥——下载 Web 根目录残留的备份文件，或利用 Nginx 配置错误直读 Config.php 源码——进而伪造合法回调通知批量盗取卡密。附官方安全公告、五站实测审计结果与完整防御方案。"
+title: "ACG-Faka 发卡站回调伪造复盘：从备份包与 BEpusdt Config.php 泄露到库存被搬空"
+description: "复盘一起针对 ACG-Faka + BEpusdt 的真实盗卡事件：从 660 条访问日志还原攻击者如何放弃盲猜签名、转头读走 Config.php 明文密钥，最后每 6 秒伪造一条合法回调搬空库存；顺带记一笔五个同类站点的授权排查结果。"
 date: 2026-08-13T23:00:00+08:00
+draft: false
 slug: acg-faka-bepusdt-callback-forgery-analysis
-categories:
-  - 漏洞分析
-tags:
-  - 支付安全
-  - Web 安全
-  - PHP
-  - 回调伪造
-  - ACG-Faka
-weight: 1
+categories: ["漏洞分析"]
+tags: ["支付安全", "Web 安全", "PHP", "回调伪造", "ACG-Faka", "BEpusdt"]
+weight: 10
 ---
 
-> 一个朋友的虚拟发卡站在一夜之间被批量盗走了上百张卡密。攻击者没有碰数据库，没有拿 Shell，甚至没有登录后台，只是向一个公开的回调接口发送了一条精心构造的"支付成功"通知，系统就把卡密吐了出来。本文从攻击日志逆向还原完整攻击链，揭示密钥泄露的两条路径：备份文件暴露（官方公告确认）与 Nginx 配置错误导致 Config.php 源码可读（日志分析发现），拆解回调签名机制的弱点，并用同一套方法对五个同类站点做了实测审计。
+前阵子有个朋友用 ACG-Faka 搭的虚拟发卡站（收款接的 BEpusdt），一宿之间被人搬空了上百张卡密。
 
-## 前言
+最邪门的地方在于：上服务器翻了一圈没见着半个 WebShell，数据库没被拖库，后台管理员账号也没有异地登录记录。对方全程就干了一件事，往公开暴露的支付回调接口发了一串带合法签名的"已付款" POST 请求，发卡程序乖乖把订单状态改成已支付，自动把卡密吐了个底朝天。
 
-事发后，ACG-Faka 官方发布了安全公告：
+拿到他发过来的 Nginx 访问日志仔细捋了一遍，再对照当时 ACG-Faka 官方刚发的安全通告（严禁在网站根目录放整站或数据库备份包），整条链路其实半点不玄乎：签名算法本身没破，是算签名用的 `api_token` 从别的口子漏出去了。
 
-> 严禁在网站根目录存放备份文件。近期排查发现，多个 V3 新版网站出现伪造支付回调，主要原因是在网站根目录存放了整站备份、数据库备份或 ZIP 压缩包。这些文件可被公网直接下载，其中通常包含支付密钥、货源接口密钥、数据库账号密码等敏感信息。攻击者获取后，可直接伪造支付回调并自动提取商品。
+## 0x00 660 条日志里的两小时空白，与 `33` 字节成功指纹
 
-公告点到了要害：问题不在签名算法，在密钥泄露。签名算法再安全，密钥被攻击者拿到也白搭。
+把受害站点的 Nginx `access.log` 拉出来按可疑 IP（`203.27.106.***`）筛了一下，一共 660 来条记录，整场动作的节奏特别清楚。
 
-密钥怎么泄露的？公告指出是备份文件，我们的日志分析还发现了另一条独立路径：Nginx 配置错误导致 PHP 源码直接暴露。两条路径殊途同归，都指向同一个运维盲区：敏感文件可被公网直接下载。
+下午 `14:22`，对方先在摸路，拿 `/callback/BEpusdt` 和 `/user/api/order/callback.BEpusdt` 挨个试回调路由格式，看到从 `404` 变成 `200` 之后锁定了正确的插件入口。
 
-虚拟发卡系统的核心流程很简单：
+到了 `14:50`，对方发了几条全零签名（`000...000`）过来试探验签逻辑。这时候看 Nginx 日志里的响应体字节数 `body_bytes_sent` 就能直接把结果看穿：返回 `35` 字节对应 `{"code":0,"msg":"handle not found"}`（插件名不对）；返回 `29` 字节对应 `{"code":0,"msg":"sign error"}`（签名没过被拦下）；一旦变成 `33` 字节的成功回执，说明验签已经放行，订单当场入账发货。
 
-```
-用户下单 → 跳转支付网关 → 链上确认 → 网关回调通知 → 系统标记已付 → 释放卡密
-```
+在 `14:50` 连吃几个 `29` 字节的 `sign error` 之后，这个 IP 突然安静了整整两个小时，压根没去傻乎乎地暴力撞哈希。等到 `17:01` 再露面的时候，他直接精准请求了 `/app/Pay/BEpusdt/Config/Config.php`，拿到了包含源码的 `200` 响应。半小时后的 `17:32`，日志里蹦出了第一条 `33` 字节的成功回调；`18:31` 之后彻底挂上了自动化脚本，卡着每 6 秒建一单、伪造一次回调的节奏，一路把库存扫空。
 
-问题出在第四步。支付网关（BEpusdt）向发卡系统（ACG-Faka）发送回调通知时，系统需要验证这条通知确实来自网关，而不是攻击者伪造。如果验证机制存在缺陷，攻击者就可以跳过真实支付，直接"通知"系统订单已付，白拿卡密。
+那两小时的空白期，人家根本没在死磕密码学，而是转头把签名密钥明文给读走了。
 
-这不是假设场景。我拿到了一份真实攻击日志，下面是完整拆解。
+## 0x01 两条漏密钥的野路子：根目录备份包与 PHP 源码直出
 
----
+在 ACG-Faka 里，一笔支付回调从进门到放货主要过三个文件：路由收到 `/user/api/order/callback.BEpusdt` 后调插件目录下的 `app/Pay/BEpusdt/Impl/Signature.php` 验签，密钥从同插件的 `app/Pay/BEpusdt/Config/Config.php` 里读，验过之后调 `app/Service/Bind/Order.php` 改订单状态并吐卡密。
 
-## 一、攻击复盘：从日志还原 660 条请求
-
-### 1.1 攻击时间线
-
-通过分析受害站点的 Nginx Access Log，攻击者（IP: `203.27.106.***`）的行为可以清晰地分为四个阶段：
-
-| 时间 | 阶段 | 行为 | 日志特征 |
-|------|------|------|----------|
-| 14:22 | 路径探测 | 尝试 `/callback/BEpusdt` vs `/callback.BEpusdt` | 404 → 200，锁定正确路径格式 |
-| 14:50 | 签名试探 | 发送全零签名 `000...000` | 29 字节响应 = `{"code":0,"msg":"sign error"}` |
-| 17:01 | 源码窃取 | 反复请求 `/app/Pay/BEpusdt/Config/Config.php` | 200，响应体包含 PHP 源码 |
-| 17:32 | 首次得手 | 发送携带正确签名的伪造回调 | 33 字节响应 = `{"code":200,"msg":"success"}` |
-| 18:31+ | 批量收割 | 自动化脚本，每 6 秒一单 | 持续 33 字节成功响应 |
-
-14:50 到 17:01 之间有两小时空白。攻击者在第一次签名试探失败后没有继续暴力枚举签名，而是转向了另一个方向：读源码。
-
-### 1.2 响应大小指纹
-
-Nginx 日志中的 `body_bytes_sent` 字段暴露了一切：
-
-```
-29 字节 → {"code":0,"msg":"sign error"}     # 签名错误，攻击失败
-35 字节 → {"code":0,"msg":"handle not found"} # 插件不存在
-33 字节 → {"code":200,"msg":"success"}        # 攻击成功，订单被标记已付
-```
-
-当日志中突然出现 33 字节的响应时，攻击已经得手了。
-
----
-
-## 二、回调签名机制：为什么能被伪造
-
-### 2.1 BEpusdt 的签名算法
-
-BEpusdt 是一个 USDT 收款网关，当链上确认收款后，它向商户系统发送 HTTP POST 回调。签名计算方式：
-
-```
-signature = MD5( 按字母排序的参数字符串 + API_TOKEN )
-```
-
-具体来说：
+BEpusdt 这套 USDT 收款网关的验签公式很直白：把除了 `signature` 本身之外的所有非空字段按字母排个序拼成 `k=v&...`，尾巴上直接拼上商户配的 `api_token`，整体算一把 MD5：
 
 ```python
-# 1. 取所有非空参数（排除 signature 本身）
-params = {k: v for k, v in data.items() if v != '' and k != 'signature'}
-
-# 2. 按 key 字母排序，拼接成 key=value& 格式
-sorted_str = '&'.join(f'{k}={params[k]}' for k in sorted(params.keys()))
-
-# 3. 末尾拼接 API Token，取 MD5
-signature = md5(sorted_str + api_token)
+params = {k: v for k, v in data.items() if v != "" and k != "signature"}
+sorted_str = "&".join(f"{k}={params[k]}" for k in sorted(params.keys()))
+signature = hashlib.md5((sorted_str + api_token).encode()).hexdigest()
 ```
 
-商户端验证时，用自己存储的 API Token 重新计算签名，与收到的签名做比对。
+只要 `api_token` 不为空也不外泄，外人靠 `curl` 是算不出合法签名的。可现实里不少站长自己把保险箱钥匙摆在了门口，一边是整站备份包裸奔，另一边就是这次日志里抓到的 `Config.php` 直读。
 
-这个算法本身没有问题，问题在于：
+先说官方通告点名的备份包问题。很多用宝塔面板的站长图省事，点完一键备份或者导完库，随手就把 `backup.zip`、`www.zip`、`域名.sql` 留在网站根目录 `/www/wwwroot/faka/` 底下。Nginx 看见 `.zip` 和 `.sql` 默认当普通静态文件直出，扫描器挂个常见备份文件名字典撞中一次，全站源码连带 `config/database.php` 里的数据库密码、上游货源接口密钥和支付 `api_token` 直接一锅端，数据库导出文件里甚至躺着现成的卡密库存，连伪造回调那一步都省了。
 
-1. 如果 API Token 泄露了，攻击者可以算出合法签名
-2. 如果 API Token 为空，签名 = `MD5(params + "")`，任何人都能算
-3. 如果比对方式有缺陷（PHP 弱类型），签名验证可被绕过
+再看这次日志里实锤的第二条路。`app/Pay/BEpusdt/Config/Config.php` 里就几行返回配置数组的 PHP 代码（`'api_token' => 'a1b2c3d4...'`）。按理说就算站长没给 `/app/` 目录配访问拦截，请求 `.php` 交给 PHP-FPM 执行完 `return [...]` 也只会吐出一个长度为 0 的空页面；偏偏有些站长自己改伪静态或者子目录规则的时候写歪了 `location ~ \.php$` 的匹配范围，导致深层路径 `/app/Pay/...` 底下的 `.php` 压根没进 PHP-FPM，直接被 Nginx 当纯文本把源码吐了出去，密钥当场裸奔。
 
-### 2.2 ACG-Faka 的回调处理流程
+## 0x02 插件代码与访问控制上的两处软肋
 
-ACG-Faka 收到回调请求后的处理链：
+除了运维配错漏出密钥，翻看这类 PHP 发卡插件时还有两处代码与架构层面的隐患得留心。
 
-```
-/user/api/order/callback.{Handle}
-    ↓
-路由到对应插件（BEpusdt / Epusdt / Alipay）
-    ↓
-插件的 Signature.php 验证签名
-    ↓
-验证通过 → Order.php 更新订单状态 → 释放卡密
-    ↓
-返回 "success"（BEpusdt）或 "ok"（Epusdt）
-```
-
-关键文件：
-
-| 文件 | 作用 |
-|------|------|
-| `app/Pay/BEpusdt/Config/Config.php` | 存储 API Token（签名密钥） |
-| `app/Pay/BEpusdt/Impl/Signature.php` | 签名验证逻辑 |
-| `app/Service/Bind/Order.php` | 订单状态更新 |
-
----
-
-## 三、根因分析：密钥泄露的两条路径 + 两重代码缺陷
-
-攻击成功的前提是拿到 API Token。从目前掌握的信息看，攻击者有两条互相独立的路径可以拿到密钥，命中任何一条就够了。
-
-### 3.1 路径一：备份文件泄露（官方公告确认）
-
-这是官方通告明确指出的主因。很多站长习惯用宝塔面板的"一键备份"功能，把整站打包成 `.zip` 或 `.tar.gz` 放在网站根目录：
-
-```
-/www/wwwroot/faka/
-├── index.php
-├── app/
-│   └── Pay/BEpusdt/Config/Config.php   ← 包含 API Token
-├── config/
-│   └── database.php                     ← 包含数据库密码
-├── site_backup_20260810.zip             ← 整站备份，包含以上所有文件
-└── db_backup_20260810.sql               ← 数据库导出，包含所有订单和卡密
-```
-
-Nginx 默认会把 `.zip` 当静态文件返回。攻击者只需猜到文件名（常见模式：`backup.zip`、`www.zip`、域名.zip、日期.zip），就能一次性下载全站源码 + 数据库，其中包括支付密钥、数据库凭据、货源接口密钥，全部明文。
-
-这比后面要说的 Config.php 泄露更严重，数据库备份里连卡密都有，攻击者甚至不需要走伪造回调这条弯路。
-
-### 3.2 路径二：Nginx 配置错误导致 Config.php 直接暴露
-
-这是我们在日志分析中发现的另一条路径。ACG-Faka 的 PHP 配置文件存放在 `/app/Pay/BEpusdt/Config/Config.php`。如果 Nginx 没有做目录级 deny：
-
-```nginx
-# 缺少这条规则，攻击者可以直接请求 PHP 文件
-location ~* ^/(app|config|runtime|vendor)/ {
-    deny all;
-}
-```
-
-后果因 Nginx 对 `.php` 的路由配置而异：
-
-| Nginx 配置 | 请求 Config.php 的结果 | 危险等级 |
-|------------|----------------------|----------|
-| `.php` 正确路由到 PHP-FPM | PHP 执行 `return [...]`，输出为空（200 空响应） | 中 |
-| `.php` 未路由到 PHP-FPM（当静态文件返回） | PHP 源码原文输出，API Token 明文暴露 | 致命 |
-
-第二种情况在宝塔面板上比想象中常见。如果 Nginx 的 `location ~ \.php$` 规则只匹配了网站根目录下的 `.php` 文件，深层路径（如 `/app/Pay/.../Config.php`）的 `.php` 可能不会交给 PHP-FPM 处理，而是被当成普通文本文件返回。
-
-攻击者直接看到了：
-
-```php
-<?php
-return [
-    'api_url'  => 'https://pay.example.com',
-    'api_token' => 'a1b2c3d4e5f6...',  // ← 签名密钥，明文暴露
-];
-```
-
-我们审计的五个站中，Config.php 都返回 200 空响应（PHP 正确执行了 `return []`），Token 没有泄露。但路径可达本身就是隐患，未来某次运维操作改了 PHP-FPM 配置，Token 就会暴露。
-
-两条路径的关系：备份文件是"一锅端"，Config.php 是"精准窃取"。攻击者会两条路都试，先扫备份文件（自动化成本低），扫不到再尝试直接读 Config.php。实际攻击日志中两种行为都有出现。
-
-### 3.3 代码缺陷一：PHP 弱类型比较（高危）
-
-即使 Token 没有泄露，BEpusdt 插件的签名比对方式也可能存在问题。如果 Signature.php 使用了 PHP 的 `==`（宽松比较）而非 `===`（严格比较）或 `hash_equals()`：
-
-```php
-// 危险：PHP 弱类型比较
-if ($calculated_sign == $received_sign) { ... }
-
-// 攻击向量：
-// - signature=0     → int(0) == "any_string" 在特定条件下为 true
-// - signature=false → false == "" 为 true
-// - signature=[]    → 数组与字符串比较行为不可预测
-```
-
-安全的实现应该是：
-
-```php
-// 类型检查 + 时序安全比较
-if (!is_string($sign) || $sign === '') {
-    return false;
-}
-return hash_equals($calculated, $sign);
-```
-
-`hash_equals()` 做了两件事：一是防止类型混淆，只接受字符串；二是防止时序攻击，比较耗时恒定，不会因为前几位匹配而提前返回。
-
-### 3.4 代码缺陷二：回调端点无访问控制（中危）
-
-回调端点 `/user/api/order/callback.BEpusdt` 对任何 IP 开放。攻击者可以从任意位置发送请求，系统只靠签名验证来区分合法回调与伪造请求。
-
-理想状态下，应该叠加 IP 白名单：
-
-```nginx
-location ~* ^/user/api/order/callback\. {
-    allow 1.2.3.4;   # 支付网关服务器 IP
-    deny all;
-}
-```
-
-即使签名验证被绕过，IP 白名单也能兜底。
-
----
-
-## 四、完整攻击链
-
-两条密钥泄露路径最终汇聚到同一个攻击终点：
-
-```
-  ┌─────────────────────────┐   ┌─────────────────────────────┐
-  │  路径 A: 备份文件扫描     │   │  路径 B: Config.php 直读      │
-  │  GET /backup.zip         │   │  GET /app/Pay/BEpusdt/       │
-  │  GET /www.zip            │   │  Config/Config.php           │
-  │  GET /db_2026.sql        │   │  (Nginx 未路由到 PHP-FPM)     │
-  │  → 下载整站+数据库       │   │  → PHP 源码明文返回           │
-  └────────────┬────────────┘   └──────────────┬──────────────┘
-               │                                │
-               │     ┌────────────────────┐     │
-               └────►│  API Token 泄露 ★  │◄────┘
-                     └─────────┬──────────┘
-                               │
-               ┌───────────────▼───────────────┐
-               │  Step 1: 路径探测               │
-               │  GET /user/api/order/callback.  │
-               │  → 确认 BEpusdt Handle 存在     │
-               └───────────────┬───────────────┘
-                               │
-               ┌───────────────▼───────────────┐
-               │  Step 2: 伪造合法回调           │
-               │  用窃取的 Token 计算 MD5 签名    │
-               │  POST callback.BEpusdt         │
-               │  → "success" (33B) ★            │
-               └───────────────┬───────────────┘
-                               │
-               ┌───────────────▼───────────────┐
-               │  Step 3: 批量收割               │
-               │  自动化创建订单 → 伪造回调       │
-               │  → 查询卡密 → 每 6 秒一单        │
-               └───────────────────────────────┘
-```
-
-整个过程不需要任何漏洞利用工具，只需要 `curl` 和 `md5sum`。路径 A 甚至不需要走回调——数据库备份里直接就有卡密。
-
----
-
-## 五、五站实测审计
-
-拿到攻击手法后，我用同一套方法对五个同类站点做了黑盒审计。测试矩阵包含 13+ 种攻击向量，每次攻击后通过 API 验证订单状态是否变化。
-
-### 5.1 攻击向量
-
-| # | 向量 | 目标 |
-|---|------|------|
-| A1 | 全零签名 / 随机签名 | 基础验签能力 |
-| A2 | 空签名 / 缺失签名字段 | 空值绕过 |
-| A3 | `signature=0` (int) | PHP `==` 弱类型：`0 == "string"` |
-| A4 | `signature=false` | PHP `==` 弱类型：`false == ""` |
-| A5 | `signature=[]` (数组) | PHP 数组比较行为异常 |
-| A6 | 空密钥 MD5 签名 | Token 为空时可伪造 |
-| A7 | 空密钥 HMAC-SHA256 | 同上，适配 Epusdt 插件 |
-| A8 | 金额篡改 (0.01) | 金额绑定验证 |
-| A9 | 非成功 status 值 | 状态字段校验 |
-| A10 | form-urlencoded 格式 | Content-Type 混淆 |
-| A11 | 路径穿越 Handle | 插件路由安全 |
-
-### 5.2 审计结果
-
-| 站点 | 框架 | 回调安全 | 状态验证 | 源码泄露 | CF 防护 | 综合 |
-|------|------|----------|----------|----------|---------|------|
-| 站点 A | ACG-Faka | 34/34 SAFE | 有 API | 路径泄露 | 无 | 中 |
-| 站点 B | ACG-Faka | 全部 SAFE | 有 API | 路径泄露 | 无 | 中 |
-| 站点 C | Next.js/Vercel | N/A | 需认证 | 无 | 全站 | 低 |
-| 站点 D | ACG-Faka | 全部 SAFE | 无 (404) | 路径+composer | 无 | 中 |
-| 站点 E | ACG-Faka | 64/64 SAFE | 有 API | 路径+composer | 无 | 中 |
-
-关键发现：
-
-- 回调签名验证全部正常——五个站都没有被伪造回调突破
-- 但四个 ACG-Faka 站都有源码路径泄露——攻击者可以看到 Fatal Error 中暴露的物理路径
-- Config.php 虽然返回 200 空（PHP 正确执行了），但路径可达本身就是隐患
-- 唯一一个 Next.js + Vercel 站完全不受此类攻击影响——非 PHP 框架，无弱类型问题，Vercel 不暴露源码
-
-### 5.3 为什么这五个站没被攻破
-
-1. 没有备份文件暴露——五个站的 Web 根目录下没有扫到可下载的 `.zip` / `.sql` / `.bak` 文件
-2. Config.php 正确走了 PHP-FPM 路由——返回 200 空响应，Token 没有泄露
-
-但隐患仍在：四个 ACG-Faka 站的 `/app/` 路径仍然可达，只是 PHP-FPM 兜住了。如果未来某次运维操作改错了 PHP-FPM 配置，或者站长在根目录放了一次备份文件，攻击者立刻就能得手。这是一颗定时炸弹。
-
----
-
-## 六、防御方案
-
-### 6.1 P0 紧急修复（立即执行）
-
-清理并封锁备份文件——这是最紧急的一步：
-
-```bash
-# 1. 立即删除 Web 根目录下的所有备份文件
-find /www/wwwroot/faka/ -maxdepth 1 \
-  \( -name "*.zip" -o -name "*.tar.gz" -o -name "*.rar" \
-     -o -name "*.sql" -o -name "*.bak" -o -name "*.7z" \) \
-  -exec rm -f {} \;
-
-# 2. 在 Nginx 中彻底封锁备份文件下载
-```
-
-```nginx
-# 封锁所有备份/归档文件类型
-location ~* \.(zip|tar\.gz|rar|sql|bak|7z|gz|tgz)$ {
-    deny all;
-    return 403;
-}
-```
-
-Nginx 封锁源码目录——阻断 Config.php 泄露路径：
-
-```nginx
-# 阻止所有对 PHP 源码、配置、运行时文件的直接访问
-location ~* ^/(app|config|runtime|vendor)/ {
-    deny all;
-    return 403;
-}
-
-# 阻止敏感文件
-location ~* (composer\.(json|lock)|\.env|\.git) {
-    deny all;
-    return 403;
-}
-```
-
-**更换所有凭据**——如果曾经在 Web 目录放过备份文件，必须假设已泄露，一律重置：
-- API Token（支付密钥）
-- 数据库密码
-- 货源接口密钥
-- 后台管理员密码
-
-**升级签名验证**——确认 Signature.php 使用 `hash_equals()` + `is_string()` 类型检查：
+第一处是 PHP 里的签名比对写法。如果插件在 `Signature.php` 里图省事拿宽松比较 `==` 去对签名，在老 PHP 7 环境里传个整数 `signature=0` 或布尔值就会撞上弱类型绕过；哪怕到了 ACG-Faka V3 跑的 PHP 8 环境里 `0 == "非数字字符串"` 已经修成了 `false`，一旦两端都是字符串且碰上 `0e` 开头的纯数字科学计数法哈希（Magic Hash），`==` 照样会当成 `0 == 0` 放行，外加普通字符串逐字节比对还带时序侧信道风险。规矩的写法必须先用 `is_string()` 拦掉数组和异形参数、判掉空串与空密钥，再进恒定时间的 `hash_equals()`：
 
 ```php
 public static function safetyEquals(mixed $str, string $local): bool
 {
-    if (!is_string($str) || $str === '') {
+    if (!is_string($str) || $str === '' || $local === '') {
         return false;
     }
     return hash_equals($local, $str);
 }
 ```
 
-### 6.2 P1 加固措施
+如果收款网关和发卡插件两端都是自己可控的代码，顺手把简陋的 `md5($sorted_string . $token)` 字符串拼接升级成标准的 `hash_hmac('sha256', $sorted_string, $token)` 也稳妥得多。
 
-回调端点 IP 白名单：
+第二处软肋是 `/user/api/order/callback.BEpusdt` 默认对全网任意 IP 敞开。只要密钥因为任何一次失误漏了，随便找台机器敲条 `curl` 就能往里灌假通知，网络层没有任何拦阻。
+
+## 0x03 顺手帮五家同类站体检，四家没锁 `/app/` 目录
+
+帮朋友止完血之后，我征得另外五家同类小站站长的许可，拿包含全零签名、空签名、缺失签名字段、`signature=0`、`signature=false`、`signature=[]` 数组、空密钥 MD5 / HMAC-SHA256、非成功 `status`、`0.01` 金额篡改、`Content-Type` 混淆、Handle 路径穿越和目录暴露检查在内的十几类用例帮他们过了一遍体检：
+
+| 站点 | 架构 | 伪造回调测试 | `/app/` 与敏感文件暴露情况 |
+|---|---|---|---|
+| 站点 A | ACG-Faka | 34 次请求全部拦截 | 报错暴露物理路径，`/app/` 未配 `deny`（靠 PHP-FPM 执行返回空兜底） |
+| 站点 B | ACG-Faka | 全部拦截 | 同上，`/app/` 可直接打到 PHP-FPM |
+| 站点 C | Next.js (Vercel) | 接口强鉴权 | 全站套 Cloudflare，无静态源码目录与备份包残留隐患 |
+| 站点 D | ACG-Faka | 全部拦截 | 暴露物理路径，`composer.json` 可直接下载 |
+| 站点 E | ACG-Faka | 64 次请求全部拦截 | 暴露物理路径，`composer.json` 可读，`/app/` 未配 `deny` |
+
+这五家站没被伪造回调打穿，纯粹是因为根目录刚好没留备份包，外加 PHP-FPM 正常运转替他们把 `Config.php` 执行成了空响应。但四家 PHP 站的 `/app/`、`/config/` 目录全都没在 Nginx 层配 `deny all`。这种状态就像在冰面上开车，只要哪天迁服务器改坏一次 PHP 解析规则，或者半夜维护随手在根目录打了个压缩包忘了删，分分钟就会步前面那位朋友的后尘。
+
+## 0x04 五分钟把口子焊死
+
+手头还在跑 ACG-Faka 或类似 PHP 发卡系统的，别等库存空了再翻日志，先把根目录下的压缩包和 SQL 导出文件彻底清出去（备份一律存到 Web 目录之外，比如 `/data/backups/`）：
+
+```bash
+find /www/wwwroot/faka/ -maxdepth 1 \
+  \( -name "*.zip" -o -name "*.tar.gz" -o -name "*.rar" \
+     -o -name "*.sql" -o -name "*.bak" -o -name "*.7z" \) \
+  -exec rm -f {} \;
+```
+
+紧接着在 Nginx 的 `server` 块里把内部源码目录、敏感描述文件、归档后缀以及回调网关的来源 IP 白名单一次性配齐（BEpusdt 一般都是自己固定机器跑的收款服务，绑死网关 IP 之后就算哪天 Token 真漏了，外网伪造请求也连门都进不来）：
 
 ```nginx
-location ~* ^/user/api/order/callback\. {
-    allow 支付网关IP;
+# 放在 include enable-php*.conf 之前，封死内部源码、配置与运行时目录
+location ~* ^/(app|config|runtime|vendor)/ {
     deny all;
+    return 403;
+}
+
+# 封死所有备份包后缀与敏感工程文件
+location ~* (\.(zip|tar\.gz|tgz|gz|rar|7z|sql|bak)$|composer\.(json|lock)|\.env|\.git) {
+    deny all;
+    return 403;
+}
+
+# 支付回调接口仅放行你自己的收款网关服务器 IP（用 try_files 进入口，避免 rewrite 提前跳出访问控制）
+location ~* ^/user/api/order/callback\. {
+    allow 203.0.113.10; # 换成你的真实支付网关服务器 IP
+    deny all;
+    try_files $uri /index.php?s=$uri&$args;
 }
 ```
 
-**签名算法升级**——从 MD5 升级到 HMAC-SHA256：
-
-```php
-// MD5 拼接（BEpusdt 默认）→ 容易被长度扩展攻击
-$sign = md5($sorted_string . $token);
-
-// HMAC-SHA256（推荐）→ 密钥参与哈希内部运算，无法伪造
-$sign = hash_hmac('sha256', $sorted_string, $token);
-```
-
-### 6.3 P2 监控告警
-
-- 回调端点频率限制（单 IP 每分钟 ≤ 10 次）
-- 异常响应监控：连续出现 33 字节（success）响应时触发告警
-- 回调日志独立记录：IP、签名、时间、订单号，便于事后追溯
-
-### 6.4 架构层面
-
-如果条件允许，考虑迁移到非 PHP 框架（如 Next.js + Vercel），从根本上消除 PHP 弱类型比较和源码泄露的风险。审计中唯一零风险的站点正是这种架构。
+最后两条收尾动作也别省：凡是以前在网站目录里放过备份包的，一律按已经泄露处理，把支付 `api_token`、数据库密码、货源对接密钥和后台口令全换一遍；平时在监控脚本里给回调接口加个单 IP 频率限制（比如每分钟不超过 10 次），再盯一下访问日志里短时间连续刷出 `33` 字节响应的异常波动，基本就能把这类盗卡路子彻底断干净。
 
 ---
 
-## 七、总结
-
-这次攻击的本质不是密码学层面的签名绕过，而是运维层面的密钥泄露。攻击者有两条路可走：
-
-```
-路径 A: Web 根目录残留备份文件（.zip / .sql）
-    → 攻击者下载备份 → 解压得到全部凭据（甚至直接拿到卡密）
-
-路径 B: Nginx 配置错误，Config.php 当静态文件返回
-    → 攻击者读取 PHP 源码 → 得到 API Token
-
-两条路殊途同归：
-    → 用 Token 计算合法 MD5 签名
-        → 伪造回调通知
-            → 系统认为已付款
-                → 卡密被释放
-```
-
-官方通告指向路径 A，日志分析发现路径 B。多个受害站点同时存在两个问题。
-
-修复其实不复杂——删备份文件、加 Nginx deny 规则、换密钥，三步就能阻断整条链。但现实是，四个受审计的 ACG-Faka 站点连 `/app/` 目录的 deny 规则都没有。
-
-安全不是只靠签名算法。签名验证是最后一道防线，不应该是唯一一道。 纵深防御意味着即使签名被绕过，IP 白名单能兜底；即使白名单没配，源码和备份至少不应该暴露密钥。任何一层失守都不会导致全盘崩溃——这才是安全架构的正确姿势。
-
----
-
-*本文所有测试均在授权范围内进行，已获得站点所有者许可。文中不包含任何真实域名和凭据。*
+*文中所涉日志与五站体检均获站点负责人授权许可，IP 与域名均已脱敏。*

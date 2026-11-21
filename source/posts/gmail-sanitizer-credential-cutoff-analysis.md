@@ -1,311 +1,118 @@
 ---
-title: "Gmail Sanitizer 深度拆解：8 步全链路凭据切断的自动化实现"
-description: "从 DrissionPage 浏览器自动化到 AES-256-GCM 加密冷库，从 Sudo Gate 循环挑战到 Cloudflare Email Worker 极速接码——完整解析一款 Google 账号全链路凭据切断系统的技术内幕。"
+title: "只改密码拦不住找回：看 Gmail Sanitizer 的 8 步凭据流转与 Google 7 天窗口盲区"
+description: "梳理自动化安全工具 Gmail Sanitizer 的工程实现：从 1-2-5-4-3-6-7-8 乱序过 Sudo Gate、AES-256-GCM 凭据加密冷库到 Cloudflare Email Worker 接码，并补齐它漏掉的 7 天旧恢复凭据宽限期与邮件转发后门。"
 date: 2026-08-04T14:00:00+08:00
 draft: false
-weight: 1
-categories: ["技术分析"]
-tags: ["Google", "自动化", "安全", "DrissionPage", "浏览器自动化", "凭据管理", "账号安全"]
----
-> 一分钟速读：Gmail Sanitizer 是一套 8 步全链路凭据切断系统，覆盖恢复邮箱、恢复手机、Passkey、2FA 密钥、OAuth 授权等所有后门，逐一切断后用新凭据重新登录验证。底层用 DrissionPage 驱动真实 Chrome 绕过 Google 反自动化检测，配合 Cloudflare Email Worker 实现验证码秒级推送，AES-256-GCM 加密冷库保护敏感数据，asyncio 任务队列 + 死信队列实现批量并发 + 失败自愈。本文从攻防对抗、引擎架构、接码管道三个维度展开。
-
+categories: ["安全研究", "技术分析"]
+tags: ["Google", "账号安全", "DrissionPage", "凭据管理", "AES-GCM", "自动化"]
+weight: 10
 ---
 
-## 引言
+做过团队测试账号交接或者企业安全巡检的人都很清楚，接手一个现成的 Google 账号时，光把登录密码改掉基本等于没锁门。
 
-你从卡网买了一个 Google 账号，改了密码，是不是就安全了？
+只要前任持有人手里还留着其他任意一条恢复通道或持久化凭据，随时都能把账号反手申诉拿回去，或者一声不吭继续读里面的数据：原恢复邮箱和原恢复手机号可以直接收重置验证码；旧设备上注册过的 Passkey（通行密钥）按一下指纹就能免密直登；以前扫过的 Authenticator 二步验证（Base32）种子随时能算出有效的 6 位动态码；没踢下线的浏览器 Cookie 和以前点过允许的第三方 OAuth 应用，更是连登录页都不用过就能接着调接口。
 
-不是。
+开源项目 `Gmail Sanitizer` 当初想解决的就是这件繁琐事：把手工挨个翻安全设置清后门的活儿，做成一条带断点续跑和加密存储的 8 步自动化流水线。先把丑话挑明：在卡网买卖个人 Google 账号本身直接违反 Google 服务条款，而且极易触发异地风控秒封，这篇笔记纯粹从账号交接安全审计和浏览器自动化工程设计的角度，看看它做对了哪些细节，又漏掉了哪几个连脚本都挡不住的致命真后门。
 
-改密码只切断了 6 条"绳子"中的 1 条。卖家仍然可以通过以下方式盗回你的账号：
+## 0x00 为什么要按 `1-2-5-4-3-6-7-8` 的乱序去跑
 
-| 后门 | 盗回方式 |
-|------|----------|
-| 恢复邮箱 | 通过"忘记密码"流程，Google 会把重置链接发到卖家的恢复邮箱 |
-| 恢复手机号 | 同上，短信验证码直接发到卖家手机 |
-| Passkey | 卖家的设备上注册了 Passkey，无需密码即可登录 |
-| TOTP 2FA 密钥 | 卖家手里有 Base32 密钥，能随时生成你的 2FA 验证码 |
-| 旧会话 / Cookie | 卖家的浏览器可能还保持着登录状态 |
-| OAuth 授权 | 授权过的第三方应用可以读取邮件、通讯录等数据 |
+在账面定义上，这套工具列了整整齐齐 8 个步骤：登录验活旧凭据（Step 1）、换绑恢复邮箱（Step 2）、删掉旧恢复手机号（Step 3）、循环删光最多 20 个已绑定的 Passkey（Step 4）、重置 Authenticator TOTP 密钥（Step 5）、用标准库 `secrets` 生成 18 位带大小写数字符号的强密码改密并踢掉其他设备会话（Step 6）、循环吊销最多 30 个第三方 OAuth 应用授权（Step 7），最后拿全套新密码加新 2FA 重新登录做最终核验（Step 8）。
 
-你只改了密码？卖家用恢复邮箱就能把密码改回来。你改了密码又关了 2FA？Passkey 还在。你把 Passkey 也删了？OAuth 授权的第三方应用还在偷偷读你的数据。
+但去翻它的核心调度代码就会发现，真正落地的执行顺序被故意改成了 `1 -> 2 -> 5 -> 4 -> 3 -> 6 -> 7 -> 8`，把原本排在后面的重置 2FA（Step 5）硬生生提到了删 Passkey（Step 4）和删手机号（Step 3）前面。
 
-Gmail Sanitizer 的目标就是一口气把这 6 条绳子全部切断。
+这个看似别扭的顺序，完全是被 Google 的 Sudo Gate（敏感操作二次验身拦截）逼出来的。每当你去改安全设置里的关键项，Google 都会根据当前账号绑定状态动态挑一种验证方式拦你一下，而且经常在同一次操作里连环出招（比如刚输完密码，下一页立马又要你验 TOTP）。如果你按顺序先把 Passkey 全删光了再去重置 2FA，Google 的会话状态偶尔没来得及同步刷新，偏偏在 Sudo Gate 里点名让你用刚删掉的 Passkey 验身，整条流水线当场就死锁在那儿了。反过来先把新的 TOTP Base32 种子换好攥在自己手里，后面再去删 Passkey、删手机、改密码（Step 6 改完密码立刻在内存里热更新 `cred.password = new_password`），再撞上拦截就能一路拿新凭据丝滑过关。
 
----
-
-## 一、核心功能：8 步全链路凭据切断
-
-这个系统的核心是一条 8 步流水线，每一步精确对应一个后门：
-
-| 步骤 | 操作 | 切断的后门 | 关键难点 |
-|------|------|-----------|---------|
-| Step 1 | 登录验证 | 验证旧凭据有效性 | 2FA 挑战、Account Chooser、中间提示页 |
-| Step 2 | 替换恢复邮箱 | 卖家的恢复邮箱 → 买家自建接码邮箱 | Google 可能要求邮箱验证码 |
-| Step 3 | 移除恢复手机 | 卖家绑定的手机号 | 可能需要 Sudo 二次验证 |
-| Step 4 | 删除所有 Passkey | 卖家设备的无密码登录凭据 | 循环删除，最多 20 个 |
-| Step 5 | 重置 2FA | 旧 TOTP 密钥 → 新 Base32 密钥 | 需要提取页面上的 Base32 密钥文本 |
-| Step 6 | 修改密码 + 全设备登出 | 旧密码 + 旧会话 | 密码强度校验、设备登出确认 |
-| Step 7 | 撤销 OAuth 授权 | 所有第三方应用权限 | 循环撤销，最多 30 个 |
-| Step 8 | 新凭据验证 | 确认所有切断生效 | 用新密码 + 新 2FA 重新登录 |
-
-实际执行顺序是 1-2-5-4-3-6-7-8，Step 5（重置 2FA）被提前到 Step 4（删除 Passkey）之前。原因是 Step 5 需要在 Sudo Gate 中输入旧 TOTP 码验证身份，如果先删了 Passkey，Google 可能挑选 Passkey 作为 Sudo 验证方式却找不到，导致验证失败。
-
-### 1.1 Sudo Gate：Google 的二次验证拦截
-
-Google 在修改安全设置时会弹出 Sudo Gate（二次身份验证页面）。Sudo Gate 的挑战方式不固定，Google 根据账号状态动态选择：
+为了应付连环跳出来的不同挑战页，Sudo Gate 处理器写了一个最多转 6 轮的 URL 匹配循环：
 
 ```python
-def handle_google_sudo_gate(self, page, password, totp_secret=None, 
+def handle_google_sudo_gate(self, page, password, totp_secret=None,
                             gmail=None, recovery_email=None):
-    for cycle in range(6):  # 最多循环 6 次
+    for _ in range(6):
         current_url = page.url
-        
-        # 1. Account Chooser（会话过期）
         if "accountchooser" in current_url:
-            # 点击账号重新选择
-            
-        # 2. 2FA 方式选择页
-        if "challenge/selection" in current_url:
-            # 智能选择：优先 recovery email > TOTP
-            
-        # 3. 恢复邮箱验证 (challenge/kpe)
-        if is_rec_email_challenge and recovery_email:
-            # 输入恢复邮箱地址
-            
-        # 4. 密码重输 (challenge/pwd)
-        if is_pwd_challenge:
-            # 重新输入当前密码
-            
-        # 5. TOTP 二次验证 (challenge/totp)
-        if is_totp_challenge and totp_secret:
-            # 生成并输入 TOTP 验证码
+            # 会话掉线跳回选号页，重新点选当前账号
+            ...
+        elif "challenge/selection" in current_url:
+            # 多种验身方式选择页：优先挑当前手里握有凭据的恢复邮箱或 TOTP
+            ...
+        elif "challenge/kpe" in current_url and recovery_email:
+            # 要求补全完整恢复邮箱地址确认身份
+            ...
+        elif "challenge/pwd" in current_url:
+            # 重新输入当前生效密码
+            ...
+        elif "challenge/totp" in current_url and totp_secret:
+            # 调 pyotp 算出当前 30 秒窗口的动态码填进去
+            ...
 ```
 
-关键设计在于循环处理。Google 可能在一次操作中连续弹出多种挑战（先要密码，再要 TOTP），所以 Sudo Gate 处理器用 `for cycle in range(6)` 最多循环 6 次，每次检测当前 URL 和页面元素，动态匹配处理策略。
-
-### 1.2 TOTP 密钥提取：从页面 HTML 中挖掘 Base32
-
-Step 5 重置 2FA 时，需要从 Google 的 Authenticator 设置页面提取新的 Base32 密钥。这个密钥显示在页面上的格式是 4 字符一组、空格分隔的文本（如 `ABCD EFGH IJKL MNOP`）。
-
-提取策略是两层漏斗：
+在 Step 5 重置二步验证时，脚本得从网页弹窗里把形如 `ABCD EFGH IJKL MNOP` 的 4 字符分组 Base32 密钥文本抠出来。顺手提个原仓库代码里的小 Bug：它写的两层正则漏斗在第二层兜底遍历 DOM 元素时，忘了把 `m.group(1).upper()` 重新赋给局部变量，一旦第一层没命中就会直接抛 `NameError`（或者读到第一层筛剩下的脏值）。把这处变量赋值修干净之后，两层提取逻辑就很稳了：
 
 ```python
-# 第一层：正则匹配 4-8 组 Base32 字符块
-m_groups = re.search(
-    r"\b(?:[a-zA-Z2-7]{4}\s+){3,7}[a-zA-Z2-7]{4}\b", 
-    dialog_text
-)
+# 第一层：优先匹配标准的 4 字符空格分组 Base32 文本
+m_groups = re.search(r"\b(?:[a-zA-Z2-7]{4}\s+){3,7}[a-zA-Z2-7]{4}\b", dialog_text)
+new_secret = None
 if m_groups:
-    candidate = m_groups.group(0).replace(" ", "").upper()
-    if len(candidate) in (16, 24, 32):
-        new_secret = candidate
+    cand = m_groups.group(0).replace(" ", "").upper()
+    if len(cand) in (16, 24, 32):
+        new_secret = cand
 
-# 第二层：暴力遍历所有元素文本
+# 第二层兜底：去空格后扫弹窗内所有 16~32 位合法 Base32 串，排除标题英文词
 if not new_secret:
-    for e in page.eles("xpath://div[@role='dialog']//..."):
-        m = re.search(r"\b([a-zA-Z2-7]{16,32})\b", txt.replace(" ", ""))
-        if m and candidate not in ("AUTHENTICATOR", "VERIFICATION", ...):
-            new_secret = candidate
+    for elem in page.eles("xpath://div[@role='dialog']//*"):
+        m = re.search(r"\b([a-zA-Z2-7]{16,32})\b", elem.text.replace(" ", ""))
+        if m:
+            cand = m.group(1).upper()
+            if cand not in ("AUTHENTICATOR", "VERIFICATION"):
+                new_secret = cand
+                break
 ```
 
-提取到密钥后，立即用 `pyotp.TOTP(new_secret).now()` 生成验证码填入确认框，完成 2FA 重置闭环。
+抠出 `new_secret` 当场调 `pyotp.TOTP(new_secret).now()` 算出 6 位码填回确认框，新 2FA 就正式生效了。而且每跑完一小步，`StepProgress` 都会立刻把 10 个细分布尔位之一落盘保存（比如 `account.mark_step("step2_email_changed")`）；万一跑到第 5 步正好赶上代理抖动超时，下一轮重试会直接跳过已经打勾的前几步接着往下跑，不会傻乎乎从头再来一遍。
 
-### 1.3 断点续跑：任意步骤中断后恢复
+## 0x01 独立 Chrome 进程、异步线程池、接码 Worker 与 `AES-256-GCM`
 
-每完成一个步骤，引擎立即将进度持久化：
+往下看它的底座，有四块工程细节值得挑出来细看。
 
-```python
-account.mark_step("step2_email_changed")
-self._save_sync(account)
-```
+第一块是双引擎隔离。代码里同时写了 `DrissionPage` 和 `Playwright` 两套驱动，真正干活默认走直接拉起真实 Chrome 进程的 `DrissionPage`：每次领任务找一个空闲调试端口（高并发下找空闲端口记得加锁或直接让内核分配，防瞬间端口抢占竞态），并单独配一个 `data/chrome_profiles/profile_{port}` 目录，这样既不会撞上 Chrome 的 `SingletonLock` 文件死锁，也不会在多账号之间串了 Cookie。至于它给 Playwright 备的那份 `stealth_browser.py`，里面用普通 JS 数组去覆盖 `navigator.plugins`（一测 `instanceof PluginArray` 就露馅），还把 5 组 User-Agent、分辨率、语言（`en-US` / `zh-CN`）和时区（`America/New_York` / `Asia/Shanghai`）做成独立随机抽签。实战里千万别学这种乱炖法：顶着美国出口 IP 和纽约时区，语言却报 `zh-CN`，或者手改的旧版 UA 跟 Chromium 内核发出去的 `Sec-CH-UA` 请求头对不上号，在 Google 的反自动化风控眼里简直就是黑夜里的萤火虫，老老实实让时区和语言跟着出口 IP 归属地走才合逻辑。
 
-`StepProgress` 用 10 个布尔字段精确记录每一步的完成状态。重试时，引擎检查哪些步骤已完成，直接跳过：
+第二块是 `asyncio.Queue` 配死信队列（Dead-Letter Queue）和抖动节流。Worker 领任务前先睡一个 `1.5` 到 `5.0` 秒的随机抖动，每步页面点击之间插 `random.uniform(0.8, 2.0)` 秒停顿。碰到 `WRONG_PASSWORD`、`ACCOUNT_DISABLED` 这类硬伤直接踢进人工复核，不再白费力气；碰到 `STEP_TIMEOUT`、`PROXY_ERROR` 则按 `2^n` 秒指数退避最多重排 3 次；要是失败原因里带着 `passkeyenrollment` 或 `speedbump`，说明只是被 Google 推销通行密钥的中间引导页绊住了脚，自动跳过弹窗拉回重试队列。这里有个写 Python 混编时极容易踩的坑：`DrissionPage` 底层是同步阻塞 I/O，在 20 个并发 `asyncio` 协程 Worker 里调 `DrissionEngine.run_sync(task)` 时，必须包进 `await asyncio.to_thread(engine.run_sync, task)`（或独立进程池）里跑，如果直接在协程里裸调同步方法，一个浏览器等网页加载就会把整个事件循环彻底冻死。
 
-```python
-if not account.step_progress.step2_email_changed:
-    ok = self._step2_recovery_email(page, cred, account)
-    # ...
-```
-
-这意味着如果 Step 5 因为网络超时失败，重试时会跳过 Step 1-4 直接从 Step 5 开始。
-
----
-
-## 二、技术架构
-
-### 2.1 双引擎设计
-
-系统提供两套浏览器引擎，适配不同场景：
-
-| | DrissionPage 引擎 | Playwright 引擎 |
-|---|---|---|
-| Chrome 类型 | 真实 Chrome 进程 | Chromium 内核 |
-| 反检测能力 | 天然通过，就是真 Chrome | 需要 JS 注入伪装 |
-| 并发模式 | 每个任务独立端口 + Profile | 每个任务独立 BrowserContext |
-| 适用场景 | 生产环境（高通过率） | 开发调试（API 更友好） |
-| 进程隔离 | 每个账号独立 Chrome 进程 | 同一 Browser 下的 Context 隔离 |
-
-DrissionPage 引擎是生产首选。它直接控制真实 Chrome 浏览器，Google 的反自动化检测基本无效，因为从 Google 视角看这就是普通用户在操作浏览器。
-
-进程隔离的实现方式：
-
-```python
-def _make_options() -> ChromiumOptions:
-    port = _find_free_port()  # 每个任务随机端口
-    opt.set_local_port(port)
-    # 独立 Profile 目录，防止 Chrome SingletonLock 死锁
-    profile_dir = f"data/chrome_profiles/profile_{port}"
-    opt.set_user_data_path(profile_dir)
-```
-
-每个账号对应一个独立的 Chrome 实例（独立端口 + 独立 Profile），彻底避免了并发时的 Cookie 串扰和 SingletonLock 死锁。
-
-### 2.2 反检测体系
-
-Playwright 引擎需要额外的反检测处理。`stealth_browser.py` 实现了完整的指纹随机化：
-
-```javascript
-// 隐藏 webdriver 属性
-Object.defineProperty(navigator, 'webdriver', {get: () => undefined});
-
-// 伪造 plugins（无头浏览器默认为空）
-Object.defineProperty(navigator, 'plugins', {
-    get: () => [
-        {name: 'Chrome PDF Plugin', filename: 'internal-pdf-viewer'},
-        // ...
-    ]
-});
-```
-
-配合随机 User-Agent、随机分辨率、随机时区和随机语言：
-
-```python
-_USER_AGENTS = ["Chrome/125.0", "Chrome/124.0", ...]  # 5 种
-_VIEWPORTS   = [1920x1080, 1440x900, ...]             # 5 种
-_LOCALES     = ["en-US", "zh-CN", ...]                 # 5 种
-_TIMEZONES   = ["America/New_York", "Asia/Shanghai", ...] # 5 种
-```
-
-每个 BrowserContext 从这些池子中随机组合，确保指纹不重复。
-
-### 2.3 任务队列 + 死信队列
-
-并发调度用经典的 asyncio 生产者-消费者模型：
-
-```
-┌──────────────┐     ┌──────────────┐
-│   任务入队    │────▶│ asyncio.Queue │
-└──────────────┘     └──────┬───────┘
-                            │
-              ┌─────────────┼─────────────┐
-              ▼             ▼             ▼
-        ┌──────────┐ ┌──────────┐ ┌──────────┐
-        │ Worker 0 │ │ Worker 1 │ │ Worker N │
-        └────┬─────┘ └────┬─────┘ └────┬─────┘
-             │             │             │
-             ▼             ▼             ▼
-        ┌──────────────────────────────────┐
-        │  DrissionEngine.run_sync(task)   │
-        └──────────┬───────────────────────┘
-                   │
-          ┌────────┴────────┐
-          ▼                 ▼
-    ┌──────────┐     ┌──────────┐
-    │ VERIFIED │     │  FAILED  │──▶ 死信队列
-    └──────────┘     └──────────┘     (指数退避重试)
-```
-
-死信队列的分类逻辑：
-
-- 不可重试类型自动隔离：`WRONG_PASSWORD`（密码错误）、`ACCOUNT_DISABLED`（封号）、`CAPTCHA_BLOCKED`（风控拦截），这些重试也没用，直接进人工审核
-- 可重试类型指数退避：`STEP_TIMEOUT`（超时）、`PROXY_ERROR`（代理挂了），等 2^n 秒后重试，最多 3 次
-- Passkey 误判恢复：如果失败详情包含 `passkeyenrollment` 或 `speedbump`，说明并非真正失败，实际是卡在中间提示页，强制纳入可重试队列
-
-### 2.4 AES-256-GCM 加密冷库
-
-所有敏感字段（新密码、TOTP 密钥、Cookie）在存入数据库前经过 AES-256-GCM 加密：
-
-```python
-class _Cipher:
-    def encrypt(self, plaintext: str) -> str:
-        nonce = os.urandom(12)  # 96-bit 随机 nonce
-        ct = self._aesgcm.encrypt(nonce, plaintext.encode(), None)
-        return (nonce + ct).hex()  # nonce 和密文拼接后存储
-```
-
-GCM 模式提供认证加密，既保密也防篡改。即使数据库被拖库，没有 32 字节主密钥也无法解密。而且每次加密使用随机 nonce，相同明文产生不同密文，抵抗已知明文攻击。
-
----
-
-## 三、验证码邮件管道
-
-Step 2（替换恢复邮箱）可能触发 Google 的邮箱验证码。系统通过 Cloudflare Email Worker 实现秒级接码：
-
-```
-Google 发送验证码邮件
-    ↓
-Cloudflare Email Routing（Catch-All 规则）
-    ↓
-Email Worker（正则提取 6 位验证码）
-    ↓
-HTTP POST → 主程序回调接口
-    ↓
-主程序轮询取码 → 填入浏览器
-```
-
-Email Worker 的正则提取覆盖了 Google 验证码邮件的多种模板：
+第三块是 Step 2 换绑恢复邮箱时的验证码管道。它用自己域名的 Cloudflare Email Routing 配了一条 Catch-All 转发给边缘侧的 Email Worker，收到信当场用一组正则把 6 位验证码抠出来回调给主程序；万一 30 秒没等来邮件，如果在交互终端下（`sys.stdin.isatty()`）就自动退化成 `input()` 让人工敲进去：
 
 ```javascript
 const codePatterns = [
   /\b([0-9]{6})\b(?=\s*(?:is your|是您的|verification|验证|code))/i,
   /(?:verification code|验证码)[^\d]*([0-9]{6})/i,
-  /G-([0-9]{6})/i,          // Google 特定格式 "G-123456"
-  /\b([0-9]{6})\b/,         // 兜底：提取第一个 6 位数字
+  /G-([0-9]{6})/i,
+  /\b([0-9]{6})\b/, // 兜底规则：切记只在剥掉标签的纯文本正文上跑！
 ];
 ```
 
-如果邮件通道超时（30 秒），系统会降级到手动模式，在终端提示操作者输入验证码：
+写这种邮件解析 Worker 时有两个小坑千万留意：一是最后那条裸匹配 6 位数字的兜底正则，只准喂纯文本正文（`text/plain`），绝不能直接扫原始 HTML 邮件源码，否则分分钟把 CSS 样式里的 `#123456` 颜色十六进制码当成验证码塞回来；二是 Worker 往主程序发 HTTP POST 回调时一定要带 `Bearer` 共享密钥或 HMAC 签名，别开成谁都能往里灌假码的裸接口。
+
+第四块是落库加密。新改出来的强密码、TOTP Base32 种子和会话 Cookie 在进数据库前，统一用 32 字节主密钥跑一遍 `AES-256-GCM` 认证加密。每次加密用 `os.urandom(12)` 现摇一个 96-bit 随机 Nonce，确保语义安全且绝不踩 GCM 最忌讳的 Nonce 复用大忌；更讲究一点的写法是把当前行的 `account_id` 编码成关联认证数据（AAD）一块儿喂进去，这样就算有人拿到了数据库读写权限，也没法把 A 账号的密文偷梁换柱贴到 B 账号头上：
 
 ```python
-if sys.stdin.isatty():
-    user_code = input("6-digit code (or Enter to skip): ").strip()
+class CredentialCipher:
+    def __init__(self, master_key: bytes):
+        self._aesgcm = AESGCM(master_key)  # 32 字节主密钥
+
+    def encrypt(self, plaintext: str, account_id: str) -> str:
+        nonce = os.urandom(12)
+        aad = account_id.encode("utf-8")
+        ct = self._aesgcm.encrypt(nonce, plaintext.encode("utf-8"), aad)
+        return (nonce + ct).hex()
 ```
 
----
+## 0x02 泼盆冷水：跑完这 8 步依然挡不住的四个真后门
 
-## 四、安全设计亮点
+看完了上面挺严整的自动化设计，最后得把原项目宣传里说的"覆盖全部后门、洗完即绝对安全"这个牛皮戳破。站在真实的 Google 账号安全体系面前，光跑完这 8 步，至少还漏着四道大口子。
 
-| 设计 | 实现 | 目的 |
-|------|------|------|
-| 进程隔离 | 每账号独立 Chrome 进程 + 独立端口 + 独立 Profile | 防 Cookie 串扰、防 SingletonLock |
-| 加密存储 | AES-256-GCM + 随机 Nonce | 数据库脱库也无法解密 |
-| 人类行为模拟 | `random.uniform(0.8, 2.0)` 秒操作间隔 + Worker 领任务前 1.5-5.0 秒抖动 | 降低 Google 风控触发率 |
-| 中间提示页自动跳过 | 识别 Passkey 引导、恢复邮箱确认等弹窗 | 防止流程卡死 |
-| 密码强度保证 | 18 位、大小写 + 数字 + 符号、`secrets` 模块生成 | 通过 Google 密码强度校验 |
-| 密码热切换 | Step 6 修改密码后立即 `cred.password = new_password` | 后续步骤用新密码通过 Sudo Gate |
+头号大雷是 Google 官方专门为防盗号设计的"7 天旧恢复凭据保护窗口"。当一个账号在陌生设备或新 IP 上改掉了恢复手机号和恢复邮箱之后，在随后的整整 7 天之内，Google 的申诉与高危校验页面依然允许往修改之前的旧手机号或旧恢复邮箱发送验证码，一键把你改过的所有密码和二步验证全盘推翻！这是刻在 Google 服务端风控状态机里的硬规则，客户端脚本写得再花哨也绕不过这 7 天观察期。
 
----
+第二处漏网之鱼是 8 位一次性备用验证码（Backup Codes）与 16 位应用专用密码（App Passwords）。Step 5 只重置了 Authenticator 的动态码种子，如果原持有人事先生成并存下了那 10 组 8 位备用码，脚本没去主动点销毁重生成，旧备用码照样能过二步验证；应用专用密码虽然在改主密码时通常会被顺带吊销，但交接审计时同样得亲眼核对一遍列表为空才放心。
 
-## 五、与同类方案对比
+第三处最阴险，因为它压根不在 `myaccount.google.com` 的安全设置页里，而是藏在 Gmail 邮箱自己的后台（`mail.google.com/#settings/fwdandpop` 与账号导入页）：事先配好一条自动转发地址外加"收到验证码邮件自动归档跳过收件箱"的静默过滤器，或者在"授予对您账号的访问权限"里挂一个邮件委托（Mail Delegation）账号。哪怕你把外层的 Google 密码、Passkey、TOTP、OAuth 全换了一百遍，往后发进这个邮箱的所有敏感邮件还是会一封不落地抄送出去。
 
-| 维度 | 手动操作 | 简单脚本 | Gmail Sanitizer |
-|------|---------|---------|----------------|
-| 覆盖后门数 | 取决于经验（通常漏 2-3 个） | 1-2 个（通常只改密码） | 全部 6 类后门 |
-| 单号耗时 | 15-30 分钟 | 3-5 分钟 | 1-3 分钟 |
-| 并发能力 | 1 | 1-3 | 20+（可配置） |
-| 断点续跑 | 不支持 | 不支持 | 支持（10 步粒度） |
-| 失败自愈 | 手动重试 | 无 | 死信队列 + 指数退避 |
-| 凭据保护 | 明文 | 明文 | AES-256-GCM |
-| 反检测 | 不需要 | Selenium（易被检测） | 真实 Chrome / 指纹随机化 |
-| Sudo Gate 处理 | 人工判断 | 通常卡住 | 6 种挑战类型自动适配 |
-
----
-
-## 写在最后
-
-Gmail Sanitizer 的技术含量不在"自动化"本身，Selenium 填表单谁都会。它的价值在于对 Google 安全机制的深度理解：知道 Google 有哪些后门、知道 Sudo Gate 有哪些挑战类型、知道 Base32 密钥在页面上以什么格式显示、知道修改密码后旧 TOTP 密钥还能用多久。
-
-从工程角度看，断点续跑 + 死信队列 + 加密冷库的组合让它从"一次性脚本"变成了可运维的生产系统，这是大多数同类工具缺失的维度。
-
-大体量的 Google 账号采购场景，先批量跑一遍 8 步清洗再投入使用，是成本最低的安全保障。
+第四处则是物理硬件安全密钥（WebAuthn Security Keys）与绑在旧安卓手机系统层的 Google Prompt 设备推送，它们的权限权重和移除门槛都比普通网页 Passkey 棘手得多。所以真在正规业务交接里接管高价值 Google 账号，跑完凭据轮换只是走了万里长征第一步，老老实实进 Gmail 把转发规则、过滤器和委托列表翻个底朝天，再盯紧 7 天保护期届满后的安全检查清单，才算真正把门锁死。

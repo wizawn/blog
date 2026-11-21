@@ -1,51 +1,28 @@
 ---
-title: "焚决 Claude — 一个油猴脚本如何撬开 Anthropic 的支付大门"
+title: "不到 200 行油猴脚本撬动收银台：复盘网传 Claude 焚决的通道篡改与 SEPA 清算时间差"
 date: 2026-07-26T04:49:00+08:00
 draft: false
-weight: 1
-categories: ["漏洞分析", "支付安全", "Web 安全"]
-tags: ["Claude", "订阅漏洞", "API 劫持", "Tampermonkey", "SEPA", "支付安全", "漏洞复现", "客户端安全"]
-description: "深入拆解传说中的「焚决」——通过 Tampermonkey 油猴脚本劫持 checkout_capabilities API 响应，前端注入 cassia 支付流，配合随机德国 IBAN 实现 Claude Max/Pro 零元订阅。完整技术分析：Fetch/XHR 双通道拦截、SEPA CORE 直接借记清算机制、MOD 97-10 校验算法局限性、客户端信任边界漏洞的通用攻击框架与防御方案。"
----
-> ** 时效性提醒**：本文发布于 2026 年 7 月，文中涉及的 API 端点、支付流参数均为发布时有效值。Anthropic 随时可能修改 `checkout_capabilities` 响应结构或在后端追加校验逻辑，届时本方法将失效。本文保留仅供安全研究与客户端安全防御参考。
-
+categories: ["漏洞分析", "支付安全"]
+tags: ["Claude", "支付安全", "Tampermonkey", "SEPA", "客户端信任边界", "漏洞复盘"]
+description: "复盘 2026 年夏流传的 Claude 油猴脚本：如何通过劫持 checkout_capabilities 响应把前端收银台切进欧元区 SEPA 直接借记（cassia）通道，利用 ISO 7064 MOD 97-10 纯数学格式校验与 T+1 至 T+3 银行清算时间差套取短期订阅，以及常见的会话失效报错原因与服务端根治方案。"
+weight: 10
 ---
 
-## 前言
+2026 年 7 月那阵子，圈子里神神秘秘传着一套号称"焚决"的 Claude 开号秘籍。名字起得跟玄幻小说似的，结果拿过来扒开源码一看，其实就是一段不到 200 行的 Tampermonkey 油猴脚本。
 
-最近圈子里流传着一个叫**「焚决」**的东西，名字取得很玄，搞得好像什么了不得的秘术。拿到手一看——是一段不到 200 行的 Tampermonkey 油猴脚本。
+代码虽短，下刀的位置却找得极刁钻：趁你打开 `claude.ai` 点升级订阅的那一瞬间，脚本在浏览器内部半路把一个配置接口的响应体换掉，把页面上原本要验卡号、CVC 安全码和 3DS 挑战的信用卡表单，调包成了欧元区的 SEPA 银行账户直接借记（Direct Debit）输入框。接着随便去 `randomiban.com` 生成一串符合校验公式的虚拟德国 IBAN 填进去提交，欧洲银行间的批量清算还没来得及退单拒付，Claude 的高阶订阅就已经先给你开出来了。
 
-但别小看这 200 行代码。它干了一件非常漂亮的事情：在你打开 Claude 网页版准备付费订阅的瞬间，在浏览器内部悄无声息地篡改了一个 API 响应，把你看到的支付页面从信用卡表单换成了 SEPA 银行转账。然后你去 `randomiban.com` 随便生成一个德国银行账号，填进去，提交——Claude Max 到手，扣款金额 0 元。
+这套路子早已随着上游补丁和风控收紧成了历史样本，但它把"前端信任边界失守"和"异步支付清算真空期"这两件事咬合得非常典型，很适合原原本本拆开做个复盘。
 
-这玩意在外面传得沸沸扬扬，各路卡网卖的廉价 Claude 会员，相当一部分就是靠这个批量生产的。
+## 0x00 改一个字段换掉整张收银台，再借 SEPA 异步清算打时间差
 
-今天咱们把它彻底拆开。不光讲它怎么工作，更要讲**为什么能成**、它利用了支付系统的哪个结构性缺陷、以及这种攻击模式怎么迁移到其他平台。
+正常登录 `claude.ai` 点升级套餐时，前端页面并不会写死只画信用卡输入框，第一步总会先发一条 GET 请求去问后端"当前这个组织该渲染哪条收银通道"：
 
----
-
-## 一、攻击全景：一个 API 字段改写引发的连锁反应
-
-### 正常的 Claude 订阅流程
-
-打开 `claude.ai`，点击升级订阅，前端第一件事不是弹出支付表单——它先问后端一个问题：
-
-```
+```text
 GET /api/organizations/{org_id}/subscription/checkout_capabilities
 ```
 
-这个接口的职责很简单：告诉前端，当前这个用户应该走哪条支付通道。 后端会综合 IP 地理位置、账号注册区域、浏览器 Accept-Language 等信号，返回一个支付流标识：
-
-```json
-{
-  "checkout_flow": "stripe"
-}
-```
-
-前端拿到 `stripe`，渲染信用卡表单——卡号、有效期、CVV、3DS 二次验证，一套标准流程。信用卡支付是同步授权的，银行实时校验，过不了就是过不了。
-
-### 劫持后的流程
-
-脚本做的事情只有一件：把所有命中 `checkout_capabilities` 的响应体替换为：
+对绝大多数地区的用户，后端返回的 JSON 里写着 `"checkout_flow": "stripe"`，前端据此加载实时在线扣款的银行卡组件。而那段油猴脚本干的全部事情，就是把这个返回值改成了 Anthropic 内部代表欧元区 SEPA 直接借记通道的代号：
 
 ```json
 {
@@ -53,165 +30,70 @@ GET /api/organizations/{org_id}/subscription/checkout_capabilities
 }
 ```
 
-`cassia` 是 Anthropic 内部用于欧洲 SEPA 银行转账的支付流标识。前端一看返回值变了，渲染逻辑直接切换——不再是信用卡表单，而是一个 IBAN 输入框。
+前端一看到 `cassia`，立马把收银台切换成银行账户扣款授权书（Mandate），只让你填一串欧洲银行的 IBAN 账号。
 
-这时候去 randomiban.com 生成一个德国 IBAN（格式：`DE` + 2 位校验码 + 8 位银行代码 + 10 位账号，共 22 位），填进去，点提交。
+为什么随便拿在线工具捏一串虚拟德国 IBAN 填进去就能骗过第一关？这得把信用卡实时收单和欧洲 SEPA CORE 直接借记（覆盖 36 个国家/地区）的底层清算机制摆在一起比一下：
 
-前端校验？只检查 IBAN 格式是否合法（MOD 97-10 校验通过即可）。
-
-后端校验？SEPA 体系下，提交时不做实时账户验证。
-
-结果：Claude 立刻给你开通了订阅。
-
----
-
-## 二、SEPA 直接借记——为什么填个假账号也能过
-
-这是整个攻击的核心利用点，不理解 SEPA 的清算机制，就不可能理解这个漏洞为什么成立。
-
-### 先搞清楚 SEPA 是什么
-
-SEPA（Single Euro Payments Area，单一欧元支付区）覆盖 36 个欧洲国家和地区，是欧盟推动的统一支付基础设施。其中的 SEPA Direct Debit（直接借记，德语叫 Lastschriftverfahren）允许商家向消费者的银行账户"拉钱"——不是你给商家转账，而是商家拿着你的授权凭证去你的银行把钱取走。
-
-听起来很方便对吧？问题就出在这个"拉钱"的流程设计上。
-
-### 信用卡 vs SEPA 直接借记：两套完全不同的信任模型
-
-| | 信用卡（Stripe 标准流） | SEPA 直接借记（cassia 流） |
+| 对比维度 | 信用卡收单（实时在线授权） | SEPA CORE 直接借记（异步批量拉款） |
 |---|---|---|
-| **授权模式** | 同步在线授权 | 异步离线扣款 |
-| 交易发起时校验 | 卡号 Luhn 校验 + CVV 验证 + 3DS 二次认证 + 银行实时授权 | IBAN MOD 97-10 格式校验，**仅此而已** |
-| **银行参与时机** | 交易发起的瞬间 | 交易发起后的 1-3 个工作日 |
-| **资金确认** | 毫秒级返回授权结果 | 银行不返回任何确认，排队等清算 |
-| **消费者保护** | Chargeback 争议流程 | 8 周无条件撤回权（SEPA CORE 规则） |
+| 结算币种 | 多币种 | 仅限欧元（`EUR` / `€`，绝不结算美元） |
+| 提交瞬间的校验深度 | Luhn 校验 + CVC + 3DS 挑战 + 发卡行毫秒级在线冻结授信额度 | 若未接开放银行实时验户，当场仅跑一遍 ISO 7064 MOD 97-10 纯数学公式验格式 |
+| 真实扣款反馈周期 | 当场返回扣款成功或发卡行拒付 | 扣款指令送进欧洲银行间批量清算网，要等 `T+1` 到 `T+3` 个工作日才出结果 |
+| 账号不存在的后果 | 当场拦截，不开通任何权益 | 几个工作日后对方银行退回 ISO 20022 四位退单原因码（如 `AC01` 账号不正确/不存在、`AC04` 账户已销户、`AM04` 余额不足、`MD01` 无有效授权；注意早年有些文章写成了 `R02`/`R04`，那是美国本土 NACHA ACH 网络的退单码，跟欧洲 SEPA 不是一套标准） |
 
-看到关键区别了吗？信用卡在你点击支付的**那一瞬间**就跟银行确认了你有没有钱、卡号对不对、你本人是不是同意的。而 SEPA 直接借记**完全不做这些**——它只检查 IBAN 的格式，然后把扣款请求扔进银行间的批量清算队列里，等着慢慢处理。
+看清这张表，整个把戏就一点都不玄乎了。IBAN 依赖的 ISO 7064 MOD 97-10 算法只有四步纯算术：把开头的两位国家代码和两位校验码挪到字符串末尾，把字母按 `A=10, B=11, ..., Z=35` 替换成数字，对着拼出来的大整数算一次模 97，余数等于 `1` 就算格式合法。它只能抓出你手滑输错了一位数字，根本不可能知道这个银行账号在现实世界里存不存在；而且在欧洲各国里，德国（`DE`）的 IBAN 固定 22 位（`DE` + 2 位校验码 + 8 位银行代码 BLZ + 10 位账号），不像 27 位的法国 IBAN 那样叠加了额外的 RIB 密钥校验，也不像 24 位的西班牙 IBAN 带国家级 DC 校验位，造出合规格式串的阻力最小。
 
-### SEPA CORE 清算流程
+而平台当年连犯了两个错：既没有在提交结账的后端接口上复核这个账号到底有没有走欧元区 `cassia` 通道的资格，又在异步拉款还没拿到银行 `T+1` 至 `T+3` 清算确认之前，就把昂贵的 Claude Max / Pro 算力立刻交付了出去（这也是那阵子黑产卡网上到处叫卖"质保两天、用完即封"的廉价短命号的真实来历）。
 
-实际的清算过程是这样的：
+## 0x01 细看那不到 200 行油猴脚本里的五个实现细节
 
-```
-你提交 IBAN
-  ↓
-支付网关做 MOD 97-10 校验（纯数学公式，检查 IBAN 格式是否合法）
-  ↓
-校验通过 → 支付网关返回"交易成功"
-  ↓
-Anthropic 收到成功信号 → 开通你的 Claude Max 订阅
-  ↓
-... T+1 到 T+3 工作日 ...
-  ↓
-扣款请求进入 SEPA CORE 清算系统
-  ↓
-商家银行 → 消费者银行：请从账号 DEXX XXXX XXXX XXXX XXXX XX 扣 $20
-  ↓
-消费者银行查询账号 → 账号不存在 / 余额不足 / 未授权
-  ↓
-返回 R 代码拒绝（R02=无效账号, R04=账户已关, R05=被授权人撤销...）
-  ↓
-Anthropic 收到扣款失败通知 → 关闭你的订阅
-```
+虽然核心只是改一个 JSON 键值，但写这段脚本的人在浏览器注入上确实是个老手，几乎把前端拦截容易翻车的边角全堵严实了。
 
-重点来了：从你提交 IBAN 到银行清算出结果，中间有一个 1-3 个工作日的真空期。 在这段时间里，你的 Claude Max 订阅是完全生效的——能用 Opus、能用所有高级功能、流量不限。
-
-### MOD 97-10：格式校验的局限性
-
-IBAN 的校验算法叫 ISO 7064 MOD 97-10，原理其实很简单：
-
-1. 把 IBAN 的国家代码和校验码移到末尾
-2. 把字母转换为数字（A=10, B=11, ..., Z=35）
-3. 对整个大整数做 MOD 97 运算
-4. 结果等于 1 就合法
-
-这个算法能检出什么？**格式错误**——打错了某一位、漏了一位、国家代码不对。
-
-这个算法检不出什么？一切跟真实世界有关的东西——账户是否存在、余额是否充足、持有人是不是你。
-
-`randomiban.com` 生成的 IBAN 就是利用了这一点：它按照 MOD 97-10 算法逆向构造，生成的 IBAN 格式 100% 合法，能通过任何基于此算法的前端和后端校验。至于这个账号在不在现实中存在——那是 3 天后银行清算时才会发现的事情。
-
-### 为什么偏偏是德国 IBAN？
-
-SEPA 覆盖 36 个国家，为什么脚本选了德国（DE）？
-
-1. **格式最简单**：DE 开头的 IBAN 固定 22 位，结构是 `DE + 2位校验码 + 8位银行代码(BLZ) + 10位账号`，没有额外的国家级校验叠加
-2. **通过率最高**：德国 IBAN 在 Stripe 等主流支付网关的接受度最好，不会触发额外的地区风控
-3. 银行代码空间大：8 位 BLZ 有大量有效的银行代码段，随机生成碰上有效 BLZ 前缀的概率不低
-
-对比一下法国 IBAN（27 位，还有额外的 RIB 密钥校验）或者西班牙 IBAN（24 位，有 DC 校验位），德国确实是阻力最小的选择。
-
----
-
-## 三、脚本逐行技术拆解
-
-理解了 SEPA 的机制，再来看脚本本身就清晰多了。每一个设计决策都有明确的技术理由。
-
-### 3.1 元数据——抢在一切之前
+首先是脚本头部的三条元信息指令，直接决定了能不能抢在页面发包前接管上下文：
 
 ```javascript
-// @name         TestExample Cassia Response Mock
+// ==UserScript==
+// @name         Cassia Response Mock Demo
 // @match        *://claude.ai/*
 // @match        *://*.claude.ai/*
 // @run-at       document-start
 // @grant        none
 // @sandbox      raw
+// ==/UserScript==
 ```
 
-三个关键设定：
+`@run-at document-start` 保证在 DOM 还没开始解析时先把钩子挂好（要是等默认的 `document-idle`，`checkout_capabilities` 请求早发完回来了）；而 `@sandbox raw` 配上 `@grant none` 则是为了跳出 Tampermonkey 默认的隔离沙箱，直接改写宿主页面自己用的那个 `window.fetch`。如果留在隔离沙箱里，你改破喉咙也碰不到业务前端真正调用的全局函数。
 
-- `@run-at document-start`：页面 DOM 还没开始构建，脚本已经注入完毕。这不是可选项——如果等到 `document-idle`，`checkout_capabilities` 的请求可能已经发出去了，Hook 就晚了。整个攻击成立的前提就是比目标请求更早完成注入。
-
-- `@sandbox raw`：绕过 Tampermonkey 的安全沙箱。默认沙箱会隔离脚本的执行上下文，导致你覆盖的 `window.fetch` 和页面实际用的 `window.fetch` 不是同一个。`raw` 模式下脚本直接在页面上下文中执行，Hook 才能真正生效。
-
-- `@grant none`：不申请 `GM_*` 系列 API 权限。一方面减少 Tampermonkey 的安全提示弹窗，另一方面 `@sandbox raw` 本身就不兼容 `GM_*` API。
-
-### 3.2 精确制导——只改一个接口
+其次是精准制导的路径正则，连末尾带不带斜杠都兼容了，绝不乱碰其他业务请求免得页面出怪毛病：
 
 ```javascript
-const TARGET_PATH =
-  /^\/api\/organizations\/[^/]+\/subscription\/checkout_capabilities\/?$/;
+const TARGET_PATH = /^\/api\/organizations\/[^/]+\/subscription\/checkout_capabilities\/?$/;
 ```
 
-正则匹配精确到路径段，连末尾有没有斜杠都考虑了。只拦截这一个接口，其他所有请求原样放行。
-
-为什么是这个接口？因为它是 Claude 前端支付流的**单一决策点**——前端根据它的返回值决定渲染 Stripe 信用卡表单还是 SEPA IBAN 输入框。控制了这个响应，就控制了用户看到的整个支付界面。
-
-这种精准度也是为了隐蔽性——如果你 Hook 了所有请求，前端的行为会出各种异常，容易暴露。只改一个接口，前端其他部分的运行完全正常。
-
-### 3.3 Fetch 拦截——先发后改
+第三个细节最贼：拦截 `window.fetch` 时采用的是"先真发请求、等真响应回来再内存换包"：
 
 ```javascript
 const nativeFetch = window.fetch;
 
 window.fetch = async function (input, init) {
-  const method = init?.method ||
-    (input instanceof Request ? input.method : "GET");
-
+  const method = init?.method || (input instanceof Request ? input.method : "GET");
   const targetUrl = getTargetUrl(input, method);
   const originalResponse = await nativeFetch.apply(this, arguments);
 
   if (!targetUrl) {
     return originalResponse;
   }
-
   return createMockResponse(originalResponse);
 };
 ```
 
-注意调用顺序：先用原生 `fetch` 把真实请求正常发出去，等拿到响应后再替换返回值。
+要是图省事在本地直接短路返回一个假 `Response` 不往外发包，服务端访问日志里就会出现"这个用户压根没查过 `checkout_capabilities`，却凭空提交了一笔结账单"的明显时序异常；先让真实 GET 请求照常走一遭拿到 `200`，再在浏览器内存里掉包，从服务端日志往外看一切如常。
 
-这是这个脚本最巧妙的地方。
-
-如果直接拦截请求不发出去，构造一个假响应返回呢？功能上没问题。但从服务端的角度看——你打开了支付页面，前端应该调 `checkout_capabilities`，结果后端日志里根本没看到这个请求。这就是一个异常信号，可以被 Anthropic 的安全团队用于检测。
-
-先发后改的策略完美回避了这个问题：服务端日志里看到了正常的 GET 请求、正常的 200 响应，一切如常。篡改发生在浏览器内部，从 HTTPS 加密通道往外看什么都没变。
-
-### 3.4 Response 重构——细节决定成败
+第四个细节在重构 `Response` 响应头时的扫尾动作：
 
 ```javascript
 function createMockResponse(originalResponse) {
   const headers = new Headers(originalResponse.headers);
-
   headers.delete("content-length");
   headers.delete("content-encoding");
   headers.delete("etag");
@@ -221,42 +103,22 @@ function createMockResponse(originalResponse) {
   headers.set("content-length", String(MOCK_LENGTH));
   headers.set("cache-control", "no-store");
 
-  const response = new Response(MOCK_BODY, {
-    status: 200,
-    statusText: "OK",
-    headers
-  });
+  return new Response(MOCK_BODY, { status: 200, statusText: "OK", headers });
+}
 ```
 
-逐个分析删掉的响应头：
+服务端吐回来的原始响应十有八九带着 `gzip` 或 `br`（Brotli）压缩头 `content-encoding`，如果你塞进去的是明文 JSON 却忘了删掉 `content-encoding` 和旧的 `content-length`，浏览器拿着明文硬做解压当场就会报错抛异常；顺手删掉 `etag` / `content-md5` 并加上 `cache-control: no-store`，则是确保每次刷新页面都老老实实重新过一遍网络钩子，不会被浏览器缓存绕过去。
 
-- `content-encoding`：原始响应大概率是 gzip 或 br 压缩的。我们构造的 JSON 是明文，如果不删这个头，浏览器会拿着明文 JSON 去做 gzip 解压——直接炸。
-- `content-length`：原始响应体大小和我们构造的不一样，不改的话浏览器会截断或报错。
-- `etag` / `content-md5`：完整性校验头。原始响应的哈希和我们篡改后的内容对不上。虽然浏览器通常不强制校验这些头，但删掉更保险——万一前端代码拿这些值做了缓存校验呢。
-- `cache-control: no-store`：强制不缓存。如果浏览器缓存了我们的假响应，下次刷新页面不走 Hook 了就拿到缓存的假数据——反而弄巧成拙。反过来，如果缓存了之前的真响应，前端可能直接用缓存不发请求，Hook 就没机会触发。`no-store` 确保每次都走网络请求，每次都经过 Hook。
-
-### 3.5 XHR 双通道保险
-
-脚本不光 Hook 了 `fetch`，还对 `XMLHttpRequest` 做了一套完整的拦截——覆盖了 `responseText`、`response`、`status`、`statusText`、`getResponseHeader`、`getAllResponseHeaders`。
-
-为什么要两套？现代 Web 应用大多用 `fetch`，但你无法保证 Anthropic 的前端代码——或者它依赖的第三方库——不会在某些场景下 fallback 到 XHR。少 Hook 一个通道就是留了一条漏网之鱼。
-
-XHR 的 Hook 方式也值得一看：
+第五个细节是给 `XMLHttpRequest` 补上的双通道保险。防着前端某处依赖库回退到老式 XHR，脚本没用粗糙的直接赋值，而是先拿 `Object.getOwnPropertyDescriptor` 取出原型链上的原始属性描述符，检查 `configurable` 不为 `false` 后再用 `Object.defineProperty` 精细替换 `responseText`、`response`、`status` 等 getter（最后再往页面右下角塞一个 `#cassia-mock-badge` 小绿标提示脚本已挂载）：
 
 ```javascript
 function replaceXhrGetter(propertyName, replacement) {
-  const descriptor =
-    Object.getOwnPropertyDescriptor(XhrPrototype, propertyName);
-
-  if (!descriptor || typeof descriptor.get !== "function" ||
-      descriptor.configurable === false) {
-    console.warn(`[Cassia Mock] 无法接管 XHR.${propertyName}`);
+  const descriptor = Object.getOwnPropertyDescriptor(XMLHttpRequest.prototype, propertyName);
+  if (!descriptor || typeof descriptor.get !== "function" || descriptor.configurable === false) {
     return;
   }
-
   const nativeGetter = descriptor.get;
-
-  Object.defineProperty(XhrPrototype, propertyName, {
+  Object.defineProperty(XMLHttpRequest.prototype, propertyName, {
     ...descriptor,
     get: function () {
       if (!getMatchedXhr(this)) {
@@ -268,208 +130,32 @@ function replaceXhrGetter(propertyName, replacement) {
 }
 ```
 
-用 `Object.getOwnPropertyDescriptor` 先取原始的 property descriptor，再通过 `Object.defineProperty` 精确替换 getter。比直接赋值靠谱得多——它保留了原始 descriptor 的所有属性（`configurable`、`enumerable`），而且会先检查 `configurable` 是否为 `false`，如果属性被冻结就优雅降级而不是静默失败。
+## 0x02 点提交瞬间撞见"验证失败并清除旧会话"到底是谁的锅
 
-### 3.6 状态指示器
-
-```javascript
-const badge = document.createElement("div");
-badge.id = "cassia-mock-badge";
-badge.textContent = "Cassia Mock ON";
-```
-
-页面右下角一个绿色小角标，确认脚本已激活。实际攻击中这是个安慰剂——真正的确认是看支付页面有没有从信用卡变成 IBAN 输入框。但对于批量操作的卡商来说，这个视觉反馈能提高操作效率。
-
----
-
-## 四、横向迁移：这不是一个漏洞，是一类漏洞
-
-焚决本身只是一个案例，但它代表的攻击模式是可复用的。
-
-### 漏洞本质
-
-> 客户端信任边界缺失：服务端将支付流的决策权——"这个用户该走哪条支付通道"——交给了一个客户端可以任意篡改的 API 响应。
-
-这不是孤例。回顾我们之前分析过的一系列支付漏洞，它们共享同一个底层模式：
-
-| 漏洞 | 被篡改的对象 | 信任边界裂缝 |
-|------|------------|-------------|
-| **焚决（本例）** | `checkout_capabilities` 响应 | 前端信任 API 返回值决定支付通道 |
-| GPT Plus offerToken 注入 | Google Play Billing 内存中的 offerToken | 服务端不校验 token 与账号资格的绑定关系 |
-| GPT iOS 收据复用 | Base64 App Store 收据 | 服务端不验证收据与提交者账号的对应关系 |
-| Cloudflare Pro 竞态 | 并发请求的状态窗口 | 权限发放与支付确认之间存在可利用的时序差 |
-| RevenueCat 回调劫持 | `fetch_token` 跨账号提交 | 第三方回调接口缺乏调用方鉴权 |
-
-### 通用攻击模型
-
-把这些漏洞抽象一下，可以提取出一个四步攻击框架：
-
-```
-1. 定位决策接口
-   找到决定支付流 / 功能开关 / 定价计算的 API 端点
-   信号关键词：checkout_capabilities, payment_methods, available_plans,
-              eligible_promotions, feature_flags, entitlements
-
-2. 注入篡改数据
-   通过油猴脚本（Web）、MITM（移动端）、Frida Hook（Native）等
-   方式替换响应内容
-
-3. 选择确认延迟最长的路径
-   SEPA 直接借记 > 银行转账 > PayPal > 信用卡
-   延迟越长，时间窗口越大
-
-4. 利用"前端校验 + 后端真空"
-   前端校验通过后，后端在异步确认完成前不暂停服务发放
-```
-
-这个框架可以复用到任何订阅制平台，只要目标满足：
-
-- 支付方式的选择依赖客户端可控状态
-- 存在至少一种异步确认的支付方式
-- "服务开通"发生在"支付确认"之前
-
-在漏洞挖掘实战中，打开 DevTools Network 面板，搜索 `checkout`、`payment`、`billing`、`plan`、`subscription` 这些关键词，找到所有影响支付逻辑的端点，逐个测试响应注入——这就是最直接的攻击面枚举方式。
-
----
-
-## 五、防御视角
-
-### 给服务端开发者
-
-1. 支付流决策必须服务端闭环。`checkout_flow` 的值应该在后端根据用户地区、账号状态、风控信号独立计算，前端只是一个渲染器——它不应该有能力选择自己走哪条支付通道。
-
-2. 异步支付必须延迟开通。SEPA、银行转账这类异步支付方式，在银行返回扣款成功确认之前，不应该开通任何付费功能。可以给用户一个"支付处理中"的状态，等清算完成后再激活。
-
-3. API 响应签名。对关键 API 响应做 HMAC 签名（密钥存服务端），前端消费前验签。虽然不能根治（攻击者可以 Hook 验签逻辑），但大幅提高了攻击门槛——从改一个 JSON 字段变成了还得逆向验签实现。
-
-4. IBAN 实时银行验证。接入 SWIFT gpi 或各国央行的 IBAN 验证服务（如德国 Bundesbank 的 IBAN 验证接口），在提交时做实时的账户存在性校验，而不是只靠本地 MOD 97。
-
-### 给安全研究者
-
-这类漏洞的攻击面很清晰——任何一个返回了影响支付逻辑数据的 API 端点，且这个数据可以被前端篡改，都是潜在的攻击入口。
-
-一些高价值的"信号接口"：
-
-- `checkout_capabilities` / `payment_methods` / `available_plans`
-- `region` / `locale` / `country_detection`
-- `eligible_promotions` / `offers` / `discounts`
-- `feature_flags` / `entitlements` / `subscription_tiers`
-
----
-
-## 六、实战翻车现场："验证失败并清除旧会话"
-
-讲完了攻击原理和防御思路，再来看一个真实场景——焚决并不是每次都能成功的。
-
-在实际操作中（不管是焚决的 SEPA 路径还是正常的 Stripe 信用卡路径），你大概率会遇到这样一幕：
+不管是正常拿信用卡付钱，还是当年有人跑自动化脚本测试，点下 Claude 收银台提交按钮的那一刻经常会迎面撞上下面这两行同时蹦出来的红字报错：
 
 ![Claude支付失败截图](/images/claude-payment-session-error.png)
 
-两条红色报错同时弹出来：
+上面写着"未提交付款：发生了意外错误，请检查表单后重试"，底下紧跟着一句"验证失败并清除旧会话"。
 
-1. "未提交付款：发生了意外错误。请检查表单后重试。"
-2. "验证失败并清除旧会话"
+一看见底下那句清除旧会话，其实就不用去怀疑卡里没钱或者表单填错了：请求压根还没走到后面的支付网关，在 Anthropic 自己的前置登录会话校验网关那一步就已经被拍死了。
 
-第一次看到这个，很多人会以为是卡的问题、网络的问题、脚本的问题。其实都不是——这是会话状态失效的问题，而且它能帮我们理解 Anthropic 的支付架构到底是怎么做验证的。
+在 `claude.ai` 网页端体系里，维持登录态的核心凭据是名为 `sessionKey` 的 Cookie（值以 `sk-ant-sid01-...` 开头，所以圈子里常简称为 SK Cookie；注意别跟 ChatGPT 网页端用的 NextAuth Cookie `__Secure-next-auth.session-token` 搞串台了）。平时把这枚会话搞崩的原因逃不出五种：
 
-### 为什么会出现这个错误？
+第一种是 `sessionKey` 自然到期，比如账号在自动化任务队列里排了几个钟头，填完表单点提交时刚好踩在 TTL 过期的点上；第二种是多端互踢，好几个浏览器窗口或脚本 Worker 共用同一串 `sessionKey`，旁边的窗口刚好做了一次请求触发会话令牌轮换，把正在收银台点提交的这个窗口当场挤下了线；第三种最常见，就是中途代理断线重拨导致出口 IP 漂移，建会话时还在 `45.67.xx.xx`，点提交前一秒跳到了另一个国家的 `89.12.xx.xx`，后端风控直接判会话异常踢出；第四种是在支付页面挂机太久导致底层的结账 Intent 过期；第五种则是同一个 `org_id` 同时开了两个标签页并发点升级，后建的结账会话把前一个顶废了。
 
-两条错误同时出现，意味着会话死在了支付提交的瞬间。理解这一点需要知道 Claude 支付提交时后端做了什么：
+平时正经绑卡遇到这提示，关掉多余标签页、固定死一条稳当的代理出口重新登一次账号，快进快出填完提交基本就过了。
 
-```
-用户点击"提交支付"
-  ↓
-前端将 Stripe token / IBAN 提交到 Anthropic 后端
-  ↓
-后端第一件事：校验当前会话（session）是否有效
-  ↓
-会话失效 → 返回"验证失败" → 前端清除旧 session → 支付自然失败
-```
+## 0x03 服务端该怎么彻底堵死"前端选路 + 异步交货"漏洞
 
-关键点在于：Anthropic 在处理支付请求之前，会先验证你的登录会话。 如果会话已经过期或被吊销，支付请求根本不会到达 Stripe——它在 session 校验这一步就被打回来了。
+把这起案例跟站内复盘过的 [Google Play `prorationMode` 篡改](/posts/google-play-ccmax-proration-vulnerability-2026/)、[ChatGPT 0 PHP 跨区定价混淆](/posts/chatgpt-plus-0php-cross-region-pricing-exploit-2026/) 和 [Cloudflare 计费并发竞态](/posts/manual-sec-20260519-cloudflare-billing-race-condition/) 摆在一块儿看，底子其实都是同一类毛病：把原本该由后端独占裁决的路由或计费状态，放心大胆交给了用户浏览器。
 
-### 五种常见的会话失效原因
+讨论修法的时候，曾有人提议"让服务端给 `checkout_capabilities` 的响应体加一层 HMAC 签名，前端渲染前先验签"。仔细推敲一下就会发现这招防君子不防小人：对称 HMAC 的密钥放进公开的前端 JS 包里等于明文送人；就算换成非对称公钥验签，既然攻击者已经用 `@sandbox raw` 把整个页面上下文接管了，顺手把前端的验签函数一块儿 Hook 成永远返回 `true` 也不过是多敲几行代码的事。
 
-① SK Cookie 过期（最常见）
+真正管用的防御必须百分之百收回到服务端自己手里。
 
-Claude.ai 使用 `__Secure-next-auth.session-token`（业内简称 SK Cookie）维持登录态。这个 cookie 有 TTL，通常几个小时后过期。
+第一条铁律是结账落单接口必须在后端独立重算通道资格。前端调 `checkout_capabilities` 拿回来的字段只能当纯 UI 排版参考；等用户真正把 IBAN 或支付令牌 POST 到后端创建订阅时，后端必须根据账户归属地、风控评分和白名单重新算一遍"这个组织到底允不允许走 `cassia`（SEPA）"，不符合条件的直接回 `403` 拒单。
 
-如果你在打开支付页面之前获取的 cookie，到填完表单点提交的时候刚好过期——恭喜，踩中了时间窗口。自动化场景下尤其常见：任务在队列里排了一段时间，等轮到你的时候 cookie 已经不新鲜了。
+第二条是所有异步清算渠道一律实行"到账再给正式额度"。像 SEPA 直接借记、银行电汇这种天然要等 `T+1` 到 `T+3` 工作日才能确认真金白银落袋的支付方式，在清算回执落地前只显示"支付处理中"（或仅给极低成本的防刷试用配额），绝不能钱影儿还没见着就把几百欧元的算力敞开供应。
 
-② Session 被踢（多端互踢）
-
-同一个账号如果在多个地方同时登录（比如你开了好几个 Worker 共用一个 cookie），后登录的会话会使前一个失效。你在 Worker A 上正准备提交支付，Worker B 刚好用同一个 cookie 做了一次请求刷新了 session——A 的 session 就死了。
-
-③ 代理 IP 切换（Session-IP 绑定）
-
-Anthropic 很可能在 session 上绑定了创建时的 IP 或 IP 段。如果你的代理在支付流程中间断线重连，换了一个出口 IP，后端一比对——这个 session 是从 `45.67.xx.xx` 创建的，现在请求来自 `89.12.xx.xx`？验证失败。
-
-④ Stripe PaymentIntent 过期
-
-即使 session 没问题，Stripe 侧也有自己的超时机制。`PaymentIntent` 和对应的 `client_secret` 有有效期（通常数小时，但在高风控场景下可能更短）。如果从打开支付页面到实际提交间隔太长，Intent 过期了，Stripe 返回错误，前端展示为"发生了意外错误"。
-
-⑤ Checkout Session 并发冲突
-
-同一个 Organization 如果同时发起了多个订阅操作（比如一个在升级 Pro，另一个在改支付方式），后一个操作创建的 `checkout session` 会使前一个失效。前一个提交的时候引用的 session ID 已经不存在了。
-
-### 应对策略
-
-针对这类会话失效问题，无论是做自动化还是做安全防护，都有几条通用原则：
-
-从攻击者/自动化角度看：
-
-| 策略 | 做法 | 解决的问题 |
-|------|------|-----------|
-| Session 预检 | 进支付页之前先调 `/api/auth/session` 确认 cookie 存活 | Cookie 过期 |
-| **快进快出** | 打开支付页后立刻完成填写和提交，压缩停留时间 | Intent 超时 |
-| **代理钉住** | 支付全流程内锁定同一个代理出口，不允许中途切换 | IP 绑定 |
-| Cookie 生命周期管理 | 记录每个 cookie 的获取时间，临近 TTL 时主动刷新 | Cookie 过期 |
-| **错误分类重试** | 检测到"清除旧会话"后标记为 session 失效，重新获取 cookie 再试 | 所有会话类问题 |
-| **单账号串行化** | 同一个 org 同时只跑一个支付操作 | 并发冲突 |
-
-从防御者角度看：
-
-这个报错机制本身就是 Anthropic 的一层防线——在处理支付之前先验会话，避免在认证不确定的情况下创建订阅。这个设计是对的。
-
-但如果要更进一步：
-
-1. Session 绑定 + 支付确认二次绑定：不光 session 绑 IP，`PaymentIntent` 也应该绑定创建时的 session ID。Session 变了，Intent 就失效——即使攻击者拿到了一个新的有效 session，也得重新走一遍支付页面，不能复用之前的 Intent。
-
-2. 支付提交时的实时 Session 刷新：在提交支付的瞬间，后端不仅校验 session 是否有效，还可以强制刷新一次 token，确保提交时的 session 是"活跃"的而不仅仅是"未过期"的。
-
-3. **异常模式检测**：如果一个 org 短时间内反复出现"session 校验通过 → 进入支付页 → 提交时 session 失效"的模式，说明有人在用自动化工具——标记为可疑行为。
-
-### 小结
-
-这个"验证失败"的报错看着烦人，但它揭示了一个重要的架构细节：Anthropic 的支付流不是单纯的前端-Stripe 双边交互，中间有一层 session 校验网关。 这层网关既是防线（挡住了过期/伪造的会话），也是自动化场景下最常踩的坑。
-
-理解了这个机制，不管你是想加固自己平台的支付安全，还是想搞清楚为什么自己的自动化流程老是翻车——这个报错里都有答案。
-
----
-
-## 七、写在最后
-
-焚决这个东西，技术上说穿了就是一个客户端状态注入工具。它不攻击 Claude 的认证系统，不碰 Anthropic 的服务器，攻击目标是前端与后端之间那条看不见的信任边界。
-
-它的精妙不在于代码多复杂——说真的 200 行 JS 连个正经项目的单元测试都撑不满——而在于它精准地捏住了两个系统设计缺陷的交叉点：
-
-- Anthropic 的前端支付流由一个可篡改的 API 响应驱动
-- SEPA 直接借记在清算完成前不验证账户真实性
-
-两个缺陷单独拿出来，各自都不算致命。但组合在一起，就变成了一条从"修改一个 JSON 字段"到"零元订阅 Claude Max"的完整攻击链。
-
-而这类"信任边界错位 + 异步确认间隙"的组合漏洞，绝不仅限于 Claude。任何一个同时提供信用卡和 SEPA 支付的 SaaS 平台，如果支付通道的选择权交给了前端，都可能面临同样的问题。
-
-工具可以被修复，模式值得被记住。
-
----
-
-## 相关阅读
-
-- [GPT Plus 订阅漏洞深度分析 — Google Play Billing 鉴权缺失导致 0 元订阅](/posts/gpt-plus-exploit-revenuecat-vulnerability/)
-- [GPT Plus 收据复用漏洞 — iOS 收据验证缺陷](/posts/gpt-plus-receipt-vulnerability-2026/)
-- [Cloudflare 计费逻辑缺陷 — 请求重放绕过订阅支付](/posts/manual-sec-20260519-cloudflare-billing-race-condition/)
-
----
-
-**标签**: #Claude #支付安全 #API劫持 #客户端安全 #SEPA #Tampermonkey #漏洞分析 #焚决
+第三条是在欧洲收单时接上实时账户核验。针对高客单价的 SEPA 授权，要么强制引导走一遍 Open Banking AIS（开放银行账户信息服务）网银实时登录验户，要么接入欧盟推行的 SEPA VoP（Verification of Payee，收付款人户名与账户存在性实时核验）接口，当场就能把在线生成器算出来的幽灵 IBAN 挡在大门外头。

@@ -3,69 +3,61 @@ title: "Codex 官方订阅和中转怎么切换？手改配置与 CC-Switch 说�
 slug: "codex-official-relay-switch"
 date: 2026-09-18T12:30:00+08:00
 draft: false
-weight: 50
 categories: ["Codex常见问题"]
 tags: ["Codex", "官方订阅", "中转", "CC-Switch", "配置"]
-description: "分清 ChatGPT 登录、API Key 和第三方中转，用 profile 或 CC-Switch 安全切换 Codex 提供商。"
+description: "把 ChatGPT 订阅登录、OpenAI 官方 API 和第三方中转的账单与配置边界捋清楚，用 profile 文件干净切换。"
+weight: 10
 ---
 
-{{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}
-联系方式 & 交流群
+很多人刚开始混用官方订阅和第三方中转的时候，最爱干的一件事就是反复去涂改 `~/.codex/config.toml`，改来改去不是把原配置弄丢了，就是环境变量没对上，报出一堆莫名其妙的鉴权错。
 
-- **QQ**: 46333839
-- **微信**: GOV-HACK
+动手之前先把这三条通道的账本分清楚。平时走浏览器 OAuth 登录的叫 ChatGPT 官方订阅模式，吃的是 Plus、Pro 或 Business 账号自带的周期窗口额度，登录态对不对直接敲 `codex login status` 就能看（顺手提一句，`codex logout` 会把本机保存的 ChatGPT 登录态和 API Key 凭据一块儿清掉，没事别乱敲）。用 `printenv OPENAI_API_KEY | codex login --with-api-key` 绑 API Key 的是 OpenAI 官方按量 API，按 Token 扣 `platform.openai.com` 的预付美元余额，受组织 Tier 速率和项目预算限制。至于第三方中转，完全走服务商自己发的 Key、自己的转发地址和限流日志，跟前两条通道互不相通。
 
----
+三者的会话历史、权限和计费彼此独立，千万别为了切个中转就把本地存着官方登录态的 `~/.codex/auth.json` 删掉，更别把这个文件发给任何人。
 
-## 先分清三件事：订阅、API、真正的中转
+## 0x00 用独立 profile 文件切换最省心
 
-| 方式 | 凭据/计费 | 失败时先看什么 |
-|---|---|---|
-| ChatGPT 官方登录 | 浏览器登录的账号或工作区；受计划、用量和重置时间影响 | `codex login status`、账号/工作区用量 |
-| OpenAI API | API Key；按组织/项目的余额、限额和速率计费 | Key、项目、余额、`429`/`usage` 错误 |
-| 第三方中转 | 服务商自己的 Key、模型、限流和日志 | 中转文档、接口兼容性、服务商状态 |
+新版 Codex CLI 原生支持在 `~/.codex/` 目录下并排放多个 `<名称>.config.toml` 方案文件，启动时传个 `--profile` 参数就能指定跑哪套。
 
-API Key 或中转不是“把 ChatGPT 订阅搬到另一个地址”。三者的会话、历史、权限和账单彼此独立。CLI 中可用 `codex login status` 查看当前官方登录，用 `codex logout` 清除本机保存的官方登录；不要为了切到 API 就把 `auth.json` 发给别人。
-
-## 推荐用 profile 切换
-
-官方支持在 `~/.codex/` 下建立多个 profile 文件，启动时选择，不必反复覆盖主配置。先备份原文件，再创建配置：
+动手前先把主配置文件备份一份留底：
 
 ```bash
-cp ~/.codex/config.toml ~/.codex/config.toml.backup-$(date +%Y%m%d-%H%M%S)
-codex --profile official
-codex --profile relay
+cp ~/.codex/config.toml ~/.codex/config.toml.bak-$(date +%Y%m%d-%H%M%S)
 ```
 
-`~/.codex/official.config.toml` 可以只放官方相关的个人偏好；`~/.codex/relay.config.toml` 可以这样写一个**示例**（地址、环境变量名和模型名按服务商文档填写）：
+假设平时主力跑官方订阅，主配置 `~/.codex/config.toml`（或者单独建个 `~/.codex/official.config.toml` 放个人偏好）留给官方不动；另外新建一个 `~/.codex/relay.config.toml` 专门放中转配置，里面的地址、模型名和环境变量名照着你实际用的服务商文档填：
 
 ```toml
+model = "gpt-5-codex" # 按中转服务商实际提供的模型名修改
 model_provider = "my_relay"
 
 [model_providers.my_relay]
-name = "My relay"
-base_url = "https://你的服务商地址/v1"
+name = "My Relay"
+base_url = "https://你的中转服务商地址/v1"
 env_key = "MY_RELAY_API_KEY"
 wire_api = "responses"
 ```
 
-切换时建议按这个顺序：
+注意 `wire_api = "responses"` 这一行：新版 Codex CLI 的 `wire_api` 只支持 `responses`，只兼容老 `/chat/completions` 接口的中转在现行版本上是跑不通的。
 
-1. 关闭正在运行的 Codex 会话，避免旧进程继续使用旧配置。
-2. 确认环境变量已在**启动 Codex 的同一个终端**中设置，再执行 `codex --profile relay`。
-3. 用一句不含敏感信息的短请求测试；同时确认报错中的请求地址和模型确实属于目标提供商。
-4. 测试完成后退出，再用 `codex --profile official` 切回官方。
+配好之后，切换前先把正在跑的旧 Codex 会话彻底关掉，免得旧进程还抱着旧配置不放；然后在同一个已经 `export` 了密钥环境变量的终端里拉起（如果直接从 macOS Dock 或 Windows 开始菜单点开 Codex 桌面端，它读不到终端临时 `export` 的变量，得把变量配进系统级用户环境或从该终端启动）：
 
-项目目录里的 `.codex/config.toml` 只适合项目级偏好，不能覆盖提供商、认证、profile 等本机设置；profile 必须放在用户级 `~/.codex/profile-name.config.toml`。Codex 版本升级后配置键可能变化，先看当前版本的官方配置参考。
+```bash
+export MY_RELAY_API_KEY="sk-xxxx"
 
-如果不想使用 profile，也可以手动编辑 `~/.codex/config.toml`：先备份，替换 `model_provider` 和对应的 `[model_providers.xxx]`，测试后不满意就把备份文件恢复。不要在同一份配置中留下两个同名提供商，也不要把真实 Key 写进 Git 仓库。
+# 指定走中转配置启动，先发一句不带敏感代码的短消息验一下连通和实际命中的地址
+codex --profile relay
 
-## CC-Switch 能不能用
+# 测完退出，不带参数（或传 --profile official）即回到官方通道
+codex
+```
 
-CC-Switch 是第三方工具，不是 OpenAI 官方产品。只从其[官方仓库或 Releases](https://github.com/farion1231/cc-switch) 下载。一般流程是：备份 `~/.codex` 配置 → 添加提供商 → 填写服务商要求的地址、模型和 Key → 激活 → 完全重启 Codex → 发短请求验证。工具只是帮你改配置，不会替你解决服务商不兼容、额度或封禁问题；激活后仍要检查实际请求地址和模型。
+项目根目录下的 `.codex/config.toml` 只适合放项目级偏好，覆盖不了提供商、认证和 profile 这类本机设置，所以切换方案一律放在用户家目录 `~/.codex/` 下。实在不想分 profile、非要手改主文件 `~/.codex/config.toml` 也行，记得先备份（改坏了直接把备份覆盖回去），注意别在同一份 TOML 里留下两个重名的 `[model_providers.xxx]` 段，也别把明文 Key 提交进 Git 仓库。
 
-中转服务通常能看到你发送的代码、提示词和请求元数据，计费、留存、审计和兼容性也由它决定。不要把 OpenAI OAuth/access token、`~/.codex/auth.json`、API Key 或 Cloudflare token 粘贴进文章、截图或中转配置。生产代码先脱敏，能不用中转处理的敏感项目不要使用不明服务商。
+## 0x01 用 CC-Switch 图形化切换要注意什么
 
-切换后历史记录暂时看不到，通常是 provider、账号或 session 不同，不代表数据被删除；先切回原 provider、原 profile 和原工作目录检查。若官方登录正常而中转失败，优先找中转服务商；若所有方式都失败，再看网络和 OpenAI 状态。
+嫌手写 TOML 麻烦的话，社区开源的第三方小工具 [CC-Switch](https://github.com/farion1231/cc-switch) 也能拿来点选切换，下载时认准作者的 GitHub Releases 页面即可。点切换之前照样先把 `~/.codex` 目录备份一份；它本质上只是替你覆写本地配置文件，管不了服务商协议不兼容或额度用尽，激活新配置后一样得彻底重启 Codex 再发短消息核对一眼。
 
-参考：[Codex 身份验证](https://developers.openai.com/zh-Hans/docs/auth)｜[配置方案文件](https://developers.openai.com/zh-Hans/docs/config-file/config-reference)。
+最后留几个心眼。第一，第三方中转网关在技术上能看到你发过去的所有代码片段、提示词和请求元数据；写写个人玩具项目无所谓，碰到公司核心仓库或者带内网地址、密钥的生产代码，先脱敏或者老老实实切回官方通道跑。第二，切完通道发现之前的聊天记录不见了先别慌，不同 provider 或不同工作目录的会话本来就是分开挂的，切回原来的配置和原目录自然就回来了。另外如果遇到官方登录完全正常、只有切到中转才报错，优先找中转服务商查上游；要是两边一起挂，再回头查本机网络和 OpenAI 状态页。
+
+底层配置字段随版本升级偶有调整，拿不准的时候直接翻官方的 [Codex 身份验证说明](https://developers.openai.com/codex/auth) 和 [配置文件参考手册](https://developers.openai.com/codex/config-reference)。

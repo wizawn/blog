@@ -1,545 +1,151 @@
 ---
-title: "Codex Console v1.1.1 超详细保姆级教程 - 从零到一完整部署指南（2026 最新版）"
+title: "Codex Console 部署与排坑记录：源码运行、Docker 映射与安全配置"
 date: 2026-03-26T09:15:00+00:00
 lastmod: 2026-03-26T09:30:00+00:00
-categories: ["tech"]
-tags: ["tutorial", "codex", "guide", "open-source", "step-by-step"]
+categories: ["AI 工具", "技术教程"]
+tags: ["Codex", "Codex Console", "开源工具", "部署教程"]
 draft: false
-weight: 1
----
----
-
-## 前言
-
-> 写教程不易，如果对您有帮助，欢迎赞赏支持！
-> 
-> **微信收款码**：
-> 
-> 
-> **支付宝收款码**：
-> 
-> 
-> 感谢您的支持！
-
-这篇教程覆盖 Codex Console v1.1.1 的完整部署和使用流程。Codex Console 是一款免费开源的 OpenAI/Codex 账号注册管理工具。
-
-假设你没有编程基础，每一步都给出了可直接复制执行的命令，常见的坑也提前标注了。内容跟随项目版本同步更新。
-
-**项目信息**：
-- GitHub 仓库：https://github.com/dou-jiang/codex-console
-- **基于项目**：cnlimiter/codex-manager（修复增强版）
-- **许可证**：MIT（免费开源）
-- **当前版本**：v1.1.1
-
-{{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}
-**联系方式**：
-- **微信**：`GOV-HACK`（添加请备注"兑换码购买"）
-- **QQ**：`46333839`（工作日 9:00-18:00 在线）
-
+description: "整理开源项目 dou-jiang/codex-console（v1.1.1+）在本地与服务器上的部署流程，修正 /tmp 目录丢失、0.0.0.0 默认监听配弱口令、docker-compose 硬编码密码与 noVNC 端口裸奔等常见配置坑。"
+weight: 10
 ---
 
-## 重要声明（必读）
+[`dou-jiang/codex-console`](https://github.com/dou-jiang/codex-console) 是基于 [`cnlimiter/codex-manager`](https://github.com/cnlimiter/codex-manager) 二次维护的一套开源 Web 管理面板（MIT 协议，最初整理这篇记录时跑的是 `v1.1.1`，上游后续已迭代出 `v1.1.2` 及更新版本）。相比原版，它补上了 CloudMail 邮箱轮询取码、`newApi` / `oldApi` 导出对接、Codex 账号 JSON 导出回迁、CPA `proxy_url` 代理保存以及 Outlook 状态列展示，顺手还修了不同 Starlette 版本的模板渲染兼容、六位普通数字误判成验证码、Outlook 邮箱大小写识别错乱和并发验证卡死等一堆陈年小毛病。
 
-### 1. 免费开源原则
+在动手搭环境之前，先把丑话说在前面。第一，这项目从头到尾都是免费开源的，外面但凡改个标题拿去收费倒卖的直接绕道就行。第二，仓库依赖里带了 `playwright` 和批量自动化逻辑，拿工具搞批量自动注册或自动绑卡直接踩死在 OpenAI 服务条款的红线上，极易招来连坐封号，下面的部署笔记仅限在本地回环环境里学习研究它的 FastAPI + SQLAlchemy 工程实现，切勿拿去干违规滥用的活儿。
 
-本项目永久免费开源，任何付费版本均为倒卖行为！
+## 0x00 Python 3.11 与代理环境准备
 
-- **禁止倒卖**：严禁倒卖本项目及相关衍生版本
-- **禁止付费**：任何人向你收费提供本工具，请立即退款并举报
-- **允许学习**：允许学习、研究、二次开发
-- **允许分享**：允许分享给有需要的朋友
+这项目要求 Python `3.10` 及以上（平时直接装 `3.11` 或 `3.12` 最省事），外加 Git 和一个能稳当连上外网的本地 HTTP 代理。
 
-### 2. 合法使用提醒
+在三类常见系统上装 Python 3.11 时各有各的小坑。Windows 10 / 11（64 位）直接去 [Python 官网](https://www.python.org/downloads/)下 64 位安装包，向导第一页底下那个 `Add Python to PATH` 千万记得勾上；如果想在 PowerShell 里看一眼系统版本，敲 `Get-ComputerInfo OsName,OsVersion` 最通吃，别抄英文教程里的 `systeminfo | findstr "OS Name"`，中文版 Windows 输出写的是"OS 名称"，那行命令敲下去半个字都筛不出来。
 
-- 请遵守 OpenAI 相关服务条款
-- 严禁用于违规、滥用或非法用途
-- 仅供学习、研究和技术交流使用
-- 因使用本项目产生的风险和后果由使用者自行承担
+macOS 上用 Homebrew 跑完 `brew install python@3.11 git` 之后，注意终端里直接敲不带版本号的 `python3` 调出来的往往还是系统自带的 Xcode Command Line Tools 旧版本，后面建虚拟环境时老老实实指明 `python3.11` 最稳。
 
-### 3. 使用建议
-
-- **新手建议**：先用小号测试，熟悉流程后再批量操作
-- **时段选择**：避开北京时间 14:00 左右（美国午夜，封号高峰）
-- **批量控制**：建议每批 10-50 个，不要一次性注册太多
-- **数据备份**：定期导出账号数据，防止丢失
-
----
-
-## v1.1.1 版本更新内容
-
-### 新增功能（5 项）
-
-| 序号 | 功能 | 说明 |
-|------|------|------|
-| 1 | CloudMail 邮箱服务 | 完整支持服务注册、配置接入、邮件轮询、验证码提取 |
-| 2 | newApi 上传支持 | 可配置选择不同导入目标类型（newApi/oldApi） |
-| 3 | Codex 账号导出 | 导出的账号可直接用于登录、数据迁移、重新导入 |
-| 4 | CPA proxy_url 支持 | CPA 服务配置中可直接保存并使用代理地址 |
-| 5 | Outlook 状态识别 | 直观查看"已注册/未注册"状态，显示关联账号编号 |
-
-### 功能优化（5 项）
-
-| 序号 | 优化项 | 效果 |
-|------|--------|------|
-| 1 | 批量注册上限 | 从 100 个提升至 **1000 个** |
-| 2 | OAuth token 刷新 | 完善异常处理，降低报错概率 |
-| 3 | 批量验证流程 | 改为受控并发，减少卡死问题 |
-| 4 | WebUI 端口冲突 | 自动切换可用端口，无需手动修改 |
-| 5 | 字段迁移逻辑 | 启动时自动补齐新增字段，兼容旧数据 |
-
-### BUG 修复（4 项）
-
-| 序号 | 修复内容 | 影响 |
-|------|----------|------|
-| 1 | 模板渲染兼容 | 适配不同 Starlette 版本 |
-| 2 | 六位数字误判 OTP | 避免无关文本被识别为验证码 |
-| 3 | Outlook 大小写问题 | 避免 Outlook.com 因大小写误判 |
-| 4 | Outlook 列表显示 | 修复列错位、乱码、占位文案问题 |
-
----
-
-## 环境准备（按步骤操作）
-
-### 第一步：确认操作系统
-
-本教程支持以下操作系统：
-
-| 系统 | 版本要求 | 推荐度 |
-|------|----------|--------|
-| Windows | Windows 10/11 (64 位) | |
-| macOS | macOS 10.15+ | |
-| Linux | Ubuntu 20.04+/Debian 10+ | |
-| Docker | 任意支持 Docker 的系统 | |
-
-查看系统版本命令：
+至于 Linux 服务器，直接选 Ubuntu 22.04+ 或 Debian 12+（早年的 Ubuntu 20.04 和 Debian 10 早就过了标准维护期，默认源里也没有现成的 `python3.11` 包；RHEL 8.8+ 或 Rocky / AlmaLinux 9+ 注意装 pip 时包名叫 `python3.11-pip`，别装成给系统老 Python 用的 `python3-pip`）：
 
 ```bash
-# Windows（PowerShell）
-systeminfo | findstr /B /C:"OS Name" /C:"OS Version"
-
-# macOS
-sw_vers
-
-# Linux
-cat /etc/os-release
-```
-
-### 第二步：安装 Python（3.10+）
-
-#### Windows 安装 Python
-
-1. 下载 Python
-   - 访问官网：https://www.python.org/downloads/
-   - 下载 Python 3.10 或更高版本（推荐 3.11/3.12）
-   - 选择 "Windows installer (64-bit)"
-
-2. 安装 Python
-   - 双击安装包
- - **重要**：勾选 "Add Python to PATH"
-   - 点击 "Install Now"
-
-3. **验证安装**
-   ```bash
-   # 打开命令提示符（Win+R → cmd）
-   python --version
-   # 应显示：Python 3.10.x 或更高
-   ```
-
-#### macOS 安装 Python
-
-```bash
-# 使用 Homebrew（推荐）
-brew install python@3.11
-
-# 验证安装
-python3 --version
-```
-
-#### Linux 安装 Python
-
-```bash
-# Ubuntu/Debian
+# Ubuntu 22.04+ / Debian 12+
 sudo apt update
-sudo apt install python3.11 python3.11-venv python3-pip
+sudo apt install -y git python3.11 python3.11-venv python3-pip
 
-# CentOS/RHEL
-sudo yum install python3.11 python3-pip
-
-# 验证安装
-python3 --version
+# RHEL 8.8+ / Rocky / AlmaLinux 9+
+sudo dnf install -y git python3.11 python3.11-pip
 ```
 
-### 第三步：安装 Git
-
-#### Windows 安装 Git
-
-1. 下载：https://git-scm.com/download/win
-2. 双击安装，使用默认选项即可
-3. 验证：
-   ```bash
-   git --version
-   ```
-
-#### macOS 安装 Git
+开装依赖前先拿 `curl` 探一眼本地代理通不通（假设本机代理跑在 `127.0.0.1:7890`）：
 
 ```bash
-# 使用 Homebrew
-brew install git
-
-# 或使用 Xcode 命令行工具
-xcode-select --install
+curl -x http://127.0.0.1:7890 -I https://chatgpt.com
 ```
 
-#### Linux 安装 Git
+能痛快返回 HTTP 响应头再往下走，不然服务跑起来也是干卡着超时。
+
+## 0x01 源码虚拟环境安装（千万别往 `/tmp` 里克隆）
+
+见过不少抄来抄去的部署教程第一句就教人 `cd /tmp && git clone ...`，这习惯真是害人不浅：Linux 机器但凡重启一次，或者 macOS 跑一轮系统日常清理，`/tmp` 底下的目录连同你跑出来的默认 SQLite 数据库 `data/database.db` 和 `.env` 配置全会被清得渣都不剩。正经装软件就在自己的家目录 `~/apps` 或者 `/opt` 底下安家：
 
 ```bash
-# Ubuntu/Debian
-sudo apt install git
-
-# CentOS/RHEL
-sudo yum install git
-
-# 验证
-git --version
-```
-
-### 第四步：准备代理环境（重要）
-
-由于 OpenAI 服务限制，你需要准备可用的代理：
-
-**代理要求**：
-- 支持 HTTPS
-- 稳定性好（推荐付费代理）
-- 延迟低于 300ms
-- 支持并发连接
-
-**常见代理配置**：
-
-```bash
-# 本地代理示例（Clash）
-HTTP 代理：http://127.0.0.1:7890
-HTTPS 代理：http://127.0.0.1:7890
-
-# 环境变量设置（临时）
-export HTTP_PROXY=http://127.0.0.1:7890
-export HTTPS_PROXY=http://127.0.0.1:7890
-
-# Windows PowerShell
-$env:HTTP_PROXY="http://127.0.0.1:7890"
-$env:HTTPS_PROXY="http://127.0.0.1:7890"
-```
-
-**代理测试命令**：
-
-```bash
-# 测试代理是否可用
-curl -x http://127.0.0.1:7890 https://www.google.com -I
-# 返回 HTTP/2 200 表示正常
-```
-
----
-
-## 安装部署（5 种方式任选）
-
-### 方式一：源码安装（推荐新手）
-
-#### 步骤 1：克隆项目
-
-```bash
-# 选择安装目录（Windows 示例：D:\tools\codex-console）
-cd /tmp  # Linux/Mac
-
-# 克隆项目
+mkdir -p ~/apps && cd ~/apps
 git clone https://github.com/dou-jiang/codex-console.git
-
-# 进入项目目录
 cd codex-console
 
-# 查看项目结构
-ls -la
-```
-
-**预期输出**：
-```
-drwxr-xr-x  9 root   4096 Mar 26 09:10 .
-drwxrwxrwt 26 root   4096 Mar 26 09:10 ..
--rw-r--r--  1 root   1461 Mar 26 09:10 build.bat
--rw-r--r--  1 root   1185 Mar 26 09:10 build.sh
--rw-r--r--  1 root    647 Mar 26 09:10 docker-compose.yml
--rw-r--r--  1 root   8278 Mar 26 09:10 README.md
--rw-r--r--  1 root    303 Mar 26 09:10 requirements.txt
-drwxr-xr-x  7 root   4096 Mar 26 09:10 src
-drwxr-xr-x  4 root   4096 Mar 26 09:10 static
-drwxr-xr-x  3 root   4096 Mar 26 09:10 templates
--rw-r--r--  1 root   5992 Mar 26 09:10 webui.py
-```
-
-#### 步骤 2：创建虚拟环境（强烈推荐）
-
-为什么使用虚拟环境：
-- 避免污染系统 Python 环境
-- 方便管理依赖包
-- 便于迁移和部署
-
-```bash
-# Python 3.10+ 内置 venv 模块
-python -m venv .venv
-
-# 激活虚拟环境
-# Windows (CMD):
-.venv\Scripts\activate
-
-# Windows (PowerShell):
-.venv\Scripts\Activate.ps1
-
-# Linux/Mac:
+python3.11 -m venv .venv
 source .venv/bin/activate
 ```
 
-**激活成功后**，命令行前会出现 `(.venv)` 标识：
-```
-(.venv) user@host:~/codex-console$
+如果你在 Windows 的 PowerShell 里跑 `.venv\Scripts\Activate.ps1` 激活虚拟环境时撞上"在此系统上禁止运行脚本"的红字报错，只想在当前这一个终端窗口临时放行的话，把作用域设成 `-Scope Process` 就够了（网上爱抄的 `-Scope CurrentUser` 会永久改写当前用户的注册表策略，完全没必要）：
+
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.venv\Scripts\Activate.ps1
+# 若在传统 CMD 窗口下则直接运行：.venv\Scripts\activate.bat
 ```
 
-#### 步骤 3：安装依赖
+进到虚拟环境（命令行前缀带 `(.venv)`）之后，把 `requirements.txt` 里的依赖装齐（里面主要是 FastAPI、Uvicorn、Pydantic v2、SQLAlchemy 2.x、`aiosqlite`、`psycopg[binary]>=3.1.18`、`curl_cffi` 和 `playwright`）。用传统 `pip` 或者更快的 `uv` 都行：
 
 ```bash
-# 方式 1：使用 pip（通用）
-pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
-
-# 方式 2：使用 uv（更快，推荐）
-# 先安装 uv
-pip install uv
-
-# 使用 uv 安装依赖
-uv pip install -r requirements.txt
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+# 网络拉包慢的话可以临时挂清华镜像：-i https://pypi.tuna.tsinghua.edu.cn/simple
+# 或者装了 uv 的直接跑：uv pip install -r requirements.txt
 ```
 
-**依赖列表**（requirements.txt）：
-```
-certifi>=2024.0.0
-cffi>=1.16.0
-curl_cffi>=0.14.0
-pycparser>=1.21
-pydantic>=2.0.0
-pydantic-settings>=2.0.0
-fastapi>=0.100.0
-uvicorn[standard]>=0.23.0
-jinja2>=3.1.0
-python-multipart>=0.0.6
-sqlalchemy>=2.0.0
-aiosqlite>=0.19.0
-psycopg[binary]>=3.1.18
-playwright>=1.40.0  # 自动绑卡依赖
-```
-
-**安装时间**：约 2-5 分钟（取决于网络）
-
-**验证安装**：
-```bash
-pip list | grep -E "(fastapi|uvicorn|playwright)"
-```
-
-#### 步骤 4：安装 Playwright 浏览器（可选）
-
-如需使用自动绑卡功能，需要安装 Playwright 浏览器：
+平时如果只看后台管理代码、不碰浏览器自动化那一块，到这里依赖就已经齐活了；真需要拉起无头浏览器模块时，才需要额外下载几百兆的 Chromium 内核与系统图形库：
 
 ```bash
-# 安装浏览器
-playwright install
-
-# 安装系统依赖（Linux）
-playwright install-deps
+playwright install chromium
+# Linux 服务器缺底层动态库时再补一句：
+sudo $(which playwright) install-deps chromium
 ```
 
-**注意**：这一步可能需要较长时间（10-20 分钟），如果暂时不需要绑卡功能可以跳过。
+## 0x02 配 `.env` 的监听红线与 PostgreSQL v3 驱动说明
 
-#### 步骤 5：配置文件
+把仓库自带的环境变量模板拷一份出来改：
 
 ```bash
-# 复制环境变量模板
 cp .env.example .env
-
-# 编辑配置文件（选择你熟悉的编辑器）
-# Windows: 用记事本打开 .env
-# Linux/Mac: nano .env 或 vim .env
 ```
 
-.env 配置示例：
+打开 `.env` 填参数的时候，最要命的是监听地址和初始密码。上游代码默认就把监听地址设在 `0.0.0.0`，没配密码时回退的默认口令又是烂大街的 `admin123`，而不少教程还照着默认值原样留着直接往公网云服务器上跑。真这么干，不出半天后台里存的账号和 Token 就会被路过的扫描器洗劫一空。不管是本机还是远端服务器，一律建议把 `APP_HOST` 显式改成 `127.0.0.1` 回环口，启动前先把密码换成 16 位以上的随机强口令；人在外地要连服务器后台时，本地敲一条 `ssh -L 8000:127.0.0.1:8000 user@server` 走 SSH 隧道映射回来打开最稳当，或者老老实实在前面套一层带 HTTPS 证书的 Nginx 反代。
+
+顺带提一嘴 PostgreSQL 连接串的细节：这项目装的是新一代的 `psycopg[binary]>=3.1.18`（即 psycopg 3），没装老的 `psycopg2`。虽然项目自身的配置加载函数会自动把 `postgresql://` 补全改写成 `postgresql+psycopg://`，但如果你把同一条连接串复用到自己写的外部 SQLAlchemy 备份或迁移脚本里，记得直接写全 `postgresql+psycopg://`，免得外部脚本默认去找不存在的 `psycopg2`。
+
+整理后的一份干净 `.env` 示例：
 
 ```ini
-# ── Web UI 监听地址 ──────────────────────────────────────────
-# 监听主机（默认 0.0.0.0，允许外部访问）
-APP_HOST=0.0.0.0
-
-# 监听端口（默认 8000，可自定义）
+# 仅监听本地回环口，拒绝公网明文裸奔
+APP_HOST=127.0.0.1
 APP_PORT=8000
 
-# Web UI 访问密码（⚠️ 强烈建议修改！）
-APP_ACCESS_PASSWORD=your_strong_password_here
+# 启动前务必改成高强度随机口令，别留默认密码
+APP_ACCESS_PASSWORD=请替换成16位以上随机强口令
 
-# ── 数据库 ───────────────────────────────────────────────────
-# 本地 SQLite（默认，新手推荐）
+# 默认走本地 SQLite（程序内部会将相对路径归一到项目目录下）
 APP_DATABASE_URL=data/database.db
 
-# 远程 PostgreSQL（高级用户）
-# APP_DATABASE_URL=postgresql://user:password@host:5432/dbname
+# 若切到外部 PostgreSQL，建议直接写全 +psycopg 驱动前缀
+# APP_DATABASE_URL=postgresql+psycopg://user:password@127.0.0.1:5432/codex_console
 
-# ── 代理配置（重要）
-# HTTP_PROXY=http://127.0.0.1:7890
-# HTTPS_PROXY=http://127.0.0.1:7890
-
-# ── 第三方自动绑卡（可选）
-# BIND_CARD_API_URL=https://your-workers-domain.dev/
-# BIND_CARD_API_KEY=your_api_key_here
+# 出站代理
+HTTP_PROXY=http://127.0.0.1:7890
+HTTPS_PROXY=http://127.0.0.1:7890
 ```
 
-** 安全提醒**：
-- 务必修改 `APP_ACCESS_PASSWORD` 默认值
-- 不要将 `.env` 文件上传到公开仓库
-- 生产环境建议使用强密码（16 位以上，包含大小写、数字、符号）
-
-#### 步骤 6：启动服务
+保存后顺手敲一句 `chmod 600 .env` 把配置文件权限收紧，然后启动 `webui.py`（命令行也支持临时传 `--host`、`--port`、`--access-password` 或 `--debug` 覆盖环境变量）：
 
 ```bash
-# 方式 1：默认启动（127.0.0.1:8000）
-python webui.py
-
-# 方式 2：指定主机和端口（允许外部访问）
-python webui.py --host 0.0.0.0 --port 8000
-
-# 方式 3：设置访问密码
-python webui.py --access-password your_password
-
-# 方式 4：组合参数（推荐）
-python webui.py --host 0.0.0.0 --port 8000 --access-password your_password
-
-# 方式 5：调试模式（开发使用）
-python webui.py --debug
+python webui.py --host 127.0.0.1 --port 8000
 ```
 
-**启动成功标志**：
-```
-INFO:     Started server process [12345]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
-```
+看到终端打出就位提示就算跑通了，浏览器访问 `http://127.0.0.1:8000` 输密码就能进界面（`v1.1.1` 起如果默认端口被占，它会自动往后顺延找空端口并在终端打印实际端口）。
 
-访问 WebUI：
-- 本地访问：http://127.0.0.1:8000
-- 远程访问：http://你的服务器 IP:8000
-- 默认密码：admin123（如未在 .env 中修改）
+## 0x03 Docker Compose 部署与硬编码密码、`6080` 端口隐患
 
----
+不想在宿主机折腾 Python 环境的话，也可以直接用仓库自带的 `docker-compose.yml`（需 Docker 20.10+ 与 Compose v2）。
 
-### 方式二：Docker 部署（推荐生产环境）
+这里有两处非常隐蔽的坑千万盯紧。第一，源码直接跑 `webui.py` 默认起在 `8000` 端口，而仓库里的 `docker-compose.yml` 固定把 WebUI 映射到了宿主机的 `1455` 端口（跟 Codex 本地 OAuth 回调常用的端口相同），同时还暴露了一个完全无密码（`x11vnc -nopw`）的 `6080` 端口给容器里的 `noVNC` 远程桌面画面用；第二，上游 `docker-compose.yml` 在 `environment:` 里直接写死了 `WEBUI_ACCESS_PASSWORD=admin123` 且没有挂载 `.env` 文件，如果你只改了外面的 `.env` 就敲 `up -d`，容器起来的密码依然是 `admin123`！
 
-#### 前置要求
-
-- 已安装 Docker 和 Docker Compose
-- Docker 版本：20.10+
-- Docker Compose 版本：2.0+
-
-安装 Docker：
+所以在云服务器上启动容器之前，务必先打开 `docker-compose.yml`，把 `WEBUI_ACCESS_PASSWORD=admin123` 改成你自己的强口令，再把 `ports` 全部加上回环前缀改成 `127.0.0.1:1455:1455` 和 `127.0.0.1:6080:6080`（防止 Docker 绕过 `ufw` 防火墙把管理口和无密码桌面捅到公网）：
 
 ```bash
-# Ubuntu/Debian
-curl -fsSL https://get.docker.com -o get-docker.sh
-sudo sh get-docker.sh
-sudo systemctl enable docker
-sudo systemctl start docker
-
-# 验证安装
-docker --version
-docker compose version
-```
-
-#### 使用 Docker Compose（推荐）
-
-```bash
-# 克隆项目
-git clone https://github.com/dou-jiang/codex-console.git
-cd codex-console
-
-# 启动服务
+# 先改好 docker-compose.yml 里的 WEBUI_ACCESS_PASSWORD 强口令与 127.0.0.1 端口绑定，再启动
 docker compose up -d
-
-# 查看日志
 docker compose logs -f
 
-# 停止服务
+# 不用时停掉容器
 docker compose down
 ```
 
-**访问服务**：
-- WebUI: http://你的服务器 IP:1455
-- noVNC（绑卡可视化）: http://你的服务器 IP:6080
+## 0x04 两个高频启动问题速查
 
----
+平时拉起服务最常碰见两件事。一是端口占用：`v1.1.1` 及之后版本遇到 `8000` 被占会自动往后找空端口（比如顺延到 `8001`），注意看一眼终端实际打出来的端口号，别一直守着旧端口刷页面；老版本报 `[Errno 98] Address already in use`（Windows 报 `[WinError 10048]`）或者你想固定死 `8000` 端口时，把占着端口的旧进程查出来关掉即可：
 
-## 常见问题解答
-
-### 一、安装问题
-
-Q1: pip install 报错 "Could not find a version that satisfies the requirement"
-
-**解决**：
 ```bash
-# 升级 pip
-python -m pip install --upgrade pip
+# Linux / macOS 查端口占用
+lsof -i :8000
 
-# 使用国内镜像
-pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+# Windows PowerShell / CMD 查占用 PID
+netstat -ano | findstr :8000
 ```
 
-Q2: 虚拟环境激活失败
-
-Windows PowerShell 执行策略问题：
-```powershell
-# 临时允许执行脚本
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-
-# 重新激活
-.venv\Scripts\Activate.ps1
-```
-
-### 二、启动问题
-
-Q1: 端口被占用
-
-```
-Error: [Errno 98] Address already in use
-```
-
-**解决**：
-```bash
-# 方式 1：更换端口
-python webui.py --port
----
-
-## 💖 赞赏支持
-
-<div style="margin: 50px 0; padding: 30px 20px; border: 3px dashed #ff6b6b; border-radius: 15px; background: linear-gradient(135deg, #fff5f5 0%, #fff0f0 100%); text-align: center; box-shadow: 0 4px 15px rgba(255, 107, 107, 0.15);">
-  <div style="font-size: 1.3em; font-weight: bold; color: #ff6b6b; margin-bottom: 10px;">
-    <span style="font-size: 1.5em;">❤️</span>
-    写教程不易，如果对您有帮助，可以赞赏一下吗？
-    <span style="font-size: 1.5em;">❤️</span>
-  </div>
-  <p style="color: #666; font-size: 0.95em; margin: 10px 0 25px 0;">您的支持是我持续更新的最大动力！</p>
-  
-  <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-bottom: 25px;">
-    <div style="text-align: center; background: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);">
-      <p style="margin-top: 12px; font-weight: bold; font-size: 1.1em; color: #333;">微信</p>
-    </div>
-    <div style="text-align: center; background: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);">
-      <p style="margin-top: 12px; font-weight: bold; font-size: 1.1em; color: #333;">支付宝</p>
-    </div>
-  </div>
-  
-  <div style="margin-top: 20px; padding-top: 20px; border-top: 2px solid rgba(255, 107, 107, 0.2);">
-    <p style="color: #ff6b6b; font-weight: bold; font-size: 1.1em; margin: 0;">🎉 感谢您的支持！</p>
-  </div>
-</div>
-
-<!-- 强制刷新缓存 -->
+二是 `pip install` 报 `Could not find a version that satisfies the requirement`。十次里有九次是因为当前激活的 Python 还是机器上的 `3.8` 或 `3.9` 老版本（装不上新版 `curl_cffi>=0.14.0`），敲 `python --version` 核对一眼版本、升级完 `pip` 再重装基本就过了。另外导出备份出来的账号 JSON 和 `data/database.db` 里全躺着明文令牌，平时备份记得加密收好，千万别手滑 `git add .` 推上公开仓库。

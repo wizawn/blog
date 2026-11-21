@@ -1,700 +1,122 @@
 ---
-title: "Codex Tools v1.5.4 超详细教程 - 多账号管理 + API 反代完整指南（2026 最新版）"
+title: "Codex Tools 桌面端折腾记录：多账号切号、本地反代与 Cursor 连通踩坑"
 date: 2026-03-26T11:35:00+00:00
 lastmod: 2026-03-26T11:35:00+00:00
-categories: ["tech"]
-tags: ["tutorial", "codex", "tools", "api-proxy", "guide"]
+categories: ["AI 工具", "技术教程"]
+tags: ["Codex", "Codex Tools", "API 反代", "Tauri", "多账号管理"]
 draft: false
-weight: 1
----
----
-
-## 前言
-
-这篇教程面向零基础用户，从安装到使用完整覆盖 Codex Tools v1.5.4 的各项功能。Codex Tools 是一款基于 React + Tauri 的桌面工具，用来管理多个 Codex 账号，并提供本地 API 反代能力。
-
-教程里的所有步骤都经过实际测试，常见的坑也会提前标注。内容跟随项目版本同步更新。
-
-项目信息：
-- GitHub 仓库：https://github.com/170-carry/codex-tools
-- 当前版本：v1.5.4
-- 技术栈：React + Tauri (Rust)
-- 支持系统：macOS / Windows
-- 许可证：MIT（免费开源）
-
+description: "梳理开源桌面工具 170-carry/codex-tools 的安装打包、四类账号导入、窗口百分比看板与本地 /v1 反代用法，纠正乱关 macOS Gatekeeper 和在 Cursor 里直填 127.0.0.1 等常见误区。"
+weight: 10
 ---
 
-## 重要声明
+手里同时备了两三个 ChatGPT 订阅号轮换写代码的人，来回退登 Codex 桌面端是一件挺折磨人的事。[`170-carry/codex-tools`](https://github.com/170-carry/codex-tools)（MIT 开源，React + Rust Tauri 写的跨平台桌面小工具）干的就是这个脏活：把多个账号的登录态集中管起来，一眼看清每个号在 5 小时和 1 周窗口里消耗了百分之多少配额，点一下自动换号重开 Codex，顺带还能在本地起一个兼容 OpenAI 格式的 `/v1` 反代服务。
 
-1. 本项目仅供学习研究，请遵守 OpenAI 相关服务条款
-2. 严禁用于滥用、非法用途
-3. 因使用本项目产生的风险和后果由使用者自行承担
-4. 项目免费开源，任何付费版本均为倒卖行为
+这篇记录最初是基于 `v1.5.4`（经历过 `v1.0.0` 重构 Tauri、`v1.4.0` 加自定义 Codex 路径、`v1.5.0` 重做 OAuth 与导入逻辑之后的一版）实测整理的，眼下上游 [Releases](https://github.com/170-carry/codex-tools/releases) 已经一路迭代到了 `v3.x`，安装包名字和细节以仓库最新挂出来的为准。动手前照例先把话挑明：软件完全免费开源，别去买任何收费倒卖包；另外把多个个人订阅号塞进池子里对外开共享反代，在 OpenAI 服务条款里妥妥算账号共享与规避单号限流，自己本机切号图个方便还行，千万别拿去开公共接口。
 
----
+## 0x00 安装与源码打包（别一上来就关 macOS 全局 Gatekeeper）
 
-## 核心功能
+平时自用压根不需要配前端和 Rust 编译链，直接去 [GitHub Releases](https://github.com/170-carry/codex-tools/releases) 下预编译好的桌面包就行。macOS 上 Apple Silicon（M 系列芯片）选 `Codex.Tools_<版本号>_aarch64.dmg`，Intel 芯片选 `Codex.Tools_<版本号>_x64.dmg`（页面里带 `.app.tar.gz` 后缀的是给应用内自动更新用的增量包，手动装选 `.dmg`）；Windows 64 位选 `Codex.Tools_<版本号>_x64-setup.exe`（NSIS 安装包）或者 `Codex.Tools_<版本号>_x64_en-US.msi`（注意官方并没有发过什么 Windows `.zip` 免安装包，也暂不支持 Linux 桌面端）。
 
-### 1. 多账号管理
-- 支持 OAuth 登录导入
-- 支持 JSON 文件批量导入
-- 支持读取文件夹下的全部账号文件
-- 导入后保留当前本机登录态
-
-### 2. 用量查看与智能切换
-- 展示每个账号的 5 小时用量窗口
-- 展示每个账号的 1 周用量窗口
-- 显示计划类型（Free/Plus/Team 等）
-- 支持手动刷新和定时自动刷新
-- 支持按余量排序和智能切换
-
-### 3. 一键切换账号
-- 一键切换账号并启动 Codex
-- 找不到桌面应用时自动回退到 `codex app`
-- 可选同步 Opencode OpenAI 授权
-- 可选在切换后重启已选编辑器
-
-### 4. API 反代（核心功能）
-- 本地提供 OpenAI 兼容的 `/v1` 接口
-- 使用已登录的 Codex 账号作为上游
-- 支持固定端口、自定义端口
-- 支持固定 API Key 和手动刷新
-- 按账号余量自动挑选可用账号转发
-- 可设置应用启动时自动启动 API 反代
-
-### 5. 公网访问与桌面能力
-- 集成 cloudflared，可将本地反代暴露到公网
-- 支持快速隧道和命名隧道
-- 可选 HTTP/2 协议
-- 支持后台驻留、状态栏菜单
-- 支持应用内更新和多语言界面
-
----
-
-## 环境准备
-
-### 系统要求
-
-| 系统 | 版本要求 | 推荐度 |
-|------|----------|--------|
-| macOS | macOS 10.15+ | 推荐 |
-| Windows | Windows 10/11 (64 位) | 支持 |
-| Linux | 暂不支持 | - |
-
-### 前置软件
-
-如果只是使用（不做开发），不需要安装任何额外软件，直接下载安装包即可。
-
-如果你要开发或打包：
-- Node.js 20+
-- Rust stable
-- pnpm 9.15.9+
-
-查看系统版本：
+这里必须重点纠正一个在中文教程圈流毒甚广的 macOS 排错命令。因为个人开源构建没交苹果开发者年费做公证，把 `Codex Tools.app` 拖进 `/Applications` 第一次双击时，系统常会弹"已损坏，无法打开"。很多教程张口就让人敲 `sudo spctl --master-disable` 把整台 Mac 的 Gatekeeper 安全防线彻底卸掉。千万别敲那一行！为了开一个小工具把系统对所有未知来路木马的拦截全关了纯属因噎废食，而且在 macOS 15 Sequoia 及更新系统上苹果也早就收紧了这道口子。你只需要单独摘掉这一个 App 身上的下载隔离扩展属性就够了：
 
 ```bash
-# macOS
-sw_vers
-
-# Windows (PowerShell)
-systeminfo | findstr /B /C:"OS Name" /C:"OS Version"
+xattr -dr com.apple.quarantine "/Applications/Codex Tools.app"
 ```
 
----
+敲完再双击就能正常打开（或者去"系统设置 -> 隐私与安全性"底部点一次"仍要打开"）。至于 Windows 上要是装完双击闪退，也别信网上偏方去点什么"右键以管理员身份运行"：一个肚子里装着你全部账号明文 Token 的桌面程序没道理拿最高管理员权限跑，Tauri 应用在 Windows 上闪退九成是系统缺了底层的 Microsoft Edge WebView2 Runtime，补装一下官方 WebView2 运行时再看日志就能解决。
 
-## 安装部署（3 种方式）
-
-### 方式一：下载预编译版本（推荐新手）
-
-#### 步骤 1：访问发布页面
-
-打开浏览器访问：
-- GitHub Releases：https://github.com/170-carry/codex-tools/releases
-
-#### 步骤 2：下载对应版本
-
-macOS 用户：
-- Intel 芯片：下载 `Codex_Tools_x64.dmg` 或 `Codex_Tools_x64.app.tar.gz`
-- Apple Silicon (M1/M2/M3)：下载 `Codex_Tools_aarch64.dmg` 或 `Codex_Tools_aarch64.app.tar.gz`
-
-Windows 用户：
-- 下载 `Codex_Tools_x64-setup.exe` 或 `Codex_Tools_x64.zip`
-
-#### 步骤 3：安装应用
-
-**macOS**：
-1. 双击 `.dmg` 文件
-2. 将 `Codex Tools.app` 拖拽到「应用程序」文件夹
-3. 如果提示"已损坏"，执行以下命令修复：
+如果你打算自己拉源码改点功能或者亲手编译打包，先备好 Node.js 22 LTS（早年的 Node 20 已在 2026 年 4 月底结束维护；macOS 上如果用 `brew install node@22` 装这类 keg-only 版本公式，装完记得按提示把 `/opt/homebrew/opt/node@22/bin` 写进 `PATH` 或手动 `brew link`，不然敲 `node -v` 还是找不着）、Rust stable 工具链以及 `pnpm`：
 
 ```bash
-sudo spctl --master-disable
-sudo xattr -r -d com.apple.quarantine /Applications/Codex\ Tools.app
-```
-
-Windows：
-1. 双击 `.exe` 安装包
-2. 按照安装向导完成安装
-3. 或在开始菜单找到应用
-
-#### 步骤 4：首次启动
-
-1. 打开「应用程序」文件夹（macOS）或开始菜单（Windows）
-2. 找到并打开 `Codex Tools`
-3. 首次启动可能会提示确认，点击"打开"即可
-
----
-
-### 方式二：源码安装（适合开发者）
-
-#### 步骤 1：安装前置环境
-
-安装 Node.js 20+：
-
-```bash
-# macOS (使用 Homebrew)
-brew install node@20
-
-# Windows
-# 访问 https://nodejs.org/ 下载安装包
-
-# 验证安装
-node --version  # 应显示 v20.x.x
-```
-
-安装 Rust：
-
-```bash
-# macOS/Linux
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-source $HOME/.cargo/env
-
-# Windows
-# 访问 https://rustup.rs/ 下载 rustup-init.exe
-
-# 验证安装
-rustc --version  # 应显示 rustc 1.x.x
-```
-
-安装 pnpm：
-
-```bash
-npm install -g pnpm
-
-# 验证安装
-pnpm --version  # 应显示 9.15.9+
-```
-
-#### 步骤 2：克隆项目
-
-```bash
-# 选择安装目录
-cd /tmp  # macOS/Linux
-# 或 D:\tools  # Windows
-
-# 克隆项目
+mkdir -p ~/src && cd ~/src
 git clone https://github.com/170-carry/codex-tools.git
-
-# 进入项目目录
 cd codex-tools
-```
 
-#### 步骤 3：安装依赖
-
-```bash
-# 安装 Node.js 依赖
 pnpm install
 
-# 安装时间：约 2-5 分钟（取决于网络）
-```
-
-#### 步骤 4：启动开发环境
-
-```bash
-# 启动桌面应用（开发模式）
+# 开发模式启动（带前端热重载与控制台日志）
 pnpm run tauri dev
 
-# 启动时间：约 30-60 秒
-# 启动后会打开应用窗口
-```
-
-**开发模式特点**：
-- 支持热重载
-- 修改代码后自动刷新
-- 控制台会显示日志
-
----
-
-### 方式三：自行打包（适合高级用户）
-
-#### 步骤 1：完成方式二的所有步骤
-
-#### 步骤 2：执行打包命令
-
-```bash
-# macOS
-pnpm run tauri build
-
-# Windows
+# 正式编译打包（首次编 Rust 依赖大概五到十五分钟）
 pnpm run tauri build
 ```
 
-**打包时间**：约 5-15 分钟（首次打包需要编译 Rust 代码）
+编完之后去产物目录捞安装包：macOS 落在 `src-tauri/target/release/bundle/dmg/` 和 `bundle/macos/` 下；Windows 则落在 `src-tauri\target\release\bundle\nsis\`（生成 `-setup.exe`）和 `bundle\msi\` 底下（有些老文章写成 `bundle\app\`，Windows 版 Tauri 压根没那个目录）。
 
-#### 步骤 3：查找打包产物
+## 0x01 四种账号导入方式、窗口百分比与编辑器联动
 
-**macOS**：
-```bash
-ls -la src-tauri/target/release/bundle/dmg/
-ls -la src-tauri/target/release/bundle/macos/
-```
+打开软件，底部导航栏清清爽爽就四块：`账号管理`、`API 反代`、`设置`、`关于`，平时也可以缩到状态栏菜单后台驻留。
 
-Windows：
-```bash
-dir src-tauri\target\release\bundle\msi\
-dir src-tauri\target\release\bundle\app\
-```
+点"账号管理 -> + 添加账号"，工具给了四条导入路子。如果你本机正好已经登着 Codex 桌面端，直接选"同步当前登录"最省事，它会把当前机器上的登录态直接读进来存好，不会冲掉你正在干的活；想加第二个、第三个号，选"OAuth 登录"，浏览器弹出来走完登录授权会自动跳回应用落库；要是你手里已经有以前导出来的备份文件，可以用"导入 JSON 文件"选单个或多个 `.json`，或者干脆选"读取文件夹"把整个目录里的账号文件一口气扫进来。导入时识别的 JSON 结构长这样：
 
-**产物说明**：
-- `.dmg` / `.app` - macOS 安装包
-- `.exe` / `.msi` - Windows 安装包
-
----
-
-## 界面介绍
-
-### 主界面布局
-
-```
-┌─────────────────────────────────────────┐
-│  Codex Tools                    [设置]  │
-├─────────────────────────────────────────┤
-│                                         │
-│  ┌─────────────────────────────────┐   │
-│  │ 账号列表                        │   │
-│  │ ┌─────────────────────────────┐ │   │
-│  │ │ 🟢 账号 1 (Free)           │ │   │
-│  │ │    5h: 2.5h / 1w: 15h      │ │   │
-│  │ └─────────────────────────────┘ │   │
-│  │ ┌─────────────────────────────┐ │   │
-│  │ │ 🟡 账号 2 (Plus)           │ │   │
-│  │ │    5h: 4.8h / 1w: 20h      │ │   │
-│  │ └─────────────────────────────┘ │   │
-│  └─────────────────────────────────┘   │
-│                                         │
-│  [刷新] [切换账号] [启动 Codex]        │
-│                                         │
-├─────────────────────────────────────────┤
-│ [账号管理] [API 反代] [设置] [关于]    │
-└─────────────────────────────────────────┘
-```
-
-### 底部导航栏
-
-| 标签 | 功能 |
-|------|------|
-| **账号管理** | 查看和管理所有账号 |
-| **API 反代** | 配置和启动 API 代理服务 |
-| **设置** | 应用设置和偏好配置 |
-| **关于** | 版本信息和帮助 |
-
----
-
-## 详细使用教程
-
-### 一、导入账号
-
-#### 方法 1：OAuth 登录导入（推荐）
-
-1. 点击「账号管理」标签
-2. 点击「+ 添加账号」按钮
-3. 选择「OAuth 登录」
-4. 应用会自动生成授权链接并打开浏览器
-5. 在浏览器中登录你的 Codex/ChatGPT 账号
-6. 授权完成后会自动跳转回应用
-7. 账号会自动导入并保存
-
-**优点**：
-- 最简单快捷
-- 自动获取完整认证信息
-- 不需要手动操作文件
-
-#### 方法 2：上传 JSON 文件
-
-1. 点击「账号管理」标签
-2. 点击「+ 添加账号」按钮
-3. 选择「导入 JSON 文件」
-4. 选择一个或多个 `.json` 账号文件
-5. 点击「导入」
-
-JSON 文件格式：
 ```json
 {
-  "label": "我的账号 1",
-  "account_id": "xxx-xxx-xxx",
+  "label": "主力工作号",
+  "account_id": "acct_xxxxxxxx",
   "auth_json": {
-    "access_token": "xxx",
-    "refresh_token": "xxx",
-    "session_token": "xxx"
+    "access_token": "...",
+    "refresh_token": "...",
+    "session_token": "..."
   },
-  "plan_type": "free"
+  "plan_type": "plus"
 }
 ```
 
-#### 方法 3：读取文件夹
+要是导入 JSON 报错，先查文件是不是标准 UTF-8 编码、里面有没有漏掉核心的 `access_token` 和 `account_id`。同时这里必须敲个警钟：从工具里导出备份的这些 JSON 文件里，明文躺着完整的 `access_token`、`refresh_token` 和 `session_token`！外人只要拿到这个文件，连你的密码和二步验证都不用问就能直接接管会话。导出来的备份文件务必立刻 `chmod 600` 收紧权限塞进加密盘里，打死别扔进网盘同步目录或者顺手提交进代码仓库。
 
-1. 点击「账号管理」标签
-2. 点击「+ 添加账号」按钮
-3. 选择「读取文件夹」
-4. 选择包含多个 `.json` 文件的文件夹
-5. 应用会自动读取所有账号文件
+账号进列表之后点一下"刷新"（也可以去设置里把"用量自动刷新"打开，默认 30 分钟刷一次，号多的话调成 1 小时更省心），每个号底下会列出计划类型（Free / Plus / Business / Pro）以及 `5h`、`1w` 两栏数字。注意这两栏显示的是当前 5 小时滚动窗口和 7 天周期内的已用配额百分比（`%`）及重置时刻，早年有些教程把它们硬翻译成"过去 5 小时用了几小时时长"，纯属外行看数字瞎猜。点一下用量列标题就能按剩余额度高低排序，挑余量最宽裕的号点"启动 Codex"，工具就会替你切好本机凭据并自动拉起 Codex 桌面端（要是你装在了非默认位置，可以在设置里改自定义 Codex 路径，找不到桌面包时它也会尝试回退调 `codex app`）。
 
-**适用场景**：
-- 有大量账号需要批量导入
-- 从其他工具迁移账号
+设置页里还有两个很顺手的联动开关：一个是"切换账号后重启编辑器"，勾上之后切号时会自动帮你重开 VS Code 等关联编辑器让新凭据生效；另一个是"同步 Opencode 授权"，如果你平时同时在用 Opencode 和 Codex 两套工具，打开之后切一次号两边认证一块儿跟着换，省得两边各改一遍。
 
-#### 方法 4：同步当前设备登录
+## 0x02 本地 `/v1` 反代与"Cursor 连不上 `127.0.0.1`"的经典坑
 
-1. 确保你已经在 Codex 桌面应用或网页版登录
-2. 点击「账号管理」标签
-3. 点击「+ 添加账号」按钮
-4. 选择「同步当前登录」
-5. 应用会自动读取本机的登录凭证
+切到底部的 `API 反代` 标签页，填好端口（默认 `8787`，可以在设置里设成固定端口、固定密钥，甚至勾上随应用启动自动拉起反代），点一下启动，本机就多了一个按账号余量自动挑号转发的 OpenAI 兼容网关，默认地址是 `http://127.0.0.1:8787/v1`。详细协议说明也可以直接翻仓库里的 [`docs/api-proxy.md`](https://github.com/170-carry/codex-tools/blob/main/docs/api-proxy.md)。
 
-**注意**：
-- 只会同步当前登录的账号
-- 不会覆盖正在使用的账号
+这套本地网关一共暴露了四个常用端点：`GET /health` 做存活检查，`GET /v1/models` 拉可用模型清单，`POST /v1/chat/completions` 接传统对话补全，`POST /v1/responses` 接新版 Responses 协议。
 
----
+在往第三方客户端里填地址之前，有两个十个人里八个人会栽跟头的坑。
 
-### 二、查看账号用量
-
-#### 手动刷新
-
-1. 进入「账号管理」页面
-2. 点击「刷新」按钮
-3. 等待几秒钟，用量信息会更新
-
-#### 自动刷新
-
-1. 进入「设置」页面
-2. 找到「用量自动刷新」选项
-3. 设置刷新间隔（默认 30 分钟）
-4. 开启自动刷新
-
-#### 用量信息说明
-
-每个账号会显示：
-
-| 字段 | 说明 |
-|------|------|
-| **5h 用量** | 过去 5 小时的使用时长 |
-| **1w 用量** | 过去 1 周的使用时长 |
-| **计划类型** | Free / Plus / Team 等 |
-| **状态** | 可用 / 受限 / 不可用 |
-
-#### 按余量排序
-
-1. 点击「用量」列标题
-2. 账号会按余量从高到低排序
-3. 再次点击会从低到高排序
-
----
-
-### 三、切换账号并启动 Codex
-
-#### 一键切换
-
-1. 在账号列表中选择一个可用账号
-2. 点击「切换账号」按钮
-3. 等待应用切换到目标账号
-4. 切换成功后会显示提示
-
-#### 切换并启动 Codex
-
-1. 在账号列表中选择一个可用账号
-2. 点击「启动 Codex」按钮
-3. 应用会：
-   - 切换到目标账号
-   - 自动启动 Codex 桌面应用
-   - 如果找不到桌面应用，会回退到 `codex app`
-
-#### 编辑器联动（可选）
-
-1. 进入「设置」页面
-2. 找到「编辑器联动」部分
-3. 开启「切换账号后重启编辑器」
-4. 选择你的编辑器（Cursor / VSCode 等）
-
-**效果**：
-- 切换账号后会自动重启编辑器
-- 编辑器会使用新的账号认证
-
-#### Opencode 授权同步（可选）
-
-1. 进入「设置」页面
-2. 找到「Opencode」部分
-3. 开启「同步 Opencode 授权」
-
-**效果**：
-- 切换 Codex 账号时会同步更新 Opencode 的认证
-- 适合同时使用两个工具的用户
-
----
-
-### 四、API 反代（核心功能）
-
-#### 什么是 API 反代？
-
-在你的电脑上跑一个本地 API 服务，让其他工具通过 OpenAI 兼容的接口调用 Codex 能力。
-
-**工作原理**：
-```
-客户端（如 Cursor） → 本地 API (127.0.0.1:8787) → Codex 上游
-```
-
-#### 启动 API 反代
-
-1. 点击底部导航栏的「API 反代」标签
-2. 设置端口号（默认 8787）
-3. 点击「启动」按钮
-4. 等待服务启动成功
-5. 界面会显示：
-   - Base URL: `http://127.0.0.1:8787/v1`
-   - API Key: `sk-xxxxxxxx`（自动生成）
-
-#### 在 Cursor 中使用
-
-1. 打开 Cursor
-2. 点击设置图标 → Cursor Settings
-3. 选择「Models」页面
-4. 开启「OpenAI API Key」
-5. 填入 API Key（从 Codex Tools 复制）
-6. 开启「Override OpenAI Base URL」
-7. 填入 Base URL：`http://127.0.0.1:8787/v1`
-8. 在「Add or search model」中输入 `gpt-4`（或其他支持的模型）
-9. 点击「Add Custom Model」
-
-**完成！** 现在你可以在 Cursor 中使用 Codex 的能力了。
-
-#### 在其他客户端中使用
-
-**通用配置**：
-
-| 配置项 | 值 |
-|--------|-----|
-| **API 类型** | OpenAI Compatible |
-| Base URL | `http://127.0.0.1:8787/v1` |
-| API Key | `sk-xxxxxxxx`（从 Codex Tools 复制） |
-| **模型名称** | `gpt-4` 或 `gpt-5` |
-
-**支持的工具**：
-- Cursor
-- VSCode (Continue 插件)
-- JetBrains IDEs
-- Any API 客户端
-
-#### 支持的接口
-
-| 接口 | 说明 |
-|------|------|
-| `GET /health` | 健康检查 |
-| `GET /v1/models` | 获取模型列表 |
-| `POST /v1/chat/completions` | 聊天补全（兼容 OpenAI） |
-| `POST /v1/responses` | Responses 接口 |
-
-#### 请求示例
+第一个坑是模型名字别闭着眼睛瞎填 `gpt-4`。Codex 订阅上游跑的是 Codex 专用模型栈（比如 `gpt-5.x-codex` 系列），压根不认老掉牙的 `gpt-4`（除非反代自己做了别名映射，而且在不少 IDE 里填 `gpt-4` 还会跟软件内置模型名打架）。最稳的做法是反代启动后先敲两行 `curl` 探一下存活和真实模型列表，`/v1/models` 吐出来什么名字，你就往客户端里填什么名字：
 
 ```bash
-# 健康检查
-curl http://127.0.0.1:8787/health
+# 1. 探一眼本地反代活没活着
+curl -s http://127.0.0.1:8787/health
 
-# 获取模型列表
-curl http://127.0.0.1:8787/v1/models \
-  -H 'Authorization: Bearer sk-xxxx'
+# 2. 查当前上游实际支持的模型 ID 列表（记得把 sk-xxxx 换成你在界面设的强密钥）
+curl -s http://127.0.0.1:8787/v1/models \
+  -H "Authorization: Bearer sk-xxxx"
+```
 
-# 聊天补全
-curl http://127.0.0.1:8787/v1/chat/completions \
-  -H 'Content-Type: application/json' \
-  -H 'Authorization: Bearer sk-xxxx' \
+拿到真实模型名之后，测一把 `chat/completions` 或 `responses` 能正常回话就算通了：
+
+```bash
+# 兼容 Chat Completions 调用
+curl -s http://127.0.0.1:8787/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer sk-xxxx" \
   -d '{
-    "model": "gpt-4",
-    "messages": [
-      {"role": "user", "content": "1+1 等于几？"}
-    ]
+    "model": "填入上面 /v1/models 返回的真实模型名",
+    "messages": [{"role": "user", "content": "用一句话解释 Rust 的所有权"}]
+  }'
+
+# 原生 Responses 接口调用
+curl -s http://127.0.0.1:8787/v1/responses \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer sk-xxxx" \
+  -d '{
+    "model": "填入上面 /v1/models 返回的真实模型名",
+    "input": "写一个最小的无锁计数器示意"
   }'
 ```
 
-#### 自动启动 API 反代
+第二个大坑在 Cursor 上。很多教程手把手教大家打开 Cursor Settings -> Models，勾上 `Override OpenAI Base URL` 然后填进 `http://127.0.0.1:8787/v1`，结果一发消息全报错。原因一点不复杂：像 VS Code 里的 Continue、Cline、Roo Code 插件或者你自己写的本地 CLI 脚本，HTTP 请求是从你面前的这台电脑直接发出去的，连 `127.0.0.1:8787` 丝滑无比；唯独 Cursor 的自定义 OpenAI 接口请求，是先发回 Cursor 自家的远端云服务器，再由 Cursor 云端替你去连那个 Base URL。人家的云服务器怎么可能连得上你本机的 `127.0.0.1` 回环地址？所以在本地写代码想接这套反代，直接配给 Continue 或 Cline 这类纯本地直连插件最省心。
 
-1. 进入「设置」页面
-2. 找到「API 反代」部分
-3. 开启「应用启动时自动启动」
-4. 设置端口和 API Key（可选）
+## 0x03 开 `cloudflared` 公网隧道前先把安全账算清
 
-**效果**：
-- 每次打开应用都会自动启动 API 反代
-- 不需要手动操作
+正是为了喂给 Cursor 云端或者出门在外拿别的设备连回家，`API 反代` 页面里直接集成了 `cloudflared`（可选走 HTTP/2 协议），支持一键拉起临时的快速隧道（Quick Tunnel，吐出一个 `https://xxx.trycloudflare.com` 公网地址）以及绑自己域名的持久命名隧道（Named Tunnel）。
 
-#### 公网访问（Cloudflared）
+真打算点下"启动隧道"把本地端口捅到公网上之前，千万把下面两件事想明白。
 
-如果你想让其他设备也能访问 API 反代：
+第一，免费的临时快速隧道（`trycloudflare.com`）压根没有所谓的"设置 IP 白名单"功能！有些文章嘴上劝你开了快速隧道去配 IP 白名单，纯属没用过瞎支招。一旦公网地址通了，全靠你设的那串本地 `sk-...` 密钥拦门，所以开隧道前必须先把反代 API Key 换成足够长的随机高熵字符串，用完随手关掉隧道。
 
-1. 点击「API 反代」标签
-2. 找到「Cloudflared 公网访问」部分
-3. 选择隧道类型：
-   - **快速隧道**：临时隧道，重启后失效
-   - **命名隧道**：持久隧道，需要配置
-4. 点击「启动隧道」
-5. 等待隧道建立成功
-6. 复制公网地址（如 `https://xxx.trycloudflare.com`）
-
-**注意**：
-- 公网访问会暴露你的 API 到互联网
-- 请确保 API Key 足够安全
-- 建议设置访问限制
-
----
-
-## 故障排查
-
-### 问题 1：应用无法启动
-
-macOS 提示"已损坏"：
-
-```bash
-sudo spctl --master-disable
-sudo xattr -r -d com.apple.quarantine /Applications/Codex\ Tools.app
-```
-
-Windows 闪退：
-1. 右键应用 → 以管理员身份运行
-2. 检查是否有杀毒软件拦截
-3. 重新下载安装包
-
-### 问题 2：账号导入失败
-
-OAuth 登录失败：
-1. 检查网络连接
-2. 确保浏览器能正常访问 ChatGPT
-3. 清除浏览器缓存后重试
-4. 尝试使用 JSON 文件导入
-
-JSON 文件导入失败：
-1. 检查 JSON 格式是否正确
-2. 确保包含必要字段（`access_token`, `account_id`）
-3. 检查文件编码是否为 UTF-8
-
-### 问题 3：用量刷新失败
-
-1. 检查账号是否已登录
-2. 检查网络连接
-3. 手动点击刷新按钮
-4. 如果所有账号都失败，可能是网络问题
-
-### 问题 4：API 反代无法启动
-
-**端口被占用**：
-```bash
-# macOS/Linux
-lsof -i :8787
-
-# Windows
-netstat -ano | findstr :8787
-```
-
-**解决方案**：
-1. 关闭占用端口的应用
-2. 或在 Codex Tools 中更换端口
-
-API Key 无效：
-1. 确保从「API 反代」页面复制正确的 API Key
-2. 检查是否有多余空格
-3. 尝试重新生成 API Key
-
-### 问题 5：Cursor 无法连接
-
-1. 检查 API 反代是否已启动
-2. 检查 Base URL 是否正确（`http://127.0.0.1:8787/v1`）
-3. 检查 API Key 是否正确
-4. 尝试访问 `http://127.0.0.1:8787/health` 确认服务正常
-5. 检查 Cursor 是否支持自定义 API
-
----
-
-## 使用技巧
-
-### 1. 账号管理技巧
-
-- **定期刷新用量**：设置自动刷新，保持用量信息最新
-- **按余量排序**：快速找到可用额度最高的账号
-- **使用标签**：给账号添加标签（如"工作"、"个人"）
-- **备份账号**：定期导出账号 JSON 文件备份
-
-### 2. API 反代技巧
-
-- **固定端口**：避免每次启动端口变化
-- 设置强 API Key：不要使用默认的弱 Key
-- **监控日志**：查看 API 调用日志，了解使用情况
-- **限制访问**：如果开启公网访问，设置 IP 白名单
-
-### 3. 性能优化
-
-- 关闭不用的功能：如不需要 API 反代，可以关闭
-- 减少自动刷新频率：设置为 1 小时或更长
-- **清理旧账号**：删除不再使用的账号
-
----
-
-## 版本历史
-
-| 版本 | 日期 | 主要更新 |
-|------|------|----------|
-| v1.5.4 | 2026-03 | 修复端口占用、稳定性优化 |
-| v1.5.3 | 2026-03 | 修复稳定性问题 |
-| v1.5.0 | 2026-03 | 重做账号导入、OAuth 登录优化 |
-| v1.4.1 | 2026-02 | 去除工作区相关功能 |
-| v1.4.0 | 2026-02 | 支持自定义 Codex 路径 |
-| v1.3.2 | 2026-02 | UI 优化 |
-| v1.0.0 | 2026-01 | 重构为 Tauri 应用 |
-
----
-
-## 相关链接
-
-- GitHub 仓库：https://github.com/170-carry/codex-tools
-- **问题反馈**：https://github.com/170-carry/codex-tools/issues
-- **更新日志**：https://github.com/170-carry/codex-tools/blob/main/changelog.md
-- API 反代文档：https://github.com/170-carry/codex-tools/blob/main/docs/api-proxy.md
-
----
-
-## 总结
-
-Codex Tools 的定位就是多账号管理 + API 反代：
-
-### 优点
-- 界面简洁，易于上手
-- 支持多种账号导入方式
-- 用量查看直观清晰
-- API 反代功能强大
-- 支持公网访问
-- 免费开源
-
-### 注意事项
-- 目前仅支持 macOS 和 Windows
-- Linux 暂不支持
-- 公网访问需注意安全
-
-### 适用人群
-- 有多个 Codex 账号的用户
-- 需要在多个工具间切换账号
-- 需要使用 API 反代功能
-- 开发者和技术爱好者
-
----
-
-*最后更新：2026-03-26*
-
-*本教程基于 codex-tools v1.5.4 编写，具体操作请以实际版本为准。*
-*使用本工具请遵守 OpenAI 相关服务条款，严禁用于违规用途。*
+第二，如果真有长期跨设备自用的刚需，别偷懒用临时隧道，老老实实绑自己的域名配 Named Tunnel，在 Cloudflare Zero Trust 后台叠一层 Cloudflare Access 策略（比如 Service Token 或邮箱验证码准入），把陌生扫描流量挡在边缘节点外头。要是碰到启动反代时报 `8787` 端口被占，macOS 下敲 `lsof -i :8787`、Windows 下敲 `netstat -ano | findstr :8787` 揪出撞车的进程，或者在设置里换个冷门端口固定住就完事了。遇到新版本的 Bug 可以去仓库的 [Issues](https://github.com/170-carry/codex-tools/issues) 或 [`changelog.md`](https://github.com/170-carry/codex-tools/blob/main/changelog.md) 翻最新动态。

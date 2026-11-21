@@ -1,38 +1,26 @@
 ---
 title: "友情链接 / Links"
 date: 2026-03-03T08:00:00+08:00
+lastmod: 2026-11-21T23:00:00+08:00
 draft: false
 type: "page"
-
 ---
 
-## 🔗 本站矩阵
+## 本站站点导航
 
-| 名称 | 描述 | 链接 |
-|------|------|------|
-| **www.caowo.de** | 主站 | [访问](https://www.caowo.de) |
-| **www.wizawn.com** | 备用主站 | [访问](https://www.wizawn.com) |
-| **blog.caowo.de** | 博客 | [访问](https://blog.caowo.de) |
-| **blog.wizawn.com** | 备用博客 | [访问](https://blog.wizawn.com) |
-| **api.caowo.de** | API 服务 | [访问](https://api.caowo.de) |
-| **api.wizawn.com** | 备用 API | [访问](https://api.wizawn.com) |
-| **ruanzhu.caowo.de** | 软筑服务 | [访问](https://ruanzhu.caowo.de) |
-| **ruanzhu.wizawn.com** | 备用软筑 | [访问](https://ruanzhu.wizawn.com) |
+目前本人持有并维护的官方站点统一归属在 `caowo.de` 主域名下（其他近似域名均与本人无关，请勿轻信）：
 
-## 📢 交换友链
+| 站点 | 用途说明 | 地址 |
+|---|---|---|
+| `blog.caowo.de` | 技术博客主站 | [https://blog.caowo.de](https://blog.caowo.de) |
+| `www.caowo.de` | 个人主页入口 | [https://www.caowo.de](https://www.caowo.de) |
+| `api.caowo.de` | 自用接口服务 | [https://api.caowo.de](https://api.caowo.de) |
+| `ruanzhu.caowo.de` | 软筑服务 | [https://ruanzhu.caowo.de](https://ruanzhu.caowo.de) |
 
-如需交换友链，请通过以下方式联系：
+## 交换友链
 
-- **微信**: GOV-HACK
-- **QQ群**: 797481450
-- **QQ**: 46333839
-- **邮箱**: hihacker@foxmail.com
+欢迎长期更新原创内容的安全研究、逆向分析或后端工程类独立博客互换友链（要求内容合法合规、站点稳定可访问）。直接通过下面任一方式把你的站点名称、简介、链接和头像地址发我就行：
 
-要求：
-- 内容合法合规
-- 长期稳定运营
-- 优先安全/技术类博客
-
----
-
-*Last updated: 2026-04-17*
+- 邮箱：`hihacker@foxmail.com`
+- QQ 群：`797481450` / QQ：`46333839`
+- 微信：`GOV-HACK`

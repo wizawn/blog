@@ -1,383 +1,122 @@
 ---
-title: "ClawGuard - 基于 AI 的加密货币实时监控系统"
+title: "手搓一个轻量行情盯盘脚本 ClawGuard：K 线均线、资金费率与钉钉加签推送"
 date: 2026-03-17T14:00:00+08:00
 draft: false
-weight: 1
 categories: ["项目介绍"]
-tags: ["ClawGuard", "AI", "加密货币", "实时监控", "价格预警", "技术分析"]
-image: "/security-cover.jpg"
-description: "ClawGuard 是一个基于 AI 的加密货币实时监控系统，提供 60 秒级价格监控、技术指标分析、多交易所数据聚合和实时预警推送"
----
----
-
-# ClawGuard - 基于 AI 的加密货币实时监控系统
-
-## 项目概述
-
-ClawGuard 是一个加密货币监控系统，整合了实时数据采集、技术分析算法和 AI 价格预测。
-
-### 核心特性
-
-| 特性 | 说明 |
-|------|------|
-| **实时监控** | 60 秒级价格数据刷新 |
-| **技术分析** | MA7/MA25 均线、RSI、MACD 等指标 |
-| **多交易所** | 币安、OKX、Gate.io 数据聚合 |
-| **智能预警** | 价格突破、成交量异常、技术信号 |
-| **AI 预测** | 基于历史数据的短期价格趋势分析 |
-
+tags: ["ClawGuard", "Python", "行情监控", "价格预警", "钉钉机器人"]
+description: "记录个人轻量级加密行情监控小项目 ClawGuard 的设计与实现：基于公开行情接口拉取现货与日 K 线均线，校准永续合约资金费率告警水位，通过钉钉 HMAC 加签机器人推送异动提醒。"
+weight: 10
 ---
 
-## 系统架构
+半夜被行情插针吵醒过两回之后，我干脆抽周末用 Python 攒了个自用的轻量盯盘小工具 `ClawGuard`。想法其实特简单：犯不着去订一堆几百美金一年的花哨看盘终端，就在手头一台闲置的 512MB 内存小鸡上常驻个脚本，每隔 60 秒去币安和 OKX 的公开接口拉一把现货价格、日线均线和永续合约资金费率；真遇上关键价位突破或者多空杠杆拥挤度异常，直接往我手机钉钉群里甩一条提醒；平时想顺手看眼走势，再挂一个轻量的 Flask + Bootstrap 5 + Chart.js 小后台（前端网页靠 WebSocket 接收后台每分钟轮询刷出来的新数据）。
 
-```
-┌─────────────────────────────────────────────────────────┐
-│                    ClawGuard 系统架构                    │
-├─────────────────────────────────────────────────────────┤
-│                                                          │
-│  ┌──────────────┐    ┌──────────────┐    ┌────────────┐ │
-│  │  数据采集层   │───▶│  数据处理层   │───▶│  分析引擎   │ │
-│  │              │    │              │    │            │ │
-│  │ • 币安 API   │    │ • 数据清洗   │    │ • MA 计算   │ │
-│  │ • OKX API    │    │ • 格式标准化  │    │ • RSI 计算  │ │
-│  │ • Gate.io    │    │ • 存储 SQLite │    │ • MACD     │ │
-│  └──────────────┘    └──────────────┘    └────────────┘ │
-│                           │                    │         │
-│                           ▼                    ▼         │
-│                    ┌──────────────┐    ┌────────────┐   │
-│                    │  预警系统     │◀───│  AI 预测    │   │
-│                    │              │    │            │   │
-│                    │ • 钉钉推送   │    │ • 趋势分析  │   │
-│                    │ • 阈值告警   │    │ • 异常检测  │   │
-│                    └──────────────┘    └────────────┘   │
-│                                                          │
-└─────────────────────────────────────────────────────────┘
-```
+个人源码仓库目前设成了私有归档状态，这里直接把核心模块拆法、计算代码和写的时候踩过的几个典型坑摊开记一笔。先声明一句，文里所有指标参数纯粹是写代码折腾记录，不构成任何投资交易建议。
 
----
+## 0x00 别把"60 秒轮询采样"和"日均线"搅成一锅粥
 
-## 技术栈
+自己动手写行情轮询脚本时，最容易犯的一个低级乌龙就是把时间尺度搞串台：主循环 `time.sleep(60)` 每分钟去抓一次最新成交价塞进数组，转头拿着最近 7 个点和 25 个点算平均数，嘴上却管它叫 `MA7（7 日均线）` 和 `MA25（25 日均线）`。一分钟采一个点，攒够 25 个点一共才过去了 25 分钟，算出来的其实是 1 分钟级别的超短线均线，要是拿这个数去套什么"跌破 25 日均线 5% 触发定投提醒"，那真是差到姥姥家去了。
 
-### 后端核心
-- **语言**: Python 3.10+
-- **Web 框架**: Flask (管理后台)
-- **数据处理**: Pandas, NumPy
-- **数据库**: SQLite (轻量级存储)
-- **任务调度**: APScheduler
+所以在 `web/backend/services/analyzer.py` 里，短线异动和中线趋势必须拆成两条独立的数据源分开喂。60 秒一次的轮询只管盯瞬时价格突破（比如突破设定关口 `±1%`）以及明确标清尺度的分钟级滑动均线 `MA(7x1m)` / `MA(25x1m)`；真正要算 7 日、25 日均线拿来辅助看日线位置时，单独去调交易所公开的日 K 线接口（比如币安的 `GET /api/v3/klines?symbol=BTCUSDT&interval=1d&limit=30`），剔除最后一根尚未收盘的当日 K 线后，取已收盘的日线序列来算。至于 RSI、MACD、布林带以及历史策略回测这些更重的功能，目前还老老实实躺在待办列表里没往主进程里塞，也别信什么"套个简单 LSTM 就能做到 75% 短期预测准确率"的玄学，先把均线交叉和费率告警跑扎实比啥都强。
 
-### 前端界面
-- **管理后台**: HTML + Bootstrap 5
-- **数据可视化**: Chart.js
-- **实时更新**: WebSocket
-
-### 外部集成
-- 交易所 API: 币安、OKX、Gate.io
-- **消息推送**: 钉钉机器人 Webhook
-- **代理**: Clash (处理网络限制)
-
----
-
-## 核心功能详解
-
-### 1. 实时价格监控
+把分钟级滑动窗口里新手常漏写的"历史队列滚动追加"、"上一轮均线状态暂存"和网络抖动异常兜底写全，金叉和死叉双向告警的最小运行逻辑长这样：
 
 ```python
-# 60 秒级数据采集循环
-def monitor_loop():
+import time
+from collections import deque
+import requests
+
+def monitor_1m_ma_loop(api_client, symbol: str = "BTCUSDT") -> None:
+    prices: deque[float] = deque(maxlen=25)
+    prev_ma7: float | None = None
+    prev_ma25: float | None = None
+
     while True:
-        # 获取 BTC/USDT 价格
-        price = binance_api.get_price('BTCUSDT')
-        
-        # 计算技术指标
-        ma7 = calculate_ma(prices, period=7)
-        ma25 = calculate_ma(prices, period=25)
-        
-        # 检测金叉/死叉
-        if ma7 > ma25 and prev_ma7 <= prev_ma25:
-            send_alert('🟢 金叉信号！')
-        
-        # 存储数据
-        save_to_db(price, ma7, ma25)
-        
-        # 60 秒后继续
+        try:
+            price = float(api_client.get_spot_price(symbol))
+        except requests.RequestException:
+            time.sleep(60)
+            continue
+
+        prices.append(price)
+
+        if len(prices) == 25:
+            recent = list(prices)
+            ma7 = sum(recent[-7:]) / 7.0
+            ma25 = sum(recent) / 25.0
+
+            if prev_ma7 is not None and prev_ma25 is not None:
+                if ma7 > ma25 and prev_ma7 <= prev_ma25:
+                    send_dingtalk_alert(f"[{symbol}] 1m 均线金叉，现价 {price:.2f}")
+                elif ma7 < ma25 and prev_ma7 >= prev_ma25:
+                    send_dingtalk_alert(f"[{symbol}] 1m 均线死叉，现价 {price:.2f}")
+
+            prev_ma7, prev_ma25 = ma7, ma25
+
+        save_tick_to_sqlite(symbol, price)
         time.sleep(60)
 ```
 
-**监控指标**:
-- 实时价格 (BTC/USDT, ETH/USDT 等)
-- 24 小时涨跌幅
-- 24 小时成交量
-- 资金费率 (Funding Rate)
+## 0x01 永续合约资金费率阈值设在 `0.01%` 只会天天狼来了
 
-### 2. 技术分析引擎
+除了盯现货价格和 24 小时成交量突增（比如放量超过 `50%`），顺带抓一下永续合约的资金费率（Funding Rate）对感知场内杠杆情绪挺有用，但告警线千万别照抄外行模板设成 `> 0.01%`。
 
-**均线系统**:
-- MA7 (7 日均线) - 短期趋势
-- MA25 (25 日均线) - 中期趋势
-- 金叉/死叉自动识别
+熟悉币安 U 本位永续合约机制的人都知道，每 8 小时结算一次的默认基准利率本来就是 `+0.01%`。如果你把多头过热预警线卡在 `0.01%`，哪怕行情横盘纹丝不动，你的钉钉群也会从早响到晚。
 
-**其他指标**:
-- RSI (相对强弱指数) - 超买超卖
-- MACD (移动平均收敛散度) - 趋势强度
-- 布林带 - 波动率分析
+实战里把阈值拉开安全垫才有参考意义：比如 8 小时费率冲到 `+0.05%` 乃至 `+0.10%` 以上，说明多头杠杆明显拥挤、做多持仓摩擦成本陡增；反过来跌穿 `-0.03%`，说明空头扎堆在给多头交补贴。这里顺嘴把概念说准：资金费率本质上是多空双方定期互付的持仓成本和拥挤度温度计，单靠费率本身并不会直接触发低倍仓位强平，拿它来警惕极端单边情绪正合适。
 
-### 3. 智能预警系统
+## 0x02 目录结构、钉钉 `HMAC-SHA256` 加签与零私钥原则
 
-**预警类型**:
+整个小工具的文件结构压得很扁，一眼就能看清谁管谁：
 
-| 类型 | 触发条件 | 推送渠道 |
-|------|----------|----------|
-| 价格突破 | 突破关键价位 ±1% | 钉钉 |
-| 成交量异常 | 24h 成交量突增 50%+ | 钉钉 |
-| 技术信号 | 金叉/死叉/超买超卖 | 钉钉 |
-| 资金费率 | 费率 > 0.01% 或 < -0.01% | 钉钉 |
-
-**推送示例**:
-```
-🔔 ClawGuard 价格预警
-
-币种：BTC/USDT
-当前价：$74,500.00
-24h 涨跌：+2.35%
-信号：🟢 金叉 (MA7 上穿 MA25)
-
-建议：短期看涨，注意成交量配合
-时间：2026-03-17 14:30:00 UTC
-```
-
-### 4. AI 价格预测
-
-**模型特点**:
-- 基于 LSTM 神经网络
-- 输入：过去 7 天价格 + 成交量 + 技术指标
-- 输出：未来 1 小时/4 小时/24 小时价格预测
-- 准确率：约 75% (短期预测)
-
-**预测结果展示**:
-```
-🤖 AI 价格预测 (BTC/USDT)
-
-当前价：$74,500
-
-1 小时后：$74,800 (+0.40%)  [置信度：78%]
-4 小时后：$75,200 (+0.94%)  [置信度：72%]
-24 小时后：$76,100 (+2.15%) [置信度：65%]
-
-趋势：🟢 看涨
-风险：中等
-```
-
----
-
-## 项目结构
-
-```
+```text
 ClawGuard/
-├── web/
-│   ├── backend/
-│   │   ├── app.py              # Flask 主应用
-│   │   ├── routes/
-│   │   │   ├── api.py          # API 路由
-│   │   │   └── admin.py        # 管理后台
-│   │   ├── services/
-│   │   │   ├── binance.py      # 币安 API 封装
-│   │   │   ├── okx.py          # OKX API 封装
-│   │   │   └── analyzer.py     # 技术分析引擎
-│   │   └── models/
-│   │       └── price_data.py   # 数据模型
-│   └── frontend/
-│       ├── templates/
-│       │   ├── dashboard.html  # 监控仪表盘
-│       │   └── settings.html   # 配置页面
-│       └── static/
-│           ├── css/
-│           └── js/
-├── scripts/
-│   ├── price-alert-monitor.sh  # 监控启动脚本
-│   └── daily-morning-report.sh # 晨报生成脚本
-├── clawguard_with_ta.py        # 主监控进程 (带技术分析)
-├── config.json                 # 配置文件
-└── requirements.txt            # Python 依赖
+  clawguard_with_ta.py        # 60 秒轮询主监控进程
+  config.example.json         # 配置模板（复制为 config.json 后使用）
+  requirements.txt            # Python 依赖（Flask / flask-sock / requests / pandas 等）
+  scripts/                    # 启停与每日汇总辅助脚本
+  web/
+    backend/
+      app.py                  # Flask 面板入口
+      models/price_data.py    # SQLite 持久化表模型
+      routes/                 # API 与后台视图路由
+      services/               # binance.py、okx.py 与 analyzer.py
+    frontend/                 # dashboard.html、settings.html 与静态资源
 ```
 
----
-
-## 部署指南
-
-### 系统要求
-
-| 项目 | 要求 |
-|------|------|
-| 操作系统 | Linux / macOS / Windows |
-| Python 版本 | 3.10+ |
-| 内存 | 512MB+ |
-| 存储 | 1GB+ |
-| 网络 | 需要代理 (Clash) |
-
-### 快速部署
+在 Debian 12 或 Ubuntu 24.04 这类默认开启了 PEP 668（`externally-managed-environment`）保护的新系统上部署时，直接拿系统级 `pip` 硬装会报错，先建个虚拟环境再装包，顺手把 `config.json` 的权限锁成 `600`（毕竟明文配置落在磁盘上，没接系统密钥环之前谁能读文件谁就能拿走你的机器人地址）：
 
 ```bash
-# 1. 克隆项目
-git clone https://github.com/wizawn/ClawGuard.git
-cd ClawGuard
-
-# 2. 安装依赖
+python3 -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
 
-# 3. 配置 API Key
 cp config.example.json config.json
-# 编辑 config.json 填入你的配置
+chmod 600 config.json
 
-# 4. 启动监控
-python3 clawguard_with_ta.py
-
-# 5. 启动 Web 后台
-cd web/backend && python3 app.py --port 5000
+# 起后台监控与本地 Web 面板（默认只绑回环口）
+python3 clawguard_with_ta.py &
+python3 web/backend/app.py --host 127.0.0.1 --port 5000
 ```
 
-### 配置说明
+`config.json` 里把要盯的交易对数组 `symbols`、钉钉机器人地址与加签密钥、出站代理和告警水位配齐就行：
 
 ```json
 {
-  "binance_api_key": "你的币安 API Key",
-  "binance_api_secret": "你的币安 API Secret",
-  "dingtalk_webhook": "钉钉机器人 Webhook",
+  "symbols": ["BTCUSDT", "ETHUSDT"],
+  "dingtalk_webhook": "https://oapi.dingtalk.com/robot/send?access_token=...",
+  "dingtalk_secret": "SEC开头的钉钉机器人加签密钥",
   "proxy": "http://127.0.0.1:7890",
   "monitor_interval": 60,
-  "price_threshold": 1.0
+  "price_threshold_pct": 1.0,
+  "funding_high_threshold": 0.0005,
+  "funding_low_threshold": -0.0003
 }
 ```
 
----
+最后叮嘱两个实打实踩过的坑。
 
-## 使用场景
+第一个是 API Key 的最小权限铁律：只拉现货价格、K 线和资金费率的纯监控脚本，压根不需要填任何交易所 API Key！币安和 OKX 的公开行情端点本来就是免鉴权直连的，配置里压根别留交易所密钥字段最踏实。就算你以后自己改代码想顺带查个人账户余额，去后台建 Key 时也只准勾"只读（Enable Reading）"并绑死服务器固定出口 IP，千万别给一个跑在小鸡上的盯盘脚本开"允许现货或合约交易"权限。另外部分司法管辖区对交易所接口访问有地域合规限制，挂代理请求前先确认符合平台服务条款。
 
-### 场景 1: 短线交易监控
+第二个坑在钉钉推送报 `errcode: 310000` 上。现在建钉钉群自定义机器人强制要求三选一配安全设置，选最稳妥的"加签"模式拿到 `SEC...` 密钥之后，每次发 POST 请求前必须拿当前毫秒级时间戳拼上换行符和密钥（`f"{timestamp}\n{secret}"`）跑一遍 `HMAC-SHA256`，再做 Base64 和 `urllib.parse.quote_plus` 编码拼到 URL 的 `&timestamp=...&sign=...` 尾巴上，光往裸 Webhook 地址硬塞 JSON 是一条都发不出去的。
 
-**需求**: 捕捉 BTC 短期波动机会
-
-**配置**:
-- 监控周期：60 秒
-- 价格阈值：±1%
-- 技术指标：MA7/MA25 金叉死叉
-
-**效果**: 每次出现金叉/死叉或价格突破 1% 时，立即收到钉钉推送
-
-### 场景 2: 定投提醒
-
-**需求**: 在价格低于均线时定投
-
-**配置**:
-- 监控价格 vs MA25
-- 当价格 < MA25 * 0.95 时触发
-
-**效果**: 价格低于 25 日均线 5% 时收到提醒，适合定投入场
-
-### 场景 3: 风险预警
-
-**需求**: 监控持仓风险
-
-**配置**:
-- 监控资金费率
-- 当费率 > 0.01% 时预警
-
-**效果**: 费率过高时提醒减仓，避免清算风险
-
----
-
-## 安全特性
-
-### API Key 安全
-- 本地存储，不上传云端
-- 配置文件权限 600 (仅所有者可读)
-- 仅使用现货交易权限 (禁用提现)
-
-### 数据安全
-- SQLite 本地数据库
-- 敏感数据加密存储
-- 定期自动备份
-
-### 网络安全
-- 支持代理 (Clash)
-- HTTPS API 调用
-- Webhook 签名验证
-
----
-
-## 性能指标
-
-| 指标 | 数值 |
-|------|------|
-| 数据采集延迟 | < 1 秒 |
-| 预警推送延迟 | < 5 秒 |
-| 数据库写入速度 | 1000 条/秒 |
-| 内存占用 | ~50MB |
-| CPU 占用 | < 5% (空闲时) |
-
----
-
-## 常见问题
-
-### Q1: 为什么价格数据不更新？
-**A**: 检查 Clash 代理是否运行，网络是否正常
-
-### Q2: 钉钉推送失败？
-**A**: 检查 Webhook 配置，确保机器人已添加到群聊
-
-### Q3: 技术分析指标不准确？
-**A**: 确保数据库中有足够的历史数据 (至少 25 条)
-
-### Q4: 如何添加新的监控币种？
-**A**: 在 config.json 的 `symbols` 数组中添加交易对
-
----
-
-## 更新日志
-
-### v1.0.0 (2026-03-17)
-- 实时价格监控 (60 秒级)
-- 技术分析引擎 (MA7/MA25)
-- 钉钉预警推送
-- Web 管理后台
-- AI 价格预测
-
-### v0.9.0 (2026-02-20)
-- 多交易所支持
-- 资金费率监控
-- 成交量异常检测
-
----
-
-## 未来规划
-
-- [ ] 添加更多技术指标 (RSI, MACD, 布林带)
-- [ ] 集成更多交易所 (Bybit, KuCoin)
-- [ ] 移动端 App (iOS/Android)
-- [ ] 回测系统 (策略验证)
-- [ ] 自动交易 (需用户授权)
-
----
-
-## 联系方式
-
-- **GitHub**: https://github.com/wizawn/ClawGuard
-- **博客**: https://blog.caowo.de
-- **邮箱**: hihacker@foxmail.com
-
----
-
-## 免责声明
-
-ClawGuard 仅供学习和研究使用，不构成投资建议。
-
-加密货币市场风险极高，价格波动剧烈。使用本系统进行交易决策前，请务必：
-1. 自行验证数据准确性
-2. 理解技术分析指标的局限性
-3. 做好风险管理和资金管理
-4. 不要投入超过承受能力的资金
-
-作者不对任何交易损失负责。
-
----
-
-*ClawGuard - 加密货币实时监控与预警*
+整套东西跑起来只占四五十兆内存，单次 HTTP 拉取虽然不到 1 秒就能回包，但既然底层走的是 60 秒轮询，行情异动的最大感知延迟自然也是 60 秒；等后面哪天空闲了，再把采集源换成交易所原生的 `wss://stream.binance.com:9443` WebSocket 实时流。

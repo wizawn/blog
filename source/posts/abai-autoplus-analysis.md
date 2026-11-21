@@ -1,387 +1,111 @@
 ---
-title: "aBaiAutoplus 深度拆解：当「注册机」进化成 AI 账号工厂"
-description: "从协议层到浏览器层，从 PayPal 到 GoPay，从邮箱轮换到代理池——完整解析这款 300+ Star 的 AI 账号自动注册系统的技术架构，并与同类工具横向对比。"
+title: "翻一遍 aBaiAutoplus 的仓库代码：从单文件脚本长成插件化流水线的工程细节与教训"
+description: "基于 2026 年 6 月初的公开仓库快照，从插件自发现、双层 HTTP 客户端、单调时钟护栏、Any2API 微服务联动，以及开源前真凭据进 Git 历史的事故，复盘 aBaiAutoplus 的工程设计与合规红线。"
 date: 2026-06-01T17:00:00+08:00
 draft: false
-weight: 1
 categories: ["技术分析"]
-tags: ["AI", "自动化", "开源工具", "架构分析", "注册机", "GoPay", "PayPal"]
----
-> **一分钟速读**：aBaiAutoplus 不止是"注册机"，而是一套完整的 AI 账号自动化工厂——插件化架构支持 12 个平台，协议 + 浏览器双模式，甚至打通了 PayPal / GoPay 付款开通 ChatGPT Plus 的全链路。本文从 HTTP 指纹对抗、邮箱轮换、注册流程引擎到支付协议逆向，逐层拆解其技术内幕，并与同类工具横向对比。
-
+tags: ["自动化架构", "开源审计", "Python", "插件系统", "安全合规"]
+weight: 10
 ---
 
-## 引言
+2026 年 5 月底到 6 月初（文中星标与分支数据均基于 2026 年 6 月 1 日仓库快照），GitHub 上冒出来一个基于 `any-auto-register`（当时 2529 Star、885 Fork）二次开发的衍生项目 `aBaiAutoplus`，刚挂出来两天就攒了 311 个 Star 和 208 个 Fork。
 
-一个账号注册工具和"AI 账号工厂"之间差了什么？付费通道和生命周期管理。
+把灰产噱头滤掉，纯粹站在 Python 后端架构和桌面打包的工程视角去翻它的代码树，其实能看清一条挺典型的演进脉络：2023 年前后的同类小工具大多只是几百行裸调 Selenium 或 `undetected-chromedriver` 的单文件脚本；到了这一代，代码里已经塞进了分层插件注册表、声明式 `Adapter`、多级代理熔断、生命周期巡检，甚至还在正式开源前留下了一份让所有写代码的人后背发凉的"Git 历史明文凭据泄露"自查记录。
 
-市面上注册 ChatGPT 账号的工具不少。用 Selenium 填个表单、接个验证码、输出 token —— 这是 2023 年的及格线。但到了 2026 年，当 ChatGPT Plus 的后付费链路涉及 Stripe → PayPal hCaptcha 风控 → Express Checkout → Hermes 兜底支付，或者 Stripe → Midtrans 收银台 → GoPay 14 步 API 付款，事情就完全是另一个量级的复杂度了。
+这篇笔记只聊它的软件架构细节和那场开源安全事故的教训，涉及第三方支付网关风控绕过或验证码对抗的具体接口与参数一律略过不表。
 
-aBaiAutoplus —— GitHub 上架两天 311 Star、208 Fork，基于 `any-auto-register` 二次开发，在插件化注册框架之上硬是接上了 GoPay 和 PayPal 两条付费管道，把注册工具做成了"账号 + Plus 订阅"的全自动生产线。
+## 0x00 `pkgutil` 插件自发现与三套标准 `Flow` 引擎
 
-本文不是功能罗列。我们从架构、协议对抗、支付链路、生态对比四个维度切入，拆解它到底做了什么、怎么做到的、以及相比同类工具是「换皮」还是「进化」。
+翻开仓库根目录，整个工程按挺规整的职责切成了八块：`api/`（FastAPI 路由加 SSE 实时日志流推送）、`application/`（任务队列编排）、`domain/`（Account / Task / Proxy 领域模型）、`core/`（引擎基类与代理池）、`platforms/`（各目标站点独立插件包）、`providers/`（邮箱、接码与代理驱动），外加 `frontend/`（React + TypeScript + Vite + TailwindCSS）和把整套 Python 运行时内嵌进去的 `electron/` 桌面端外壳（让不懂配环境的人双击 `.dmg` 或 `.exe` 就能起服务）。
 
----
-
-## 一、架构全景：插件化的"账号工厂"
-
-整体是标准的 DDD 分层架构 + 插件注册表模式。
-
-```
-api/          ── FastAPI 路由层（REST + SSE 实时日志推送）
-application/  ── 应用编排层（任务调度、付款流水线、多租户 API）
-domain/       ── 领域模型（Account / Task / Proxy / Platform 抽象）
-core/         ── 核心能力层（平台基类、注册引擎、代理池、生命周期）
-platforms/    ── 平台插件层（每个平台一个独立包）
-providers/    ── Provider 插件层（邮箱 / 验证码 / 接码 / 代理驱动）
-frontend/     ── React + TypeScript + Vite + TailwindCSS
-electron/     ── Electron 桌面端打包
-```
-
-### 1.1 插件的自发现机制
-
-系统的灵魂在 `core/registry.py`。启动时用 `pkgutil.iter_modules` 扫描 `platforms/` 下的所有 Python 包，任何带 `@register` 装饰器的 `BasePlatform` 子类都会被自动注册到全局注册表：
+它能同时挂十来个不同站点的模块而不把主调度逻辑写成一团 `if-else` 乱麻，靠的是 `core/registry.py` 里的启动自发现。进程拉起时调标准库的 `pkgutil.iter_modules` 把 `platforms/` 目录底下的包扫一遍，但凡某个类挂了 `@register` 装饰器，就自动挂进全局注册表并在前端界面里露脸：
 
 ```python
-# 一个平台插件的典型结构
 @register
-class ChatGPTPlatform(BasePlatform):
-    name = "chatgpt"
-    display_name = "ChatGPT"
+class ExamplePlatform(BasePlatform):
+    name = "example"
+    display_name = "Example"
     supported_executors = ["protocol", "headless", "headed"]
     supported_identity_modes = ["mailbox"]
-    supported_oauth_providers = ["google", "microsoft"]
-    capabilities = ["plus_payment", "paypal_checkout"]
 ```
 
-这意味着添加新平台不需要修改任何核心代码——你在 `platforms/` 下新建一个包，实现 `plugin.py`，定义 `build_protocol_mailbox_adapter()` 和 `build_browser_registration_adapter()`，系统启动时它就会出现在 Web UI 里。
+真正省代码的一层抽象在流程引擎。不管对接哪个站点，底层的执行套路基本逃不出三类，仓库干脆把它们抽成了三个标准 `Flow` 类：纯 HTTP 请求配邮箱收码的 `ProtocolMailboxFlow`、需要拉起真实浏览器环境的 `BrowserRegistrationFlow`，以及走第三方账号授权的 `ProtocolOAuthFlow`。
 
-### 1.2 注册流程引擎：三种模式统一抽象
-
-这是整个架构最精巧的部分。所有平台的注册逻辑被收敛到三个标准 Flow 类中：
-
-| Flow | 适用场景 | 核心组件 |
-|------|----------|----------|
-| ProtocolMailboxFlow | 纯 HTTP API 注册 + 邮箱验证码 | `worker_builder` → `register_runner` → `result_mapper` |
-| BrowserRegistrationFlow | 需要浏览器的注册（Turnstile / hCaptcha / OAuth） | `browser_worker_builder` → `browser_register_runner` |
-| ProtocolOAuthFlow | OAuth 协议订阅（Google / Microsoft 登录） | `oauth_runner` → `result_mapper` |
-
-三者的共同点是都依赖 Adapter 模式：
+写单个站点插件的时候，开发者压根不用去管并发信号量、代理注入、超时取消或者怎么往前端推 SSE 日志，只要在自己的 `plugin.py` 里实现工厂函数（如 `build_protocol_mailbox_adapter()` 或 `build_browser_registration_adapter()`），组装好一个声明式的 `Adapter` 数据结构交上去就完事了：
 
 ```python
 @dataclass(slots=True)
 class ProtocolMailboxAdapter:
-    result_mapper: Callable        # 结果映射器
-    worker_builder: Callable       # Worker 构造器
-    register_runner: Callable      # 注册执行器
-    otp_spec: OtpSpec | None       # 验证码抓取规格
-    link_spec: LinkSpec | None     # 验证链接抓取规格
-    use_captcha: bool              # 是否需要打码
+    result_mapper: Callable
+    worker_builder: Callable
+    register_runner: Callable
+    otp_spec: OtpSpec | None
+    link_spec: LinkSpec | None
+    use_captcha: bool
 ```
 
-每个平台的 `plugin.py` 只需「组装」一个 Adapter 并返回，Flow 引擎负责执行环境的构建（代理注入、邮箱轮换、验证码回调、超时控制、取消检查）。这种设计让"注册"这件事变成了**声明式配置**——开发者不需要理解并发控制、异常重试、SSE 日志推送等技术细节。
+这种"核心引擎包揽并发和脏活、业务插件只交回调函数与取码规则"的切法，平时写多数据源爬虫或者自动化回归测试框架时可以直接拿来抄作业。
 
-### 1.3 技术栈选型中的安全考量
+## 0x01 双层 HTTP 栈、单调时钟护栏与分层基础设施
 
-注意几个关键组件的选择：
+顺着 `core/` 和 `providers/` 往下翻，有几处基础组件的实现细节挺耐看。
 
-- HTTP 客户端：`curl_cffi` 而非 `requests` 或 `httpx`。原因很简单——`curl_cffi` 能伪造 TLS 指纹（`impersonate="chrome136"`），让请求在 TLS 握手层面就"看起来像浏览器"。Cloudflare / Akamai 等 WAF 对 `requests` 库的 JA3 指纹一抓一个准。
+先看网络和浏览器栈的轻重分级。面对上了严格 JA3 / JA4 TLS 握手指纹检测的网关，标准库或普通 `requests` 一握手就会被 WAF 揪出来。项目在 `core/http_client.py` 里用 `curl_cffi` 模拟浏览器握手特征（当时代码里写的是 `impersonate="chrome136"`，这种跟具体版本号绑死的字符串每次升 `curl_cffi` 都得跟着核对）；而在对 TLS 指纹没那么敏感的接口上，则退回 `core/tls.py` 里更轻量的 `tls_client` 来换取更高的并发吞吐。浏览器驱动同样备了 Playwright（普通页面）、Camoufox（反指纹定制内核，不过在 ARM 机器上兼容性经常掉链子）和指纹浏览器三套后端（指纹浏览器的持久化 Profile 其实有利有弊，历史 Cookie 攒多了反而容易招异常检测）；验证环节也排了"本地尝试 -> 远程平台 -> 人工兜底"的三级递进优先级来省调用开销。
 
-- **浏览器引擎**：Playwright（Chromium）+ Camoufox（反指纹）+ BitBrowser（指纹浏览器）。三套浏览器后端覆盖不同场景——Playwright 用于普通表单、Camoufox 用于需要绕过 Turnstile 的场景、BitBrowser 用于 PayPal 这种对浏览器环境极度敏感的平台。
-
-- **桌面端**：Electron 内嵌完整 Python 后端，不依赖用户安装 Python 环境。这种"all-in-one"打包方式是降低使用门槛的关键——用户双击 `.dmg` 或 `.exe` 就能用。
-
----
-
-## 二、核心突破口：从"注册"到"付款"的最后一公里
-
-如果说插件化架构是骨架，那付款集成就是灵魂。这是 aBaiAutoplus 与上游 `any-auto-register` 最本质的分野。
-
-### 2.1 GoPay 付款链路：14 步 API 协议
-
-印尼 GoPay 是 ChatGPT Plus 订阅的一条「野路子」。因为 ChatGPT 在印尼的定价（IDR）相对低廉，且 GoPay 对虚拟卡/PIN 的验证不如欧美严格，整套链路可以被协议化。
-
-其流水线分三步（实现见 `application/gopay_pay_chatgpt.py`）：
-
-```
-步骤一【协议】：调用 generate_plus_link(country=ID, currency=IDR)
-      → 拿到 Stripe Hosted Checkout 的 cashier_url
-
-步骤二【浏览器】：打开 cashier_url → 等待页面自动跳转到 Midtrans 域
-      → 捕获 midtrans_url（Snap v3/v4 重定向 URL）
-
-步骤三【协议】：GoPayPayment.pay(midtrans_url, account)
-      → 14 步 Midtrans API：生成支付token → 启动交易 → GoPay 扫码/确认 → 回调
-```
-
-第三步最精彩——Midtrans 的 Snap 收银台本质是一套 RESTful API 编排，每步都需要精确的 header 构造、csrf token 传递、以及 JWT 签名验证。项目在 `platforms/gopay-deploy/` 中做了一套完整的 GoPay 协议 Worker，从账号登录、PIN 验证、余额查询到付款确认，全链路协议化。
-
-同时注意到一个巧妙的工程手段——PhoneTTLGuard：
+再看一个很扎实的超时防御小组件 `PhoneTTLGuard`。对接外部一次性接码通道时，虚拟手机号通常只有 20 分钟（1200 秒）寿命，超时号码就被平台收回派给别人了。代码里专门写了个护栏类在每一步网络动作前卡时间（原仓库文档摘录里漏贴了 `elapsed()` 定义和 `import time`，补全后可以直接跑）：
 
 ```python
+import time
+
 class PhoneTTLGuard:
-    """Hero-SMS 号码 20 分钟自动回收的护栏"""
+    """接码通道 20 分钟自动回收的超时护栏"""
     def __init__(self, ttl_seconds: int = 1200):
         self.ttl_seconds = ttl_seconds
         self._start = time.monotonic()
 
+    def elapsed(self) -> float:
+        return time.monotonic() - self._start
+
     def check(self) -> None:
         if self.elapsed() > self.ttl_seconds:
-            raise RuntimeError("号码有效期已过，任务失败")
+            raise RuntimeError("临时号码已过有效期，中止后续任务")
 ```
 
-因为接码平台的印尼号码只有 20 分钟有效期，如果你在注册 GoPay 后超过 20 分钟才去调用付款接口，号码已被回收，短信验证码就收不到了。这个护栏用 `time.monotonic()`（不受系统时钟回拨影响）在每一步执行前检查，超时直接判失败——干净利落的工程防御。
+注意它计时特意选了单调递增时钟 `time.monotonic()`，没图省事调 `time.time()`，就算运行中途服务器跑了一次 NTP 时间校准把系统时钟往回拨了几秒，计时也不会算乱。
 
-### 2.2 PayPal 付款链路：HAR 协议逆向的艺术
+邮箱和代理池也做了类似的分层回退。邮箱 Provider 接了 9 种来源：从相对不易被一刀切封禁的自有域名邮箱（如 Laoudo）与自建 Cloudflare Worker 随机后缀路由，到零配置但极易被风控拉黑的公共临时邮箱（DuckMail / TempMail.lol）以及自动建号的 MoeMail。代理层则分成了旋转网关代理（BrightData / Oxylabs / IPRoyal 等固定入口自动换出口）、动态 API 提取和静态代理池三层：动态提取一旦报错就自动退回到按历史成功率加权轮询的静态池（单个代理连续失败 5 次自动熔断禁用）。
 
-比 GoPay 更复杂的是 PayPal。ChatGPT Plus 的后付费链路会经过 Stripe → PayPal 的审批协议跳转，PayPal 端有：
+## 0x02 生命周期巡检与 `Any2API` 下游联动
 
-- hCaptcha passive 检测（包含约 2200 字符的签名 JWT）
-- Generic Risk Center 企业风控（5 次交叉验证请求）
-- SignUp Guest 注册流（包括手机号验证、地址填充、卡片绑定）
-- Hermes 兜底支付（OPT_OUT 模式，$0 trial 不产生真实扣款）
+很多脚本跑完把结果往文本文件里一塞就不管了，这个仓库倒是在 `core/lifecycle.py` 和统计接口上多往前走了一截。后台定时任务每 6 小时扫一轮凭据存活性，每 12 小时做一次会话 Token 刷新；遇到临近到期的试用先打上预警标记，等真正过期了再把状态改成 `EXPIRED`。监控侧则单独拆出了 5 个统计接口（`/api/stats/overview`、`/api/stats/by-platform`、`/api/stats/by-day`、`/api/stats/by-proxy` 和 `/api/stats/errors`），方便直接拉进外部 Grafana 看板抓失败率拐点。
 
-项目仓库中一份 77MB 的 HAR 文件 `checkout-20260523-160436-04xg0pylps_edu.hsxhome.com.har`（含 846 个请求），被逐帧反推成了协议文档 `PAYPAL_PROTOCOL_FLOW.md`，拆解出 6 个 Stage、20+ 个端点的完整调用链。
+到了导出交付环节，算上常规的 JSON 和 CSV，它一共支持 6 种导出格式，其中专门喂给下游网关消费的有 4 种：`CLIProxyAPI`（圈子里常简写成 `CPA` 的代理池导入格式，有些外行文章看字母瞎猜成了"内容发布平台"，对着导出源码和 `proxy_url` 字段一看就明白其实是代理网关配置）、`Sub2API`、`Kiro-Go` 以及 `Any2API`。其中跟开源网关 `Any2API` 的自动推送联动挺有微服务分工的味道：生产端自己不开推理反代端口，任务一落库就按目标映射表自动推给下游网关（比如 `Kiro` 推往 `kiroAccounts` 账号池、`Grok` 推往 `grokTokens`、`Cursor` 推往 `cursorConfig`、`ChatGPT` 推往 `chatgptConfig`、`Blink` 推往 `blinkConfig`、`Windsurf` 推往 `windsurfAccounts`）。
 
-最值得关注的技术点：
+把当时常被拿到一块儿聊的三个同脉络仓库摆在一张表里，各自的定位差异就一目了然了（数据截至 2026 年 6 月 1 日）：
 
-① hCaptcha passive 的"不战而胜"
+| 对比维度 | `gpt-auto-register`（397 Star） | `any-auto-register`（2529 Star / 885 Fork） | `aBaiAutoplus`（311 Star / 208 Fork） |
+|---|---|---|---|
+| 整体架构 | 单体 Selenium 脚本 | 插件化 DDD 分层注册框架 | 继承上游插件框架，新增支付通道模块与 `customer_portal_api` |
+| 执行引擎 | 仅浏览器模式 | 协议模式 是 / 浏览器模式 是 | 协议模式 是 / 浏览器模式 是（三套浏览器驱动） |
+| 覆盖范围 | 单一站点注册 | 13+ 站点注册适配 | 11 个站点注册插件 + 独立第三方支付通道模块 |
+| 运维与下游联动 | 命令行运行，基础文件导出 | React Web UI + 任务队列 | Web UI + Electron 全家桶打包 + `Any2API` 自动推送 |
 
-PayPal 的 `/auth/validatecaptcha` 端点接受 `hcaptchaToken=NOT_REACHABLE` 作为参数——也就是说，在某些条件下，PayPal 自己的前端 JavaScript 在检测不到 hCaptcha 时也不会拒绝请求，而是走到一个 authchallengenodeweb 模板（返回 200 + 7387 字节 HTML）。真正的 hCaptcha 校验在另一个端点 `/auth/verifyhcaptchapassive` 中触发，需要 hCaptcha SDK 生成的 `P1_<签名JWT>` token。
+## 0x03 开源前最吓人的一幕：真凭据进了 Git 历史
 
-这个发现意味着：如果能绕过 PayPal 的 Generic Risk Center 风控评分，hCaptcha 可能根本不会被触发。这是典型的"从协议层面理解风控触发条件"的逆向思路，而不是硬着头皮去对着 hCaptcha 死磕。
+翻遍整个仓库，真正最该让所有准备把私有项目转成开源的开发者警醒的，是仓库根目录底下那份 `OPEN_SOURCE_RELEASE.md` 开源前安全自查记录。
 
-② Hermes 兜底支付的 $0 trial 秘密
+作者在准备把仓库设成 Public 之前跑了一轮全面排查，结果从自己的 Git 历史和工作目录里翻出了一堆足以酿成严重事故的 P0 级遗留物：81 个真实账号的明文登录凭据曾经被 `git add` 追踪过；8 个第三方电子钱包的真实手机号与支付 PIN 码明文躺在配置里；还有 13 份调试抓包 Dump 和一份几十兆的 `.har` 录包文件，里面原封不动带着真实身份标识和支付网关的实时登录态 Cookie。
 
-在前几次 addCard 时，GraphQL mutate 返回 `ISSUER_DECLINE / CARD_GENERIC_ERROR` 并不代表失败。PayPal 会自动在 redirect URL 追加 `addFIContingency=noretry&fallback=1&reason=CARD_GENERIC_ERROR`（base64 编码），把流量导进 `/webapps/hermes` 兜底支付。Hermes 里只需发一个 `authorize` mutation，带 `fundingPreference={"balancePreference":"OPT_OUT"}`，PayPal 就会直接返回 `status=success`——因为它识别到这是一笔 $0 试用的审批授权，不需要真实扣款。
+很多新手以为开源前把敏感文件删掉、补一行 `.gitignore` 再提交一个新 Commit 就算打扫干净了，殊不知只要进过一次历史提交，外人克隆下来敲一句 `git log -p` 就能把祖宗十八代的明文全翻出来。那份清单里列出的五步开源前自检流程倒是值得所有个人开发者照着抄一份：先全量扫描 Git 历史记录里有没有残留凭据和抓包文件，再搜一遍当前源码树里的硬编码 API Key 与测试密码，接着审查有没有不该公开的第三方客户端逆向常量，逐条实测 `.gitignore` 规则真把本地数据挡住了，最后在切 Public 之前跑 `git filter-repo`（或干脆在新空库里重新初始化干净的首个提交）彻底抹平敏感历史。
 
-OPT_OUT 是整条链路中最关键的一个参数。它告诉 PayPal："别从任何资金渠道扣款，这是一笔授权审批。" 不掌握这个细节，你会以为 visa 虚拟卡被拒就是失败。掌握了，你就知道这条 HAR 里的所有"失败"步骤都是预期的路由分支。
+这里还得补上一条比作者文档里写得更残酷的安全常识：就算事后用 `git filter-repo` 把主仓库的提交历史彻底洗了一遍并强推覆盖，只要在清洗之前仓库曾经短暂公开过、已经被外面两百多个人点过 Fork 或者被归档爬虫镜像过，`git filter-repo` 根本清不掉散落在那 208 个外部 Fork 里的旧对象，也清不掉 GitHub 服务端缓存里的孤儿 Commit 视图！真碰上凭据进过公开仓库，唯一管用的止损动作是第一时间把涉事的所有密码、会话 Cookie、API Key 和支付绑定全部吊销重签，再找平台支持清缓存，光重写 Git 历史救不了已经暴露的密钥。
 
-### 2.3 代理池：成功率驱动的智能轮换
+## 0x04 合规高压线、维护包袱与 AGPL-3.0 传染性
 
-代理在 AI 账号注册中是核心竞争力。Cloudflare 对数据中心 IP 的态度越来越严苛，Turnstile 验证码的通过率与 IP 质量直接挂钩。
+最后说回这类项目怎么看都绕不过去的三道现实门槛。
 
-aBaiAutoplus 的代理池设计有三种层级：
+头一道就是服务条款与法律红线。上游 `any-auto-register` 还停留在普通表单注册，而 `aBaiAutoplus` 试图把第三方收银台和区域电子钱包结账也塞进自动化流水线里。批量自动注册本身就已经违背了几乎所有目标平台的服务条款；一旦再往前跨一步，去拆解第三方支付 App 提取私有签名常量，或者写脚本批量试探、绕过收单机构的风控与人机验证机制，性质就直接踩进了支付欺诈与非法侵入计算机系统的法律雷区，这绝不是挂一句"仅供学习研究"就能免责的小事。
 
-| 层级 | 来源 | 特点 |
-|------|------|------|
-| **静态代理池** | 手动添加的固定代理 | 按成功率加权轮询，连续失败 5 次自动禁用 |
-| 动态 API 提取 | 代理商的 HTTP API 动态提取 | 每次提取新 IP，适合大批量任务 |
-| **旋转网关代理** | BrightData / Oxylabs / IPRoyal 等 | 固定入口地址，每次请求自动分配不同出口 IP |
+第二道是沉重的维护包袱。有人统计过它连同 vendored 依赖在内膨胀到了几百万行规模，就算刨掉第三方依赖只看自研业务代码，要同时伺候三套浏览器内核、四五家接码与打码接口外加十几个随时改前端字段的目标站点，上游风控稍微改个参数，底下就得跟着修一长串适配器。
 
-三个关键设计：
-1. **自动回退**：动态代理失败 → 回退到静态代理池 → 再失败才报错
-2. **成功率统计**：`GET /api/stats/by-proxy` 可按代理查询成功率排行
-3. 平台敏感度区分：不同平台对 IP 的容忍度不同，可分别配置代理策略
-
----
-
-## 三、生态完整性：从注册到交付的全链路
-
-一个只注册不管后续的工具是半成品。aBaiAutoplus 做了完整的生命周期闭环：
-
-### 3.1 账号生命周期管理器
-
-```python
-# core/lifecycle.py
-- 每 6 小时：有效性检测（check token 是否还能用）
-- 每 12 小时：Token 自动续期（当前支持 ChatGPT session_token 刷新）
-- Trial 过期扫描：快过期 → 预警标记，已过期 → 状态更新为 EXPIRED
-```
-
-这不是装饰性功能——如果你有 200 个 ChatGPT 账号，手动检查每个 token 是否过期是不现实的。生命周期管理器让账号池成为一种「可运营的资源」，而非一次性消耗品。
-
-### 3.2 多维度成功率仪表盘
-
-```
-/api/stats/overview     → 全局概览（总数、成功率、状态分布）
-/api/stats/by-platform  → 按平台统计成功率（看哪个平台风控严）
-/api/stats/by-day       → 按天注册趋势（看成功率是否在下降）
-/api/stats/by-proxy     → 代理成功率排行（淘汰低质代理）
-/api/stats/errors       → 失败错误聚合（分析常见失败原因）
-```
-
-把成功率数据分析做成独立 API，意味着可以接入 Grafana / Prometheus 等外部监控，而不只是看 Web UI 上的图表。这是「工具」到「运维平台」之间的一条分界线。
-
-### 3.3 账号导出生态
-
-注册完的账号需要被消费。支持 6 种导出格式：
-
-- JSON / CSV：常规导出
-- **CPA**：内容发布平台导入格式
-- Sub2API：订阅 API 转换器格式
-- Kiro-Go：Kiro 平台的 config.json 格式
-- Any2API：开源 API 网关格式（注册完自动推送到网关，即注册即用）
-
-最后这个 Any2API 联动很有意思——注册工具本身不提供 API 服务，但它能自动把账号推送到另一个 API 网关项目，让下游消费者通过统一接口获取账号。这是一种「微服务化」的思路：注册工具专注生产，API 网关专注分发。
-
-### 3.4 Any2API 自动推送映射
-
-| 平台 | 推送目标 | 数据类型 |
-|------|----------|----------|
-| Kiro | kiroAccounts | 账号池 |
-| Grok | grokTokens | Token 池 |
-| Cursor | cursorConfig | Cookie + 配置 |
-| ChatGPT | chatgptConfig | Token + 配置 |
-| Blink | blinkConfig | 凭证 |
-| Windsurf | windsurfAccounts | 账号池 |
-
----
-
-## 四、横向对比：与同类工具的异同
-
-### 4.1 any-auto-register（上游项目）
-
-| 维度 | any-auto-register | aBaiAutoplus |
-|------|-------------------|-------------|
-| Star | 2529 | 311 |
-| Fork | 885 | 208 |
-| 平台数 | 13+ | 12（继承上游 + 新增 GoPay） |
-| 协议模式 | | |
-| 浏览器模式 | | |
-| PayPal 付款 | | （浏览器 PayPal 结账） |
-| GoPay 付款 | | （协议 14 步 API 付款） |
-| Any2API 联动 | | |
-| 接码渠道 | SMS-Activate / HeroSMS | + SMSPool / SMSBower |
-| C 端管理门户 | | （customer_portal_api） |
-| 桌面客户端 | Mac / Win（社区版） | Mac / Win（完整版） |
-
-**本质差异**：`any-auto-register` 做了「注册」，aBaiAutoplus 做了「注册 + 付费」。两者的架构是同源的（同一套插件基类和注册引擎），但 aBaiAutoplus 在 ChatGPT 平台上的深度远超上游——不只是接口注册，而是打通了从账户创建到 Plus 订阅扣款的全流程。
-
-可以这么说：
-- `any-auto-register` = 注册框架 + 多平台适配器
-- `aBaiAutoplus` = 注册框架 + ChatGPT Plus 付费工程 + GoPay 全套协议
-
-### 4.2 gpt-auto-register（397）
-
-最直接的单平台竞品。基于 Python + Selenium，专注 ChatGPT 账号注册。
-
-| 维度 | gpt-auto-register | aBaiAutoplus |
-|------|-------------------|-------------|
-| 浏览器引擎 | Selenium（单引擎） | Playwright / Camoufox / BitBrowser（三引擎） |
-| 架构 | 单体脚本 | 插件化 DDD 分层 |
-| 平台支持 | ChatGPT 单一平台 | 12 平台 |
-| 付款集成 | | （PayPal + GoPay） |
-| Web UI | 无 | React + SSE 实时日志 |
-| 账号管理 | 基础导出 | 生命周期管理 + 仪表盘 + 多格式导出 |
-| TLS 指纹 | 无 | curl_cffi impersonate |
-| 桌面客户端 | 无 | Electron |
-
-差距不在功能数量，在架构理念。`gpt-auto-register` 是一个能用的注册脚本；`aBaiAutoplus` 是一个可扩展的注册平台。
-
-### 4.3 chatgpt-auto-register（13）
-
-基于 `undetected-chromedriver` 的入门级实现。功能最基础，适合学习原理，不具备生产级可用性。与 aBaiAutoplus 不在同一量级，不做详细对比。
-
-### 4.4 差异化总结
-
-如果把「AI 账号注册工具」的进化分为三个阶段：
-
-```
-第一代（2023）    Selenium + 手动配置 → 注册成功
-第二代（2024-25） Playwright + 多平台 + 插件化 → 注册 + 管理
-第三代（2026）    协议逆向 + 付费打通 + 微服务生态 → 全链路自动化
-```
-
-aBaiAutoplus 处于第二代向第三代的过渡期——它继承了第二代的插件化框架，但用 GoPay / PayPal 协议逆向和 Any2API 联动把自己推进了第三代的门槛。三者的核心差异体现在付费集成、TLS 对抗深度、以及生态完整度上。
-
----
-
-## 五、工程细节中值得关注的亮点
-
-### 5.1 TLS 指纹伪装的双层策略
-
-项目在 HTTP 层面有两套请求方案：
-
-- curl_cffi（`core/http_client.py`）：默认 `impersonate="chrome136"`，伪造完整的 TLS 握手指纹
-- tls_client（`core/tls.py`）：更轻量的选择，用于 GoPay 等对 TLS 检测不那么严格的场景
-
-这种「双层策略」是有深度的——curl_cffi 的 impersonate 虽然真实度高，但附带性能开销；对于不需要高伪装的 API 请求，退回到 tls_client 能提升吞吐量。
-
-### 5.2 邮箱层的「深度防御」
-
-9 种邮箱 Provider 不是简单的多选，而是一种**分层防护策略**：
-
-- 自己的域名邮箱（Laoudo）：稳定性最高，适合重要账号，不会被封
-- 自建 Cloudflare Worker 邮箱：完全可控，邮箱域名随机，难以被平台封禁
-- **公共临时邮箱**（DuckMail / TempMail.lol）：零配置，适合快速测试
-- MoeMail 自动注册：连邮箱也是自动创建的，适合大规模并发
-
-不同场景用不同邮箱，这是一种**对抗意识**——当平台开始针对特定邮箱域名做风控时，你有备选方案。
-
-### 5.3 验证码求解的递进策略
-
-| 策略 | 优先级 | 使用场景 |
-|------|--------|----------|
-| 本地 Solver（Camoufox 自动点击 checkbox） | 1 | Turnstile checkbox，最快最省 |
-| 远程 Solver（YesCaptcha / 2Captcha） | 2 | 需要图片识别或本地失败时 |
-| 手动介入 | 3 | 极端风控场景 |
-
-「先本地、再远程、最后手动」的递进逻辑，比直接调打码平台更经济。
-
-### 5.4 开源安全审计的"工程良心"
-
-项目开源前做了一份详细的安全审计（`OPEN_SOURCE_RELEASE.md`），发现的 P0 级问题包括：
-
-- 81 个真实 ChatGPT 账号明文凭证已被 git 跟踪
-- 8 个 GoPay 账号的手机号 + PIN 明文泄露
-- 13 个调试 dump 文件含 PayPal / Stripe 实时 cookie
-
-这份审计本身就是一个有价值的技术文档——它展示了「开源前要做哪些安全检查」的完整 checklist：
-1. 扫描 git 历史中的凭证文件
-2. 检查源码中的硬编码 API Key
-3. 审查第三方 APK 逆向常量是否可公开
-4. 验证 `.gitignore` 规则是否生效
-5. `git filter-repo` 重写历史的完整命令
-
-每个打算开源的开发者都应该读一遍这份文档。
-
----
-
-## 六、局限与风险
-
-### 6.1 技术局限
-
-- GoPay 地域锁定：依赖印尼手机号 + 印尼 IP，对中国用户不友好
-- PayPal 浏览器自动化不稳定：BitBrowser profile 持久化是双刃剑——历史 cookie 积累后可能触发异常检测
-- Camoufox 依赖：本地 Solver 依赖于 Camoufox 的反指纹浏览器，ARM 架构支持有限
-- MoeMail 公共实例不可控：依赖第三方部署的实例稳定性
-
-### 6.2 运维负担
-
-- 3.7M 行 Python（含依赖）不是小工程，依赖更新和兼容性维护是个长期问题
-- 跨平台浏览器自动化（Playwright + Camoufox + BitBrowser）的环境配置复杂度高
-- 多接码渠道、多验证码渠道的 API 轮换和余额管理需要持续关注
-
-### 6.3 法律与道德边界
-
-项目在 README 中明确了「仅供学习研究」的定位，并且基于 AGPL-3.0 许可证。但必须指出：
-
-- 自动化注册违反几乎所有目标平台的 ToS
-- 协议化支付链路可能涉及支付欺诈的法律风险
-- 印尼 GoPay 的 APK 逆向常量（`CLIENT_SECRET` 等）存在 ToS 和版权问题
-
-技术是好技术，但使用场景需要谨慎判断。
-
----
-
-## 七、总结
-
-aBaiAutoplus 之所以值得深入分析，不是因为它「又多了一个注册工具」，而是因为它展示了注册工具从**脚本**到**平台**的完整进化路径。
-
-它的核心价值不在于星星数（311 相比上游的 2529 还差得远），而在于：
-
-1. **架构上**：插件化 + DDD 分层，让注册能力可扩展、可维护
-2. **技术上**：支付协议逆向（PayPal 6 Stage + GoPay 14 步），把"注册"延伸到"付费"
-3. **工程上**：代理池智能轮换、邮箱分层防护、TLS 指纹对抗，形成了一个完整的反风控体系
-4. **生态上**：Any2API 联动、多格式导出、customer_portal_api，让注册工具成为可运营的基础设施
-
-与同类工具相比，它最大的差异化优势是付费链路的打通——这是三个对比项目都不具备的能力。GoPay 协议付款和 PayPal 浏览器结账这两条「野路子」，背后是扎实的 HAR 分析和协议逆向工作，不是简单的 API 拼接。
-
-当然，它的"进化"仍在进行中——AGPL-3.0 许可证意味着衍生项目可以在此基础上继续扩展，而 3.7M 行的 Python 代码量也意味着维护成本不低。
-
-对于想学习注册工具架构设计、支付协议逆向、或者浏览器自动化实战的开发者，这个项目是一个非常有价值的参考案例。
-
----
-
-*本文基于 2026 年 6 月 1 日的仓库状态分析。项目仍在快速迭代中，部分细节可能已有更新。*
+第三道是很多人没留神的开源协议义务：这仓库挂的是强传染性的 AGPL-3.0 许可证。跟普通 GPL 不同，AGPL-3.0 明确规定只要你修改了它的代码并作为网络服务对外提供访问（比如拿它内置的 `customer_portal_api` 搭个在线面板给别人用），哪怕你没有分发二进制安装包，同样负有把修改后的完整源码公开出来的法定义务。

@@ -2,7 +2,9 @@
     {{- $feedPages := slice -}}
     {{- range where .Site.RegularPages "Section" "posts" -}}
         {{- $tagText := delimit (default (slice) .Params.tags) " " | lower -}}
-        {{- if or (in $tagText "auto-generated") (in $tagText "ai-processed") (in $tagText "rss") -}}
+        {{- $isAutoFile := false -}}
+        {{- with .File }}{{ $isAutoFile = hasPrefix .BaseFileName "auto-" }}{{ end -}}
+        {{- if or $isAutoFile (in $tagText "auto-generated") (in $tagText "ai-processed") (in $tagText "rss") -}}
             {{- $feedPages = $feedPages | append . -}}
         {{- end -}}
     {{- end -}}

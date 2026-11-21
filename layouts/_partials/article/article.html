@@ -17,6 +17,8 @@
     </aside>
     {{ end }}
 
+    {{ partial "article/components/community" . }}
+
     {{ if eq .Section "posts" }}
         {{ partial "ads/in-article.html" . }}
     {{ end }}

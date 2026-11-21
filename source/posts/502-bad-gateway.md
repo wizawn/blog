@@ -4,28 +4,8 @@ date: 2026-02-27T09:00:00+08:00
 draft: false
 categories: ["技术感悟"]
 tags: ["运维", "情感", "502", "AI", "比特币", "以太坊", "AI Agent"]
-weight: -998
-image: "/blog-cover-default.jpg"
 description: "502 Bad Gateway - 当理想遭遇现实 - 谨以此文献给所有在理想路上受挫的人"
 ---
-
-
-
-
-
-
-{{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}
-**联系方式 & 交流群**
-
-- **QQ**: 46333839
-- **微信**: GOV-HACK
-
-进微信群请联系博主，各位觉得文章对你有帮助的话可否打赏一些呀~
-
----
-
-
-
 ---
 
 

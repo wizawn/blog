@@ -8,24 +8,6 @@ tags: ["OpenClaw", "部署", "教程"]
 image: "/tech-cover-1.jpg"
 description: "OpenClaw 部署教程 - macOS 篇（2026 最新版） - 详细部署教程"
 ---
-
-
-
-
-
-
-{{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}
-**联系方式 & 交流群**
-
-- **QQ**: 46333839
-- **微信**: GOV-HACK
-
-进微信群请联系博主，各位觉得文章对你有帮助的话可否打赏一些呀~
-
----
-
-
-
 ---
 
 # OpenClaw 部署教程 - macOS 篇（2026 最新版）

@@ -5,7 +5,6 @@ date: 2026-04-22T13:45:00+08:00
 draft: false
 tags: ["公告", "域名", "澄清"]
 categories: ["公告"]
-weight: -997
 ---
 
 ## 域名所有权澄清

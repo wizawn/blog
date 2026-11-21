@@ -7,17 +7,6 @@ weight: 1
 categories: ["技术分析"]
 tags: ["Google", "自动化", "安全", "DrissionPage", "浏览器自动化", "凭据管理", "账号安全"]
 ---
-
-{{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}
-联系方式 & 交流群
-
-- **QQ**: 46333839
-- **微信**: GOV-HACK
-
-进微信群请联系博主，各位觉得文章对你有帮助的话可否打赏一些呀~
-
----
-
 > 一分钟速读：Gmail Sanitizer 是一套 8 步全链路凭据切断系统，覆盖恢复邮箱、恢复手机、Passkey、2FA 密钥、OAuth 授权等所有后门，逐一切断后用新凭据重新登录验证。底层用 DrissionPage 驱动真实 Chrome 绕过 Google 反自动化检测，配合 Cloudflare Email Worker 实现验证码秒级推送，AES-256-GCM 加密冷库保护敏感数据，asyncio 任务队列 + 死信队列实现批量并发 + 失败自愈。本文从攻防对抗、引擎架构、接码管道三个维度展开。
 
 ---

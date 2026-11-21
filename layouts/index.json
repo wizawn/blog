@@ -1,0 +1,14 @@
+{{- $pages := partial "helper/pages.html" .Site.Home -}}
+{{- $result := slice -}}
+{{- range $pages -}}
+    {{- $tagText := delimit (default (slice) .Params.tags) " " | lower -}}
+    {{- if not (or (in $tagText "auto-generated") (in $tagText "ai-processed") (in $tagText "rss")) -}}
+        {{- $data := dict "title" .Title "date" .Date "permalink" .RelPermalink "content" (.Plain) -}}
+        {{- $image := partial "helper/image" (dict "Image" .Params.image "Resources" .Resources "Context" .) -}}
+        {{- if $image -}}
+            {{- $data = merge $data (dict "image" $image.Permalink) -}}
+        {{- end -}}
+        {{- $result = $result | append $data -}}
+    {{- end -}}
+{{- end -}}
+{{ jsonify $result }}

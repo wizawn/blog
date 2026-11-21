@@ -1,0 +1,46 @@
+{{ define "main" }}
+    {{- $pages := where .Site.RegularPages "Section" "posts" -}}
+    {{- $filtered := slice -}}
+    {{- $feedPages := slice -}}
+    {{- range $pages -}}
+        {{- $tagText := delimit (default (slice) .Params.tags) " " | lower -}}
+        {{- if or (in $tagText "auto-generated") (in $tagText "ai-processed") (in $tagText "rss") -}}
+            {{- $feedPages = $feedPages | append . -}}
+        {{- else -}}
+            {{- $filtered = $filtered | append . -}}
+        {{- end -}}
+    {{- end -}}
+    {{- $pag := .Paginate $filtered -}}
+
+    <div class="yl-stream-bar">
+        <div class="yl-stream-bar__tabs">
+            <a href="{{ .Site.Home.RelPermalink }}" class="is-active">
+                原创文章 <span style="font-family:var(--code-font-family);font-size:12px;font-weight:400;">{{ len $filtered }}</span>
+            </a>
+            {{- with .Site.GetPage "/feeds" -}}
+            <a href="{{ .RelPermalink }}">
+                资讯聚合 <span style="font-family:var(--code-font-family);font-size:12px;">{{ len $feedPages }}</span>
+            </a>
+            {{- end -}}
+        </div>
+        {{- with .Site.GetPage "/posts/domain-ownership-clarification" -}}
+        <a href="{{ .RelPermalink }}" class="yl-stream-bar__notice">域名所有权说明 →</a>
+        {{- end -}}
+    </div>
+
+    <section class="article-list">
+        {{- range $index, $element := $pag.Pages -}}
+            {{ partial "article-list/default" $element }}
+            {{- if and (eq $pag.PageNumber 1) (eq $index 1) -}}
+                {{ partial "ads/in-feed.html" $ }}
+            {{- end -}}
+        {{- end -}}
+    </section>
+
+    {{- partial "pagination.html" . -}}
+    {{- partial "footer/footer" . -}}
+{{ end }}
+
+{{ define "right-sidebar" }}
+    {{ partial "sidebar/right.html" (dict "Context" . "Scope" "homepage") }}
+{{ end }}

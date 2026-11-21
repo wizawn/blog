@@ -7,7 +7,6 @@ weight: 50
 categories: ["Codex常见问题"]
 tags: ["Codex", "Reconnecting", "网络排查", "Responses API"]
 description: "Codex 反复 Reconnecting，重试五次后才响应时，按网络、客户端和传输方式逐步排查。"
-image: "/blog-cover-default.jpg"
 ---
 
 {{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}

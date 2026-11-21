@@ -6,19 +6,7 @@ weight: 1
 categories: ["漏洞分析", "支付安全", "Web 安全"]
 tags: ["ChatGPT", "Stripe", "TOCTOU", "竞态条件", "订阅升级", "PaymentIntent", "OpenAI", "Pro 20X", "支付安全"]
 description: "深度拆解 ChatGPT Pro 20X 的 ₱982 漏洞：从最初的 TOCTOU 并发假说出发，通过 HAR 抓包发现 token plan_type 绑定机制阻断了简单并发攻击，最终推断真实路径为 proration 最后一天定时攻击。附 OpenAI 升级协议变更分析与 token refresh 机制逆向。"
-image: "/blog-cover-default.jpg"
 ---
-
-{{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}
-联系方式 & 交流群
-
-- **QQ**: 46333839
-- **微信**: GOV-HACK
-
-进微信群请联系博主，各位觉得文章对你有帮助的话可否打赏一些呀~
-
----
-
 > ** 免责声明**：本文仅供安全研究与技术讨论。文中不提供可直接复用的攻击工具或完整利用脚本。利用类似手段对正式服务进行未授权操作属违法行为，后果自负。本文目的是帮助支付系统开发者理解并发支付场景下的攻击面并加固防御。
 
 ---

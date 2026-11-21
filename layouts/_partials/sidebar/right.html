@@ -1,15 +1,30 @@
 {{- $scope := default "homepage" .Scope -}}
 {{- $context := .Context -}}
-<aside class="sidebar right-sidebar sticky">
-    {{- with (index .Context.Site.Params.widgets $scope) -}}
-        {{ range $widget := . }}
-            {{ if templates.Exists (printf "_partials/widget/%s.html" .type) }}
+{{- with (index $context.Site.Params.widgets $scope) -}}
+    <aside class="sidebar right-sidebar sticky">
+        {{- if eq $scope "homepage" -}}
+            {{- /* 首页右侧第一顺位：直接展示核心双推广卡 */ -}}
+            {{ partial "ads/right-sidebar.html" $context }}
+        {{- end -}}
+
+        {{- range $widget := . -}}
+            {{- if templates.Exists (printf "_partials/widget/%s.html" .type) -}}
                 {{- $params := default dict .params -}}
                 {{ partial (printf "widget/%s" .type) (dict "Context" $context "Params" $params) }}
-            {{ else }}
-                {{ warnf "Widget %s not found" .type }}
-            {{ end }}
-        {{ end }}
-    {{ end }}
 
-</aside>
+                {{- /* 文章内页：紧贴在限高后的目录组件正下方，展示常驻双推广卡 */ -}}
+                {{- if and (eq $scope "page") (eq .type "toc") -}}
+                    {{ partial "ads/right-sidebar.html" $context }}
+                {{- end -}}
+            {{- else -}}
+                {{ warnf "Widget %s not found" .type }}
+            {{- end -}}
+        {{- end -}}
+    </aside>
+{{- else -}}
+    {{- if eq $scope "homepage" -}}
+    <aside class="sidebar right-sidebar sticky">
+        {{ partial "ads/right-sidebar.html" $context }}
+    </aside>
+    {{- end -}}
+{{- end -}}

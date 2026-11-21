@@ -1,0 +1,37 @@
+{{- $sp := .Site.Params.sponsors -}}
+{{- if or (not (isset .Site.Params "sponsors")) $sp.enabled -}}
+{{- $ra := $sp.redeemai -}}
+{{- $zc := $sp.zovocard -}}
+<section class="widget yl-sidebar-ads">
+  <div class="yl-sidebar-ads__head">
+    <span>推荐服务</span>
+    <span>自营 / 严选</span>
+  </div>
+
+  <div class="yl-ad-card">
+    <div class="yl-ad-meta">
+      <span class="yl-ad-tag">{{ default "自营直充" $ra.tag }}</span>
+      <span class="yl-ad-domain">{{ default "faka.cdkey.si" $ra.domain }}</span>
+    </div>
+    <div class="yl-ad-title">{{ default "RedeemAI · 会员自动代充" $ra.title }}</div>
+    <p class="yl-ad-desc">{{ default "ChatGPT Plus / Pro · Claude · Grok 官方渠道充值，下单自动发卡。" $ra.desc }}</p>
+    <a href="{{ default "https://faka.cdkey.si/" $ra.url }}" target="_blank" rel="noopener" class="yl-ad-btn">
+      {{ default "前往选购 →" $ra.cta }}
+    </a>
+  </div>
+
+  <div class="yl-ad-card">
+    <div class="yl-ad-meta">
+      <span class="yl-ad-tag">{{ default "海外支付" $zc.tag }}</span>
+      <span class="yl-ad-domain">{{ default "zovocard.com" $zc.domain }}</span>
+    </div>
+    <div class="yl-ad-title">{{ default "ZovoCard · 虚拟信用卡" $zc.title }}</div>
+    <p class="yl-ad-desc">
+      Visa / Mastercard · 支持 <span class="yl-nowrap">USDT 充值</span>，即开即用，通付各类 Stripe 商户。
+    </p>
+    <a href="{{ default "https://zovocard.com/register?invite=7777777" $zc.url }}" target="_blank" rel="noopener" class="yl-ad-btn">
+      {{ default "立即开卡 →" $zc.cta }}
+    </a>
+  </div>
+</section>
+{{- end -}}

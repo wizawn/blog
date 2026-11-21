@@ -6,19 +6,7 @@ weight: 1
 categories: ["漏洞分析", "支付安全", "Web 安全"]
 tags: ["ChatGPT", "Stripe", "提链", "跨区支付", "iDEAL", "UPI", "本地支付", "Checkout Session"]
 description: "完整拆解 ChatGPT 提链技术：从 Session Token 出发，通过 12 步协议流程构造 Stripe Checkout Session，最终提取 iDEAL/UPI/PIX/Kakao Pay 等本地支付链接。附带八种支付方式的技术对比和完整代码分析。"
-image: "/blog-cover-default.jpg"
 ---
-
-{{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}
-联系方式 & 交流群
-
-- **QQ**: 46333839
-- **微信**: GOV-HACK
-
-进微信群请联系博主，各位觉得文章对你有帮助的话可否打赏一些呀~
-
----
-
 > **免责声明**：本文仅供安全研究与技术讨论。文中不提供可直接复用的攻击工具或完整利用脚本。本文目的是帮助开发者理解 Stripe 跨区支付的工作原理，以及为什么某些支付方式在不同区域可见性不同。提链工具不篡改金额、不注入优惠码，用户以正常价格通过本地支付方式完成订阅。
 
 ---

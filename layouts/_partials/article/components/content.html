@@ -1,6 +1,47 @@
 <section class="article-content">
-    {{ partial "article/components/community" . }}
-    <!-- Refer to https://discourse.gohugo.io/t/responsive-tables-in-markdown/10639/5 -->
-    {{ $wrappedTable := printf "<div class=\"table-wrapper\">${1}</div>" }}
-    {{ .Content | replaceRE "(<table>(?:.|\n)+?</table>)" $wrappedTable | safeHTML }}
+  {{- $content := .Content -}}
+  {{- if eq .Section "posts" -}}
+    {{- $inlineAd := partial "ads/in-article.html" . -}}
+    {{- $parts := split $content "<h2" -}}
+    {{- if ge (len $parts) 3 -}}
+      {{- index $parts 0 | safeHTML -}}
+      {{ printf "<h2%s" (index $parts 1) | safeHTML }}
+      {{- $inlineAd -}}
+      {{- range after 2 $parts -}}
+        {{ printf "<h2%s" . | safeHTML }}
+      {{- end -}}
+    {{- else -}}
+      {{- $content -}}
+    {{- end -}}
+
+    {{- partial "ads/post-footer-matrix.html" . -}}
+  {{- else -}}
+    {{- $content -}}
+  {{- end -}}
 </section>
+
+<script>
+  /* 为所有未标注语言的普通 <pre> 代码块补齐悬停「复制」按钮 */
+  (function () {
+    const pres = document.querySelectorAll(".article-content pre");
+    pres.forEach(function (pre) {
+      if (pre.closest(".highlight") || pre.parentElement.classList.contains("yl-pre-wrap")) return;
+      const wrap = document.createElement("div");
+      wrap.className = "yl-pre-wrap";
+      pre.parentNode.insertBefore(wrap, pre);
+      wrap.appendChild(pre);
+
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "yl-copy-btn";
+      btn.textContent = "复制";
+      btn.addEventListener("click", function () {
+        navigator.clipboard.writeText(pre.innerText).then(function () {
+          btn.textContent = "已复制";
+          setTimeout(function () { btn.textContent = "复制"; }, 1400);
+        });
+      });
+      wrap.appendChild(btn);
+    });
+  })();
+</script>

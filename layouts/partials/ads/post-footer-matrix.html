@@ -1,0 +1,74 @@
+{{- $sp := .Site.Params.sponsors -}}
+{{- if or (not (isset .Site.Params "sponsors")) $sp.enabled -}}
+{{- $sb := $sp.switchbase -}}
+{{- $ra := $sp.redeemai -}}
+{{- $zc := $sp.zovocard -}}
+{{- $qq := default "46333839" $sp.qqGroup -}}
+{{- $qqAccount := default "46333839" $sp.qq -}}
+{{- $wx := default "GOV-HACK" $sp.wechat -}}
+{{- $qr := $sp.qrImage -}}
+
+<div class="yl-post-footer-box">
+  <div class="yl-post-footer-head">
+    <strong style="color:var(--card-text-color-main);">站长自用与自营服务</strong>
+    {{- if $qr -}}
+    <button type="button" class="yl-qr-toggle" onclick="this.closest('.yl-post-footer-box').querySelector('.yl-qr-drawer').classList.toggle('is-open')">
+      交流勘误 QQ 群：{{ $qq }} · QQ：{{ $qqAccount }} · 微信：{{ $wx }}（点击展开群二维码）
+    </button>
+    {{- else -}}
+    <span>交流勘误 QQ 群：{{ $qq }} · QQ：{{ $qqAccount }} · 微信：{{ $wx }}</span>
+    {{- end -}}
+  </div>
+
+  {{- if $qr -}}
+  <div class="yl-qr-drawer">
+    <img src="{{ $qr }}" alt="交流群二维码" loading="lazy" />
+    <div>
+      <div><strong>安全研究交流群（QQ）：</strong><code>{{ $qq }}</code></div>
+      <div style="margin-top:4px;"><strong>联系 QQ：</strong><code>{{ $qqAccount }}</code><br><strong>博主微信：</strong><code>{{ $wx }}</code>（添加请备注博客读者）</div>
+    </div>
+  </div>
+  {{- end -}}
+
+  <div class="yl-ad-grid-3">
+    <div class="yl-ad-card">
+      <div>
+        <div class="yl-ad-meta">
+          <span class="yl-ad-tag">{{ default "站长自用" $sb.tag }}</span>
+        </div>
+        <div class="yl-ad-title">{{ default "SwitchBase 中转" $sb.shortTitle }}</div>
+        <p class="yl-ad-desc">{{ default "Claude 纯血自有号池，99%+ 在线。" $sb.shortDesc }}</p>
+      </div>
+      <a href="{{ default "https://switchbase.vip/register?aff=MOSH" $sb.url }}" target="_blank" rel="noopener" class="yl-ad-btn yl-ad-btn--full">
+        {{ default "前往注册 →" $sb.cta }}
+      </a>
+    </div>
+
+    <div class="yl-ad-card">
+      <div>
+        <div class="yl-ad-meta">
+          <span class="yl-ad-tag">{{ default "自营直充" $ra.tag }}</span>
+        </div>
+        <div class="yl-ad-title">{{ default "RedeemAI 代充" $ra.shortTitle }}</div>
+        <p class="yl-ad-desc">{{ default "GPT / Claude / Grok 会员自动充值。" $ra.shortDesc }}</p>
+      </div>
+      <a href="{{ default "https://faka.cdkey.si/" $ra.url }}" target="_blank" rel="noopener" class="yl-ad-btn yl-ad-btn--full">
+        {{ default "前往选购 →" $ra.cta }}
+      </a>
+    </div>
+
+    <div class="yl-ad-card">
+      <div>
+        <div class="yl-ad-meta">
+          <span class="yl-ad-tag">{{ default "海外支付" $zc.tag }}</span>
+        </div>
+        <div class="yl-ad-title">{{ default "ZovoCard 虚拟卡" $zc.shortTitle }}</div>
+        <p class="yl-ad-desc">支持 <span class="yl-nowrap">USDT 充值</span>，通付全球 Stripe 商户。</p>
+      </div>
+      <a href="{{ default "https://zovocard.com/register?invite=7777777" $zc.url }}" target="_blank" rel="noopener" class="yl-ad-btn yl-ad-btn--full">
+        {{ default "立即开卡 →" $zc.cta }}
+      </a>
+    </div>
+  </div>
+</div>
+{{- end -}}

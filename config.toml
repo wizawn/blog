@@ -1,6 +1,8 @@
 baseURL = 'https://blog.caowo.de/'
-languageCode = 'zh-CN'
-title = "言零的博客 - 20260405"
+languageCode = 'zh-cn'
+defaultContentLanguage = 'zh-cn'
+hasCJKLanguage = true
+title = "言零的博客"
 theme = 'stack'
 contentDir = 'source'
 paginate = 10
@@ -20,14 +22,14 @@ timeZone = 'UTC'
   # 自动配图配置
   [params.cover]
     # 使用随机封面图（从 static/ 目录随机选择）
-    autoAssign = true
+    autoAssign = false
     images = [
       "/security-cover.jpg",
       "/tech-cover-1.jpg",
       "/blog-cover-default.jpg"
     ]
-  mainSections = ["post", "posts"]
-  defaultImage = '/blog-cover-default.jpg'
+  mainSections = ["posts"]
+  defaultImage = ''
   
   [params.header]
     title = '言零的博客'
@@ -37,7 +39,7 @@ timeZone = 'UTC'
     
   # SEO 配置
   [params.seo]
-    title = '言零的博客 - Web 渗透测试与安全研究'
+    title = '言零的博客'
     description = '专注于 Web 渗透测试、漏洞复现、SRC 挖洞与安全防御技术分享。提供 Nuclei 教程、SQLMap 指南、CVE 漏洞复现等实战内容。'
     keywords = ['Web 渗透测试', '漏洞复现', 'SRC 挖洞', '网络安全', 'Nuclei', 'SQLMap', 'CVE', '安全研究']
     author = '言零'
@@ -46,7 +48,7 @@ timeZone = 'UTC'
   [params.opengraph]
     title = '言零的博客'
     description = '专注于 Web 渗透测试、漏洞复现与安全防御技术分享'
-    image = '/blog-cover-default.jpg'
+    image = ''
     
   # Cloudflare Web Analytics
   [params.cloudflareAnalytics]
@@ -107,33 +109,65 @@ timeZone = 'UTC'
 [menu]
   [[menu.main]]
     identifier = "posts"
-    name = "文章 / Posts"
+    name = "文章"
     url = "/posts/"
     weight = 1
-    
+
+  [[menu.main]]
+    identifier = "feeds"
+    name = "资讯"
+    url = "/feeds/"
+    weight = 10
+    [menu.main.params]
+      icon = "rss"
+
+  [[menu.main]]
+    identifier = "archives"
+    name = "归档"
+    url = "/archives/"
+    weight = 20
+    [menu.main.params]
+      icon = "archives"
+
   [[menu.main]]
     identifier = "categories"
-    name = "分类 / Categories"
+    name = "分类"
     url = "/categories/"
-    weight = 2
-    
+    weight = 30
+    [menu.main.params]
+      icon = "categories"
+
   [[menu.main]]
     identifier = "tags"
-    name = "标签 / Tags"
+    name = "标签"
     url = "/tags/"
-    weight = 3
-    
-  [[menu.main]]
-    identifier = "about"
-    name = "关于 / About"
-    url = "/about/"
-    weight = 4
-    
+    weight = 40
+    [menu.main.params]
+      icon = "tag"
+
   [[menu.main]]
     identifier = "links"
-    name = "友链 / Links"
+    name = "友链"
     url = "/links/"
-    weight = 5
+    weight = 50
+    [menu.main.params]
+      icon = "link"
+
+  [[menu.main]]
+    identifier = "about"
+    name = "关于"
+    url = "/about/"
+    weight = 55
+    [menu.main.params]
+      icon = "user"
+
+  [[menu.main]]
+    identifier = "search"
+    name = "搜索"
+    url = "/search/"
+    weight = 60
+    [menu.main.params]
+      icon = "search"
 
 # 首页配置
 [pagination]
@@ -141,3 +175,53 @@ pagerSize = 10
 
 [outputs]
 home = ["HTML", "RSS", "JSON"]
+
+[params.sidebar]
+  compact = false
+  subtitle = "Web 渗透、客户端逆向、支付风控与协议分析笔记。"
+
+[params.article]
+  math = false
+  toc = true
+  readingTime = true
+
+[params.article.license]
+  enabled = true
+  default = "原创文章，采用 CC BY-NC-SA 4.0 协议，转载请保留原文链接。"
+
+[params.sponsors]
+  enabled = true
+  qqGroup = "797481450"
+  qq = "46333839"
+  wechat = "GOV-HACK"
+  qrImage = "/images/qq-group-qr.jpg"
+
+  [params.sponsors.switchbase]
+    tag = "站长主力自用"
+    domain = "switchbase.vip"
+    title = "SwitchBase · API 中转站"
+    shortTitle = "SwitchBase 中转"
+    desc = "Claude 全系列纯血自有号池，在线率 99%+，跑 Codex / Agent 稳定不掉线。"
+    shortDesc = "Claude 纯血自有号池，99%+ 在线。"
+    url = "https://switchbase.vip/register?aff=MOSH"
+    cta = "注册试用 →"
+
+  [params.sponsors.redeemai]
+    tag = "自营直充"
+    domain = "faka.cdkey.si"
+    title = "RedeemAI · 会员自动代充"
+    shortTitle = "RedeemAI 代充"
+    desc = "ChatGPT Plus / Pro · Claude · Grok 官方渠道充值，下单自动发卡。"
+    shortDesc = "GPT / Claude / Grok 会员自动充值。"
+    url = "https://faka.cdkey.si/"
+    cta = "前往选购 →"
+
+  [params.sponsors.zovocard]
+    tag = "海外支付"
+    domain = "zovocard.com"
+    title = "ZovoCard · 虚拟信用卡"
+    shortTitle = "ZovoCard 虚拟卡"
+    desc = "Visa / Mastercard · 支持 USDT 充值，即开即用，通付各类 Stripe 商户。"
+    shortDesc = "USDT 充值，通付全球 Stripe 商户。"
+    url = "https://zovocard.com/register?invite=7777777"
+    cta = "立即开卡 →"

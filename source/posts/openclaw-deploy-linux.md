@@ -8,24 +8,6 @@ tags: ["OpenClaw", "Linux", "Ubuntu", "部署", "AI 助手", "保姆级教程"]
 image: "/tech-cover-1.jpg"
 description: "OpenClaw Linux 部署终极指南 - 含环境配置、NVM 安装、一键脚本、初始化向导、故障排查，基于 Ubuntu 22.04 LTS 实测验证"
 ---
-
-
-
-
-
-
-{{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}
-**联系方式 & 交流群**
-
-- **QQ**: 46333839
-- **微信**: GOV-HACK
-
-进微信群请联系博主，各位觉得文章对你有帮助的话可否打赏一些呀~
-
----
-
-
-
 ---
 
 # OpenClaw 部署教程 - Linux 篇（2026 终极版）

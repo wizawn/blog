@@ -7,17 +7,6 @@ weight: 1
 categories: ["安全研究", "支付安全", "技术科普"]
 tags: ["ChatGPT", "GPT Plus", "Google Play", "RevenueCat", "订阅转移", "Android", "ADB", "MITM", "Python"]
 ---
-
-{{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}
-联系方式 & 交流群
-
-- **QQ**: 46333839
-- **微信**: GOV-HACK
-
-进微信群请联系博主，各位觉得文章对你有帮助的话可否打赏一些呀~
-
----
-
 ## 前言
 
 之前写了两篇关于 GPT Plus 的漏洞分析：一篇是 [iOS 收据复用](../gpt-plus-receipt-vulnerability-2026)，一篇是 [Google Play offerToken 替换实现 0 元订阅](../gpt-plus-exploit-revenuecat-vulnerability)。

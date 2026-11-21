@@ -6,19 +6,7 @@ weight: 1
 categories: ["技术分析", "支付安全"]
 tags: ["Stripe", "协议支付", "自动化", "ConfirmationToken", "PaymentIntent", "TLS指纹", "逆向工程", "Checkout Session", "支付安全", "API"]
 description: "完整拆解 Stripe 协议支付的技术实现：从浏览器 HAR 抓包逆向 Stripe Checkout Session 全流程，到纯 API 无浏览器实现 ConfirmationToken 创建、PaymentIntent 确认、3DS 验证挑战，再到 TLS 指纹对抗、代理池架构和反欺诈绕过。附 5 套不同技术栈的完整实现源码下载。"
-image: "/blog-cover-default.jpg"
 ---
-
-{{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}
-联系方式 & 交流群
-
-- **QQ**: 46333839
-- **微信**: GOV-HACK
-
-进微信群请联系博主，各位觉得文章对你有帮助的话可否打赏一些呀~
-
----
-
 > **免责声明**：本文仅供安全研究与技术学习。文中描述的技术手段仅用于分析 Stripe 支付协议的工作原理，帮助支付系统开发者理解安全边界。请勿将相关技术用于任何未授权的操作。
 
 ---

@@ -1,0 +1,29 @@
+{{ define "main" }}
+    {{- $feedPages := slice -}}
+    {{- range where .Site.RegularPages "Section" "posts" -}}
+        {{- $tagText := delimit (default (slice) .Params.tags) " " | lower -}}
+        {{- if or (in $tagText "auto-generated") (in $tagText "ai-processed") (in $tagText "rss") -}}
+            {{- $feedPages = $feedPages | append . -}}
+        {{- end -}}
+    {{- end -}}
+    <header>
+        <h3 class="section-title">资讯聚合</h3>
+        <div class="section-card">
+            <div class="section-details">
+                <h1 class="section-term">外部行业与技术动态</h1>
+                <h2 class="section-description">{{ .Description }}</h2>
+            </div>
+        </div>
+    </header>
+    {{- $pag := .Paginate $feedPages -}}
+    <section class="article-list--compact">
+        {{- range $pag.Pages -}}
+            {{ partial "article-list/compact" . }}
+        {{- end -}}
+    </section>
+    {{- partial "pagination.html" . -}}
+{{ end }}
+
+{{ define "right-sidebar" }}
+    {{ partial "sidebar/right.html" (dict "Context" . "Scope" "homepage") }}
+{{ end }}

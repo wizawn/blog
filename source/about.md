@@ -6,8 +6,6 @@ type: "page"
 
 ---
 
-# 关于本站 / About
-
 ## 👤 站长介绍
 
 **昵称**: 言零  
@@ -37,6 +35,7 @@ type: "page"
 - **GitHub**: [wizawn](https://github.com/wizawn)
 - **邮箱**: hihacker@foxmail.com
 - **微信**: GOV-HACK
+- **QQ群**: 797481450
 - **QQ**: 46333839
 
 ## 📜 免责声明

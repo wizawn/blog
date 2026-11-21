@@ -6,22 +6,11 @@ weight: 1
 categories: ["AI 工具", "技术教程"]
 tags: ["ChatGPT", "GPT-5.4", "降智测试", "Juice 值", "家宽 IP", "模型检测"]
 description: "GPT-5.4 thinking 进阶思考版本降智测试完整指南，包含 Juice 值检测方法、家宽 IP 影响分析、模型降级判断标准"
-image: "/blog-cover-default.jpg"
 ---
 
 >  联系方式 & 交流群
 > 
 > **QQ**: 46333839  
-{{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}
-联系方式 & 交流群
-
-- **QQ**: 46333839
-- **微信**: GOV-HACK
-
-进微信群请联系博主，各位觉得文章对你有帮助的话可否打赏一些呀~
-
----
-
 ## 前言
 
 这篇文章整理了 GPT-5.4 thinking 进阶思考版本的降智测试方法。

@@ -6,19 +6,7 @@ weight: 1
 categories: ["AI 工具", "技术教程"]
 tags: ["ChatGPT", "Codex", "GPT-5.6-Sol", "隐藏模型"]
 description: "2026 年 8 月实测，任意 ChatGPT 付费账号（Plus/Pro/Team）通过 Codex 调用隐藏的 gpt-5.6-sol-wm 模型。不走 API 按量计费、不进 API 消费明细，但仍占用订阅的用量窗口——附完整配置教程与常见误解更正。"
-image: "/blog-cover-default.jpg"
 ---
-
-{{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}
-**联系方式 & 交流群**
-
-- **QQ**: 46333839
-- **微信**: GOV-HACK
-
-进微信群请联系博主，各位觉得文章对你有帮助的话可否打赏一些呀~
-
----
-
 ## 前言
 
 兄弟们，今天这个发现属于是重量级的——**GPT-5.6-Sol 有一个隐藏的内部路由模型 `gpt-5.6-sol-wm`，任意付费账号都能调用，而且不走 API 按量计费、不出现在 API 消费明细里**。

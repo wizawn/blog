@@ -19,14 +19,6 @@
             ) }}
         </a>
     </div>
-    {{ else }}
-    <div class="article-image">
-        <a href="{{ $Page.RelPermalink }}">
-            <img src="/blog-cover-default.jpg"
-                alt="{{ printf "Featured image of post %s" $Page.Title }}"
-                loading="lazy">
-        </a>
-    </div>
     {{ end }}
 
     {{ partial "article/components/details" (dict "Page" $Page "IsList" $IsList) }}

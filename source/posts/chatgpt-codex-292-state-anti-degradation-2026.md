@@ -6,19 +6,7 @@ weight: 1
 categories: ["技术分析", "逆向工程"]
 tags: ["ChatGPT", "Codex", "OpenAI", "292", "降智", "Overload", "429", "current_turn_state", "逆向", "代理注入"]
 description: "拆解 ChatGPT/Codex 降智的底层机制：292 响应携带 current_turn_state 是不降智的凭据，312 是服务端主动下发的降智信号。通过注入 292 state + 监控 312 立即轮换，稳定绕过 overload 和降智。附 codex-state-kit 完整架构。"
-image: "/blog-cover-default.jpg"
 ---
-
-{{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}
-联系方式 & 交流群
-
-- **QQ**: 46333839
-- **微信**: GOV-HACK
-
-进微信群请联系博主，各位觉得文章对你有帮助的话可否打赏一些呀~
-
----
-
 > **时效性提醒**：本文基于 2026 年 9 月中旬对 codex-state-kit 工具的实际运行观察和社区反馈。OpenAI 随时可能调整相关机制，届时本文描述的方法可能部分或完全失效。文中会明确区分"已观察到的事实"和"推测"。
 
 ---

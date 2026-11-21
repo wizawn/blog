@@ -1,0 +1,22 @@
+{{- $context := .Context -}}
+{{- $limit := default 15 .Params.limit -}}
+{{- $blocked := slice "ai-processed" "auto-generated" "rss" "ai" -}}
+<section class="widget tagCloud">
+  <div class="widget-icon">
+    {{ partial "helper/icon" "tag" }}
+  </div>
+  <h2 class="widget-title section-title">标签</h2>
+
+  <div class="tagCloud-tags">
+    {{- $shown := 0 -}}
+    {{- range $context.Site.Taxonomies.tags.ByCount -}}
+      {{- $slug := lower .Page.Title -}}
+      {{- if and (lt $shown $limit) (not (in $blocked $slug)) -}}
+        <a href="{{ .Page.RelPermalink }}" class="font_size_{{ .Count }}">
+          {{ .Page.Title }}
+        </a>
+        {{- $shown = add $shown 1 -}}
+      {{- end -}}
+    {{- end -}}
+  </div>
+</section>

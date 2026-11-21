@@ -6,20 +6,8 @@ weight: 1
 categories: ["安全研究", "技术分析"]
 tags: ["Google One", "Google Play", "Playwright", "源码分析", "支付安全", "Offer Token"]
 description: "Ngbm 请求改写、Google Play 结账弹窗、代理桥接，以及源码中几处影响订阅结果判断的细节。"
-image: "/blog-cover-default.jpg"
 lastmod: 2026-11-04T23:51:15+08:00
 ---
-
-{{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}
-联系方式 & 交流群
-
-- **QQ**: 46333839
-- **微信**: GOV-HACK
-
-进微信群请联系博主，各位觉得文章对你有帮助的话可否打赏一些呀~
-
----
-
 ## 0x00 这东西是什么
 
 拿到一份打包好的工具：`Google_AI_Pro_2Year_ZeroCost_Auto`。

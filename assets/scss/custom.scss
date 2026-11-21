@@ -1,50 +1,601 @@
-/* Mobile hamburger — enlarge tap target to 44x44 minimum */
-#toggle-menu {
-    min-width: 44px;
-    min-height: 44px;
+/* ==========================================================================
+   言零的博客 (blog.caowo.de) — 纸墨风去模板味 + 全站高曝光原生商业位完整样式
+   文件位置：assets/scss/custom.scss（Hugo Stack 会自动在主样式末尾加载此文件）
+   设计约束：无渐变、无霓虹紫蓝、无大圆角气泡、无模糊重阴影、无假窗口红绿灯
+   ========================================================================== */
+
+/* 1. 核心设计变量：暖石纸灰（浅色）/ 纯炭黑（深色） */
+:root {
+  --body-background: #f5f4f0;
+  --card-background: #ffffff;
+  --card-background-selected: #eeece6;
+  --card-text-color-main: #181817;
+  --card-text-color-secondary: #55544f;
+  --card-text-color-tertiary: #87857e;
+  --card-separator-color: #e4e2dc;
+
+  --accent-color: #181817;
+  --accent-color-darker: #000000;
+  --accent-color-text: #ffffff;
+
+  --shadow-l1: none;
+  --shadow-l2: none;
+  --shadow-l3: none;
+  --shadow-l4: none;
+  --card-border-radius: 8px;
+
+  /* 原生纸墨商业卡片专属变量 */
+  --yl-line: #e4e2dc;
+  --yl-line-hover: #c9c6be;
+  --yl-code-bg: #f2f1ec;
+  --yl-quote-bg: #f9f8f4;
+  --yl-ad-bg: #faf8f2;
+  --yl-ad-border: #d4d0c4;
+  --yl-ad-tag-bg: #eae6da;
+  --yl-ad-tag-fg: #545046;
+  --yl-btn-bg: #181817;
+  --yl-btn-fg: #ffffff;
+  --yl-link-hover: #1d4e78;
+
+  --base-font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --article-font-family: var(--base-font-family);
+  --code-font-family: ui-monospace, "SF Mono", Menlo, Monaco, Consolas, monospace;
+}
+
+:root[data-scheme="dark"] {
+  --body-background: #131312;
+  --card-background: #1b1b19;
+  --card-background-selected: #242421;
+  --card-text-color-main: #e8e7e2;
+  --card-text-color-secondary: #a09f98;
+  --card-text-color-tertiary: #6e6d66;
+  --card-separator-color: #2b2b27;
+
+  --accent-color: #e8e7e2;
+  --accent-color-darker: #ffffff;
+  --accent-color-text: #141413;
+
+  --yl-line: #2b2b27;
+  --yl-line-hover: #42413b;
+  --yl-code-bg: #151513;
+  --yl-quote-bg: #20201d;
+  --yl-ad-bg: #22211d;
+  --yl-ad-border: #3b3932;
+  --yl-ad-tag-bg: #2f2e28;
+  --yl-ad-tag-fg: #b8b5aa;
+  --yl-btn-bg: #e8e6df;
+  --yl-btn-fg: #141413;
+  --yl-link-hover: #95b8d6;
+}
+
+/* 2. 修复移动端 399px 横向溢出抖动与阅读时长时钟图标断行落单 */
+html,
+body {
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+}
+
+.article-time > div {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.yl-nowrap {
+  white-space: nowrap;
+}
+
+/* 3. 彻底修复左侧栏导航被挤压成 14px 的致命缺陷 */
+.left-sidebar {
+  #main-menu {
+    flex-shrink: 0 !important;
+    overflow-y: visible !important;
+    min-height: auto !important;
+  }
+}
+
+/* 仅桌面端显示左侧左下角唯一主推卡，手机抽屉菜单内隐藏以免挡导航 */
+.yl-left-ad-wrap {
+  display: none;
+  margin-top: 12px;
+
+  @media (min-width: 1024px) {
+    display: block;
+  }
+}
+
+/* 4. 全站卡片统一为干净的 1px 细线平面纸张，去掉浮夸阴影与位移动画 */
+.article-list article,
+.article-page .main-article,
+.article-list--compact,
+.search-form input,
+.widget--toc,
+.tagCloud .tagCloud-tags a {
+  border: 1px solid var(--yl-line) !important;
+  box-shadow: none !important;
+}
+
+.article-list article {
+  transition: border-color 0.15s ease;
+
+  &:hover {
+    border-color: var(--yl-line-hover) !important;
+
+    .article-title a {
+      color: var(--yl-link-hover);
+    }
+  }
+}
+
+/* 5. 分类与标签去彩色化：干掉自动哈希生成的浅粉色/浅绿色药丸 */
+.article-category a,
+.article-tags a {
+  background: var(--card-background-selected) !important;
+  color: var(--card-text-color-secondary) !important;
+  border-radius: 4px !important;
+  font-weight: 400 !important;
+  font-size: 12.5px !important;
+  padding: 3px 8px !important;
+}
+
+/* 6. 正文排版精修：行高、标题分割线、三线表、朴素左竖线引用 */
+.article-content {
+  font-size: 16px;
+  line-height: 1.88;
+  color: var(--card-text-color-main);
+
+  h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 2.3em;
+    margin-bottom: 0.8em;
+    padding-bottom: 0.45em;
+    border-bottom: 1px solid var(--yl-line);
+    border-inline-start: none !important;
+    margin-inline-start: 0 !important;
+    padding-inline-start: 0 !important;
+  }
+
+  h3 {
+    font-size: 16.5px;
+    font-weight: 600;
+    margin-top: 1.65em;
+    margin-bottom: 0.55em;
+    border-inline-start: none !important;
+    margin-inline-start: 0 !important;
+    padding-inline-start: 0 !important;
+  }
+
+  /* 行内代码 */
+  code:not(pre code) {
+    font-family: var(--code-font-family);
+    font-size: 0.86em;
+    padding: 0.15em 0.42em;
+    border-radius: 4px;
+    background: var(--yl-code-bg);
+    border: 1px solid var(--yl-line);
+    color: var(--card-text-color-main);
+  }
+
+  /* 统一所有代码块（包含未标语言的裸 pre 与 highlight 代码块）：解决 #fafafa 白底隐形和 17px 过宽问题 */
+  .highlight,
+  pre {
+    background: var(--yl-code-bg) !important;
+    color: var(--card-text-color-main) !important;
+    border: 1px solid var(--yl-line) !important;
+    border-radius: 6px !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    font-size: 13.5px !important;
+    line-height: 1.7 !important;
+  }
+
+  .highlight pre {
+    border: none !important;
+    margin: 0 !important;
+    background: transparent !important;
+  }
+
+  pre {
+    padding: 1rem 1.15rem !important;
+    overflow-x: auto;
+  }
+
+  /* 通用悬停复制按钮（无红黄绿圆点） */
+  .yl-pre-wrap {
+    position: relative;
+    margin: 1.25em 0;
+
+    .yl-copy-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      padding: 2px 8px;
+      font-size: 11.5px;
+      font-family: var(--code-font-family);
+      background: var(--card-background);
+      color: var(--card-text-color-tertiary);
+      border: 1px solid var(--yl-line);
+      border-radius: 4px;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.15s ease, color 0.15s ease;
+    }
+
+    &:hover .yl-copy-btn {
+      opacity: 1;
+    }
+
+    .yl-copy-btn:hover {
+      color: var(--card-text-color-main);
+    }
+  }
+
+  /* 干净的三线表，去掉粗重竖框 */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin: 1.4em 0;
+
+    th,
+    td {
+      border: none !important;
+      padding: 10px 12px;
+      text-align: left;
+    }
+
+    thead tr {
+      border-top: 1.5px solid var(--card-text-color-main);
+      border-bottom: 1px solid var(--yl-line);
+      background: transparent !important;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid var(--yl-line);
+      background: transparent !important;
+    }
+
+    tbody tr:last-child {
+      border-bottom: 1.5px solid var(--yl-line);
+    }
+  }
+
+  /* 朴素引用块 */
+  blockquote {
+    border-inline-start: 2px solid var(--card-text-color-tertiary) !important;
+    background: var(--yl-quote-bg) !important;
+    padding: 0.75rem 1rem !important;
+    margin: 1.3em 0 !important;
+    border-radius: 0 4px 4px 0;
+    color: var(--card-text-color-secondary);
+  }
+}
+
+/* 7. 右侧目录：清掉原生列表圆点 (• / ◦)，并限制最大高度，保证下方常驻推广卡永远留在屏幕内 */
+#TableOfContents {
+  max-height: 210px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+
+  ul,
+  ol {
+    list-style: none !important;
+    padding-left: 0.85rem;
+    margin: 0;
+  }
+
+  > ul,
+  > ol {
+    padding-left: 0;
+  }
+
+  li {
+    margin: 6px 0;
+    font-size: 13px;
+  }
+}
+
+/* 8. 全站统一纸墨风高曝光商业卡片组件体系（.yl-ad-*） */
+.yl-ad-card {
+  background: var(--yl-ad-bg);
+  border: 1px solid var(--yl-ad-border);
+  border-radius: 8px;
+  padding: 15px 16px;
+  transition: border-color 0.15s ease;
+
+  &:hover {
+    border-color: var(--card-text-color-secondary);
+  }
+}
+
+.yl-ad-card--primary {
+  border-top: 2px solid var(--card-text-color-main);
+}
+
+.yl-ad-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.yl-ad-tag {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  background: var(--yl-ad-tag-bg);
+  color: var(--yl-ad-tag-fg);
+  line-height: 1.4;
+}
+
+.yl-ad-domain {
+  font-family: var(--code-font-family);
+  font-size: 11px;
+  color: var(--card-text-color-tertiary);
+}
+
+.yl-ad-title {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--card-text-color-main);
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+
+.yl-ad-desc {
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: var(--card-text-color-secondary);
+  margin: 0 0 12px 0;
+}
+
+.yl-ad-btn {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 5px;
+  font-size: 12.5px;
+  font-weight: 500;
+  text-align: center;
+  text-decoration: none !important;
+  background: var(--yl-btn-bg);
+  color: var(--yl-btn-fg) !important;
+  transition: opacity 0.15s ease;
+  white-space: nowrap;
+
+  &:hover {
+    opacity: 0.85;
+  }
+}
+
+.yl-ad-btn--full {
+  display: block;
+  width: 100%;
+}
+
+.yl-ad-btn--ghost {
+  background: var(--card-background);
+  color: var(--card-text-color-main) !important;
+  border: 1px solid var(--yl-ad-border);
+
+  &:hover {
+    border-color: var(--card-text-color-main);
+    opacity: 1;
+  }
+}
+
+/* 首页信息流穿插条（第 2 篇后） & 正文中段内嵌推荐卡（第 2 个 H2 前） */
+.yl-ad-banner {
+  background: var(--yl-ad-bg);
+  border: 1px solid var(--yl-ad-border);
+  border-left: 3px solid var(--card-text-color-main);
+  border-radius: 8px;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  @media (min-width: 640px) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.yl-ad-banner--inline {
+  margin: 1.85em 0;
+}
+
+.yl-ad-banner__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  flex-shrink: 0;
+
+  @media (min-width: 640px) {
+    flex-direction: column;
+  }
+}
+
+/* 右侧栏双卡栈 */
+.yl-sidebar-ads {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.yl-sidebar-ads__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--card-text-color-tertiary);
+  font-weight: 600;
+}
+
+/* 文末三列并排矩阵 + 折叠群二维码 */
+.yl-post-footer-box {
+  margin-top: 2.2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--yl-line);
+}
+
+.yl-post-footer-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 12px;
+  font-size: 12.5px;
+  color: var(--card-text-color-tertiary);
+}
+
+.yl-qr-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 12.5px;
+  color: var(--card-text-color-secondary);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.yl-qr-drawer {
+  display: none;
+  margin-bottom: 14px;
+  padding: 14px;
+  border-radius: 6px;
+  background: var(--yl-code-bg);
+  border: 1px solid var(--yl-line);
+  font-size: 13px;
+  color: var(--card-text-color-secondary);
+
+  &.is-open {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+  }
+
+  img {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    border-radius: 6px;
+    background: #ffffff;
+    padding: 6px;
+  }
+}
+
+.yl-ad-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .yl-ad-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
+
+/* 9. 纯文字相关阅读列表（彻底取代原站白字撞电路板与横向溢出滚动条） */
+.yl-related-clean {
+  background: var(--card-background);
+  border: 1px solid var(--yl-line);
+  border-radius: 8px;
+  padding: 20px 24px;
+
+  &__title {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--card-text-color-tertiary);
+    margin: 0 0 12px 0;
+  }
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__item {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    font-size: 14.5px;
+
+    a {
+      color: var(--card-text-color-main);
+      text-decoration: none;
+
+      &:hover {
+        color: var(--yl-link-hover);
+        text-decoration: underline;
+      }
+    }
+
+    time {
+      font-family: var(--code-font-family);
+      font-size: 12.5px;
+      color: var(--card-text-color-tertiary);
+      flex-shrink: 0;
+    }
+  }
+}
+
+/* 首页顶部栏：原创 / 快讯入口 + 域名说明单行链接 */
+.yl-stream-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-bottom: 10px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid var(--yl-line);
+  font-size: 13.5px;
+
+  &__tabs {
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 10px;
+    gap: 20px;
 
-    @media (min-width: 768px) {
-        display: none;
+    a {
+      padding-bottom: 10px;
+      margin-bottom: -11px;
+      color: var(--card-text-color-tertiary);
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+
+      &.is-active {
+        color: var(--card-text-color-main);
+        font-weight: 600;
+        border-bottom-color: var(--card-text-color-main);
+      }
     }
-}
+  }
 
-/* Left sidebar ads — desktop only, fit sidebar width */
-.sidebar-ads-desktop {
-    display: none;
+  &__notice {
+    font-size: 12.5px;
+    color: var(--card-text-color-tertiary);
+    text-decoration: none;
 
-    @media (min-width: 768px) {
-        display: flex;
-        flex-direction: column;
-        gap: var(--sidebar-element-separation, 16px);
-        margin-top: auto;
-
-        .widget {
-            width: 100%;
-            box-sizing: border-box;
-            font-size: 0.9em;
-        }
+    &:hover {
+      color: var(--card-text-color-main);
+      text-decoration: underline;
     }
-}
-
-/* Mobile inline ads — after main content, mobile only */
-.ads-mobile-inline {
-    display: flex;
-    flex-direction: row;
-    gap: 12px;
-    width: 100%;
-    order: 0;
-    padding: 0;
-
-    .widget {
-        flex: 1;
-        min-width: 0;
-    }
-
-    @media (min-width: 768px) {
-        display: none;
-    }
+  }
 }

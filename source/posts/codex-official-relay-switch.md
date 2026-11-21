@@ -7,7 +7,6 @@ weight: 50
 categories: ["Codex常见问题"]
 tags: ["Codex", "官方订阅", "中转", "CC-Switch", "配置"]
 description: "分清 ChatGPT 登录、API Key 和第三方中转，用 profile 或 CC-Switch 安全切换 Codex 提供商。"
-image: "/blog-cover-default.jpg"
 ---
 
 {{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}

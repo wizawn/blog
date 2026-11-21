@@ -7,7 +7,6 @@ weight: 50
 categories: ["Codex常见问题"]
 tags: ["Codex", "429", "503", "usage_limit", "故障排查"]
 description: "用简单的方式区分 Codex 模型过载、请求限流、服务不可用和周期额度用尽，并给出对应处理办法。"
-image: "/blog-cover-default.jpg"
 ---
 
 {{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}

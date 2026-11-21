@@ -1,0 +1,17 @@
+{{- $related := (where (.Site.RegularPages.Related .) "Params.hidden" "!=" true) -}}
+{{- $related = (where $related "Section" "posts") | first 5 -}}
+{{- with $related -}}
+<aside class="yl-related-clean">
+  <h2 class="yl-related-clean__title">相关文章</h2>
+  <ul class="yl-related-clean__list">
+    {{- range . -}}
+    <li class="yl-related-clean__item">
+      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      {{- if not .Date.IsZero -}}
+      <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format "2006-01-02" }}</time>
+      {{- end -}}
+    </li>
+    {{- end -}}
+  </ul>
+</aside>
+{{- end -}}

@@ -7,17 +7,6 @@ categories: ["漏洞分析", "支付安全", "Web 安全"]
 tags: ["Claude", "订阅漏洞", "API 劫持", "Tampermonkey", "SEPA", "支付安全", "漏洞复现", "客户端安全"]
 description: "深入拆解传说中的「焚决」——通过 Tampermonkey 油猴脚本劫持 checkout_capabilities API 响应，前端注入 cassia 支付流，配合随机德国 IBAN 实现 Claude Max/Pro 零元订阅。完整技术分析：Fetch/XHR 双通道拦截、SEPA CORE 直接借记清算机制、MOD 97-10 校验算法局限性、客户端信任边界漏洞的通用攻击框架与防御方案。"
 ---
-
-{{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}
-联系方式 & 交流群
-
-- **QQ**: 46333839
-- **微信**: GOV-HACK
-
-进微信群请联系博主，各位觉得文章对你有帮助的话可否打赏一些呀~
-
----
-
 > ** 时效性提醒**：本文发布于 2026 年 7 月，文中涉及的 API 端点、支付流参数均为发布时有效值。Anthropic 随时可能修改 `checkout_capabilities` 响应结构或在后端追加校验逻辑，届时本方法将失效。本文保留仅供安全研究与客户端安全防御参考。
 
 ---

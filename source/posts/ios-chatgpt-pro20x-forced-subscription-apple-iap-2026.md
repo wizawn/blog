@@ -6,19 +6,7 @@ weight: 1
 categories: ["安全研究", "支付安全", "技术科普"]
 tags: ["ChatGPT", "Pro 20x", "iOS", "Apple", "IAP", "越狱", "App Store", "buyProduct", "MITM", "订阅", "支付安全", "逆向工程"]
 description: "OpenAI 关闭了 Pro 20x 新订阅入口，但 App Store 的 IAP 商品仍然存在。本文深度拆解通过越狱 iOS 设备抓取 Apple ID 鉴权数据，直接调用 Apple buyProduct API 强制开通 Pro 20x 的完整技术链路。附三大支付平台（Stripe / Google Play / Apple IAP）的跨平台攻击面对比。"
-image: "/blog-cover-default.jpg"
 ---
-
-{{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}
-**联系方式 & 交流群**
-
-- **QQ**: 46333839
-- **微信**: GOV-HACK
-
-进微信群请联系博主，各位觉得文章对你有帮助的话可否打赏一些呀~
-
----
-
 > 免责声明：本文基于一份已公开的教程和我们自己的协议分析写成，只讨论 Apple IAP 与订阅系统的工作原理，供安全研究和防御参考。请勿用于任何未授权操作，后果自负。
 
 ---

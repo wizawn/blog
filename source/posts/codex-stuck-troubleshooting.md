@@ -7,7 +7,6 @@ weight: 50
 categories: ["Codex常见问题"]
 tags: ["Codex", "无响应", "提交失败", "日志排查"]
 description: "Codex 卡住或提交消息失败时，从审批、终端、会话和日志四个方向快速定位，不误删历史。"
-image: "/blog-cover-default.jpg"
 ---
 
 {{< figure src="/images/qq-group-qr.jpg" alt="QQ群二维码" width="200" >}}

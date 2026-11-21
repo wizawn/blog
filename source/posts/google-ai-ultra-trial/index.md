@@ -6,7 +6,6 @@ categories: ["安全研究", "技术分析"]
 tags: ["Google One", "Google Play", "BillingClient", "Frida", "Offer Token"]
 draft: false
 weight: 1
-image: "/blog-cover-default.jpg"
 ---
 
 ## 0x00 页面上不给看，BillingClient 里倒是都有

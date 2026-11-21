@@ -1,0 +1,17 @@
+{{- $sp := .Site.Params.sponsors -}}
+{{- if or (not (isset .Site.Params "sponsors")) $sp.enabled -}}
+{{- $sb := $sp.switchbase -}}
+<div class="yl-left-ad-wrap">
+  <div class="yl-ad-card yl-ad-card--primary">
+    <div class="yl-ad-meta">
+      <span class="yl-ad-tag">{{ default "站长主力自用" $sb.tag }}</span>
+      <span class="yl-ad-domain">{{ default "switchbase.vip" $sb.domain }}</span>
+    </div>
+    <div class="yl-ad-title">{{ default "SwitchBase · API 中转站" $sb.title }}</div>
+    <p class="yl-ad-desc">{{ default "Claude 全系列纯血自有号池，在线率 99%+，跑 Codex / Agent 稳定不掉线。" $sb.desc }}</p>
+    <a href="{{ default "https://switchbase.vip/register?aff=MOSH" $sb.url }}" target="_blank" rel="noopener" class="yl-ad-btn yl-ad-btn--full">
+      {{ default "注册试用 →" $sb.cta }}
+    </a>
+  </div>
+</div>
+{{- end -}}

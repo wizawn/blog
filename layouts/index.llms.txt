@@ -13,7 +13,7 @@
 
 ## 核心栏目导航
 
-- [关于本站](https://blog.caowo.de/about/)：研究方向、联系方式（QQ 交流群 `797481450` / 个人 QQ `46333839` / 微信 `GOV-HACK`）与合规免责声明。
+- [关于本站](https://blog.caowo.de/about/)：研究方向、联系方式（QQ 交流群 `754842541` / 个人 QQ `46333839` / 微信 `GOV-HACK`）与合规免责声明。
 - [原创文章列表](https://blog.caowo.de/posts/)：站内全部手写原创安全研究、逆向拆解与排坑实录。
 - [文章归档](https://blog.caowo.de/archives/)：按年份整理的全部原创文章时间线。
 - [友情链接与站点导航](https://blog.caowo.de/links/)：`caowo.de` 官方子站导航与独立博客友链说明。

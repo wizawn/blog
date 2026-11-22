@@ -54,7 +54,7 @@ description: 言零博客（blog.caowo.de）专属写作、去人机感与技术
 
 2. **严禁破坏或遮蔽站点顶部的 `联系方式 & 交流群` 与 `配套服务` 导流区**
    - 本站 Hugo 模板（`layouts/_partials/article/article.html`）会自动在每篇 `posts` 正文最上方依次渲染两块全站统一的顶部引流组件：
-     1) `article/components/community.html`（展示 `/images/qq-group-qr.jpg` 二维码、`联系方式 & 交流群`、QQ 群 `797481450`、QQ `46333839`、微信 `GOV-HACK`）；
+     1) `article/components/community.html`（展示 `联系方式 & 交流群`、QQ 群 `754842541`、QQ `46333839`、微信 `GOV-HACK`）；
      2) `ads/in-article.html`（根据文章 `categories` / `tags` / `title` 自动匹配 `SwitchBase`、`RedeemAI` 或 `ZovoCard` 配套服务卡片）。
    - **关键红线**：`community.html` 内部通过 `not (strings.Contains .RawContent "/images/qq-group-qr.jpg")` 判断是否渲染统一卡片。因此**绝对禁止在文章 `.md` 正文里手动硬塞 `/images/qq-group-qr.jpg` 短代码或旧版残缺的 `> 联系方式 & 交流群` 引用块**，否则反而会把模板自动渲染的标准群号导流框顶掉；同时 Frontmatter 的 `categories` 与 `tags` 必须准确填写（如含 `Codex`、`Claude`、`AI 工具`、`支付安全` 等），让顶部配套服务卡片精准匹配业务。
 
@@ -114,8 +114,8 @@ python3 ~/.gemini/config/skills/yanling-blog-style/scripts/check_ai_smell.py <�
 ## 五、SEO / GEO 元数据与联系方式唯一基线
 
 1. **联系方式唯一有效清单**
-   - 站内个人与交流联系方式仅保留三项：QQ 交流群 `797481450`、个人 QQ `46333839`、微信 `GOV-HACK`。
-   - **严禁写入已停用或移除的旧信息**：个人 GitHub（`github.com/wizawn`）、旧邮箱（`hihacker@foxmail.com` 等任何私人邮箱）、已下线子域名（`api.caowo.de`、`ruanzhu.caowo.de`）。
+   - 站内个人与交流联系方式仅保留三项：QQ 交流群 `754842541`、个人 QQ `46333839`、微信 `GOV-HACK`。
+   - **严禁写入已停用或移除的旧信息**：历史旧 QQ 群号、个人 GitHub（`github.com/wizawn`）、旧邮箱（`hihacker@foxmail.com` 等任何私人邮箱）、已下线子域名（`api.caowo.de`、`ruanzhu.caowo.de`）。
 2. **SEO 与生成式搜索（GEO）元数据要求**
    - 每篇原创文章必须填写精准的 `description`（建议 45–110 字中文，直接交代研究对象、报错码/CVE 编号、协议组件与实测结论），该字段会同步喂给 `<meta name="description">`、OpenGraph、Schema.org `TechArticle` 结构化数据以及 `/llms.txt`、`/llms-full.txt` 大模型索引。
    - 修改历史文章技术内容时同步更新 `lastmod`（ISO-8601 时间戳），触发 `sitemap.xml` 与 `article:modified_time` 刷新。

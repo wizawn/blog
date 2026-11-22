@@ -1,17 +1,21 @@
 {{- $sp := .Site.Params.sponsors -}}
-{{- $group := default "797481450" $sp.qqGroup -}}
+{{- $group := default "754842541" $sp.qqGroup -}}
 {{- $qq := default "46333839" $sp.qq -}}
 {{- $wechat := default "GOV-HACK" $sp.wechat -}}
-{{- $qr := default "/images/qq-group-qr.jpg" $sp.qrImage -}}
+{{- $qr := $sp.qrImage -}}
 {{- if and (in (slice "post" "posts") .Section) (not (strings.Contains .RawContent "/images/qq-group-qr.jpg")) -}}
-<div class="article-community">
+<div class="article-community{{ if not $qr }} article-community--compact{{ end }}">
+    {{- if $qr -}}
     <figure><img src="{{ $qr | relURL }}" alt="QQ群二维码" width="200"></figure>
-    <p>联系方式 &amp; 交流群</p>
-    <ul>
-        <li><strong>QQ群</strong>：{{ $group }}</li>
-        <li><strong>QQ</strong>：{{ $qq }}</li>
-        <li><strong>微信</strong>：{{ $wechat }}</li>
-    </ul>
+    {{- end -}}
+    <div class="article-community__body">
+        <p>联系方式 &amp; 交流群</p>
+        <ul>
+            <li><strong>QQ群</strong>：{{ $group }}</li>
+            <li><strong>QQ</strong>：{{ $qq }}</li>
+            <li><strong>微信</strong>：{{ $wechat }}</li>
+        </ul>
+    </div>
     <hr>
 </div>
 {{- end -}}

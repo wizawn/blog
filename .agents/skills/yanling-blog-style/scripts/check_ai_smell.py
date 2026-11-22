@@ -24,10 +24,10 @@ PROSE_PATTERNS = [
     ("列表项加粗冒号模板「- **标题**：」（AI 典型排版指纹）", re.compile(r"^\s*(?:[-*]|\d+\.)\s+\*\*[^*]+\*\*\s*[：:]")),
     ("日文假名或乱码字符", re.compile(r"[\u3040-\u30ff\ufffd]")),
     (
-        "疑似隐私路径、过时服务/邮箱/GitHub 或非官方弃用域名",
+        "疑似隐私路径、过时服务/邮箱/群号/GitHub 或非官方弃用域名",
         re.compile(
             r"yileina|UserRelocate|/root/\.openclaw|/root/blog-repo|wizawn\.com|github\.com/wizawn|ccwu\.cc|"
-            r"api\.caowo\.de|ruanzhu\.caowo\.de|hihacker@foxmail\.com"
+            r"api\.caowo\.de|ruanzhu\.caowo\.de|hihacker@foxmail\.com|797481450"
         ),
     ),
     ("残留模板标记", re.compile(r"geo_target:|<!-- JSON-LD|CVE-202\d-XXXX")),

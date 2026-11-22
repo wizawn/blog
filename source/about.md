@@ -17,7 +17,6 @@ type: "page"
 ## 联系我
 
 - GitHub：[wizawn](https://github.com/wizawn)
-- 邮箱：`hihacker@foxmail.com`
 - QQ 交流群：`797481450`
 - 个人 QQ：`46333839`
 - 微信：`GOV-HACK`

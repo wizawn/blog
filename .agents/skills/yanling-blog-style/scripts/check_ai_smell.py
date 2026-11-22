@@ -23,7 +23,13 @@ PROSE_PATTERNS = [
     ("生硬括号补丁「（注：…）」", re.compile(r"[（(]注[：:]")),
     ("列表项加粗冒号模板「- **标题**：」（AI 典型排版指纹）", re.compile(r"^\s*(?:[-*]|\d+\.)\s+\*\*[^*]+\*\*\s*[：:]")),
     ("日文假名或乱码字符", re.compile(r"[\u3040-\u30ff\ufffd]")),
-    ("疑似隐私路径或非官方弃用域名", re.compile(r"yileina|UserRelocate|/root/\.openclaw|/root/blog-repo|wizawn\.com|ccwu\.cc")),
+    (
+        "疑似隐私路径、过时服务/邮箱或非官方弃用域名",
+        re.compile(
+            r"yileina|UserRelocate|/root/\.openclaw|/root/blog-repo|wizawn\.com|ccwu\.cc|"
+            r"api\.caowo\.de|ruanzhu\.caowo\.de|hihacker@foxmail\.com"
+        ),
+    ),
     ("残留模板标记", re.compile(r"geo_target:|<!-- JSON-LD|CVE-202\d-XXXX")),
     ("手写旧版群二维码（会屏蔽 Hugo 顶部统一交流群引流卡片渲染！）", re.compile(r"qq-group-qr\.jpg")),
     ("Markdown 空表格单元格", re.compile(r"\|\s*\|\s*\|")),
@@ -169,7 +175,7 @@ def check_file(path: Path) -> list[str]:
             )
             target = (
                 raw_or_clean.replace("wizawn.com", "")
-                if (label == "疑似隐私路径或非官方弃用域名" and path.name == "domain-ownership-clarification.md")
+                if (label.startswith("疑似隐私路径") and path.name == "domain-ownership-clarification.md")
                 else raw_or_clean
             )
             m = pat.search(target)

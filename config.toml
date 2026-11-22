@@ -217,10 +217,10 @@ timeZone = 'UTC'
 
 [params.sponsors]
   enabled = true
-  qqGroup = "754842541"
+  qqGroup = "1137420469"
   qq = "46333839"
   wechat = "GOV-HACK"
-  qrImage = ""
+  qrImage = "/images/qq-group-1137420469.jpg"
 
   [params.sponsors.switchbase]
     tag = "站长主力自用"

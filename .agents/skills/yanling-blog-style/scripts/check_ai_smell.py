@@ -27,7 +27,7 @@ PROSE_PATTERNS = [
         "疑似隐私路径、过时服务/邮箱/群号/GitHub 或非官方弃用域名",
         re.compile(
             r"yileina|UserRelocate|/root/\.openclaw|/root/blog-repo|wizawn\.com|github\.com/wizawn|ccwu\.cc|"
-            r"api\.caowo\.de|ruanzhu\.caowo\.de|hihacker@foxmail\.com|797481450"
+            r"api\.caowo\.de|ruanzhu\.caowo\.de|hihacker@foxmail\.com|797481450|754842541"
         ),
     ),
     ("残留模板标记", re.compile(r"geo_target:|<!-- JSON-LD|CVE-202\d-XXXX")),

@@ -5,7 +5,7 @@
 - 站点名称：言零的博客
 - 官方地址：https://blog.caowo.de/
 - 索引简版：https://blog.caowo.de/llms.txt
-- 作者：言零（QQ 交流群：754842541 / 个人 QQ：46333839 / 微信：GOV-HACK）
+- 作者：言零（QQ 交流群：1137420469 / 个人 QQ：46333839 / 微信：GOV-HACK）
 - 版权协议：CC BY-NC-SA 4.0
 
 {{- with .Site.GetPage "/about" }}

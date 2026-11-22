@@ -1,8 +1,29 @@
-{{- $related := (where (.Site.RegularPages.Related .) "Params.hidden" "!=" true) -}}
-{{- $related = (where $related "Section" "posts") | first 5 -}}
+{{- $current := . -}}
+{{- $candidates := where (.Site.RegularPages.Related $current) "Params.hidden" "!=" true -}}
+{{- $candidates = where $candidates "Section" "posts" -}}
+{{- $related := slice -}}
+{{- $seen := dict $current.RelPermalink true -}}
+
+{{- range $candidates -}}
+    {{- if and (lt (len $related) 5) (not (partial "helper/is-auto-page.html" .)) (not (index $seen .RelPermalink)) -}}
+        {{- $related = $related | append . -}}
+        {{- $seen = merge $seen (dict .RelPermalink true) -}}
+    {{- end -}}
+{{- end -}}
+
+{{- if lt (len $related) 5 -}}
+    {{- $origPool := partial "helper/pages.html" .Site.Home -}}
+    {{- range $origPool -}}
+        {{- if and (lt (len $related) 5) (not (index $seen .RelPermalink)) -}}
+            {{- $related = $related | append . -}}
+            {{- $seen = merge $seen (dict .RelPermalink true) -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+
 {{- with $related -}}
 <aside class="yl-related-clean">
-  <h2 class="yl-related-clean__title">相关文章</h2>
+  <h2 class="yl-related-clean__title">相关原创阅读</h2>
   <ul class="yl-related-clean__list">
     {{- range . -}}
     <li class="yl-related-clean__item">

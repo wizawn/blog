@@ -1,14 +1,15 @@
 {{- $pages := .Pages -}}
 
 {{- /*
-  Codex 常见问题不参加 weight 优先级：在手工文章之后随机展示，
-  但始终放在自动文章（weight >= 100）之前。
+  Codex 常见问题不参加 weight 优先级：在手工置顶/主力文章之后按日期降序确定性排列，
+  避免构建产物因随机洗牌产生无意义哈希漂移，并始终排在 weight >= 100 的内容之前。
 */ -}}
 {{- $codexPages := where $pages "Params.categories" "intersect" (slice "Codex常见问题") -}}
 {{- if gt (len $codexPages) 0 -}}
     {{- $otherPages := $pages | complement $codexPages -}}
     {{- $manualPages := where $otherPages "Weight" "lt" 100 -}}
     {{- $autoPages := where $otherPages "Weight" "ge" 100 -}}
+    {{- $codexSorted := sort $codexPages "Date" "desc" -}}
 
     {{- if eq .Context.Site.Params.SortBy "lastmod" -}}
         {{- $manualPages = $manualPages.ByLastmod.Reverse -}}
@@ -24,10 +25,9 @@
     {{- end -}}
 
     {{- /* append adds the earlier arguments to the final slice argument */ -}}
-    {{- $pages = append (shuffle $codexPages) $manualPages -}}
+    {{- $pages = append $codexSorted $manualPages -}}
     {{- $pages = append $autoPages $pages -}}
 {{- else -}}
-    {{- /* 原有排序：weight 升序，日期降序 */ -}}
     {{- if eq .Context.Site.Params.SortBy "lastmod" -}}
         {{- $pages = $pages.ByLastmod.Reverse -}}
     {{- else if eq .Context.Site.Params.SortBy "weight" -}}

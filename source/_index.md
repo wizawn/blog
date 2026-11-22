@@ -1,8 +1,8 @@
 ---
 title: "言零的博客"
-description: "Web 渗透、客户端逆向、支付风控与协议分析笔记。"
+description: "专注于 Web 渗透测试、客户端逆向（Frida / BillingClient / StoreKit）、Stripe 支付风控协议分析、CVE 漏洞复现与 AI 工程排坑的一手实测笔记。"
 ---
 
 这里主要记平时折腾 Web 安全、客户端逆向、支付状态机审计和工程排坑时留下的实测笔记。
 
-GitHub 在 [github.com/wizawn](https://github.com/wizawn)，日常交流可加 QQ 群 `797481450` 或微信 `GOV-HACK`。
+日常技术交流可加 QQ 群 `797481450`、个人 QQ `46333839` 或微信 `GOV-HACK`。

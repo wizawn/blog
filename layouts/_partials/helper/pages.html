@@ -1,0 +1,69 @@
+{{- $pages := .Pages -}}
+
+{{- if eq .Layout "feeds" -}}
+    {{- $feedPages := slice -}}
+    {{- range where .Site.RegularPages "Section" "posts" -}}
+        {{- if partial "helper/is-auto-page.html" . -}}
+            {{- $feedPages = $feedPages | append . -}}
+        {{- end -}}
+    {{- end -}}
+    {{- $pages = sort $feedPages "Date" "desc" -}}
+{{- else if .IsHome -}}
+    {{- $raw := where .Site.RegularPages "Type" "in" .Site.Params.mainSections -}}
+    {{- $filtered := slice -}}
+    {{- range $raw -}}
+        {{- if not (partial "helper/is-auto-page.html" .) -}}
+            {{- $filtered = $filtered | append . -}}
+        {{- end -}}
+    {{- end -}}
+    {{- $pages = partial "helper/pages-sort.html" (dict "Pages" $filtered "Context" .) -}}
+{{- else if eq .Kind "section" -}}
+    {{- $subsections := .Sections -}}
+    {{- $raw := .Pages | complement $subsections -}}
+    {{- $filtered := slice -}}
+    {{- range $raw -}}
+        {{- if not (partial "helper/is-auto-page.html" .) -}}
+            {{- $filtered = $filtered | append . -}}
+        {{- end -}}
+    {{- end -}}
+    {{- if eq (len $filtered) 0 -}}
+        {{- $pages = $subsections -}}
+    {{- else -}}
+        {{- $pages = partial "helper/pages-sort.html" (dict "Pages" $filtered "Context" .) -}}
+    {{- end -}}
+{{- else if eq .Kind "taxonomy" -}}
+    {{- $scored := slice -}}
+    {{- range .Pages -}}
+        {{- $origCount := 0 -}}
+        {{- range .Pages -}}
+            {{- if not (partial "helper/is-auto-page.html" .) -}}
+                {{- $origCount = add $origCount 1 -}}
+            {{- end -}}
+        {{- end -}}
+        {{- if gt $origCount 0 -}}
+            {{- $scored = $scored | append (dict "count" $origCount "title" .Title "page" .) -}}
+        {{- end -}}
+    {{- end -}}
+    {{- $sorted := sort (sort $scored "title" "asc") "count" "desc" -}}
+    {{- $terms := slice -}}
+    {{- range $sorted -}}
+        {{- $terms = $terms | append .page -}}
+    {{- end -}}
+    {{- $pages = $terms -}}
+{{- else if eq .Kind "term" -}}
+    {{- $filtered := slice -}}
+    {{- range .Pages -}}
+        {{- if not (partial "helper/is-auto-page.html" .) -}}
+            {{- $filtered = $filtered | append . -}}
+        {{- end -}}
+    {{- end -}}
+    {{- if gt (len $filtered) 0 -}}
+        {{- $pages = partial "helper/pages-sort.html" (dict "Pages" $filtered "Context" .) -}}
+    {{- else -}}
+        {{- $pages = partial "helper/pages-sort.html" (dict "Pages" .Pages "Context" .) -}}
+    {{- end -}}
+{{- else -}}
+    {{- $pages = partial "helper/pages-sort.html" (dict "Pages" $pages "Context" .) -}}
+{{- end -}}
+
+{{- return $pages -}}

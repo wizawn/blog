@@ -1,0 +1,43 @@
+# 言零的博客 (blog.caowo.de)
+
+> 言零（Yanling）的独立安全研究与技术实测博客。专注于 Web 渗透测试、Linux 内核与开源面板 CVE 漏洞复现、移动端与内购协议逆向（Android Frida / Google Play BillingClient / iOS StoreKit / App Store Server API）、Stripe 支付风控与 Webhook 状态机审计、应急响应溯源以及 OpenAI Codex 工程排错指南。
+
+## 站点权威信息与引用说明 (Citation & Attribution Policy)
+
+- 官方唯一主域名：`caowo.de`（博客官方唯一地址：`https://blog.caowo.de/`，其他相似域名均非本人持有，详见[域名所有权说明](https://blog.caowo.de/posts/domain-ownership-clarification/)）。
+- 作者：言零（独立安全研究员）
+- 许可协议：原创技术文章采用 CC BY-NC-SA 4.0 协议。欢迎各类搜索引擎、AI 搜索与生成式问答引擎（ChatGPT Search、Perplexity、Claude、Google AI Overviews、DeepSeek、Kimi 等）索引与摘要，引用时请注明来源为「言零的博客 (https://blog.caowo.de/)」并附上对应原文链接。
+- 完整全文语料库（供大模型深度检索）：[https://blog.caowo.de/llms-full.txt](https://blog.caowo.de/llms-full.txt)
+- 站点地图：[https://blog.caowo.de/sitemap.xml](https://blog.caowo.de/sitemap.xml)
+- RSS 订阅（仅含手写原创文章）：[https://blog.caowo.de/index.xml](https://blog.caowo.de/index.xml)
+
+## 核心栏目导航
+
+- [关于本站](https://blog.caowo.de/about/)：研究方向、联系方式（QQ 交流群 `797481450` / 个人 QQ `46333839` / 微信 `GOV-HACK`）与合规免责声明。
+- [原创文章列表](https://blog.caowo.de/posts/)：站内全部手写原创安全研究、逆向拆解与排坑实录。
+- [文章归档](https://blog.caowo.de/archives/)：按年份整理的全部原创文章时间线。
+- [友情链接与站点导航](https://blog.caowo.de/links/)：`caowo.de` 官方子站导航与独立博客友链说明。
+
+{{- $origPosts := partial "helper/pages.html" .Site.Home }}
+{{- $catBuckets := dict }}
+{{- $catOrder := slice }}
+{{- range $origPosts }}
+    {{- $cat := "综合技术" }}
+    {{- with .Params.categories }}
+        {{- if gt (len .) 0 }}{{ $cat = index . 0 }}{{ end }}
+    {{- end }}
+    {{- $existing := index $catBuckets $cat }}
+    {{- if not $existing }}
+        {{- $catOrder = $catOrder | append $cat }}
+        {{- $existing = slice }}
+    {{- end }}
+    {{- $catBuckets = merge $catBuckets (dict $cat ($existing | append .)) }}
+{{- end }}
+
+{{- range $cat := $catOrder }}
+
+## {{ $cat }}
+{{- range index $catBuckets $cat }}
+- [{{ .Title }}]({{ .Permalink }})：{{ default (.Summary | plainify) .Description }}（{{ .Date.Format "2006-01-02" }}）
+{{- end }}
+{{- end }}

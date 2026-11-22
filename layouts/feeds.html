@@ -1,29 +1,23 @@
 {{ define "main" }}
-    {{- $feedPages := slice -}}
-    {{- range where .Site.RegularPages "Section" "posts" -}}
-        {{- $tagText := delimit (default (slice) .Params.tags) " " | lower -}}
-        {{- $isAutoFile := false -}}
-        {{- with .File }}{{ $isAutoFile = hasPrefix .BaseFileName "auto-" }}{{ end -}}
-        {{- if or $isAutoFile (in $tagText "auto-generated") (in $tagText "ai-processed") (in $tagText "rss") -}}
-            {{- $feedPages = $feedPages | append . -}}
-        {{- end -}}
-    {{- end -}}
+    {{- $feedPages := partial "helper/pages.html" . -}}
+    {{- $pag := partial "helper/paginator.html" . -}}
     <header>
-        <h3 class="section-title">资讯聚合</h3>
+        <div class="section-title">资讯聚合</div>
         <div class="section-card">
             <div class="section-details">
+                <div class="section-count">{{ T "list.page" (len $feedPages) }}</div>
                 <h1 class="section-term">外部行业与技术动态</h1>
-                <h2 class="section-description">{{ .Description }}</h2>
+                <p class="section-description">{{ .Description }}</p>
             </div>
         </div>
     </header>
-    {{- $pag := .Paginate $feedPages -}}
     <section class="article-list--compact">
         {{- range $pag.Pages -}}
             {{ partial "article-list/compact" . }}
         {{- end -}}
     </section>
     {{- partial "pagination.html" . -}}
+    {{- partial "footer/footer" . -}}
 {{ end }}
 
 {{ define "right-sidebar" }}

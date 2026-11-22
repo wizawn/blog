@@ -1,8 +1,9 @@
 ---
 title: "友情链接 / Links"
 date: 2026-03-03T08:00:00+08:00
-lastmod: 2026-11-22T11:10:00+08:00
+lastmod: 2026-11-22T11:20:00+08:00
 draft: false
+description: "言零的博客（blog.caowo.de）官方站点导航与独立技术博客友情链接交换说明。"
 type: "page"
 ---
 

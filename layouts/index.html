@@ -1,15 +1,9 @@
 {{ define "main" }}
-    {{- $pages := where .Site.RegularPages "Section" "posts" -}}
-    {{- $filtered := slice -}}
-    {{- $feedPages := slice -}}
-    {{- range $pages -}}
-        {{- $tagText := delimit (default (slice) .Params.tags) " " | lower -}}
-        {{- $isAutoFile := false -}}
-        {{- with .File }}{{ $isAutoFile = hasPrefix .BaseFileName "auto-" }}{{ end -}}
-        {{- if or $isAutoFile (in $tagText "auto-generated") (in $tagText "ai-processed") (in $tagText "rss") -}}
-            {{- $feedPages = $feedPages | append . -}}
-        {{- else -}}
-            {{- $filtered = $filtered | append . -}}
+    {{- $filtered := partial "helper/pages.html" . -}}
+    {{- $feedCount := 0 -}}
+    {{- range where .Site.RegularPages "Section" "posts" -}}
+        {{- if partial "helper/is-auto-page.html" . -}}
+            {{- $feedCount = add $feedCount 1 -}}
         {{- end -}}
     {{- end -}}
     {{- $pag := .Paginate $filtered -}}
@@ -21,7 +15,7 @@
             </a>
             {{- with .Site.GetPage "/feeds" -}}
             <a href="{{ .RelPermalink }}">
-                资讯聚合 <span style="font-family:var(--code-font-family);font-size:12px;">{{ len $feedPages }}</span>
+                资讯聚合 <span style="font-family:var(--code-font-family);font-size:12px;">{{ $feedCount }}</span>
             </a>
             {{- end -}}
         </div>

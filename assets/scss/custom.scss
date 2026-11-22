@@ -654,3 +654,71 @@ body {
     }
   }
 }
+
+
+/* 10. SEO 语义标签切换零像素偏移修正 + 面包屑导航与页脚站点索引 */
+.sidebar header .site-name {
+  font-weight: 700;
+}
+
+.section-title {
+  font-weight: 700;
+}
+
+.yl-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--card-text-color-tertiary);
+  margin: 0 0 2px 0;
+
+  a {
+    color: var(--card-text-color-secondary);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--yl-link-hover);
+      text-decoration: underline;
+    }
+  }
+
+  &__sep {
+    color: var(--card-text-color-tertiary);
+    user-select: none;
+  }
+
+  &__current {
+    color: var(--card-text-color-tertiary);
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.yl-updated-meta {
+  color: var(--card-text-color-tertiary);
+}
+
+.yl-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+  font-size: 12.5px;
+  color: var(--card-text-color-tertiary);
+
+  a {
+    color: var(--card-text-color-secondary);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--yl-link-hover);
+      text-decoration: underline;
+    }
+  }
+}

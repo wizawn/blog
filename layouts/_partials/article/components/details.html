@@ -1,0 +1,105 @@
+{{- $IsList := .IsList -}}
+{{- $Page := .Page -}}
+<div class="article-details">
+    {{- if not $IsList -}}
+    <nav class="yl-breadcrumb" aria-label="面包屑导航">
+        <a href="{{ $Page.Site.Home.RelPermalink }}">首页</a>
+        {{- if eq $Page.Section "posts" -}}
+            <span class="yl-breadcrumb__sep">/</span>
+            {{- $cats := $Page.GetTerms "categories" -}}
+            {{- if gt (len $cats) 0 -}}
+                {{- $cat := index $cats 0 -}}
+                <a href="{{ $cat.RelPermalink }}">{{ $cat.LinkTitle }}</a>
+            {{- else -}}
+                <a href="{{ `/posts/` | relLangURL }}">原创文章</a>
+            {{- end -}}
+        {{- end -}}
+        <span class="yl-breadcrumb__sep">/</span>
+        <span class="yl-breadcrumb__current" aria-current="page">{{ $Page.Title }}</span>
+    </nav>
+    {{- end -}}
+
+    {{ if $Page.Params.categories }}
+    <header class="article-category">
+        {{ range ($Page.GetTerms "categories") }}
+            {{ $color := partial "helper/color-from-str" .LinkTitle }}
+            {{ $BackgroundColor := default $color.BackgroundColor .Params.style.background }}
+            {{ $TextColor := default $color.TextColor .Params.style.color }}
+            <a href="{{ .RelPermalink }}" style="background-color: {{ $BackgroundColor | safeCSS }}; color: {{ $TextColor | safeCSS }};">
+                {{ .LinkTitle }}
+            </a>
+        {{ end }}
+    </header>
+    {{ end }}
+
+    <div class="article-title-wrapper">
+        {{- if $IsList -}}
+            <h2 class="article-title">
+                <a href="{{ $Page.RelPermalink }}">
+                    {{- $Page.Title -}}
+                </a>
+            </h2>
+        {{- else -}}
+            <h1 class="article-title">
+                {{- $Page.Title -}}
+            </h1>
+        {{- end -}}
+
+        {{ with $Page.Params.description }}
+        <p class="article-subtitle">
+            {{ . }}
+        </p>
+        {{ end }}
+    </div>
+
+    {{ $showReadingTime := $Page.Params.readingTime | default ($Page.Site.Params.article.readingTime) }}
+    {{ $showDate := not $Page.Date.IsZero }}
+    {{ $showTime := or $showDate $showReadingTime }}
+    {{ $showTranslations := $Page.IsTranslated }}
+    {{ $showTags := and $Page.Site.Params.Article.List.ShowTags ($Page.GetTerms "tags") $IsList }}
+
+    {{ if or $showTime $showTranslations $showTags }}
+    <footer class="article-meta">
+        {{ if $showTime }}
+            <div class="inline-meta">
+                {{ if $showDate }}
+                    {{ partial "helper/icon" "date" }}
+                    <time class="article-time--published" datetime='{{ $Page.Date.Format "2006-01-02T15:04:05Z07:00" }}'>
+                        {{- $Page.Date | time.Format $Page.Site.Params.dateFormat.published -}}
+                    </time>
+                    {{- if and (not $IsList) (not $Page.Lastmod.IsZero) (ne ($Page.Lastmod.Format "2006-01-02") ($Page.Date.Format "2006-01-02")) -}}
+                        <span class="yl-updated-meta">
+                            · 更新于 <time class="article-time--updated" datetime='{{ $Page.Lastmod.Format "2006-01-02T15:04:05Z07:00" }}'>{{ $Page.Lastmod.Format "2006-01-02" }}</time>
+                        </span>
+                    {{- end -}}
+                {{ end }}
+
+                {{ if $showReadingTime }}
+                    {{ partial "helper/icon" "clock" }}
+                    <time class="article-time--reading">
+                        {{ T "article.readingTime" $Page.ReadingTime }}
+                    </time>
+                {{ end }}
+            </div>
+        {{ end }}
+
+        {{ if $showTranslations }}
+            <div class="inline-meta">
+                {{ partial "helper/icon" "language" }}
+                {{ range $Page.Translations }}
+                    <a href="{{ .RelPermalink }}" class="link">{{ .Language.LanguageName }}</a>
+                {{ end }}
+            </div>
+        {{ end }}
+
+        {{ if $showTags }}
+            <div class="article-tags inline-meta">
+                {{ partial "helper/icon" "tag" }}
+                {{ range ($Page.GetTerms "tags") }}
+                    <a href="{{ .RelPermalink }}" class="link">{{ .LinkTitle }}</a>
+                {{ end }}
+            </div>
+        {{ end }}
+    </footer>
+    {{ end }}
+</div>

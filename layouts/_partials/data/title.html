@@ -1,0 +1,18 @@
+{{- $siteTitle := .Site.Title -}}
+{{- $seoHomeTitle := default $siteTitle .Site.Params.seo.title -}}
+{{- $paginator := partial "helper/paginator.html" . -}}
+
+{{- $base := $seoHomeTitle -}}
+{{- if not .IsHome -}}
+    {{- if and .Title (ne .Title $siteTitle) -}}
+        {{- $base = printf "%s | %s" .Title $siteTitle -}}
+    {{- else -}}
+        {{- $base = $siteTitle -}}
+    {{- end -}}
+{{- end -}}
+
+{{- if and $paginator $paginator.HasPrev -}}
+    {{- $base = printf "%s - 第 %d 页" $base $paginator.PageNumber -}}
+{{- end -}}
+
+{{- return $base -}}

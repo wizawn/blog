@@ -4,6 +4,7 @@
     {{- $image := partial "helper/image" (dict "Image" $Page.Params.image "Resources" $Page.Resources "Context" $Page) -}}
     {{ if $image }}
     <div class="article-image">
+        {{- if $IsList -}}
         <a href="{{ $Page.RelPermalink }}">
             {{ partial "helper/responsive-image" (dict
                 "Resource" $image.Resource
@@ -12,12 +13,26 @@
                     "src" $image.Permalink
                     "width" $image.Width
                     "height" $image.Height
-                    "alt" (printf "Featured image of post %s" $Page.Title)
-                    "loading" (cond $IsList "lazy" "eager")
+                    "alt" (printf "%s - 配图" $Page.Title)
+                    "loading" "lazy"
                     "sizes" "(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px"
                 )
             ) }}
         </a>
+        {{- else -}}
+            {{ partial "helper/responsive-image" (dict
+                "Resource" $image.Resource
+                "Widths" (cond $Page.Site.Params.ImageProcessing.Content.Enabled $Page.Site.Params.ImageProcessing.Content.Widths nil)
+                "Attributes" (dict
+                    "src" $image.Permalink
+                    "width" $image.Width
+                    "height" $image.Height
+                    "alt" (printf "%s - 配图" $Page.Title)
+                    "loading" "eager"
+                    "sizes" "(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px"
+                )
+            ) }}
+        {{- end -}}
     </div>
     {{ end }}
 

@@ -1,0 +1,40 @@
+{{- $ThemeVersion := "4.0.0" -}}
+<footer class="site-footer">
+    <section class="copyright">
+        &copy;
+        {{ if and (.Site.Params.footer.since) (ne .Site.Params.footer.since (int (now.Format "2006"))) }}
+            {{ .Site.Params.footer.since }} -
+        {{ end }}
+        {{ now.Format "2006" }} {{ default .Site.Title .Site.Copyright }} · blog.caowo.de
+    </section>
+
+    <nav class="yl-footer-links" aria-label="页脚站点索引">
+        <a href="{{ `/posts/` | relLangURL }}">原创文章</a>
+        <span>·</span>
+        <a href="{{ `/archives/` | relLangURL }}">归档</a>
+        <span>·</span>
+        <a href="{{ `/about/` | relLangURL }}">关于本站</a>
+        <span>·</span>
+        <a href="{{ `/links/` | relLangURL }}">友情链接</a>
+        <span>·</span>
+        <a href="{{ `/posts/domain-ownership-clarification/` | relLangURL }}">域名所有权声明</a>
+        <span>·</span>
+        <a href="{{ `/index.xml` | relURL }}">RSS</a>
+        <span>·</span>
+        <a href="{{ `/sitemap.xml` | relURL }}">Sitemap</a>
+        <span>·</span>
+        <a href="{{ `/llms.txt` | relURL }}">LLMs.txt</a>
+    </nav>
+
+    <section class="powerby">
+        {{ with .Site.Params.footer.customText }}
+            {{ . | safeHTML }} <br/>
+        {{ end }}
+
+        {{- $Generator := `<a href="https://gohugo.io/" target="_blank" rel="nofollow noopener">Hugo</a>` -}}
+        {{- $Theme := printf `<b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="nofollow noopener" data-version="%s">Stack</a></b>` $ThemeVersion -}}
+        {{- $DesignedBy := `<a href="https://jimmycai.com" target="_blank" rel="nofollow noopener">Jimmy</a>` -}}
+
+        {{ T "footer.builtWith" (dict "Generator" $Generator) | safeHTML }} · {{ T "footer.designedBy" (dict "Theme" $Theme "DesignedBy" $DesignedBy) | safeHTML }}
+    </section>
+</footer>

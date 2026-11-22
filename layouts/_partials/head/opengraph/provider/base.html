@@ -1,0 +1,44 @@
+{{- $title := partialCached "data/title" . .RelPermalink -}}
+{{- $description := partialCached "data/description" . .RelPermalink -}}
+
+<meta property="og:title" {{ printf "content=%q" $title | safeHTMLAttr }}>
+<meta property="og:description" {{ printf "content=%q" $description | safeHTMLAttr }}>
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:site_name" content="{{ .Site.Title }}">
+<meta property="og:locale" content="{{ default `zh_CN` .Params.locale }}">
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+
+{{- if .IsPage -}}
+    {{- with .Params.categories -}}
+        <meta property="article:section" content="{{ index . 0 }}">
+    {{- else -}}
+        <meta property="article:section" content="{{ .Section | title }}">
+    {{- end -}}
+    {{- range .Params.tags -}}
+        <meta property="article:tag" content="{{ . }}">
+    {{- end -}}
+    {{- if not .Date.IsZero -}}
+        <meta property="article:published_time" content="{{ .Date.Format `2006-01-02T15:04:05-07:00` | safeHTML }}">
+    {{- end -}}
+    {{- if not .Lastmod.IsZero -}}
+        <meta property="article:modified_time" content="{{ .Lastmod.Format `2006-01-02T15:04:05-07:00` | safeHTML }}">
+    {{- end -}}
+    <meta property="article:author" content="{{ default `言零` .Site.Params.seo.author }}">
+{{- else -}}
+    {{- if not .Site.Lastmod.IsZero -}}
+        <meta property="og:updated_time" content="{{ .Site.Lastmod.Format `2006-01-02T15:04:05-07:00` | safeHTML }}">
+    {{- end -}}
+{{- end -}}
+
+{{- $image := partial "helper/image" (dict "Image" .Params.image "Resources" .Resources "Context" .) -}}
+{{- if $image -}}
+    <meta property="og:image" content="{{ $image.Permalink | absURL }}">
+    {{- with $image.Width }}<meta property="og:image:width" content="{{ . }}">{{ end -}}
+    {{- with $image.Height }}<meta property="og:image:height" content="{{ . }}">{{ end -}}
+    <meta property="og:image:alt" {{ printf "content=%q" (default .Site.Title .Title) | safeHTMLAttr }}>
+{{- else if .Site.Params.opengraph.image -}}
+    <meta property="og:image" content="{{ .Site.Params.opengraph.image | absURL }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" {{ printf "content=%q" (default .Site.Title .Title) | safeHTMLAttr }}>
+{{- end -}}

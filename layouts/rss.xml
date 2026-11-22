@@ -1,0 +1,41 @@
+{{- $pages := partial "helper/pages.html" . -}}
+{{- $pages = sort $pages "Date" "desc" -}}
+{{- $limit := .Site.Config.Services.RSS.Limit -}}
+{{- if ge $limit 1 -}}
+    {{- $pages = $pages | first $limit -}}
+{{- end -}}
+{{- $authorName := default "言零" .Site.Params.seo.author -}}
+{{- $channelDesc := default .Site.Params.seo.description .Description -}}
+{{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    <channel>
+        <title>{{ if or .IsHome (eq .Title .Site.Title) }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+        <link>{{ .Permalink }}</link>
+        <description>{{ $channelDesc | transform.XMLEscape | safeHTML }}</description>
+        <generator>Hugo</generator>
+        <language>zh-CN</language>
+        {{- if gt (len $pages) 0 -}}
+            {{- $latest := index ($pages.ByLastmod.Reverse) 0 -}}
+            {{- $mod := cond (not $latest.Lastmod.IsZero) $latest.Lastmod $latest.Date -}}
+        <lastBuildDate>{{ $mod.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>
+        {{- end -}}
+        {{- with .OutputFormats.Get "RSS" -}}
+        {{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
+        {{- end -}}
+        {{- range $pages }}
+        <item>
+            <title>{{ .Title | transform.XMLEscape | safeHTML }}</title>
+            <link>{{ .Permalink }}</link>
+            <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
+            <dc:creator>{{ $authorName | transform.XMLEscape | safeHTML }}</dc:creator>
+            <guid isPermaLink="true">{{ .Permalink }}</guid>
+            {{- range .Params.categories }}
+            <category>{{ . | transform.XMLEscape | safeHTML }}</category>
+            {{- end }}
+            {{- $desc := default .Summary .Description | plainify -}}
+            <description>{{ $desc | transform.XMLEscape | safeHTML }}</description>
+            <content:encoded>{{ printf "<![CDATA[%s<p><a href=\"%s\">阅读《%s》完整原文 →</a></p>]]>" .Content .Permalink .Title | safeHTML }}</content:encoded>
+        </item>
+        {{- end }}
+    </channel>
+</rss>

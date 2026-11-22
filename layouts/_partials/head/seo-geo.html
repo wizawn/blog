@@ -1,0 +1,175 @@
+{{- $isAuto := partial "helper/is-auto-page.html" . -}}
+{{- $paginator := partial "helper/paginator.html" . -}}
+{{- $isPaginatedFollowup := and $paginator $paginator.HasPrev -}}
+
+{{- /* Term page thin-content check: 0 original posts or <2 original posts on tag terms -> noindex, follow */ -}}
+{{- $isThinTerm := false -}}
+{{- if eq .Kind "term" -}}
+    {{- $origCount := 0 -}}
+    {{- range .Pages -}}
+        {{- if not (partial "helper/is-auto-page.html" .) -}}
+            {{- $origCount = add $origCount 1 -}}
+        {{- end -}}
+    {{- end -}}
+    {{- if eq $origCount 0 -}}
+        {{- $isThinTerm = true -}}
+    {{- else if and (eq .Data.Plural "tags") (lt $origCount 2) -}}
+        {{- $isThinTerm = true -}}
+    {{- end -}}
+{{- end -}}
+
+{{- $noindex := or $isAuto (eq .Layout "feeds") (eq .Section "feeds") (eq .Layout "search") (eq .Kind "404") $isPaginatedFollowup $isThinTerm (eq .Params.noindex true) -}}
+{{- if $noindex -}}
+<meta name="robots" content="noindex, follow">
+{{- else -}}
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+{{- end -}}
+
+<meta name="author" content="{{ default `言零` .Site.Params.seo.author }}">
+
+{{- /* Keywords: only emit here if .Params.Keywords wasn't already emitted by theme head.html */ -}}
+{{- if not .Params.Keywords -}}
+    {{- $kw := slice -}}
+    {{- with .Params.categories }}{{ range . }}{{ $kw = $kw | append . }}{{ end }}{{ end -}}
+    {{- with .Params.tags }}{{ range . }}{{ $kw = $kw | append . }}{{ end }}{{ end -}}
+    {{- if eq (len $kw) 0 -}}
+        {{- $kw = default (slice) .Site.Params.seo.keywords -}}
+    {{- end -}}
+    {{- if gt (len $kw) 0 -}}
+<meta name="keywords" {{ printf "content=%q" (delimit (uniq $kw) ", ") | safeHTMLAttr }}>
+    {{- end -}}
+{{- end -}}
+
+<link rel="icon" type="image/svg+xml" href="{{ `/favicon.svg` | relURL }}">
+<link rel="alternate" type="text/plain" title="LLMs Index" href="{{ `/llms.txt` | absURL }}">
+<link rel="alternate" type="text/plain" title="LLMs Full Corpus" href="{{ `/llms-full.txt` | absURL }}">
+
+{{- /* Structured Data (Schema.org JSON-LD @graph) */ -}}
+{{- if ne .Kind "404" -}}
+    {{- $title := partialCached "data/title" . .RelPermalink -}}
+    {{- $description := partialCached "data/description" . .RelPermalink -}}
+    {{- $siteURL := .Site.BaseURL -}}
+    {{- $defaultOG := .Site.Params.opengraph.image | default "/images/og-default.png" | absURL -}}
+    {{- $imgObj := partial "helper/image" (dict "Image" .Params.image "Resources" .Resources "Context" .) -}}
+    {{- $pageImg := $defaultOG -}}
+    {{- if $imgObj }}{{ $pageImg = $imgObj.Permalink | absURL }}{{ end -}}
+
+    {{- $personNode := dict
+        "@type" "Person"
+        "@id" (printf "%s#author" $siteURL)
+        "name" (default "言零" .Site.Params.seo.author)
+        "url" ("/about/" | absURL)
+        "description" "专注于 Web 渗透测试、客户端逆向、支付风控协议分析与安全防御研究的独立安全研究员。"
+        "knowsAbout" (slice "Web 渗透测试" "CVE 漏洞复现" "Android Frida 逆向" "Google Play BillingClient" "iOS StoreKit 内购审计" "Stripe 支付风控与状态机" "Linux 内核安全" "AI 工程与 Codex 排错")
+    -}}
+
+    {{- $orgNode := dict
+        "@type" "Organization"
+        "@id" (printf "%s#organization" $siteURL)
+        "name" .Site.Title
+        "url" $siteURL
+        "logo" (dict "@type" "ImageObject" "url" $defaultOG "width" 1200 "height" 630)
+    -}}
+
+    {{- $websiteNode := dict
+        "@type" "WebSite"
+        "@id" (printf "%s#website" $siteURL)
+        "url" $siteURL
+        "name" .Site.Title
+        "alternateName" "blog.caowo.de"
+        "description" .Site.Params.seo.description
+        "inLanguage" "zh-CN"
+        "author" (dict "@id" (printf "%s#author" $siteURL))
+        "publisher" (dict "@id" (printf "%s#organization" $siteURL))
+        "potentialAction" (dict
+            "@type" "SearchAction"
+            "target" (dict "@type" "EntryPoint" "urlTemplate" (printf "%ssearch/?keyword={search_term_string}" $siteURL))
+            "query-input" "required name=search_term_string"
+        )
+    -}}
+
+    {{- $graph := slice $personNode $orgNode $websiteNode -}}
+
+    {{- if and .IsPage (eq .Section "posts") (not $isAuto) -}}
+        {{- $pubISO := .Date.Format "2006-01-02T15:04:05Z07:00" -}}
+        {{- $modDate := cond (not .Lastmod.IsZero) .Lastmod .Date -}}
+        {{- $modISO := $modDate.Format "2006-01-02T15:04:05Z07:00" -}}
+        {{- $catName := "安全研究" -}}
+        {{- $catURL := ("/posts/" | absURL) -}}
+        {{- $cats := .GetTerms "categories" -}}
+        {{- if gt (len $cats) 0 -}}
+            {{- $firstCat := index $cats 0 -}}
+            {{- $catName = $firstCat.LinkTitle -}}
+            {{- $catURL = $firstCat.Permalink -}}
+        {{- end -}}
+        {{- $kwSlice := slice -}}
+        {{- with .Params.categories }}{{ range . }}{{ $kwSlice = $kwSlice | append . }}{{ end }}{{ end -}}
+        {{- with .Params.tags }}{{ range . }}{{ $kwSlice = $kwSlice | append . }}{{ end }}{{ end -}}
+
+        {{- $articleNode := dict
+            "@type" (slice "TechArticle" "BlogPosting")
+            "@id" (printf "%s#article" .Permalink)
+            "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink)
+            "isPartOf" (dict "@id" (printf "%s#website" $siteURL))
+            "headline" .Title
+            "description" $description
+            "image" (slice $pageImg)
+            "datePublished" $pubISO
+            "dateModified" $modISO
+            "author" (dict "@id" (printf "%s#author" $siteURL))
+            "publisher" (dict "@id" (printf "%s#organization" $siteURL))
+            "articleSection" $catName
+            "keywords" (uniq $kwSlice)
+            "wordCount" .WordCount
+            "inLanguage" "zh-CN"
+            "isAccessibleForFree" true
+            "license" "https://creativecommons.org/licenses/by-nc-sa/4.0/"
+        -}}
+
+        {{- $breadcrumbNode := dict
+            "@type" "BreadcrumbList"
+            "@id" (printf "%s#breadcrumb" .Permalink)
+            "itemListElement" (slice
+                (dict "@type" "ListItem" "position" 1 "name" "首页" "item" $siteURL)
+                (dict "@type" "ListItem" "position" 2 "name" $catName "item" $catURL)
+                (dict "@type" "ListItem" "position" 3 "name" .Title "item" .Permalink)
+            )
+        -}}
+        {{- $graph = $graph | append $articleNode $breadcrumbNode -}}
+    {{- else if eq .RelPermalink "/about/" -}}
+        {{- $aboutNode := dict
+            "@type" "ProfilePage"
+            "@id" (printf "%s#webpage" .Permalink)
+            "url" .Permalink
+            "name" $title
+            "description" $description
+            "inLanguage" "zh-CN"
+            "isPartOf" (dict "@id" (printf "%s#website" $siteURL))
+            "mainEntity" (dict "@id" (printf "%s#author" $siteURL))
+        -}}
+        {{- $breadcrumbNode := dict
+            "@type" "BreadcrumbList"
+            "@id" (printf "%s#breadcrumb" .Permalink)
+            "itemListElement" (slice
+                (dict "@type" "ListItem" "position" 1 "name" "首页" "item" $siteURL)
+                (dict "@type" "ListItem" "position" 2 "name" .Title "item" .Permalink)
+            )
+        -}}
+        {{- $graph = $graph | append $aboutNode $breadcrumbNode -}}
+    {{- else if not $noindex -}}
+        {{- $pageType := cond .IsPage "WebPage" "CollectionPage" -}}
+        {{- $webPageNode := dict
+            "@type" $pageType
+            "@id" (printf "%s#webpage" .Permalink)
+            "url" .Permalink
+            "name" $title
+            "description" $description
+            "inLanguage" "zh-CN"
+            "isPartOf" (dict "@id" (printf "%s#website" $siteURL))
+        -}}
+        {{- $graph = $graph | append $webPageNode -}}
+    {{- end -}}
+
+    {{- $ld := dict "@context" "https://schema.org" "@graph" $graph -}}
+<script type="application/ld+json">{{ $ld | jsonify | safeJS }}</script>
+{{- end -}}

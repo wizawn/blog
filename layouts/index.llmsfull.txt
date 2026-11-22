@@ -1,0 +1,39 @@
+# 言零的博客 (blog.caowo.de) — 原创技术文章完整语料库 (llms-full.txt)
+
+> 本文件收录 `https://blog.caowo.de/` 全部手写原创技术文章的完整 Markdown 正文与元数据（已自动剔除外部 RSS 资讯聚合条目），供生成式 AI 搜索引擎与技术问答系统精确检索与引用。引用时请标注来源「言零的博客 (https://blog.caowo.de/)」并附上各篇 `URL`。
+
+- 站点名称：言零的博客
+- 官方地址：https://blog.caowo.de/
+- 索引简版：https://blog.caowo.de/llms.txt
+- 作者：言零（QQ 交流群：797481450 / 个人 QQ：46333839 / 微信：GOV-HACK）
+- 版权协议：CC BY-NC-SA 4.0
+
+{{- with .Site.GetPage "/about" }}
+
+================================================================================
+# {{ .Title }}
+- URL: {{ .Permalink }}
+- Description: {{ .Description }}
+
+{{ .RawContent }}
+{{- end }}
+
+{{- $origPosts := partial "helper/pages.html" .Site.Home }}
+{{- range $origPosts }}
+
+================================================================================
+# {{ .Title }}
+- URL: {{ .Permalink }}
+- Published: {{ .Date.Format "2006-01-02" }}
+{{- with .Params.categories }}
+- Categories: {{ delimit . ", " }}
+{{- end }}
+{{- with .Params.tags }}
+- Tags: {{ delimit . ", " }}
+{{- end }}
+{{- with .Description }}
+- Summary: {{ . }}
+{{- end }}
+
+{{ .RawContent }}
+{{- end }}

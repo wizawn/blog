@@ -5,7 +5,7 @@ hasCJKLanguage = true
 title = "言零的博客"
 theme = 'stack'
 contentDir = 'source'
-paginate = 10
+enableRobotsTXT = true
 enableFuturePages = true
 buildFuture = true
 timeZone = 'UTC'
@@ -13,68 +13,59 @@ timeZone = 'UTC'
 [params]
   # 允许发布未来日期的文章
   enableFuturePages = true
-  
+
   # 文章排序：weight（教程置顶）
   SortBy = "weight"
-  
-  description = '专注于 Web 渗透测试、漏洞复现与安全防御技术分享'
-  
+
+  description = '专注于 Web 渗透测试、客户端逆向（Frida / BillingClient / StoreKit）、Stripe 支付风控协议分析、CVE 漏洞复现与 AI 工程排坑的一手实测笔记。'
+  favicon = '/favicon.svg'
+
   # 自动配图配置
   [params.cover]
-    # 使用随机封面图（从 static/ 目录随机选择）
     autoAssign = false
     images = [
-      "/security-cover.jpg",
-      "/tech-cover-1.jpg",
-      "/blog-cover-default.jpg"
+      "/images/og-default.png"
     ]
   mainSections = ["posts"]
   defaultImage = ''
-  
+
   [params.header]
     title = '言零的博客'
-    
+
   [params.footer]
     since = 2026
-    
+
   # SEO 配置
   [params.seo]
-    title = '言零的博客'
-    description = '专注于 Web 渗透测试、漏洞复现、SRC 挖洞与安全防御技术分享。提供 Nuclei 教程、SQLMap 指南、CVE 漏洞复现等实战内容。'
-    keywords = ['Web 渗透测试', '漏洞复现', 'SRC 挖洞', '网络安全', 'Nuclei', 'SQLMap', 'CVE', '安全研究']
+    title = '言零的博客 | Web 渗透、客户端逆向、支付风控与协议分析'
+    description = '专注于 Web 渗透测试、CVE 漏洞复现、移动端与内购逆向（Frida / BillingClient / StoreKit）、Stripe 支付状态机审计与 Codex 工程排坑的实战技术博客。'
+    keywords = ['Web 渗透测试', '漏洞复现', '客户端逆向', '支付风控', '协议分析', 'Frida', 'StoreKit', 'Stripe', 'Nuclei', 'SQLMap', 'CVE', 'Codex']
     author = '言零'
-    
+    indexNowKey = 'b7e4c9a1d2f84e6093a5c1d7e8f02468'
+
   # Open Graph / 社交媒体分享
   [params.opengraph]
     title = '言零的博客'
-    description = '专注于 Web 渗透测试、漏洞复现与安全防御技术分享'
-    image = ''
-    
+    description = '专注于 Web 渗透测试、客户端逆向、支付风控协议分析与 CVE 漏洞复现的一手实测笔记。'
+    image = '/images/og-default.png'
+    [params.opengraph.twitter]
+      card = 'summary_large_image'
+
   # Cloudflare Web Analytics
   [params.cloudflareAnalytics]
     enabled = true
     token = "SDZvDCIq-3er2UKht5fIrl2UvvIrJxi6hZVxBfIa"
-  
+
   # Google Analytics 4 - blog.caowo.de
   [params.googleAnalytics]
     enabled = true
     id = "G-M3JN483VK6"
-  
-  # Google Analytics 4 - blog.wizawn.com
-  [params.googleAnalyticsWizawn]
-    enabled = false
-    id = "G-SPGY6F5H5M"
-  
+
   # 百度统计 - blog.caowo.de
   [params.baiduAnalytics]
     enabled = true
     id = "459a34335680d2c2b91885b9497df7ff"
-  
-  # 百度统计 - blog.wizawn.com（备用域名）
-  [params.baiduAnalyticsWizawn]
-    enabled = false
-    id = "af4b0bac159ccbc7fec135fb16d457d5"
-  
+
   # Google AdSense
   [params.adsense]
     enabled = true
@@ -96,6 +87,20 @@ timeZone = 'UTC'
     type = "tag-cloud"
     [params.widgets.homepage.params]
       limit = 20
+
+[related]
+  includeNewer = true
+  threshold = 20
+  toLower = true
+  [[related.indices]]
+    name = "tags"
+    weight = 80
+  [[related.indices]]
+    name = "categories"
+    weight = 50
+  [[related.indices]]
+    name = "date"
+    weight = 10
 
 [markup]
   [markup.goldmark.renderer]
@@ -169,12 +174,33 @@ timeZone = 'UTC'
     [menu.main.params]
       icon = "search"
 
-# 首页配置
+# 首页与分页配置
 [pagination]
-pagerSize = 10
+  pagerSize = 10
+
+[mediaTypes]
+  [mediaTypes."text/llms"]
+    suffixes = ["txt"]
+  [mediaTypes."text/llmsfull"]
+    suffixes = ["txt"]
+
+[outputFormats]
+  [outputFormats.LLMS]
+    mediaType = "text/llms"
+    baseName = "llms"
+    isPlainText = true
+    notAlternative = true
+  [outputFormats.LLMSFULL]
+    mediaType = "text/llmsfull"
+    baseName = "llms-full"
+    isPlainText = true
+    notAlternative = true
 
 [outputs]
-home = ["HTML", "RSS", "JSON"]
+  home = ["HTML", "RSS", "JSON", "LLMS", "LLMSFULL"]
+  section = ["HTML", "RSS"]
+  taxonomy = ["HTML"]
+  term = ["HTML"]
 
 [params.sidebar]
   compact = false

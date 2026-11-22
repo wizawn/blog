@@ -1,0 +1,53 @@
+# robots.txt for https://blog.caowo.de/
+# 言零的博客 — Web 渗透测试、客户端逆向、支付风控与协议分析
+# AI / LLM Structured Index: https://blog.caowo.de/llms.txt
+# AI / LLM Full Technical Corpus: https://blog.caowo.de/llms-full.txt
+
+User-agent: *
+Allow: /
+Disallow: /search/
+
+User-agent: Googlebot
+Allow: /
+Disallow: /search/
+
+User-agent: Bingbot
+Allow: /
+Disallow: /search/
+
+User-agent: Baiduspider
+Allow: /
+Disallow: /search/
+
+# Generative Engine Optimization (GEO) — AI Search & Answer Engines Explicitly Allowed
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: DuckAssistBot
+Allow: /
+
+Sitemap: {{ "sitemap.xml" | absURL }}

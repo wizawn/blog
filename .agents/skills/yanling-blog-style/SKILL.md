@@ -107,3 +107,16 @@ weight: 10
 ```bash
 python3 ~/.gemini/config/skills/yanling-blog-style/scripts/check_ai_smell.py <目标文件或目录>
 ```
+
+
+---
+
+## 五、SEO / GEO 元数据与联系方式唯一基线
+
+1. **联系方式唯一有效清单**
+   - 站内个人与交流联系方式仅保留三项：QQ 交流群 `797481450`、个人 QQ `46333839`、微信 `GOV-HACK`。
+   - **严禁写入已停用或移除的旧信息**：个人 GitHub（`github.com/wizawn`）、旧邮箱（`hihacker@foxmail.com` 等任何私人邮箱）、已下线子域名（`api.caowo.de`、`ruanzhu.caowo.de`）。
+2. **SEO 与生成式搜索（GEO）元数据要求**
+   - 每篇原创文章必须填写精准的 `description`（建议 45–110 字中文，直接交代研究对象、报错码/CVE 编号、协议组件与实测结论），该字段会同步喂给 `<meta name="description">`、OpenGraph、Schema.org `TechArticle` 结构化数据以及 `/llms.txt`、`/llms-full.txt` 大模型索引。
+   - 修改历史文章技术内容时同步更新 `lastmod`（ISO-8601 时间戳），触发 `sitemap.xml` 与 `article:modified_time` 刷新。
+   - 正式发布至 `blog-worker` 后，可执行仓库内 `python3 scripts/submit_indexnow.py` 将最新 `sitemap.xml` 主动推送至 IndexNow（加速 Bing、ChatGPT Search 与 Perplexity 收录）。

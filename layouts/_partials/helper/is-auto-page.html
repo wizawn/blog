@@ -1,0 +1,13 @@
+{{- $isAuto := false -}}
+{{- with .File -}}
+    {{- if hasPrefix .BaseFileName "auto-" -}}
+        {{- $isAuto = true -}}
+    {{- end -}}
+{{- end -}}
+{{- if not $isAuto -}}
+    {{- $tagText := delimit (default (slice) .Params.tags) " " | lower -}}
+    {{- if or (in $tagText "auto-generated") (in $tagText "ai-processed") (in $tagText "rss") -}}
+        {{- $isAuto = true -}}
+    {{- end -}}
+{{- end -}}
+{{- return $isAuto -}}

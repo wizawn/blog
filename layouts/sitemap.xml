@@ -1,0 +1,80 @@
+{{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{{- $origPosts := partial "helper/pages.html" .Site.Home -}}
+{{- $latestMod := now -}}
+{{- if gt (len $origPosts) 0 -}}
+    {{- $latestPage := index ($origPosts.ByLastmod.Reverse) 0 -}}
+    {{- $latestMod = cond (not $latestPage.Lastmod.IsZero) $latestPage.Lastmod $latestPage.Date -}}
+{{- end -}}
+  <url>
+    <loc>{{ .Site.Home.Permalink }}</loc>
+    <lastmod>{{ $latestMod.Format "2006-01-02T15:04:05-07:00" | safeHTML }}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+{{- range slice "/posts" "/archives" "/about" "/links" "/categories" "/tags" -}}
+    {{- with $.Site.GetPage . -}}
+    {{- $m := $latestMod -}}
+    {{- if not .Lastmod.IsZero }}{{ $m = .Lastmod }}{{ else if not .Date.IsZero }}{{ $m = .Date }}{{ end -}}
+  <url>
+    <loc>{{ .Permalink }}</loc>
+    <lastmod>{{ $m.Format "2006-01-02T15:04:05-07:00" | safeHTML }}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+    {{- end -}}
+{{- end -}}
+{{- range $origPosts -}}
+    {{- $m := cond (not .Lastmod.IsZero) .Lastmod .Date -}}
+  <url>
+    <loc>{{ .Permalink }}</loc>
+    <lastmod>{{ $m.Format "2006-01-02T15:04:05-07:00" | safeHTML }}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+{{- end -}}
+{{- with .Site.GetPage "taxonomyTerm" "categories" -}}
+    {{- range .Pages -}}
+        {{- $origCount := 0 -}}
+        {{- $termLatest := $latestMod -}}
+        {{- range .Pages -}}
+            {{- if not (partial "helper/is-auto-page.html" .) -}}
+                {{- if eq $origCount 0 -}}
+                    {{- $termLatest = cond (not .Lastmod.IsZero) .Lastmod .Date -}}
+                {{- end -}}
+                {{- $origCount = add $origCount 1 -}}
+            {{- end -}}
+        {{- end -}}
+        {{- if gt $origCount 0 -}}
+  <url>
+    <loc>{{ .Permalink }}</loc>
+    <lastmod>{{ $termLatest.Format "2006-01-02T15:04:05-07:00" | safeHTML }}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+{{- with .Site.GetPage "taxonomyTerm" "tags" -}}
+    {{- range .Pages -}}
+        {{- $origCount := 0 -}}
+        {{- $termLatest := $latestMod -}}
+        {{- range .Pages -}}
+            {{- if not (partial "helper/is-auto-page.html" .) -}}
+                {{- if eq $origCount 0 -}}
+                    {{- $termLatest = cond (not .Lastmod.IsZero) .Lastmod .Date -}}
+                {{- end -}}
+                {{- $origCount = add $origCount 1 -}}
+            {{- end -}}
+        {{- end -}}
+        {{- if ge $origCount 2 -}}
+  <url>
+    <loc>{{ .Permalink }}</loc>
+    <lastmod>{{ $termLatest.Format "2006-01-02T15:04:05-07:00" | safeHTML }}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+        {{- end -}}
+    {{- end -}}
+{{- end }}
+</urlset>

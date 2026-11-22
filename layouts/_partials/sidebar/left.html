@@ -11,13 +11,13 @@
             <figure class="site-avatar">
                 <a href="{{ $.Site.BaseURL | relLangURL }}">
                 {{ if not .local }}
-                    <img src="{{ .src }}" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    <img src="{{ .src }}" width="300" height="300" class="site-logo" loading="lazy" alt="言零的博客">
                 {{ else }}
                     {{ $avatar := resources.Get (.src) }}
                     {{ if $avatar }}
                         {{ $avatarResized := $avatar.Resize "300x" }}
                         <img src="{{ $avatarResized.RelPermalink }}" width="{{ $avatarResized.Width }}"
-                            height="{{ $avatarResized.Height }}" class="site-logo" loading="lazy" alt="Avatar">
+                            height="{{ $avatarResized.Height }}" class="site-logo" loading="lazy" alt="言零的博客">
                     {{ end }}
                 {{ end }}
                 </a>
@@ -26,8 +26,12 @@
         {{ end }}
 
         <div class="site-meta">
-            <h1 class="site-name"><a href="{{ .Site.BaseURL | relLangURL }}">{{ .Site.Title }}</a></h1>
-            <h2 class="site-description">{{ .Site.Params.sidebar.subtitle }}</h2>
+            {{- if .IsHome -}}
+                <h1 class="site-name"><a href="{{ .Site.BaseURL | relLangURL }}">{{ .Site.Title }}</a></h1>
+            {{- else -}}
+                <div class="site-name"><a href="{{ .Site.BaseURL | relLangURL }}">{{ .Site.Title }}</a></div>
+            {{- end -}}
+            <p class="site-description">{{ .Site.Params.sidebar.subtitle }}</p>
         </div>
     </header>
 
@@ -54,9 +58,10 @@
     <ol class="menu" id="main-menu">
         {{ $currentPage := . }}
         {{ range .Site.Menus.main }}
-        {{ $active := or (eq $currentPage.Title .Name) (or ($currentPage.HasMenuCurrent "main" .) ($currentPage.IsMenuCurrent "main" .)) }}
+        {{ $menuURL := .URL | relLangURL }}
+        {{ $active := or (eq $currentPage.RelPermalink $menuURL) (eq $currentPage.Title .Name) ($currentPage.HasMenuCurrent "main" .) ($currentPage.IsMenuCurrent "main" .) }}
         <li {{ if $active }}class='current'{{ end }}>
-            <a href='{{ .URL | relLangURL }}' {{ if eq .Params.newTab true }}target="_blank"{{ end }}>
+            <a href='{{ $menuURL }}' {{ if eq .Params.newTab true }}target="_blank"{{ end }}>
                 {{ $icon := default .Pre .Params.icon }}
                 {{ if .Pre }}
                     {{ warnf "Menu item [%s] is using [pre] field to set icon, please use [params.icon] instead.\nMore information: https://stack.jimmycai.com/config/menu" .URL }}

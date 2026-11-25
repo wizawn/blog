@@ -206,7 +206,7 @@ if (raw instanceof Uint8Array) {
       : { 'g1.ios.20tb.m.v2': 'g1.20tb.3months_ip_90p.acq', 'g1.ios.30tb.ai.pro.m': 'g1.ai.ultra.3months_ip_90p.acq' };
     const fb = (MODE_KIND === 'tri_eft_smart')
       ? { 'g1.20tb.1month_eft.acq': 'g1.20tb.3months_ip_90p.acq', 'g1.ai.ultra.1month_eft.acq': 'g1.ai.ultra.3months_ip_90p.acq' }
-      : { 'g1.20tb.3months_ip_90p.acq': 'g1.20tb.3months_ip_75p.acq', 'g1.ai.ultra.3months_ip_90p.acq': 'g1.ai.ultra.3months_ip_75p.acq' };
+      : {};
     let hits = 0;
     const out = raw.replace(/(^|[^A-Za-z0-9._@%-])(g1\.[A-Za-z0-9._-]+)(?=$|[^A-Za-z0-9._-])/g, (m, pre, id) => {
       if (id.indexOf('g1.ios.2tb.') === 0 && id.length > 11) { hits++; return pre + 'g1.2tb.ai.12months_ip_90p'; }

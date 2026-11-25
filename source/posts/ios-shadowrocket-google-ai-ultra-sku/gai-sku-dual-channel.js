@@ -218,8 +218,12 @@ if (raw instanceof Uint8Array) {
       return m;
     });
     $done(hits ? { body: out } : {});
+  } else if (MODE_KIND === 'eft_20x_direct') {
+    const out = raw.replace(/g1\.ios\.(?:20tb\.m\.v2|30tb\.ai\.pro\.m)/g, 'g1.ai.ultra.1month_eft.acq');
+    $done(out !== raw ? { body: out } : {});
   } else {
-    $done({ body: raw.replace(/g1\.ios\.20tb\.m\.v2/g, DST_STR) });
+    const out = raw.replace(/g1\.ios\.20tb\.m\.v2/g, DST_STR);
+    $done(out !== raw ? { body: out } : {});
   }
 } else {
   $done({});

@@ -3,6 +3,7 @@
 {{- $sb := $sp.switchbase -}}
 {{- $ra := $sp.redeemai -}}
 {{- $zc := $sp.zovocard -}}
+{{- $ck := $sp.claudekyc -}}
 {{- $qq := default "1137420469" $sp.qqGroup -}}
 {{- $qqAccount := default "46333839" $sp.qq -}}
 {{- $wx := default "GOV-HACK" $sp.wechat -}}
@@ -30,7 +31,7 @@
   </div>
   {{- end -}}
 
-  <div class="yl-ad-grid-3">
+  <div class="yl-ad-grid-4">
     <div class="yl-ad-card">
       <div>
         <div class="yl-ad-meta">
@@ -67,6 +68,19 @@
       </div>
       <a href="{{ default "https://zovocard.com/register?invite=7777777" $zc.url }}" target="_blank" rel="noopener" class="yl-ad-btn yl-ad-btn--full">
         {{ default "立即开卡 →" $zc.cta }}
+      </a>
+    </div>
+
+    <div class="yl-ad-card">
+      <div>
+        <div class="yl-ad-meta">
+          <span class="yl-ad-tag">{{ default "源头直营" $ck.tag }}</span>
+        </div>
+        <div class="yl-ad-title">{{ default "专业 Claude KYC · 门户验证" $ck.shortTitle }}</div>
+        <p class="yl-ad-desc">{{ default "全网源头直营 · 秒封包退。" $ck.shortDesc }}</p>
+      </div>
+      <a href="{{ default "https://shop.ttzzaaww.shop/register?invite=DG8RJDEG" $ck.url }}" target="_blank" rel="noopener" class="yl-ad-btn yl-ad-btn--full">
+        {{ default "立即前往 →" $ck.cta }}
       </a>
     </div>
   </div>

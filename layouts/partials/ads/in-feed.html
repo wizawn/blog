@@ -2,20 +2,22 @@
 {{- if or (not (isset .Site.Params "sponsors")) $sp.enabled -}}
 {{- $ra := $sp.redeemai -}}
 {{- $zc := $sp.zovocard -}}
+{{- $ck := $sp.claudekyc -}}
 <aside class="yl-ad-banner" aria-label="推荐服务">
   <div>
     <div class="yl-ad-meta" style="justify-content:flex-start;margin-bottom:6px;">
       <span class="yl-ad-tag">推荐</span>
-      <span class="yl-ad-domain">海外订阅绑卡与会员直充</span>
+      <span class="yl-ad-domain">海外订阅绑卡 · 会员直充 · Claude KYC 门户验证</span>
     </div>
-    <div class="yl-ad-title" style="font-size:15.5px;">开海外订阅缺卡用 ZovoCard，嫌折腾直接走 RedeemAI 自动代充</div>
+    <div class="yl-ad-title" style="font-size:15.5px;">ZovoCard 海外虚拟卡 · RedeemAI 自动代充 · 专业 Claude KYC 门户验证</div>
     <p class="yl-ad-desc" style="margin-bottom:0;">
-      Visa / Mastercard 支持 <span class="yl-nowrap">USDT 充值</span> 通付 Stripe；ChatGPT / Claude / Grok 官方会员支持自动发卡。
+      Visa / Mastercard 支持 <span class="yl-nowrap">USDT 充值</span> 通付 Stripe；ChatGPT / Claude / Grok 官方会员自动发卡；专业 Claude KYC · 门户验证全网源头直营、秒封包退。
     </p>
   </div>
-  <div class="yl-ad-banner__actions" style="flex-direction:row;">
+  <div class="yl-ad-banner__actions">
     <a href="{{ default "https://zovocard.com/register?invite=7777777" $zc.url }}" target="_blank" rel="noopener" class="yl-ad-btn">ZovoCard 开卡 →</a>
     <a href="{{ default "https://faka.cdkey.si/" $ra.url }}" target="_blank" rel="noopener" class="yl-ad-btn yl-ad-btn--ghost">会员代充 →</a>
+    <a href="{{ default "https://shop.ttzzaaww.shop/register?invite=DG8RJDEG" $ck.url }}" target="_blank" rel="noopener" class="yl-ad-btn yl-ad-btn--ghost">Claude KYC 验证 →</a>
   </div>
 </aside>
 {{- end -}}

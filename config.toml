@@ -251,3 +251,13 @@ timeZone = 'UTC'
     shortDesc = "USDT 充值，通付全球 Stripe 商户。"
     url = "https://zovocard.com/register?invite=7777777"
     cta = "立即开卡 →"
+
+  [params.sponsors.claudekyc]
+    tag = "源头直营"
+    domain = "shop.ttzzaaww.shop"
+    title = "专业 Claude KYC · 门户验证"
+    shortTitle = "专业 Claude KYC · 门户验证"
+    desc = "全网源头直营 · 秒封包退。"
+    shortDesc = "全网源头直营 · 秒封包退。"
+    url = "https://shop.ttzzaaww.shop/register?invite=DG8RJDEG"
+    cta = "立即前往 →"

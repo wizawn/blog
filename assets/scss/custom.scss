@@ -420,7 +420,13 @@ body {
   }
 }
 
-/* 右侧栏双卡栈 */
+/* 右侧栏推广卡栈（适配 3 卡在窄屏笔记本下可平滑内滚不裁切） */
+.right-sidebar.sticky {
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
 .yl-sidebar-ads {
   display: flex;
   flex-direction: column;
@@ -498,6 +504,22 @@ body {
 
   @media (min-width: 640px) {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .yl-ad-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
+
+.yl-ad-grid-4 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+
+  @media (min-width: 560px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .yl-ad-card {

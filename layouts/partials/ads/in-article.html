@@ -3,28 +3,48 @@
 {{- $sb := $sp.switchbase -}}
 {{- $ra := $sp.redeemai -}}
 {{- $zc := $sp.zovocard -}}
+{{- $ck := $sp.claudekyc -}}
 
-{{- /* 根据当前文章分类/标签自动匹配最相关的两项业务 */ -}}
+{{- /* 根据当前文章分类/标签自动匹配最相关的配套服务 */ -}}
 {{- $cats := delimit (default (slice) .Params.categories) " " | lower -}}
 {{- $tags := delimit (default (slice) .Params.tags) " " | lower -}}
 {{- $haystack := printf "%s %s %s" ($cats) ($tags) (lower .Title) -}}
 
-{{- $isAI := or (in $haystack "codex") (in $haystack "claude") (in $haystack "ai 工具") (in $haystack "gpt-5") (in $haystack "agent") -}}
+{{- $isClaude := or (in $haystack "claude") (in $haystack "anthropic") (in $haystack "kyc") -}}
+{{- $isAI := or $isClaude (in $haystack "codex") (in $haystack "ai 工具") (in $haystack "gpt-5") (in $haystack "agent") -}}
 
-{{- if $isAI -}}
+{{- if $isClaude -}}
 <aside class="yl-ad-banner yl-ad-banner--inline" aria-label="配套服务">
   <div>
     <div class="yl-ad-meta" style="justify-content:flex-start;margin-bottom:6px;">
       <span class="yl-ad-tag">配套服务</span>
-      <span class="yl-ad-domain">高稳定 API 号池 / 会员直充</span>
+      <span class="yl-ad-domain">门户验证源头直营 / 纯血 API 号池</span>
     </div>
-    <div class="yl-ad-title" style="font-size:15px;">SwitchBase 纯血 Claude 号池 &amp; RedeemAI 会员自动代充</div>
+    <div class="yl-ad-title" style="font-size:15px;">专业 Claude KYC · 门户验证 &amp; SwitchBase 纯血 Claude 号池</div>
     <p class="yl-ad-desc" style="margin-bottom:0;">
-      跑 Codex / Claude Code 需要高稳定满血接口可直接用站长同款 SwitchBase（99%+ 在线）；官方 Plus / Pro 账号代充走 RedeemAI。
+      专业 Claude KYC · 门户验证（全网源头直营 · 秒封包退）；跑 Claude Code / Agent 需高稳定满血接口可直接用站长同款 SwitchBase（99%+ 在线）。
+    </p>
+  </div>
+  <div class="yl-ad-banner__actions">
+    <a href="{{ default "https://shop.ttzzaaww.shop/register?invite=DG8RJDEG" $ck.url }}" target="_blank" rel="noopener" class="yl-ad-btn">Claude KYC 验证 →</a>
+    <a href="{{ default "https://switchbase.vip/register?aff=MOSH" $sb.url }}" target="_blank" rel="noopener" class="yl-ad-btn yl-ad-btn--ghost">试用 SwitchBase →</a>
+  </div>
+</aside>
+{{- else if $isAI -}}
+<aside class="yl-ad-banner yl-ad-banner--inline" aria-label="配套服务">
+  <div>
+    <div class="yl-ad-meta" style="justify-content:flex-start;margin-bottom:6px;">
+      <span class="yl-ad-tag">配套服务</span>
+      <span class="yl-ad-domain">API 号池 / Claude KYC 门户验证 / 会员直充</span>
+    </div>
+    <div class="yl-ad-title" style="font-size:15px;">SwitchBase 纯血号池 · 专业 Claude KYC 门户验证 · RedeemAI 代充</div>
+    <p class="yl-ad-desc" style="margin-bottom:0;">
+      跑 Codex / Claude Code 可用站长同款 SwitchBase（99%+ 在线）；专业 Claude KYC · 门户验证全网源头直营、秒封包退；官方 Plus / Pro 账号代充走 RedeemAI。
     </p>
   </div>
   <div class="yl-ad-banner__actions">
     <a href="{{ default "https://switchbase.vip/register?aff=MOSH" $sb.url }}" target="_blank" rel="noopener" class="yl-ad-btn">试用 SwitchBase →</a>
+    <a href="{{ default "https://shop.ttzzaaww.shop/register?invite=DG8RJDEG" $ck.url }}" target="_blank" rel="noopener" class="yl-ad-btn yl-ad-btn--ghost">Claude KYC 验证 →</a>
     <a href="{{ default "https://faka.cdkey.si/" $ra.url }}" target="_blank" rel="noopener" class="yl-ad-btn yl-ad-btn--ghost">会员代充 →</a>
   </div>
 </aside>
@@ -33,16 +53,17 @@
   <div>
     <div class="yl-ad-meta" style="justify-content:flex-start;margin-bottom:6px;">
       <span class="yl-ad-tag">配套服务</span>
-      <span class="yl-ad-domain">省去备机抓包与海外绑卡折腾</span>
+      <span class="yl-ad-domain">省去备机抓包与海外绑卡、门户验证折腾</span>
     </div>
-    <div class="yl-ad-title" style="font-size:15px;">RedeemAI 会员直充 &amp; ZovoCard 海外订阅虚拟卡</div>
+    <div class="yl-ad-title" style="font-size:15px;">RedeemAI 会员直充 · ZovoCard 虚拟卡 · 专业 Claude KYC 门户验证</div>
     <p class="yl-ad-desc" style="margin-bottom:0;">
-      不想自己搭环境抓包可直接走自营代充；需要绑海外 Apple ID、Google Play 或付 Stripe 账单可开 ZovoCard（支持 <span class="yl-nowrap">USDT 充值</span>）。
+      不想自己搭环境抓包可走自营代充；绑海外商店或付 Stripe 账单可开 ZovoCard（支持 <span class="yl-nowrap">USDT 充值</span>）；专业 Claude KYC · 门户验证全网源头直营、秒封包退。
     </p>
   </div>
   <div class="yl-ad-banner__actions">
     <a href="{{ default "https://faka.cdkey.si/" $ra.url }}" target="_blank" rel="noopener" class="yl-ad-btn">前往代充 →</a>
     <a href="{{ default "https://zovocard.com/register?invite=7777777" $zc.url }}" target="_blank" rel="noopener" class="yl-ad-btn yl-ad-btn--ghost">开通虚拟卡 →</a>
+    <a href="{{ default "https://shop.ttzzaaww.shop/register?invite=DG8RJDEG" $ck.url }}" target="_blank" rel="noopener" class="yl-ad-btn yl-ad-btn--ghost">Claude KYC 验证 →</a>
   </div>
 </aside>
 {{- end -}}

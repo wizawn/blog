@@ -2,6 +2,7 @@
 {{- if or (not (isset .Site.Params "sponsors")) $sp.enabled -}}
 {{- $ra := $sp.redeemai -}}
 {{- $zc := $sp.zovocard -}}
+{{- $ck := $sp.claudekyc -}}
 <section class="widget yl-sidebar-ads">
   <div class="yl-sidebar-ads__head">
     <span>推荐服务</span>
@@ -31,6 +32,18 @@
     </p>
     <a href="{{ default "https://zovocard.com/register?invite=7777777" $zc.url }}" target="_blank" rel="noopener" class="yl-ad-btn">
       {{ default "立即开卡 →" $zc.cta }}
+    </a>
+  </div>
+
+  <div class="yl-ad-card">
+    <div class="yl-ad-meta">
+      <span class="yl-ad-tag">{{ default "源头直营" $ck.tag }}</span>
+      <span class="yl-ad-domain">{{ default "shop.ttzzaaww.shop" $ck.domain }}</span>
+    </div>
+    <div class="yl-ad-title">{{ default "专业 Claude KYC · 门户验证" $ck.title }}</div>
+    <p class="yl-ad-desc">{{ default "全网源头直营 · 秒封包退。" $ck.desc }}</p>
+    <a href="{{ default "https://shop.ttzzaaww.shop/register?invite=DG8RJDEG" $ck.url }}" target="_blank" rel="noopener" class="yl-ad-btn">
+      {{ default "立即前往 →" $ck.cta }}
     </a>
   </div>
 </section>

@@ -1,161 +1,459 @@
 ---
-title: "iOS 端用小火箭改写 SKU 拿到 Google AI Ultra 的一折价和免费试用"
+title: "iOS 免越狱改写 SKU 拿 Google AI Ultra 免费试用与一折价：小火箭、Clash、Stash、Surge、圈 X、Loon 全客户端实录"
 date: 2026-11-24T22:00:00+08:00
-lastmod: 2026-11-25T11:30:00+08:00
-description: "在 iPhone 上用小火箭（Shadowrocket）开启 HTTPS 解密与响应体改写，把 one.google.com/ai 返回的 iOS 原价 SKU 替换成隐藏的 .acq 促销 SKU，拉出 Google AI Ultra 30TB 前三个月 $19.99 一折价或首月 $0 免费试用。"
+lastmod: 2026-11-25T12:20:00+08:00
+description: "在 iPhone 上免越狱拦截网页与原生 Protobuf 双通道，把默认下发的 iOS 原价 SKU 替换成隐藏促销编号，拉出 Google AI Ultra 首月 $0 免费试用或 $9.99 / $19.99 一折价，附 Shadowrocket、Clash 全系（Stash / Clash Mi / FlClash / Clash Verge / Karing）、Surge、Loon、Quantumult X、Egern 完整配置。"
 categories: ["安全研究", "技术分析"]
-tags: ["Google AI Ultra", "Google One", "Shadowrocket", "小火箭", "SKU 改写", "iOS", "MITM"]
+tags: ["Google AI Ultra", "Google One", "Shadowrocket", "小火箭", "Clash", "Stash", "Surge", "Quantumult X", "Loon", "SKU 改写", "iOS"]
 draft: false
 weight: 10
 ---
 
-## 0x00 上回塞 Frida 太重，这回在 iPhone 上半路换个商品名
+## 0x00 上回塞 Frida 太重，这回把 iOS 全家桶代理工具一次配齐
 
-[上一篇](/posts/google-ai-ultra-trial/)折腾的是 Android 那边的路子：在电脑上装 MuMu 模拟器、推 `frida-server`、自己备一个带结算库的 `module.apk`，再用 `DexClassLoader` 塞进 Google One 进程里调 `BillingClient`，把藏在底下的 `$0` 试用翻出来。整套流程虽然稳稳跑通了，但对没碰过逆向的朋友实在不太友好，光是配 ADB 转发和来回切类加载器就能劝退一大半人。
+[上一篇](/posts/google-ai-ultra-trial/)折腾的是 Android 模拟器那条路子：在电脑上装 MuMu、推 `frida-server`、备一个带结算库的 `module.apk`，再用 `DexClassLoader` 动态塞进 Google One 进程里调 `BillingClient`，把藏在底下的 `$0` 试用翻出来。整套流程跑得挺稳，但对没碰过逆向的朋友实在不太友好，光是配 ADB 端口转发和来回切类加载器就能劝退一大半人。
 
-后来顺手看了一眼 iOS 这边的请求链路，发现压根不用搞进程注入那么重。iPhone 上虽然没法随便往 App 内存里塞钩子，但 Google One 的 iOS 客户端在加载 AI 订阅方案页时，底层会走 HTTPS 请求 `one.google.com/ai`，由服务端把当前允许展示的套餐编号（也就是 SKU）塞在响应体里发回手机渲染。
+后来顺手抓了一下 iPhone 上的请求链路，发现 iOS 端压根不用搞进程注入那么重。谷歌旗下的 iOS 客户端在渲染 AI 订阅升级页时，当前允许展示哪些套餐编号（也就是 SKU），全靠服务端通过两条通道下发给手机：一条是内嵌网页容器请求的 `https://one.google.com/ai`（多账号路径长成 `/u/0/ai`），返回明文 HTML 与内嵌配置块。
 
-说白了，只要让小火箭（Shadowrocket）在手机本地当个中间传话的：趁谷歌把价目表发回来的半路上，把里面写死的 iOS 原价 SKU 偷偷替换成带折扣或试用的隐藏 SKU，客户端拿到的就是换过的商品 ID，点订阅自然拉起对应的促销价收银台。平时用 Surge、Quantumult X（圈 X）、Loon、Stash 或者 Clash 系的客户端也是一模一样的道理，核心都是开一条针对 `one.google.com` 的 HTTPS 解密（MITM）规则，再配一段响应体字符串替换。下面直接拿大家手里最常见的小火箭把完整步骤和踩过的坑捋一遍，照着点几下就能上手。
+另一条则是原生套餐展台接口 `https://subscriptionsmobile-pa.googleapis.com/$rpc/google.internal.one.v1.StorefrontService/GetDynamicStorefrontInfo`，走的是带 5 字节帧头的二进制 gRPC / Protobuf 数据流。只要让手机上的代理软件在本地当个中间传话的，趁这两路响应落回客户端之前把里面写死的 `g1.ios.*` 日常正价编号偷偷替换成隐藏促销编号，App 点订阅时就会乖乖拿着换过的商品 ID 去拉收银台。
 
-## 0x01 动手前先备好干净号、限额卡，认清两套 SKU 命名
+不管你主力用的是小火箭（`Shadowrocket`）、`Surge`、`Clash` 全系（包括 iOS 端的 `Stash`，以及跑纯 `Mihomo` 内核的 `Clash Mi`、`FlClash`、`Clash Verge`、`Karing`），还是 `Loon`、`Quantumult X`（圈 X）、`Egern`，底子都是同一套拦截逻辑，只是各家配置文件的写法和内核能力有一点差别。动手前先看一眼下面这张表，对号入座挑自己手头正在用的工具往下翻就行：
 
-开搞之前先把防扣费护栏和账号条件交底，免得规则配半天最后卡在资格弹窗上。
+| 你手里正在用的客户端 | 本地 HTTPS 改包能力 | 推荐挂载格式 | 是否需要电脑配合 |
+|---|---|---|---|
+| `Shadowrocket`（小火箭）/ `Surge` | 原生支持请求头、正文正则与二进制脚本 | 在原有配置上叠加 `.sgmodule` 模块 | 不需要，纯手机独立完成 |
+| `Stash`（iOS 版 Clash 生态） | 原生内置 `http.mitm` 与 `binary-mode` 脚本 | 在现有机场配置上叠加 `.stoverride` 覆写 | 不需要，内联脚本单文件生效 |
+| `Clash Mi` / `FlClash` / `Clash Verge` / `Karing` | 纯 `Mihomo` 内核无本地改响应体引擎 | `+proxies` / `+rules` 或 `main(config)` 覆写 | 需要同一 Wi-Fi 下电脑开改写网关 |
+| `Loon` / `Quantumult X`（圈 X）/ `Egern` | 原生支持 MITM 与二进制响应体脚本 | `.plugin` / `.snippet` / `Egern.yaml` + `.js` | 不需要，纯手机独立完成 |
 
-最重要的一件事先说在前面：换上跨端促销 SKU 之后，最终结账扣的是你在谷歌 `payments.google.com` 里绑定的银行卡，跟苹果 App Store 账户余额或 Apple Pay 半毛钱关系没有。苹果原生的 `StoreKit` 内购只认 App Store Connect 后台写死的那几款 iOS 商品名，而这套 `.acq` 促销编号走的是谷歌自家的结算通道，所以在苹果商店里绑卡是使不上劲的，动手前得先把卡绑进谷歌付款资料里。
+## 0x01 两条实测路线、双结算通道，还有绝对不能进错的入口 App
 
-拿来操作的谷歌账号必须同时满足两条硬门槛：一是账号目前没有任何现存的 Google One 订阅（哪怕订着最便宜的 100GB 基础版都不行），二是已经提前在 `payments.google.com` 绑好了一张可用的海外 Visa 或 Mastercard 卡。如果是冲首月 `$0` 免费试用去的，跟上回一样，往虚拟卡里只放 3 美元最保险；如果是冲 Ultra 30TB 前三个月一折（`$19.99`/月）去的，首月当场就要扣第一笔钱，卡里塞个 22 美元左右刚够付首月加预授权就行。万一哪步手滑没命中改写、弹出了 `$199.99` 的原价框也不至于被一刀扣穿。
+最开始我也犯过一个想当然的经验主义错误：以为 `.acq` 这类跨端拉新编号只认谷歌网页端的 `payments.google.com` 结算，跟苹果原生的 `StoreKit` 内购尿不到一个壶里。结果拿真机挂上 `storekitd` 日志点了几轮才看明白，谷歌其实早把这批隐藏促销编号同步注册进了苹果 App Store Connect 后台，只是苹果商店里每一个 iOS App 各自维护着一张互不相通的内购商品表（`SKProduct`）。选错点击升级的入口 App，改写规则哪怕百分之百命中了，弹出来的照样是 `$199.99` 原价。
 
-再看一眼我们要替换的字符串。上一篇在 Android 侧摸出来带试用的商品 ID 往往嵌着 `play`（比如 `g1.play.ai.pro`、`g1.play.20tb`），而在 iPhone 上抓 `one.google.com/ai` 返回给客户端的数据时，默认下发的原价 SKU 统一换成了 `g1.ios.*` 前缀：
+按手里账号的新老情况，实测下来一共分两条路走，原价编号、目标隐藏编号和必须打开的入口 App 对照如下：
 
-| 客户端默认收到的 iOS 原价 SKU | 对应订阅档位 | 默认月费 |
-|---|---|---|
-| `g1.ios.30tb.ai.pro.m` | Google AI Ultra 30TB（20x） | $199.99 |
-| `g1.ios.20tb.m.v2` | Google AI Ultra 20TB（5x） | $99.99 |
-| `g1.ios.2tb.*` 系列 | Google AI Pro（2TB / 5TB） | $19.99 |
+| 目标方案与实测扣款价 | 原响应里的默认 SKU | 替换后的目标促销 SKU | 手机端必须打开的入口 App |
+|---|---|---|---|
+| Ultra 20x（30TB）首月 $0 免费试用 | `g1.ios.30tb.ai.pro.m` | `g1.ai.ultra.1month_eft.acq` | `Google` 搜索 App、`Gemini`（仅 $0 试用可用 `Google One`） |
+| Ultra 5x（20TB）首月 $0 免费试用 | `g1.ios.20tb.m.v2` | `g1.20tb.1month_eft.acq` | `Google` 搜索 App、`Gemini`（仅 $0 试用可用 `Google One`） |
+| Ultra 5x（20TB）前 3 个月 $9.99/月 | `g1.ios.20tb.m.v2` | `g1.20tb.3months_ip_90p.acq` | 仅限 `Gemini` App（点头像 -> 升级 -> 20TB） |
+| Ultra 20x（30TB）前 3 个月 $19.99/月 | `g1.ios.30tb.ai.pro.m` | `g1.ai.ultra.3months_ip_90p.acq` | 仅限 `Google` 搜索 App 彩色 G 图标（选 30TB） |
+| AI Pro（2TB / 5TB）前 12 个月 $1.99/月 | `g1.ios.2tb.*` 系列 | `g1.2tb.ai.12months_ip_90p` | `Google` 搜索 App（彩色 G 图标）或 `Gemini` |
 
-虽说默认展示的商品名带了 `ios` 前缀，但谷歌结算后台真正管拉新促销的那批 `.acq` 商品编号是跨平台共用的，后缀规律也跟 Android 侧完全一致：`.acq` 代表纯新客获客（Acquisition），`_ip_90p` 代表 Introductory Price 90% off（前三个月打一折），`_eft` 代表免费试用（Extended Free Trial）。常用的四组替换关系直接对照下面这张表挑一组用就行：
+先说白板新号首选的 `$0` 免费试用路线。只要你的谷歌号和美区 Apple ID 之前没开过同组试用，把 `30TB` 换成 `g1.ai.ultra.1month_eft.acq`（或者干脆把 `20TB` 和 `30TB` 两个按钮全指到 `g1.ai.ultra.1month_eft.acq`），进 `Google` 搜索 App、`Gemini` 或 `Google One` 点升级就能直接拉出首月 `$0` 的苹果内购确认单。而且 `g1.20tb.1month_eft.acq`（5x）和 `g1.ai.ultra.1month_eft.acq`（20x）在商店里算两件独立商品，领过 20x 试用的号回头还能单独测一把 5x。
 
-| 原响应里的源 SKU | 替换成的目标促销 SKU | 实际拉出的收银台效果 |
-|---|---|---|
-| `g1.ios.30tb.ai.pro.m` | `g1.ai.ultra.3months_ip_90p.acq` | Ultra 30TB 前 3 个月一折（$19.99/月） |
-| `g1.ios.30tb.ai.pro.m` | `g1.ai.ultra.1month_eft.acq` | Ultra 30TB 首月 $0 免费试用 |
-| `g1.ios.20tb.m.v2` | `g1.20tb.3months_ip_90p.acq` | Ultra 20TB 前 3 个月一折（$9.99/月） |
-| `g1.ios.20tb.m.v2` | `g1.20tb.1month_eft.acq` | Ultra 20TB 首月 $0 免费试用 |
+这里顺手记一个很容易漏掉的进阶彩蛋。首月 `$0` 试用刚激活那一下，别急着退出来，立刻进 iPhone 系统 `设置 -> Apple 账户 -> 订阅`，点进刚生效的 `Google`（或 `Google One`）订阅项，再点里面的"查看所有方案"（`See All Plans`，也可以直接用浏览器开 `https://apps.apple.com/account/subscriptions`）。苹果系统会把同一个订阅组底下所有上架过的隐藏档位全列出来，不少账号能在这里直接翻出前端页面根本没画出来的 `Google AI Ultra (1 year free trial)` 一年免费档，点切换就能顺延整整一年。另外千万留个神：准备冲 `$0` 试用的号，一上来别挂付费一折模块（`3months_ip_90p.acq`）去试水。苹果 `StoreKit` 同一个订阅组只给一次新客优惠机会，强行塞付费 `.acq` 会把原本能弹出来的免费试用直接顶成付费一折。
 
-再叮嘱一句 `.acq` 的脾气：它只认白板新客。只要当前谷歌号名下挂着任何一档现存订阅，哪怕改写规则把字符串换过去了，谷歌后台在算价时也会直接把 `introprice` 优惠阶段吞掉，只吐回光秃秃的 `base` 原价，甚至直接返回空列表。
+再说拿不到免费资格的老号，退一步改开付费一折的规矩。这一路最大的坑就在入口 App 上：付费一折绝对不能在 `Google One` App 里点！`Google One` 的内购白名单里只录了 `g1.ios.*` 和免费试用编号，压根不认识非 `ios` 前缀的一折编号，在里面点升级只会被回退成 `$199.99`/月。想开 5x（20TB）前三个月 `$9.99`/月，必须进 `Gemini` App 点右上角头像选升级；想开满血 20x（30TB）前三个月 `$19.99`/月，或者 AI Pro 连续 12 个月 `$1.99`/月（注意 Pro 这个编号 `g1.2tb.ai.12months_ip_90p` 尾巴上不带 `.acq`，如果个别老号连 `90p` 一折都吃不到，把 `90p` 改成 `75p` 还能退一步测二五折），必须去下那个彩色 G 图标的 `Google` 搜索 App，点右上角头像进升级页选卡片。
 
-## 0x02 小火箭三步实操：开证书信任、挂改写模块、杀后台拉账单
+扣款方式和防翻车护栏也顺手拎清。在上面这几个 iOS 原生 App 里点订阅，拉起的是苹果美区 `StoreKit` 付款单（双击侧边键确认，扣美区 Apple ID 绑定的卡或美区 PayPal），所以后面所有客户端的分流规则都必须把 `itunes.apple.com`、`apps.apple.com`、`apple.com` 这些苹果结算域名强制设为 `DIRECT` 直连，免得挂代理调收银台撞上苹果异地风控。
 
-很多人第一次拿小火箭改响应体，照着网上的半截配置抄完死活不生效，十有八九是栽在"证书只装没信任"或者"写了裸脚本名手机根本读不到文件"这两个地方。下面按手机屏幕上的真实点击顺序拆成三步，不用自己买域名搭服务器，两分钟就能配好。
+反过来，如果你不开原生 App，直接在手机 Safari 无痕窗口打开 `https://one.google.com/ai` 网页版点订阅，走的则是谷歌自家的 `payments.google.com` 网页收银台，扣谷歌付款资料里的海外 Visa 或 Mastercard 卡。走网页通道的话跟上一篇一样，冲 `$0` 试用往虚拟卡里只放 3 美元，冲 `$19.99` 一折只放 22 美元，靠卡内余额做物理限额永远最踏实；同时确认当前谷歌号名下没有任何现存的 Google One 订阅（哪怕挂着 100GB 基础版，后台算价时也会直接剥掉 `.acq` 的优惠阶段）。
 
-第一步是开启 HTTPS 解密并打开系统的根证书信任（只需做一次，以前配过抓包的直接核对一眼即可）。打开小火箭切到底部的"配置"页，点当前正在用的那条配置右边的蓝色 `(i)` 图标，往下滑找到"HTTPS 解密"，把开关打开。如果底下提示还没生成过证书，点"生成新的 CA 证书"，接着点"安装证书"，顺着弹窗允许下载描述文件。下载完去 iPhone 系统的 `设置` 顶部点"已下载描述文件"（或者进 `设置 -> 通用 -> VPN 与设备管理`，部分系统区域叫"描述文件与设备管理"），把 `Shadowrocket` 描述文件装上。注意这还没完，iOS 16 以后把真正的总开关藏得很深：继续进系统 `设置 -> 通用 -> 关于本机`，拉到最底下点进 `证书信任设置`，把刚才那个 `Shadowrocket` 根证书右侧的开关手动掰绿。漏掉最后这一下，后面解出来的流量全是证书报错，什么改写规则都跑不到。做完回小火箭点右上角"完成"保存。
+## 0x02 小火箭（Shadowrocket）与 Surge 配置：在现有配置上叠加 .sgmodule
 
-第二步是新建一个本地改写模块。这里千万别去网上随便导别人挂着远程 `https://.../xxx.js` 外链的模块：你既然已经对 `one.google.com` 开了 HTTPS 解密，一旦引了来路不明的外部脚本，人家顺手读走请求头里的谷歌登录 Cookie 简直易如反掌。
+先从小火箭讲起。新手拿小火箭配改写最容易踩的一个大坑，就是去导入别人给的"独立空白 `.conf` 配置文件"。在小火箭里，你平时生成并信任好的根证书私钥（`ca-p12` / `ca-passphrase`）连同所有机场节点，全都保存在当前正在用的 `default.conf` 肚子里。一旦导入并切到一个新建的空白 `.conf`，里面既没有外部节点，也没有刚才信任过的那把 CA 私钥，`one.google.com` 根本解不开密。稳妥的做法是始终保持选中你原有的 `default.conf`，在上面直接挂载 `.sgmodule` 叠加模块。
 
-最省事也最安全的起手方案，是直接用小火箭兼容的 `[Body Rewrite]` 正文正则替换语法，不用额外建 `.js` 文件，把屏蔽 QUIC、指定解密域名和替换 SKU 捏进同一个纯文本本地模块里。下面这段默认把 Ultra 30TB 原价换成前三个月 `$19.99` 一折价，顺带把 20TB 原价换成首月免费试用（如果想把 30TB 也换成首月免费试用，把第 9 行末尾的 `g1.ai.ultra.3months_ip_90p.acq` 改成 `g1.ai.ultra.1month_eft.acq` 即可）：
+第一步先把 `default.conf` 的 HTTPS 解密证书开好（以前抓过包、信任过证书的朋友直接跳到下一步）。先把小火箭首页顶部的连接总开关关掉，切到底部"配置"页，点 `default.conf` 右侧的蓝色 `(i)` 图标，往下找到"HTTPS 解密"点进去，打开顶部的"HTTPS 解密"开关，依次点"证书 -> 生成新的 CA 证书 -> 安装证书 -> 允许"把描述文件下到手机里。接着打开 iPhone 系统 `设置`，点顶部的"已下载描述文件"（或者进 `设置 -> 通用 -> VPN 与设备管理`），输入锁屏密码把 `Shadowrocket` 描述文件装上。装完描述文件只走了一半，继续进系统 `设置 -> 通用 -> 关于本机`，一路滑到最底下点进"证书信任设置"，找到 `Shadowrocket` 根证书把右侧开关掰绿（要是点进来发现列表是空的，说明漏了前一步安装描述文件）。全部弄完切回小火箭，千万记得连续点两次右上角的保存对勾退回列表，别顺手往右滑屏幕返回，左滑返回不会保存刚才打开的 HTTPS 解密开关！
+
+第二步挂改写模块。如果你只想用纯手机花一分钟跑通、不想单独放任何 `.js` 脚本文件，直接复制下面这段纯文本模块（文末压缩包 `Shadowrocket叠加模块/` 目录里也备好了现成的 `GAI-PureText-FreeTrial-免JS纯文本版.sgmodule` 与 `GAI-PureText-90Off-免JS纯文本版.sgmodule`）。它同时干了四件事：拦掉 `UDP 443` 逼流量退回常规 TCP、让苹果内购域名走直连、强迫原生接口返回未压缩数据、用内置的 `[Body Rewrite]` 把网页容器里的三档 SKU 一次换齐（下面演示付费一折的 `3months_ip_90p.acq`；白板新号冲 `$0` 免费试用时把两处 `3months_ip_90p.acq` 换成 `1month_eft.acq` 即可）：
 
 ```ini
-#!name=Google One Ultra SKU 本地改写
-#!desc=屏蔽 UDP 443 强制回落 TCP，并将 one.google.com/ai 响应中的 iOS 原价 SKU 替换为促销 SKU
+#!name=Google AI Ultra SKU 免脚本叠加模块
+#!desc=叠加于已有 default.conf，覆盖苹果内购直连、QUIC 阻断与三档 SKU 替换
+#!system=ios
 
 [Rule]
 AND,((PROTOCOL,UDP),(DEST-PORT,443)),REJECT-NO-DROP
+DOMAIN-SUFFIX,itunes.apple.com,DIRECT
+DOMAIN-SUFFIX,apps.apple.com,DIRECT
+DOMAIN-SUFFIX,mzstatic.com,DIRECT
+DOMAIN-SUFFIX,xp.apple.com,DIRECT
+DOMAIN-SUFFIX,apple.com,DIRECT
+DOMAIN-SUFFIX,icloud.com,DIRECT
+DOMAIN-SUFFIX,one.google.com,PROXY
+DOMAIN,subscriptionsmobile-pa.googleapis.com,PROXY
+
+[Header Rewrite]
+http-request ^https://subscriptionsmobile\-pa\.googleapis\.com/\$rpc/.*GetDynamicStorefrontInfo header-replace Accept-Encoding identity
+http-request ^https://subscriptionsmobile\-pa\.googleapis\.com/\$rpc/.*GetDynamicStorefrontInfo header-replace grpc-accept-encoding identity
 
 [Body Rewrite]
-http-response ^https://one\.google\.com/(?:u/\d+/)?ai(?:[/?#].*)?$ g1\.ios\.30tb\.ai\.pro\.m g1.ai.ultra.3months_ip_90p.acq
-http-response ^https://one\.google\.com/(?:u/\d+/)?ai(?:[/?#].*)?$ g1\.ios\.20tb\.m\.v2 g1.20tb.1month_eft.acq
+http-response ^https://one\.google\.com/(?:u/\d+/)?ai.*$ g1\.ios\.20tb\.m\.v2 g1.20tb.3months_ip_90p.acq
+http-response ^https://one\.google\.com/(?:u/\d+/)?ai.*$ g1\.ios\.30tb\.ai\.pro\.m g1.ai.ultra.3months_ip_90p.acq
+http-response ^https://one\.google\.com/(?:u/\d+/)?ai.*$ g1\.ios\.2tb\.[A-Za-z0-9._-]+ g1.2tb.ai.12months_ip_90p
 
 [MITM]
-hostname = %APPEND% one.google.com
+enable = true
+hostname = %APPEND% one.google.com, subscriptionsmobile-pa.googleapis.com
 ```
 
-把上面整段代码块复制下来，打开小火箭点底部"配置"，切到上方的"模块"栏，点右上角的 `+` 号新建本地模块，整段粘贴进去点右上角保存，确认模块列表里这一项前面打上了蓝勾。
-
-有一个小概率边界情况得提前打个预防针：`[Body Rewrite]` 走的是代理引擎内置的固定响应体缓冲上限（通常在 1MB 左右），没法手动调大；万一 `one.google.com/ai` 某次返回的页面体积偏大超了内置阈值，引擎会静默跳过不替换。要是碰到日志里看请求过了代理却死活没改掉，或者你平时主力用的是 Surge、Quantumult X（圈 X）、Loon、Stash 以及 Clash 系客户端（Clash 用 `rewrite` 或 `script` 配合 MITM 白名单，圈 X 用 `url script-response-body`），可以切到下面这套标准的 `[Script]` 脚本方案，用 `max-size=2097152` 手动把响应体上限撑到 2MB，同时 URL 正则用 `(?:[/?#].*)?$` 兼容不带参数的裸 `/ai`、带参数的 `/ai?...` 以及多账号路径 `/u/0/ai`：
+打开小火箭底部的"配置"，切到顶栏的"模块"，点右上角 `+` 号新建本地模块，把整段代码贴进去保存并确认前面打上了勾。要是遇到页面体积偏大超了 `[Body Rewrite]` 的默认缓冲上限，或者客户端某次升级页完全不走网页容器、只读原生 `GetDynamicStorefrontInfo` 的二进制 Protobuf 响应，就把文末提供的 [gai-sku-dual-channel.js](gai-sku-dual-channel.js) 存进系统"文件" App 的 `我的 iPhone -> Shadowrocket -> Scripts/` 目录（也可以在自己电脑同目录起一行 `python3 -m http.server 8080` 填局域网地址，切勿乱引网上来路不明的第三方外链脚本，免得暴露 `one.google.com` 的登录 Cookie），再往上面的模块里补上这段 `[Script]` 声明（文末压缩包里的标准 `.sgmodule` 已默认写好）：
 
 ```ini
-#!name=Google One Ultra 脚本版改写
-#!desc=使用自定义 JS 改写 one.google.com/ai 响应体中的 SKU（放宽响应体至 2MB）
-
-[Rule]
-AND,((PROTOCOL,UDP),(DEST-PORT,443)),REJECT-NO-DROP
-
 [Script]
-google-one-sku = type=http-response, pattern=^https://one\.google\.com/(?:u/\d+/)?ai(?:[/?#].*)?$, requires-body=1, max-size=2097152, script-path=http://192.168.1.100:8080/sku-rewrite.js
-
-[MITM]
-hostname = %APPEND% one.google.com
+GAI_Web_StoreKit = type=http-response,requires-body=1,max-size=0,pattern=^https://one\.google\.com/(?:u/\d+/)?ai.*$,script-path=gai-sku-dual-channel.js
+GAI_Native_Storefront = type=http-response,requires-body=1,binary-body-mode=1,max-size=524288,pattern=^https://subscriptionsmobile\-pa\.googleapis\.com/\$rpc/.*GetDynamicStorefrontInfo,script-path=gai-sku-dual-channel.js
 ```
 
-配套的 `sku-rewrite.js` 加上判空保护，防止遇到 `304` 空响应时抛异常：
+如果你主力用的是 `Surge`（无论是 iOS 版还是 macOS 桌面版），配置起来更省心，因为 `.sgmodule` 本来就是 Surge 的原生模块格式。iOS 版打开 Surge 点右上角进 `MitM`，点"生成新的 CA 证书"装好描述文件，再去系统 `设置 -> 通用 -> 关于本机 -> 证书信任设置` 掰绿根证书，回到 Surge 把 `MitM`、`Rewrite` 和 `Scripting` 三个总开关全打开（macOS 版直接在 `偏好设置 -> MitM` 里点生成并信任证书写入系统钥匙串就行）。接着把 `gai-sku-dual-channel.js` 丢进 `iCloud Drive`（或 `我的 iPhone`）底下的 `Surge/Scripts/` 文件夹，进"模块 -> 安装新模块"导入上面这份带 `[Script]` 的 `.sgmodule` 勾选启用。出发前瞄一眼首页的出站模式，确认选在"规则判定"（小火箭那边叫全局路由选`配置`），千万别停在"直接连接"上，选好美国节点打开开关就能去杀后台刷价格了。
+
+## 0x03 Clash 全生态配置：分清 Stash 单机覆写与纯 Mihomo 局域网网关
+
+群里问得最多的就是"我手机和电脑上只有 Clash，到底怎么配"。先把最容易翻车的两条铁律摊开讲清楚：第一，千万别去点网上那种裸 `clash://install-config?url=...` 的一键导入链接，那玩意儿导入的是一整份空白节点库，点下去直接把你正在用的机场订阅覆盖没了，连网都出不去；正经做法永远是在你现有的机场配置上挂载"覆写（`Override`）"，原有机场节点和策略组一根汗毛都不动。第二，看清你手里的客户端底子：`App Store` 上的 `Stash` 虽然兼容 Clash 配置文件，但它自己内置了完整的 `http.mitm` 和 `http.script` 引擎，光靠一台 iPhone 就能独立改完双通道；而 `Clash Mi`、`FlClash`、`Clash Verge`、`Karing` 底层跑的是纯 `Mihomo`（原 `Clash.Meta`）路由内核，它只管三四层流量分发，压根没有拆开 HTTPS 改响应体的本地脚本引擎，必须把那两个谷歌域名分流给同一 Wi-Fi 下电脑跑的改写网关。
+
+### 1. iOS Stash（免电脑，单文件 .stoverride 内联脚本独立生效）
+
+手里有 `Stash` 的朋友不需要开电脑。先在 Stash 底部点"工具 -> HTTPS 解密"，生成根证书、安装描述文件，照例去系统 `设置 -> 通用 -> 关于本机 -> 证书信任设置` 把 Stash 根证书掰绿，再回 Stash 确认"HTTPS 解密"和"脚本"开关都已开启。
+
+Stash 官方的 `.stoverride` 覆写规范有个特别舒服的设计：顶层的 `rules:` 会自动置顶插入你当前正在用的机场配置里，不会冲掉任何节点；同时底下的 `script-providers:` 支持直接用 `payload: |` 把整段 JavaScript 代码内联写进同一个文件里，连外部 `.js` 都不用单独拷。你可以直接从文末压缩包 `Clash与Stash规则库/` 里选好对应档位的 `.stoverride` AirDrop 到手机导入，也可以直接复制下面这段自带内联双通道脚本的 `.stoverride` 保存启用（把内联脚本第一行的 `MODE` 从 `"eft"` 改成 `"90off"` 即可切到老号付费一折）：
+
+```yaml
+name: "Google AI Ultra SKU 双通道内联覆写"
+desc: "叠加于当前机场配置生效，保留全部原节点，内联脚本免电脑独立运行"
+category: GoogleAI
+
+rules:
+  - AND,((NETWORK,UDP),(DST-PORT,443),(DOMAIN-SUFFIX,one.google.com)),REJECT
+  - AND,((NETWORK,UDP),(DST-PORT,443),(DOMAIN,subscriptionsmobile-pa.googleapis.com)),REJECT
+  - DOMAIN-SUFFIX,itunes.apple.com,DIRECT
+  - DOMAIN-SUFFIX,apps.apple.com,DIRECT
+  - DOMAIN-SUFFIX,mzstatic.com,DIRECT
+  - DOMAIN-SUFFIX,xp.apple.com,DIRECT
+  - DOMAIN-SUFFIX,apple.com,DIRECT
+  - DOMAIN-SUFFIX,icloud.com,DIRECT
+
+http:
+  mitm:
+    - "one.google.com"
+    - "*.one.google.com"
+    - "subscriptionsmobile-pa.googleapis.com"
+  header-rewrite:
+    - ^https:\/\/subscriptionsmobile\-pa\.googleapis\.com\/\$rpc\/.*GetDynamicStorefrontInfo request-replace Accept-Encoding identity
+    - ^https:\/\/subscriptionsmobile\-pa\.googleapis\.com\/\$rpc\/.*GetDynamicStorefrontInfo request-replace grpc-accept-encoding identity
+  script:
+    - match: ^https:\/\/subscriptionsmobile\-pa\.googleapis\.com\/\$rpc\/.*GetDynamicStorefrontInfo
+      name: gai_sku_req
+      type: request
+      timeout: 10
+    - match: ^https:\/\/one\.google\.com\/(?:u\/\d+\/)?ai.*$
+      name: gai_sku_resp
+      type: response
+      require-body: true
+      max-size: 1048576
+      timeout: 15
+    - match: ^https:\/\/subscriptionsmobile\-pa\.googleapis\.com\/\$rpc\/.*GetDynamicStorefrontInfo
+      name: gai_sku_resp
+      type: response
+      require-body: true
+      binary-mode: true
+      max-size: 524288
+      timeout: 15
+
+script-providers:
+  gai_sku_req:
+    interval: 86400
+    payload: |
+      (function() {
+        const h = Object.assign({}, ($request && $request.headers) || {});
+        for (const k of Object.keys(h)) {
+          const low = k.toLowerCase();
+          if (low === "accept-encoding" || low === "grpc-accept-encoding") delete h[k];
+        }
+        h["Accept-Encoding"] = "identity";
+        h["grpc-accept-encoding"] = "identity";
+        $done({ headers: h });
+      })();
+  gai_sku_resp:
+    interval: 86400
+    payload: |
+      (function() {
+        const MODE = "eft"; // "eft": 首月$0免费试用 | "90off": 老号付费一折
+        const PAIRS = MODE === "90off"
+          ? [["g1.ios.20tb.m.v2", "g1.20tb.3months_ip_90p.acq"], ["g1.ios.30tb.ai.pro.m", "g1.ai.ultra.3months_ip_90p.acq"]]
+          : [["g1.ios.20tb.m.v2", "g1.20tb.1month_eft.acq"], ["g1.ios.30tb.ai.pro.m", "g1.ai.ultra.1month_eft.acq"]];
+        const toB = s => Uint8Array.from(s, c => c.charCodeAt(0) & 0xff);
+        const encV = v => { const o = []; while (true) { const b = v & 0x7f; v >>>= 7; if (v) o.push(b | 0x80); else { o.push(b); return new Uint8Array(o); } } };
+        const eqB = (b, o, l, p) => { if (l !== p.length) return false; for (let i = 0; i < l; i++) if (b[o + i] !== p[i]) return false; return true; };
+        const hasB = (b, o, l, p) => { for (let i = o; i <= o + l - p.length; i++) { let ok = true; for (let j = 0; j < p.length; j++) if (b[i + j] !== p[j]) { ok = false; break; } if (ok) return true; } return false; };
+        function rwPb(b, s, e, sb, db, d) {
+          if (d <= 0 || !hasB(b, s, e - s, sb)) return null;
+          const cs = []; let p = s, h = 0;
+          while (p < e) {
+            const ts = p; let tg = 0, sh = 0;
+            while (p < e) { const c = b[p++]; tg |= (c & 0x7f) << sh; if (!(c & 0x80)) break; sh += 7; if (sh > 35) return null; }
+            const wt = tg & 7; if ((tg >>> 3) <= 0) return null;
+            cs.push(b.subarray(ts, p));
+            if (wt === 0) { const vs = p; while (p < e && (b[p++] & 0x80)) {} cs.push(b.subarray(vs, p)); }
+            else if (wt === 1) { if (p + 8 > e) return null; cs.push(b.subarray(p, p + 8)); p += 8; }
+            else if (wt === 5) { if (p + 4 > e) return null; cs.push(b.subarray(p, p + 4)); p += 4; }
+            else if (wt === 2) {
+              let ln = 0, ls = 0;
+              while (p < e) { const c = b[p++]; ln |= (c & 0x7f) << ls; if (!(c & 0x80)) break; ls += 7; if (ls > 28) return null; }
+              if (ln < 0 || p + ln > e) return null;
+              const ss = p; p += ln; let rep = null;
+              if (eqB(b, ss, ln, sb)) { rep = db; h++; }
+              else if (d > 1 && hasB(b, ss, ln, sb)) { const n = rwPb(b, ss, ss + ln, sb, db, d - 1); if (n) { rep = n.bytes; h += n.hits; } }
+              const pl = rep || b.subarray(ss, ss + ln);
+              cs.push(encV(pl.length), pl);
+            } else return null;
+          }
+          if (p !== e || !h) return null;
+          const out = new Uint8Array(cs.reduce((a, c) => a + c.length, 0));
+          let o = 0; for (const c of cs) { out.set(c, o); o += c.length; }
+          return { bytes: out, hits: h };
+        }
+        function rwFrame(b, sb, db) {
+          if (b.length >= 5 && (b[0] === 0 || b[0] === 0x80)) {
+            let fp = 0, ok = true, fh = 0; const fc = [];
+            while (fp < b.length) {
+              if (fp + 5 > b.length) { ok = false; break; }
+              const flg = b[fp], fl = ((b[fp + 1] << 24) >>> 0) + (b[fp + 2] << 16) + (b[fp + 3] << 8) + b[fp + 4];
+              if (fp + 5 + fl > b.length) { ok = false; break; }
+              let pl = b.subarray(fp + 5, fp + 5 + fl);
+              if (flg === 0 && hasB(b, fp + 5, fl, sb)) { const r = rwPb(b, fp + 5, fp + 5 + fl, sb, db, 20); if (r) { pl = r.bytes; fh += r.hits; } }
+              const hd = new Uint8Array([flg, (pl.length >>> 24) & 0xff, (pl.length >>> 16) & 0xff, (pl.length >>> 8) & 0xff, pl.length & 0xff]);
+              fc.push(hd, pl); fp += 5 + fl;
+            }
+            if (ok && fp === b.length && fh > 0) {
+              const out = new Uint8Array(fc.reduce((a, c) => a + c.length, 0));
+              let o = 0; for (const c of fc) { out.set(c, o); o += c.length; }
+              return { bytes: out, hits: fh };
+            }
+          }
+          return rwPb(b, 0, b.length, sb, db, 20);
+        }
+        let raw = $response && $response.body;
+        if (raw instanceof ArrayBuffer) raw = new Uint8Array(raw);
+        if (raw instanceof Uint8Array) {
+          let cur = raw, hit = false;
+          for (const [s, d] of PAIRS) { const r = rwFrame(cur, toB(s), toB(d)); if (r && r.hits) { cur = r.bytes; hit = true; } }
+          $done(hit ? { body: cur } : {});
+        } else if (typeof raw === "string" && raw.length > 0) {
+          let txt = raw;
+          for (const [s, d] of PAIRS) txt = txt.split(s).join(d);
+          txt = txt.replace(/g1\.ios\.2tb\.[A-Za-z0-9._-]+/g, "g1.2tb.ai.12months_ip_90p");
+          $done(txt !== raw ? { body: txt } : {});
+        } else $done({});
+      })();
+```
+
+### 2. Clash Mi / FlClash / Clash Verge / Karing（覆写叠加电脑局域网网关）
+
+用纯 `Mihomo` 系客户端的朋友，思路是"各司其职"：你手机上成千上万个日常连接照旧走你自己的机场节点，唯独把 `one.google.com` 和 `subscriptionsmobile-pa.googleapis.com` 这两个域名拐个弯递给同一 Wi-Fi 下电脑跑的本地改写网关，改完包再由电脑的美国代理出口发出去。
+
+先在连着同一个路由器的电脑上把网关跑起来。如果你电脑上已经在跑配套桌面控制台的"iOS 免越狱"页，直接拿手机扫界面上的二维码，在 Safari 里点下载"域限定 CA 根证书"（证书绑了 Name Constraints，只对这两个谷歌域名有效），装完描述文件去系统 `关于本机 -> 证书信任设置` 掰绿即可。要是手头没装桌面端，直接下载文末的 [gai_mitm_gateway.py](gai_mitm_gateway.py)（压缩包的 `Clash本地网关脚本(纯Mihomo内核专用)/` 目录里也有一份），用开源的 `mitmproxy` 在电脑终端绑死局域网 IP 起一个临时网关（下面假设你电脑局域网 IP 是 `192.168.1.100`，电脑本机 Clash 美国代理端口是 `7897`，需要开老号付费一折时在命令最前面加个 `GAI_MODE=tri_smart`）：
+
+```bash
+pip install mitmproxy
+mitmdump --listen-host 192.168.1.100 -p 18910 \
+  --proxyauth gtool:change-me-token \
+  --mode upstream:http://127.0.0.1:7897 \
+  -s gai_mitm_gateway.py
+```
+
+首次用 `mitmdump` 的话，先在手机系统 Wi-Fi 里临时配一下手动代理连过去访问 `http://mitm.it` 把根证书装上并进 `证书信任设置` 掰绿，装完就把系统 Wi-Fi 手动代理关回自动。接着打开手机上的 `Clash Mi`、`FlClash`（或桌面端的 `Clash Verge`），进入 `配置 (Profiles) -> 覆写 (Override)` 新建一条 YAML 覆写规则，把里面的 `192.168.1.100` 和 `change-me-token` 换成你刚才设的电脑局域网 IP 与口令（若直接导入压缩包里的覆写模板，则是替换 `<YOUR_COMPUTER_LAN_IP>` 与 `<YOUR_STUDIO_LAN_TOKEN>`）：
+
+```yaml
++proxies:
+  - name: "GTool-iOS-Rewrite"
+    type: http
+    server: 192.168.1.100
+    port: 18910
+    username: "gtool"
+    password: "change-me-token"
+
++rules:
+  - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
+  - IP-CIDR,10.0.0.0/8,DIRECT,no-resolve
+  - IP-CIDR,172.16.0.0/12,DIRECT,no-resolve
+  - AND,((NETWORK,UDP),(DST-PORT,443),(DOMAIN-SUFFIX,one.google.com)),REJECT
+  - AND,((NETWORK,UDP),(DST-PORT,443),(DOMAIN,subscriptionsmobile-pa.googleapis.com)),REJECT
+  - DOMAIN-SUFFIX,one.google.com,GTool-iOS-Rewrite
+  - DOMAIN,subscriptionsmobile-pa.googleapis.com,GTool-iOS-Rewrite
+  - DOMAIN-SUFFIX,itunes.apple.com,DIRECT
+  - DOMAIN-SUFFIX,apps.apple.com,DIRECT
+  - DOMAIN-SUFFIX,mzstatic.com,DIRECT
+  - DOMAIN-SUFFIX,xp.apple.com,DIRECT
+  - DOMAIN-SUFFIX,apple.com,DIRECT
+  - DOMAIN-SUFFIX,icloud.com,DIRECT
+```
+
+盯一眼上面最顶头那三条 `IP-CIDR,...,DIRECT,no-resolve`，千万别嫌啰嗦手欠删掉：手机开着 TUN 虚拟网卡模式时，如果不把内网段置顶直连，发往 `192.168.1.100:18910` 的包会被 TUN 自己抓回来塞进代理隧道打死循环，最后全卡超时。另外有些版本的客户端覆写面板更习惯填 JavaScript 扩展脚本，直接在"覆写 -> JavaScript 脚本"里贴下面这段 `main(config)` 函数，效果一模一样，还会顺手帮你把嗅探域名覆写打开：
 
 ```javascript
-let body = $response && $response.body;
-if (body) {
-    // Ultra 30TB：iOS 原价替换为前 3 个月 $19.99 一折
-    body = body.replace(/g1\.ios\.30tb\.ai\.pro\.m/g, "g1.ai.ultra.3months_ip_90p.acq");
-    // Ultra 20TB：iOS 原价替换为首月 $0 免费试用
-    body = body.replace(/g1\.ios\.20tb\.m\.v2/g, "g1.20tb.1month_eft.acq");
-    $done({ body });
-} else {
-    $done({});
+function main(config) {
+  if (!config || typeof config !== "object") return config;
+  if (config.sniffer && typeof config.sniffer === "object") {
+    config.sniffer["override-destination"] = true;
+  }
+  const gwProxy = {
+    name: "GTool-iOS-Rewrite",
+    type: "http",
+    server: "192.168.1.100",
+    port: 18910,
+    username: "gtool",
+    password: "change-me-token"
+  };
+  const headRules = [
+    "IP-CIDR,192.168.0.0/16,DIRECT,no-resolve",
+    "IP-CIDR,10.0.0.0/8,DIRECT,no-resolve",
+    "IP-CIDR,172.16.0.0/12,DIRECT,no-resolve",
+    "AND,((NETWORK,UDP),(DST-PORT,443),(DOMAIN-SUFFIX,one.google.com)),REJECT",
+    "AND,((NETWORK,UDP),(DST-PORT,443),(DOMAIN,subscriptionsmobile-pa.googleapis.com)),REJECT",
+    "DOMAIN-SUFFIX,one.google.com,GTool-iOS-Rewrite",
+    "DOMAIN,subscriptionsmobile-pa.googleapis.com,GTool-iOS-Rewrite",
+    "DOMAIN-SUFFIX,itunes.apple.com,DIRECT",
+    "DOMAIN-SUFFIX,apps.apple.com,DIRECT",
+    "DOMAIN-SUFFIX,mzstatic.com,DIRECT",
+    "DOMAIN-SUFFIX,xp.apple.com,DIRECT",
+    "DOMAIN-SUFFIX,apple.com,DIRECT",
+    "DOMAIN-SUFFIX,icloud.com,DIRECT"
+  ];
+  const oldProxies = Array.isArray(config.proxies)
+    ? config.proxies.filter(p => p && p.name !== "GTool-iOS-Rewrite")
+    : [];
+  config.proxies = [gwProxy, ...oldProxies];
+  const headSet = new Set(headRules);
+  const oldRules = Array.isArray(config.rules)
+    ? config.rules.filter(r => !headSet.has(r))
+    : [];
+  config.rules = [...headRules, ...oldRules];
+  return config;
 }
 ```
 
-注意小火箭不像桌面版 Surge 那样有独立的本地脚本目录，模块里要是只写裸文件名 `script-path=sku-rewrite.js` 大概率会报找不到文件。真要跑脚本版，在自己电脑上存好 `sku-rewrite.js` 起一行 `python3 -m http.server 8080` 填局域网地址，或者丢到自己的私密 GitHub Gist 拿 Raw 直链填进去最稳；纯手机操作的新手直接用前面那段免 `.js` 的 `[Body Rewrite]` 模块就够了。
+至于用 `Karing` 的朋友，除了直接导入合入节点的配置，也可以在自定义分流组里直接挂载文末压缩包 `RuleSet远程与本地分流规则库/` 底下的 `gai_rewrite.json`（指给局域网 HTTP 网关节点）和 `apple_direct.json`（指给 `DIRECT`）。连上 VPN 后第一次触发局域网通信时，iOS 系统会弹一个"是否允许查找并连接到本地网络上的设备"权限框，记得点"允许"。接着教你一个三秒钟验通不通的办法：不用先去刷谷歌 App，直接打开手机 Safari 访问 `https://one.google.com/g1-sku-report`，只要网页干净利落地吐出一段包含 `"ok": true` 和命中计数的 JSON，就说明分流、局域网网关和证书信任三条线全齐活了。
 
-第三步是连上代理触发改写。回到小火箭首页先确认两件事：一是"全局路由"一定要选默认的`配置`模式（千万别选成`直连`，选直连就不走规则和重写引擎了），二是代理节点选美国等明确支持 Google AI Ultra 的地区，确认无误再打开顶部的连接开关。接着把手机后台原本开着的 Google One App 彻底往上划掉杀干净进程，重新打开 Google One App 切到那个绑好卡的干净谷歌号，点进 AI 订阅页面（如果 App 本地缓存太死怎么刷都不变，也可以打开 Safari 无痕窗口访问 `https://one.google.com/ai` 对照测试）。想确认改写到底吃上没有，切回小火箭底部的"数据"（或"日志"）页搜一下 `one.google.com`，能看到请求走过 MITM 解密并带上重写标记，再点升级按钮就能拉出折扣收银台了。
+## 0x04 Loon、Quantumult X（圈 X）与 Egern 配置，以及 Protobuf 为什么不能硬替
 
-## 0x03 为什么改个响应字符串就能过：展示层与结算层的信任脱节
+剩下三款 iOS 进阶玩家常用的工具全都自带完整的本地脚本引擎，只要先把文末的 [gai-sku-dual-channel.js](gai-sku-dual-channel.js) 下载存进各自客户端的本地 `Scripts` 目录（打开脚本最顶部的 `MODE_KIND` 常量就能在默认的免费试用模式 `"tri_eft_smart"` 和老号付费一折模式 `"tri_smart"` 之间切换），再把对应的规则片段挂上去即可。
 
-可能有人会纳闷：价格难道不应该是谷歌服务器自己说了算吗，怎么在手机里改几个字母就能按一折结算？
+用 `Loon` 的话，先在 `配置 -> MITM` 里生成并安装根证书，去系统 `关于本机 -> 证书信任设置` 掰绿，把 MITM、复写和脚本总开关都打开。把 `gai-sku-dual-channel.js` 放进 `我的 iPhone`（或 `iCloud Drive`）下的 `Loon/Scripts/` 目录，接着新建或导入下面这份 `.plugin` 插件。注意 Loon 拦 QUIC 的原生规则写法是 `PROTOCOL,QUIC,REJECT`（开启期间会全局拦掉 QUIC 强制走 TCP，办完订阅关掉插件就能恢复），而且原生接口那一行脚本必须带上 `binary-body-mode=true`：
 
-其实谷歌后台并没有蠢到让客户端随便编造价格数字，你就算把页面上的 `$199.99` 文本改成 `$0.01`，真正扣款时服务器理都不会理你。这里真正被绕过去的，是"当前前端界面允许用户发起哪一个商品编号的购买"这道展示过滤。
+```ini
+#!name = Google AI Ultra SKU 双通道改写插件
+#!desc = 覆盖苹果内购直连、QUIC 拦截与网页/Protobuf 双通道 SKU 替换
+#!system = ios
 
-正常的业务流程分两截走：前半截客户端请求 `one.google.com/ai` 拉可用方案列表，前端服务看一眼你的环境是 iOS，就按默认策略只往响应里塞 `g1.ios.30tb.ai.pro.m` 这类日常正价 SKU，压根不把 `.acq` 拉新促销编号发给你；后半截等你按下订阅按钮时，客户端拿着刚才响应里的 SKU 编号去向谷歌结算后端发起购买请求。
+[Rule]
+PROTOCOL,QUIC,REJECT
+DOMAIN-SUFFIX,itunes.apple.com,DIRECT
+DOMAIN-SUFFIX,apps.apple.com,DIRECT
+DOMAIN-SUFFIX,mzstatic.com,DIRECT
+DOMAIN-SUFFIX,xp.apple.com,DIRECT
+DOMAIN-SUFFIX,apple.com,DIRECT
+DOMAIN-SUFFIX,icloud.com,DIRECT
+DOMAIN-SUFFIX,one.google.com,PROXY
+DOMAIN,subscriptionsmobile-pa.googleapis.com,PROXY
 
-问题就出在前后两截各管一摊。后面的结算服务收到 `g1.ai.ultra.3months_ip_90p.acq` 时，只管校验三件事：库里有没有这个合法的促销 SKU、促销活动还在不在有效期内、当前谷歌账号符不符合无历史订阅加已绑卡的新客资格。它默认假设"只要客户端能把这个 SKU 传上来，肯定就是前面展示层刚刚下发给它的"，中间没有做任何一次服务端签名绑定或会话回查。口子就在这里。趁响应落回客户端之前把原价编号换成真实存在的隐藏促销编号，两头校验就全都顺顺当当放行了。
+[Rewrite]
+^https://subscriptionsmobile\-pa\.googleapis\.com/\$rpc/.*GetDynamicStorefrontInfo header-replace Accept-Encoding identity
+^https://subscriptionsmobile\-pa\.googleapis\.com/\$rpc/.*GetDynamicStorefrontInfo header-replace grpc-accept-encoding identity
 
-## 0x04 实测踩过的四个细碎坑
+[Script]
+http-response ^https://one\.google\.com/(?:u/\d+/)?ai.*$ script-path=gai-sku-dual-channel.js, requires-body=true, tag=GAI_Web_StoreKit
+http-response ^https://subscriptionsmobile\-pa\.googleapis\.com/\$rpc/.*GetDynamicStorefrontInfo script-path=gai-sku-dual-channel.js, requires-body=true, binary-body-mode=true, tag=GAI_Native_Storefront
 
-真正在真机上调通之前，我也连着撞了好几回软钉子，这里按排查顺序记一下，万一你点开还是 `$199.99` 原价，直接挨个对照查就行。
-
-头一个拦路虎就是前面模块里顺手加进去的那条 `UDP 443` 拦截规则。`one.google.com` 默认优先走 HTTP/3（也就是基于 UDP 443 端口的 QUIC 协议），而小火箭的 MITM 解密只能拆 TCP 上的常规 TLS 流量，碰上走 UDP 的 QUIC 直接解不了，流量从旁边溜走了，后面的重写规则一行都不会触发。加上 `AND,((PROTOCOL,UDP),(DEST-PORT,443)),REJECT-NO-DROP` 之后，系统发现 UDP 443 不通就会自动回落到常规 TCP 连接，解密和替换瞬间就活过来了。唯一要注意的是这条规则在模块开启期间会把手机上所有 App 的 QUIC 一并拦掉，平时刷网页可能会慢一丢丢，订阅办完记得关掉模块。
-
-第二个坑是响应体体积与本地缓存。Google One 的 `/ai` 页面经常一口气塞回来大几百 KB 的数据，如果走脚本改写没配 `max-size` 很容易因为超默认体积上限导致脚本超时失效；另外要是开代理之前已经进过一次 Google One 的升级页，客户端会把上一次拉回来的原价方案列表缓存在内存里，不杀后台重进的话点多少次都是旧数据。同时记得看一眼小火箭规则列表，确认 `one.google.com` 没有被别的分流规则提前判成 `DIRECT` 直连跳过代理。
-
-第三个坑在第一个老测试号上折腾了我十来分钟。当时抓包确认响应里的 `g1.ios.30tb.ai.pro.m` 明明已经一字不差换成了 `g1.ai.ultra.3months_ip_90p.acq`，可点进结账框一看，上面照样冷冰冰印着 `US$199.99/month`。回头一查历史账单才拍大腿：这个号已经订着一档最低配的 Google One Basic 100GB。对挂着现存订阅的账号，谷歌服务端下发数据时压根不给 `.acq` 促销编号配 `introprice` 折扣字段，客户端拿到的就是个光秃秃的 `base` 原价，换了商品名价格也不会变。换上第二个干干净净的无订阅新号，同样的规则，收银台立马吐出了 `US$19.99/month`。
-
-第四个容易踩空的地方是谷歌付款资料（Payment Profile）串区。有些朋友平时折腾海外服务，同一个谷歌号底下的 `payments.google.com` 里同时残留了多个不同国家的付款资料，比如一个香港 HKD、一个美国 USD。结账时系统如果把订阅挂在了不支持区的旧资料名下，就算钱扣成功了，回头进 Antigravity 调 Claude 高阶模型时配额也会卡在 Starter 动不了，纯属白花钱。稳妥的做法是付钱前先进 `payments.google.com/gp/w/home/settings` 检查一眼，把多余的非支持区付款资料关掉，只留一个干净的支持区资料。
-
-## 0x05 收银台核对价格与善后提醒
-
-永远以点击最终确认按钮前弹出来的那张收银台明细作为唯一准绳，没看到折扣数字之前千万别闭着眼睛往下点。
-
-改写生效后打开 Google One App 进到 AI 页面，点升级弹出的 Ultra 30TB 一折收银台长这样：
-
-```text
-Google AI Ultra (30 TB)
-  开始日期：今天          US$19.99/month
-  开始日期：2027年2月     US$199.99/month
-  Mastercard ····6872
-  [订阅]
+[MITM]
+hostname = one.google.com, subscriptionsmobile-pa.googleapis.com
 ```
 
-账面算得很清楚：前三个月每月扣 `$19.99`，第四个月（2027 年 2 月对应账单日）起恢复原价 `$199.99`/月。三个月合计 `$59.97`，按正常原价订三个月得 `$599.97`，省下整整 `$540`。
+用 `Quantumult X`（圈 X）的朋友有两个专属细节千万留神。第一，圈 X 的 `[filter_local]` 分流段不支持按传输层端口拦 `UDP 443`，要防 HTTP/3 溜号得编辑主配置文件的 `[general]` 段落，往里面加一行 `udp_drop_list = 443`；第二，Surge、Loon、Stash 在二进制模式下都是把 `Uint8Array` 塞进 `$response.body` 里传给脚本，唯独圈 X 是把 `ArrayBuffer` 放在 `$response.bodyBytes` 字段里，改完还得原样包成 `$done({ bodyBytes: ... })` 交回去（好在 `gai-sku-dual-channel.js` 已经专门写了 `isQxBytes` 分支兼容好了）。点圈 X 右下角小风车生成配置好根证书并去系统信任后，把 `gai-sku-dual-channel.js` 丢进 `Quantumult X/Scripts/` 目录，挂载下面这段 `.snippet` 片段即可：
 
-如果是换成 `1month_eft.acq` 走首月免费试用的路子，收银台更直接：
+```ini
+; 别忘了在主配置 [general] 段加上 udp_drop_list = 443 阻断 QUIC
+[filter_local]
+host-suffix, itunes.apple.com, direct
+host-suffix, apps.apple.com, direct
+host-suffix, mzstatic.com, direct
+host-suffix, xp.apple.com, direct
+host-suffix, apple.com, direct
+host-suffix, icloud.com, direct
+host-suffix, one.google.com, proxy
+host, subscriptionsmobile-pa.googleapis.com, proxy
 
-```text
-Google AI Ultra (30 TB)
-  今天          US$0.00
-  1个月后       US$199.99/month
-  [开始免费试用]
+[rewrite_local]
+^https://subscriptionsmobile\-pa\.googleapis\.com/\$rpc/.*GetDynamicStorefrontInfo url request-header (\r\n)(?i)Accept-Encoding:\s*[^\r\n]+(\r\n) request-header $1Accept-Encoding: identity$2
+^https://subscriptionsmobile\-pa\.googleapis\.com/\$rpc/.*GetDynamicStorefrontInfo url request-header (\r\n)(?i)grpc-accept-encoding:\s*[^\r\n]+(\r\n) request-header $1grpc-accept-encoding: identity$2
+^https://one\.google\.com/(?:u/\d+/)?ai.*$ url script-response-body gai-sku-dual-channel.js
+^https://subscriptionsmobile\-pa\.googleapis\.com/\$rpc/.*GetDynamicStorefrontInfo url script-response-body gai-sku-dual-channel.js
+
+[mitm]
+hostname = one.google.com, subscriptionsmobile-pa.googleapis.com
 ```
 
-顺便多嘴提醒一句风控问题：网上流传的那些 `tokenized.play.google.com/eacquire/multiline?ear=...` 超长免抓包直链，主力号千万别图省事乱点。把链接里的 `ear` 参数剥出来做一次 Base64 解码就能看见（上一篇末尾那条参考样本里也能直观看到），里面原封不动封存着最初抓包者的 BotGuard 设备指纹、UA 字符串和时区信息。成百上千个不同设备的用户去点同一条死链接，在谷歌风控那边看起来就是一群提交了相同假指纹的关联账号集群。2026 年 11 月中旬刚刚有一波开发者因为乱叠异常试用被批量清退降级，连原有的正价订阅都被一并撤掉，直接打回了免费 15GB。在自己手机上用本地代理实时改写 SKU 的好处，就是每次结账会话都由你自己的真机当场生成，没有静态指纹污染这个问题。
+如果你用的是这两年挺火的模块化客户端 `Egern`，同样先在设置里开好 MITM 证书并完成系统完全信任，在主配置里确认开了 `block_quic: true`，把 `gai-sku-dual-channel.js` 放进本地脚本目录后新建一个 YAML 模块，核心是在原生接口那条 `http_response` 底下把 `body_required: true` 和 `binary_body: true` 一块儿加上：
 
-订阅激活之后记得顺手干完两件收尾小事：第一，回小火箭切到底部"配置"再点上方"模块"，把刚才勾选的那个改写模块点掉取消勾选，恢复手机正常的 QUIC 网络；第二，一折的第 90 天、免费试用的第 30 天一过就会按 `$199.99`/月自动续费，记得到期前手动去取消订阅，平时卡里也别留太多余额，万一忙忘了取消也扣不动。
+```yaml
+# 使用前请确认已在 Egern 主配置开启 block_quic: true
+name: "Google AI Ultra SKU 双通道模块"
+description: "覆盖苹果内购直连与网页/Protobuf 双通道 SKU 替换"
+domain_suffix_set:
+  - match: itunes.apple.com
+    policy: DIRECT
+  - match: apps.apple.com
+    policy: DIRECT
+  - match: mzstatic.com
+    policy: DIRECT
+  - match: xp.apple.com
+    policy: DIRECT
+  - match: apple.com
+    policy: DIRECT
+  - match: icloud.com
+    policy: DIRECT
+header_rewrites:
+  - http_request:
+      match: "^https://subscriptionsmobile\\-pa\\.googleapis\\.com/\\$rpc/.*GetDynamicStorefrontInfo"
+      name: Accept-Encoding
+      value: identity
+      type: replace
+  - http_request:
+      match: "^https://subscriptionsmobile\\-pa\\.googleapis\\.com/\\$rpc/.*GetDynamicStorefrontInfo"
+      name: grpc-accept-encoding
+      value: identity
+      type: replace
+scriptings:
+  - http_response:
+      name: "GAI-Web-StoreKit"
+      match: "^https://one\\.google\\.com/(?:u/\\d+/)?ai.*$"
+      script_url: gai-sku-dual-channel.js
+      body_required: true
+  - http_response:
+      name: "GAI-PB-Storefront"
+      match: "^https://subscriptionsmobile\\-pa\\.googleapis\\.com/\\$rpc/.*GetDynamicStorefrontInfo"
+      script_url: gai-sku-dual-channel.js
+      body_required: true
+      binary_body: true
+mitm:
+  hostnames:
+    - one.google.com
+    - subscriptionsmobile-pa.googleapis.com
+```
+
+顺嘴聊两句为什么第二条通道非得写二进制解析代码不可。`GetDynamicStorefrontInfo` 吐回来的是标准的 gRPC 数据帧：最外层顶着 5 个字节的帧头（1 字节压缩标志位 `0x00` 加上 4 字节大端序负载长度），里面套着好几层 Protobuf 的 `wire type 2` 变长消息，每一个字符串和外层父消息前面都顶着一个 `varint` 字节长度前缀。你把 16 字节的 `g1.ios.20tb.m.v2` 换成 26 字节的 `g1.20tb.3months_ip_90p.acq`，平白多出来 10 个字节；要是直接拿二进制查找替换硬塞进去，从最里层的字符串字段到外层所有嵌套子消息的 `varint` 长度、再到最外头那 4 字节大端帧长全都会错位，客户端反序列化当场崩掉，升级页直接刷出一片空白。所以先在请求头里强塞 `identity` 把 gzip 压缩剥掉，再由脚本递归遍历每一层 Protobuf 标签，由内向外逐层重算 `varint` 长度并更新 5 字节帧头，客户端吃进去才跟原生下发的一模一样。
+
+## 0x05 实测排坑、Apple 内购风控解锁话术与模块包下载
+
+规则挂好连上美国节点之后，第一件必做的动作是把手机后台开着的 `Google`、`Gemini`、`Google One` 彻底往上划掉杀干净进程再重进。客户端会把上一次拉回来的原价方案列表缓存在内存里，不杀后台重进的话点多少次都是旧数据。永远以双击侧边键前弹出来的那张收银台明细作为唯一准绳，看到 `1 month free trial`（`$0.00`）或者前三个月 `$9.99/month`、`$19.99/month` 的字样再按下去。
+
+真机实测时还有两类苹果侧的弹窗最容易让人误以为"改写失效了"，其实跟脚本半毛钱关系没有。第一种是双击侧边键输完面容之后，屏幕正中间蹦出一句 `"Your Purchase Could Not Be Completed - Submit a request to Apple Support for review"`（中文提示"购买未完成，提交申请至 Apple 支持以供审核"）。能走到双击侧边键这一步，说明 SKU 改写和商店查价早就成功了，纯粹是你这个新注册的美区 Apple ID 第一次发起内购撞上了苹果的账号风控。别反复狂点，直接用浏览器打开 `https://getsupport.apple.com/`，依次选 `Billing & Subscriptions -> Unable to purchase -> Chat` 找在线客服，把下面这段英文发过去，人工客服后台点一下放行，回头再订就能秒过：
+
+```text
+Hi, I tried to purchase a Google One subscription ($19.99) via In-App Purchase on my iPhone, and received "Your Purchase Could Not Be Completed - Submit a request to Apple Support for review". Could you please help review and unblock In-App Purchases on my Apple Account? Thank you.
+```
+
+第二种常见报错是弹窗提示 `"Your payment method was declined"`。碰到这个先去 iPhone 系统 `设置 -> Apple 账户 -> 媒体与购买项目 -> 查看账户 -> 购买记录` 里翻一圈，十有八九是以前某个订阅续费扣款失败留下了一笔红色的未结清欠费单，先把旧欠单结清才能买新订阅。另外如果你绑的是美区 PayPal，苹果内购默认走小额合并账单（`Batch Billing`），页面弹出订阅成功且容量到账后，PayPal 账单往往要过 1 到 72 小时才会实际扣走那笔钱；千万别看着没扣款就手痒去解绑 PayPal，不然等苹果后台真正发起合并结算时扣空，号立刻就变欠费风控态了。要是你走的是 Safari 网页端 `payments.google.com` 结算，付款前记得先进 `payments.google.com/gp/w/home/settings` 看一眼，把香港等非支持区的旧付款资料关掉，免得订阅挂错区导致回头进 Antigravity 调高阶模型时配额死活卡在 Starter。
+
+顺便再提一嘴外部直链的风控雷区：网上流传的那些 `tokenized.play.google.com/eacquire/multiline?ear=...` 免抓包直链，主力号千万别图省事乱点。把里面的 `ear` 参数做一次 Base64 解码就能看见，里面原封不动封存着最初抓包那台电脑的 BotGuard 设备指纹、浏览器 UA 和时区。几百个人拿不同账号去点同一条死链接，在谷歌风控眼里就是一窝共用假指纹的关联集群，2026 年 11 月中旬刚有一大批乱叠异常试用的账号被集中清退打回免费 15GB。在自己手机上用代理模块实时替换 SKU，每次结账会话都由你自己的真机当场生成，干净得多。
+
+订阅顺利到账之后记得收好两个尾巴。第一，回各自的代理软件把改写规则关掉，恢复日常刷网页的 HTTP/3 QUIC 速度：小火箭进"配置 -> 模块"取消勾选，`Surge` 进"模块"取消启用，`Stash` 在当前配置下取消勾选对应的 `.stoverride`，`Clash Mi` / `FlClash` / `Clash Verge` 进"配置 -> 覆写"关掉条目并按 `Ctrl+C` 停掉电脑终端上的 `mitmdump`，`Loon` 进"插件"关掉开关，圈 X 取消勾选重写片段并把 `[general]` 里的 `udp_drop_list = 443` 删掉，`Egern` 进模块页关闭模块并还原 `block_quic`。第二，免费试用的第 30 天、一折特惠的第 90 天一到就会按 `$99.99` 或 `$199.99`/月原价自动续费，记得到期前去系统 `设置 -> Apple 账户 -> 订阅`（网页开通的去 Google One 管理页）手动点掉续订。
+
+上面提到的所有客户端现成配置文件（含小火箭与 Surge 的双通道及免 `.js` 纯文本 `.sgmodule`、已内联完整脚本且去掉冗余顶层键的 Stash `.stoverride`、纯 Mihomo 的 YAML / JS 覆写与 `mitmdump` 网关脚本、Karing `.json` 规则集、Loon `.plugin`、圈 X `.snippet`、Egern 模块，分免费试用版与老号付费一折版）已经全部打包脱敏好放在这里，按需自取：
+
+- 全客户端一键模块压缩包：[下载 Google AI iOS 全客户端免越狱模块包（ZIP）](google-ai-ios-modules.zip)
+- 独立双通道改写脚本（供手动放进 `Scripts` 目录参考）：[下载通用双通道 Protobuf 脚本（gai-sku-dual-channel.js）](gai-sku-dual-channel.js)
+- 纯 Mihomo 客户端配套电脑端网关脚本：[下载 mitmdump 双通道网关脚本（gai_mitm_gateway.py）](gai_mitm_gateway.py)
 
 ---
 
